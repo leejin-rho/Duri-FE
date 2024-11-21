@@ -1,6 +1,6 @@
 <div align="center">
 
-# 두리묭실 (Duri-Salon)
+# Duri-Salon
 
 </div>
 
