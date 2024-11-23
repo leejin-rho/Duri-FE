@@ -1,14 +1,17 @@
 {
   "name": "@duri-fe/utils",
   "version": "0.0.0",
-  "exports": {},
+  "main": "./index.tsx",
+  "types": "./index.tsx",
+  "exports": {
+    ".": "./index.tsx"
+  },
   "license": "MIT",
   "scripts": {
     "lint": "eslint \"**/*.ts\""
   },
   "devDependencies": {
     "@duri-fe/eslint-config": "*",
-    "@duri-fe/typescript-config": "*",
     "eslint": "^8.57.0",
     "typescript": "5.5.4"
   }

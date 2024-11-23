@@ -11,6 +11,10 @@ export const salonInstance = axios.create({
   baseURL: BASE_URL,
 });
 
+export const adminInstance = axios.create({
+  baseURL: BASE_URL,
+});
+
 export const publicInstance = axios.create({
   baseURL: BASE_URL,
 });
