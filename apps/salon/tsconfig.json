@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@salon/*": ["./apps/salon/src/*"],
+      "@pages/*": ["./apps/salon/src/pages/*"],
+      "@components/*": ["./apps/salon/src/components/*"],
+      "@styles/*": ["./apps/salon/src/styles/*"],
+      "@assets/*": ["./apps/salon/src/assets/*"]
+    }
+  },
+  "include": ["src/**/*", "../../**/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

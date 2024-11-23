@@ -1,0 +1,32 @@
+{
+  "name": "@duri-fe/admin",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --clearScreen false",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "@duri-fe/salon": "workspace:^",
+    "@duri-fe/ui": "workspace:packages/ui",
+    "@duri-fe/utils": "workspace:packages/utils",
+    "@emotion/react": "^11.13.5",
+    "add": "^2.0.6",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.0.1",
+    "workspace": "^0.0.1-preview.1",
+    "yarn": "^1.22.22"
+  },
+  "devDependencies": {
+    "@duri-fe/eslint-config": "*",
+    "@types/add": "^2",
+    "@vitejs/plugin-react": "^4.3.3",
+    "eslint": "^8.57.0",
+    "typescript": "5.5.4",
+    "vite": "^5.1.4"
+  }
+}
