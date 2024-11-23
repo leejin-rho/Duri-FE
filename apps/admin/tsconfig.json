@@ -1,4 +1,15 @@
 {
-  "extends": "@repo/typescript-config/vite.json",
-  "include": ["src"]
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@admin/*": ["./apps/admin/src/*"],
+      "@pages/*": ["./apps/admin/src/pages/*"],
+      "@components/*": ["./apps/admin/src/components/*"],
+      "@styles/*": ["./apps/admin/src/styles/*"],
+      "@assets/*": ["./apps/admin/src/assets/*"]
+    }
+  },
+  "include": ["src/**/*", "../../**/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }
