@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./",
     "paths": {
       "@admin/*": ["./apps/admin/src/*"],
       "@pages/*": ["./apps/admin/src/pages/*"],
