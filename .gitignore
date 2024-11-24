@@ -4,6 +4,8 @@
 node_modules
 .pnp
 .pnp.js
+!.pnp.cjs
+!.pnp.loader.mjs
 
 # Local env files
 .env
@@ -39,7 +41,6 @@ yarn-error.log*
 
 
 # zero-install
-.yarn/*
 !.yarn/cache
 !.yarn/patches
 !.yarn/plugins
