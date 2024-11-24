@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./",
     "paths": {
       "@salon/*": ["./apps/salon/src/*"],
       "@pages/*": ["./apps/salon/src/pages/*"],
