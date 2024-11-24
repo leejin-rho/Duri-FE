@@ -18,7 +18,7 @@ jobs:
           
       - name: Add remote-url
         run: |
-          git remote add forked-repo https://leejin-rho:${{ secrets.AUTO_ACTIONS }}@github.com/leejin-rho/DURI-FE
+          git remote add forked-repo https://leejin-rho:${{ secrets.AUTO_ACTIONS }}@github.com/leejin-rho/Duri-FE
           git config user.name leejin-rho
           git config user.email ${{ secrets.EMAIL }}
 
