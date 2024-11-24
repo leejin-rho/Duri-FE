@@ -9,6 +9,9 @@ function App() {
       <Global styles={globalStyle} />
       <Home />
       <div>하이</div>
+      {/* <Routes>
+        <Route path="/payment" element={<Payment />} />
+      </Routes> */}
     </BrowserRouter>
   );
 }

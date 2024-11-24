@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "target": "es2017",
     "baseUrl": "./",
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
@@ -9,7 +10,8 @@
       "@pages/*": ["./apps/duri/src/pages/*"],
       "@components/*": ["./apps/duri/src/components/*"],
       "@styles/*": ["./apps/duri/src/styles/*"],
-      "@assets/*": ["./apps/duri/src/assets/*"]
+      "@assets/*": ["./apps/duri/src/assets/*"],
+      "@mocks/*": ["./apps/duri/src/mocks/*"],
     }
   },
   "include": ["src/**/*", "../../**/*.d.ts"],
