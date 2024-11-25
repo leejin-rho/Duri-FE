@@ -6051,6 +6051,7 @@ __metadata:
     date-fns: "npm:^4.1.0"
     emotion-reset: "npm:^3.0.1"
     eslint: "npm:^8.57.0"
+    eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-storybook: "npm:^0.11.1"
     msw: "npm:^2.6.6"
     prettier: "npm:^3.2.5"
