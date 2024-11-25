@@ -81,6 +81,7 @@ const RAW_RUNTIME_STATE =
           ["emotion-reset", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:3.0.1"],\
           ["eslint", "npm:8.57.1"],\
           ["eslint-config-prettier", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:9.1.0"],\
+          ["eslint-plugin-simple-import-sort", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:12.1.1"],\
           ["eslint-plugin-storybook", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:0.11.1"],\
           ["msw", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:2.6.6"],\
           ["prettier", "npm:3.3.3"],\
@@ -4809,6 +4810,28 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["eslint-plugin-simple-import-sort", [\
+      ["npm:12.1.1", {\
+        "packageLocation": "../../../.yarn/berry/cache/eslint-plugin-simple-import-sort-npm-12.1.1-179ee2216e-10c0.zip/node_modules/eslint-plugin-simple-import-sort/",\
+        "packageDependencies": [\
+          ["eslint-plugin-simple-import-sort", "npm:12.1.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:12.1.1", {\
+        "packageLocation": "./.yarn/__virtual__/eslint-plugin-simple-import-sort-virtual-e1c69208a7/4/.yarn/berry/cache/eslint-plugin-simple-import-sort-npm-12.1.1-179ee2216e-10c0.zip/node_modules/eslint-plugin-simple-import-sort/",\
+        "packageDependencies": [\
+          ["eslint-plugin-simple-import-sort", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:12.1.1"],\
+          ["@types/eslint", null],\
+          ["eslint", "npm:8.57.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/eslint",\
+          "eslint"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["eslint-plugin-storybook", [\
       ["npm:0.11.1", {\
         "packageLocation": "../../../.yarn/berry/cache/eslint-plugin-storybook-npm-0.11.1-cbb24222b7-10c0.zip/node_modules/eslint-plugin-storybook/",\
@@ -8044,6 +8067,7 @@ const RAW_RUNTIME_STATE =
           ["emotion-reset", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:3.0.1"],\
           ["eslint", "npm:8.57.1"],\
           ["eslint-config-prettier", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:9.1.0"],\
+          ["eslint-plugin-simple-import-sort", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:12.1.1"],\
           ["eslint-plugin-storybook", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:0.11.1"],\
           ["msw", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:2.6.6"],\
           ["prettier", "npm:3.3.3"],\
