@@ -15,10 +15,10 @@
     "@duri-fe/utils": "workspace:packages/utils",
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
-    "axios": "^1.7.7",
-    "msw": "^2.6.6",
     "@typescript-eslint/eslint-plugin": "^8.15.0",
     "@typescript-eslint/parser": "^8.15.0",
+    "axios": "^1.7.7",
+    "msw": "^2.6.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.0.1"
