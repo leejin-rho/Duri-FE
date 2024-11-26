@@ -8,9 +8,6 @@ import PetDiseaseInfo from './PetDiseaseInfo';
 import PetNameGenderInfo from './PetNameGenderInfo';
 import PetPersonalityInfo from './PetPersonalityInfo';
 
-
-
-
 export interface FormData {
   name: string;
   weight: string;
@@ -33,15 +30,13 @@ const MultiStepForm = () => {
         // 이미 포함된 값이면 제거
         setValue(
           field,
-          currentValues.filter((v) => v !== value)
+          currentValues.filter((v) => v !== value),
         );
       } else {
         // 포함되지 않은 값이면 추가
         setValue(field, [...currentValues, value]);
       }
-    }
-
-    else {
+    } else {
       console.error(`Field "${field}" is not an array.`);
     }
   };
@@ -66,8 +61,6 @@ const MultiStepForm = () => {
       disease: [],
     },
   });
-
-
 
   const onNextStep = async () => {
     // 현재 단계의 필드 유효성 검사
@@ -111,15 +104,16 @@ const MultiStepForm = () => {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           {step === 1 && (
-            <PetNameGenderInfo control={control} register={register} errors={errors} />
+            <PetNameGenderInfo
+              control={control}
+              register={register}
+              errors={errors}
+            />
           )}
           {step === 2 && (
             <>
               <h2>{getValues('name')}의 기본 정보를 입력해주세요</h2>
-              <PetAdditionalInfo
-                control={control}
-                errors={errors}
-              />
+              <PetAdditionalInfo control={control} errors={errors} />
             </>
           )}
           {step === 3 && (
@@ -133,14 +127,22 @@ const MultiStepForm = () => {
             <>
               <h2>{getValues('name')}는 어떤 성격을 가지고 있나요?</h2>
               <>입력된 성격은 MY에서 변경 가능해요.</>
-              <PetPersonalityInfo control={control} errors={errors} toggleArrayValue={toggleArrayValue} />
+              <PetPersonalityInfo
+                control={control}
+                errors={errors}
+                toggleArrayValue={toggleArrayValue}
+              />
             </>
           )}
           {step === 5 && (
             <>
-            <h2>{getValues('name')}가 갖고있는 질환이 있나요?</h2>
-            <>입력된 질환은 MY에서 변경 가능해요.</>
-            <PetDiseaseInfo control={control} errors={errors} toggleArrayValue={toggleArrayValue} />
+              <h2>{getValues('name')}가 갖고있는 질환이 있나요?</h2>
+              <>입력된 질환은 MY에서 변경 가능해요.</>
+              <PetDiseaseInfo
+                control={control}
+                errors={errors}
+                toggleArrayValue={toggleArrayValue}
+              />
             </>
           )}
 

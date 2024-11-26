@@ -1,9 +1,8 @@
 import { createRoot } from 'react-dom/client';
 
-import { enableMocking } from '@mocks';
-
 // import { worker } from './mocks/browser';
 import App from './App';
+import { enableMocking } from './mocks';
 
 // const rootElement = document.getElementById('app');
 

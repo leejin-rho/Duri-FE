@@ -2,7 +2,9 @@
 
 import React from 'react';
 
-import MultiStepForm from '@duri/components/onboarding';
+import MultiStepForm from '@components/onboarding';
+
+
 
 
 
