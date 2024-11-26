@@ -8,6 +8,7 @@
       "env": ["YARN_ENABLE_IMMUTABLE_INSTALLS"]
     },
     "lint": {},
+    "lint:fix": {},
     "dev": {
       "cache": false,
       "persistent": true

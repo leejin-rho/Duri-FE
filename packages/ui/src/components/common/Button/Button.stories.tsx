@@ -1,8 +1,10 @@
-import type { Meta, StoryFn, StoryObj } from '@storybook/react';
-import { Button } from '.';
+import type { Meta, StoryFn } from '@storybook/react';
+
 import { Flex } from '../FlexBox';
 
-type Story = StoryObj<typeof Button>;
+import Button from '.';
+
+// type Story = StoryObj<typeof Button>;
 
 /**
  * `Button` 컴포넌트의 스토리북 정의입니다.

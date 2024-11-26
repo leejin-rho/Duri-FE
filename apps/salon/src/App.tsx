@@ -1,7 +1,10 @@
-import { Global } from '@emotion/react';
+// import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+
 import { globalStyle } from '@duri-fe/ui';
+import { Global } from '@emotion/react';
+
 import Home from '@pages/Home';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (

@@ -16,7 +16,9 @@ module.exports = {
   },
   rules: {
     "@typescript-eslint/no-non-null-assertion": "off",
+    "react/react-in-jsx-scope": "off",
     "react/jsx-pascal-case": "error",
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }],
     "camelcase": ["error", { "properties": "never" }],
     "simple-import-sort/imports": [
       "error",
