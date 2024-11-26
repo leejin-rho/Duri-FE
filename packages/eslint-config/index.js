@@ -6,14 +6,44 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier",
+    "plugin:react/recommended",
+    "prettier"
   ],
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "react", "simple-import-sort"],
   parserOptions: {
     sourceType: "module",
     ecmaVersion: 2020,
   },
   rules: {
     "@typescript-eslint/no-non-null-assertion": "off",
+    "react/jsx-pascal-case": "error",
+    "camelcase": ["error", { "properties": "never" }],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        groups: [
+          // 'react', 'react-router-dom'
+          ["^react", "^react-router-dom"],
+          // 외부 라이브러리
+          ["^@?\\w"],
+          // 내부 모듈
+          ["^@pages(/.*|$)"],
+          ["^@components(/.*|$)"],
+          ["^.+\\.svg$"],
+          ["^@hooks(/.*|$)"],
+          // Side effect imports. ('./styles.css 포함')
+          ["^\\u0000"],
+          // Parent imports.
+          ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+          // Other relative imports. Put same-folder imports and `.` last.
+          ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
+        ],
+      },
+    ],
+  },
+  settings: {
+    react: {
+      version: "18.3.1",
+    },
   },
 };
