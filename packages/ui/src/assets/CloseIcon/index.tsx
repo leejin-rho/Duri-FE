@@ -9,7 +9,8 @@ export interface CloseProps {
 }
 
 export const CloseIcon = (props: CloseProps) => {
-  const { width, height, margin, isOpen, toggleModal } = props;
+  // const { width, height, margin, isOpen, toggleModal } = props;
+  const { width, height, margin, toggleModal } = props;
   return (
     <div
       css={css`

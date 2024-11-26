@@ -45,6 +45,9 @@ yarn-error.log*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.yarn/install-state.gz
+
+yarn.lock
 
 # Storybook
 *storybook.log
