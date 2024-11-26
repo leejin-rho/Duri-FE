@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import SignStep1 from './SignStep1';
-import SignStep2 from './SignStep2';
-import SignStep3 from './SignStep3';
-import SignStep4 from './SignStep4';
-import SignStep5 from './SignStep5';
+import PetAdditionalInfo from './PetAdditionalInfo';
+import PetBirthYearInfo from './PetBirthYearInfo';
+import PetDiseaseInfo from './PetDiseaseInfo';
+import PetNameGenderInfo from './PetNameGenderInfo';
+import PetPersonalityInfo from './PetPersonalityInfo';
+
+
+
 
 export interface FormData {
   name: string;
@@ -21,7 +24,7 @@ export interface FormData {
 
 const MultiStepForm = () => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState<number>(0);
   const toggleArrayValue = (field: keyof FormData, value: string) => {
     const currentValues = getValues(field);
     // 에러 처리 -> currentValues가 배열일 때만 처리
@@ -108,12 +111,12 @@ const MultiStepForm = () => {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           {step === 1 && (
-            <SignStep1 control={control} register={register} errors={errors} />
+            <PetNameGenderInfo control={control} register={register} errors={errors} />
           )}
           {step === 2 && (
             <>
               <h2>{getValues('name')}의 기본 정보를 입력해주세요</h2>
-              <SignStep2
+              <PetAdditionalInfo
                 control={control}
                 errors={errors}
               />
@@ -124,21 +127,21 @@ const MultiStepForm = () => {
               {' '}
               <h2>{getValues('name')}의 나이를 입력해주세요</h2>
               <>미용실을 추천해주는 카테고리로 쓰여요.</>
-              <SignStep3 control={control} errors={errors} />
+              <PetBirthYearInfo control={control} errors={errors} />
             </>
           )}
           {step === 4 && (
             <>
               <h2>{getValues('name')}는 어떤 성격을 가지고 있나요?</h2>
               <>입력된 성격은 MY에서 변경 가능해요.</>
-              <SignStep4 control={control} errors={errors} toggleArrayValue={toggleArrayValue} />
+              <PetPersonalityInfo control={control} errors={errors} toggleArrayValue={toggleArrayValue} />
             </>
           )}
           {step === 5 && (
             <>
             <h2>{getValues('name')}가 갖고있는 질환이 있나요?</h2>
             <>입력된 질환은 MY에서 변경 가능해요.</>
-            <SignStep5 control={control} errors={errors} toggleArrayValue={toggleArrayValue} />
+            <PetDiseaseInfo control={control} errors={errors} toggleArrayValue={toggleArrayValue} />
             </>
           )}
 

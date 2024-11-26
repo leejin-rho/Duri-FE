@@ -1,14 +1,15 @@
+import React from 'react';
 import { Control, Controller, FieldErrors, UseFormRegister } from 'react-hook-form';
 
 import { FormData } from '.';
 
-interface SignStep1Props {
+interface PetNameAndGenderInfoProps {
   control: Control<FormData>;
   register: UseFormRegister<FormData>;
   errors: FieldErrors<FormData>;
 }
 
-const SignStep1 = ({ control, register, errors }: SignStep1Props) => {
+const PetNameGenderInfo = ({ control, register, errors }: PetNameAndGenderInfoProps) => {
   return (
     <>
       <h2>반려견의 이름과 성별을 입력해주세요</h2>
@@ -38,4 +39,4 @@ const SignStep1 = ({ control, register, errors }: SignStep1Props) => {
   );
 };
 
-export default SignStep1;
+export default PetNameGenderInfo;

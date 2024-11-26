@@ -6,7 +6,7 @@ import {
 
 import { FormData } from '.';
 
-interface SignStep2Props {
+interface PetAdditionalInfoProps {
   control: Control<FormData>;
   errors: FieldErrors<FormData>;
 }
@@ -76,7 +76,7 @@ const breeds: string[] = [
   '화이트테리어',
 ];
 
-const SignStep2 = ({ control, errors }: SignStep2Props) => {
+const PetAdditionalInfo = ({ control, errors }: PetAdditionalInfoProps) => {
   return (
     <>
       <>
@@ -170,4 +170,4 @@ const SignStep2 = ({ control, errors }: SignStep2Props) => {
   );
 };
 
-export default SignStep2;
+export default PetAdditionalInfo;

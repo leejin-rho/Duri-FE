@@ -6,12 +6,12 @@ import {
 
 import { FormData } from '.';
 
-interface SignStep3Props {
+interface PetBirthYearInfoProps {
   control: Control<FormData>;
   errors: FieldErrors<FormData>;
 }
 
-const SignStep3 = ({ control, errors }: SignStep3Props) => {
+const PetBirthYearInfo = ({ control, errors }: PetBirthYearInfoProps) => {
   const currentYear = new Date().getFullYear();
 
   // 출생 연도 리스트 생성 (현재 연도 - 0세부터 25세까지)
@@ -41,4 +41,4 @@ const SignStep3 = ({ control, errors }: SignStep3Props) => {
   );
 };
 
-export default SignStep3;
+export default PetBirthYearInfo;

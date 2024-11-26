@@ -2,13 +2,13 @@ import { Control, Controller, FieldErrors } from 'react-hook-form';
 
 import { FormData } from '.';
 
-interface SignStep5Props {
+interface PetDiseaseInfoProps {
   control: Control<FormData>;
   errors: FieldErrors<FormData>;
   toggleArrayValue: (field: keyof FormData, value: string) => void
 }
 
-const SignStep5 = ({control, errors, toggleArrayValue}: SignStep5Props) => {
+const PetDiseaseInfo = ({control, errors, toggleArrayValue}: PetDiseaseInfoProps) => {
   return (
     <>
       <Controller
@@ -59,4 +59,4 @@ const SignStep5 = ({control, errors, toggleArrayValue}: SignStep5Props) => {
   );
 };
 
-export default SignStep5;
+export default PetDiseaseInfo;
