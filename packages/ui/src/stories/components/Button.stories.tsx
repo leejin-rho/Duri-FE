@@ -15,9 +15,10 @@ const meta: Meta<typeof Button> = {
 export default meta;
 
 const Template: StoryFn<typeof Button> = (args) => (
-  <Flex direction="row" gap={10}>
-    <Button {...args}>button1</Button>
-    <Button {...args}>button2</Button>
+  <Flex direction="column" gap={10}>
+    <Button {...args} width="335px">
+      입력하러 가기
+    </Button>
   </Flex>
 );
 
