@@ -566,6 +566,7 @@ const RAW_RUNTIME_STATE =
           ["@duri-fe/utils", "workspace:packages/utils"],\
           ["@emotion/react", "virtual:3824c5864215f805b3022ef55adb69c02ff3a18147cd734243c2da218607e91d8bfb122e822a546d5db17ff6dd2450e218b780df674f02c7861e0cf3507e9267#npm:11.13.5"],\
           ["@emotion/styled", "virtual:3824c5864215f805b3022ef55adb69c02ff3a18147cd734243c2da218607e91d8bfb122e822a546d5db17ff6dd2450e218b780df674f02c7861e0cf3507e9267#npm:11.13.5"],\
+          ["@types/node", "npm:22.10.0"],\
           ["@types/react", "npm:18.3.12"],\
           ["@types/react-dom", "npm:18.3.1"],\
           ["@typescript-eslint/eslint-plugin", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:8.16.0"],\

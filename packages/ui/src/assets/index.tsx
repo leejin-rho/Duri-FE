@@ -26,3 +26,65 @@ export { default as UnionUp } from './UnionUp';
 export { default as UpArrow } from './UpArrow';
 export { default as Lock } from './Lock';
 export { default as Unlock } from './Unlock';
+
+import Add from './Add';
+import AddNew from './AddNew';
+import Approve from './Approve';
+import ArrowBottom from './ArrowBottom';
+import ArrowLeft from './ArrowLeft';
+import ArrowRight from './ArrowRight';
+import ArrowTop from './ArrowTop';
+import Back from './Back';
+import Backup from './Backup';
+import BeforeArrow from './BeforeArrow';
+import Chat from './Chat';
+import Chatting from './Chatting';
+import Close from './Close';
+import CloseCircle from './CloseCircle';
+import DownArrow from './DownArrow';
+import Help from './Help';
+import Information from './Information';
+import Lock from './Lock';
+import Magnifier from './Magnifier';
+import Menu from './Menu';
+import Notification from './Notification';
+import SafetyHelp from './SafetyHelp';
+import SecurityWarning from './SecurityWarning';
+import Shield from './Shield';
+import UnionDown from './UnionDown';
+import UnionUp from './UnionUp';
+import Unlock from './Unlock';
+import UpArrow from './UpArrow';
+
+export const icons = {
+  Add,
+  AddNew,
+  Approve,
+  ArrowBottom,
+  ArrowLeft,
+  ArrowRight,
+  ArrowTop,
+  Back,
+  Backup,
+  BeforeArrow,
+  Chat,
+  Chatting,
+  Close,
+  CloseCircle,
+  DownArrow,
+  Help,
+  Information,
+  Magnifier,
+  Menu,
+  Notification,
+  SafetyHelp,
+  SecurityWarning,
+  Shield,
+  UnionDown,
+  UnionUp,
+  UpArrow,
+  Lock,
+  Unlock,
+};
+
+export default icons;
