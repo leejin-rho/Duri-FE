@@ -579,7 +579,8 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:3824c5864215f805b3022ef55adb69c02ff3a18147cd734243c2da218607e91d8bfb122e822a546d5db17ff6dd2450e218b780df674f02c7861e0cf3507e9267#npm:18.3.1"],\
           ["tsconfig", "npm:7.0.0"],\
-          ["typescript", "patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"]\
+          ["typescript", "patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"],\
+          ["vite-plugin-svgr", "virtual:3824c5864215f805b3022ef55adb69c02ff3a18147cd734243c2da218607e91d8bfb122e822a546d5db17ff6dd2450e218b780df674f02c7861e0cf3507e9267#npm:4.3.0"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -10295,6 +10296,22 @@ const RAW_RUNTIME_STATE =
           ["@svgr/plugin-jsx", "virtual:418d7f85dca5c9749af5f7deb0df0f316a886e5e20bcafa09d934edb3dbc5320deeb453f6bd1cf608c8f3d1009ccc2450aea2e500e750e80f54317ec2810e94f#npm:8.1.0"],\
           ["@types/vite", null],\
           ["vite", "virtual:049202a2ae0c61b2c4172801b9e30fb7aded29c50bf3ea1a3ab20769622883cf9c216f8754136de3187d8eef55dd09e790021fde29d014bb79ab8921d28553aa#npm:5.4.11"]\
+        ],\
+        "packagePeers": [\
+          "@types/vite",\
+          "vite"\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["virtual:3824c5864215f805b3022ef55adb69c02ff3a18147cd734243c2da218607e91d8bfb122e822a546d5db17ff6dd2450e218b780df674f02c7861e0cf3507e9267#npm:4.3.0", {\
+        "packageLocation": "./.yarn/__virtual__/vite-plugin-svgr-virtual-f83450c94f/4/.yarn/berry/cache/vite-plugin-svgr-npm-4.3.0-ded8bb690b-10c0.zip/node_modules/vite-plugin-svgr/",\
+        "packageDependencies": [\
+          ["vite-plugin-svgr", "virtual:3824c5864215f805b3022ef55adb69c02ff3a18147cd734243c2da218607e91d8bfb122e822a546d5db17ff6dd2450e218b780df674f02c7861e0cf3507e9267#npm:4.3.0"],\
+          ["@rollup/pluginutils", "virtual:3b3b9c59e5913e8b031c15482cef03af3ca8df1be835075fdf986b9141be603ae837d2627758d19773eb8cd0aa328898009e4f08f981a076856cb459e872fa21#npm:5.1.3"],\
+          ["@svgr/core", "npm:8.1.0"],\
+          ["@svgr/plugin-jsx", "virtual:418d7f85dca5c9749af5f7deb0df0f316a886e5e20bcafa09d934edb3dbc5320deeb453f6bd1cf608c8f3d1009ccc2450aea2e500e750e80f54317ec2810e94f#npm:8.1.0"],\
+          ["@types/vite", null],\
+          ["vite", null]\
         ],\
         "packagePeers": [\
           "@types/vite",\

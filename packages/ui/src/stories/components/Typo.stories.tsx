@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Text } from '../../components/common/Typo';
-import { KeyOfTypo, theme } from '../../styles/theme';
+import { Text } from '../../components/Typo';
+import { KeyOfTypo, theme } from '../../styles';
 
 type Story = StoryObj<typeof Text>;
 
@@ -9,7 +9,7 @@ type Story = StoryObj<typeof Text>;
  * `Text` 컴포넌트의 스토리북 정의입니다.
  */
 const meta: Meta<typeof Text> = {
-  title: 'Components/common/Text',
+  title: 'components/Text',
   component: Text,
   argTypes: {
     typo: {

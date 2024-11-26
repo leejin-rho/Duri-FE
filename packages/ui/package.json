@@ -9,7 +9,8 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint \"src/**/*.ts\" \"src/**/*.tsx\"",
-    "lint:fix": "eslint --fix \"src/**/*.ts\" \"src/**/*.tsx\""
+    "lint:fix": "eslint --fix \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "svgr": "npx @svgr/cli -d src/assets --ignore-existing --no-dimensions --ext tsx src/assets/svgs"
   },
   "devDependencies": {
     "@duri-fe/eslint-config": "*",
@@ -32,6 +33,7 @@
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "vite-plugin-svgr": "^4.3.0"
   }
 }

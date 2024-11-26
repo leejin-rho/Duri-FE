@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { KeyOfTypo, theme } from '../../../styles/theme';
+import { KeyOfTypo, theme } from '../../styles';
 
 export const Text = styled.div<{
   typo?: KeyOfTypo;

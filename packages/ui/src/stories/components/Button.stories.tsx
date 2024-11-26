@@ -1,7 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
 
-import Button from '../../components/common/Button';
-import { Flex } from '../../components/common/FlexBox';
+import { Button, Flex } from '../../components';
 
 // type Story = StoryObj<typeof Button>;
 
@@ -9,7 +8,7 @@ import { Flex } from '../../components/common/FlexBox';
  * `Button` 컴포넌트의 스토리북 정의입니다.
  */
 const meta: Meta<typeof Button> = {
-  title: 'Components/common/Button',
+  title: 'components/Button',
   component: Button,
 };
 
