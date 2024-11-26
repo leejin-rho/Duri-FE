@@ -124,7 +124,6 @@ const MultiStepForm = () => {
           )}
           {step === 3 && (
             <>
-              {' '}
               <h2>{getValues('name')}의 나이를 입력해주세요</h2>
               <>미용실을 추천해주는 카테고리로 쓰여요.</>
               <PetBirthYearInfo control={control} errors={errors} />

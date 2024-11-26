@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import SignUp from '@duri/pages/SignUpPage';
+import Onboarding from '@duri/pages/Onboarding';
 import { globalStyle } from '@duri-fe/ui';
 import { Global } from '@emotion/react';
 
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/login" element={<Login />} /> */}
-        <Route path="/signup" element={<SignUp />} />
+        <Route path="/onboarding" element={<Onboarding />} />
       </Routes>
     </BrowserRouter>
   );

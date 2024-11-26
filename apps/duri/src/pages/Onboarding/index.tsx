@@ -1,8 +1,13 @@
 // import { useEffect,useState } from 'react';
 
-import MultiStepForm from '@duri/components/signup';
+import React from 'react';
 
-const SignUp = () => {
+import MultiStepForm from '@duri/components/onboarding';
+
+
+
+
+const Onboarding = () => {
   // const user = { id: '', name: '김찬별', birth: 1998, gender: 'female' };
 
   return (
@@ -12,4 +17,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Onboarding;
