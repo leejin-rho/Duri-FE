@@ -1,0 +1,97 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+import { theme } from '../../styles/theme';
+
+<Meta title="colors/Palette" />
+
+# Palette
+
+<br />
+
+## Primary Color
+
+<br />
+
+<ColorPalette>
+  <ColorItem
+    title="Normal50-400"
+    subtitle="main color"
+    colors={{
+      Normal50: theme.palette.Normal50,
+      Normal100: theme.palette.Normal100,
+      Normal200: theme.palette.Normal200,
+      Normal300: theme.palette.Normal300,
+      Normal400: theme.palette.Normal400,
+    }}
+
+/>
+
+<ColorItem
+  title="Normal500-900"
+  subtitle="main color"
+  colors={{
+    Normal500: theme.palette.Normal500,
+    Normal600: theme.palette.Normal600,
+    Normal700: theme.palette.Normal700,
+    Normal800: theme.palette.Normal800,
+    Normal900: theme.palette.Normal900,
+  }}
+/>
+</ColorPalette>
+
+<br />
+
+## Gray Scale
+
+<br />
+
+<ColorPalette>
+
+<ColorItem
+  title="Gray20-400"
+  subtitle="gray"
+  colors={{
+    White: theme.palette.White,
+    Gray20: theme.palette.Gray50,
+    Gray50: theme.palette.Gray50,
+    Gray100: theme.palette.Gray100,
+    Gray200: theme.palette.Gray200,
+    Gray300: theme.palette.Gray300,
+    Gray400: theme.palette.Gray400,
+  }}
+/>
+
+<ColorItem
+  title="Gray500-900"
+  subtitle="gray"
+  colors={{
+    Gray500: theme.palette.Gray500,
+    Gray600: theme.palette.Gray600,
+    Gray700: theme.palette.Gray700,
+    Gray800: theme.palette.Gray800,
+    Gray900: theme.palette.Gray900,
+    Black: theme.palette.Black,
+  }}
+/>
+
+<br />
+
+</ColorPalette>
+
+<br />
+
+## Alert
+
+<br />
+
+<ColorPalette>
+
+<ColorItem
+  title="Alert"
+  subtitle="red"
+  colors={{
+    Alert: theme.palette.Alert,
+
+}}
+/>
+
+</ColorPalette>

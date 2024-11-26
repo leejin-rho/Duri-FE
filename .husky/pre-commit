@@ -1,2 +1,2 @@
-turbo lint
+yarn turbo lint
 git add .

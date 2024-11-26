@@ -1,8 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react';
 
-import { Flex } from '../FlexBox';
-
-import Button from '.';
+import Button from '../../components/common/Button';
+import { Flex } from '../../components/common/FlexBox';
 
 // type Story = StoryObj<typeof Button>;
 
