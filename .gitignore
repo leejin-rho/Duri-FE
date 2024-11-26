@@ -3,7 +3,7 @@ node_modules
 
 # PnP
 .pnp.js
-!.pnp.cjs
+.pnp.cjs
 !.pnp.loader.mjs
 
 # Local env files

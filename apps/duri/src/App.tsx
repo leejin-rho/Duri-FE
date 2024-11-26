@@ -1,13 +1,11 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import SignUp from '@duri/pages/SignUpPage';
 import { globalStyle } from '@duri-fe/ui';
 import { Global } from '@emotion/react';
 
 import Home from '@pages/Home';
-import Login from '@pages/Login';
-import SignUp from '@duri/pages/SignUp';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
