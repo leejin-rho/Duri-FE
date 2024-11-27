@@ -1,9 +1,9 @@
-export async function enableMocking() {
-  if (import.meta.env.VITE_MSW_ENABLED === 'true') {
-    const { worker } = await import('./browser');
-    return await worker.start();
-  }
-  else {
-    console.log('MSW is disabled');
-  }
-}
+// export async function enableMocking() {
+//   if (import.meta.env.VITE_MSW_ENABLED === 'true') {
+//     const { worker } = await import('./browser');
+//     return await worker.start();
+//   }
+//   else {
+//     console.log('MSW is disabled');
+//   }
+// }
