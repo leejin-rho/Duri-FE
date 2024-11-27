@@ -14,9 +14,9 @@ const config = {
     '../apps/**/**/*.mdx',
     '../packages/ui/**/*.mdx',
     '../packages/utils/**/*.mdx',
-    '../apps/**/**/*.stories.@(js|jsx|ts|tsx|mdx)',
-    '../packages/ui/**/*.stories.@(js|jsx|ts|tsx|mdx)',
-    '../packages/utils/**/*.stories.@(js|jsx|ts|tsx|mdx)',
+    '../apps/**/**/*.stories.@(js|jsx|ts|tsx)',
+    '../packages/ui/**/*.stories.@(js|jsx|ts|tsx)',
+    '../packages/utils/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
     '@storybook/addon-onboarding',

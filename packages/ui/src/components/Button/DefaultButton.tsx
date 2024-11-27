@@ -34,7 +34,7 @@ export const Button = styled.div<ButtonProps>`
   color: ${({ fontColor }) => (fontColor ? fontColor : theme.palette.Black)};
 
   &:hover {
-    cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+    cursor: ${({ disabled }) => (disabled ? 'disabled' : 'pointer')};
     /* background-color: ${({ hoverBg, disabled }) =>
       disabled ? 'none' : hoverBg || theme.palette.Normal400};
     color: ${({ hoverFontColor, disabled }) =>

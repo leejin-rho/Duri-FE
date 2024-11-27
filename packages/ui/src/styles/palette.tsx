@@ -24,7 +24,7 @@ export const palette = {
   Gray700: '#4A4950',
   Gray800: '#313036',
   Gray900: '#1D1D20',
-  Black: '#000000',
+  Black: '#111111',
 
   //Alert
   Alert: '#FA333F',

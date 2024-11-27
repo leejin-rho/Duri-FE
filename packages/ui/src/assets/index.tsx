@@ -26,6 +26,7 @@ export { default as UnionUp } from './UnionUp';
 export { default as UpArrow } from './UpArrow';
 export { default as Lock } from './Lock';
 export { default as Unlock } from './Unlock';
+export { default as AlertStar } from './AlertStar';
 
 import Add from './Add';
 import AddNew from './AddNew';

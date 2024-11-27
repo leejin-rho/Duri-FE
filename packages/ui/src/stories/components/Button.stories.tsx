@@ -57,30 +57,29 @@ GrayButton.args = {
 };
 
 const ShortTemplate: StoryFn<typeof Button> = (args) => (
-  <Flex direction="column" gap={10}>
-    <Button {...args} width="fit-content" height="43px">
+  <Flex direction="row" gap={10}>
+    <Button
+      {...args}
+      width="fit-content"
+      height="43px"
+      bg={theme.palette.Black}
+      fontColor={theme.palette.White}
+      typo="Body2"
+    >
       관절 질환
     </Button>
-  </Flex>
-);
-
-export const ShortButton = ShortTemplate;
-ShortButton.args = {
-  bg: theme.palette.Black,
-  fontColor: theme.palette.White,
-  typo: 'Body2',
-};
-
-const ShortWhiteTemplate: StoryFn<typeof Button> = (args) => (
-  <Flex direction="column" gap={10}>
-    <Button {...args} width="fit-content" height="43px">
+    <Button
+      {...args}
+      width="fit-content"
+      height="43px"
+      bg={theme.palette.White}
+      typo="Body2"
+      border={`1px solid ${theme.palette.Gray100}`}
+    >
       기저 질환
     </Button>
   </Flex>
 );
 
-export const ShortWhiteButton = ShortWhiteTemplate;
-ShortWhiteButton.args = {
-  bg: theme.palette.White,
-  typo: 'Body2',
-};
+export const ShortButton = ShortTemplate;
+ShortButton.args = {};
