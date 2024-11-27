@@ -5,6 +5,7 @@ import {
   ReactNode,
 } from 'react';
 
+import { AlertStar } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 import { theme } from '../../styles';
@@ -23,6 +24,7 @@ interface TextFieldProps
   right?: ReactNode;
   isRound?: boolean;
   isError?: boolean;
+  isEssential?: boolean;
 }
 
 /**
@@ -36,6 +38,7 @@ interface TextFieldProps
  * @param {ReactNode} right: 우측 아이콘
  * @param {ReactNode} isRound: 둥근 인풋 여부
  * @param {ReactNode} isError: 에러일 경우
+ * @param {ReactNode} isEssential: 필수 항목일 경우
  *
  */
 export const TextField = forwardRef<
@@ -55,6 +58,7 @@ export const TextField = forwardRef<
       right,
       isError = false,
       isRound = false,
+      isEssential = false,
       ...props
     },
     ref,
@@ -67,7 +71,14 @@ export const TextField = forwardRef<
           justify="flex-start"
           align="flex-end"
         >
-          {label && <StyledLabel>{label}</StyledLabel>}
+          <Flex width="fit-content" gap={1}>
+            {label && <StyledLabel>{label}</StyledLabel>}
+            {isEssential && (
+              <Flex width={8} align="flex-start">
+                <AlertStar width={8} isUpper={true} />
+              </Flex>
+            )}
+          </Flex>
           {helperText && (
             <StyledHelperTextBox>
               {helperText.map((helper, idx) => (

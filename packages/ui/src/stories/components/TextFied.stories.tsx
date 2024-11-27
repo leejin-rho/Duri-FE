@@ -45,6 +45,7 @@ const Template: StoryFn<typeof TextField> = () => (
       label="매장 이름"
       helperText={[{ type: 'error', text: '필수항목입니다.' }]}
       isError={true}
+      isEssential={true}
     />
   </Flex>
 );
