@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import PetAdditionalInfo from './PetAdditionalInfo';
 import PetBirthYearInfo from './PetBirthYearInfo';
+import PetBreedInfo from './PetBreedInfo';
 import PetDiseaseInfo from './PetDiseaseInfo';
-import PetNameGenderInfo from './PetNameGenderInfo';
+import PetGenderInfo from './PetGenderInfo';
+import PetNameInfo from './PetNameInfo';
+import PetNeuterInfo from './PetNeuterInfo';
 import PetPersonalityInfo from './PetPersonalityInfo';
+import PetWeightInfo from './PetWeightInfo';
 
 export interface FormData {
   name: string;
@@ -22,6 +25,10 @@ export interface FormData {
 const MultiStepForm = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<number>(0);
+
+  const detailSteps = ['이름', '견종', '몸무게', '성별', '중성화 여부'];
+  const [detailStep, setDetailStep] = useState<number>(0);
+
   const toggleArrayValue = (field: keyof FormData, value: string) => {
     const currentValues = getValues(field);
     // 에러 처리 -> currentValues가 배열일 때만 처리
@@ -52,10 +59,10 @@ const MultiStepForm = () => {
   } = useForm<FormData>({
     defaultValues: {
       name: '',
-      weight: '0.0',
+      weight: '',
       breed: '',
       gender: '',
-      isNeutered: false,
+      isNeutered: undefined,
       birthYear: '',
       personality: [],
       disease: [],
@@ -66,14 +73,12 @@ const MultiStepForm = () => {
     // 현재 단계의 필드 유효성 검사
     let isValid = false;
     if (step === 1) {
-      isValid = await trigger(['name', 'gender']);
+      isValid = await trigger(['isNeutered']);
     } else if (step === 2) {
-      isValid = await trigger(['weight', 'breed', 'isNeutered']);
-    } else if (step === 3) {
       isValid = await trigger(['birthYear']);
-    } else if (step === 4) {
+    } else if (step === 3) {
       isValid = await trigger(['personality']);
-    } else if (step === 5) {
+    } else if (step === 4) {
       isValid = await trigger(['disease']);
     }
 
@@ -103,27 +108,54 @@ const MultiStepForm = () => {
         </>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
-          {step === 1 && (
-            <PetNameGenderInfo
+          {step === 1 && detailSteps[detailStep] === '이름' && (
+            <PetNameInfo
               control={control}
               register={register}
+              trigger={trigger}
               errors={errors}
+              setDetailStep={setDetailStep}
+            />
+          )}
+          {step === 1 && detailSteps[detailStep] === '견종' && (
+            <PetBreedInfo
+              control={control}
+              trigger={trigger}
+              errors={errors}
+              setDetailStep={setDetailStep}
+            />
+          )}
+          {step === 1 && detailSteps[detailStep] === '몸무게' && (
+            <PetWeightInfo
+              control={control}
+              errors={errors}
+              trigger={trigger}
+              setDetailStep={setDetailStep}
+            />
+          )}
+          {step === 1 && detailSteps[detailStep] === '성별' && (
+            <PetGenderInfo
+              control={control}
+              trigger={trigger}
+              errors={errors}
+              setDetailStep={setDetailStep}
+            />
+          )}
+          {step === 1 && detailSteps[detailStep] === '중성화 여부' && (
+            <PetNeuterInfo
+              control={control}
+              errors={errors}
+              setDetailStep={setDetailStep}
             />
           )}
           {step === 2 && (
-            <>
-              <h2>{getValues('name')}의 기본 정보를 입력해주세요</h2>
-              <PetAdditionalInfo control={control} errors={errors} />
-            </>
-          )}
-          {step === 3 && (
             <>
               <h2>{getValues('name')}의 나이를 입력해주세요</h2>
               <>미용실을 추천해주는 카테고리로 쓰여요.</>
               <PetBirthYearInfo control={control} errors={errors} />
             </>
           )}
-          {step === 4 && (
+          {step === 3 && (
             <>
               <h2>{getValues('name')}는 어떤 성격을 가지고 있나요?</h2>
               <>입력된 성격은 MY에서 변경 가능해요.</>
@@ -134,7 +166,7 @@ const MultiStepForm = () => {
               />
             </>
           )}
-          {step === 5 && (
+          {step === 4 && (
             <>
               <h2>{getValues('name')}가 갖고있는 질환이 있나요?</h2>
               <>입력된 질환은 MY에서 변경 가능해요.</>
@@ -152,12 +184,12 @@ const MultiStepForm = () => {
                 돌아가기
               </button>
             )}
-            {step < 5 && (
+            {step < 4 && detailSteps[detailStep] === '중성화 여부' && (
               <button type="button" onClick={onNextStep}>
                 다음 단계
               </button>
             )}
-            {step === 5 && <button type="submit">완료</button>}
+            {step === 4 && <button type="submit">완료</button>}
           </div>
         </form>
       )}
