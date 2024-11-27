@@ -1,16 +1,24 @@
 import React from "react";
 
-import { theme } from "@duri-fe/ui";
+import { Flex, theme } from "@duri-fe/ui";
 import styled from "@emotion/styled";
 
-const Container = styled.div`
+const Container = styled(Flex)`
   max-width: 480px;
   min-height: 100vh;
-  margin: 0 auto;
   box-sizing: border-box;
-  background-color: ${theme.palette.White};
 `
 
 export const MobileLayout = ({ children }: { children: React.ReactNode }) => {
-  return <Container>{children}</Container>
+  return (
+    <Container 
+      direction="column"
+      margin="0 auto"
+      justify="flex-start"
+      align="flex-start"
+      backgroundColor={theme.palette.White}
+    >
+      {children}
+    </Container>
+  )
 }
