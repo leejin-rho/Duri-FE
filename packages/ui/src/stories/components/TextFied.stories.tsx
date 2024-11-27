@@ -1,4 +1,4 @@
-import { Flex } from '@duri-fe/ui';
+import { Flex, theme } from '@duri-fe/ui';
 import { Magnifier, TextField } from '@duri-fe/ui';
 import type { Meta, StoryFn } from '@storybook/react';
 
@@ -13,6 +13,21 @@ const meta: Meta<typeof TextField> = {
 };
 
 export default meta;
+
+const RoundTemplate: StoryFn<typeof TextField> = () => (
+  <Flex direction="column" gap={10}>
+    <TextField
+      placeholder="반려견 이름"
+      isRound={true}
+      width={172}
+      height={50}
+      fontColor={theme.palette.Black}
+    />
+  </Flex>
+);
+
+export const RoundTextInput = RoundTemplate;
+RoundTextInput.args = {};
 
 const Template: StoryFn<typeof TextField> = () => (
   <Flex direction="column" gap={10}>

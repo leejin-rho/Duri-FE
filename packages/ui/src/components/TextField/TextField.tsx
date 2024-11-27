@@ -54,6 +54,7 @@ export const TextField = forwardRef<
       fontColor = theme.palette.Black,
       right,
       isError = false,
+      isRound = false,
       ...props
     },
     ref,
@@ -98,6 +99,7 @@ export const TextField = forwardRef<
                 fontColor={fontColor}
                 isRight={Boolean(right)}
                 isError={isError}
+                isRound={isRound}
               />
               {right && <StyledIcon className="icon">{right}</StyledIcon>}
             </InputContainer>
@@ -140,6 +142,7 @@ const StyledInput = styled.input<{
   isRight: boolean;
   value?: string | number | readonly string[] | undefined;
   isError: boolean;
+  isRound: boolean;
 }>`
   width: inherit;
   padding: ${({ isRight }) => (isRight ? '10px 50px 10px 16px' : '10px 16px')};
@@ -147,16 +150,17 @@ const StyledInput = styled.input<{
   box-sizing: border-box;
 
   background: ${theme.palette.White};
-  border-radius: 8px;
+  border-radius: ${({ isRound }) => (isRound ? '99px' : '8px')};
 
   /* border: 1px solid ${theme.palette.Gray300}; */
   border: 1px solid
     ${({ isError }) => (isError ? theme.palette.Alert : theme.palette.Gray300)};
 
-  ${theme.typo.Body3};
+  ${({ isRound }) => (isRound ? theme.typo.Body2 : theme.typo.Body3)};
   /* color: ${({ fontColor }) => fontColor}; */
   color: ${({ isError, fontColor }) =>
     isError ? theme.palette.Alert : fontColor};
+  text-align: ${({ isRound }) => (isRound ? 'center' : 'flex-start')};
 
   & + div {
     color: ${({ value }) =>
@@ -173,8 +177,12 @@ const StyledInput = styled.input<{
   }
 
   ::placeholder {
-    color: ${({ isError }) =>
-      isError ? theme.palette.Alert : theme.palette.Gray300};
+    color: ${({ isError, isRound }) =>
+      isError
+        ? theme.palette.Alert
+        : isRound
+          ? theme.palette.Black
+          : theme.palette.Gray300};
   }
 `;
 
