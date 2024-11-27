@@ -11,7 +11,6 @@ function App() {
     <BrowserRouter>
       <Global styles={globalStyle} />
       <Home />
-      <div>하이</div>
     </BrowserRouter>
   );
 }

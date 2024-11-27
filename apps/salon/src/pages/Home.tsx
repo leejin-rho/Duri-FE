@@ -1,5 +1,16 @@
+import { MobileLayout, NavBar } from "@duri-fe/ui";
+
 const Home = () => {
-  return <div>안녕하세요!</div>;
+  return (
+    <>
+      <MobileLayout>
+        <h1>Home</h1>
+        <h1>Home</h1>
+        <h1>Home</h1>
+      </MobileLayout>
+      <NavBar />
+    </>
+  )
 };
 
 export default Home;
