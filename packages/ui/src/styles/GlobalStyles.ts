@@ -10,6 +10,7 @@ export const globalStyle = css`
       scroll: smooth;
     }
     font-family: 'Pretendard';
+    background-color: lightblue;
   }
   button {
     background: inherit;
