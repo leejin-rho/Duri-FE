@@ -26,6 +26,12 @@ export { default as UnionUp } from './UnionUp';
 export { default as UpArrow } from './UpArrow';
 export { default as Lock } from './Lock';
 export { default as Unlock } from './Unlock';
+export { default as DiaryIcon } from './DiaryIcon';
+export { default as HomeIcon } from './HomeIcon';
+export { default as MyIcon } from './MyIcon';
+export { default as QuotationIcon } from './QuotationIcon';
+export { default as ShopIcon } from './ShopIcon';
+
 export { default as AlertStar } from './AlertStar';
 
 import Add from './Add';
