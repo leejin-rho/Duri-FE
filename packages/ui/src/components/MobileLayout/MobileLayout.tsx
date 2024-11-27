@@ -1,5 +1,6 @@
 import React from "react";
 
+import { theme } from "@duri-fe/ui";
 import styled from "@emotion/styled";
 
 const Container = styled.div`
@@ -7,7 +8,7 @@ const Container = styled.div`
   min-height: 100vh;
   margin: 0 auto;
   box-sizing: border-box;
-  background-color: white;
+  background-color: ${theme.palette.White};
 `
 
 export const MobileLayout = ({ children }: { children: React.ReactNode }) => {

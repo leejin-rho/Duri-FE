@@ -1,17 +1,4 @@
-import { MobileLayout } from "@duri-fe/ui";
-import styled from "@emotion/styled";
-
-const NavBar = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  height: 50px;
-  background-color: #333;
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 480px;
-`
+import { MobileLayout, NavBar } from "@duri-fe/ui";
 
 const Home = () => {
   return (

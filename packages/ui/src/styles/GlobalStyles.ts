@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import emotionReset from 'emotion-reset';
 
+import { theme } from './theme';
+
 export const globalStyle = css`
   ${emotionReset}
   body {
@@ -10,7 +12,7 @@ export const globalStyle = css`
       scroll: smooth;
     }
     font-family: 'Pretendard';
-    background-color: lightblue;
+    background-color: ${theme.palette.Normal50};
   }
   button {
     background: inherit;
