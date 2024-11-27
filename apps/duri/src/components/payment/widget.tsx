@@ -18,7 +18,8 @@ interface Amount {
 }
 
 const PaymentWidget = ({quotationInfo} : QuotationInfo) => {
-  const [amount, setAmount] = useState<Amount>({
+  // const [amount, setAmount] = useState<Amount>({
+  const [amount, ] = useState<Amount>({
     currency: 'KRW',
     value: quotationInfo.groomingTotalPrice,
   });
@@ -85,7 +86,7 @@ const PaymentWidget = ({quotationInfo} : QuotationInfo) => {
         {/* 이용약관 UI */}
         <div id="agreement" />
         {/* 쿠폰 체크박스 */}
-        <div>
+        {/* <div>
           <div>
             <label htmlFor="coupon-box">
               <input
@@ -102,10 +103,10 @@ const PaymentWidget = ({quotationInfo} : QuotationInfo) => {
                   });
                 }}
               />
-              {/* <span>5,000원 할인 쿠폰 적용</span> */}
+              <span>5,000원 할인 쿠폰 적용</span>
             </label>
           </div>
-        </div>
+        </div> */}
 
         {/* 결제하기 버튼 */}
         <button
