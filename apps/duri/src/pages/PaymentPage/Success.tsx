@@ -17,7 +17,7 @@ export function SuccessPage() {
     async function confirm() {
       //PATCH 요청으로 결제 완료 상태로 바꾸기
       const response = await fetch("/confirm", {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
@@ -33,6 +33,9 @@ export function SuccessPage() {
       }
 
       // 결제 성공 비즈니스 로직을 구현하세요.
+      // 결제 성공 시 마이 견적으로 이동 -> 견적 요청 목록에서 안뜨도록 변경되어야 함 -> 예약 탭에서 뜨게
+      // 쿠폰 사용한 경우 쿠폰 개수 줄이는 동작도 필요
+
     }
     confirm();
   }, []);

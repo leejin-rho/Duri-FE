@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { QuotationProps } from '@duri/pages/PaymentPage';
+import { QuotationProps } from '@duri/assets/types/QuotationType';
 import {
   loadTossPayments,
   TossPaymentsWidgets,
@@ -102,7 +102,7 @@ const PaymentWidget = ({quotationInfo} : QuotationInfo) => {
                   });
                 }}
               />
-              <span>5,000원 쿠폰 적용</span>
+              {/* <span>5,000원 할인 쿠폰 적용</span> */}
             </label>
           </div>
         </div>

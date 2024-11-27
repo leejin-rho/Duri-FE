@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { QuotationProps } from '@duri/assets/types/QuotationType';
 
-import { QuotationProps } from '@duri/pages/PaymentPage';
+
 
 interface QuotationInfo {
   quotationInfo: QuotationProps;
@@ -9,14 +9,6 @@ interface QuotationInfo {
 const PaymentInfo = ({ quotationInfo }: QuotationInfo) => {
   //고객 정보 - 전역변수
   const user = { name: '김동글', phone: '010-1234-5678' };
-
-  //쿠폰 정보
-//   const [coupons, setCoupons] = useState();
-
-  useEffect(() => {
-    // 쿠폰 개수 정보 불러와야 함
-
-  }, []);
 
   return (
     <>
@@ -46,7 +38,7 @@ const PaymentInfo = ({ quotationInfo }: QuotationInfo) => {
       </>
       <>
         쿠폰 정보
-        <>쿠폰 컴포넌트 만들어야 함</>
+        <>쿠폰 컴포넌트 만들어야 함 근데 완전 후순위</>
       </>
       <>
         결제 정보
