@@ -1,0 +1,60 @@
+import React from 'react';
+import { Meta, Typeset } from '@storybook/blocks';
+
+import { theme } from '../../styles';
+import { Text } from '../../components/Typo';
+
+<Meta title="styles/Typography" />
+
+# Typography
+
+**Font Family:** Pretendard  
+**Weights:** 300 (light), 400 (normal), 500 (medium), 600 (semibold, title)
+
+<br />
+
+### Title
+
+<Typeset
+  fontSizes={[32, 24]}
+  fontWeight={600}
+  sampleText={'This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+
+### Medium
+
+<Typeset
+  fontSizes={[24, 20]}
+  fontWeight={500}
+  sampleText={'This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+
+### Light
+
+<Typeset
+  fontSizes={[24, 16, 12]}
+  fontWeight={400}
+  sampleText={'This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+
+### Light
+
+<Typeset
+  fontSizes={[16, 12]}
+  fontWeight={300}
+  sampleText={'This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+
+### Disabled
+
+<Typeset
+  fontSizes={[16]}
+  fontWeight={400}
+  sampleText={'This is a disabled text.'}
+  fontFamily={'Pretendard'}
+  style={{ color: theme.palette.Gray300 }}
+/>

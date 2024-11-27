@@ -1,0 +1,15 @@
+import React from 'react';
+import { Meta, IconGallery, IconItem } from '@storybook/blocks';
+import { icons } from '../../assets';
+
+<Meta title="styles/Icons" />
+
+# Icon
+
+<IconGallery style={{ marginTop: '50px' }}>
+  {Object.keys(icons).map((iconName) => (
+    <IconItem key={iconName} name={iconName}>
+      {React.createElement(icons[iconName])}
+    </IconItem>
+  ))}
+</IconGallery>

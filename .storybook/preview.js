@@ -7,6 +7,15 @@ const preview = {
         date: /Date$/i,
       },
     },
+    storySort: {
+      order: ['docs', 'styles', 'components'],
+    },
+    backgrounds: {
+      values: [
+        { name: 'Dark', value: '#000000' },
+        { name: 'Light', value: '#FFFFFF' },
+      ],
+    },
   },
 };
 

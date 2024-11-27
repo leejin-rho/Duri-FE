@@ -35,15 +35,15 @@ export const typo = {
   `,
   Body2: css`
     font-family: 'Pretendard';
-    font-weight: 500;
+    font-weight: 400;
     font-size: ${calcRem(16)};
     line-height: 170%;
   `,
   Body3: css`
     font-family: 'Pretendard';
-    font-weight: 500;
+    font-weight: 400;
     font-size: ${calcRem(13)};
-    line-height: 140%;
+    line-height: 120%;
   `,
   Body4: css`
     font-family: 'Pretendard';
@@ -54,8 +54,8 @@ export const typo = {
   Label1: css`
     font-family: 'Pretendard';
     font-weight: 600;
-    font-size: ${calcRem(14)};
-    line-height: 170%;
+    font-size: ${calcRem(16)};
+    line-height: 120%;
   `,
   Label2: css`
     font-family: 'Pretendard';
