@@ -2,8 +2,9 @@
 
 import React from 'react';
 
-import MultiStepForm from '@components/onboarding';
+import { MobileLayout } from '@duri-fe/ui';
 
+import MultiStepForm from '@components/onboarding';
 
 
 
@@ -14,7 +15,9 @@ const Onboarding = () => {
 
   return (
     <>
-      <MultiStepForm />
+      <MobileLayout>
+        <MultiStepForm />
+      </MobileLayout>
     </>
   );
 };
