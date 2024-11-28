@@ -14,7 +14,7 @@ import { Flex } from '../FlexBox';
 
 import NavItem from './NavItem';
 
-export const Navbar = () => {
+export const DuriNavbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname; // 현재 경로
@@ -25,7 +25,7 @@ export const Navbar = () => {
 
   return (
     <Wrapper>
-      <TabContainer>
+      <TabContainer backgroundColor={theme.palette.White} height={65}>
         <Flex direction="row" justify="center">
           <NavItem
             isActive={pathname === '/'}
@@ -79,18 +79,12 @@ const Wrapper = styled(Flex)`
   height: fit-content;
 `;
 
-const TabContainer = styled.div`
-  display: flex;
+const TabContainer = styled(Flex)`
   max-width: 480px;
   min-width: 360px;
   position: fixed;
-  width: 100%;
-  height: 65px;
-  display: fixed;
   bottom: 0;
   z-index: 20;
   border-top: 0.5px solid
     hsla(224.99999999999997, 5.084745762711864%, 46.27450980392157%, 0.16);
-  background-color: ${theme.palette.White};
-  justify-content: center;
 `;
