@@ -21,6 +21,7 @@ const FormConfirm: React.FC<FormConfirmProps> = ({ formData }) => {
       <p>매장 위치: {formData.address}</p>
       <p>사업자 등록번호: {formData.registrationNumber}</p>
       <p>미용사 면허번호: {formData.licenseNumber}</p>
+      <img src=''></img>
       <button onClick={() => alert('완료되었습니다!')}>완료</button>
     </MobileLayout>
   );
