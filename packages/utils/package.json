@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@duri-fe/eslint-config": "workspace:packages/eslint-config",
+    "@types/react": "^18",
     "eslint": "^8.57.0",
     "typescript": "5.5.4"
   },
@@ -25,6 +26,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "msw": "^2.6.6"
+    "msw": "^2.6.6",
+    "react": "^18.3.1"
   }
 }
