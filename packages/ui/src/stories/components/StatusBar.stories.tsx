@@ -10,6 +10,15 @@ type Story = StoryObj<typeof StatusBar>;
 const meta: Meta<typeof StatusBar> = {
   title: 'components/StatusBar',
   component: StatusBar,
+  tags: ['autodocs'],
+  argTypes: {
+    current: {
+      type: 'number',
+    },
+    total: {
+      type: 'number',
+    },
+  }
 };
 
 export default meta;
@@ -18,7 +27,8 @@ export default meta;
  * `DefaultStatusBar`는 `StatusBar` 컴포넌트의 기본 스토리입니다.
  */
 export const DefaultStatusBar: Story = {
-  render: () => (
-    <StatusBar current={1} total={4} />
-  )
+  args: {
+    current: 1,
+    total: 5,
+  }
 };
