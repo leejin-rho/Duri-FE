@@ -43,8 +43,6 @@ const MultiStepForm = () => {
         // 포함되지 않은 값이면 추가
         setValue(field, [...currentValues, value]);
       }
-    } else {
-      console.error(`Field "${field}" is not an array.`);
     }
   };
 
