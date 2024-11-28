@@ -1,4 +1,4 @@
-import { MobileLayout, NavBar } from "@duri-fe/ui";
+import { MobileLayout, Navbar } from "@duri-fe/ui";
 
 const Home = () => {
   return (
@@ -7,8 +7,8 @@ const Home = () => {
         <h1>Home</h1>
         <h1>Home</h1>
         <h1>Home</h1>
+        <Navbar />
       </MobileLayout>
-      <NavBar />
     </>
   )
 };
