@@ -7,6 +7,10 @@
       "outputs": ["dist/**"],
       "env": ["YARN_ENABLE_IMMUTABLE_INSTALLS"]
     },
+    "build-storybook": {
+      "dependsOn": ["^build"],
+      "outputs": ["storybook-static/**"]
+    },
     "lint": {},
     "lint:fix": {},
     "dev": {
