@@ -18,17 +18,33 @@ const meta: Meta<typeof StatusBar> = {
     total: {
       type: 'number',
     },
+    mode: {
+      type: 'select',
+      options: ['onboarding', 'main'],
+    },
   }
 };
 
 export default meta;
 
 /**
- * `DefaultStatusBar`는 `StatusBar` 컴포넌트의 기본 스토리입니다.
+ * `OnboardingStatusBar`는 `StatusBar` 컴포넌트의 온보딩 스토리입니다.
  */
-export const DefaultStatusBar: Story = {
+export const OnboardingStatusBar: Story = {
   args: {
-    current: 1,
+    current: 2,
     total: 5,
+    mode: 'onboarding',
+  }
+};
+
+/**
+ * `MainStatusBar`는 `StatusBar` 컴포넌트의 메인홈 스토리입니다.
+ */
+export const MainStatusBar: Story = {
+  args: {
+    current: 2,
+    total: 5,
+    mode: 'main',
   }
 };
