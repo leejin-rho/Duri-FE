@@ -11,10 +11,11 @@ type Story = StoryObj<typeof Text>;
 const meta: Meta<typeof Text> = {
   title: 'components/Text',
   component: Text,
+  tags: ['autodocs'],
   argTypes: {
     typo: {
       control: 'select',
-      options: Object.keys(theme.typo) as KeyOfTypo[], // Web 타이포 옵션
+      options: Object.keys(theme.typo) as KeyOfTypo[],
     },
     colorCode: {
       control: 'color',

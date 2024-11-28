@@ -2,7 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Navbar } from '../../components/Navbar';
+import { DuriNavbar } from '../../components';
 
 type Story = StoryObj<typeof Navbar>;
 
@@ -11,18 +11,19 @@ type Story = StoryObj<typeof Navbar>;
  */
 const meta: Meta<typeof Navbar> = {
   title: 'components/Navbar',
-  component: Navbar,
+  component: DuriNavbar,
+  tags: ['autodocs'],
 };
 
 export default meta;
 
 /**
- * `DefaultNavbar`는 `Navbar` 컴포넌트의 기본 스토리입니다.
+ * `DuriNavbar`는 `Duri`서비스의 `Navbar`스토리입니다.
  */
-export const DefaultNavbar: Story = {
+export const DefaultDuriNavbar: Story = {
   render: () => (
     <BrowserRouter>
-      <Navbar />
+      <DuriNavbar />
     </BrowserRouter>
   ),
 };

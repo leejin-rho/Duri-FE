@@ -27,5 +27,8 @@ const config = {
     name: '@storybook/react-vite',
     options: {},
   },
+  previewHead: (head) => `
+    ${head}
+  `,
 };
 export default config;

@@ -10,6 +10,53 @@ import type { Meta, StoryFn } from '@storybook/react';
 const meta: Meta<typeof TextField> = {
   title: 'components/TextField',
   component: TextField,
+  tags: ['autodocs'],
+  argTypes: {
+    label: {
+      control: 'text',
+      description: '상단 레이블 텍스트',
+    },
+    helperText: {
+      control: 'object',
+      description: '하단 헬퍼 텍스트 배열',
+    },
+    width: {
+      control: { type: 'number', min: 100, max: 500, step: 10 },
+      description: '텍스트 필드 너비',
+    },
+    height: {
+      control: { type: 'number', min: 30, max: 300, step: 10 },
+      description: '텍스트 필드 높이 (멀티라인일 경우)',
+    },
+    multiline: {
+      control: 'boolean',
+      description: '멀티라인 텍스트 필드 여부',
+    },
+    isSubTextField: {
+      control: 'boolean',
+      description: '하위 텍스트 필드 여부',
+    },
+    fontColor: {
+      control: 'color',
+      description: '텍스트 색상',
+    },
+    right: {
+      control: 'text',
+      description: '우측 아이콘이나 요소',
+    },
+    isError: {
+      control: 'boolean',
+      description: '에러 상태 여부',
+    },
+    isRound: {
+      control: 'boolean',
+      description: '둥근 형태의 필드 여부',
+    },
+    isEssential: {
+      control: 'boolean',
+      description: '필수 필드 표시 여부(*)',
+    },
+  },
 };
 
 export default meta;
