@@ -88,7 +88,6 @@ const PetBreedInfo = ({
 }: PetBreedInfoProps) => {
   const handlePrevButton = () => {
     setDetailStep((prev) => {
-      console.log('Prev Step:', prev); // 이전 단계 확인
       return prev - 1; // 상태를 한 단계 뒤로 설정
     });
   };
