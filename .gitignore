@@ -37,6 +37,8 @@ yarn-error.log*
 .DS_Store
 *.pem
 
+yarn.lock
+
 # Yarn Zero-Install
 .yarn/*
 !.yarn/cache
@@ -46,6 +48,7 @@ yarn-error.log*
 !.yarn/sdks
 !.yarn/versions
 .yarn/install-state.gz
+
 
 # Storybook
 *storybook.log
