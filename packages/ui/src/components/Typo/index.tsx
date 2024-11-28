@@ -6,6 +6,7 @@ export const Text = styled.div<{
   typo?: KeyOfTypo;
   colorCode?: string;
   margin?: string;
+  justify?: string;
   align?: string;
 }>`
   ${({ typo }) => (typo ? theme.typo[typo] : '')};
@@ -13,6 +14,7 @@ export const Text = styled.div<{
 
   display: flex;
   align-items: ${({ align }) => (align ? align : 'center')};
+  justify-content: ${({ justify }) => (justify ? justify : 'center')};
   margin: ${({ margin }) => (margin ? margin : '0')};
 `;
 
