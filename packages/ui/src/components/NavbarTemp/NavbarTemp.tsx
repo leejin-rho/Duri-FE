@@ -1,8 +1,7 @@
 import { theme } from "@duri-fe/ui";
 import styled from "@emotion/styled";
 
-export const NavbarTemp
- = styled.div`
+export const NavbarTemp = styled.div`
   width: 100%;
   max-width: 480px;
   height: 50px;
