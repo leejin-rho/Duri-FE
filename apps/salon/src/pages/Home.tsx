@@ -1,4 +1,4 @@
-import { MobileLayout, Navbar } from "@duri-fe/ui";
+import { DuriNavbar, MobileLayout } from '@duri-fe/ui';
 
 const Home = () => {
   return (
@@ -7,10 +7,10 @@ const Home = () => {
         <h1>Home</h1>
         <h1>Home</h1>
         <h1>Home</h1>
-        <Navbar />
+        <DuriNavbar />
       </MobileLayout>
     </>
-  )
+  );
 };
 
 export default Home;
