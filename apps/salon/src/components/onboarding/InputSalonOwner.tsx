@@ -28,6 +28,19 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
     onNext(salonOwnerFormState);
   };
 
+  // const handleSelectLicense = (selectedLicense: string) => {
+  //   setSalonOwnerFormState({ ...salonOwnerFormState, license: selectedLicense });
+  // };
+
+  // const certificateOptions = [
+  //   '반려견 스타일리스트',
+  //   '펫뷰티션',
+  //   '펫테이너',
+  //   '반려동물 행동지도사',
+  //   '반려동물 관리자',
+  //   '피어프리 인증',
+  // ];
+
   return (
     <MobileLayout>
       <StatusBar current={2} total={4} mode="onboarding" />
@@ -106,21 +119,14 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
           <span>개월</span>
         </div>
         <div>
-          <label htmlFor="license">자격</label>
-          <select
-            id="license"
-            name="license"
-            value={salonOwnerFormState.license}
-            onChange={handleChange}
-            required
-          >
-            <option value="" disabled>
-              자격 선택
-            </option>
-            <option value="level1">Level 1</option>
-            <option value="level2">Level 2</option>
-            <option value="level3">Level 3</option>
-          </select>
+          <label>자격</label>
+          {/* <Dropdown
+            width="100%"
+            margin="8px 0"
+            options={certificateOptions}
+            defaultValue="자격 선택"
+            onSelect={handleSelectLicense}
+          /> */}
         </div>
         <p>
           문제가 발생한다면 <a href="/#">문의하기</a> 버튼을 눌러주세요.
