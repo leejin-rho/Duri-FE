@@ -484,6 +484,7 @@ __metadata:
     "@duri-fe/utils": "workspace:packages/utils"
     "@emotion/react": "npm:^11.13.5"
     "@emotion/styled": "npm:^11.13.5"
+    "@tosspayments/tosspayments-sdk": "npm:^2.3.2"
     "@types/node": "npm:^22.10.1"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
@@ -2336,7 +2337,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tosspayments/tosspayments-sdk@npm:2.3.2":
+"@tosspayments/tosspayments-sdk@npm:2.3.2, @tosspayments/tosspayments-sdk@npm:^2.3.2":
   version: 2.3.2
   resolution: "@tosspayments/tosspayments-sdk@npm:2.3.2"
   checksum: 10c0/d144cdf77fa7ab931ed0b46349fe5b59b504e5d64d3194b391fea4b5a59701d53fb5c4af776bb9471645043ad3de2e64c9e864fd16a32d504ee3b6f795c857fc
