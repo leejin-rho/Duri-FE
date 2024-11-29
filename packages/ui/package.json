@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@duri-fe/eslint-config": "workspace:packages/eslint-config",
-    "@duri-fe/utils": "workspace:packages/utils",
+    "@duri-fe/utils": "workspace:^",
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
     "@types/node": "^22.10.0",

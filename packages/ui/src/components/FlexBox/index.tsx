@@ -1,1 +1,1 @@
-export { Flex } from './Flex';
+export { Flex, HeightFitFlex } from './Flex';

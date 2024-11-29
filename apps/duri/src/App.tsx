@@ -7,6 +7,8 @@ import { Global } from '@emotion/react';
 
 import Home from '@pages/Home';
 
+import StartPage from './pages/Onboarding/StartPage';
+
 function App() {
   return (
     <BrowserRouter>
@@ -14,7 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/login" element={<Login />} /> */}
-        <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/onboarding" element={<StartPage />} />
+        <Route path="/onboarding/detail" element={<Onboarding />} />
       </Routes>
     </BrowserRouter>
   );
