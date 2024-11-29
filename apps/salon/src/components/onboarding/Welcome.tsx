@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MobileLayout } from '@duri-fe/ui';
+import { Button, MobileLayout } from '@duri-fe/ui';
 
 interface WelcomeProps {
   onNext: () => void;
@@ -13,7 +13,7 @@ const Welcome: React.FC<WelcomeProps> = ({ onNext }) => {
     <MobileLayout>
       <h2>{userName}님 안녕하세요!</h2>
       <p>두리몽실에 오신 것을 환영합니다 👋</p>
-      <button onClick={onNext}>다음</button>
+      <Button onClick={onNext}>다음</Button>
     </MobileLayout>
   );
 };

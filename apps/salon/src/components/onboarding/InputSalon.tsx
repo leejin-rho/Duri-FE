@@ -1,20 +1,14 @@
 import React, { useState } from 'react';
 
-import { MobileLayout } from '@duri-fe/ui';
+import { MobileLayout, StatusBar } from '@duri-fe/ui';
+import { SalonFormData } from '@salon/pages/Onboarding';
 
-interface FormData {
-  name: string;
-  address: string;
-  registrationNumber: string;
-  licenseNumber: string;
+interface InputSalonProps {
+  onNext: (data: SalonFormData) => void;
 }
 
-interface FormInputProps {
-  onNext: (data: FormData) => void;
-}
-
-const FormInput: React.FC<FormInputProps> = ({ onNext }) => {
-  const [formState, setFormState] = useState<FormData>({
+const InputSalon: React.FC<InputSalonProps> = ({ onNext }) => {
+  const [salonFormState, setSalonFormState] = useState<SalonFormData>({
     name: '',
     address: '',
     registrationNumber: '',
@@ -23,16 +17,17 @@ const FormInput: React.FC<FormInputProps> = ({ onNext }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormState({ ...formState, [name]: value });
+    setSalonFormState({ ...salonFormState, [name]: value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onNext(formState);
+    onNext(salonFormState);
   };
 
   return (
     <MobileLayout>
+      <StatusBar current={1} total={4} mode='onboarding'/>
       <h2>미용샵의 정보를 입력해주세요</h2>
       <p>등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!</p>
       <form onSubmit={handleSubmit}>
@@ -42,7 +37,7 @@ const FormInput: React.FC<FormInputProps> = ({ onNext }) => {
             type="text"
             id="name"
             name="name"
-            value={formState.name}
+            value={salonFormState.name}
             onChange={handleChange}
             placeholder="매장이름 입력"
             required
@@ -56,7 +51,7 @@ const FormInput: React.FC<FormInputProps> = ({ onNext }) => {
               type="text"
               id="address"
               name="address"
-              value={formState.address}
+              value={salonFormState.address}
               onChange={handleChange}
               placeholder="우편번호 입력"
               required
@@ -77,7 +72,7 @@ const FormInput: React.FC<FormInputProps> = ({ onNext }) => {
             type="text"
             id="registrationNumber"
             name="registrationNumber"
-            value={formState.registrationNumber}
+            value={salonFormState.registrationNumber}
             onChange={handleChange}
             placeholder="사업자 등록번호 입력"
             required
@@ -90,7 +85,7 @@ const FormInput: React.FC<FormInputProps> = ({ onNext }) => {
             type="text"
             id="licenseNumber"
             name="licenseNumber"
-            value={formState.licenseNumber}
+            value={salonFormState.licenseNumber}
             onChange={handleChange}
             placeholder="미용사 면허번호 입력"
             required
@@ -107,4 +102,4 @@ const FormInput: React.FC<FormInputProps> = ({ onNext }) => {
   );
 };
 
-export default FormInput;
+export default InputSalon;
