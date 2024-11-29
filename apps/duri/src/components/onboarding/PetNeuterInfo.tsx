@@ -1,24 +1,40 @@
-import { Control, Controller, FieldErrors } from 'react-hook-form';
+import { useState } from 'react';
+import { Control, Controller } from 'react-hook-form';
+
+import { Button, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
 
 interface PetNeuterInfoProps {
   control: Control<FormData>;
-  errors: FieldErrors<FormData>;
-  setDetailStep: React.Dispatch<React.SetStateAction<number>>;
 }
-const PetNeuterInfo = ({
-  control,
-  errors,
-  setDetailStep,
-}: PetNeuterInfoProps) => {
-  const handlePrevButton = () => {
-    setDetailStep((prev) => {
-      return prev - 1; // 상태를 한 단계 뒤로 설정
-    });
+
+const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
+  const [isNeutered, setIsNeutered] = useState<boolean | undefined>();
+
+  const handleClickButton = (field: {
+    onChange: (value: boolean) => void;
+    value: boolean;
+    name: string;
+  }, value: boolean) => {
+    field.onChange(value);
+    setIsNeutered(value);
   };
+
+  const options = [
+    { label: '네, 했어요!', value: true },
+    { label: '아니요, 아직 안했어요.', value: false },
+  ];
+
   return (
     <>
+      <Text typo="Heading2" justify="flex-start">
+        중성화 여부를 알려주세요!
+      </Text>
+      <Text typo="Body3" justify="flex-start" colorCode={theme.palette.Gray500}>
+        등록한 반려견은 MY에서 변경할 수 있어요.
+      </Text>
+
       <Controller
         name="isNeutered"
         control={control}
@@ -28,21 +44,35 @@ const PetNeuterInfo = ({
         }}
         render={({ field }) => (
           <>
-            <label>중성화 여부</label>
-            <button type="button" onClick={() => field.onChange(true)}>
-              완료
-            </button>
-            <button type="button" onClick={() => field.onChange(false)}>
-              안함
-            </button>
-            {errors.isNeutered && <p>{errors.isNeutered.message}</p>}
+            {options.map(({ label, value }) => (
+              <Button
+                key={value ? 'yes' : 'no'}
+                width="fit-content"
+                height="43px"
+                bg={
+                  isNeutered === value
+                    ? theme.palette.Black
+                    : theme.palette.White
+                }
+                fontColor={
+                  isNeutered === value
+                    ? theme.palette.White
+                    : theme.palette.Black
+                }
+                typo="Body2"
+                border={
+                  isNeutered === value
+                    ? 'none'
+                    : `1px solid ${theme.palette.Gray100}`
+                }
+                onClick={() => handleClickButton(field, value)}
+              >
+                {label}
+              </Button>
+            ))}
           </>
         )}
       />
-
-      <button type="button" onClick={handlePrevButton}>
-        돌아가기
-      </button>
     </>
   );
 };

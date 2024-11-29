@@ -1,89 +1,57 @@
 import React from 'react';
-import {
-  Control,
-  Controller,
-  FieldErrors,
-  UseFormTrigger,
-} from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
+
+import { Dropdown, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
 
 interface PetWeightInfoProps {
   control: Control<FormData>;
-  errors: FieldErrors<FormData>;
-  trigger: UseFormTrigger<FormData>;
-  setDetailStep: React.Dispatch<React.SetStateAction<number>>;
+  name: string;
 }
 
-const PetWeightInfo = ({
-  control,
-  errors,
-  trigger,
-  setDetailStep,
-}: PetWeightInfoProps) => {
-  const handlePrevButton = () => {
-    setDetailStep((prev) => {
-      return prev - 1; // 상태를 한 단계 뒤로 설정
-    });
-  };
-  const handleNextButton = async () => {
-    const isValid = await trigger('weight');
-    if (isValid) {
-      setDetailStep((prev) => prev + 1);
-    }
-  };
+const PetWeightInfo = ({ control, name }: PetWeightInfoProps) => {
+  const integerList = Array.from({ length: 41 }, (_, i) => i.toString()); // 정수 리스트
+  const decimalList = Array.from({ length: 10 }, (_, i) => i.toString()); // 소수 리스트
+
   return (
     <>
+      <Text typo="Heading2" justify="flex-start">
+        {name}의 <br />
+        몸무게를 입력해주세요
+      </Text>
+      <Text typo="Body3" justify="flex-start" colorCode={theme.palette.Gray500}>미용실을 추천해주는 카테고리로 쓰여요.</Text>
       <Controller
         name="weight"
         control={control}
         rules={{ required: '몸무게를 선택해주세요.' }}
         render={({ field }) => (
           <>
-            <label>몸무게</label>
-            <>
-              {/* 정수 선택 */}
-              <select
-                value={field.value.split('.')[0]} // 정수 부분
-                onChange={(e) => {
-                  const decimal = field.value.split('.')[1] || '0'; //소수 추출
-                  field.onChange(`${e.target.value}.${decimal}`); // 정수와 소수 조합
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              {/* 정수 Dropdown */}
+              <Dropdown
+                options={integerList}
+                defaultValue={field.value.split('.')[0] || '0'} // 정수 부분 초기값
+                onSelect={(value) => {
+                  const decimal = field.value.split('.')[1] || '0'; // 소수 추출
+                  field.onChange(`${value}.${decimal}`); // 정수와 소수 조합
                 }}
-              >
-                {Array.from({ length: 41 }, (_, i) => (
-                  <option key={i} value={i}>
-                    {i}
-                  </option>
-                ))}
-              </select>
-
+              />
               <span>.</span>
-
-              {/* 소수 선택 */}
-              <select
-                value={field.value.split('.')[1]} // 소수 부분
-                onChange={(e) => {
-                  const integer = field.value.split('.')[0] || '0'; //정수 추출
-                  field.onChange(`${integer}.${e.target.value}`); // 정수와 소수 조합
+              {/* 소수 Dropdown */}
+              <Dropdown
+                options={decimalList}
+                defaultValue={field.value.split('.')[1] || '0'} // 소수 부분 초기값
+                onSelect={(value) => {
+                  const integer = field.value.split('.')[0] || '0'; // 정수 추출
+                  field.onChange(`${integer}.${value}`); // 정수와 소수 조합
                 }}
-              >
-                {Array.from({ length: 10 }, (_, i) => (
-                  <option key={i} value={i}>
-                    {i}
-                  </option>
-                ))}
-              </select> kg
-            </>
+              />
+              <span>kg</span>
+            </div>
           </>
         )}
       />
-      {errors.weight && <p>{errors.weight.message}</p>}
-      <button type="button" onClick={handlePrevButton}>
-        돌아가기
-      </button>
-      <button type="button" onClick={handleNextButton}>
-        다음 단계
-      </button>
     </>
   );
 };

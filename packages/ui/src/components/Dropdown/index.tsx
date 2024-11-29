@@ -30,7 +30,6 @@ export const Dropdown = ({
   const handleSelectOption = (option: string) => {
     setSelectedOption(option);
     onSelect(option); //상위 컴포넌트에 option 저장
-    // setIsOpen(false);
   };
   const toggleDropdown = (e: React.MouseEvent) => {
     e.stopPropagation(); // 클릭 이벤트 전파 방지
@@ -78,3 +77,5 @@ export const Dropdown = ({
     </>
   );
 };
+
+export default Dropdown;

@@ -1,70 +1,74 @@
-import React from 'react';
-import {
-  Control,
-  Controller,
-  FieldErrors,
-  UseFormTrigger,
-} from 'react-hook-form';
+import { useState } from 'react';
+import { Control, Controller } from 'react-hook-form';
+
+import { Button, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
 
 interface PetGenderInfoProps {
   control: Control<FormData>;
-  errors: FieldErrors<FormData>;
-  trigger: UseFormTrigger<FormData>;
-  setDetailStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const PetGenderInfo = ({
-  control,
-  errors,
-  trigger,
-  setDetailStep,
-}: PetGenderInfoProps) => {
-  const handlePrevButton = () => {
-    setDetailStep((prev) => {
-      return prev - 1; // 상태를 한 단계 뒤로 설정
-    });
+const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
+  const [gender, setGender] = useState<string>('');
+
+  const handleClickButton = (field: {
+    onChange: (value: string) => void;
+    value: string;
+    name: string;
+  }, value: string) => {
+    field.onChange(value);
+    setGender(value);
   };
-  const handleNextButton = async () => {
-    const isValid = await trigger('gender');
-    if (isValid) {
-      setDetailStep((prev) => prev + 1);
-    }
-  };
+
+  const options = [
+    { label: '왕자님', value: '남자' },
+    { label: '공주님', value: '여자' },
+  ];
+
   return (
     <>
-      <h2>반려견의 성별이 어떻게 되나요?</h2>
+      <Text typo="Heading2" justify="flex-start">
+        반려견의 품종이 어떻게 되나요?
+      </Text>
+      <Text typo="Body3" justify="flex-start" colorCode={theme.palette.Gray500}>
+        등록한 반려견은 MY에서 변경할 수 있어요.
+      </Text>
+
       <Controller
         name="gender"
         control={control}
         rules={{ required: '성별을 선택해주세요.' }}
         render={({ field }) => (
           <>
-            {/* <label>성별</label> */}
-            <button
-              type="button"
-              onClick={() => {
-                field.onChange('남자');
-                handleNextButton();
-              }}
-            >
-              왕자님
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                field.onChange('여자');
-                handleNextButton();
-              }}
-            >
-              공주님
-            </button>
-            {errors.gender && <p>{errors.gender.message}</p>}
-
-            <button type="button" onClick={handlePrevButton}>
-              돌아가기
-            </button>
+            {options.map(({ label, value }) => (
+              <Button
+                key={value}
+                width="fit-content"
+                height="43px"
+                bg={
+                  gender === value
+                    ? theme.palette.Black
+                    : theme.palette.White
+                }
+                fontColor={
+                  gender === value
+                    ? theme.palette.White
+                    : theme.palette.Black
+                }
+                typo="Body2"
+                border={
+                  gender === value
+                    ? 'none'
+                    : `1px solid ${theme.palette.Gray100}`
+                }
+                onClick={() =>
+                  handleClickButton(field, gender === value ? '' : value)
+                }
+              >
+                {label}
+              </Button>
+            ))}
           </>
         )}
       />

@@ -2,17 +2,14 @@ import React from 'react';
 import {
   Control,
   Controller,
-  FieldErrors,
-  UseFormTrigger,
 } from 'react-hook-form';
+
+import { Dropdown, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
 
 interface PetBreedInfoProps {
   control: Control<FormData>;
-  errors: FieldErrors<FormData>;
-  trigger: UseFormTrigger<FormData>;
-  setDetailStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const breeds: string[] = [
@@ -81,52 +78,23 @@ const breeds: string[] = [
 ];
 
 const PetBreedInfo = ({
-  control,
-  errors,
-  trigger,
-  setDetailStep,
+  control
 }: PetBreedInfoProps) => {
-  const handlePrevButton = () => {
-    setDetailStep((prev) => {
-      return prev - 1; // 상태를 한 단계 뒤로 설정
-    });
-  };
-  const handleNextButton = async () => {
-    // 'name' 필드에 대한 유효성 검사 실행
-    const isValid = await trigger('breed');
-    if (isValid) {
-      setDetailStep((prev) => prev + 1);
-    }
-  };
 
   return (
     <>
-      <h2>반려견의 견종이 어떻게 되나요?</h2>
+      <Text typo="Heading2" justify="flex-start">반려견의 품종이 어떻게 되나요?</Text>
+      <Text typo="Body3" justify="flex-start" colorCode={theme.palette.Gray500}>등록한 반려견은 MY에서 변경할 수 있어요.</Text>
       <Controller
         name="breed"
         control={control}
-        rules={{ required: '견종을 선택해주세요.' }}
+        rules={{ required: '품종을 선택해주세요.' }}
         render={({ field }) => (
           <>
-            <label>견종</label>
-            <select {...field}>
-              <option value="">견종을 선택하세요</option>
-              {breeds.map((breed, index) => (
-                <option key={index} value={breed}>
-                  {breed}
-                </option>
-              ))}
-            </select>
+            <Dropdown options={breeds} defaultValue="품종 선택" width={114} onSelect={field.onChange} />
           </>
         )}
       />
-      {errors.breed && <p>{errors.breed.message}</p>}
-      <button type="button" onClick={handlePrevButton}>
-        돌아가기
-      </button>
-      <button type="button" onClick={handleNextButton}>
-        완료
-      </button>
     </>
   );
 };
