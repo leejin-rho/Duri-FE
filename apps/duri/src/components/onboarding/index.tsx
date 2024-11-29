@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, Flex, StatusBar, Text, theme } from '@duri-fe/ui';
+import { Button, Flex, StatusBar, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 import PetAgeInfo from './PetAgeInfo';
@@ -33,14 +33,13 @@ const MultiStepForm = () => {
   const [diseaseList, setDiseaseList] = useState<string[]>([]); // 성격 선택리스트 관리
 
   useEffect(() => {
-    if (step <= 4) setProgress(1);
-    else if (step <= 6) setProgress(2);
-    else if (step <= 7) setProgress(3);
-    else if (step <= 8) setProgress(4);
+    if (step <= 3) setProgress(1);
+    else if (step <= 5) setProgress(2);
+    else if (step <= 6) setProgress(3);
+    else if (step <= 7) setProgress(4);
   }, [step]);
 
   const stepList = [
-    '시작',
     '이름',
     '견종',
     '성별',
@@ -107,77 +106,61 @@ const MultiStepForm = () => {
 
   return (
     <>
-      {stepList[step] === '시작' ? (
-        <Container
+      <Wrapper direction="column" padding="107px 20px 0 20px">
+        <Wrapper
           direction="column"
-          justify="center"
-          align="center"
-          padding="107px 20px 0 20px"
+          justify="flex-start"
+          align="flex-start"
+          gap={55}
         >
-          <Wrapper direction="column">
-            <Text typo="Heading2" align="center">
-              두리묭실 서비스를 이용하기 위해
-            </Text>
-            <Text typo="Heading2" align="center">
-              반려견의 정보를 입력해주세요!
-            </Text>
-          </Wrapper>
-          <Button width="335px" height="54px" onClick={() => setStep(step + 1)}>
-            입력하러 가기
-          </Button>
-        </Container>
-      ) : (
-        <Container direction="column" padding="107px 20px 0 20px">
-          <Wrapper
-            direction="column"
-            justify="flex-start"
-            align="flex-start"
-            gap={55}
-          >
-            <StatusBar current={progress} total={4} mode="onboarding" />
-            <Form onSubmit={handleSubmit(onSubmit)}>
-              {stepList[step] === '이름' && (
-                <PetNameInfo
-                  control={control}
-                  register={register}
-                  trigger={trigger}
-                  setStep={setStep}
-                />
-              )}
-              {stepList[step] === '견종' && <PetBreedInfo control={control} />}
-              {stepList[step] === '성별' && <PetGenderInfo control={control} />}
-              {stepList[step] === '중성화 여부' && (
-                <PetNeuterInfo control={control} />
-              )}
-              {stepList[step] === '나이' && (
-                <PetAgeInfo control={control} name={getValues('name')} />
-              )}
-              {stepList[step] === '몸무게' && (
-                <PetWeightInfo control={control} name={getValues('name')} />
-              )}
+          <StatusBar current={progress} total={4} mode="onboarding" />
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            {stepList[step] === '이름' && (
+              <PetNameInfo
+                control={control}
+                register={register}
+                trigger={trigger}
+                setStep={setStep}
+              />
+            )}
+            {stepList[step] === '견종' && <PetBreedInfo control={control} />}
+            {stepList[step] === '성별' && <PetGenderInfo control={control} />}
+            {stepList[step] === '중성화 여부' && (
+              <PetNeuterInfo control={control} />
+            )}
+            {stepList[step] === '나이' && (
+              <PetAgeInfo control={control} name={getValues('name')} />
+            )}
+            {stepList[step] === '몸무게' && (
+              <PetWeightInfo control={control} name={getValues('name')} />
+            )}
 
-              {stepList[step] === '성격' && (
-                <PetPersonalityInfo
-                  control={control}
-                  toggleArrayValue={toggleArrayValue}
-                  personalityList={personalityList}
-                  name={getValues('name')}
-                />
-              )}
-              {stepList[step] === '질환' && (
-                <PetDiseaseInfo
-                  control={control}
-                  toggleArrayValue={toggleArrayValue}
-                  diseaseList={diseaseList}
-                  name={getValues('name')}
-                />
-              )}
-            </Form>
-          </Wrapper>
-        </Container>
-      )}
+            {stepList[step] === '성격' && (
+              <PetPersonalityInfo
+                control={control}
+                toggleArrayValue={toggleArrayValue}
+                personalityList={personalityList}
+                name={getValues('name')}
+              />
+            )}
+            {stepList[step] === '질환' && (
+              <PetDiseaseInfo
+                control={control}
+                toggleArrayValue={toggleArrayValue}
+                diseaseList={diseaseList}
+                name={getValues('name')}
+              />
+            )}
+          </Form>
+        </Wrapper>
+      </Wrapper>
 
-      <Flex justify="center" align="center" padding="0 20px" margin='0 0 44px 0'>
+      <Flex
+        justify="center"
+        align="center"
+        padding="0 20px"
+        margin="0 0 44px 0"
+      >
         {/* {step > 1 && <Button onClick={onPrevStep}>돌아가기</Button>} */}
         {['시작', '이름', '질환', '성격'].includes(stepList[step]) ? (
           <></>
@@ -240,11 +223,8 @@ const MultiStepForm = () => {
 
 export default MultiStepForm;
 
-export const Container = styled(Flex)`
-  height: 90vh;
-`;
-export const Wrapper = styled(Flex)`
-  flex-grow: 1;
+const Wrapper = styled(Flex)`
+  flex: 1;
 `;
 
 const Form = styled.form`

@@ -5,6 +5,7 @@ import Dropdown from '../../components/Dropdown';
 const meta: Meta<typeof Dropdown> = {
   title: 'components/Dropdown',
   component: Dropdown,
+  tags: ['autodocs'],
 };
 
 export default meta;

@@ -47,7 +47,7 @@ const PetPersonalityInfo = ({
         {name}는 <br />
         어떤 성격을 가지고 있나요?
       </Text>
-      <Text typo="Body3" justify="flex-start" colorCode={theme.palette.Gray500}>
+      <Text typo="Label2" justify="flex-start" colorCode={theme.palette.Gray500}>
         입력된 성격은 MY에서 변경가능해요.
       </Text>
       <Controller
@@ -60,13 +60,29 @@ const PetPersonalityInfo = ({
         render={() => (
           <FitFlex justify='flex-start' gap={8}>
             {personalityOptions.map((value) => (
-              <MultiSelectButton
+              <Button
                 key={value}
-                isSelected={personalityList.includes(value)} // 선택된 값에 따라 isSelected를 설정
+                width='fit-content'
+                height="43px"
+                bg={
+                  personalityList.includes(value)
+                    ? theme.palette.Black
+                    : theme.palette.White
+                }
+                fontColor={
+                  personalityList.includes(value)
+                    ? theme.palette.White
+                    : theme.palette.Black
+                }
+                border={
+                  personalityList.includes(value)
+                    ? 'none'
+                    : `1px solid ${theme.palette.Gray100}`
+                }
                 onClick={() => handleToggle(value)}
               >
                 {value}
-              </MultiSelectButton>
+              </Button>
             ))}
           </FitFlex>
         )}
@@ -76,19 +92,6 @@ const PetPersonalityInfo = ({
 };
 
 export default PetPersonalityInfo;
-
-export const MultiSelectButton = styled(Button)<{
-  isSelected: boolean;
-}>`
-  width: fit-content;
-  height: 43px;
-  background-color: ${({ isSelected }) =>
-    isSelected ? theme.palette.Black : theme.palette.White};
-  color: ${({ isSelected }) =>
-    isSelected ? theme.palette.White : theme.palette.Black};
-  border: ${({ isSelected }) =>
-    isSelected ? 'none' : `1px solid ${theme.palette.Gray100}`};
-`;
 
 const FitFlex = styled(Flex)`
   max-width: 374px;

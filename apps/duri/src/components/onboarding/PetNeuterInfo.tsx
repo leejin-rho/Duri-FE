@@ -31,7 +31,7 @@ const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
       <Text typo="Heading2" justify="flex-start">
         중성화 여부를 알려주세요!
       </Text>
-      <Text typo="Body3" justify="flex-start" colorCode={theme.palette.Gray500}>
+      <Text typo="Label2" justify="flex-start" colorCode={theme.palette.Gray500}>
         등록한 반려견은 MY에서 변경할 수 있어요.
       </Text>
 

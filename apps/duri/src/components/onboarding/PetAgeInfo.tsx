@@ -22,7 +22,7 @@ const PetAgeInfo = ({ control, name }: PetBirthYearInfoProps) => {
         {name}의 <br />
         나이를 입력해주세요
       </Text>
-      <Text typo="Body3" justify="flex-start" colorCode={theme.palette.Gray500}>미용실을 추천해주는 카테고리로 쓰여요.</Text>
+      <Text typo="Label2" justify="flex-start" colorCode={theme.palette.Gray500}>미용실을 추천해주는 카테고리로 쓰여요.</Text>
       <Controller
         name="age"
         control={control}
