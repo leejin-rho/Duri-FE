@@ -22,14 +22,14 @@ export const Dropdown = ({
   margin,
   options,
   defaultValue,
-  onSelect,
+  // onSelect,
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>(defaultValue);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const handleSelectOption = (option: string) => {
     setSelectedOption(option);
-    onSelect(option); //상위 컴포넌트에 option 저장
+    // onSelect(option); //상위 컴포넌트에 option 저장
   };
   const toggleDropdown = (e: React.MouseEvent) => {
     e.stopPropagation(); // 클릭 이벤트 전파 방지
@@ -66,7 +66,7 @@ export const Dropdown = ({
         )}
         {isOpen && (
           <Select width={width}>
-            {options.map((option, index) => (
+            {options?.map((option, index) => (
               <Option key={index} onClick={() => handleSelectOption(option)}>
                  <Text typo="Body3" align="center" justify='center'>{option}</Text>
               </Option>
