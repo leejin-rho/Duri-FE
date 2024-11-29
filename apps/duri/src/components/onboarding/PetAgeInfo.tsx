@@ -1,6 +1,6 @@
 import { Control, Controller } from 'react-hook-form';
 
-import { Dropdown, Text, theme } from '@duri-fe/ui';
+import { Dropdown, Flex, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
 
@@ -17,7 +17,7 @@ const PetAgeInfo = ({ control, name }: PetBirthYearInfoProps) => {
   });
 
   return (
-    <>
+    <Flex direction="column" align="flex-start" gap={28} >
       <Text typo="Heading2" justify="flex-start">
         {name}의 <br />
         나이를 입력해주세요
@@ -36,7 +36,7 @@ const PetAgeInfo = ({ control, name }: PetBirthYearInfoProps) => {
           />
         )}
       />
-    </>
+    </Flex>
   );
 };
 

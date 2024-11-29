@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Control, Controller } from 'react-hook-form';
 
-import { Button, Text, theme } from '@duri-fe/ui';
+import { Button, Flex, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
 
@@ -27,7 +27,7 @@ const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
   ];
 
   return (
-    <>
+    <Flex direction="column" align="flex-start" gap={28} >
       <Text typo="Heading2" justify="flex-start">
         중성화 여부를 알려주세요!
       </Text>
@@ -43,7 +43,7 @@ const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
             value !== undefined || '중성화 여부를 선택해주세요.',
         }}
         render={({ field }) => (
-          <>
+          <Flex direction='column' align='flex-start' gap={8}>
             {options.map(({ label, value }) => (
               <Button
                 key={value ? 'yes' : 'no'}
@@ -70,10 +70,10 @@ const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
                 {label}
               </Button>
             ))}
-          </>
+          </Flex>
         )}
       />
-    </>
+    </Flex>
   );
 };
 

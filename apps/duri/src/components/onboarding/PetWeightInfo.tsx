@@ -1,7 +1,7 @@
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 
-import { Dropdown, Text, theme } from '@duri-fe/ui';
+import { Dropdown, Flex, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
 
@@ -15,7 +15,7 @@ const PetWeightInfo = ({ control, name }: PetWeightInfoProps) => {
   const decimalList = Array.from({ length: 10 }, (_, i) => i.toString()); // 소수 리스트
 
   return (
-    <>
+    <Flex direction="column" align="flex-start" gap={28} >
       <Text typo="Heading2" justify="flex-start">
         {name}의 <br />
         몸무게를 입력해주세요
@@ -52,7 +52,7 @@ const PetWeightInfo = ({ control, name }: PetWeightInfoProps) => {
           </>
         )}
       />
-    </>
+    </Flex>
   );
 };
 

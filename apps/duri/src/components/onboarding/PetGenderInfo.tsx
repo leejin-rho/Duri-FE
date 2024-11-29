@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Control, Controller } from 'react-hook-form';
 
-import { Button, Text, theme } from '@duri-fe/ui';
+import { Button, Flex, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
 
@@ -27,7 +27,7 @@ const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
   ];
 
   return (
-    <>
+    <Flex direction="column" align="flex-start" gap={28} >
       <Text typo="Heading2" justify="flex-start">
         반려견의 품종이 어떻게 되나요?
       </Text>
@@ -35,6 +35,7 @@ const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
         등록한 반려견은 MY에서 변경할 수 있어요.
       </Text>
 
+      <Flex justify='flex-start' gap={8}>
       <Controller
         name="gender"
         control={control}
@@ -72,7 +73,8 @@ const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
           </>
         )}
       />
-    </>
+      </Flex>
+    </Flex>
   );
 };
 

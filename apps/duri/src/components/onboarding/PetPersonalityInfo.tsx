@@ -1,9 +1,6 @@
-import {
-  Control,
-  Controller
-} from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 
-import { Button, Text, theme } from '@duri-fe/ui';
+import { Button, Flex, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 import { FormData } from '.';
@@ -45,7 +42,7 @@ const PetPersonalityInfo = ({
   };
 
   return (
-    <>
+    <Flex direction="column" align="flex-start" gap={28}>
       <Text typo="Heading2" justify="flex-start">
         {name}는 <br />
         어떤 성격을 가지고 있나요?
@@ -61,7 +58,7 @@ const PetPersonalityInfo = ({
             value.length > 0 || '성격에 대해 알려주세요.',
         }}
         render={() => (
-          <>
+          <FitFlex justify='flex-start' gap={8}>
             {personalityOptions.map((value) => (
               <MultiSelectButton
                 key={value}
@@ -70,11 +67,11 @@ const PetPersonalityInfo = ({
               >
                 {value}
               </MultiSelectButton>
-            ))}{' '}
-          </>
+            ))}
+          </FitFlex>
         )}
       />
-    </>
+    </Flex>
   );
 };
 
@@ -91,4 +88,11 @@ export const MultiSelectButton = styled(Button)<{
     isSelected ? theme.palette.White : theme.palette.Black};
   border: ${({ isSelected }) =>
     isSelected ? 'none' : `1px solid ${theme.palette.Gray100}`};
+`;
+
+const FitFlex = styled(Flex)`
+  max-width: 374px;
+  width: 100%;
+  flex-wrap: wrap;
+  word-break: break-all;
 `;

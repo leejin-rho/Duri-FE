@@ -4,7 +4,7 @@ import {
   Controller,
 } from 'react-hook-form';
 
-import { Dropdown, Text, theme } from '@duri-fe/ui';
+import { Dropdown, Flex, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
 
@@ -82,7 +82,7 @@ const PetBreedInfo = ({
 }: PetBreedInfoProps) => {
 
   return (
-    <>
+    <Flex direction="column" align="flex-start" gap={28} >
       <Text typo="Heading2" justify="flex-start">반려견의 품종이 어떻게 되나요?</Text>
       <Text typo="Body3" justify="flex-start" colorCode={theme.palette.Gray500}>등록한 반려견은 MY에서 변경할 수 있어요.</Text>
       <Controller
@@ -95,7 +95,7 @@ const PetBreedInfo = ({
           </>
         )}
       />
-    </>
+    </Flex>
   );
 };
 

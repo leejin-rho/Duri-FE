@@ -1,6 +1,6 @@
 import { Control, Controller } from 'react-hook-form';
 
-import { Text, theme } from '@duri-fe/ui';
+import { Flex, Text, theme } from '@duri-fe/ui';
 
 import { MultiSelectButton } from './PetPersonalityInfo';
 import { FormData } from '.';
@@ -42,7 +42,7 @@ const PetDiseaseInfo = ({
             value.length > 0 || '질환에 대해 알려주세요.',
         }}
         render={() => (
-          <>
+          <Flex direction="column" align="flex-start" gap={28}>
             <Text typo="Heading2" justify="flex-start">
               {name}가 <br />
               갖고있는 질환이 있나요?
@@ -54,6 +54,7 @@ const PetDiseaseInfo = ({
             >
               입력된 성격은 MY에서 변경가능해요.
             </Text>
+            <Flex direction='column' align='flex-start' gap={8}>
             {diseaseOptions.map((value) => (
               <MultiSelectButton
                 key={value}
@@ -63,7 +64,8 @@ const PetDiseaseInfo = ({
                 {value}
               </MultiSelectButton>
             ))}
-          </>
+            </Flex>
+          </Flex>
         )}
       />
     </>

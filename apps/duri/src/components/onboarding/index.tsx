@@ -112,7 +112,7 @@ const MultiStepForm = () => {
           direction="column"
           justify="center"
           align="center"
-          padding="0 20px 44px 20px"
+          padding="107px 20px 0 20px"
         >
           <Wrapper direction="column">
             <Text typo="Heading2" align="center">
@@ -127,113 +127,126 @@ const MultiStepForm = () => {
           </Button>
         </Container>
       ) : (
-        <Wrapper direction="column" align="flex-start">
-          <StatusBar current={progress} total={4} mode="onboarding" />
-          <form onSubmit={handleSubmit(onSubmit)}>
-            {stepList[step] === '이름' && (
-              <PetNameInfo
-                control={control}
-                register={register}
-                trigger={trigger}
-                setStep={setStep}
-              />
-            )}
-            {stepList[step] === '견종' && <PetBreedInfo control={control} />}
-            {stepList[step] === '성별' && <PetGenderInfo control={control} />}
-            {stepList[step] === '중성화 여부' && (
-              <PetNeuterInfo control={control} />
-            )}
-            {stepList[step] === '나이' && (
-              <PetAgeInfo control={control} name={getValues('name')} />
-            )}
-            {stepList[step] === '몸무게' && (
-              <PetWeightInfo control={control} name={getValues('name')} />
-            )}
+        <Container direction="column" padding="107px 20px 0 20px">
+          <Wrapper
+            direction="column"
+            justify="flex-start"
+            align="flex-start"
+            gap={55}
+          >
+            <StatusBar current={progress} total={4} mode="onboarding" />
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              {stepList[step] === '이름' && (
+                <PetNameInfo
+                  control={control}
+                  register={register}
+                  trigger={trigger}
+                  setStep={setStep}
+                />
+              )}
+              {stepList[step] === '견종' && <PetBreedInfo control={control} />}
+              {stepList[step] === '성별' && <PetGenderInfo control={control} />}
+              {stepList[step] === '중성화 여부' && (
+                <PetNeuterInfo control={control} />
+              )}
+              {stepList[step] === '나이' && (
+                <PetAgeInfo control={control} name={getValues('name')} />
+              )}
+              {stepList[step] === '몸무게' && (
+                <PetWeightInfo control={control} name={getValues('name')} />
+              )}
 
-            {stepList[step] === '성격' && (
-              <PetPersonalityInfo
-                control={control}
-                toggleArrayValue={toggleArrayValue}
-                personalityList={personalityList}
-                name={getValues('name')}
-              />
-            )}
-            {stepList[step] === '질환' && (
-              <>
-                <h2>{getValues('name')}가 갖고있는 질환이 있나요?</h2>
-                <>입력된 질환은 MY에서 변경 가능해요.</>
+              {stepList[step] === '성격' && (
+                <PetPersonalityInfo
+                  control={control}
+                  toggleArrayValue={toggleArrayValue}
+                  personalityList={personalityList}
+                  name={getValues('name')}
+                />
+              )}
+              {stepList[step] === '질환' && (
                 <PetDiseaseInfo
                   control={control}
                   toggleArrayValue={toggleArrayValue}
                   diseaseList={diseaseList}
                   name={getValues('name')}
                 />
-              </>
-            )}
-
-            <>
-              {/* {step > 1 && <Button onClick={onPrevStep}>돌아가기</Button>} */}
-              {['이름', '질환', '성격'].includes(stepList[step]) ? (
-                <></>
-              ) : (
-                <Button
-                  bg={isValid ? theme.palette.Black : theme.palette.Gray50}
-                  fontColor={
-                    isValid ? theme.palette.White : theme.palette.Black
-                  }
-                  onClick={isValid ? onNextStep : undefined}
-                >
-                  {stepList[step] === '질환' ? '완료' : '다음 단계'}
-                </Button>
               )}
-              {stepList[step] === '성격' &&
-                (personalityList.length > 0 ? (
-                  <Button
-                    bg={theme.palette.Black}
-                    fontColor={theme.palette.White}
-                    onClick={onNextStep}
-                  >
-                    다음 단계
-                  </Button>
-                ) : (
-                  <Button
-                    bg={theme.palette.Gray50}
-                    fontColor={theme.palette.White}
-                    onClick={() => setStep(step - 1)}
-                  >
-                    다음 단계
-                  </Button>
-                ))}
-              {stepList[step] === '질환' &&
-                (diseaseList.length > 0 ? (
-                  <Button
-                    bg={theme.palette.Black}
-                    fontColor={theme.palette.White}
-                    onClick={handleSubmit(onSubmit)}
-                  >
-                    완료
-                  </Button>
-                ) : (
-                  <Button
-                    bg={theme.palette.Gray50}
-                    fontColor={theme.palette.White}
-                  >
-                    완료
-                  </Button>
-                ))}
-            </>
-          </form>
-        </Wrapper>
+            </Form>
+          </Wrapper>
+        </Container>
       )}
+
+      <Flex justify="center" align="center" padding="0 20px" margin='0 0 44px 0'>
+        {/* {step > 1 && <Button onClick={onPrevStep}>돌아가기</Button>} */}
+        {['시작', '이름', '질환', '성격'].includes(stepList[step]) ? (
+          <></>
+        ) : (
+          <Button
+            bg={isValid ? theme.palette.Black : theme.palette.Gray50}
+            fontColor={isValid ? theme.palette.White : theme.palette.Black}
+            onClick={isValid ? onNextStep : undefined}
+          >
+            {stepList[step] === '질환' ? '완료' : '다음 단계'}
+          </Button>
+        )}
+        {stepList[step] === '성격' &&
+          (personalityList.length > 0 ? (
+            <Button
+              width="335px"
+              height="54px"
+              bg={theme.palette.Black}
+              fontColor={theme.palette.White}
+              onClick={onNextStep}
+            >
+              다음 단계
+            </Button>
+          ) : (
+            <Button
+              width="335px"
+              height="54px"
+              bg={theme.palette.Gray50}
+              fontColor={theme.palette.White}
+              onClick={() => setStep(step - 1)}
+            >
+              다음 단계
+            </Button>
+          ))}
+        {stepList[step] === '질환' &&
+          (diseaseList.length > 0 ? (
+            <Button
+              width="335px"
+              height="54px"
+              bg={theme.palette.Black}
+              fontColor={theme.palette.White}
+              onClick={handleSubmit(onSubmit)}
+            >
+              완료
+            </Button>
+          ) : (
+            <Button
+              width="335px"
+              height="54px"
+              bg={theme.palette.Gray50}
+              fontColor={theme.palette.White}
+            >
+              완료
+            </Button>
+          ))}
+      </Flex>
     </>
   );
 };
 
 export default MultiStepForm;
 
-const Container = styled(Flex)`
-  height: 100vh;
+export const Container = styled(Flex)`
+  height: 90vh;
 `;
-const Wrapper = styled(Flex)`
+export const Wrapper = styled(Flex)`
   flex-grow: 1;
+`;
+
+const Form = styled.form`
+  width: 100%;
 `;
