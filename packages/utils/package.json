@@ -14,8 +14,8 @@
   "devDependencies": {
     "@duri-fe/eslint-config": "workspace:packages/eslint-config",
     "@types/react": "^18",
-    "eslint": "^8.57.0",
-    "typescript": "5.5.4"
+    "eslint": "8.57.0",
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "@emotion/react": "^11.13.5",

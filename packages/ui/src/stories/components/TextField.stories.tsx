@@ -18,7 +18,7 @@ const meta: Meta<typeof TextField> = {
     },
     helperText: {
       control: 'object',
-      description: '하단 헬퍼 텍스트 배열',
+      description: '상단 헬퍼 텍스트 배열',
     },
     width: {
       control: { type: 'number', min: 100, max: 500, step: 10 },
