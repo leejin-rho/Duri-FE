@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, MobileLayout, StatusBar, theme } from '@duri-fe/ui';
+import { Button, MobileLayout, StatusBar, Text, theme } from '@duri-fe/ui';
 import { SalonOwnerFormData } from '@salon/pages/Onboarding';
 
 interface SalonOwnerConfirmProps {
@@ -13,29 +13,29 @@ const SalonOwnerConfirm: React.FC<SalonOwnerConfirmProps> = ({
   return (
     <MobileLayout>
       <StatusBar current={4} total={4} mode="onboarding" />
-      <h2>입력하신 정보를 확인해주세요</h2>
-      <p>등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!</p>
+      <Text>입력하신 정보를 확인해주세요</Text>
+      <Text>등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!</Text>
       <div>
         <div>
-          <strong>성함:</strong> {salonOwnerFormData.name}
+          <Text>성함:</Text> {salonOwnerFormData.name}
         </div>
         <div>
-          <strong>성별:</strong> {salonOwnerFormData.gender === 'male' ? '남성' : '여성'}
+          <Text>성별:</Text> {salonOwnerFormData.gender === 'male' ? '남성' : '여성'}
         </div>
         <div>
-          <strong>나이:</strong> {salonOwnerFormData.age}세
+          <Text>나이:</Text> {salonOwnerFormData.age}세
         </div>
         <div>
-          <strong>경력:</strong> {salonOwnerFormData.experienceYears}년 {salonOwnerFormData.experienceMonths}개월
+          <Text>경력:</Text> {salonOwnerFormData.experienceYears}년 {salonOwnerFormData.experienceMonths}개월
         </div>
         <div>
-          <strong>자격:</strong> {salonOwnerFormData.license}
+          <Text>자격:</Text> {salonOwnerFormData.license}
         </div>
       </div>
-      <p>
-        문제가 발생한다면 <a href="/#">문의하기</a> 버튼을 눌러주세요.
-      </p>
-      <Button bg={theme.palette.Black} fontColor={theme.palette.White}>완료</Button>
+      <Text>
+        문제가 발생한다면 <a href="/#"><Text>문의하기</Text></a> 버튼을 눌러주세요.
+      </Text>
+      <Button bg={theme.palette.Black} fontColor={theme.palette.White}><Text>완료</Text></Button>
     </MobileLayout>
   );
 };

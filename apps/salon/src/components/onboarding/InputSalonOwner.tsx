@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { MobileLayout, StatusBar } from '@duri-fe/ui';
+import { MobileLayout, StatusBar, Text } from '@duri-fe/ui';
 import { SalonOwnerFormData } from '@salon/pages/Onboarding';
 
 interface InputSalonOwnerProps {
@@ -28,27 +28,14 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
     onNext(salonOwnerFormState);
   };
 
-  // const handleSelectLicense = (selectedLicense: string) => {
-  //   setSalonOwnerFormState({ ...salonOwnerFormState, license: selectedLicense });
-  // };
-
-  // const certificateOptions = [
-  //   '반려견 스타일리스트',
-  //   '펫뷰티션',
-  //   '펫테이너',
-  //   '반려동물 행동지도사',
-  //   '반려동물 관리자',
-  //   '피어프리 인증',
-  // ];
-
   return (
     <MobileLayout>
       <StatusBar current={2} total={4} mode="onboarding" />
-      <h2>원장님의 정보를 입력해주세요</h2>
-      <p>등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!</p>
+      <Text>원장님의 정보를 입력해주세요</Text>
+      <Text>등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!</Text>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="profile">사진</label>
+          <label htmlFor="profile"><Text>사진</Text></label>
           <input
             type="file"
             id="profile"
@@ -59,7 +46,7 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
           />
         </div>
         <div>
-          <label htmlFor="name">성함</label>
+          <label htmlFor="name"><Text>성함</Text></label>
           <input
             type="text"
             id="name"
@@ -71,7 +58,7 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
           />
         </div>
         <div>
-          <label htmlFor="age">나이</label>
+          <label htmlFor="age"><Text>나이</Text></label>
           <input
             type="text"
             id="age"
@@ -81,10 +68,10 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
             placeholder="나이 입력"
             required
           />
-          <span>세</span>
+          <Text>세</Text>
         </div>
         <div>
-          <label htmlFor='gender'>성별</label>
+          <label htmlFor='gender'><Text>성별</Text></label>
           <input
             type="text"
             id="gender"
@@ -96,7 +83,7 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
           />
         </div>
         <div>
-          <label htmlFor="experienceYears">경력</label>
+          <label htmlFor="experienceYears"><Text>경력</Text></label>
           <input
             type="number"
             id="experienceYears"
@@ -106,7 +93,7 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
             placeholder="경력 입력"
             required
           />
-          <span>년</span>
+          <Text>년</Text>
           <input
             type="number"
             id="experienceMonths"
@@ -116,22 +103,29 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
             placeholder="경력 입력"
             required
           />
-          <span>개월</span>
+          <Text>개월</Text>
         </div>
         <div>
-          <label>자격</label>
-          {/* <Dropdown
-            width="100%"
-            margin="8px 0"
-            options={certificateOptions}
-            defaultValue="자격 선택"
-            onSelect={handleSelectLicense}
-          /> */}
+          <label htmlFor="license"><Text>자격</Text></label>
+          <select
+            id="license"
+            name="license"
+            value={salonOwnerFormState.license}
+            onChange={handleChange}
+            required
+          >
+            <option value="" disabled>
+              자격 선택
+            </option>
+            <option value="level1">Level 1</option>
+          </select>
         </div>
-        <p>
-          문제가 발생한다면 <a href="/#">문의하기</a> 버튼을 눌러주세요.
-        </p>
-        <button type="submit">다음 단계</button>
+
+        {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
+        <Text>
+          문제가 발생한다면 <a href="/#"><Text>문의하기</Text></a> 버튼을 눌러주세요.
+        </Text>
+        <button type="submit"><Text>다음 단계</Text></button>
       </form>
     </MobileLayout>
   );

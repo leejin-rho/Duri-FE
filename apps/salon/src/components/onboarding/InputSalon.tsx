@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { MobileLayout, StatusBar } from '@duri-fe/ui';
+import { MobileLayout, StatusBar, Text } from '@duri-fe/ui';
 import { SalonFormData } from '@salon/pages/Onboarding';
 
 interface InputSalonProps {
@@ -28,11 +28,11 @@ const InputSalon: React.FC<InputSalonProps> = ({ onNext }) => {
   return (
     <MobileLayout>
       <StatusBar current={1} total={4} mode='onboarding'/>
-      <h2>미용샵의 정보를 입력해주세요</h2>
-      <p>등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!</p>
+      <Text>미용샵의 정보를 입력해주세요</Text>
+      <Text>등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!</Text>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">매장 이름</label>
+          <label htmlFor="name"><Text>매장 이름</Text></label>
           <input
             type="text"
             id="name"
@@ -45,7 +45,7 @@ const InputSalon: React.FC<InputSalonProps> = ({ onNext }) => {
         </div>
 
         <div>
-          <label htmlFor="address">매장 위치</label>
+          <label htmlFor="address"><Text>매장 위치</Text></label>
           <div style={{ display: 'flex', gap: '8px' }}>
             <input
               type="text"
@@ -56,7 +56,7 @@ const InputSalon: React.FC<InputSalonProps> = ({ onNext }) => {
               placeholder="우편번호 입력"
               required
             />
-            <button type="button">우편번호 검색</button>
+            <button type="button"><Text>우편번호 검색</Text></button>
           </div>
           <input
             type="text"
@@ -67,7 +67,7 @@ const InputSalon: React.FC<InputSalonProps> = ({ onNext }) => {
         </div>
 
         <div>
-          <label htmlFor="registrationNumber">사업자 등록번호</label>
+          <label htmlFor="registrationNumber"><Text>사업자 등록번호</Text></label>
           <input
             type="text"
             id="registrationNumber"
@@ -80,7 +80,7 @@ const InputSalon: React.FC<InputSalonProps> = ({ onNext }) => {
         </div>
 
         <div>
-          <label htmlFor="licenseNumber">미용사 면허번호</label>
+          <label htmlFor="licenseNumber"><Text>미용사 면허번호</Text></label>
           <input
             type="text"
             id="licenseNumber"
@@ -92,11 +92,11 @@ const InputSalon: React.FC<InputSalonProps> = ({ onNext }) => {
           />
         </div>
 
-        {/* 문의하기 눌렀을 때에 대한 처리 */}
-        <p>
-          문제가 발생한다면 <a href="/#">문의하기</a> 버튼을 눌러주세요.
-        </p>
-        <button type="submit">다음 단계</button>
+        {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
+        <Text>
+          문제가 발생한다면 <a href="/#"><Text>문의하기</Text></a> 버튼을 눌러주세요.
+        </Text>
+        <button type="submit"><Text>다음 단계</Text></button>
       </form>
     </MobileLayout>
   );
