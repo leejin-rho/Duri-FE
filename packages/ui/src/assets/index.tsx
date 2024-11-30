@@ -33,7 +33,7 @@ export { default as QuotationIcon } from './QuotationIcon';
 export { default as ShopIcon } from './ShopIcon';
 export { default as AlertStar } from './AlertStar';
 export { default as NaverLogo } from './NaverLogo';
-export { default as Polygon } from './Polygon';
+export { default as SpeechBallon } from './SpeechBallon';
 
 import Add from './Add';
 import AddNew from './AddNew';

@@ -1,4 +1,4 @@
-import { Flex, MobileLayout, NaverLogo, SpeechBallon, Text, theme } from "@duri-fe/ui";
+import { Flex, MobileLayout, NaverLogo, SpeechBallonContainer, Text, theme } from "@duri-fe/ui";
 import styled from "@emotion/styled";
 
 const LoginPage = () => {
@@ -15,7 +15,7 @@ const LoginPage = () => {
 
         {/** 로그인 버튼 */}
         <ButtonContainer direction="column" margin="120px 0 0 0">
-          <SpeechBallon
+          <SpeechBallonContainer
             label="3초만에 시작하기 🚀"
             textColor={theme.palette.Gray400}
           />
