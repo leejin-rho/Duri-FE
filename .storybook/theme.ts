@@ -1,5 +1,5 @@
 import { create } from '@storybook/theming/create';
-import doori from '../packages/ui/src/assets/svgs/doori.svg';
+import doori from '../packages/ui/src/assets/svgs/logo.svg';
 
 export default create({
   base: 'light',
