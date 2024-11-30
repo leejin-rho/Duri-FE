@@ -39,7 +39,7 @@ const Home = () => {
   return (
     <MobileLayout>
       <HeightFitFlex backgroundColor={theme.palette.Normal500}>
-        
+        캐러셀 표시 영역
       </HeightFitFlex>
       <Flex direction="column" padding="0 20px">
         {/* 단골 빠른입찰 */}
@@ -47,7 +47,7 @@ const Home = () => {
 
         {/* AI 스타일링 배너 */}
         <StyleBannerWrapper>
-          <AiStyleBanner width={373} height={70} />
+          <AiStyleBanner height={70} />
         </StyleBannerWrapper>
 
         {/* 추천 샵 */}
@@ -65,4 +65,5 @@ const StyleBannerWrapper = styled.div`
   opacity: 0.9;
   box-shadow: 0px 0px 16px 0px rgba(195, 195, 195, 0.15);
   margin-top: 26px;
+  width: 100%;
 `;

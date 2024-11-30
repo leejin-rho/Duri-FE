@@ -18,8 +18,6 @@ const PaymentPage = () => {
         try {
           const quotation = await getQuotationInfo(quotationId);
           if (quotation) setQuotationInfo(quotation);
-
-          console.log(typeof quotationInfo?.groomingTotalPrice);
         } catch (error) {
           console.error('Failed to fetch quotation info:', error);
         }
