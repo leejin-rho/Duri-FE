@@ -46,7 +46,7 @@ const Home = () => {
         <SpeedQuotation name="멍멍이" shopList={regularShopList} />
 
         {/* AI 스타일링 배너 */}
-        <StyleBannerWrapper>
+        <StyleBannerWrapper borderRadius={12} widthPer={100} margin='26px 0 0 0'>
           <AiStyleBanner height={70} />
         </StyleBannerWrapper>
 
@@ -60,10 +60,7 @@ const Home = () => {
 
 export default Home;
 
-const StyleBannerWrapper = styled.div`
-  border-radius: 12px;
+const StyleBannerWrapper = styled(HeightFitFlex)`
   opacity: 0.9;
   box-shadow: 0px 0px 16px 0px rgba(195, 195, 195, 0.15);
-  margin-top: 26px;
-  width: 100%;
 `;
