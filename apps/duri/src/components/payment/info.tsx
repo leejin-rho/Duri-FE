@@ -1,6 +1,4 @@
-import { QuotationProps } from '@duri/assets/types/QuotationType';
-
-
+import { QuotationProps } from '@duri/assets/types/quotation';
 
 interface QuotationInfo {
   quotationInfo: QuotationProps;

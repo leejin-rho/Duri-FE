@@ -1,15 +1,15 @@
 import * as React from 'react';
-const SvgUnionUp = (props: React.SVGProps<SVGSVGElement>) => (
+const SvgUnionUp = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
-    viewBox="0 0 20 11"
+    viewBox="0 0 9 5"
     {...props}
   >
     <path
       fill="#000"
       fillRule="evenodd"
-      d="M2.415 0C1.08 0 .41 1.616 1.355 2.56l7.585 7.586a1.5 1.5 0 0 0 2.122 0l7.585-7.585c.945-.945.276-2.561-1.06-2.561z"
+      d="M7.516 5c.588 0 .883-.763.467-1.21L4.645.209a.63.63 0 0 0-.934 0L.372 3.79C-.043 4.237.252 5 .84 5z"
       clipRule="evenodd"
     />
   </svg>
