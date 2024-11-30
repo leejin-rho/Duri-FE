@@ -29,6 +29,6 @@
     { "path": "packages/ui" },
     { "path": "packages/utils" },
   ],
-  "include": ["apps/**/*", "packages/**/*", "custom.d.ts"],
+  "include": ["apps/**/*", "packages/**/*", "custom.d.ts", "vite-env.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
