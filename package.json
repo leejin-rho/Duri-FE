@@ -9,7 +9,7 @@
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "storybook": "storybook dev -p 6006 -s public",
+    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "postinstall": "husky",
     "prepack": "pinst --disable",
