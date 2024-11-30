@@ -30,5 +30,6 @@ const config = {
   previewHead: (head) => `
     ${head}
   `,
+  staticDirs: ['../packages/ui/src/assets/svgs'],
 };
 export default config;
