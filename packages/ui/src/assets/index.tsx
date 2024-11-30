@@ -33,26 +33,25 @@ export { default as QuotationIcon } from './QuotationIcon';
 export { default as ShopIcon } from './ShopIcon';
 export { default as Calendar } from './Calendar';
 export { default as Call } from './Call';
-export {default as Doori} from './Doori';
-export {default as FilledHeart} from './FilledHeart';
-export {default as FilledLocation} from './FilledLocation';
-export {default as FilledNotification} from './FilledNotification';
-export {default as FilledReport} from './FilledReport';
-export {default as Filter} from './Filter';
-export {default as Heart} from './Heart';
-export {default as Hold} from './Hold';
-export {default as Home} from './Home';
-export {default as Location} from './Location';
-export {default as MyLocation} from './MyLocation';
-export {default as NextArrow} from './NextArrow';
-export {default as Profile} from './Profile';
-export {default as Report} from './Report';
-export {default as Send} from './Send';
-export {default as Shopping} from './Shopping';
-export {default as Star} from './Star';
-export {default as Write} from './Write';
-;
-
+export { default as Doori } from './Doori';
+export { default as FilledHeart } from './FilledHeart';
+export { default as FilledLocation } from './FilledLocation';
+export { default as FilledNotification } from './FilledNotification';
+export { default as FilledReport } from './FilledReport';
+export { default as Filter } from './Filter';
+export { default as Heart } from './Heart';
+export { default as Hold } from './Hold';
+export { default as Home } from './Home';
+export { default as Location } from './Location';
+export { default as MyLocation } from './MyLocation';
+export { default as NextArrow } from './NextArrow';
+export { default as Profile } from './Profile';
+export { default as Report } from './Report';
+export { default as Send } from './Send';
+export { default as Shopping } from './Shopping';
+export { default as Star } from './Star';
+export { default as Write } from './Write';
+export { default as AiStyleBanner } from './AiStyleBanner';
 
 export { default as AlertStar } from './AlertStar';
 export { default as NaverLogo } from './NaverLogo';
@@ -60,6 +59,7 @@ export { default as SpeechBallon } from './SpeechBallon';
 
 import Add from './Add';
 import AddNew from './AddNew';
+import AiStyleBanner from './AiStyleBanner';
 import Approve from './Approve';
 import ArrowBottom from './ArrowBottom';
 import ArrowLeft from './ArrowLeft';
@@ -89,7 +89,6 @@ import UnionDown from './UnionDown';
 import UnionUp from './UnionUp';
 import Unlock from './Unlock';
 import UpArrow from './UpArrow';
-
 
 export const icons = {
   Add,
@@ -123,7 +122,7 @@ export const icons = {
   UpArrow,
   Lock,
   Unlock,
-
+  AiStyleBanner,
 };
 
 export default icons;

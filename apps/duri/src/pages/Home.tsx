@@ -1,11 +1,68 @@
-const Home = () => {
+import { useEffect, useState } from 'react';
 
+import { RecommendeShopProps, RegularShopProps } from '@duri/assets/types/shop';
+import RecommendedShop from '@duri/components/home/recommendedShop';
+import SpeedQuotation from '@duri/components/home/speedQuotation';
+import {
+  AiStyleBanner,
+  DuriNavbar,
+  Flex,
+  HeightFitFlex,
+  MobileLayout,
+  theme,
+} from '@duri-fe/ui';
+import {
+  useGetRecommendedShopList,
+  useGetRegularShopList,
+} from '@duri-fe/utils';
+import styled from '@emotion/styled';
+
+const Home = () => {
+  const [regularShopList, setRegularShopList] = useState<RegularShopProps[]>(
+    [],
+  );
+  const [recommendedShopList, setRecommendedShopList] = useState<
+    RecommendeShopProps[]
+  >([]);
+  const recommendedListData = useGetRecommendedShopList();
+  const regularListData = useGetRegularShopList();
+
+  useEffect(() => {
+    if (recommendedListData) {
+      setRecommendedShopList(recommendedListData);
+    }
+    if (regularListData) {
+      setRegularShopList(regularListData);
+    }
+  }, [recommendedListData, regularListData]);
 
   return (
-    <div>
-      <h1>안녕하세요!</h1>
-    </div>
+    <MobileLayout>
+      <HeightFitFlex backgroundColor={theme.palette.Normal500}>
+        
+      </HeightFitFlex>
+      <Flex direction="column" padding="0 20px">
+        {/* 단골 빠른입찰 */}
+        <SpeedQuotation name="멍멍이" shopList={regularShopList} />
+
+        {/* AI 스타일링 배너 */}
+        <StyleBannerWrapper>
+          <AiStyleBanner width={373} height={70} />
+        </StyleBannerWrapper>
+
+        {/* 추천 샵 */}
+        <RecommendedShop shopList={recommendedShopList} />
+      </Flex>
+      <DuriNavbar />
+    </MobileLayout>
   );
 };
 
 export default Home;
+
+const StyleBannerWrapper = styled.div`
+  border-radius: 12px;
+  opacity: 0.9;
+  box-shadow: 0px 0px 16px 0px rgba(195, 195, 195, 0.15);
+  margin-top: 26px;
+`;
