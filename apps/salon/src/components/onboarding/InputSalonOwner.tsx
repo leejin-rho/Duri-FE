@@ -58,7 +58,11 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
 
   return (
     <MobileLayout>
-      <Flex direction='column' align='flex-start' padding='0 20px'>
+      <Flex
+        direction='column'
+        align='flex-start'
+        padding='0 20px 44px 20px'
+      >
         <Flex direction='column' align='flex-start'  margin='75px 0 0 0'>
           <StatusBar current={2} total={4} mode="onboarding" />
           <Text typo='Heading2' margin='55px 0 0 0'>원장님의</Text>

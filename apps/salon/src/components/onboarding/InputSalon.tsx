@@ -27,14 +27,18 @@ const InputSalon: React.FC<InputSalonProps> = ({ onNext }) => {
 
   return (
     <MobileLayout>
-      <Flex direction='column' align='flex-start' padding='0 20px'>
+      <Flex
+        direction='column'
+        align='flex-start'
+        padding='0 20px 44px 20px'
+      >
         <Flex direction='column' align='flex-start'  margin='75px 0 0 0'>
           <StatusBar current={1} total={4} mode='onboarding'/>
           <Text typo='Heading2' margin='55px 0 0 0'>미용샵의</Text>
           <Text typo='Heading2' margin='0 0 28px 0'>정보를 입력해주세요</Text>
           <Text typo='Label2' colorCode={theme.palette.Gray500} margin='0 0 27px 0'>등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!</Text>
         </Flex>
-        
+
         <form onSubmit={handleSubmit}>
           <Flex
             direction='column'
@@ -57,7 +61,6 @@ const InputSalon: React.FC<InputSalonProps> = ({ onNext }) => {
                   placeholder="우편번호 입력"
                   value={salonFormState.address}
                   onChange={(e) => handleChange('address', e.target.value)}
-                  readOnly
                   isEssential
                   width={130}
                 />
