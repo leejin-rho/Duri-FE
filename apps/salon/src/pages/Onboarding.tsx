@@ -10,6 +10,7 @@ import Welcome from '@salon/components/onboarding/Welcome';
 export interface SalonFormData {
   name: string;
   address: string;
+  addressDetail: string;
   registrationNumber: string;
   licenseNumber: string;
 }
@@ -29,6 +30,7 @@ const OnboardingPage: React.FC = () => {
   const [salonFormData, setSalonFormData] = useState<SalonFormData>({
     name: '',
     address: '',
+    addressDetail: '',
     registrationNumber: '',
     licenseNumber: '',
   });
