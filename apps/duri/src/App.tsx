@@ -6,11 +6,11 @@ import { globalStyle } from '@duri-fe/ui';
 import { Global } from '@emotion/react';
 
 import Home from '@pages/Home';
+import StartPage from '@pages/Onboarding/StartPage';
 import PaymentPage from '@pages/PaymentPage';
 import { FailPage } from '@pages/PaymentPage/Fail';
 import { SuccessPage } from '@pages/PaymentPage/Success';
-
-import StartPage from './pages/Onboarding/StartPage';
+import Shop from '@pages/Shop';
 
 function App() {
   return (
@@ -24,6 +24,8 @@ function App() {
         <Route path="/payment/:quotationId" element={<PaymentPage />} />
         <Route path="/payment/success" element={<SuccessPage />} />
         <Route path="/payment/fail" element={<FailPage />} />
+
+        <Route path="/shop" element={<Shop />} />
       </Routes>
     </BrowserRouter>
   );
