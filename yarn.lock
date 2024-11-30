@@ -558,7 +558,7 @@ __metadata:
   resolution: "@duri-fe/ui@workspace:packages/ui"
   dependencies:
     "@duri-fe/eslint-config": "npm:*"
-    "@duri-fe/utils": "workspace:packages/utils"
+    "@duri-fe/utils": "workspace:^"
     "@emotion/react": "npm:^11.13.5"
     "@emotion/styled": "npm:^11.13.5"
     "@types/node": "npm:^22.10.0"
@@ -583,7 +583,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@duri-fe/utils@workspace:packages/utils":
+"@duri-fe/utils@workspace:^, @duri-fe/utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@duri-fe/utils@workspace:packages/utils"
   dependencies:
