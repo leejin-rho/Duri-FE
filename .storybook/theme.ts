@@ -1,5 +1,5 @@
 import { create } from '@storybook/theming/create';
-import doori from '../packages/ui/src/assets/svgs/logo.svg';
+import logo from '../packages/ui/src/assets/svgs/logo.svg';
 
 export default create({
   base: 'light',
@@ -33,5 +33,5 @@ export default create({
 
   brandTitle: '두리묭실',
   brandUrl: "here's the brandurl",
-  brandImage: doori,
+  brandImage: logo,
 });
