@@ -24,7 +24,7 @@ const CarouselHome = () => {
       {/* Swiper를 감싸는 Wrapper */}
       <CustomSwiperWrapper>
         <CustomSwiper
-          slidesPerView={1.5}
+          slidesPerView={1.2}
           spaceBetween={8}
           centeredSlides={true}
           onSlideChange={(e: { realIndex: SetStateAction<number> }) => {
@@ -85,6 +85,8 @@ const CustomSwiperSlide = styled(OriginalSwiperSlide)<{ isActive: boolean }>`
   transition: transform 0.3s ease;
   height: ${({ isActive }) =>
     isActive ? '171px !important' : '141px !important'};
+  width: ${({ isActive }) =>
+    isActive ? '317px !important' : '316px !important'};
 `;
 
 const Card = styled(Flex)`

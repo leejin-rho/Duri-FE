@@ -33,7 +33,7 @@ export const ShopVertical = ({
               src={shop.shopImg}
             />
             <HeightFitFlex direction='column' align='flex-start'>
-              <Text typo="Label1" margin='19px 0 17px 6px'>{shop.shopName}</Text>
+              <Text typo="Label1" margin='13px 0 11px 6px'>{shop.shopName}</Text>
               <Text typo="Body3" colorCode={theme.palette.Gray500} margin='0 0 12px 6px'>
                 {shop.shopAddress}
               </Text>
