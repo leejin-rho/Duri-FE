@@ -1,16 +1,50 @@
-import { DuriNavbar, MobileLayout } from '@duri-fe/ui';
+import { DuriNavbar, Flex, Header, MobileLayout, Pencil, Text, theme } from '@duri-fe/ui';
+import styled from '@emotion/styled';
 
 const Home = () => {
   return (
-    <>
-      <MobileLayout>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <h1>Home</h1>
-        <DuriNavbar />
-      </MobileLayout>
-    </>
+    <MobileLayout>
+      <HomeHeaderContainer direction='column' height={260} align='start' justify='space-between'>
+        <Header logoColor={theme.palette.Black} iconColor={theme.palette.White} badge />
+        
+        <TextContainer direction='column' align='start' padding="36px 20px" gap={4}>
+          <Flex gap={12}>
+            <Text typo='Heading3' colorCode={theme.palette.White}>댕댕샵</Text>
+            <Pencil width={20} />
+          </Flex>
+          <Text typo='Body3' colorCode={theme.palette.White}>경기도 성남시</Text>
+        </TextContainer>
+
+        <ShopNotice justify='start' padding="16px" backgroundColor={theme.palette.Normal200}>
+          <Text colorCode={theme.palette.Normal900} align='start'>
+            댕댕샵 점주님 안녕하세용용용용용용용용
+          </Text>
+        </ShopNotice>
+      </HomeHeaderContainer>
+      
+      <DuriNavbar />
+    </MobileLayout>
   );
 };
+
+const HomeHeaderContainer = styled(Flex)`
+  position: relative;
+  background: linear-gradient(180deg, rgba(217, 217, 217, 0.00) 0%, #111 100%);
+`;
+
+const TextContainer = styled(Flex)`
+  height: fit-content;
+  width: fit-content;
+`;
+
+const ShopNotice = styled(Flex)`
+  height: fit-content;
+  width: calc(100% - 40px);
+  border-radius: 0 12px 12px 12px;
+  flex-grow: 1;
+  position: absolute;
+  bottom: -25px;
+  left: 20px;
+`;
 
 export default Home;

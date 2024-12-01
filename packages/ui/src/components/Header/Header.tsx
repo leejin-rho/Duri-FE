@@ -1,5 +1,7 @@
-import { Doori,Flex, Magnifier, Notification, theme } from "@duri-fe/ui";
+import { Doori, Flex, Magnifier, Notification, theme } from "@duri-fe/ui";
 import styled from "@emotion/styled";
+
+import { HeightFitFlex } from "../FlexBox/Flex";
 
 interface HeaderProps {
   logoColor: string;
@@ -22,7 +24,7 @@ export const Header = ({
   onClickNotification,
 }: HeaderProps) => {
   return (
-    <Flex justify="space-between" backgroundColor="transparent" padding="20px">
+    <HeightFitFlex justify="space-between" backgroundColor="transparent" padding="20px">
       <button onClick={onClickLogo}>
         <Doori height={26} color={logoColor} />
       </button>
@@ -38,7 +40,7 @@ export const Header = ({
           {badge && <NotificationBadge width={8} height={8} borderRadius={8} backgroundColor={theme.palette.Alert} />}
         </NotificationContainer>
       </IconContainer>
-    </Flex>
+    </HeightFitFlex>
   )
 }
 
