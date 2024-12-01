@@ -9,4 +9,5 @@ export const Image = styled.img<{
   height: ${({ height }) => (height ? `${height}px` : '100%')};
   border-radius: ${({ borderRadius }) =>
     borderRadius ? `${borderRadius}px` : '0px'};
+  flex-shrink: 0;
 `;

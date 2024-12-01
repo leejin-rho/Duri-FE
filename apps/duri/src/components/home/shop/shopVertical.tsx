@@ -24,13 +24,13 @@ export const ShopVertical = ({
             width={152}
             height={184}
             padding="3px 3px 13px 3px"
+            onClick={() => handleClickShop(shop.shopIdx)}
           >
             <Image
               width={146}
               height={81}
               borderRadius={8}
               src={shop.shopImg}
-              onClick={() => handleClickShop(shop.shopIdx)}
             />
             <HeightFitFlex direction='column' align='flex-start'>
               <Text typo="Label1" margin='19px 0 17px 6px'>{shop.shopName}</Text>
@@ -66,4 +66,5 @@ const Wrapper = styled(HeightFitFlex)`
   border-radius: 12px;
   background: var(--bw-white, #fff);
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 `;

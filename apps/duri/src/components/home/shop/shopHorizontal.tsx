@@ -11,6 +11,7 @@ import {
   Text,
   theme,
 } from '@duri-fe/ui';
+import styled from '@emotion/styled';
 
 export const ShopHorizontal = ({ shopList }: { shopList: RegularShopProps[] }) => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export const ShopHorizontal = ({ shopList }: { shopList: RegularShopProps[] }) =
               align="flex-start"
               gap={20}
             >
-              <Flex direction="column" align="flex-start">
+              <Wrapper direction="column" align="flex-start">
                 {/* onClick함수 추가해야 함!!! */}
                 <Flex justify="flex-start" gap={2}>
                   <Text typo="Body2">{shop.shopName}</Text>
@@ -45,7 +46,7 @@ export const ShopHorizontal = ({ shopList }: { shopList: RegularShopProps[] }) =
                     {shop.shopScore}&nbsp;({shop.shopReview})
                   </Text>
                 </HeightFitFlex>
-              </Flex>
+              </Wrapper>
               {/* onClick함수 추가해야 함!!! */}
               <Button
                 height="37px"
@@ -62,3 +63,7 @@ export const ShopHorizontal = ({ shopList }: { shopList: RegularShopProps[] }) =
     </Flex>
   );
 };
+
+const Wrapper = styled(HeightFitFlex)`
+  cursor: pointer;
+`
