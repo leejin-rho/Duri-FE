@@ -12,3 +12,4 @@ export * from './Image';
 export * from './Hr';
 export * from './Tag';
 export * from './Header';
+export * from './Card';

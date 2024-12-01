@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 type Story = StoryObj<typeof Header>;
 
 /**
- * `StatusBar` 컴포넌트의 스토리북 정의입니다.
+ * `Header` 컴포넌트의 스토리북 정의입니다.
  */
 const meta: Meta<typeof Header> = {
   title: 'components/Header',
