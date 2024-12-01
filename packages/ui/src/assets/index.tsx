@@ -31,8 +31,6 @@ export { default as HomeIcon } from './HomeIcon';
 export { default as MyIcon } from './MyIcon';
 export { default as QuotationIcon } from './QuotationIcon';
 export { default as ShopIcon } from './ShopIcon';
-export { default as Favicon } from './Favicon';
-export { default as Logo } from './Logo';
 export { default as Star } from './Star';
 
 export { default as AlertStar } from './AlertStar';
