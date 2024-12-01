@@ -24,7 +24,7 @@ const CarouselHome = () => {
       {/* Swiper를 감싸는 Wrapper */}
       <CustomSwiperWrapper>
         <CustomSwiper
-          slidesPerView={1.2}
+          slidesPerView={1.5}
           spaceBetween={8}
           centeredSlides={true}
           onSlideChange={(e: { realIndex: SetStateAction<number> }) => {
