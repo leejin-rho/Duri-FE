@@ -485,6 +485,7 @@ __metadata:
     "@emotion/react": "npm:^11.13.5"
     "@emotion/styled": "npm:^11.13.5"
     "@tosspayments/tosspayments-sdk": "npm:^2.3.2"
+    "@types/navermaps": "npm:^3.7.8"
     "@types/node": "npm:^22.10.1"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"

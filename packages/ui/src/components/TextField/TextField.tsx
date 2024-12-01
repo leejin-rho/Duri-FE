@@ -25,6 +25,7 @@ interface TextFieldProps
   isRound?: boolean;
   isError?: boolean;
   isEssential?: boolean;
+  isNoBorder?: boolean;
 }
 
 /**
@@ -39,6 +40,7 @@ interface TextFieldProps
  * @param {ReactNode} isRound: 둥근 인풋 여부
  * @param {ReactNode} isError: 에러일 경우
  * @param {ReactNode} isEssential: 필수 항목일 경우
+ * @param {ReactNode} isNoBorder: 테두리가 없을 경우
  *
  */
 export const TextField = forwardRef<
@@ -59,6 +61,7 @@ export const TextField = forwardRef<
       isError = false,
       isRound = false,
       isEssential = false,
+      isNoBorder = false,
       ...props
     },
     ref,
@@ -107,10 +110,12 @@ export const TextField = forwardRef<
                 ref={ref as ForwardedRef<HTMLInputElement>}
                 placeholder={placeholder}
                 spellCheck={false}
+                height={height}
                 fontColor={fontColor}
                 isRight={Boolean(right)}
                 isError={isError}
                 isRound={isRound}
+                isNoBorder={isNoBorder}
               />
               {right && <StyledIcon className="icon">{right}</StyledIcon>}
             </InputContainer>
@@ -142,33 +147,43 @@ const InputContainer = styled.div<{
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
-    /* -webkit-box-shadow: 0 0 0 1000px ${theme.palette.Gray100} inset; */
     -webkit-text-fill-color: ${({ fontColor }) => fontColor};
     //글자색
   }
 `;
 
 const StyledInput = styled.input<{
+  height?: number;
   fontColor: string;
   isRight: boolean;
   value?: string | number | readonly string[] | undefined;
-  isError: boolean;
-  isRound: boolean;
+  isError?: boolean;
+  isRound?: boolean;
+  isNoBorder?: boolean;
 }>`
   width: inherit;
+  height: ${({ height }) => height ?? 40}px;
   padding: ${({ isRight }) => (isRight ? '10px 50px 10px 16px' : '10px 16px')};
 
   box-sizing: border-box;
 
   background: ${theme.palette.White};
-  border-radius: ${({ isRound }) => (isRound ? '99px' : '8px')};
+  border-radius: ${({ isRound, isNoBorder }) =>
+    isNoBorder ? '12px' : isRound ? '99px' : '8px'};
 
-  /* border: 1px solid ${theme.palette.Gray300}; */
-  border: 1px solid
-    ${({ isError }) => (isError ? theme.palette.Alert : theme.palette.Gray300)};
+  border: ${({ isNoBorder, isError }) =>
+    isNoBorder
+      ? 'none'
+      : isError
+        ? `1px solid ${theme.palette.Alert}`
+        : `1px solid ${theme.palette.Gray300}`};
 
-  ${({ isRound }) => (isRound ? theme.typo.Body2 : theme.typo.Body3)};
-  /* color: ${({ fontColor }) => fontColor}; */
+  ${({ isNoBorder, isRound }) =>
+    isNoBorder
+      ? theme.typo.Label2
+      : isRound
+        ? theme.typo.Body2
+        : theme.typo.Body3};
   color: ${({ isError, fontColor }) =>
     isError ? theme.palette.Alert : fontColor};
   text-align: ${({ isRound }) => (isRound ? 'center' : 'flex-start')};
@@ -182,18 +197,21 @@ const StyledInput = styled.input<{
     & + div {
       color: ${theme.palette.Gray500};
     }
-    border: 1px solid ${theme.palette.Gray500};
+    border: ${({ isNoBorder }) =>
+      isNoBorder ? 'none' : `1px solid ${theme.palette.Gray500}`};
 
     color: ${theme.palette.Black};
   }
 
   ::placeholder {
-    color: ${({ isError, isRound }) =>
-      isError
-        ? theme.palette.Alert
-        : isRound
-          ? theme.palette.Black
-          : theme.palette.Gray300};
+    color: ${({ isNoBorder, isError, isRound }) =>
+      isNoBorder
+        ? theme.palette.Gray500
+        : isError
+          ? theme.palette.Alert
+          : isRound
+            ? theme.palette.Black
+            : theme.palette.Gray300};
   }
 `;
 

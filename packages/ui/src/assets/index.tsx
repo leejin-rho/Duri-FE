@@ -31,6 +31,9 @@ export { default as HomeIcon } from './HomeIcon';
 export { default as MyIcon } from './MyIcon';
 export { default as QuotationIcon } from './QuotationIcon';
 export { default as ShopIcon } from './ShopIcon';
+export { default as Favicon } from './Favicon';
+export { default as Logo } from './Logo';
+export { default as Star } from './Star';
 
 export { default as AlertStar } from './AlertStar';
 
@@ -58,6 +61,7 @@ import Notification from './Notification';
 import SafetyHelp from './SafetyHelp';
 import SecurityWarning from './SecurityWarning';
 import Shield from './Shield';
+import Star from './Star';
 import UnionDown from './UnionDown';
 import UnionUp from './UnionUp';
 import Unlock from './Unlock';
@@ -92,6 +96,7 @@ export const icons = {
   UpArrow,
   Lock,
   Unlock,
+  Star,
 };
 
 export default icons;

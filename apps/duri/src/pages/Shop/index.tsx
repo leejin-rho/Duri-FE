@@ -1,12 +1,54 @@
-import { DuriNavbar, Flex } from '@duri-fe/ui';
+import { useEffect, useState } from 'react';
+
+import { MapInfo } from '@duri/components/shop';
+import { ShopList } from '@duri/components/shop/ShopList';
+import {
+  AbsoluteFlex,
+  DuriNavbar,
+  Flex,
+  Magnifier,
+  TextField,
+} from '@duri-fe/ui';
+import styled from '@emotion/styled';
 
 const Shop = () => {
+  const [latitude, setLatitude] = useState<number>(37.49413412);
+  const [longitude, setLongitude] = useState<number>(127.034306);
+
+  const [isMap, setIsMap] = useState<boolean>(true);
+
+  useEffect(() => {
+    setLatitude(37.49413412);
+    setLongitude(127.034306);
+    setIsMap(true);
+  }, []);
+
   return (
-    <Flex>
-      <h1>안녕하세요!</h1>
+    <>
+      <Flex direction="column">
+        <SearchWrapper>
+          <TextField
+            placeholder="경기 성남시 분당구 안양판교로 1192"
+            height={46}
+            width={336}
+            right={<Magnifier width={24} height={24} />}
+            isNoBorder={true}
+          />
+        </SearchWrapper>
+        {isMap ? (
+          <MapInfo latitude={latitude} longitude={longitude} />
+        ) : (
+          <ShopList />
+        )}
+      </Flex>
       <DuriNavbar />
-    </Flex>
+    </>
   );
 };
 
 export default Shop;
+
+const SearchWrapper = styled(AbsoluteFlex)`
+  top: 30px;
+  z-index: 99;
+`;

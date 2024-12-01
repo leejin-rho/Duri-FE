@@ -56,6 +56,10 @@ const meta: Meta<typeof TextField> = {
       control: 'boolean',
       description: '필수 필드 표시 여부(*)',
     },
+    isNoBorder: {
+      control: 'boolean',
+      description: '테두리 여부',
+    },
   },
 };
 
@@ -84,7 +88,6 @@ const Template: StoryFn<typeof TextField> = () => (
       placeholder="매장이름 입력"
       label="매장 이름"
       helperText={[{ type: 'normal', text: '필수항목입니다.' }]}
-      right={<Magnifier width={24} height={24} />}
     />
 
     <TextField
@@ -102,6 +105,22 @@ const Template: StoryFn<typeof TextField> = () => (
  */
 export const DefaultTextInput = Template;
 DefaultTextInput.args = {};
+
+const SearchTemplate: StoryFn<typeof TextField> = () => (
+  <Flex direction="column" gap={10}>
+    <TextField
+      placeholder="경기 성남시 분당구 안양판교로 1192"
+      right={<Magnifier width={24} height={24} />}
+      isNoBorder={true}
+    />
+  </Flex>
+);
+
+/**
+ * `SearchInput`은 'TextField' 컴포넌트의 검색용 컴포넌트입니다.
+ */
+export const SearchInput = SearchTemplate;
+SearchInput.args = {};
 
 const AreaTemplate: StoryFn<typeof TextField> = () => (
   <Flex direction="column" gap={10}>

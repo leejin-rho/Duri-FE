@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { ReactNode } from 'react';
 
-import { theme } from '@duri-fe/ui';
+import { Flex, theme } from '@duri-fe/ui';
 import { css } from '@emotion/react';
 
 interface NavItemProps {
@@ -21,18 +21,16 @@ const NavItem: React.FC<NavItemProps> = ({
   const activeStyle = isActive ? active : inactive;
 
   return (
-    <div css={[commonStyle, activeStyle]} onClick={onClick}>
+    <Flex css={[commonStyle, activeStyle]} onClick={onClick}>
       {children}
       <span css={textStyle}>{text}</span>
-    </div>
+    </Flex>
   );
 };
 
 const commonStyle = css`
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   cursor: pointer;
   flex: 1;
 `;
