@@ -1,28 +1,27 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { MapInfo } from '@duri/components/shop';
 import { ShopList } from '@duri/components/shop/ShopList';
 import {
   AbsoluteFlex,
+  Button,
   DuriNavbar,
   Flex,
   Magnifier,
+  Text,
   TextField,
+  theme,
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 const Shop = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const [latitude, setLatitude] = useState<number>(37.49413412);
-  const [longitude, setLongitude] = useState<number>(127.034306);
 
   const [isMap, setIsMap] = useState<boolean>(true);
 
-  useEffect(() => {
-    setLatitude(37.49413412);
-    setLongitude(127.034306);
-    setIsMap(true);
-  }, []);
+  const changeMapType = () => {
+    setIsMap(!isMap);
+  };
 
   return (
     <>
@@ -37,10 +36,22 @@ const Shop = () => {
           />
         </SearchWrapper>
         {isMap ? (
-          <MapInfo ref={mapRef} latitude={latitude} longitude={longitude} />
+          <>
+            <MapInfo ref={mapRef} />
+          </>
         ) : (
           <ShopList />
         )}
+        <ListWrapper>
+          <Button
+            onClick={changeMapType}
+            width="67px"
+            height="36px"
+            bg={theme.palette.White}
+          >
+            <Text typo="Body4">목록</Text>
+          </Button>
+        </ListWrapper>
       </Flex>
       <DuriNavbar />
     </>
@@ -51,6 +62,12 @@ export default Shop;
 
 const SearchWrapper = styled(AbsoluteFlex)`
   padding-top: 30px;
+  z-index: 99;
+  height: fit-content;
+`;
+
+const ListWrapper = styled(AbsoluteFlex)`
+  bottom: 122px;
   z-index: 99;
   height: fit-content;
 `;

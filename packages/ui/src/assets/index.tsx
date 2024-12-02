@@ -32,7 +32,7 @@ export { default as MyIcon } from './MyIcon';
 export { default as QuotationIcon } from './QuotationIcon';
 export { default as ShopIcon } from './ShopIcon';
 export { default as Star } from './Star';
-
+export { default as MyLocation } from './MyLocation';
 export { default as AlertStar } from './AlertStar';
 
 import Add from './Add';
@@ -55,6 +55,7 @@ import Information from './Information';
 import Lock from './Lock';
 import Magnifier from './Magnifier';
 import Menu from './Menu';
+import MyLocation from './MyLocation';
 import Notification from './Notification';
 import SafetyHelp from './SafetyHelp';
 import SecurityWarning from './SecurityWarning';
@@ -95,6 +96,7 @@ export const icons = {
   Lock,
   Unlock,
   Star,
+  MyLocation,
 };
 
 export default icons;

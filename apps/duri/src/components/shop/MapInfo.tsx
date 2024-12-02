@@ -1,6 +1,7 @@
-import { forwardRef, useEffect } from 'react';
+import { forwardRef, Suspense, useEffect } from 'react';
 
-import { Flex } from '@duri-fe/ui';
+import { Button, Flex, MyLocation, theme } from '@duri-fe/ui';
+import { useGeolocation } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 let mapInstance: naver.maps.Map | undefined = undefined;
@@ -13,15 +14,18 @@ const loadScript = (src: string, callback: () => void) => {
   document.head.appendChild(script);
 };
 
-export const MapInfo = forwardRef<
-  HTMLDivElement,
-  { latitude: number; longitude: number }
->(({ latitude, longitude }, ref) => {
+export const MapInfo = forwardRef<HTMLDivElement>((_, ref) => {
+  const location = useGeolocation(); // 위치 정보 가져오기
+  const { loaded, coordinates } = location;
+  const { naver } = window;
+
   const initMap = () => {
+    if (!coordinates || !loaded) return;
+
     // 추가 옵션 설정
     const mapOptions = {
       zoomControl: false,
-      center: new naver.maps.LatLng(latitude, longitude),
+      center: new naver.maps.LatLng(coordinates.lat, coordinates.lng),
       zoom: 16,
     };
 
@@ -32,14 +36,16 @@ export const MapInfo = forwardRef<
 
     // Marker 생성
     const marker = new naver.maps.Marker({
-      position: new naver.maps.LatLng(latitude, longitude),
+      position: new naver.maps.LatLng(coordinates.lat, coordinates.lng),
       map: mapInstance,
       title: 'marker',
     });
 
     // Marker 클릭 시 지도 초기화
     naver.maps.Event.addListener(marker, 'click', () => {
-      mapInstance?.setCenter(new naver.maps.LatLng(latitude, longitude));
+      mapInstance?.setCenter(
+        new naver.maps.LatLng(coordinates.lat, coordinates.lng),
+      );
       mapInstance?.setZoom(16);
     });
   };
@@ -55,14 +61,35 @@ export const MapInfo = forwardRef<
     } else {
       initMap();
     }
-  }, [latitude, longitude]);
+  }, [coordinates, loaded]);
+
+  const moveToCurrentLocation = () => {
+    if (mapInstance && coordinates) {
+      mapInstance.setCenter(
+        new naver.maps.LatLng(coordinates.lat, coordinates.lng),
+      );
+      mapInstance.setZoom(16);
+    }
+  };
 
   return (
     <>
       {/* 위치 정보(지도) */}
       <MapWrapper ref={ref} direction="column">
-        <Flex id="map" />
+        <Suspense fallback={<div>Loading Map...</div>}>
+          <Flex id="map" />
+        </Suspense>
       </MapWrapper>
+      <LocationBtn
+        onClick={moveToCurrentLocation}
+        width="44px"
+        height="44px"
+        bg={theme.palette.White}
+        borderRadius="99px"
+        padding="0"
+      >
+        <MyLocation width={36} height={36} />
+      </LocationBtn>
     </>
   );
 });
@@ -71,4 +98,11 @@ MapInfo.displayName = 'MapInfo';
 
 const MapWrapper = styled(Flex)`
   height: calc(100vh - 92px);
+`;
+
+const LocationBtn = styled(Button)`
+  position: absolute;
+  bottom: 122px;
+  right: 17px;
+  z-index: 10;
 `;
