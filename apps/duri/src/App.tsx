@@ -9,8 +9,8 @@ import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import StartPage from '@pages/Onboarding/StartPage';
 import PaymentPage from '@pages/PaymentPage';
-import { FailPage } from '@pages/PaymentPage/Fail';
-import { SuccessPage } from '@pages/PaymentPage/Success';
+import FailPage from '@pages/PaymentPage/Fail';
+import SuccessPage from '@pages/PaymentPage/Success';
 
 function App() {
   return (

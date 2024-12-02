@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { QuotationProps } from '@duri/assets/types/QuotationType';
+import { QuotationProps } from '@duri/assets/types/quotation';
 import PaymentInfo from '@duri/components/payment/info';
 import PaymentWidget from '@duri/components/payment/widget';
 import { getQuotationInfo } from '@duri-fe/utils';
@@ -18,8 +18,6 @@ const PaymentPage = () => {
         try {
           const quotation = await getQuotationInfo(quotationId);
           if (quotation) setQuotationInfo(quotation);
-
-          console.log(typeof quotationInfo?.groomingTotalPrice);
         } catch (error) {
           console.error('Failed to fetch quotation info:', error);
         }

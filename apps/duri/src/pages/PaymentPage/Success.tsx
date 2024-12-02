@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-export function SuccessPage() {
+const SuccessPage= () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -56,3 +56,4 @@ export function SuccessPage() {
   );
 }
 
+export default SuccessPage;
