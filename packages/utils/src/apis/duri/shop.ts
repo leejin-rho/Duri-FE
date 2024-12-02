@@ -8,7 +8,6 @@ export async function getRegularShopInfo() {
     const response = await duriInstance.get(`shop/regular`, {
       withCredentials: true,
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -20,7 +19,6 @@ export async function getRecommendedShopInfo() {
     const response = await duriInstance.get(`shop/recommend`, {
       withCredentials: true,
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
