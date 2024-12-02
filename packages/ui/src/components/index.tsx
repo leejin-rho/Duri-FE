@@ -7,3 +7,4 @@ export * from './Navbar';
 export * from './StatusBar';
 export * from './Dropdown';
 export * from './Hr';
+export * from './Tag';

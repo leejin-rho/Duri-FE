@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { MapInfo } from '@duri/components/shop';
 import { ShopList } from '@duri/components/shop/ShopList';
@@ -12,6 +12,7 @@ import {
 import styled from '@emotion/styled';
 
 const Shop = () => {
+  const mapRef = useRef<HTMLDivElement | null>(null);
   const [latitude, setLatitude] = useState<number>(37.49413412);
   const [longitude, setLongitude] = useState<number>(127.034306);
 
@@ -36,7 +37,7 @@ const Shop = () => {
           />
         </SearchWrapper>
         {isMap ? (
-          <MapInfo latitude={latitude} longitude={longitude} />
+          <MapInfo ref={mapRef} latitude={latitude} longitude={longitude} />
         ) : (
           <ShopList />
         )}
@@ -49,6 +50,7 @@ const Shop = () => {
 export default Shop;
 
 const SearchWrapper = styled(AbsoluteFlex)`
-  top: 30px;
+  padding-top: 30px;
   z-index: 99;
+  height: fit-content;
 `;
