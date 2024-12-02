@@ -16,9 +16,9 @@ const Home = () => {
         </TextContainer>
 
         <ShopNotice justify='start' padding="16px" backgroundColor={theme.palette.Normal200}>
-          <Text colorCode={theme.palette.Normal900} align='start'>
+          <ShopNoticeText colorCode={theme.palette.Normal900} align='start'>
             댕댕샵 점주님 안녕하세용용용용용용용용
-          </Text>
+          </ShopNoticeText>
         </ShopNotice>
       </HomeHeaderContainer>
       
@@ -29,22 +29,42 @@ const Home = () => {
 
 const HomeHeaderContainer = styled(Flex)`
   position: relative;
-  background: linear-gradient(180deg, rgba(217, 217, 217, 0.00) 0%, #111 100%);
+  background-size: cover;
+  background-position: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    background: linear-gradient(180deg, rgba(217, 217, 217, 0.00) 0%, #111 100%);
+  }
 `;
 
 const TextContainer = styled(Flex)`
   height: fit-content;
   width: fit-content;
+  z-index: 2;
 `;
 
 const ShopNotice = styled(Flex)`
   height: fit-content;
   width: calc(100% - 40px);
   border-radius: 0 12px 12px 12px;
-  flex-grow: 1;
   position: absolute;
   bottom: -25px;
   left: 20px;
+  overflow: hidden;
+`;
+
+const ShopNoticeText = styled(Text)`
+  width: 100%;
+  justify-content: start;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export default Home;
