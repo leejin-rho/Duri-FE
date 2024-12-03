@@ -30,9 +30,8 @@ function App() {
         <Route path="/payment/:quotationId" element={<PaymentPage />} />
         <Route path="/payment/success" element={<SuccessPage />} />
         <Route path="/payment/fail" element={<FailPage />} />
-
+        <Route path="/quotation/request" element={<RequestPage />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/request" element={<RequestPage />} />
       </Routes>
     </BrowserRouter>
   );
