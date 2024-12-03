@@ -1,4 +1,3 @@
-// import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { globalStyle } from '@duri-fe/ui';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import Onboarding from '@duri/pages/Onboarding';
 import { globalStyle } from '@duri-fe/ui';
@@ -16,7 +16,7 @@ import Shop from './pages/Shop';
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <Global styles={globalStyle} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -29,7 +29,7 @@ function App() {
 
         <Route path="/shop" element={<Shop />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
