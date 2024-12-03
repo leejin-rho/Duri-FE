@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { salonNaverLogin } from "../auth";
+import { duriNaverLogin } from "../auth";
 
 /** 고객 네이버 소셜 로그인 hook */
-export const useSalonNaverLogin = () => {
+export const useDuriNaverLogin = () => {
   const { data, error, refetch: triggerLogin } = useQuery({
     queryKey: ['duriNaverLogin'],
-    queryFn: salonNaverLogin,
+    queryFn: duriNaverLogin,
     enabled: false,
     staleTime: Infinity,
   })
