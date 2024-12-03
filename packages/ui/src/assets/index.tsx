@@ -52,7 +52,6 @@ export { default as Shopping } from './Shopping';
 export { default as Star } from './Star';
 export { default as Write } from './Write';
 export { default as AiStyleBanner } from './AiStyleBanner';
-
 export { default as AlertStar } from './AlertStar';
 export { default as NaverLogo } from './NaverLogo';
 export { default as SpeechBallon } from './SpeechBallon';
@@ -81,10 +80,12 @@ import Information from './Information';
 import Lock from './Lock';
 import Magnifier from './Magnifier';
 import Menu from './Menu';
+import MyLocation from './MyLocation';
 import Notification from './Notification';
 import SafetyHelp from './SafetyHelp';
 import SecurityWarning from './SecurityWarning';
 import Shield from './Shield';
+import Star from './Star';
 import UnionDown from './UnionDown';
 import UnionUp from './UnionUp';
 import Unlock from './Unlock';
@@ -123,6 +124,8 @@ export const icons = {
   Lock,
   Unlock,
   AiStyleBanner,
+  Star,
+  MyLocation,
 };
 
 export default icons;

@@ -13,11 +13,12 @@ interface ButtonProps {
   borderRadius?: string;
   border?: string;
   disabled?: boolean;
+  padding?: string;
 }
 
 export const Button = styled.div<ButtonProps>`
   display: flex;
-  padding: 16px 20px;
+  padding: ${({ padding }) => padding ?? '16px 20px'};
   justify-content: center;
   align-items: center;
   width: ${({ width }) => (width ? `${width}` : '100%')};

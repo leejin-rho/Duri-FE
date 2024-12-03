@@ -39,23 +39,32 @@ const Home = () => {
 
   return (
     <MobileLayout>
-      <Flex direction='column' margin='0 0 114px 0'>
-      <HeightFitFlex backgroundColor={theme.palette.Normal500} padding='0 0 37px 0'>
-        <CarouselHome />
-      </HeightFitFlex>
-      <Flex direction="column" padding="0 20px">
-        {/* 단골 빠른입찰 */}
-        {regularShopList && <SpeedQuotation name="멍멍이" shopList={regularShopList} />}
+      <Flex direction="column" margin="0 0 114px 0">
+        <HeightFitFlex
+          backgroundColor={theme.palette.Normal500}
+          padding="0 0 37px 0"
+        >
+          <CarouselHome />
+        </HeightFitFlex>
+        <Flex direction="column" padding="0 20px">
+          {/* 단골 빠른입찰 */}
+          {regularShopList && (
+            <SpeedQuotation name="멍멍이" shopList={regularShopList} />
+          )}
 
-        {/* AI 스타일링 배너 */}
-        <StyleBannerWrapper borderRadius={12} widthPer={100} margin='26px 0 0 0'>
-          <AiStyleBanner height={70} />
-        </StyleBannerWrapper>
+          {/* AI 스타일링 배너 */}
+          <StyleBannerWrapper
+            borderRadius={12}
+            widthPer={100}
+            margin="26px 0 0 0"
+          >
+            <AiStyleBanner height={70} />
+          </StyleBannerWrapper>
 
-        {/* 추천 샵 */}
-        <RecommendedShop shopList={recommendedShopList} />
-      </Flex>
-      <DuriNavbar />
+          {/* 추천 샵 */}
+          <RecommendedShop shopList={recommendedShopList} />
+        </Flex>
+        <DuriNavbar />
       </Flex>
     </MobileLayout>
   );

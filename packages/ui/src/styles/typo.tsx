@@ -1,6 +1,23 @@
 import { css } from '@emotion/react';
 
 export const calcRem = (px: number) => `${px / 16}rem`;
+/**
+ * @param Title1: 페이지 제목 타이틀
+ * @param Title2: 본문 타이틀
+ * @param Title3: 박스 안에 들어가는 타이틀
+ *
+ * @param Caption1: 타이틀 위/아래 부가설명 텍스트
+ * @param Caption2: 박스 안에 들어가는 타이틀 밑 부가설명 텍스트
+ * @param Caption3: 거리표시 텍스트
+ * @param Caption4: 주소 텍스트
+ *
+ * @param Label1: 별점
+ * @param Label2: 후기 갯수
+ * @param Label3: 스케줄러 숫자 텍스트
+ *
+ * @param Body1: 스케줄러 이름 텍스트
+ * @param Body2: 스케줄러 담당쌤 텍스트 / 스케줄러 성별/특징 텍스트
+ */
 
 export const typo = {
   Heading1: css`
@@ -27,46 +44,104 @@ export const typo = {
     font-size: ${calcRem(18)};
     line-height: 170%;
   `,
-  Body1: css`
-    font-family: 'Pretendard';
-    font-weight: 500;
-    font-size: ${calcRem(18)};
-    line-height: 170%;
-  `,
-  Body2: css`
-    font-family: 'Pretendard';
-    font-weight: 400;
-    font-size: ${calcRem(16)};
-    line-height: 170%;
-  `,
+
   Body3: css`
     font-family: 'Pretendard';
     font-weight: 400;
     font-size: ${calcRem(13)};
-    line-height: 120%;
+    line-height: 140%;
   `,
+
   Body4: css`
     font-family: 'Pretendard';
     font-weight: 400;
     font-size: ${calcRem(10)};
     line-height: 140%;
   `,
-  Label1: css`
+
+  // 타이포 시스템
+  Title1: css`
+    /* 페이지 타이틀 */
     font-family: 'Pretendard';
+    font-size: ${calcRem(18)};
     font-weight: 600;
+    line-height: normal;
+  `,
+  Title2: css`
+    /* 본문 타이틀 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(17)};
+    font-weight: 600;
+    line-height: normal;
+  `,
+  Title3: css`
+    /* 박스 안에 들어가는 타이틀 */
+    font-family: 'Pretendard';
     font-size: ${calcRem(16)};
-    line-height: 120%;
+    font-weight: 600;
+    line-height: normal;
+  `,
+  Caption1: css`
+    /* 타이틀 위/아래 부가설명 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(14)};
+    font-weight: 300;
+    line-height: normal;
+  `,
+  Caption2: css`
+    /* 박스 안에 들어가는 타이틀 밑 부가설명 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(13)};
+    font-weight: 400;
+    line-height: normal;
+  `,
+  Caption3: css`
+    /* 거리표시 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(13)};
+    font-weight: 500;
+    line-height: normal;
+  `,
+  Caption4: css`
+    /* 주소 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(13)};
+    font-weight: 300;
+    line-height: normal;
+  `,
+  Label1: css`
+    /* 별점 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(14)};
+    font-weight: 600;
+    line-height: normal;
   `,
   Label2: css`
+    /* 후기 갯수 */
     font-family: 'Pretendard';
+    font-size: ${calcRem(14)};
     font-weight: 400;
-    font-size: ${calcRem(15)};
-    line-height: 140%;
+    line-height: normal;
   `,
   Label3: css`
+    /* 스케줄러 숫자 텍스트 */
     font-family: 'Pretendard';
-    font-weight: 400;
-    font-size: ${calcRem(12)};
-    line-height: 100%;
+    font-size: ${calcRem(13)};
+    font-weight: 500;
+    line-height: 14px;
+  `,
+  Body1: css`
+    /* 스케줄러 이름 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(16)};
+    font-weight: 500;
+    line-height: normal;
+  `,
+  Body2: css`
+    /* 스케줄러 성별,특징 / 담당쌤 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(15)};
+    font-weight: 300;
+    line-height: normal;
   `,
 } as const;

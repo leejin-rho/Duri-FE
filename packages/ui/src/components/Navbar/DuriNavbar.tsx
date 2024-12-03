@@ -25,8 +25,13 @@ export const DuriNavbar = () => {
 
   return (
     <Wrapper>
-      <TabContainer backgroundColor={theme.palette.White} height={65}>
-        <Flex direction="row" justify="center">
+      <TabContainer backgroundColor={theme.palette.White} height={92}>
+        <Flex
+          direction="row"
+          justify="center"
+          align="flex-start"
+          padding="18px 0 0 0"
+        >
           <NavItem
             isActive={pathname === '/'}
             text="홈"

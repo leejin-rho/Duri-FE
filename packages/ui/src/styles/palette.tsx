@@ -28,4 +28,7 @@ export const palette = {
 
   //Alert
   Alert: '#FA333F',
+
+  //Link
+  Link: '#3900E2',
 };

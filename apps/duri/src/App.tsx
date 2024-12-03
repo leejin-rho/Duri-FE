@@ -12,6 +12,8 @@ import PaymentPage from '@pages/PaymentPage';
 import FailPage from '@pages/PaymentPage/Fail';
 import SuccessPage from '@pages/PaymentPage/Success';
 
+import Shop from './pages/Shop';
+
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +26,8 @@ function App() {
         <Route path="/payment/:quotationId" element={<PaymentPage />} />
         <Route path="/payment/success" element={<SuccessPage />} />
         <Route path="/payment/fail" element={<FailPage />} />
+
+        <Route path="/shop" element={<Shop />} />
       </Routes>
     </BrowserRouter>
   );

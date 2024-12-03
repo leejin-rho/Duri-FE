@@ -36,3 +36,13 @@ export const Flex = styled.div<{
 export const HeightFitFlex = styled(Flex)`
   height: fit-content;
 `;
+
+export const WidthFitFlex = styled(Flex)`
+  width: fit-content;
+`;
+
+export const AbsoluteFlex = styled(Flex)`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
