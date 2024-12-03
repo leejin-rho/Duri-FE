@@ -9,6 +9,7 @@ import {
   Flex,
   HardText,
   ListIcon,
+  Location,
   Magnifier,
   MobileLayout,
   TextField,
@@ -51,14 +52,19 @@ const Shop = () => {
             height="36px"
             bg={theme.palette.White}
             padding="10px"
+            shadow={isMap ? 'none' : ' 0px 0px 4px 0px rgba(0, 0, 0, 0.25)'}
           >
-            <ListIcon width={18} color={theme.palette.Gray600} />
+            {isMap ? (
+              <ListIcon width={18} color={theme.palette.Gray600} />
+            ) : (
+              <Location width={18} color={theme.palette.Gray600} />
+            )}
             <HardText
               typo="Label2"
               margin="0 0 0 4px"
               colorCode={theme.palette.Gray600}
             >
-              목록
+              {isMap ? '목록' : '지도'}
             </HardText>
           </Button>
         </ListWrapper>

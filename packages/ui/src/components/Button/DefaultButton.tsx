@@ -14,6 +14,7 @@ interface ButtonProps {
   border?: string;
   disabled?: boolean;
   padding?: string;
+  shadow?: string;
 }
 
 export const Button = styled.div<ButtonProps>`
@@ -33,6 +34,7 @@ export const Button = styled.div<ButtonProps>`
   flex-shrink: 0;
   ${({ typo }) => (typo ? theme.typo[typo as KeyOfTypo] : theme.typo.Label1)};
   color: ${({ fontColor }) => (fontColor ? fontColor : theme.palette.Black)};
+  box-shadow: ${({ shadow }) => shadow ?? 'none'};
 
   &:hover {
     cursor: ${({ disabled }) => (disabled ? 'disabled' : 'pointer')};
