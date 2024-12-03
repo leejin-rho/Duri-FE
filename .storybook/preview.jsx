@@ -1,3 +1,9 @@
+import React from 'react';
+import { Global } from '@emotion/react';
+import { globalStyle } from '../packages/ui/src/styles/GlobalStyles';
+import { ThemeProvider } from '@emotion/react';
+import { theme } from '../packages/ui/src/styles/theme';
+
 /** @type { import('@storybook/react').Preview } */
 const preview = {
   parameters: {
@@ -17,6 +23,14 @@ const preview = {
       ],
     },
   },
+  decorators: [
+    (Story) => (
+      <ThemeProvider theme={theme}>
+        <Global styles={globalStyle} />
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 };
 
 export default preview;
