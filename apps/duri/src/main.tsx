@@ -12,11 +12,12 @@ const queryClient = new QueryClient();
 
 enableMocking().then(() => {
   createRoot(document.getElementById('app')!).render(
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <QueryClientProvider client={queryClient}>
         <App />
-      </BrowserRouter>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-    </QueryClientProvider>,
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      </QueryClientProvider>
+      ,
+    </BrowserRouter>,
   );
 });
