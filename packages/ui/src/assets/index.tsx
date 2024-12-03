@@ -55,6 +55,7 @@ export { default as AiStyleBanner } from './AiStyleBanner';
 export { default as AlertStar } from './AlertStar';
 export { default as NaverLogo } from './NaverLogo';
 export { default as SpeechBallon } from './SpeechBallon';
+export { default as ListIcon } from './List';
 
 import Add from './Add';
 import AddNew from './AddNew';

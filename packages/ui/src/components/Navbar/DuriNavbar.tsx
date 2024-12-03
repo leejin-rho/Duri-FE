@@ -38,7 +38,7 @@ export const DuriNavbar = () => {
             onClick={() => handleNavigate('/')}
             iconType="home"
           >
-            <HomeIcon height={31} />
+            <HomeIcon height={24} />
           </NavItem>
           <NavItem
             isActive={pathname === '/shop'}
@@ -70,7 +70,7 @@ export const DuriNavbar = () => {
             onClick={() => handleNavigate('/my')}
             iconType="my"
           >
-            <MyIcon height={31} />
+            <MyIcon height={24} />
           </NavItem>
         </Flex>
       </TabContainer>

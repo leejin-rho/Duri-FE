@@ -7,8 +7,10 @@ import {
   Button,
   DuriNavbar,
   Flex,
+  HardText,
+  ListIcon,
   Magnifier,
-  Text,
+  MobileLayout,
   TextField,
   theme,
 } from '@duri-fe/ui';
@@ -24,7 +26,7 @@ const Shop = () => {
   };
 
   return (
-    <>
+    <MobileLayout>
       <Flex direction="column">
         <SearchWrapper>
           <TextField
@@ -45,17 +47,24 @@ const Shop = () => {
         <ListWrapper>
           <Button
             onClick={changeMapType}
-            width="67px"
+            width="fit-content"
             height="36px"
             bg={theme.palette.White}
+            padding="10px"
           >
-            <Text typo="Body4">목록</Text>
-            <div></div>
+            <ListIcon width={18} color={theme.palette.Gray600} />
+            <HardText
+              typo="Label2"
+              margin="0 0 0 4px"
+              colorCode={theme.palette.Gray600}
+            >
+              목록
+            </HardText>
           </Button>
         </ListWrapper>
       </Flex>
       <DuriNavbar />
-    </>
+    </MobileLayout>
   );
 };
 

@@ -44,7 +44,7 @@ const inactive = css`
 `;
 
 const textStyle = css`
-  margin-top: 4px;
+  margin-top: 10px;
   font-size: 0.7rem;
 `;
 

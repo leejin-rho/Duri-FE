@@ -88,7 +88,7 @@ export const MapInfo = forwardRef<HTMLDivElement>((_, ref) => {
         borderRadius="99px"
         padding="0"
       >
-        <MyLocation width={36} height={36} />
+        <MyLocation width={36} height={36} color={theme.palette.Gray400} />
       </LocationBtn>
     </>
   );
