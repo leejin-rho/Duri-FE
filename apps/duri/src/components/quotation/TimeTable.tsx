@@ -1,8 +1,6 @@
 import { RequestProps, TimeProps } from '@duri/assets/types/request';
 import {
   Button,
-  HeightFitFlex,
-  Text,
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
@@ -24,18 +22,6 @@ const TimeTable = ({
     onSelect(key, !isSelected); // 상태 반전하여 전달
   };
   return (
-    <HeightFitFlex direction="column">
-      <HeightFitFlex
-        direction="column"
-        // justify="flex-start"
-        align="flex-start"
-        gap={8}
-      >
-        <Text>시간 선택</Text>
-        <Text colorCode={theme.palette.Gray400}>
-          원하는 미용의 종류를 모두 선택해주세요
-        </Text>
-      </HeightFitFlex>
       <WidthFitFlex align="center">
         <TimeWrapper
           justify="center"
@@ -71,7 +57,6 @@ const TimeTable = ({
           })}
         </TimeWrapper>
       </WidthFitFlex>
-    </HeightFitFlex>
   );
 };
 

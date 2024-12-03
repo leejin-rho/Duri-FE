@@ -56,11 +56,11 @@ export const SelectGrooming = ({
         selected={selected && !isOpen}
       >
         <HeightFitFlex justify="space-between">
-          <Text>{title}</Text>
+          <Text typo='Title3'>{title}</Text>
           <HeightFitFlex width="fit-content" gap={3}>
             {description && 
-            (description.length > 1 ? <Text>{description[0]} 외 {description.length - 1}&nbsp; </Text> : 
-              <Text>{description[0]}&nbsp;</Text>
+            (description.length > 1 ? <Text typo='Caption2'>{description[0]} 외 {description.length - 1}&nbsp; </Text> : 
+              <Text typo='Caption2'>{description[0]}&nbsp;</Text>
             )}
             {isOpen ? (
               <UnionUp width={9} height={6} />
@@ -85,7 +85,7 @@ export const SelectGrooming = ({
                 onClick={(e) => handleClickOption(option, e)}
                 selected={Boolean(selectedOptions.includes(option))}
               >
-                <Text>{option}</Text>
+                <Text typo='Caption2'>{option}</Text>
               </SelectGroomingBox>
             ))}
           </Flex>

@@ -57,7 +57,7 @@ const RequestPage = () => {
     time16: false,
     time17: false,
     time18: false,
-    shopIds: [1,2],
+    shopIds: [1, 2],
   });
   const [petInfo, setPetInfo] = useState<PetInfoProps>();
   const [isButton, setIsButton] = useState<boolean>(false);
@@ -103,7 +103,7 @@ const RequestPage = () => {
 
   return (
     <MobileLayout>
-      <HeightFitFlex direction="column" margin="0 0 91.6px 0">
+      <HeightFitFlex direction="column" margin="30px 0 91.6px 0">
         <HeightFitFlex
           direction="column"
           align="flex-start"
@@ -122,8 +122,8 @@ const RequestPage = () => {
             />
           )}
           <HeightFitFlex direction="column" align="flex-start" gap={8}>
-            <Text>미용 선택</Text>
-            <Text colorCode={theme.palette.Gray400}>
+            <Text typo="Title2">미용 선택</Text>
+            <Text typo="Caption1" colorCode={theme.palette.Gray400}>
               원하는 미용의 종류를 모두 선택해주세요
             </Text>
             <SelectGrooming
@@ -159,8 +159,26 @@ const RequestPage = () => {
               selected={requestList.design.length > 0}
             />
           </HeightFitFlex>
-          <TimeTable timeList={timeList} onSelect={handleSelect} selectedTimeList={requestList}/>
-          <EtcRequest onSelect={handleSelect} />
+          <HeightFitFlex direction="column" align="flex-start" gap={8}>
+            <Text typo="Title2">시간 선택</Text>
+            <Text typo="Caption1" colorCode={theme.palette.Gray400}>
+              원하는 미용의 종류를 모두 선택해주세요
+            </Text>
+            <TimeTable
+              timeList={timeList}
+              onSelect={handleSelect}
+              selectedTimeList={requestList}
+            />
+          </HeightFitFlex>
+          <HeightFitFlex direction="column" gap={12} margin="0 0 40px 0">
+            <HeightFitFlex direction="column" align="flex-start" gap={8}>
+              <Text typo="Title2">기타 요청사항</Text>
+              <Text typo="Caption1" colorCode={theme.palette.Gray400}>
+                미용사가 알아야할 점이 있다면 작성해주세요!
+              </Text>
+              <EtcRequest onSelect={handleSelect} />
+            </HeightFitFlex>
+          </HeightFitFlex>
         </HeightFitFlex>
         {isButton ? (
           <Button
@@ -168,6 +186,7 @@ const RequestPage = () => {
             fontColor={theme.palette.White}
             borderRadius="0"
             onClick={handleClickButton}
+            typo="Body2"
           >
             요청서 저장
           </Button>
@@ -176,6 +195,7 @@ const RequestPage = () => {
             bg={theme.palette.Gray50}
             fontColor={theme.palette.White}
             borderRadius="0"
+            typo="Body2"
           >
             요청서 저장
           </Button>
