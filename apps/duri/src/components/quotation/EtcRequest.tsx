@@ -7,6 +7,7 @@ const EtcRequest = (onSelect: {
   return (
     <RequestTextField
       placeholder="미용사가 주의해야할 점이 있다면 작성해주세요!"
+      placeholderTypo={theme.typo.Caption1}
       widthPer="100%"
       height={108}
       multiline={true}
@@ -20,12 +21,6 @@ const EtcRequest = (onSelect: {
 export default EtcRequest;
 
 const RequestTextField = styled(TextField)`
-  width: 100%;
-  ::placeholder {
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-  }
+  /* width: 100%; */
   border-color: ${theme.palette.Gray300};
 `;

@@ -31,17 +31,17 @@ const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
       <Text typo="Heading2" justify="flex-start">
         반려견의 품종이 어떻게 되나요?
       </Text>
-      <Text typo="Label2" justify="flex-start" colorCode={theme.palette.Gray500}>
+      <Text typo="Caption1" justify="flex-start" colorCode={theme.palette.Gray500}>
         등록한 반려견은 MY에서 변경할 수 있어요.
       </Text>
 
-      <Flex justify='flex-start' gap={8}>
+      <Flex justify='flex-start'>
       <Controller
         name="gender"
         control={control}
         rules={{ required: '성별을 선택해주세요.' }}
         render={({ field }) => (
-          <>
+          <Flex margin='47px 0' justify='flex-start' gap={8}>
             {options.map(({ label, value }) => (
               <Button
                 key={value}
@@ -57,10 +57,10 @@ const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
                     ? theme.palette.White
                     : theme.palette.Black
                 }
-                typo="Body2"
+                typo="Body3"
                 border={
                   gender === value
-                    ? 'none'
+                    ? `1px solid ${theme.palette.Black}`
                     : `1px solid ${theme.palette.Gray100}`
                 }
                 onClick={() =>
@@ -70,7 +70,7 @@ const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
                 {label}
               </Button>
             ))}
-          </>
+          </Flex>
         )}
       />
       </Flex>

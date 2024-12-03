@@ -53,16 +53,17 @@ const PetDiseaseInfo = ({
               갖고있는 질환이 있나요?
             </Text>
             <Text
-              typo="Label2"
+              typo="Caption1"
               justify="flex-start"
               colorCode={theme.palette.Gray500}
             >
               입력된 성격은 MY에서 변경가능해요.
             </Text>
-            <Flex direction="column" align="flex-start" gap={8}>
+            <Flex direction="column" align="flex-start" gap={8} margin='47px 0'>
               {diseaseOptions.map((value) => (
                 <Button
                   key={value}
+                  typo='Body3'
                   width="fit-content"
                   height="43px"
                   bg={

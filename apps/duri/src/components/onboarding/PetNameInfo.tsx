@@ -33,21 +33,22 @@ const PetNameInfo = ({ register, trigger, setStep }: PetNameInfoProps) => {
         반려견의 <br />
         이름을 입력해주세요
       </Text>
-      <Text typo="Label2" justify="flex-start" colorCode={theme.palette.Gray500}>
+      <Text typo="Caption1" justify="flex-start" colorCode={theme.palette.Gray500}>
         등록한 반려견은 MY에서 변경할 수 있어요.
       </Text>
-      <Text typo="Label2" justify="flex-start" colorCode={theme.palette.Gray500}>
+      <Text typo="Caption1" justify="flex-start" colorCode={theme.palette.Gray500}>
         Tip! <br />
         반려견 이름에서 ‘~이&apos;를 포함해서 적어주세요. <br />
         필요없다면 그대로 적어주세요.
       </Text>
-      <Text typo="Label2" justify="flex-start" colorCode={theme.palette.Gray500}>
+      <Text typo="Caption1" justify="flex-start" colorCode={theme.palette.Gray500}>
         ex. 신참 &gt; 신참이 <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 초코 &gt;
         초코
       </Text>
       <Flex justify='center' gap={8} margin='66px 0 0 0'>
         <TextField
           placeholder="반려견 이름"
+          placeholderTypo={theme.typo.Caption1}
           isRound={true}
           width={172}
           height={50}
