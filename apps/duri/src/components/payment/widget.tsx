@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { QuotationProps } from '@duri/assets/types/QuotationType';
+import { QuotationProps } from '@duri/assets/types/quotation';
 import {
   loadTossPayments,
   TossPaymentsWidgets,
@@ -10,16 +10,16 @@ const clientKey = import.meta.env.VITE_CLIENT_KEY;
 const customerKey = crypto.randomUUID(); //user Idx값으로 대체하기!
 
 interface QuotationInfo {
-    quotationInfo: QuotationProps;
+  quotationInfo: QuotationProps;
 }
 interface Amount {
   currency: string;
   value: number;
 }
 
-const PaymentWidget = ({quotationInfo} : QuotationInfo) => {
+const PaymentWidget = ({ quotationInfo }: QuotationInfo) => {
   // const [amount, setAmount] = useState<Amount>({
-  const [amount, ] = useState<Amount>({
+  const [amount] = useState<Amount>({
     currency: 'KRW',
     value: quotationInfo.groomingTotalPrice,
   });
@@ -116,15 +116,13 @@ const PaymentWidget = ({quotationInfo} : QuotationInfo) => {
             try {
               // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
               // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
-                // 결제 항목(groomingList, 미용실 정보, 고객 정보) POST 요청 to 서버!!!!!!
-
-
+              // 결제 항목(groomingList, 미용실 정보, 고객 정보) POST 요청 to 서버!!!!!!
 
               // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
               if (widgets)
                 await widgets.requestPayment({
                   orderId: 'gmilrw7NlNvxDwuzV2D4m',
-                  orderName: `${quotationInfo.groomingList[0].menu} 외 ${quotationInfo.groomingList.length-1}건`,
+                  orderName: `${quotationInfo.groomingList[0].menu} 외 ${quotationInfo.groomingList.length - 1}건`,
                   successUrl: window.location.origin + '/payment/success',
                   failUrl: window.location.origin + '/payment/fail',
                   customerName: '김토스',

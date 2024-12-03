@@ -34,4 +34,46 @@ export const handlers = [
       couponNum: 3,
     });
   }),
+
+  http.get('https://api.example.com/api/shop/regular', () => {
+    return HttpResponse.json([
+      {
+        shopIdx: '1',
+        shopName: '댕댕샵',
+        shopImg:
+          'https://s3-alpha-sig.figma.com/img/be2d/15b9/6d6d9c56fd4e47388fa79cdfb8f3c4b6?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=X1cOpSTMbxxMWxuaqTEsv4id96BVzSloxASEzxOzX87IO8neIKfYCuO8K04E5O8RniSoRCRo7JIlyuYn0AZd6Nda2W7tS8rN36WT7Ewzg-bnozvaUzH5Low6mzAGqUFhQY558k~oAoKolnCTzLEb1DSKR3Zq3Gj073fUrLrxyNnQmXqtbmMObX39c-Flw0~8kzap-ls787b58MKEnfTQ1AVHB8o-Y2~2mQWpFCMY8iKMjIsk84ToA0LhLmiGf5XkRLEtZwwWXFqsTXm0OFB2m~3uqsxFBkuW3gootLBj2ocEp400Za4j8C-IAFj1lNqPeoW9rpLdKLh0xOvoftqeaQ__',
+        shopScore: 4.9,
+        shopReview: 120,
+      },
+      {
+        shopIdx: '2',
+        shopName: '멍뭉샵',
+        shopImg:
+          'https://s3-alpha-sig.figma.com/img/be2d/15b9/6d6d9c56fd4e47388fa79cdfb8f3c4b6?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=X1cOpSTMbxxMWxuaqTEsv4id96BVzSloxASEzxOzX87IO8neIKfYCuO8K04E5O8RniSoRCRo7JIlyuYn0AZd6Nda2W7tS8rN36WT7Ewzg-bnozvaUzH5Low6mzAGqUFhQY558k~oAoKolnCTzLEb1DSKR3Zq3Gj073fUrLrxyNnQmXqtbmMObX39c-Flw0~8kzap-ls787b58MKEnfTQ1AVHB8o-Y2~2mQWpFCMY8iKMjIsk84ToA0LhLmiGf5XkRLEtZwwWXFqsTXm0OFB2m~3uqsxFBkuW3gootLBj2ocEp400Za4j8C-IAFj1lNqPeoW9rpLdKLh0xOvoftqeaQ__',
+        shopScore: 4.1,
+        shopReview: 10,
+      },
+    ]);
+  }),
+
+  http.get('https://api.example.com/api/shop/recommend', () => {
+    return HttpResponse.json([
+      {
+        shopIdx: '1',
+        shopName: '댕댕샵',
+        shopImg:
+          'https://s3-alpha-sig.figma.com/img/be2d/15b9/6d6d9c56fd4e47388fa79cdfb8f3c4b6?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=X1cOpSTMbxxMWxuaqTEsv4id96BVzSloxASEzxOzX87IO8neIKfYCuO8K04E5O8RniSoRCRo7JIlyuYn0AZd6Nda2W7tS8rN36WT7Ewzg-bnozvaUzH5Low6mzAGqUFhQY558k~oAoKolnCTzLEb1DSKR3Zq3Gj073fUrLrxyNnQmXqtbmMObX39c-Flw0~8kzap-ls787b58MKEnfTQ1AVHB8o-Y2~2mQWpFCMY8iKMjIsk84ToA0LhLmiGf5XkRLEtZwwWXFqsTXm0OFB2m~3uqsxFBkuW3gootLBj2ocEp400Za4j8C-IAFj1lNqPeoW9rpLdKLh0xOvoftqeaQ__',
+        shopAddress: '경기도 수원시 망포동',
+        shopTag: ['노견전문', '소형견'],
+      },
+      {
+        shopIdx: '2',
+        shopName: '멍뭉샵',
+        shopImg:
+          'https://s3-alpha-sig.figma.com/img/be2d/15b9/6d6d9c56fd4e47388fa79cdfb8f3c4b6?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=X1cOpSTMbxxMWxuaqTEsv4id96BVzSloxASEzxOzX87IO8neIKfYCuO8K04E5O8RniSoRCRo7JIlyuYn0AZd6Nda2W7tS8rN36WT7Ewzg-bnozvaUzH5Low6mzAGqUFhQY558k~oAoKolnCTzLEb1DSKR3Zq3Gj073fUrLrxyNnQmXqtbmMObX39c-Flw0~8kzap-ls787b58MKEnfTQ1AVHB8o-Y2~2mQWpFCMY8iKMjIsk84ToA0LhLmiGf5XkRLEtZwwWXFqsTXm0OFB2m~3uqsxFBkuW3gootLBj2ocEp400Za4j8C-IAFj1lNqPeoW9rpLdKLh0xOvoftqeaQ__',
+        shopAddress: '경기도 수원시 망포동',
+        shopTag: ['노견전문', '소형견'],
+      },
+    ]);
+  }),
 ];
