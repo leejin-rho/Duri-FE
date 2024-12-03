@@ -39,20 +39,63 @@ const timeList = Array(10)
   .map((_, i) => `${9 + i}:00`);
 
 const RequestPage = () => {
-    //shopIds 배열이 props로 전달되면 고거도 설정 필요!!!!
-  const [requestList, setRequestList] = useState<Partial<RequestProps>>({});
+  const [requestList, setRequestList] = useState<RequestProps>({
+    petId: undefined,
+    menu: [],
+    addMenu: [],
+    specialMenu: [],
+    design: [],
+    etc: '',
+    day: '',
+    time9: false,
+    time10: false,
+    time11: false,
+    time12: false,
+    time13: false,
+    time14: false,
+    time15: false,
+    time16: false,
+    time17: false,
+    time18: false,
+    shopIds: [1,2],
+  });
   const [petInfo, setPetInfo] = useState<PetInfoProps>();
-  const handleSelect = (key: string, value: string | string[] | boolean) => {
-    setRequestList((prev: object) => ({
+  const [isButton, setIsButton] = useState<boolean>(false);
+
+  const handleSelect = (
+    key: string,
+    value: number | string | string[] | boolean,
+  ) => {
+    if (key === 'petId') {
+      setRequestList((prev) => ({
+        ...prev,
+        petId:
+          typeof value === 'number' || value === undefined ? value : undefined,
+      }));
+      return;
+    }
+
+    setRequestList((prev) => ({
       ...prev,
       [key]: value,
     }));
   };
+
   const data = useGetPetInfo();
+
   useEffect(() => {
-    if (data) setPetInfo(data);
-    console.log(data);
+    if (data) {
+      setPetInfo(data);
+      handleSelect('petId', data.petId); // petId는 따로 설정
+    }
   }, [data]);
+
+  // 버튼 활성화 조건 업데이트
+  useEffect(() => {
+    const isValid =
+      !!requestList.petId && !!requestList.menu && requestList.menu.length > 0;
+    setIsButton(isValid);
+  }, [requestList]);
 
   const handleClickButton = () => {
     console.log(requestList);
@@ -60,11 +103,11 @@ const RequestPage = () => {
 
   return (
     <MobileLayout>
-      <HeightFitFlex direction='column' margin='0 0 91.6px 0'>
+      <HeightFitFlex direction="column" margin="0 0 91.6px 0">
         <HeightFitFlex
-          direction='column'
-          align='flex-start'
-          padding='0 20px'
+          direction="column"
+          align="flex-start"
+          padding="0 20px"
           gap={40}
         >
           {petInfo && (
@@ -84,60 +127,59 @@ const RequestPage = () => {
               원하는 미용의 종류를 모두 선택해주세요
             </Text>
             <SelectGrooming
-              title='기본 미용'
-              description='가위컷 외 5'
-              menuKey='menu'
+              title="기본 미용"
+              description={requestList.menu}
+              menuKey="menu"
               onSelect={handleSelect}
               options={menu}
-              selected={Boolean(
-                requestList.menu && requestList.menu.length > 0,
-              )} // null 체크 추가
+              selected={requestList.menu.length > 0}
             />
             <SelectGrooming
-              title='추가 미용'
-              menuKey='addMenu'
+              title="추가 미용"
+              menuKey="addMenu"
+              description={requestList.addMenu}
               onSelect={handleSelect}
               options={addMenu}
-              selected={Boolean(
-                requestList.addMenu && requestList.addMenu.length > 0,
-              )}
+              selected={requestList.addMenu.length > 0}
             />
             <SelectGrooming
-              title='스페셜 미용'
-              description='머드팩 외 3'
-              menuKey='specialMenu'
+              title="스페셜 미용"
+              description={requestList.specialMenu}
+              menuKey="specialMenu"
               onSelect={handleSelect}
               options={specialMenu}
-              selected={Boolean(
-                requestList.specialMenu && requestList.specialMenu.length > 0,
-              )}
+              selected={requestList.specialMenu.length > 0}
             />
             <SelectGrooming
-              title='디자인 컷'
-              description='장화 외 4'
-              menuKey='design'
+              title="디자인 컷"
+              description={requestList.design}
+              menuKey="design"
               onSelect={handleSelect}
               options={designMenu}
-              selected={Boolean(
-                requestList.design && requestList.design.length > 0,
-              )}
+              selected={requestList.design.length > 0}
             />
           </HeightFitFlex>
-          <TimeTable
-            timeList={timeList}
-            onSelect={handleSelect}
-            selectedTimeList={requestList}
-          />
+          <TimeTable timeList={timeList} onSelect={handleSelect} selectedTimeList={requestList}/>
           <EtcRequest onSelect={handleSelect} />
         </HeightFitFlex>
-        <Button
-          bg={theme.palette.Black}
-          fontColor={theme.palette.White}
-          borderRadius='0'
-          onClick={handleClickButton}
-        >
-          요청서 저장
-        </Button>
+        {isButton ? (
+          <Button
+            bg={theme.palette.Black}
+            fontColor={theme.palette.White}
+            borderRadius="0"
+            onClick={handleClickButton}
+          >
+            요청서 저장
+          </Button>
+        ) : (
+          <Button
+            bg={theme.palette.Gray50}
+            fontColor={theme.palette.White}
+            borderRadius="0"
+          >
+            요청서 저장
+          </Button>
+        )}
       </HeightFitFlex>
       <DuriNavbar />
     </MobileLayout>

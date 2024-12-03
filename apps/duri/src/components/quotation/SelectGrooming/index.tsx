@@ -7,7 +7,7 @@ import styled from '@emotion/styled';
 interface SelectGroomingProps {
   options?: string[];
   title: string;
-  description?: string;
+  description?: string[];
   menuKey: string;
   onSelect: (key: string, value: string[] | boolean) => void;
   selected: boolean;
@@ -34,11 +34,12 @@ export const SelectGrooming = ({
         ? prev.filter((item) => item !== value) // 이미 선택된 항목은 제거
         : [...prev, value]; // 새로운 항목 추가
 
-      onSelect(menuKey, updatedOptions); // 부모에 업데이트된 배열 전달
+      onSelect(menuKey, updatedOptions); // 부모에 업데이트된 값 전달
       return updatedOptions;
     });
-    console.log(selectedOptions);
   };
+
+  //버튼 활성화 조건: 미용 선택, 시간 선택, 날짜 선택
 
   return (
     <>
@@ -57,7 +58,10 @@ export const SelectGrooming = ({
         <HeightFitFlex justify="space-between">
           <Text>{title}</Text>
           <HeightFitFlex width="fit-content" gap={3}>
-            <Text>{description}&nbsp; </Text>
+            {description && 
+            (description.length > 1 ? <Text>{description[0]} 외 {description.length - 1}&nbsp; </Text> : 
+              <Text>{description[0]}&nbsp;</Text>
+            )}
             {isOpen ? (
               <UnionUp width={9} height={6} />
             ) : (

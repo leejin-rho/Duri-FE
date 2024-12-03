@@ -29,7 +29,6 @@ const CarouselHome = () => {
           centeredSlides={true}
           onSlideChange={(e: { realIndex: SetStateAction<number> }) => {
             setSwiperIndex(e.realIndex);
-            console.log(e.realIndex);
           }} // 슬라이드 변경 완료 시 인덱스 업데이트
         >
           {[0, 1, 2].map((i) => (

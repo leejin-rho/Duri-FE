@@ -1,4 +1,4 @@
-import { RequestProps } from '@duri/assets/types/request';
+import { RequestProps, TimeProps } from '@duri/assets/types/request';
 import {
   Button,
   HeightFitFlex,
@@ -11,7 +11,7 @@ import styled from '@emotion/styled';
 interface TimeTableProps {
   timeList: string[];
   onSelect: (key: string, value: boolean) => void;
-  selectedTimeList: Partial<RequestProps>;
+  selectedTimeList: RequestProps;
 }
 
 const TimeTable = ({
@@ -44,7 +44,7 @@ const TimeTable = ({
           margin="16px 0 0 0"
         >
           {timeList?.map((time, index) => {
-            const key = `time${9 + index}`;
+            const key = `time${9 + index}` as keyof TimeProps;
             const isSelected = selectedTimeList[key];
             // 4개마다 새로운 줄을 만들어서 렌더링
             return (
@@ -54,7 +54,7 @@ const TimeTable = ({
                 height="41px"
                 bg={isSelected ? theme.palette.Normal500 : theme.palette.Gray20}
                 fontColor={
-                  isSelected ? theme.palette.Normal800 : theme.palette.Gray400
+                  isSelected ? theme.palette.Normal800 : theme.palette.Gray300
                 }
                 typo="Label2"
                 borderRadius="4px"
