@@ -1,17 +1,12 @@
-import { Flex, MobileLayout, NaverLogo, SpeechBallonContainer, Text, theme, Toast } from "@duri-fe/ui";
+import { Flex, MobileLayout, NaverLogo, SpeechBallonContainer, Text, theme } from "@duri-fe/ui";
 import { useDuriNaverLogin } from "@duri-fe/utils";
 import styled from "@emotion/styled";
 
 const LoginPage = () => {
-  const { error, triggerLogin } = useDuriNaverLogin();
+  const { triggerLogin } = useDuriNaverLogin();
 
   const handleNaverLogin = async () => {
     triggerLogin();
-    if (error) {
-      return <Toast />
-    } else {
-      console.log("dd");
-    }
   }
 
   return (
