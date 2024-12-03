@@ -14,6 +14,6 @@ border-radius: 8px;
 max-height: 150px;
 overflow-y: auto;
 z-index: 100;
-padding: 0;
+margin-top: 4px;
 
 `;

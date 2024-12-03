@@ -17,6 +17,7 @@ interface TextFieldProps
   label?: string;
   helperText?: { type: 'normal' | 'error'; text: string }[];
   width?: number;
+  widthPer?: string;
   height?: number;
   multiline?: boolean;
   isSubTextField?: boolean;
@@ -28,7 +29,6 @@ interface TextFieldProps
   isNoBorder?: boolean;
   background?: string;
   shadow?: string;
-  widthPer?: string;
 }
 
 /**
@@ -59,6 +59,7 @@ export const TextField = forwardRef<
       helperText,
       placeholder = '내용을 입력해주세요.',
       width = 328,
+      widthPer,
       height,
       multiline = false,
       isSubTextField = false,
@@ -70,7 +71,6 @@ export const TextField = forwardRef<
       isNoBorder = false,
       background = theme.palette.White,
       shadow = 'none',
-      widthPer,
       ...props
     },
     ref,

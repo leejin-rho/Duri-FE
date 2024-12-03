@@ -1,0 +1,39 @@
+import { PetInfoProps } from '@duri/assets/types/pet';
+import { Button, Flex, HeightFitFlex, Image, Text, theme } from '@duri-fe/ui';
+import styled from '@emotion/styled';
+
+const PetInfo = ({
+  petName,
+  petImage,
+  age,
+  breed,
+  gender,
+  weight,
+}: PetInfoProps) => {
+  return (
+    <HeightFitFlex direction='column' align='flex-start' gap={16}>
+    <Text>반려견 선택</Text>
+    <Flex justify='flex-start' gap={18}>
+        <PetImageWrapper>
+      <Tag typo='Caption2' fontColor={theme.palette.Normal700} width='43px' height='29px' borderRadius='8px' padding='0px'>선택</Tag>
+      <Image src={petImage} borderRadius={8} width={100} height={100}/>
+      </PetImageWrapper>
+      <HeightFitFlex direction='column' gap={12} align='flex-start'>
+      <Text>{petName}</Text>
+      <Text typo='Caption2' colorCode={theme.palette.Gray400}> {breed}, {age}, {gender}, {weight}kg</Text>
+      </HeightFitFlex>
+    </Flex>
+    </HeightFitFlex>
+  );
+};
+
+export default PetInfo;
+
+const PetImageWrapper = styled.div`
+  position: relative;
+`;
+const Tag = styled(Button)`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;

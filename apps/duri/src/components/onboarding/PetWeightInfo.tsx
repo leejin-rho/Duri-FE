@@ -26,7 +26,14 @@ const PetWeightInfo = ({ control, name }: PetWeightInfoProps) => {
       <Controller
         name="weight"
         control={control}
-        rules={{ required: '몸무게를 선택해주세요.' }}
+        rules={{
+          required: '몸무게를 선택해주세요.',
+          validate: (value) => {
+            const [integer, decimal] = value.split('.'); // 정수와 소수 분리
+            const weight = parseFloat(`${integer}.${decimal}`);
+            return weight > 0;
+          },
+        }}
         render={({ field }) => (
           <>
             {/* style={{ display: 'flex', alignItems: 'center', gap: '4px' } */}
