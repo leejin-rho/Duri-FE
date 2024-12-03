@@ -5,11 +5,13 @@ import styled from '@emotion/styled';
 
 interface InstructionProps {
   onNext: () => void;
+  show: boolean;
 }
 
-const Instruction = ({ onNext }: InstructionProps) => {
+const Instruction = ({ onNext, show }: InstructionProps) => {
   return (
     <Container
+      show={show}
       direction="column"
     >
       <Wrapper direction="column">
@@ -30,8 +32,10 @@ const Instruction = ({ onNext }: InstructionProps) => {
   );
 };
 
-export const Container = styled(Flex)`
+export const Container = styled(Flex)<{show: boolean}>`
   flex-grow: 1;
+  opacity: ${({ show }) => (show ? 1 : 0)};
+  transition: opacity 1s;
 `;
 
 export const Wrapper = styled(Flex)`

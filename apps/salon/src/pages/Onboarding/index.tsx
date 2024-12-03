@@ -4,10 +4,8 @@ import { Flex, MobileLayout, StatusBar } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 import InputSalong from '@salon/components/onboarding/InputSalon';
 import InputSalonOwner from '@salon/components/onboarding/InputSalonOwner';
-import Instruction from '@salon/components/onboarding/Instructions';
 import SalonConfirm from '@salon/components/onboarding/SalonConfirm';
 import SalonOwnerConfirm from '@salon/components/onboarding/SalonOwnerConfirm';
-import Welcome from '@salon/components/onboarding/Welcome';
 import { SalonFormData, SalonOwnerFormData } from '@salon/types/onboarding';
 
 const OnboardingPage = () => {
@@ -47,18 +45,14 @@ const OnboardingPage = () => {
   return (
     <MobileLayout>
       <PageContainer padding="72px 20px" direction="column" justify="start">
-        {step >= 3 && (
-          <StatusBar current={step - 2} total={4} mode="onboarding" />
-        )}
+        <StatusBar current={step} total={4} mode="onboarding" />
 
-        {step === 1 && <Welcome onNext={nextStep} />}
-        {step === 2 && <Instruction onNext={nextStep} />}
-        {step === 3 && <InputSalong onNext={handleNextSalon} />}
-        {step === 4 && <InputSalonOwner onNext={handleNextSalonOwner} />}
-        {step === 5 && (
+        {step === 1 && <InputSalong onNext={handleNextSalon} />}
+        {step === 2 && <InputSalonOwner onNext={handleNextSalonOwner} />}
+        {step === 3 && (
           <SalonConfirm salonFormData={salonFormData} onNext={nextStep} />
         )}
-        {step === 6 && (
+        {step === 4 && (
           <SalonOwnerConfirm salonOwnerFormData={salonOwnerFormData} />
         )}
       </PageContainer>
