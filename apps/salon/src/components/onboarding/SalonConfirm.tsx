@@ -1,7 +1,13 @@
 import React from 'react';
 
 import { AlertStar, Button, Flex, Text, theme } from '@duri-fe/ui';
-import { SalonFormData } from '@salon/pages/Onboarding';
+import { SalonFormData } from '@salon/types/onboarding';
+
+import {
+  ButtonWrapper,
+  ContactContainer,
+  UnderlinedText,
+} from './onboarding.styles';
 
 interface SalonConfirmProps {
   salonFormData: SalonFormData;
@@ -11,56 +17,91 @@ interface SalonConfirmProps {
 const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
   return (
     <>
-      <Flex
-        direction='column'
-        align='flex-start'
-      >
-        <Flex direction='column' align='flex-start'  margin='75px 0 0 0'>
-          <Text typo='Heading2' margin='55px 0 0 0'>입력하신 정보를</Text>
-          <Text typo='Heading2' margin='0 0 28px 0'>확인해주세요</Text>
-          <Text typo='Label2' colorCode={theme.palette.Gray500} margin='0 0 27px 0'>등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!</Text>
+      <Flex direction="column" align="flex-start" padding="48px 0 96px 0">
+        <Flex
+          direction="column"
+          align="flex-start"
+          gap={24}
+          padding="0 0 48px 0"
+        >
+          <Flex direction="column" align="flex-start">
+            <Text typo="Heading2">입력하신 정보를</Text>
+            <Text typo="Heading2">확인해주세요</Text>
+          </Flex>
+          <Text typo="Label2" colorCode={theme.palette.Gray500}>
+            등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!
+          </Text>
         </Flex>
 
-        <Flex direction='column' align='flex-start' gap={28}>
-          <Flex justify='flex-start' gap={36}>
-            <Text typo='Label1'>매장 이름<AlertStar isUpper /></Text>
-            <Text typo='Label2'>{salonFormData.name}</Text>
+        <Flex direction="column" align="flex-start" gap={28}>
+          <Flex justify="flex-start" gap={36}>
+            <Text typo="Label1">
+              매장 이름
+              <AlertStar isUpper />
+            </Text>
+            <Text typo="Label2">{salonFormData.name}</Text>
           </Flex>
 
-          <Flex justify='flex-start' gap={36}>
-          <Text typo='Label1'>매장 위치<AlertStar isUpper /></Text>
-          <Text typo='Label2'>{salonFormData.address}&nbsp;{salonFormData.addressDetail}</Text>
+          <Flex justify="flex-start" gap={36}>
+            <Text typo="Label1">
+              매장 위치
+              <AlertStar isUpper />
+            </Text>
+            <Text typo="Label2">
+              {salonFormData.address}&nbsp;{salonFormData.addressDetail}
+            </Text>
           </Flex>
 
-          <Flex justify='flex-start' gap={36}>
-          <Text typo='Label1'>사업자 등록번호<AlertStar isUpper /></Text>
-          <Text typo='Label2'>{salonFormData.registrationNumber}</Text>
+          <Flex justify="flex-start" gap={36}>
+            <Text typo="Label1">
+              사업자 등록번호
+              <AlertStar isUpper />
+            </Text>
+            <Text typo="Label2">{salonFormData.registrationNumber}</Text>
           </Flex>
-          
-          <Flex justify='flex-start' gap={36}>
-          <Text typo='Label1'>미용사 면허번호<AlertStar isUpper /></Text>
-          <Text typo='Label2'>{salonFormData.licenseNumber}</Text>
+
+          <Flex justify="flex-start" gap={36}>
+            <Text typo="Label1">
+              미용사 면허번호
+              <AlertStar isUpper />
+            </Text>
+            <Text typo="Label2">{salonFormData.licenseNumber}</Text>
           </Flex>
         </Flex>
 
         {/* 매장 위치 네이버 지도로부터 가져오기 */}
-        <div style={{width: '335px', height: '115px', backgroundColor: 'lightgray', borderRadius: '8px', margin: '62px 0 28px 0'}}></div>
-
-        {/* 문의하기 눌렀을 때에 대한 처리 필요? */}
-        <Flex direction='column' width={335} gap={14}>
-          <Text
-            style={{fontSize: '14px', fontWeight: '500'}}
-            colorCode={theme.palette.Gray300}
-          >
-            문제가 발생한다면
-            <Text style={{fontSize: '14px', fontWeight: '600', textDecorationLine: 'underline'}}> 문의하기 </Text>
-            버튼을 눌러주세요.
-          </Text>
-          <Button bg={theme.palette.Black} fontColor={theme.palette.White} onClick={onNext} >
-            <Text>다음</Text>
-          </Button>
-        </Flex>
+        <div
+          style={{
+            width: '335px',
+            height: '115px',
+            backgroundColor: 'lightgray',
+            borderRadius: '8px',
+            margin: '62px 0 28px 0',
+          }}
+        ></div>
       </Flex>
+      {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
+      <ContactContainer gap={4}>
+        <Text typo="Label2" colorCode={theme.palette.Gray300}>
+          문제가 발생한다면
+        </Text>
+        <UnderlinedText typo="Label2" colorCode={theme.palette.Gray300}>
+          문의하기
+        </UnderlinedText>
+        <Text typo="Label2" colorCode={theme.palette.Gray300}>
+          버튼을 눌러주세요.
+        </Text>
+      </ContactContainer>
+
+      <ButtonWrapper padding="0 20px">
+        <Button
+          onClick={onNext}
+          bg={theme.palette.Black}
+          fontColor={theme.palette.White}
+        >
+          다음
+        </Button>
+      </ButtonWrapper>
     </>
   );
 };

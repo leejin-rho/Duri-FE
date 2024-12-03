@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { Button, Flex, HeightFitFlex, Text, TextField, theme } from '@duri-fe/ui';
+import { Button, Flex, Text, TextField, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
-import { SalonFormData } from '@salon/pages/Onboarding';
+import { SalonFormData } from '@salon/types/onboarding';
+
+import { ButtonWrapper, ContactContainer, UnderlinedText } from './onboarding.styles';
+
 
 interface InputSalonProps {
   onNext: (data: SalonFormData) => void;
@@ -16,7 +19,7 @@ const InputSalon = ({ onNext }: InputSalonProps) => {
     registrationNumber: '',
     licenseNumber: '',
   });
-  const [, setIsEmpty] = useState<boolean>(true);
+  const [isEmpty, setIsEmpty] = useState<boolean>(true);
 
   useEffect(() => {
     const isFilled = Object.values(salonFormState).every((value) => value !== '');
@@ -36,7 +39,7 @@ const InputSalon = ({ onNext }: InputSalonProps) => {
       <Flex
         direction='column'
         align='flex-start'
-        padding='48px 0'
+        padding='48px 0 96px 0'
       >
         <Flex direction='column' align='flex-start' gap={24} padding='0 0 24px 0'>
           <Flex direction='column' align='flex-start'>
@@ -101,17 +104,17 @@ const InputSalon = ({ onNext }: InputSalonProps) => {
             />
           </Flex>
         </form>
-
-        {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
-        <Flex padding="24px 0 0 0" gap={4}>
-          <Text typo='Label2' colorCode={theme.palette.Gray300}>문제가 발생한다면</Text>
-          <UnderlinedText typo='Label2' colorCode={theme.palette.Gray300}>문의하기</UnderlinedText>
-          <Text typo='Label2' colorCode={theme.palette.Gray300}>버튼을 눌러주세요.</Text>
-        </Flex>
       </Flex>
 
+      {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
+      <ContactContainer gap={4}>
+        <Text typo='Label2' colorCode={theme.palette.Gray300}>문제가 발생한다면</Text>
+        <UnderlinedText typo='Label2' colorCode={theme.palette.Gray300}>문의하기</UnderlinedText>
+        <Text typo='Label2' colorCode={theme.palette.Gray300}>버튼을 눌러주세요.</Text>
+      </ContactContainer>
+
       <ButtonWrapper padding='0 20px'>
-        {/* {isEmpty ? (
+        {isEmpty ? (
           <Button bg={theme.palette.Gray50} disabled>
             다음 단계
           </Button>
@@ -119,10 +122,7 @@ const InputSalon = ({ onNext }: InputSalonProps) => {
           <Button onClick={handleSubmit} bg={theme.palette.Black} fontColor={theme.palette.White}>
             다음 단계
           </Button>
-        )} */}
-          <Button onClick={handleSubmit} bg={theme.palette.Black} fontColor={theme.palette.White}>
-            다음 단계
-          </Button>
+        )}
       </ButtonWrapper>
     </>
   );
@@ -131,15 +131,5 @@ const InputSalon = ({ onNext }: InputSalonProps) => {
 const AddressButton = styled(Button)`
   width: auto;
 `
-
-const UnderlinedText = styled(Text)`
-  font-weight: 600;
-  text-decoration: underline;
-`
-
-const ButtonWrapper = styled(HeightFitFlex)`
-  position: absolute;
-  bottom: 40px;
-`;
 
 export default InputSalon;

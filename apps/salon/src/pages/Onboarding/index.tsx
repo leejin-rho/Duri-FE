@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Flex, MobileLayout, StatusBar } from '@duri-fe/ui';
 import styled from '@emotion/styled';
@@ -8,24 +8,7 @@ import Instruction from '@salon/components/onboarding/Instructions';
 import SalonConfirm from '@salon/components/onboarding/SalonConfirm';
 import SalonOwnerConfirm from '@salon/components/onboarding/SalonOwnerConfirm';
 import Welcome from '@salon/components/onboarding/Welcome';
-
-export interface SalonFormData {
-  name: string;
-  address: string;
-  addressDetail: string;
-  registrationNumber: string;
-  licenseNumber: string;
-}
-
-export interface SalonOwnerFormData {
-  profile: string;
-  name: string;
-  age: string;
-  gender: string;
-  experienceYears: string;
-  experienceMonths: string;
-  license: string;
-}
+import { SalonFormData, SalonOwnerFormData } from '@salon/types/onboarding';
 
 const OnboardingPage = () => {
   const [step, setStep] = useState<number>(1);
@@ -36,15 +19,16 @@ const OnboardingPage = () => {
     registrationNumber: '',
     licenseNumber: '',
   });
-  const [salonOwnerFormData, setSalonOnwerFormData] = useState<SalonOwnerFormData>({
-    profile: '',
-    name: '',
-    age: '',
-    gender: '',
-    experienceYears: '',
-    experienceMonths: '',
-    license: '',
-  });
+  const [salonOwnerFormData, setSalonOnwerFormData] =
+    useState<SalonOwnerFormData>({
+      profile: '',
+      name: '',
+      age: '',
+      gender: '',
+      experienceYears: '',
+      experienceMonths: '',
+      license: '',
+    });
 
   const nextStep = () => {
     setStep((prev) => prev + 1);
@@ -54,28 +38,29 @@ const OnboardingPage = () => {
     setSalonFormData(data);
     nextStep();
   };
-  
+
   const handleNextSalonOwner = (data: SalonOwnerFormData) => {
     setSalonOnwerFormData(data);
     nextStep();
   };
 
-  useEffect(() => {
-    console.log(salonFormData);
-    console.log(salonOwnerFormData);
-  }, [salonFormData, salonOwnerFormData]);
-
   return (
     <MobileLayout>
-      <PageContainer padding='72px 20px' direction='column'>
-        {step >= 3 && <StatusBar current={step - 2} total={4} mode='onboarding' />}
+      <PageContainer padding="72px 20px" direction="column" justify="start">
+        {step >= 3 && (
+          <StatusBar current={step - 2} total={4} mode="onboarding" />
+        )}
 
         {step === 1 && <Welcome onNext={nextStep} />}
         {step === 2 && <Instruction onNext={nextStep} />}
         {step === 3 && <InputSalong onNext={handleNextSalon} />}
         {step === 4 && <InputSalonOwner onNext={handleNextSalonOwner} />}
-        {step === 5 && <SalonConfirm salonFormData={salonFormData} onNext={nextStep}/>}
-        {step === 6 && <SalonOwnerConfirm salonOwnerFormData={salonOwnerFormData} />}
+        {step === 5 && (
+          <SalonConfirm salonFormData={salonFormData} onNext={nextStep} />
+        )}
+        {step === 6 && (
+          <SalonOwnerConfirm salonOwnerFormData={salonOwnerFormData} />
+        )}
       </PageContainer>
     </MobileLayout>
   );
@@ -84,6 +69,6 @@ const OnboardingPage = () => {
 const PageContainer = styled(Flex)`
   flex-grow: 1;
   position: relative;
-`
+`;
 
 export default OnboardingPage;
