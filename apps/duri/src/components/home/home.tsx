@@ -13,9 +13,9 @@ const CarouselHome = () => {
   return (
     <HeightFitFlex direction="column" align="flex-start">
       <Text
-        typo="Heading3"
+        typo="Body1"
         colorCode={theme.palette.Normal900}
-        margin="33px 0 23px 25px"
+        margin="18px 0 23px 25px"
       >
         미용한지 <br />
         12일이 지났어요 <br />
@@ -97,3 +97,4 @@ const Bullet = styled(Button)`
   padding: 0;
   transition: all 0.3s ease;
 `;
+

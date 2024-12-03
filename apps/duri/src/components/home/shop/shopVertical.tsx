@@ -33,22 +33,22 @@ export const ShopVertical = ({
               src={shop.shopImg}
             />
             <HeightFitFlex direction='column' align='flex-start'>
-              <Text typo="Label1" margin='13px 0 11px 6px'>{shop.shopName}</Text>
-              <Text typo="Body3" colorCode={theme.palette.Gray500} margin='0 0 12px 6px'>
+              <Text typo="Title3" margin='13px 0 11px 6px'>{shop.shopName}</Text>
+              <Text typo="Caption4" colorCode={theme.palette.Gray500} margin='0 0 12px 6px'>
                 {shop.shopAddress}
               </Text>
               <HeightFitFlex justify="flex-start" gap={3} margin='0 0 0 6px'>
                 {shop.shopTag.map((shopTag: string) => (
                   <Tag
                     key={shopTag}
-                    typo="Body3"
+                    typo="Caption2"
                     bg={theme.palette.Gray50}
                     fontColor={theme.palette.Gray500}
                     width="fit-content"
                     height="19px"
                     borderRadius="2px"
                   >
-                    <Text typo="Label3">{shopTag}</Text>
+                    {shopTag}
                   </Tag>
                 ))}
               </HeightFitFlex>

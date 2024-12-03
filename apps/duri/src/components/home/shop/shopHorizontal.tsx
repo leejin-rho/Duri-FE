@@ -7,6 +7,7 @@ import {
   HeightFitFlex,
   Image,
   NextArrow,
+  Send,
   Star,
   Text,
   theme,
@@ -34,17 +35,22 @@ export const ShopHorizontal = ({ shopList }: { shopList: RegularShopProps[] }) =
               align="flex-start"
               gap={20}
             >
-              <Wrapper direction="column" align="flex-start">
+              <Wrapper direction='column' align='flex-start'>
                 {/* onClick함수 추가해야 함!!! */}
-                <Flex justify="flex-start" gap={2}>
-                  <Text typo="Body2">{shop.shopName}</Text>
+                <Flex justify='flex-start' gap={2}>
+                  <Text typo='Title3'>{shop.shopName}</Text>
                   <NextArrow width={20} height={20} />
                 </Flex>
-                <HeightFitFlex justify="flex-start" gap={7}>
+                <HeightFitFlex align='flex-start' gap={7}>
                   <Star width={14} height={14} />
-                  <Text typo="Label3">
-                    {shop.shopScore}&nbsp;({shop.shopReview})
+                  <Flex justify='flex-start' gap={3}>
+                  <Text typo='Label1'>
+                    {shop.shopScore}
                   </Text>
+                  <Text typo='Label3' justify='flex-start'>
+                  ({shop.shopReview})
+                  </Text>
+                  </Flex>
                 </HeightFitFlex>
               </Wrapper>
               {/* onClick함수 추가해야 함!!! */}
@@ -53,8 +59,9 @@ export const ShopHorizontal = ({ shopList }: { shopList: RegularShopProps[] }) =
                 bg={theme.palette.Black}
                 fontColor={theme.palette.White}
                 borderRadius="8px"
-                typo="Label3"
+                typo="Label2"
               >
+                <Send width={18} height={17} /> &nbsp;
                 입찰 넣기
               </Button>
             </Flex>
