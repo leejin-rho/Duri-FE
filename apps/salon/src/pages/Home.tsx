@@ -1,4 +1,4 @@
-import { DuriNavbar, Flex, Header, MobileLayout, Pencil, Text, theme } from '@duri-fe/ui';
+import { DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, Pencil, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 const Home = () => {
@@ -49,8 +49,7 @@ const TextContainer = styled(Flex)`
   z-index: 2;
 `;
 
-const ShopNotice = styled(Flex)`
-  height: fit-content;
+const ShopNotice = styled(HeightFitFlex)`
   width: calc(100% - 40px);
   border-radius: 0 12px 12px 12px;
   position: absolute;
