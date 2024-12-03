@@ -66,8 +66,10 @@ const SearchWrapper = styled(AbsoluteFlex)`
   height: fit-content;
 `;
 
-const ListWrapper = styled(AbsoluteFlex)`
-  bottom: 122px;
-  z-index: 99;
+const ListWrapper = styled(Flex)`
+  position: fixed;
   height: fit-content;
+  bottom: 104px;
+  left: 17px;
+  z-index: 99;
 `;
