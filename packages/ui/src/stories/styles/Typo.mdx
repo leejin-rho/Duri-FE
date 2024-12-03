@@ -1,8 +1,6 @@
 import React from 'react';
 import { Meta, Typeset } from '@storybook/blocks';
-
 import { theme } from '../../styles';
-import { Text } from '../../components/Typo';
 
 <Meta title="styles/Typography" />
 
@@ -13,48 +11,124 @@ import { Text } from '../../components/Typo';
 
 <br />
 
-### Title
+## Title
+
+### Title Variants
 
 <Typeset
-  fontSizes={[32, 24]}
+  fontSizes={[18]}
   fontWeight={600}
-  sampleText={'This is a sample text.'}
+  sampleText={'Title1: This is a sample text.'}
   fontFamily={'Pretendard'}
 />
-
-### Medium
-
 <Typeset
-  fontSizes={[24, 20]}
-  fontWeight={500}
-  sampleText={'This is a sample text.'}
+  fontSizes={[17]}
+  fontWeight={600}
+  sampleText={'Title2: This is a sample text.'}
   fontFamily={'Pretendard'}
 />
-
-### Light
-
-<Typeset
-  fontSizes={[24, 16, 12]}
-  fontWeight={400}
-  sampleText={'This is a sample text.'}
-  fontFamily={'Pretendard'}
-/>
-
-### Light
-
-<Typeset
-  fontSizes={[16, 12]}
-  fontWeight={300}
-  sampleText={'This is a sample text.'}
-  fontFamily={'Pretendard'}
-/>
-
-### Disabled
-
 <Typeset
   fontSizes={[16]}
-  fontWeight={400}
-  sampleText={'This is a disabled text.'}
+  fontWeight={600}
+  sampleText={'Title3: This is a sample text.'}
   fontFamily={'Pretendard'}
-  style={{ color: theme.palette.Gray300 }}
+/>
+
+<br />
+
+## Caption
+
+### Caption Variants
+
+<Typeset
+  fontSizes={[14]}
+  fontWeight={300}
+  sampleText={'Caption1: This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+<Typeset
+  fontSizes={[13]}
+  fontWeight={400}
+  sampleText={'Caption2: This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+<Typeset
+  fontSizes={[13]}
+  fontWeight={500}
+  sampleText={'Caption3: This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+<Typeset
+  fontSizes={[13]}
+  fontWeight={300}
+  sampleText={'Caption4: This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+<Typeset
+  fontSizes={[12]}
+  fontWeight={400}
+  sampleText={'Caption5: This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+
+<br />
+
+## Label
+
+### Label Variants
+
+<Typeset
+  fontSizes={[14]}
+  fontWeight={600}
+  sampleText={'Label1: This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+<Typeset
+  fontSizes={[14]}
+  fontWeight={500}
+  sampleText={'Label2: This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+<Typeset
+  fontSizes={[14]}
+  fontWeight={400}
+  sampleText={'Label3: This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+<Typeset
+  fontSizes={[13]}
+  fontWeight={600}
+  sampleText={'Label4: This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+
+<br />
+
+## Body
+
+### Body Variants
+
+<Typeset
+  fontSizes={[20]}
+  fontWeight={500}
+  sampleText={'Body1: This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+<Typeset
+  fontSizes={[16]}
+  fontWeight={500}
+  sampleText={'Body2: This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+<Typeset
+  fontSizes={[15]}
+  fontWeight={400}
+  sampleText={'Body3: This is a sample text.'}
+  fontFamily={'Pretendard'}
+/>
+<Typeset
+  fontSizes={[15]}
+  fontWeight={300}
+  sampleText={'Body4: This is a sample text.'}
+  fontFamily={'Pretendard'}
 />

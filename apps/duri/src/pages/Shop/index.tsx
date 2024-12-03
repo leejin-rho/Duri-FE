@@ -50,6 +50,7 @@ const Shop = () => {
             bg={theme.palette.White}
           >
             <Text typo="Body4">목록</Text>
+            <div></div>
           </Button>
         </ListWrapper>
       </Flex>

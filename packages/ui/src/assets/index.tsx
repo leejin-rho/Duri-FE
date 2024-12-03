@@ -58,7 +58,6 @@ export { default as SpeechBallon } from './SpeechBallon';
 
 import Add from './Add';
 import AddNew from './AddNew';
-import AiStyleBanner from './AiStyleBanner';
 import Approve from './Approve';
 import ArrowBottom from './ArrowBottom';
 import ArrowLeft from './ArrowLeft';
@@ -73,18 +72,29 @@ import Chat from './Chat';
 import Chatting from './Chatting';
 import Close from './Close';
 import CloseCircle from './CloseCircle';
-import Doori from './Doori';
 import DownArrow from './DownArrow';
+import FilledHeart from './FilledHeart';
+import FilledLocation from './FilledLocation';
+import FilledNotification from './FilledNotification';
+import FilledReport from './FilledReport';
+import Filter from './Filter';
+import Heart from './Heart';
 import Help from './Help';
+import Hold from './Hold';
 import Information from './Information';
+import List from './List';
+import Location from './Location';
 import Lock from './Lock';
 import Magnifier from './Magnifier';
 import Menu from './Menu';
 import MyLocation from './MyLocation';
 import Notification from './Notification';
+import Report from './Report';
 import SafetyHelp from './SafetyHelp';
 import SecurityWarning from './SecurityWarning';
+import Send from './Send';
 import Shield from './Shield';
+import Shopping from './Shopping';
 import Star from './Star';
 import UnionDown from './UnionDown';
 import UnionUp from './UnionUp';
@@ -109,12 +119,10 @@ export const icons = {
   Close,
   CloseCircle,
   DownArrow,
-  Doori,
   Help,
   Information,
   Magnifier,
   Menu,
-  Notification,
   SafetyHelp,
   SecurityWarning,
   Shield,
@@ -123,9 +131,21 @@ export const icons = {
   UpArrow,
   Lock,
   Unlock,
-  AiStyleBanner,
   Star,
+  Heart,
+  FilledHeart,
   MyLocation,
+  Location,
+  FilledLocation,
+  Notification,
+  FilledNotification,
+  Report,
+  FilledReport,
+  List,
+  Filter,
+  Send,
+  Shopping,
+  Hold,
 };
 
 export default icons;

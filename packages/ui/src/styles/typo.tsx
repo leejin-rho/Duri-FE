@@ -10,13 +10,17 @@ export const calcRem = (px: number) => `${px / 16}rem`;
  * @param Caption2: 박스 안에 들어가는 타이틀 밑 부가설명 텍스트
  * @param Caption3: 거리표시 텍스트
  * @param Caption4: 주소 텍스트
+ * @param Caption5: 미니 박스 내부 텍스트
  *
  * @param Label1: 별점
- * @param Label2: 후기 갯수
- * @param Label3: 스케줄러 숫자 텍스트
+ * @param Label2: 지도 텍스트
+ * @param Label3: 후기 갯수
+ * @param Label4: 스케줄러 숫자 텍스트
  *
- * @param Body1: 스케줄러 이름 텍스트
- * @param Body2: 스케줄러 담당쌤 텍스트 / 스케줄러 성별/특징 텍스트
+ * @param Body1: 정렬 본문 텍스트
+ * @param Body2: 스케줄러 이름 텍스트
+ * @param Body3: 팝업 부가 설명 텍스트
+ * @param Body3: 스케줄러 담당쌤 텍스트 / 스케줄러 성별/특징 텍스트
  */
 
 export const typo = {
@@ -43,20 +47,6 @@ export const typo = {
     font-weight: 600;
     font-size: ${calcRem(18)};
     line-height: 170%;
-  `,
-
-  Body3: css`
-    font-family: 'Pretendard';
-    font-weight: 400;
-    font-size: ${calcRem(13)};
-    line-height: 140%;
-  `,
-
-  Body4: css`
-    font-family: 'Pretendard';
-    font-weight: 400;
-    font-size: ${calcRem(10)};
-    line-height: 140%;
   `,
 
   // 타이포 시스템
@@ -109,6 +99,13 @@ export const typo = {
     font-weight: 300;
     line-height: normal;
   `,
+  Caption5: css`
+    /* 미니 박스 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(12)};
+    font-weight: 400;
+    line-height: normal;
+  `,
   Label1: css`
     /* 별점 */
     font-family: 'Pretendard';
@@ -117,27 +114,48 @@ export const typo = {
     line-height: normal;
   `,
   Label2: css`
+    /* 지도 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(14)};
+    font-weight: 500;
+    line-height: normal;
+  `,
+  Label3: css`
     /* 후기 갯수 */
     font-family: 'Pretendard';
     font-size: ${calcRem(14)};
     font-weight: 400;
     line-height: normal;
   `,
-  Label3: css`
+  Label4: css`
     /* 스케줄러 숫자 텍스트 */
     font-family: 'Pretendard';
     font-size: ${calcRem(13)};
-    font-weight: 500;
+    font-weight: 600;
     line-height: 14px;
   `,
   Body1: css`
+    /* 정렬 본문 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(20)};
+    font-weight: 500;
+    line-height: normal;
+  `,
+  Body2: css`
     /* 스케줄러 이름 텍스트 */
     font-family: 'Pretendard';
     font-size: ${calcRem(16)};
     font-weight: 500;
     line-height: normal;
   `,
-  Body2: css`
+  Body3: css`
+    /* 팝업 부가설명 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(15)};
+    font-weight: 400;
+    line-height: normal;
+  `,
+  Body4: css`
     /* 스케줄러 성별,특징 / 담당쌤 텍스트 */
     font-family: 'Pretendard';
     font-size: ${calcRem(15)};
