@@ -8,7 +8,7 @@ interface InputSalonProps {
   onNext: (data: SalonFormData) => void;
 }
 
-const InputSalon: React.FC<InputSalonProps> = ({ onNext }) => {
+const InputSalon = ({ onNext }: InputSalonProps) => {
   const [salonFormState, setSalonFormState] = useState<SalonFormData>({
     name: '',
     address: '',

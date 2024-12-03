@@ -17,7 +17,7 @@ const certificateOptions = [
   '피어프리 인증',
 ];
 
-const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
+const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
   const [salonOwnerFormState, setSalonOwnerFormState] = useState<SalonOwnerFormData>({
     profile: '',
     name: '',

@@ -7,9 +7,9 @@ interface SalonOwnerConfirmProps {
   salonOwnerFormData: SalonOwnerFormData;
 }
 
-const SalonOwnerConfirm: React.FC<SalonOwnerConfirmProps> = ({
+const SalonOwnerConfirm = ({
   salonOwnerFormData,
-}) => {
+}: SalonOwnerConfirmProps) => {
   return (
     <>
       <Flex

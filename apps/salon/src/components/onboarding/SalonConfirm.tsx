@@ -8,7 +8,7 @@ interface SalonConfirmProps {
   onNext: () => void;
 }
 
-const SalonConfirm: React.FC<SalonConfirmProps> = ({ salonFormData, onNext }) => {
+const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
   return (
     <>
       <Flex

@@ -7,7 +7,7 @@ interface WelcomeProps {
   onNext: () => void;
 }
 
-const Welcome: React.FC<WelcomeProps> = ({ onNext }) => {
+const Welcome = ({ onNext }: WelcomeProps) => {
   const userName = '심숭숭'; // 네이버로부터 받은 미용사 이름
 
   return (

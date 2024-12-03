@@ -7,7 +7,7 @@ interface InstructionProps {
   onNext: () => void;
 }
 
-const Instruction: React.FC<InstructionProps> = ({ onNext }) => {
+const Instruction = ({ onNext }: InstructionProps) => {
   return (
     <Container
       direction="column"
