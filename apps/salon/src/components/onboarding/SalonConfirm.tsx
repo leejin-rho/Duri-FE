@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AlertStar, Button, Flex, MobileLayout, StatusBar, Text, theme } from '@duri-fe/ui';
+import { AlertStar, Button, Flex, Text, theme } from '@duri-fe/ui';
 import { SalonFormData } from '@salon/pages/Onboarding';
 
 interface SalonConfirmProps {
@@ -10,14 +10,12 @@ interface SalonConfirmProps {
 
 const SalonConfirm: React.FC<SalonConfirmProps> = ({ salonFormData, onNext }) => {
   return (
-    <MobileLayout>
+    <>
       <Flex
         direction='column'
         align='flex-start'
-        padding='0 20px 44px 20px'
       >
         <Flex direction='column' align='flex-start'  margin='75px 0 0 0'>
-          <StatusBar current={3} total={4} mode='onboarding'/>
           <Text typo='Heading2' margin='55px 0 0 0'>입력하신 정보를</Text>
           <Text typo='Heading2' margin='0 0 28px 0'>확인해주세요</Text>
           <Text typo='Label2' colorCode={theme.palette.Gray500} margin='0 0 27px 0'>등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!</Text>
@@ -63,7 +61,7 @@ const SalonConfirm: React.FC<SalonConfirmProps> = ({ salonFormData, onNext }) =>
           </Button>
         </Flex>
       </Flex>
-    </MobileLayout>
+    </>
   );
 };
 

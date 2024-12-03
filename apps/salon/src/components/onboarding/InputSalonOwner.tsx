@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { AlertStar, Dropdown, Flex, MobileLayout, StatusBar, Text, TextField, theme } from '@duri-fe/ui';
+import { AlertStar, Button, Dropdown, Flex, HeightFitFlex, Text, TextField, theme } from '@duri-fe/ui';
+import styled from '@emotion/styled';
 import { SalonOwnerFormData } from '@salon/pages/Onboarding';
 
 interface InputSalonOwnerProps {
@@ -27,6 +28,12 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
     license: '',
   });
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [isEmpty, setIsEmpty] = useState<boolean>(true);
+
+  useEffect(() => {
+    const isFilled = Object.values(salonOwnerFormState).every((value) => value !== '');
+    setIsEmpty(!isFilled);
+  }, [salonOwnerFormState])
 
   const handleChange = (field: keyof SalonOwnerFormData, value: string) => {
     setSalonOwnerFormState({ ...salonOwnerFormState, [field]: value });
@@ -51,23 +58,23 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
     setSalonOwnerFormState({ ...salonOwnerFormState, license: selectedLicense });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     onNext(salonOwnerFormState);
   };
 
   return (
-    <MobileLayout>
+    <>
       <Flex
         direction='column'
         align='flex-start'
-        padding='0 20px 44px 20px'
+        padding='48px 0'
       >
-        <Flex direction='column' align='flex-start'  margin='75px 0 0 0'>
-          <StatusBar current={2} total={4} mode="onboarding" />
-          <Text typo='Heading2' margin='55px 0 0 0'>원장님의</Text>
-          <Text typo='Heading2' margin='0 0 28px 0'>정보를 입력해주세요</Text>
-          <Text typo='Label2' colorCode={theme.palette.Gray500} margin='0 0 27px 0'>등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!</Text>
+        <Flex direction='column' align='flex-start' gap={24} padding='0 0 24px 0'>
+          <Flex direction='column' align='flex-start'>
+            <Text typo='Heading2'>원장님의</Text>
+            <Text typo='Heading2'>정보를 입력해주세요</Text>
+          </Flex>
+          <Text typo='Label2' colorCode={theme.palette.Gray500}>등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!</Text>
         </Flex>
 
         <form onSubmit={handleSubmit}>
@@ -164,30 +171,42 @@ const InputSalonOwner: React.FC<InputSalonOwnerProps> = ({ onNext }) => {
                 width={235}
               />
             </div>
-
-            {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
-            <Flex direction='column' width={335} gap={14}>
-                <Text
-                  style={{fontSize: '14px', fontWeight: '500'}}
-                  colorCode={theme.palette.Gray300}
-                >
-                  문제가 발생한다면
-                  <Text style={{fontSize: '14px', fontWeight: '600', textDecorationLine: 'underline'}}> 문의하기 </Text>
-                  버튼을 눌러주세요.
-                </Text>
-                <button
-                  type="submit"
-                  style={{width: '335px', height: '54px', borderRadius: '99px', backgroundColor: 'black', color: 'white', fontSize: '16px', fontWeight: '600'}}
-                >
-                  <Text>다음 단계</Text>
-                </button>
-            </Flex>
+            
           </Flex>
         </form>
+        {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
+        <Flex padding="24px 0 0 0" gap={4}>
+          <Text typo='Label2' colorCode={theme.palette.Gray300}>문제가 발생한다면</Text>
+          <UnderlinedText typo='Label2' colorCode={theme.palette.Gray300}>문의하기</UnderlinedText>
+          <Text typo='Label2' colorCode={theme.palette.Gray300}>버튼을 눌러주세요.</Text>
+        </Flex>
       </Flex>
-    </MobileLayout>
+
+      <ButtonWrapper padding='0 20px'>
+        {isEmpty ? (
+          <Button bg={theme.palette.Gray50} disabled>
+            다음 단계
+          </Button>
+        ) : (
+          <Button onClick={handleSubmit} bg={theme.palette.Black} fontColor={theme.palette.White}>
+            다음 단계
+          </Button>
+        )}
+
+      </ButtonWrapper>
+    </>
   );
 };
+
+const UnderlinedText = styled(Text)`
+  font-weight: 600;
+  text-decoration: underline;
+`
+
+const ButtonWrapper = styled(HeightFitFlex)`
+  position: absolute;
+  bottom: 40px;
+`;
 
 export default InputSalonOwner;
 

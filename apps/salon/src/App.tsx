@@ -5,9 +5,8 @@ import { globalStyle } from '@duri-fe/ui';
 import { Global } from '@emotion/react';
 
 import Home from '@pages/Home';
-
-import LoginPage from './pages/Login';
-import OnboardingPage from './pages/Onboarding';
+import LoginPage from '@pages/Login';
+import OnboardingPage from '@pages/Onboarding';
 
 function App() {
   return (
