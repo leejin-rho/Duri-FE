@@ -46,3 +46,9 @@ export const AbsoluteFlex = styled(Flex)`
   top: 0;
   left: 0;
 `;
+
+export const FixedFlex = styled(Flex)`
+  position: fixed;
+  top: 0;
+  left: 0;
+`;

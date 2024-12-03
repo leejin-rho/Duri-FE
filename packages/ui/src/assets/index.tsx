@@ -56,6 +56,7 @@ export { default as AlertStar } from './AlertStar';
 export { default as NaverLogo } from './NaverLogo';
 export { default as SpeechBallon } from './SpeechBallon';
 export { default as ListIcon } from './List';
+export { default as LocationShop } from './LocationShop';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -85,6 +86,7 @@ import Hold from './Hold';
 import Information from './Information';
 import List from './List';
 import Location from './Location';
+import LocationShop from './LocationShop';
 import Lock from './Lock';
 import Magnifier from './Magnifier';
 import Menu from './Menu';
@@ -138,6 +140,7 @@ export const icons = {
   MyLocation,
   Location,
   FilledLocation,
+  LocationShop,
   Notification,
   FilledNotification,
   Report,

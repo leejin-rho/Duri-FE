@@ -20,10 +20,10 @@ export const SalonTag = ({ content, bg, borderRadius, height }: TagProps) => {
     <WidthFitFlex
       backgroundColor={bg ?? theme.palette.Gray50}
       borderRadius={borderRadius ?? 2}
-      padding="10px"
+      padding="5.5px 4px"
       height={height ?? 20}
     >
-      <Text typo="Label3" colorCode={theme.palette.Gray500}>
+      <Text typo="Caption5" colorCode={theme.palette.Gray500}>
         {content}
       </Text>
     </WidthFitFlex>

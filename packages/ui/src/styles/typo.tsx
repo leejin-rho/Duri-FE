@@ -7,15 +7,15 @@ export const calcRem = (px: number) => `${px / 16}rem`;
  * @param Title3: 박스 안에 들어가는 타이틀
  *
  * @param Caption1: 타이틀 위/아래 부가설명 텍스트
- * @param Caption2: 박스 안에 들어가는 타이틀 밑 부가설명 텍스트
- * @param Caption3: 거리표시 텍스트
+ * @param Caption2: 거리표시 텍스트
+ * @param Caption3: 박스 안에 들어가는 타이틀 밑 부가설명 텍스트
  * @param Caption4: 주소 텍스트
  * @param Caption5: 미니 박스 내부 텍스트
  *
  * @param Label1: 별점
  * @param Label2: 지도 텍스트
  * @param Label3: 후기 갯수
- * @param Label4: 스케줄러 숫자 텍스트
+ * @param Label: 스케줄러 숫자 텍스트
  *
  * @param Body1: 정렬 본문 텍스트
  * @param Body2: 스케줄러 이름 텍스트
@@ -79,17 +79,19 @@ export const typo = {
     line-height: normal;
   `,
   Caption2: css`
-    /* 박스 안에 들어가는 타이틀 밑 부가설명 텍스트 */
-    font-family: 'Pretendard';
-    font-size: ${calcRem(13)};
-    font-weight: 400;
-    line-height: normal;
-  `,
-  Caption3: css`
     /* 거리표시 텍스트 */
+
     font-family: 'Pretendard';
     font-size: ${calcRem(13)};
     font-weight: 500;
+    line-height: normal;
+  `,
+  Caption3: css`
+    /* 박스 안에 들어가는 타이틀 밑 부가설명 텍스트 */
+
+    font-family: 'Pretendard';
+    font-size: ${calcRem(13)};
+    font-weight: 400;
     line-height: normal;
   `,
   Caption4: css`

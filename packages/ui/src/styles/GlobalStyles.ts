@@ -14,6 +14,12 @@ export const globalStyle = css`
     font-family: 'Pretendard';
     background-color: ${theme.palette.Normal50};
   }
+
+  .scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
   button {
     background: inherit;
     border: none;

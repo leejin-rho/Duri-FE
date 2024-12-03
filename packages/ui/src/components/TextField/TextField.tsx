@@ -26,6 +26,8 @@ interface TextFieldProps
   isError?: boolean;
   isEssential?: boolean;
   isNoBorder?: boolean;
+  background?: string;
+  shadow?: string;
 }
 
 /**
@@ -37,10 +39,12 @@ interface TextFieldProps
  * @param {boolean} isSubTextField: 하위 TextField 여부
  * @param {boolean} fontColor: TextField 내부 폰트 색상
  * @param {ReactNode} right: 우측 아이콘
- * @param {ReactNode} isRound: 둥근 인풋 여부
- * @param {ReactNode} isError: 에러일 경우
- * @param {ReactNode} isEssential: 필수 항목일 경우
- * @param {ReactNode} isNoBorder: 테두리가 없을 경우
+ * @param {boolean} isRound: 둥근 인풋 여부
+ * @param {boolean} isError: 에러일 경우
+ * @param {boolean} isEssential: 필수 항목일 경우
+ * @param {boolean} isNoBorder: 테두리가 없을 경우
+ * @param {string} background: 배경색
+ * @param {string} shadow: 그림자
  *
  */
 export const TextField = forwardRef<
@@ -62,6 +66,8 @@ export const TextField = forwardRef<
       isRound = false,
       isEssential = false,
       isNoBorder = false,
+      background = theme.palette.White,
+      shadow = 'none',
       ...props
     },
     ref,
@@ -116,6 +122,8 @@ export const TextField = forwardRef<
                 isError={isError}
                 isRound={isRound}
                 isNoBorder={isNoBorder}
+                background={background}
+                shadow={shadow}
               />
               {right && <StyledIcon className="icon">{right}</StyledIcon>}
             </InputContainer>
@@ -160,6 +168,8 @@ const StyledInput = styled.input<{
   isError?: boolean;
   isRound?: boolean;
   isNoBorder?: boolean;
+  background?: string;
+  shadow?: string;
 }>`
   width: inherit;
   height: ${({ height }) => height ?? 40}px;
@@ -167,7 +177,9 @@ const StyledInput = styled.input<{
 
   box-sizing: border-box;
 
-  background: ${theme.palette.White};
+  background: ${({ background }) => background ?? theme.palette.White};
+  box-shadow: ${({ shadow }) => shadow ?? 'none'};
+
   border-radius: ${({ isRound, isNoBorder }) =>
     isNoBorder ? '12px' : isRound ? '99px' : '8px'};
 

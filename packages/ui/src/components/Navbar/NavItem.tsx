@@ -45,7 +45,7 @@ const inactive = css`
 
 const textStyle = css`
   margin-top: 10px;
-  font-size: 0.7rem;
+  font-size: 12px;
 `;
 
 export default NavItem;

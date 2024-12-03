@@ -2,8 +2,10 @@ import salonDefault from '@assets/images/pngs/salonDefault.png';
 import {
   Button,
   Flex,
+  HardText,
+  HeightFitFlex,
   SalonTag,
-  Seperator,
+  Send,
   Star,
   Text,
   theme,
@@ -11,48 +13,78 @@ import {
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-export const ShopLine = () => {
+interface ShopLineProps {
+  title: string;
+  score: string;
+  reviewNum: number;
+  distance: number;
+  address: string;
+  phone: string;
+}
+
+export const ShopLine = ({
+  title,
+  score,
+  reviewNum,
+  distance,
+  address,
+  phone,
+}: ShopLineProps) => {
   return (
-    <Flex direction="column">
-      <Flex gap={20} padding="15px 26px">
-        <SalonImg src={salonDefault} />
-        <Flex direction="column" align="flex-start" gap={8}>
-          <Flex gap={17} justify="flex-start">
-            <Text typo="Body2">댕댕샵</Text>
-            <WidthFitFlex gap={7}>
-              <Star width={14} />
-              <Text typo="Label3">4.9 (120)</Text>
-            </WidthFitFlex>
-          </Flex>
+    <HeightFitFlex gap={20}>
+      <SalonImg src={salonDefault} />
+      <Flex direction="column" align="flex-start" gap={8}>
+        <Flex gap={17} justify="flex-start">
+          <Text typo="Body2">{title}</Text>
+          <WidthFitFlex gap={7}>
+            <Star width={14} />
+            <Text typo="Label3">
+              {score} ({reviewNum})
+            </Text>
+          </WidthFitFlex>
+        </Flex>
 
-          <TextLine typo="Body3" colorCode={theme.palette.Gray400}>
-            <MarkText>{'354m | '}</MarkText>
-            {'경기 성남시 분당구 안양판교로'}
-          </TextLine>
+        <TextLine typo="Caption3" colorCode={theme.palette.Gray400}>
+          <MarkText>{`${distance}m | `}</MarkText>
+          {address}
+        </TextLine>
 
-          <Flex gap={6} justify="flex-start">
-            <Button
-              width="53px"
-              height="22px"
-              padding="10px"
-              borderRadius="2px"
-              bg={theme.palette.White}
-              border={`0.8px solid ${theme.palette.Gray100}`}
-              disabled={true}
-            >
-              <Text typo="Body4">영업중</Text>
-            </Button>
-            <Text colorCode={theme.palette.Link}>{'031)123-1234'}</Text>
-          </Flex>
-          <Flex gap={8} justify="flex-start">
-            <SalonTag content="노견전문" />
-            <SalonTag content="소형견" />
-            <SalonTag content="노견전문" />
-          </Flex>
+        <Flex gap={6} justify="flex-start">
+          <Button
+            width="53px"
+            height="22px"
+            padding="6.5px 9.5px"
+            borderRadius="2px"
+            bg={theme.palette.White}
+            border={`0.8px solid ${theme.palette.Gray100}`}
+            disabled={true}
+          >
+            <HardText typo="Caption2" colorCode={theme.palette.Gray500}>
+              영업중
+            </HardText>
+          </Button>
+          <Text typo="Caption2" colorCode={theme.palette.Link}>
+            {phone}
+          </Text>
+        </Flex>
+        <Flex gap={8} justify="flex-start">
+          <SalonTag content="노견전문" />
+          <SalonTag content="소형견" />
+          <SalonTag content="노견전문" />
         </Flex>
       </Flex>
-      <Seperator />
-    </Flex>
+      <WidthFitFlex direction="column" justify="flex-end">
+        <Button
+          width="42px"
+          height="42px"
+          borderRadius="40px"
+          bg={theme.palette.Normal100}
+          padding="0"
+        >
+          <Send width={21} height={21} color={theme.palette.Normal800} />
+        </Button>
+      </WidthFitFlex>
+    </HeightFitFlex>
   );
 };
 

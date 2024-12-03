@@ -28,14 +28,14 @@ const Shop = () => {
 
   return (
     <MobileLayout>
-      <Flex direction="column">
+      <OuterWrapper direction="column">
         <SearchWrapper>
           <TextField
             placeholder="경기 성남시 분당구 안양판교로 1192"
             height={46}
-            width={336}
             right={<Magnifier width={24} height={24} />}
             isNoBorder={true}
+            shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
           />
         </SearchWrapper>
         {isMap ? (
@@ -52,7 +52,7 @@ const Shop = () => {
             height="36px"
             bg={theme.palette.White}
             padding="10px"
-            shadow={isMap ? 'none' : ' 0px 0px 4px 0px rgba(0, 0, 0, 0.25)'}
+            shadow={isMap ? 'none' : '0px 0px 4px 0px rgba(0, 0, 0, 0.25)'}
           >
             {isMap ? (
               <ListIcon width={18} color={theme.palette.Gray600} />
@@ -68,7 +68,7 @@ const Shop = () => {
             </HardText>
           </Button>
         </ListWrapper>
-      </Flex>
+      </OuterWrapper>
       <DuriNavbar />
     </MobileLayout>
   );
@@ -88,4 +88,8 @@ const ListWrapper = styled(Flex)`
   bottom: 104px;
   left: 17px;
   z-index: 99;
+`;
+
+const OuterWrapper = styled(Flex)`
+  overflow: hidden;
 `;
