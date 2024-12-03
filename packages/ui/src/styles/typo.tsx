@@ -45,6 +45,13 @@ export const typo = {
     line-height: 170%;
   `,
 
+  Body3: css`
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-size: ${calcRem(13)};
+    line-height: 140%;
+  `,
+
   Body4: css`
     font-family: 'Pretendard';
     font-weight: 400;
@@ -52,6 +59,7 @@ export const typo = {
     line-height: 140%;
   `,
 
+  // 타이포 시스템
   Title1: css`
     /* 페이지 타이틀 */
     font-family: 'Pretendard';
