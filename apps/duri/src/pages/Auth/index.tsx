@@ -15,7 +15,7 @@ const AuthPage = () => {
     if (error) {
       window.alert('로그인에 실패했습니다.');
     } else if (isSuccess && data) {
-      localStorage.setItem('token', data.token);
+      localStorage.setItem(`${data.client}`, data.token);
       if (data.newUser) {
         window.location.href = '/onboarding';
       } else {

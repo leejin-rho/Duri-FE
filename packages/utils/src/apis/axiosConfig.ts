@@ -42,3 +42,15 @@ export const authInstance = axios.create({
     'Access-Control-Allow-Origin': '*',
   },
 });
+
+duriInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem('authorization_user');
+  config.headers['authorization_user'] = token ? `Bearer ${token}` : '';
+  return config;
+})
+
+salonInstance.interceptors.request.use((config) => {
+  const token = localStorage.getItem('authorization_shop');
+  config.headers['authorization_shop'] = token ? `Bearer ${token}` : '';
+  return config;
+})
