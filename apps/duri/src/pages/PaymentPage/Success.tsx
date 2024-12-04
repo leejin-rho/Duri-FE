@@ -1,7 +1,16 @@
 import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { HeightFitFlex, MobileLayout } from '@duri-fe/ui';
+import {
+  DuriNavbar,
+  Flex,
+  HeightFitFlex,
+  MobileLayout,
+  Seperator,
+  Text,
+  theme,
+} from '@duri-fe/ui';
+import styled from '@emotion/styled';
 
 const SuccessPage = () => {
   const navigate = useNavigate();
@@ -43,20 +52,73 @@ const SuccessPage = () => {
 
   return (
     <MobileLayout>
-      <HeightFitFlex direction="column" margin="56px 0 0 0">
-        {/* <BoxSelect width={126} height={126} stroke={theme.palette.Normal700} fill={theme.palette.White} /> */}
+      <HeightFitFlex direction="column" padding="0 24px 46px 24px" gap={29} margin='90px 0 35px 0'>
+        {/* <RadioSelect width={126} height={126} stroke={theme.palette.Normal700} fill={theme.palette.White} /> */}
 
-        <div className="box_section">
-          <h2>결제 성공</h2>
-          <p>{`주문번호: ${searchParams.get('orderId')}`}</p>
-          <p>{`결제 금액: ${Number(
-            searchParams.get('amount'),
-          ).toLocaleString()}원`}</p>
-          <p>{`paymentKey: ${searchParams.get('paymentKey')}`}</p>
-        </div>
+        <Text typo="Body1" colorCode={theme.palette.Normal700}>
+          결제가 완료되었습니다!
+        </Text>
+        <p>{`주문번호: ${searchParams.get('orderId')}`}</p>
+        <p>{`결제 금액: ${Number(
+          searchParams.get('amount'),
+        ).toLocaleString()}원`}</p>
+        <p>{`paymentKey: ${searchParams.get('paymentKey')}`}</p>
+
+        <Seperator height="1px" />
+        <HeightFitFlex direction="column" padding="0 10px" gap={12}>
+          <HeightFitFlex justify="space-between">
+            <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+              가맹점
+            </Text>
+            <Text typo="Label2">댕댕샵</Text>
+          </HeightFitFlex>
+          <HeightFitFlex justify="space-between">
+            <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+              결제금액
+            </Text>
+            <Text typo="Body1" colorCode={theme.palette.Normal700}>
+            {Number(
+          searchParams.get('amount'),
+        ).toLocaleString()} 원
+            </Text>
+          </HeightFitFlex>
+        </HeightFitFlex>
+        <Seperator height="1px" />
+        <HeightFitFlex direction="column" padding="0 10px" gap={12}>
+          <HeightFitFlex justify="space-between">
+            <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+              결제일시
+            </Text>
+            <Text typo="Label2">2024-11-21 10:52:16</Text>
+          </HeightFitFlex>
+          <HeightFitFlex justify="space-between">
+            <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+              결제카드
+            </Text>
+            <Text typo="Label2">현대카드</Text>
+          </HeightFitFlex>
+        </HeightFitFlex>
+
+        <Flex margin="173px 0 25px 0">
+          <ul>
+            <Li>결제금액은 해당 금액만큼 충전 후 즉시 결제됩니다.</Li>
+            <Li>
+              포인트 적립 정책은 예고없이 변경될 수 있으며, 결제 취소 시적립된
+              포인트는 회수됩니다.
+            </Li>
+            <Li colorCode={theme.palette.Black}>결제 취소를 원할 경우 매장에 문의해주세요.</Li>
+          </ul>
+        </Flex>
       </HeightFitFlex>
+      <DuriNavbar />
     </MobileLayout>
   );
 };
 
 export default SuccessPage;
+
+const Li = styled.li<{ colorCode?: string }>`
+  list-style: outside;
+  color: ${({ colorCode }) => (colorCode ? colorCode : theme.palette.Gray400)};
+  font: ${theme.typo.Caption4};
+`;
