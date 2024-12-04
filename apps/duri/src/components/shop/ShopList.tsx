@@ -8,9 +8,9 @@ export const ShopList = () => {
     <Flex
       direction="column"
       backgroundColor={theme.palette.White}
-      padding="76px 0px 92px 0px"
+      padding="108px 0px 92px 0px"
     >
-      <Flex justify="space-between" height={65} padding="0 20px">
+      <Flex justify="space-between" height={65} padding="4px 20px 0 20px">
         <Button
           width="fit-content"
           height="32px"
@@ -47,7 +47,7 @@ export const ShopList = () => {
         direction="column"
         justify="flex-start"
         gap={28}
-        padding="17px 20px 0 20px"
+        padding="17px 20px 28px 20px"
       >
         <ShopLine
           title="댕댕샵"
@@ -103,7 +103,7 @@ export const ShopList = () => {
 };
 
 const ScrollFlex = styled(Flex)`
-  height: calc(100vh - 232.5px);
+  height: calc(100vh - 274.5px);
   overflow-y: auto;
 
   .scroll {

@@ -28,6 +28,7 @@ interface TextFieldProps
   isNoBorder?: boolean;
   background?: string;
   shadow?: string;
+  widthPer?: string;
 }
 
 /**
@@ -45,6 +46,7 @@ interface TextFieldProps
  * @param {boolean} isNoBorder: 테두리가 없을 경우
  * @param {string} background: 배경색
  * @param {string} shadow: 그림자
+ * @param {string} widthPer: 너비 퍼센티지
  *
  */
 export const TextField = forwardRef<
@@ -68,12 +70,16 @@ export const TextField = forwardRef<
       isNoBorder = false,
       background = theme.palette.White,
       shadow = 'none',
+      widthPer,
       ...props
     },
     ref,
   ) => {
     return (
-      <Container width={isSubTextField ? width + 37 : width}>
+      <Container
+        widthPer={widthPer}
+        width={isSubTextField ? width + 37 : width}
+      >
         <HeightFitFlex
           direction="row"
           gap={19}
@@ -136,8 +142,8 @@ export const TextField = forwardRef<
 
 TextField.displayName = 'TextField';
 
-const Container = styled(Flex)<{ width: number }>`
-  width: ${({ width }) => width}px;
+const Container = styled(Flex)<{ width: number; widthPer?: string }>`
+  width: ${({ width, widthPer }) => widthPer ?? width ?? `${width}px`};
 
   flex-direction: column;
   align-items: flex-start;

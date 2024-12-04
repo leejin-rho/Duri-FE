@@ -63,6 +63,7 @@ export { default as SelectBox } from './SelectBox';
 export { default as SelectBoxUn } from './SelectBoxUn';
 export { default as PortfolioIcon } from './PortfolioIcon';
 export { default as TimetableIcon } from './TimetableIcon';
+export { default as CurLocation } from './CurLocation';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -80,6 +81,7 @@ import Chat from './Chat';
 import Chatting from './Chatting';
 import Close from './Close';
 import CloseCircle from './CloseCircle';
+import CurLocation from './CurLocation';
 import DownArrow from './DownArrow';
 import FilledHeart from './FilledHeart';
 import FilledLocation from './FilledLocation';
@@ -133,17 +135,15 @@ export const icons = {
   Chatting,
   Close,
   CloseCircle,
+  UpArrow,
   DownArrow,
   Help,
   Information,
-  Magnifier,
-  Menu,
   SafetyHelp,
   SecurityWarning,
   Shield,
   UnionDown,
   UnionUp,
-  UpArrow,
   Lock,
   Unlock,
   Star,
@@ -153,12 +153,15 @@ export const icons = {
   Location,
   FilledLocation,
   LocationShop,
+  CurLocation,
   Notification,
   FilledNotification,
   Report,
   FilledReport,
+  Menu,
   List,
   Filter,
+  Magnifier,
   Send,
   Shopping,
   Hold,

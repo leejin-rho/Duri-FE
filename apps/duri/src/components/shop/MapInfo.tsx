@@ -35,10 +35,11 @@ export const MapInfo = forwardRef<HTMLDivElement>((_, ref) => {
     }
 
     // Marker 생성
+    const MARKER_URL = '/svg/CurLocation.svg';
     const marker = new naver.maps.Marker({
       position: new naver.maps.LatLng(coordinates.lat, coordinates.lng),
       map: mapInstance,
-      title: 'marker',
+      icon: MARKER_URL,
     });
 
     // Marker 클릭 시 지도 초기화

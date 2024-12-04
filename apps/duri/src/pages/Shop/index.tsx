@@ -3,7 +3,6 @@ import { useRef, useState } from 'react';
 import { MapInfo } from '@duri/components/shop';
 import { ShopList } from '@duri/components/shop/ShopList';
 import {
-  AbsoluteFlex,
   Button,
   DuriNavbar,
   Flex,
@@ -27,15 +26,22 @@ const Shop = () => {
   };
 
   return (
-    <MobileLayout>
+    <RelativeMobile>
       <OuterWrapper direction="column">
         <SearchWrapper>
           <TextField
             placeholder="경기 성남시 분당구 안양판교로 1192"
             height={46}
-            right={<Magnifier width={24} height={24} />}
+            right={
+              <Magnifier
+                width={24}
+                height={24}
+                color={theme.palette.Normal800}
+              />
+            }
             isNoBorder={true}
             shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+            widthPer="100%"
           />
         </SearchWrapper>
         {isMap ? (
@@ -70,16 +76,24 @@ const Shop = () => {
         </ListWrapper>
       </OuterWrapper>
       <DuriNavbar />
-    </MobileLayout>
+    </RelativeMobile>
   );
 };
 
 export default Shop;
 
-const SearchWrapper = styled(AbsoluteFlex)`
-  padding-top: 30px;
+const RelativeMobile = styled(MobileLayout)`
+  align-items: center;
+  position: relative;
+`;
+
+const SearchWrapper = styled(Flex)`
+  position: absolute;
+  max-width: 480px;
+  top: 62px;
   z-index: 99;
   height: fit-content;
+  padding: 0 20px;
 `;
 
 const ListWrapper = styled(Flex)`
