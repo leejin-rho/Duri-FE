@@ -8,7 +8,14 @@ interface NavItemProps {
   isActive: boolean;
   text: string;
   onClick: () => void;
-  iconType: 'home' | 'shop' | 'quotation' | 'diary' | 'my';
+  iconType:
+    | 'home'
+    | 'shop'
+    | 'quotation'
+    | 'diary'
+    | 'my'
+    | 'portfolio'
+    | 'timetable';
   children: ReactNode;
 }
 

@@ -57,6 +57,14 @@ export { default as NaverLogo } from './NaverLogo';
 export { default as SpeechBallon } from './SpeechBallon';
 export { default as ListIcon } from './List';
 export { default as LocationShop } from './LocationShop';
+export { default as RadioSelect } from './RadioSelect';
+export { default as RadioUnselect } from './RadioUnselect';
+export { default as SelectBox } from './SelectBox';
+export { default as SelectBoxUn } from './SelectBoxUn';
+export { default as Favicon } from './Favicon';
+export { default as Logo } from './Logo';
+export { default as PortfolioIcon } from './PortfolioIcon';
+export { default as TimetableIcon } from './TimetableIcon';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -92,13 +100,19 @@ import Magnifier from './Magnifier';
 import Menu from './Menu';
 import MyLocation from './MyLocation';
 import Notification from './Notification';
+import PortfolioIcon from './PortfolioIcon';
+import RadioSelect from './RadioSelect';
+import RadioUnselect from './RadioUnselect';
 import Report from './Report';
 import SafetyHelp from './SafetyHelp';
 import SecurityWarning from './SecurityWarning';
+import SelectBox from './SelectBox';
+import SelectBoxUn from './SelectBoxUn';
 import Send from './Send';
 import Shield from './Shield';
 import Shopping from './Shopping';
 import Star from './Star';
+import TimetableIcon from './TimetableIcon';
 import UnionDown from './UnionDown';
 import UnionUp from './UnionUp';
 import Unlock from './Unlock';
@@ -150,6 +164,12 @@ export const icons = {
   Send,
   Shopping,
   Hold,
+  RadioSelect,
+  RadioUnselect,
+  SelectBox,
+  SelectBoxUn,
+  PortfolioIcon,
+  TimetableIcon,
 };
 
 export default icons;
