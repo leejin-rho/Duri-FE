@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 
-import { NaverLoginSDKRequest } from "@duri-fe/utils";
-
-// import { useQuery } from "@tanstack/react-query";
+import { duriNaverLogin, NaverLoginSDKRequest } from "@duri-fe/utils";
+import { useQuery } from "@tanstack/react-query";
 
 export const useOpenNaverLogin = ({ clientId, callbackUrl, onSuccess, onFailure }: NaverLoginSDKRequest) => {
   useEffect(() => {
@@ -42,23 +41,13 @@ export const useOpenNaverLogin = ({ clientId, callbackUrl, onSuccess, onFailure 
 };
 
 /** 고객 네이버 소셜 로그인 hook */
-// export const useDuriNaverLogin = () => {
-//   const { data, error, isSuccess, refetch: triggerLogin } = useQuery({
-//     queryKey: ['duriNaverLogin'],
-//     queryFn: () => duriNaverLogin(),
-//     enabled: true,
-//     staleTime: Infinity,
-//   })
+export const useDuriNaverLogin = (providerId: string) => {
+  const { data, error, isSuccess } = useQuery({
+    queryKey: ['duriNaverLogin'],
+    queryFn: () => duriNaverLogin(providerId),
+    enabled: true,
+    staleTime: Infinity,
+  })
 
-//   if (error) {
-//     window.alert('로그인에 실패했습니다.');
-//   }
-
-//   if (isSuccess) {
-//     console.log(data);
-//     // localStorage.setItem('token', data.token);
-//     // window.location.href = '/';
-//   }
-
-//   return { data, error, triggerLogin };
-// };
+  return { data, error, isSuccess };
+};

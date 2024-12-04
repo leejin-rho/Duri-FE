@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import AuthPage from '@duri/pages/Auth/Naver';
+import AuthPage from '@duri/pages/Auth';
 import Onboarding from '@duri/pages/Onboarding';
 import { globalStyle } from '@duri-fe/ui';
 import { Global } from '@emotion/react';
 
-import KakaoAuthPage from '@pages/Auth/Kakao';
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import StartPage from '@pages/Onboarding/StartPage';
@@ -36,8 +35,7 @@ function App() {
         <Route path="/" element={<Home />} />
         
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/login/oauth2/code/naver-user" element={<AuthPage />} />
-        <Route path="/auth/callback" element={<KakaoAuthPage />} />
+        <Route path="/auth" element={<AuthPage />} />
 
         <Route path="/onboarding" element={<StartPage />} />
         <Route path="/onboarding/detail" element={<Onboarding />} />
