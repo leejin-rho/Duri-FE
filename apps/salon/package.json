@@ -36,5 +36,6 @@
     "eslint": "8.57.0",
     "typescript": "5.5.4",
     "vite": "^5.1.4"
-  }
+  },
+  "proxy": "https://nid.naver.com/oauth2.0/authorize"
 }

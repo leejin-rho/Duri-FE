@@ -5,6 +5,7 @@ import Onboarding from '@duri/pages/Onboarding';
 import { globalStyle } from '@duri-fe/ui';
 import { Global } from '@emotion/react';
 
+import AuthPage from '@pages/Auth';
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import StartPage from '@pages/Onboarding/StartPage';
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/login/oauth2/code/naver-user" element={<AuthPage />} />
         <Route path="/onboarding" element={<StartPage />} />
         <Route path="/onboarding/detail" element={<Onboarding />} />
         <Route path="/payment/:quotationId" element={<PaymentPage />} />
