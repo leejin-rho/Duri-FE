@@ -1,48 +1,51 @@
-import { QuotationProps } from '@duri/assets/types/quotation';
+import { Flex, Text, theme } from '@duri-fe/ui';
 
-interface QuotationInfo {
-  quotationInfo: QuotationProps;
-}
-
-const PaymentInfo = ({ quotationInfo }: QuotationInfo) => {
-  //고객 정보 - 전역변수
-  const user = { name: '김동글', phone: '010-1234-5678' };
+const PaymentInfo = ({
+  totalGroomingPrice,
+  vat,
+}: {
+  totalGroomingPrice: number;
+  vat: number;
+}) => {
+  console.log(totalGroomingPrice, vat);
+  const totalPrice = totalGroomingPrice + vat;
 
   return (
-    <>
-      <>
-        고객 정보
-        {user.name}님{user.phone}
-      </>
-      <>
-        매장 정보
-        {quotationInfo.salonImage}
-        {quotationInfo.salonName}
-        {quotationInfo.salonAddress}
-        미용사 정보
-        {quotationInfo.designerName} 디자이너 경력{quotationInfo.designerCareer}
-        /{quotationInfo.designerGender}/{quotationInfo.designerAge}세
-      </>
-      <>
-        시술 정보
-        {quotationInfo.groomingList.map((grooming) => {
-          return (
-            <>
-              {grooming.menu} {grooming.price}
-            </>
-          );
-        })}
-        총 금액 {quotationInfo.groomingTotalPrice} 원
-      </>
-      <>
-        쿠폰 정보
-        <>쿠폰 컴포넌트 만들어야 함 근데 완전 후순위</>
-      </>
-      <>
-        결제 정보
-        {quotationInfo.groomingTotalPrice}
-      </>
-    </>
+    <Flex
+      direction="column"
+      align="flex-start"
+      padding="29px 20px 150px 20px"
+      gap={24}
+    >
+      <Text typo="Title2">결제금액</Text>
+      <Flex direction="column" gap={15}>
+        <Flex justify="space-between">
+          <Text typo="Body2">주문금액</Text>
+          <Text typo="Body2">
+            {totalPrice
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+            원
+          </Text>
+        </Flex>
+        <Flex justify="space-between" padding="0 0 0 9px">
+          <Text typo="Label3" colorCode={theme.palette.Gray300}>
+            ㄴ 상품금액
+          </Text>
+          <Text typo="Label3" colorCode={theme.palette.Gray300}>
+            {totalGroomingPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
+          </Text>
+        </Flex>
+        <Flex justify="space-between" padding="0 0 0 9px">
+          <Text typo="Label3" colorCode={theme.palette.Gray300}>
+            ㄴ VAT
+          </Text>
+          <Text typo="Label3" colorCode={theme.palette.Gray300}>
+            {vat.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
+          </Text>
+        </Flex>
+      </Flex>
+    </Flex>
   );
 };
 
