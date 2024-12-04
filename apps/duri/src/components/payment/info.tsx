@@ -9,7 +9,6 @@ const PaymentInfo = ({
   totalGroomingPrice: number;
   vat: number;
 }) => {
-  console.log(totalGroomingPrice, vat);
   const totalPrice = totalGroomingPrice + vat;
 
   return (
