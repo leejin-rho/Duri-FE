@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import React from 'react';
 
-import { QuotationProps } from '@duri/assets/types/quotation';
 import { Button, Flex, Seperator, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 import {
@@ -8,7 +8,10 @@ import {
   TossPaymentsWidgets,
 } from '@tosspayments/tosspayments-sdk';
 
-import PaymentInfo from './info';
+import { QuotationProps } from '../../assets/types/quotation';
+
+import PaymentInfo from './Info';
+
 
 const clientKey = import.meta.env.VITE_CLIENT_KEY;
 const customerKey = crypto.randomUUID(); //user Idx값으로 대체하기!
@@ -117,15 +120,18 @@ const PaymentWidget = ({ quotationInfo }: QuotationInfo) => {
       </Flex>
       <Seperator height="12px" />
       {/* 결제 정보 컴포넌트 - 쿠폰 개발된다면 쿠폰 정보도 같이 넘겨야 함 */}
-      <PaymentInfo totalGroomingPrice={quotationInfo.groomingTotalPrice} vat={quotationInfo.groomingTotalPrice * 0.1} />
+      <PaymentInfo
+        totalGroomingPrice={quotationInfo.groomingTotalPrice}
+        vat={quotationInfo.groomingTotalPrice * 0.1}
+      />
       {/* 결제하기 버튼 */}
       <BottomButton
         bg={theme.palette.Black}
         fontColor={theme.palette.White}
-        typo='Body2'
+        typo="Body2"
         disabled={!ready}
         borderRadius="0"
-        height='53px'
+        height="53px"
         onClick={async () => {
           try {
             // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
@@ -158,7 +164,7 @@ export default PaymentWidget;
 
 const Container = styled(Flex)`
   position: relative;
-`
+`;
 
 const BottomButton = styled(Button)`
   position: sticky;

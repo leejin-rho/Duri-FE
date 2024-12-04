@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { QuotationProps } from '@duri/assets/types/quotation';
-import PaymentWidget from '@duri/components/payment/widget';
+import PaymentWidget from '@duri/components/payment/Widget';
 import { DuriNavbar, Flex, MobileLayout } from '@duri-fe/ui';
 import { getQuotationInfo } from '@duri-fe/utils';
 

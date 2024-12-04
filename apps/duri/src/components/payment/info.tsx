@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Flex, Text, theme } from '@duri-fe/ui';
 
 const PaymentInfo = ({
@@ -22,10 +24,7 @@ const PaymentInfo = ({
         <Flex justify="space-between">
           <Text typo="Body2">주문금액</Text>
           <Text typo="Body2">
-            {totalPrice
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-            원
+            {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
           </Text>
         </Flex>
         <Flex justify="space-between" padding="0 0 0 9px">
@@ -33,7 +32,10 @@ const PaymentInfo = ({
             ㄴ 상품금액
           </Text>
           <Text typo="Label3" colorCode={theme.palette.Gray300}>
-            {totalGroomingPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
+            {totalGroomingPrice
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+            원
           </Text>
         </Flex>
         <Flex justify="space-between" padding="0 0 0 9px">

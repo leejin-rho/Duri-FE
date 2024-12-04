@@ -58,11 +58,11 @@ const SuccessPage = () => {
         <Text typo="Body1" colorCode={theme.palette.Normal700}>
           결제가 완료되었습니다!
         </Text>
-        <p>{`주문번호: ${searchParams.get('orderId')}`}</p>
+        {/* <p>{`주문번호: ${searchParams.get('orderId')}`}</p>
         <p>{`결제 금액: ${Number(
           searchParams.get('amount'),
         ).toLocaleString()}원`}</p>
-        <p>{`paymentKey: ${searchParams.get('paymentKey')}`}</p>
+        <p>{`paymentKey: ${searchParams.get('paymentKey')}`}</p> */}
 
         <Seperator height="1px" />
         <HeightFitFlex direction="column" padding="0 10px" gap={12}>
