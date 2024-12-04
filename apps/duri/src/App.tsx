@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import AuthPage from '@duri/pages/Auth/Naver';
 import Onboarding from '@duri/pages/Onboarding';
 import { globalStyle } from '@duri-fe/ui';
-import { useKakaoSDK } from '@duri-fe/utils';
 import { Global } from '@emotion/react';
 
 import KakaoAuthPage from '@pages/Auth/Kakao';
@@ -17,7 +16,18 @@ import SuccessPage from '@pages/PaymentPage/Success';
 import Shop from '@pages/Shop';
 
 function App() {
-  useKakaoSDK();
+  const kakaoSDKKey = import.meta.env.VITE_KAKAO_SDK_KEY || '';
+
+  /** 카카오 SDK 초기화 */
+  const kakaoInit = useCallback(() => {
+    if (window.Kakao && !window.Kakao.isInitialized()) {
+      window.Kakao.init(kakaoSDKKey);
+    }
+  }, [kakaoSDKKey]);
+
+  useEffect(() => {
+    kakaoInit();
+  }, [kakaoInit]);
   
   return (
     <BrowserRouter>
