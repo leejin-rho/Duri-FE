@@ -52,7 +52,8 @@ const SuccessPage = () => {
 
   return (
     <MobileLayout>
-      <HeightFitFlex direction="column" padding="0 24px 46px 24px" gap={29} margin='90px 0 35px 0'>
+      <Container direction='column'>
+      <Flex direction="column" padding="0 24px 46px 24px" gap={29} margin='90px 0 35px 0'>
         {/* <RadioSelect width={126} height={126} stroke={theme.palette.Normal700} fill={theme.palette.White} /> */}
 
         <Text typo="Body1" colorCode={theme.palette.Normal700}>
@@ -65,7 +66,7 @@ const SuccessPage = () => {
         <p>{`paymentKey: ${searchParams.get('paymentKey')}`}</p> */}
 
         <Seperator height="1px" />
-        <HeightFitFlex direction="column" padding="0 10px" gap={12}>
+        <HeightFitFlex direction="column" padding="0 10px" gap={12} justify='flex-start'>
           <HeightFitFlex justify="space-between">
             <Text typo="Caption1" colorCode={theme.palette.Gray300}>
               가맹점
@@ -84,7 +85,7 @@ const SuccessPage = () => {
           </HeightFitFlex>
         </HeightFitFlex>
         <Seperator height="1px" />
-        <HeightFitFlex direction="column" padding="0 10px" gap={12}>
+        <Flex direction="column" padding="0 10px" gap={12} justify='flex-start'>
           <HeightFitFlex justify="space-between">
             <Text typo="Caption1" colorCode={theme.palette.Gray300}>
               결제일시
@@ -97,9 +98,10 @@ const SuccessPage = () => {
             </Text>
             <Text typo="Label2">현대카드</Text>
           </HeightFitFlex>
-        </HeightFitFlex>
+        </Flex>
+        </Flex>
 
-        <Flex margin="173px 0 25px 0">
+        <BottomWrapper padding='0 44px' widthPer={100}>
           <ul>
             <Li>결제금액은 해당 금액만큼 충전 후 즉시 결제됩니다.</Li>
             <Li>
@@ -108,8 +110,8 @@ const SuccessPage = () => {
             </Li>
             <Li colorCode={theme.palette.Black}>결제 취소를 원할 경우 매장에 문의해주세요.</Li>
           </ul>
-        </Flex>
-      </HeightFitFlex>
+        </BottomWrapper>
+      </Container>
       <DuriNavbar />
     </MobileLayout>
   );
@@ -122,3 +124,13 @@ const Li = styled.li<{ colorCode?: string }>`
   color: ${({ colorCode }) => (colorCode ? colorCode : theme.palette.Gray400)};
   font: ${theme.typo.Caption4};
 `;
+
+const Container = styled(Flex)`
+  position: relative;
+  height: 100vh;
+`
+
+const BottomWrapper = styled(HeightFitFlex)`
+  position: absolute;
+  bottom: calc(92px + 25px);
+`
