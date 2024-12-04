@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { QuotationProps } from '@duri/assets/types/quotation';
-import PaymentInfo from '@duri/components/payment/info';
-import PaymentWidget from '@duri/components/payment/widget';
+import PaymentWidget from '@duri/components/payment/Widget';
+import { DuriNavbar, Flex, MobileLayout } from '@duri-fe/ui';
 import { getQuotationInfo } from '@duri-fe/utils';
 
 const PaymentPage = () => {
@@ -32,18 +32,17 @@ const PaymentPage = () => {
   }, []);
 
   return (
-    <>
+    <MobileLayout>
       {quotationInfo ? (
-        <>
-          {/* 결제 정보 컴포넌트 - 쿠폰 개발된다면 쿠폰 정보도 같이 넘겨야 함 */}
-          <PaymentInfo quotationInfo={quotationInfo} />
+        <Flex direction='column'>
           {/* 결제 방법 - 쿠폰 개발된다면 쿠폰 정보도 같이 넘겨야 함 */}
           <PaymentWidget quotationInfo={quotationInfo} />
-        </>
+        </Flex>
       ) : (
         <>돌아가기</>
       )}
-    </>
+      <DuriNavbar />
+    </MobileLayout>
   );
 };
 
