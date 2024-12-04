@@ -1,8 +1,8 @@
 import { RequestProps, TimeProps } from '@duri/assets/types/request';
 import {
   Button,
+  Flex,
   theme,
-  WidthFitFlex,
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
@@ -22,13 +22,8 @@ const TimeTable = ({
     onSelect(key, !isSelected); // 상태 반전하여 전달
   };
   return (
-      <WidthFitFlex align="center">
-        <TimeWrapper
-          justify="center"
-          gap={8}
-          //   width="315px"
-          margin="16px 0 0 0"
-        >
+      <Flex align="center">
+        <TimeWrapper>
           {timeList?.map((time, index) => {
             const key = `time${9 + index}` as keyof TimeProps;
             const isSelected = selectedTimeList[key];
@@ -56,13 +51,19 @@ const TimeTable = ({
             );
           })}
         </TimeWrapper>
-      </WidthFitFlex>
+      </Flex>
   );
 };
 
 export default TimeTable;
 
-const TimeWrapper = styled(WidthFitFlex)`
-  flex-wrap: wrap;
+const TimeWrapper = styled.div`
+  display: grid;
+  gap: 8px;
   width: fit-content;
+  margin: 12px 0 0 0;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  justify-items: center;
+  align-items: center;
 `;
