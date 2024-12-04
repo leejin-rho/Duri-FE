@@ -1,5 +1,5 @@
 import * as React from 'react';
-const SvgRadioUnselect = (props) => (
+const SvgRadioUnselect = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
