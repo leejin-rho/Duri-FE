@@ -76,10 +76,7 @@ export const TextField = forwardRef<
     ref,
   ) => {
     return (
-      <Container
-        widthPer={widthPer}
-        width={isSubTextField ? width + 37 : width}
-      >
+      <Container per={widthPer} width={isSubTextField ? width + 37 : width}>
         <HeightFitFlex
           direction="row"
           gap={19}
@@ -142,8 +139,11 @@ export const TextField = forwardRef<
 
 TextField.displayName = 'TextField';
 
-const Container = styled(Flex)<{ width: number; widthPer?: string }>`
-  width: ${({ width, widthPer }) => widthPer ?? width ?? `${width}px`};
+const Container = styled(Flex)<{
+  per?: string;
+  width: number;
+}>`
+  width: ${({ width, widthPer }) => (widthPer ? widthPer : `${width}px`)};
 
   flex-direction: column;
   align-items: flex-start;
