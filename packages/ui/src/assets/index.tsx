@@ -61,8 +61,6 @@ export { default as RadioSelect } from './RadioSelect';
 export { default as RadioUnselect } from './RadioUnselect';
 export { default as SelectBox } from './SelectBox';
 export { default as SelectBoxUn } from './SelectBoxUn';
-export { default as Favicon } from './Favicon';
-export { default as Logo } from './Logo';
 export { default as PortfolioIcon } from './PortfolioIcon';
 export { default as TimetableIcon } from './TimetableIcon';
 
