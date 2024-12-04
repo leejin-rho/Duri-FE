@@ -132,5 +132,5 @@ const Container = styled(Flex)`
 
 const BottomWrapper = styled(HeightFitFlex)`
   position: absolute;
-  bottom: calc(92px + 25px);
+  bottom: 117px;
 `
