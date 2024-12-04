@@ -1,10 +1,10 @@
 import { Flex, MobileLayout, NaverLogo, SpeechBallonContainer, Text, theme } from "@duri-fe/ui";
-import { duriNaverLoginRedirect } from "@duri-fe/utils";
+import { duriKakaoLogin } from "@duri-fe/utils";
 import styled from "@emotion/styled";
 
 const LoginPage = () => {
   const handleNaverLogin = () => {
-    duriNaverLoginRedirect();
+    duriKakaoLogin();
   }
 
   return (
