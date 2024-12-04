@@ -1,18 +1,18 @@
-import { useSearchParams } from "react-router-dom";
+// import { useSearchParams } from "react-router-dom";
 
-import { BASE_URL_CALLBACK } from "@duri-fe/utils";
+// import { BASE_URL_CALLBACK, useDuriNaverLogin } from "@duri-fe/utils";
 
 const AuthPage = () => {
-  const [query, ] = useSearchParams();
-  const code = query.get('code') || '';
-  const state = query.get('state') || '';
+  // const [query, ] = useSearchParams();
+  // const code = query.get('code') || '';
+  // const state = query.get('state') || '';
 
   // const { data, error } = useDuriNaverLogin({
   //   code: code, 
   //   state: state
   // });
   
-  window.location.href = BASE_URL_CALLBACK + '/naver-user?code=' + code + '&state=' + state;
+  // window.location.href = BASE_URL_CALLBACK + '/naver-user?code=' + code + '&state=' + state;
   
   // useEffect(() => {
   //   duriNaverLogin({ code, state });
