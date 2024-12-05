@@ -176,7 +176,6 @@ const MultiStepForm = () => {
         {stepList[step] === '성격' &&
           (personalityList.length > 0 ? (
             <Button
-              width="335px"
               height="54px"
               bg={theme.palette.Black}
               fontColor={theme.palette.White}
@@ -186,7 +185,6 @@ const MultiStepForm = () => {
             </Button>
           ) : (
             <Button
-              width="335px"
               height="54px"
               bg={theme.palette.Gray50}
               fontColor={theme.palette.White}
@@ -198,7 +196,6 @@ const MultiStepForm = () => {
         {stepList[step] === '질환' &&
           (diseaseList.length > 0 ? (
             <Button
-              width="335px"
               height="54px"
               bg={theme.palette.Black}
               fontColor={theme.palette.White}
@@ -208,7 +205,6 @@ const MultiStepForm = () => {
             </Button>
           ) : (
             <Button
-              width="335px"
               height="54px"
               bg={theme.palette.Gray50}
               fontColor={theme.palette.White}
