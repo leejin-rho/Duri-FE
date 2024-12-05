@@ -17,7 +17,7 @@ interface ButtonProps {
   shadow?: string;
 }
 
-export const Button = styled.button<ButtonProps>`
+export const Button = styled.div<ButtonProps>`
   display: flex;
   padding: ${({ padding }) => padding ?? '16px 20px'};
   justify-content: center;

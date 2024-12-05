@@ -1,23 +1,14 @@
+import { salonNaverLogin } from "@duri-fe/utils";
 import { useQuery } from "@tanstack/react-query";
 
-import { salonNaverLogin } from "../auth";
-
 /** 고객 네이버 소셜 로그인 hook */
-export const useSalonNaverLogin = () => {
-  const { data, isError, error, refetch: triggerLogin } = useQuery({
-    queryKey: ['duriNaverLogin'],
-    queryFn: salonNaverLogin,
-    enabled: false,
+export const useSalonNaverLogin = (providerId: string) => {
+  const { data, error, isSuccess } = useQuery({
+    queryKey: ['salonNaverLogin'],
+    queryFn: () => salonNaverLogin(providerId),
+    enabled: true,
     staleTime: Infinity,
   })
 
-  if (isError) {
-    window.alert(error);
-  }
-
-  if (data) {
-    console.log(data);
-  }
-
-  return { triggerLogin };
+  return { data, error, isSuccess };
 };

@@ -1,4 +1,4 @@
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Flex, MobileLayout } from '@duri-fe/ui';
@@ -9,7 +9,6 @@ import Welcome from '@components/onboarding/Welcome';
 
 const StartPage = () => {
   const navigate = useNavigate();
-
   const [showSplash, setShowSplash] = useState<boolean>(true);
 
   useEffect(() => {
@@ -19,12 +18,12 @@ const StartPage = () => {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const handleClickButton = () => navigate('/onboarding/detail');
   
+  const handleClickButton = () => navigate('/onboarding/detail');
+
   return (
     <MobileLayout>
-      <Welcome userName='김찬별' show={showSplash} />
+      <Welcome userName='심숭숭' show={showSplash} />
       <PageContainer padding="72px 20px" direction="column" justify="start">
         <Instruction onNext={handleClickButton} show={!showSplash} />
       </PageContainer>

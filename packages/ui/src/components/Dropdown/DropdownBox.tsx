@@ -14,7 +14,7 @@ export const DropdownBox = styled.div<{
   gap: 5px;
   align-items: center;
   background: ${palette.White};
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
