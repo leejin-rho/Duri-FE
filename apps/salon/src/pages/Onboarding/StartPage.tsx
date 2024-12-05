@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { Flex, MobileLayout } from '@duri-fe/ui';
 import styled from '@emotion/styled';
-import Instruction from '@salon/components/onboarding/Instructions';
-import Welcome from '@salon/components/onboarding/Welcome';
+
+import Instruction from '@components/onboarding/Instructions';
+import Welcome from '@components/onboarding/Welcome';
 
 const StartPage = () => {
   const navigate = useNavigate();
