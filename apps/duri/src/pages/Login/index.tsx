@@ -1,7 +1,12 @@
 import { Flex, MobileLayout, NaverLogo, SpeechBallonContainer, Text, theme } from "@duri-fe/ui";
+import { duriNaverLoginRedirect } from "@duri-fe/utils";
 import styled from "@emotion/styled";
 
 const LoginPage = () => {
+  const handleNaverLogin = () => {
+    duriNaverLoginRedirect();
+  }
+
   return (
     <MobileLayout>
       <Container direction="column">
@@ -19,7 +24,7 @@ const LoginPage = () => {
             label="3초만에 시작하기 🚀"
             textColor={theme.palette.Gray400}
           />
-          <LoginButton>
+          <LoginButton onClick={handleNaverLogin}>
             <NaverLogo />
           </LoginButton>
         </Flex>

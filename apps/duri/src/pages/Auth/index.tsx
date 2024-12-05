@@ -1,13 +1,28 @@
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+
 import { Flex, MobileLayout, NaverLogo, SpeechBallonContainer, Text, theme } from "@duri-fe/ui";
-import { useSalonNaverLogin } from "@duri-fe/utils";
+import { useDuriNaverLogin } from "@duri-fe/utils";
 import styled from "@emotion/styled";
 
-const LoginPage = () => {
-  const { triggerLogin } = useSalonNaverLogin();
+const AuthPage = () => {
+  const [query, ] = useSearchParams();
+  const providerId = query.get('providerId') || '';
 
-  const handleNaverLogin = async () => {
-    triggerLogin();
-  }
+  const { data, error, isSuccess } = useDuriNaverLogin(providerId);
+
+  useEffect(() => {
+    if (error) {
+      window.alert('로그인에 실패했습니다.');
+    } else if (isSuccess && data) {
+      localStorage.setItem(`${data.client}`, data.token);
+      if (data.newUser) {
+        window.location.href = '/onboarding';
+      } else {
+        window.location.href = '/';
+      }
+    }
+  }, [data, error]);
 
   return (
     <MobileLayout>
@@ -26,7 +41,7 @@ const LoginPage = () => {
             label="3초만에 시작하기 🚀"
             textColor={theme.palette.Gray400}
           />
-          <LoginButton onClick={handleNaverLogin}>
+          <LoginButton>
             <NaverLogo />
           </LoginButton>
         </Flex>
@@ -43,19 +58,20 @@ const LoginPage = () => {
 const Container = styled(Flex)`
   flex-grow: 1;
   position: relative;
-`
+`;
 
-const Logo = styled.img``
+const Logo = styled.img``;
 
 const LoginButton = styled.button`
   width: 60px;
   height: 60px;
   margin-top: 20px;
-`
+`;
+
 const Contact = styled(Flex)`
   position: absolute;
   bottom: 50px;
   height: fit-content;
-`
+`;
 
-export default LoginPage;
+export default AuthPage;
