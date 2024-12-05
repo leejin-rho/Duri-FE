@@ -64,6 +64,7 @@ export { default as SelectBoxUn } from './SelectBoxUn';
 export { default as PortfolioIcon } from './PortfolioIcon';
 export { default as TimetableIcon } from './TimetableIcon';
 export { default as CurLocation } from './CurLocation';
+export { default as Pencil } from './Pencil';
 
 import Add from './Add';
 import AddNew from './AddNew';

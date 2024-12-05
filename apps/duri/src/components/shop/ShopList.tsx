@@ -95,7 +95,7 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
             </Button>
           </WidthFitFlex>
         </Flex>
-        <Seperator />
+        <Seperator height="5px" />
         <ScrollFlex
           direction="column"
           justify="flex-start"
