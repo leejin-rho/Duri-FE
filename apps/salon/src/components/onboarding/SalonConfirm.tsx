@@ -47,7 +47,7 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
               매장 위치
               <AlertStar isUpper />
             </Text>
-            <Flex widthPer={70}>
+            <Flex widthPer={70} justify='flex-start'>
               <Text typo="Body4">
                 {salonFormData.addressDetail}[{salonFormData.address}]
               </Text>

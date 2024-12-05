@@ -53,7 +53,6 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
       (value) => value !== '',
     );
     setIsEmpty(!isFilled);
-    console.log(salonOwnerFormState);
   }, [salonOwnerFormState]);
 
   /** 변경 함수 */

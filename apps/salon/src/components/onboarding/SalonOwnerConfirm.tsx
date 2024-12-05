@@ -11,9 +11,10 @@ import {
 
 interface SalonOwnerConfirmProps {
   salonOwnerFormData: SalonOwnerFormData;
+  onNext: () => void;
 }
 
-const SalonOwnerConfirm = ({ salonOwnerFormData }: SalonOwnerConfirmProps) => {
+const SalonOwnerConfirm = ({ salonOwnerFormData, onNext }: SalonOwnerConfirmProps) => {
   return (
     <>
       <Flex direction="column" align="flex-start" padding="48px 0 96px 0">
@@ -96,7 +97,7 @@ const SalonOwnerConfirm = ({ salonOwnerFormData }: SalonOwnerConfirmProps) => {
       </ContactContainer>
 
       <ButtonWrapper padding="0 20px">
-        <Button bg={theme.palette.Black} fontColor={theme.palette.White}>
+        <Button bg={theme.palette.Black} fontColor={theme.palette.White} onClick={onNext}>
           다음
         </Button>
       </ButtonWrapper>
