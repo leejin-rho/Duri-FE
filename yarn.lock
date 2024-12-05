@@ -3022,6 +3022,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@wojtekmaj/date-utils@npm:^1.1.3":
+  version: 1.5.1
+  resolution: "@wojtekmaj/date-utils@npm:1.5.1"
+  checksum: 10c0/7c213cca5ab6b84ef61b9aea2b9fb8a04bf4c9764b28a97ffc4ee46a3e81560532a74d106a6f8aeef4792e1aaa6ea3dfd3c4a639dddbea560eb3f33cd62b8d7d
+  languageName: node
+  linkType: hard
+
 "@xstate/react@npm:^1.2.0":
   version: 1.6.3
   resolution: "@xstate/react@npm:1.6.3"
@@ -3038,13 +3045,6 @@ __metadata:
     xstate:
       optional: true
   checksum: 10c0/dfd6239cd13ce190cf2d9ae9f695c1b0320de00b3e2152311c6f83e26170472146150c518c0f7595aaadb4a492d5a92a56bc3cd13a9462a810ac39d22dd3f50b
-  languageName: node
-  linkType: hard
-
-"@wojtekmaj/date-utils@npm:^1.1.3":
-  version: 1.5.1
-  resolution: "@wojtekmaj/date-utils@npm:1.5.1"
-  checksum: 10c0/7c213cca5ab6b84ef61b9aea2b9fb8a04bf4c9764b28a97ffc4ee46a3e81560532a74d106a6f8aeef4792e1aaa6ea3dfd3c4a639dddbea560eb3f33cd62b8d7d
   languageName: node
   linkType: hard
 
