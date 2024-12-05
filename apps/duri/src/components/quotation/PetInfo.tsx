@@ -16,7 +16,7 @@ const PetInfo = ({
       <Card borderRadius={12} height='113px' borderColor={theme.palette.Normal500} padding='6px'>
       <Flex justify="flex-start" gap={18}>
         <PetImageWrapper>
-          <Tag
+          <SelectedTag
             typo="Caption3"
             fontColor={theme.palette.Normal700}
             width="43px"
@@ -25,7 +25,7 @@ const PetInfo = ({
             padding="0px"
           >
             선택
-          </Tag>
+          </SelectedTag>
           <Image src={petImage} borderRadius={8} width={100} height={100} />
         </PetImageWrapper>
         <HeightFitFlex direction="column" gap={12} align="flex-start">
@@ -46,7 +46,7 @@ export default PetInfo;
 const PetImageWrapper = styled.div`
   position: relative;
 `;
-const Tag = styled(Button)`
+const SelectedTag = styled(Button)`
   position: absolute;
   top: 0;
   left: 0;

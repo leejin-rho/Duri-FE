@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { addMenu, designMenu, menu, specialMenu } from '@duri/assets/data';
 import { PetInfoProps } from '@duri/assets/types/pet';
 import { RequestProps } from '@duri/assets/types/request';
 import MonthlyCalendar from '@duri/components/quotation/Calendar';
@@ -17,24 +18,6 @@ import {
 } from '@duri-fe/ui';
 import { useGetPetInfo } from '@duri-fe/utils';
 
-const menu = [
-  '가위컷',
-  '부분+목욕',
-  '부분목욕',
-  '스포팅',
-  '위생',
-  '전체 클리핑',
-];
-const addMenu = [
-  '입질',
-  '이중모',
-  '기장추가',
-  '모량추가',
-  '엉킴추가',
-  '발등미용',
-];
-const specialMenu = ['머드팩', '허브팩', '스파', '약욕'];
-const designMenu = ['장화', '나팔', '방울', '디자인 얼굴컷', '기본 얼굴컷'];
 const timeList = Array(10)
   .fill(0)
   .map((_, i) => `${9 + i}:00`);
