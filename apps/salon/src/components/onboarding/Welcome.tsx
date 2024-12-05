@@ -29,7 +29,7 @@ export const Container = styled(Flex)<{ show: boolean }>`
   z-index: ${({ show }) => (show ? 1000 : 0)};
   transition: opacity 0.5s;
   position: absolute;
-  max-width: 374px;
+  max-width: 375px;
 `;
 
 export const Wrapper = styled(Flex)`
