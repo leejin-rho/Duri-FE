@@ -42,6 +42,7 @@ export const typo = {
     font-size: ${calcRem(20)};
     line-height: 150%;
   `,
+
   Heading4: css`
     font-family: 'Pretendard';
     font-weight: 600;

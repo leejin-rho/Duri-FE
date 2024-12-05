@@ -1,5 +1,6 @@
 import { forwardRef, Suspense, useEffect } from 'react';
 
+import { RelativeMobile } from '@duri/pages/Shop';
 import { Button, Flex, MyLocation, theme } from '@duri-fe/ui';
 import { useGeolocation } from '@duri-fe/utils';
 import styled from '@emotion/styled';
@@ -74,24 +75,26 @@ export const MapInfo = forwardRef<HTMLDivElement>((_, ref) => {
   };
 
   return (
-    <>
+    <RelativeMobile>
       {/* 위치 정보(지도) */}
       <MapWrapper ref={ref} direction="column">
         <Suspense fallback={<div>Loading Map...</div>}>
           <Flex id="map" />
         </Suspense>
       </MapWrapper>
-      <LocationBtn
-        onClick={moveToCurrentLocation}
-        width="44px"
-        height="44px"
-        bg={theme.palette.White}
-        borderRadius="99px"
-        padding="0"
-      >
-        <MyLocation width={36} height={36} color={theme.palette.Gray400} />
+      <LocationBtn justify="flex-end" padding="0 13px">
+        <Button
+          onClick={moveToCurrentLocation}
+          width="44px"
+          height="44px"
+          bg={theme.palette.White}
+          borderRadius="99px"
+          padding="0"
+        >
+          <MyLocation width={36} height={36} color={theme.palette.Gray400} />
+        </Button>
       </LocationBtn>
-    </>
+    </RelativeMobile>
   );
 });
 
@@ -101,9 +104,10 @@ const MapWrapper = styled(Flex)`
   height: calc(100vh - 92px);
 `;
 
-const LocationBtn = styled(Button)`
+const LocationBtn = styled(Flex)`
   position: absolute;
-  bottom: 122px;
-  right: 17px;
+  height: fit-content;
+  max-width: 480px;
+  bottom: 120px;
   z-index: 10;
 `;

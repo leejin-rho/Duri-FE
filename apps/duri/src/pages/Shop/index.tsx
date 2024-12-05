@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { BottomSheetRef } from 'react-spring-bottom-sheet';
 
 import { MapInfo } from '@duri/components/shop';
 import { ShopList } from '@duri/components/shop/ShopList';
@@ -18,6 +19,7 @@ import styled from '@emotion/styled';
 
 const Shop = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
+  const sheetRef = useRef<BottomSheetRef>(null);
 
   const [isMap, setIsMap] = useState<boolean>(true);
 
@@ -49,7 +51,7 @@ const Shop = () => {
             <MapInfo ref={mapRef} />
           </>
         ) : (
-          <ShopList />
+          <ShopList ref={sheetRef} />
         )}
         <ListWrapper>
           <Button
@@ -82,7 +84,7 @@ const Shop = () => {
 
 export default Shop;
 
-const RelativeMobile = styled(MobileLayout)`
+export const RelativeMobile = styled(MobileLayout)`
   align-items: center;
   position: relative;
 `;
@@ -91,7 +93,7 @@ const SearchWrapper = styled(Flex)`
   position: absolute;
   max-width: 480px;
   top: 62px;
-  z-index: 99;
+  z-index: 1;
   height: fit-content;
   padding: 0 20px;
 `;
@@ -100,8 +102,7 @@ const ListWrapper = styled(Flex)`
   position: fixed;
   height: fit-content;
   bottom: 104px;
-  left: 17px;
-  z-index: 99;
+  z-index: 1;
 `;
 
 const OuterWrapper = styled(Flex)`

@@ -143,7 +143,7 @@ const Container = styled(Flex)<{
   per?: string;
   width: number;
 }>`
-  width: ${({ width, widthPer }) => (widthPer ? widthPer : `${width}px`)};
+  width: ${({ width, per }) => per ?? `${width}px`};
 
   flex-direction: column;
   align-items: flex-start;

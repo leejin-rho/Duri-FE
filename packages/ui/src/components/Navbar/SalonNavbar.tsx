@@ -89,7 +89,7 @@ const TabContainer = styled(Flex)`
   min-width: 360px;
   position: fixed;
   bottom: 0;
-  z-index: 20;
+  z-index: 2;
   border-top: 0.5px solid
     hsla(224.99999999999997, 5.084745762711864%, 46.27450980392157%, 0.16);
 `;
