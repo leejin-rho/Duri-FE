@@ -1,6 +1,6 @@
-//emotion.d.ts
-import '@emotion/react';
+// //emotion.d.ts
+// import '@emotion/react';
 
-declare module '@emotion/react' {
-  export interface Theme {}
-}
+// declare module '@emotion/react' {
+//   export interface Theme {}
+// }

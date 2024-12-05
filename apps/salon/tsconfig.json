@@ -6,7 +6,8 @@
       "@pages/*": ["./apps/salon/src/pages/*"],
       "@components/*": ["./apps/salon/src/components/*"],
       "@styles/*": ["./apps/salon/src/styles/*"],
-      "@assets/*": ["./apps/salon/src/assets/*"]
+      "@assets/*": ["./apps/salon/src/assets/*"],
+      "@mocks/*": ["./apps/salon/src/mocks/*"],
     }
   },
   "include": ["src/**/*", "../../**/*.d.ts"],

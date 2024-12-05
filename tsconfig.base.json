@@ -19,7 +19,7 @@
     "baseUrl": ".",
     "paths": {
       "@duri-fe/ui/*": ["packages/ui/src/*"],
-      "@duri-fe/utils/*": ["packages/utils/src/*"]
+      "@duri-fe/utils/*": ["packages/utils/src/*"],
     }
   },
   "references": [
@@ -27,8 +27,8 @@
     { "path": "apps/duri" },
     { "path": "apps/salon" },
     { "path": "packages/ui" },
-    { "path": "packages/utils" }
+    { "path": "packages/utils" },
   ],
-  "include": ["apps/**/*", "packages/**/*", "custom.d.ts"],
+  "include": ["apps/**/*", "packages/**/*", "custom.d.ts", "vite-env.d.ts"],
   "exclude": ["node_modules", "dist"]
 }
