@@ -8,9 +8,10 @@
       "@pages/*": ["./apps/duri/src/pages/*"],
       "@components/*": ["./apps/duri/src/components/*"],
       "@styles/*": ["./apps/duri/src/styles/*"],
-      "@assets/*": ["./apps/duri/src/assets/*"]
+      "@assets/*": ["./apps/duri/src/assets/*"],
+      "@mocks/*": ["./apps/duri/src/mocks/*"]
     }
   },
-  "include": ["src/**/*", "../../**/*.d.ts"],
+  "include": ["src/**/*", "../../**/*.d.ts", "public/svg/MyLocation.tsx"],
   "exclude": ["node_modules", "dist"]
 }

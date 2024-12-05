@@ -3,7 +3,7 @@ node_modules
 
 # PnP
 .pnp.js
-!.pnp.cjs
+.pnp.cjs
 !.pnp.loader.mjs
 
 # Local env files
@@ -45,6 +45,8 @@ yarn-error.log*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+.yarn/install-state.gz
+
 
 # Storybook
 *storybook.log

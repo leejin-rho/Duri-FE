@@ -7,14 +7,21 @@
     "dev": "vite --clearScreen false",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint \"src/**/*.ts\""
+    "lint": "eslint \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "lint:fix": "eslint --fix \"src/**/*.ts\" \"src/**/*.tsx\""
   },
   "dependencies": {
+    "@duri-fe/eslint-config": "workspace:packages/eslint-config",
     "@duri-fe/ui": "workspace:packages/ui",
     "@duri-fe/utils": "workspace:packages/utils",
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
-    "add": "^2.0.6",
+    "@types/node": "^22.10.1",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.0.1",
@@ -22,12 +29,13 @@
     "yarn": "^1.22.22"
   },
   "devDependencies": {
-    "@duri-fe/eslint-config": "*",
     "@types/add": "^2",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^4.3.3",
-    "eslint": "^8.57.0",
+    "acorn": "^8.14.0",
+    "eslint": "8.57.0",
+    "rollup": "^4.27.4",
     "typescript": "5.5.4",
     "vite": "^5.1.4"
   }

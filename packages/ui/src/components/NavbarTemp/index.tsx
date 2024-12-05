@@ -1,0 +1,1 @@
+export { NavbarTemp } from './NavbarTemp';
