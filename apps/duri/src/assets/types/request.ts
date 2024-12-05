@@ -5,7 +5,7 @@ export interface RequestProps extends TimeProps{
   specialMenu: string[];
   design: string[];
   etc: string;
-  day: string;
+  day: Date;
   shopIds: number[];
 }
 

@@ -50,4 +50,8 @@ export const globalStyle = css`
     border: none;
     margin: 0;
   }
+  .react-calendar {
+    border: none !important;
+    width: 100%;
+  }
 `;

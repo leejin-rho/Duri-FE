@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { PetInfoProps } from '@duri/assets/types/pet';
 import { RequestProps } from '@duri/assets/types/request';
+import MonthlyCalendar from '@duri/components/quotation/Calendar';
 import EtcRequest from '@duri/components/quotation/EtcRequest';
 import PetInfo from '@duri/components/quotation/PetInfo';
 import SelectGrooming from '@duri/components/quotation/SelectGrooming';
@@ -46,7 +47,7 @@ const RequestPage = () => {
     specialMenu: [],
     design: [],
     etc: '',
-    day: '',
+    day: new Date(),
     time9: false,
     time10: false,
     time11: false,
@@ -64,7 +65,7 @@ const RequestPage = () => {
 
   const handleSelect = (
     key: string,
-    value: number | string | string[] | boolean,
+    value: number | string | string[] | boolean | Date,
   ) => {
     if (key === 'petId') {
       setRequestList((prev) => ({
@@ -165,6 +166,7 @@ const RequestPage = () => {
               희망하는 날짜를 선택해주세요.
             </Text>
             {/* 날짜 선택 UI */}
+            <MonthlyCalendar onSelect={handleSelect} />
           </HeightFitFlex>
           <HeightFitFlex direction="column" align="flex-start" gap={8}>
             <Text typo="Title2">시간 선택</Text>
