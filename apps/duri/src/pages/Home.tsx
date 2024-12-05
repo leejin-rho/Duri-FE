@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RecommendeShopProps, RegularShopProps } from '@duri/assets/types/shop';
-import CarouselHome from '@duri/components/home/Homehome';
-import SpeedQuotation from '@duri/components/home/Quotation';
-import RecommendedShop from '@duri/components/home/Recommend';
+import CarouselHome from '@duri/components/home/Home';
+import RecommendedShop from '@duri/components/home/RecommendedShop';
+import SpeedQuotation from '@duri/components/home/SpeedQuotation';
 import {
   AiStyleBanner,
   DuriNavbar,

@@ -1,4 +1,5 @@
 import { SetStateAction, useState } from 'react';
+import React from 'react';
 
 import { Button, Flex, HeightFitFlex, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
