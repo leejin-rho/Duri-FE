@@ -3,12 +3,14 @@ import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 
 import {
   Button,
+  DownArrow,
   Filter,
   Flex,
   HardText,
   Seperator,
   Text,
   theme,
+  WidthFitFlex,
 } from '@duri-fe/ui';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -19,6 +21,7 @@ import { ShopLine } from './ShopLine';
 
 export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [filter, setFilter] = useState<'거리순' | '별점순'>('거리순');
 
   const handleDismiss = () => {
     setOpen(false);
@@ -51,18 +54,34 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
             </HardText>
           </Button>
 
-          <Button
-            width="fit-content"
-            height="32px"
-            bg={theme.palette.White}
-            borderRadius="99px"
-            padding="10px"
-            shadow={'0px 0px 4px 0px rgba(0, 0, 0, 0.25)'}
-          >
-            <HardText typo="Label3" colorCode={theme.palette.Gray600}>
-              영업중
-            </HardText>
-          </Button>
+          <WidthFitFlex gap={12}>
+            <Button
+              width="fit-content"
+              height="32px"
+              bg={theme.palette.White}
+              borderRadius="99px"
+              padding="10px"
+              shadow={'0px 0px 4px 0px rgba(0, 0, 0, 0.25)'}
+              disabled={true}
+            >
+              <HardText typo="Label3" colorCode={theme.palette.Gray600}>
+                영업중
+              </HardText>
+            </Button>
+
+            <Button
+              width="fit-content"
+              height="32px"
+              bg={theme.palette.White}
+              padding="0"
+              disabled={true}
+            >
+              <HardText typo="Label3" colorCode={theme.palette.Gray600}>
+                {filter}
+              </HardText>
+              <DownArrow width={18} />
+            </Button>
+          </WidthFitFlex>
         </Flex>
         <Seperator />
         <ScrollFlex
@@ -144,11 +163,39 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
               margin="22px 5px 0 5px"
               gap={36}
             >
-              <Button bg="transparent" width="fit-content" padding="0">
-                <Text typo="Title3">거리순</Text>
+              <Button
+                bg="transparent"
+                width="fit-content"
+                padding="0"
+                onClick={() => setFilter('거리순')}
+              >
+                <Text
+                  typo="Title3"
+                  colorCode={
+                    filter == '거리순'
+                      ? theme.palette.Normal600
+                      : theme.palette.Black
+                  }
+                >
+                  거리순
+                </Text>
               </Button>
-              <Button bg="transparent" width="fit-content" padding="0">
-                <Text typo="Title3">거리순</Text>
+              <Button
+                bg="transparent"
+                width="fit-content"
+                padding="0"
+                onClick={() => setFilter('별점순')}
+              >
+                <Text
+                  typo="Title3"
+                  colorCode={
+                    filter == '별점순'
+                      ? theme.palette.Normal600
+                      : theme.palette.Black
+                  }
+                >
+                  별점순
+                </Text>
               </Button>
             </Flex>
           </Flex>
