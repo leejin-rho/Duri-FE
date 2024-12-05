@@ -88,6 +88,7 @@ const RequestPage = () => {
     if (data) {
       setPetInfo(data);
       handleSelect('petId', data.petId); // petId는 따로 설정
+      console.log(data)
     }
   }, [data]);
 

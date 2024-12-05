@@ -1,7 +1,7 @@
 import { RegularShopProps } from '@duri/assets/types/shop';
 import { Flex, Text, theme } from '@duri-fe/ui';
 
-import { ShopHorizontal } from './shop';
+import { ShopHorizontal } from './ShopHorizontal';
 
 const SpeedQuotation = ({ shopList }: { shopList: RegularShopProps[] }) => {
   return (

@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
-  http.get('https://api.example.com/api/user', () => {
+  http.get('https://api.example.com/api/v1/user', () => {
     return HttpResponse.json({
       id: 'c7b3d8e0-5e0b-4b0f-8b3a-3b9f4b3d3b3d',
       firstName: 'John',
@@ -9,7 +9,7 @@ export const handlers = [
     });
   }),
 
-  http.get(`https://api.example.com/api/quotation/:quotationId`, () => {
+  http.get(`https://api.example.com/api/v1/quotation/:quotationId`, () => {
     return HttpResponse.json({
       shopIdx: 'shop-001',
       shopName: 'Duri',
@@ -28,14 +28,14 @@ export const handlers = [
     });
   }),
 
-  http.get(`https://api.example.com/api/coupon`, () => {
+  http.get(`https://api.example.com/api/v1/coupon`, () => {
     return HttpResponse.json({
       couponName: '10% 할인 쿠폰',
       couponNum: 3,
     });
   }),
 
-  http.get('https://api.example.com/api/shop/regular', () => {
+  http.get('https://api.example.com/api/v1/shop/regular', () => {
     return HttpResponse.json([
       {
         shopIdx: '1',
@@ -56,7 +56,7 @@ export const handlers = [
     ]);
   }),
 
-  http.get('https://api.example.com/api/shop/recommend', () => {
+  http.get('https://api.example.com/api/v1/shop/recommend', () => {
     return HttpResponse.json([
       {
         shopIdx: '1',
@@ -77,7 +77,7 @@ export const handlers = [
     ]);
   }),
 
-  http.get('https://api.example.com/api/pet', () => {
+  http.get('https://api.example.com/api/v1/pet', () => {
     return HttpResponse.json(
       {
         petId:1,

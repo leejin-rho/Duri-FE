@@ -1,7 +1,7 @@
 import { RecommendeShopProps } from '@duri/assets/types/shop';
 import { Flex, Text, theme } from '@duri-fe/ui';
 
-import { ShopVertical } from './shop';
+import { ShopVertical } from './ShopVertical';
 
 const RecommendedShop = ({ shopList }: { shopList: RecommendeShopProps[] }) => {
   return (

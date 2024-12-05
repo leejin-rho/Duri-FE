@@ -33,18 +33,13 @@ const TimeTable = ({
                 key={time}
                 width="72px"
                 height="41px"
-                bg={isSelected ? theme.palette.Normal500 : theme.palette.Gray20}
+                bg={isSelected ? theme.palette.Black : theme.palette.Gray20}
                 fontColor={
-                  isSelected ? theme.palette.Normal800 : theme.palette.Gray300
+                  isSelected ? theme.palette.White : theme.palette.Black
                 }
                 typo="Label2"
                 borderRadius="4px"
                 onClick={() => handleSelect(index, isSelected)}
-                border={
-                  isSelected
-                    ? `1px solid ${theme.palette.Normal700}`
-                    : `1px solid ${theme.palette.Gray20}`
-                }
               >
                 {time}
               </Button>
