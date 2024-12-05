@@ -20,6 +20,7 @@ interface ShopLineProps {
   distance: number;
   address: string;
   phone: string;
+  isClicked?: boolean;
 }
 
 export const ShopLine = ({
@@ -29,6 +30,7 @@ export const ShopLine = ({
   distance,
   address,
   phone,
+  isClicked = false,
 }: ShopLineProps) => {
   return (
     <HeightFitFlex gap={20}>
@@ -78,7 +80,7 @@ export const ShopLine = ({
           width="42px"
           height="42px"
           borderRadius="40px"
-          bg={theme.palette.Normal100}
+          bg={isClicked ? theme.palette.Normal600 : theme.palette.Normal100}
           padding="0"
         >
           <Send width={21} height={21} color={theme.palette.Normal800} />

@@ -105,6 +105,7 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
             distance={354}
             address="경기 성남시 분당구"
             phone="031)123-1234"
+            isClicked={true}
           />
           <ShopLine
             title="댕댕샵"
