@@ -17,7 +17,6 @@ const PaymentPage = () => {
 
   useEffect(()=>{
     if(response){
-      console.log(response);
       setQuotationInfo(response);
     }
   }, [response])
