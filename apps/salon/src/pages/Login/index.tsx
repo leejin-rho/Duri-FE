@@ -14,14 +14,14 @@ const LoginPage = () => {
       <Container direction="column">
         {/** 로고 */}
         <Logo src="/images/logo.png" />
-        <TitleContainer direction="column" margin="24px 0 0 0">
+        <Flex direction="column" margin="24px 0 0 0">
           <Text typo="Heading2">두리묭실로</Text>
           <Text typo="Heading2">쉽고 빠르게 예약해요!</Text>
           <Text typo="Body3" colorCode={theme.palette.Gray300} margin="8px 0 0 0">최저가 예약부터 근처 미용샵까지</Text>
-        </TitleContainer>
+        </Flex>
 
         {/** 로그인 버튼 */}
-        <ButtonContainer direction="column" margin="120px 0 0 0">
+        <Flex direction="column" margin="120px 0 0 0">
           <SpeechBallonContainer
             label="3초만에 시작하기 🚀"
             textColor={theme.palette.Gray400}
@@ -29,7 +29,7 @@ const LoginPage = () => {
           <LoginButton onClick={handleNaverLogin}>
             <NaverLogo />
           </LoginButton>
-        </ButtonContainer>
+        </Flex>
 
         {/** 문의하기 */}
         <Contact>
@@ -45,11 +45,7 @@ const Container = styled(Flex)`
   position: relative;
 `
 
-const TitleContainer = styled(Flex)``
-
 const Logo = styled.img``
-
-const ButtonContainer = styled(Flex)``
 
 const LoginButton = styled.button`
   width: 60px;
