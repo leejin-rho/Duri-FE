@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { RecommendeShopProps, RegularShopProps } from '@duri/assets/types/shop';
-import CarouselHome from '@duri/components/home/home';
-import RecommendedShop from '@duri/components/home/recommendedShop';
-import SpeedQuotation from '@duri/components/home/speedQuotation';
+import CarouselHome from '@duri/components/home/Home';
+import RecommendedShop from '@duri/components/home/RecommendedShop';
+import SpeedQuotation from '@duri/components/home/SpeedQuotation';
 import {
   AiStyleBanner,
   DuriNavbar,
   Flex,
+  Header,
   HeightFitFlex,
   MobileLayout,
   theme,
@@ -27,6 +29,8 @@ const Home = () => {
   >([]);
   const recommendedListData = useGetRecommendedShopList();
   const regularListData = useGetRegularShopList();
+  const navigate = useNavigate();
+  const handleClickSearchIcon = () => navigate('/search');
 
   useEffect(() => {
     if (recommendedListData) {
@@ -41,16 +45,21 @@ const Home = () => {
     <MobileLayout>
       <Flex direction="column" margin="0 0 114px 0">
         <HeightFitFlex
+          direction="column"
           backgroundColor={theme.palette.Normal500}
           padding="0 0 37px 0"
         >
+          <Header
+            logoColor={theme.palette.Black}
+            iconColor={theme.palette.Normal800}
+            searchIcon={true}
+            onClickSearch={handleClickSearchIcon}
+          />
           <CarouselHome />
         </HeightFitFlex>
         <Flex direction="column" padding="0 20px">
           {/* 단골 빠른입찰 */}
-          {regularShopList && (
-            <SpeedQuotation name="멍멍이" shopList={regularShopList} />
-          )}
+          {regularShopList && <SpeedQuotation shopList={regularShopList} />}
 
           {/* AI 스타일링 배너 */}
           <StyleBannerWrapper
@@ -62,7 +71,7 @@ const Home = () => {
           </StyleBannerWrapper>
 
           {/* 추천 샵 */}
-          <RecommendedShop shopList={recommendedShopList} />
+          {recommendedShopList && <RecommendedShop shopList={recommendedShopList} />}
         </Flex>
         <DuriNavbar />
       </Flex>

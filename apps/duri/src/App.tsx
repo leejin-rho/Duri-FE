@@ -11,6 +11,7 @@ import StartPage from '@pages/Onboarding/StartPage';
 import PaymentPage from '@pages/PaymentPage';
 import FailPage from '@pages/PaymentPage/Fail';
 import SuccessPage from '@pages/PaymentPage/Success';
+import RequestPage from '@pages/RequestPage';
 import Shop from '@pages/Shop';
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
         <Route path="/payment/:quotationId" element={<PaymentPage />} />
         <Route path="/payment/success" element={<SuccessPage />} />
         <Route path="/payment/fail" element={<FailPage />} />
-
+        <Route path="/quotation/request" element={<RequestPage />} />
         <Route path="/shop" element={<Shop />} />
       </Routes>
     </BrowserRouter>

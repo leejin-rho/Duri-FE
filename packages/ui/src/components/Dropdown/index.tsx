@@ -55,9 +55,9 @@ export const Dropdown = ({
     <>
       <DropdownBox margin={margin} width={width} onClick={toggleDropdown} ref={dropdownRef}>
         {selectedOption === defaultValue ? (
-            <Text typo="Body3" colorCode={theme.palette.Gray300} justify='center'>{selectedOption}</Text>
+            <Text typo="Caption2" colorCode={theme.palette.Gray300} justify='center'>{selectedOption}</Text>
         ) : (
-            <Text typo="Body3">{selectedOption}</Text>
+            <Text typo="Label3">{selectedOption}</Text>
         )}
         {isOpen ? (
           <UnionUp width={8} height={5} />

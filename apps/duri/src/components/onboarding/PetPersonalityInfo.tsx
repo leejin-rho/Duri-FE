@@ -47,7 +47,7 @@ const PetPersonalityInfo = ({
         {name}는 <br />
         어떤 성격을 가지고 있나요?
       </Text>
-      <Text typo="Label2" justify="flex-start" colorCode={theme.palette.Gray500}>
+      <Text typo="Caption1" justify="flex-start" colorCode={theme.palette.Gray500}>
         입력된 성격은 MY에서 변경가능해요.
       </Text>
       <Controller
@@ -58,10 +58,11 @@ const PetPersonalityInfo = ({
             value.length > 0 || '성격에 대해 알려주세요.',
         }}
         render={() => (
-          <FitFlex justify='flex-start' gap={8}>
+          <FitFlex justify='flex-start' gap={8} margin='47px 0'>
             {personalityOptions.map((value) => (
               <Button
                 key={value}
+                typo='Body3'
                 width='fit-content'
                 height="43px"
                 bg={
@@ -76,7 +77,7 @@ const PetPersonalityInfo = ({
                 }
                 border={
                   personalityList.includes(value)
-                    ? 'none'
+                    ? `1px solid ${theme.palette.Black}`
                     : `1px solid ${theme.palette.Gray100}`
                 }
                 onClick={() => handleToggle(value)}

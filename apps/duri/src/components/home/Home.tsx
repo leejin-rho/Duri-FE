@@ -1,4 +1,5 @@
 import { SetStateAction, useState } from 'react';
+import React from 'react';
 
 import { Button, Flex, HeightFitFlex, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
@@ -13,9 +14,9 @@ const CarouselHome = () => {
   return (
     <HeightFitFlex direction="column" align="flex-start">
       <Text
-        typo="Heading3"
+        typo="Body1"
         colorCode={theme.palette.Normal900}
-        margin="33px 0 23px 25px"
+        margin="18px 0 23px 25px"
       >
         미용한지 <br />
         12일이 지났어요 <br />
@@ -29,7 +30,6 @@ const CarouselHome = () => {
           centeredSlides={true}
           onSlideChange={(e: { realIndex: SetStateAction<number> }) => {
             setSwiperIndex(e.realIndex);
-            console.log(e.realIndex);
           }} // 슬라이드 변경 완료 시 인덱스 업데이트
         >
           {[0, 1, 2].map((i) => (
@@ -98,3 +98,4 @@ const Bullet = styled(Button)`
   padding: 0;
   transition: all 0.3s ease;
 `;
+

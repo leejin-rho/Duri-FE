@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
-  http.get('https://api.example.com/api/user', () => {
+  http.get('https://api.example.com/api/v1/user', () => {
     return HttpResponse.json({
       id: 'c7b3d8e0-5e0b-4b0f-8b3a-3b9f4b3d3b3d',
       firstName: 'John',
@@ -9,7 +9,7 @@ export const handlers = [
     });
   }),
 
-  http.get(`https://api.example.com/api/quotation/:quotationId`, () => {
+  http.get(`https://api.example.com/api/v1/quotation/:quotationId`, () => {
     return HttpResponse.json({
       shopIdx: 'shop-001',
       shopName: 'Duri',
@@ -28,14 +28,14 @@ export const handlers = [
     });
   }),
 
-  http.get(`https://api.example.com/api/coupon`, () => {
+  http.get(`https://api.example.com/api/v1/coupon`, () => {
     return HttpResponse.json({
       couponName: '10% 할인 쿠폰',
       couponNum: 3,
     });
   }),
 
-  http.get('https://api.example.com/api/shop/regular', () => {
+  http.get('https://api.example.com/api/v1/shop/regular', () => {
     return HttpResponse.json([
       {
         shopIdx: '1',
@@ -56,7 +56,7 @@ export const handlers = [
     ]);
   }),
 
-  http.get('https://api.example.com/api/shop/recommend', () => {
+  http.get('https://api.example.com/api/v1/shop/recommend', () => {
     return HttpResponse.json([
       {
         shopIdx: '1',
@@ -75,5 +75,19 @@ export const handlers = [
         shopTag: ['노견전문', '소형견'],
       },
     ]);
+  }),
+
+  http.get('https://api.example.com/api/v1/pet', () => {
+    return HttpResponse.json(
+      {
+        petId:1,
+        petName: "멍이",
+        petImage: 'https://s3-alpha-sig.figma.com/img/be2d/15b9/6d6d9c56fd4e47388fa79cdfb8f3c4b6?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=X1cOpSTMbxxMWxuaqTEsv4id96BVzSloxASEzxOzX87IO8neIKfYCuO8K04E5O8RniSoRCRo7JIlyuYn0AZd6Nda2W7tS8rN36WT7Ewzg-bnozvaUzH5Low6mzAGqUFhQY558k~oAoKolnCTzLEb1DSKR3Zq3Gj073fUrLrxyNnQmXqtbmMObX39c-Flw0~8kzap-ls787b58MKEnfTQ1AVHB8o-Y2~2mQWpFCMY8iKMjIsk84ToA0LhLmiGf5XkRLEtZwwWXFqsTXm0OFB2m~3uqsxFBkuW3gootLBj2ocEp400Za4j8C-IAFj1lNqPeoW9rpLdKLh0xOvoftqeaQ__',
+        breed: "시츄",
+        gender: "여아",
+        age: "7살",
+        weight: "1.4"
+      },
+    );
   }),
 ];

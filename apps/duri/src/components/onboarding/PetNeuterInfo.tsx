@@ -31,7 +31,7 @@ const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
       <Text typo="Heading2" justify="flex-start">
         중성화 여부를 알려주세요!
       </Text>
-      <Text typo="Label2" justify="flex-start" colorCode={theme.palette.Gray500}>
+      <Text typo="Caption1" justify="flex-start" colorCode={theme.palette.Gray500}>
         등록한 반려견은 MY에서 변경할 수 있어요.
       </Text>
 
@@ -43,7 +43,7 @@ const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
             value !== undefined || '중성화 여부를 선택해주세요.',
         }}
         render={({ field }) => (
-          <Flex direction='column' align='flex-start' gap={8}>
+          <Flex direction='column' align='flex-start' gap={8} margin='47px 0'>
             {options.map(({ label, value }) => (
               <Button
                 key={value ? 'yes' : 'no'}
@@ -59,10 +59,10 @@ const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
                     ? theme.palette.White
                     : theme.palette.Black
                 }
-                typo="Body2"
+                typo="Body3"
                 border={
                   isNeutered === value
-                    ? 'none'
+                    ? `1px solid ${theme.palette.Black}`
                     : `1px solid ${theme.palette.Gray100}`
                 }
                 onClick={() => handleClickButton(field, value)}

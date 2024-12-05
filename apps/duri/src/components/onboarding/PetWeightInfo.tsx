@@ -20,17 +20,24 @@ const PetWeightInfo = ({ control, name }: PetWeightInfoProps) => {
         {name}의 <br />
         몸무게를 입력해주세요
       </Text>
-      <Text typo="Label2" justify="flex-start" colorCode={theme.palette.Gray500}>
+      <Text typo="Caption1" justify="flex-start" colorCode={theme.palette.Gray500}>
         미용실을 추천해주는 카테고리로 쓰여요.
       </Text>
       <Controller
         name="weight"
         control={control}
-        rules={{ required: '몸무게를 선택해주세요.' }}
+        rules={{
+          required: '몸무게를 선택해주세요.',
+          validate: (value) => {
+            const [integer, decimal] = value.split('.'); // 정수와 소수 분리
+            const weight = parseFloat(`${integer}.${decimal}`);
+            return weight > 0;
+          },
+        }}
         render={({ field }) => (
           <>
             {/* style={{ display: 'flex', alignItems: 'center', gap: '4px' } */}
-            <Flex gap={12} justify="flex-start" align="flex-end">
+            <Flex gap={12} justify="flex-start" align="flex-end" margin='26px 0'>
               {/* 정수 Dropdown */}
               <Dropdown
                 width={85}
