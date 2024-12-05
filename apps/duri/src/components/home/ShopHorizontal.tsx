@@ -21,13 +21,13 @@ export const ShopHorizontal = ({ shopList }: { shopList: RegularShopProps[] }) =
     <Flex direction="column" gap={15} margin="28px 0 0 0">
       {shopList &&
         shopList.map((shop: RegularShopProps) => (
-          <HeightFitFlex key={shop.shopIdx} justify="flex-start" gap={15}>
+          <HeightFitFlex key={shop.salonIdx} justify="flex-start" gap={15}>
             <Image
               width={100}
               height={100}
               borderRadius={8}
-              src={shop.shopImg}
-              onClick={() => handleClickShop(shop.shopIdx)}
+              src={shop.salonImage}
+              onClick={() => handleClickShop(shop.salonIdx)}
             />
             <Flex
               direction="column"
@@ -38,17 +38,17 @@ export const ShopHorizontal = ({ shopList }: { shopList: RegularShopProps[] }) =
               <Wrapper direction='column' align='flex-start'>
                 {/* onClick함수 추가해야 함!!! */}
                 <Flex justify='flex-start' gap={2}>
-                  <Text typo='Title3'>{shop.shopName}</Text>
+                  <Text typo='Title3'>{shop.salonName}</Text>
                   <NextArrow width={20} height={20} />
                 </Flex>
                 <HeightFitFlex align='flex-start' gap={7}>
                   <Star width={14} height={14} />
                   <Flex justify='flex-start' gap={3}>
                   <Text typo='Label1'>
-                    {shop.shopScore}
+                    {shop.salonScore}
                   </Text>
                   <Text typo='Label3' justify='flex-start'>
-                  ({shop.shopReview})
+                  ({shop.salonReviewCount})
                   </Text>
                   </Flex>
                 </HeightFitFlex>

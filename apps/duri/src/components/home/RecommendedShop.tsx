@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { RecommendeShopProps } from '@duri/assets/types/shop';
 import { Flex, Text, theme } from '@duri-fe/ui';
+
+import { RecommendeShopProps } from '../../assets/types/shop';
 
 import { ShopVertical } from './ShopVertical';
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { LastReservationProps, UpcomingReservationProps } from '@duri/assets/types/reservation';
 import { RecommendeShopProps, RegularShopProps } from '@duri/assets/types/shop';
 import CarouselHome from '@duri/components/home/Home';
 import RecommendedShop from '@duri/components/home/RecommendedShop';
@@ -15,8 +16,10 @@ import {
   theme,
 } from '@duri-fe/ui';
 import {
+  useGetLastReservation,
   useGetRecommendedShopList,
   useGetRegularShopList,
+  useGetUpcomingReservation,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
@@ -27,19 +30,21 @@ const Home = () => {
   const [recommendedShopList, setRecommendedShopList] = useState<
     RecommendeShopProps[]
   >([]);
+  const [upcomingReservation, setUpcomingReservation] = useState<UpcomingReservationProps>();
+  const [lastReservation, setLastReservation] = useState<LastReservationProps>();
   const recommendedListData = useGetRecommendedShopList();
   const regularListData = useGetRegularShopList();
+  const reservationData = useGetUpcomingReservation();
+  const lastReservationData = useGetLastReservation();
   const navigate = useNavigate();
   const handleClickSearchIcon = () => navigate('/search');
 
   useEffect(() => {
-    if (recommendedListData) {
-      setRecommendedShopList(recommendedListData);
-    }
-    if (regularListData) {
-      setRegularShopList(regularListData);
-    }
-  }, [recommendedListData, regularListData]);
+    if (recommendedListData) setRecommendedShopList(recommendedListData);
+    if (regularListData) setRegularShopList(regularListData);
+    if(reservationData) setUpcomingReservation(reservationData);
+    if(lastReservationData) setLastReservation(lastReservationData);
+  }, [recommendedListData, regularListData, reservationData, lastReservationData]);
 
   return (
     <MobileLayout>
@@ -55,7 +60,7 @@ const Home = () => {
             searchIcon={true}
             onClickSearch={handleClickSearchIcon}
           />
-          <CarouselHome />
+          <CarouselHome upcomingReservation={upcomingReservation} lastReservation={lastReservation} />
         </HeightFitFlex>
         <Flex direction="column" padding="0 20px">
           {/* 단골 빠른입찰 */}

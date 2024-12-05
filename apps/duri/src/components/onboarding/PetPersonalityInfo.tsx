@@ -95,7 +95,7 @@ const PetPersonalityInfo = ({
 export default PetPersonalityInfo;
 
 const FitFlex = styled(Flex)`
-  max-width: 374px;
+  max-width: 375px;
   width: 100%;
   flex-wrap: wrap;
   word-break: break-all;

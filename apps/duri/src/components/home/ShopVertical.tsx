@@ -17,30 +17,30 @@ export const ShopVertical = ({
       {shopList &&
         shopList.map((shop: RecommendeShopProps) => (
           <Wrapper
-            key={shop.shopIdx}
+            key={shop.salonIdx}
             direction="column"
             align="flex-start"
             gap={6}
             width={152}
             height={184}
             padding="3px 3px 13px 3px"
-            onClick={() => handleClickShop(shop.shopIdx)}
+            onClick={() => handleClickShop(shop.salonIdx)}
           >
             <Image
               width={146}
               height={81}
               borderRadius={8}
-              src={shop.shopImg}
+              src={shop.salonImage}
             />
             <HeightFitFlex direction='column' align='flex-start'>
-              <Text typo="Title3" margin='13px 0 11px 6px'>{shop.shopName}</Text>
+              <Text typo="Title3" margin='13px 0 11px 6px'>{shop.salonName}</Text>
               <Text typo="Caption4" colorCode={theme.palette.Gray500} margin='0 0 12px 6px'>
-                {shop.shopAddress}
+                {shop.salonAddress}
               </Text>
               <HeightFitFlex justify="flex-start" gap={3} margin='0 0 0 6px'>
-                {shop.shopTag.map((shopTag: string) => (
+                {shop.salonTag?.map((tag: string) => (
                   <Tag
-                    key={shopTag}
+                    key={tag}
                     typo="Caption2"
                     bg={theme.palette.Gray50}
                     fontColor={theme.palette.Gray500}
@@ -48,7 +48,7 @@ export const ShopVertical = ({
                     height="19px"
                     borderRadius="2px"
                   >
-                    {shopTag}
+                    {tag}
                   </Tag>
                 ))}
               </HeightFitFlex>

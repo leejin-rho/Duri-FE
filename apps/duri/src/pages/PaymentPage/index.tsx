@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { QuotationProps } from '@duri/assets/types/quotation';
 import PaymentWidget from '@duri/components/payment/Widget';
 import { DuriNavbar, Flex, MobileLayout } from '@duri-fe/ui';
-import { getQuotationInfo } from '@duri-fe/utils';
+import { useGetQuotationInfo } from '@duri-fe/utils';
 
 const PaymentPage = () => {
   const { quotationId } = useParams<{ quotationId: string }>();
@@ -12,24 +12,20 @@ const PaymentPage = () => {
 
   //매장 및 시술 정보
   const [quotationInfo, setQuotationInfo] = useState<QuotationProps>();
-  useEffect(() => {
-    (async () => {
-      if (quotationId) {
-        try {
-          const quotation = await getQuotationInfo(quotationId);
-          if (quotation) setQuotationInfo(quotation);
-        } catch (error) {
-          console.error('Failed to fetch quotation info:', error);
-        }
-      }
-    })();
-  }, [quotationId]);
+  if(quotationId === undefined) return
+  const response = useGetQuotationInfo(quotationId);
+
+  useEffect(()=>{
+    if(response){
+      setQuotationInfo(response);
+    }
+  }, [response])
 
   //쿠폰 정보 - 후순위!!!!!!
   //   const [coupons, setCoupons] = useState();
-  useEffect(() => {
+  // useEffect(() => {
     // 쿠폰 정보 불러와야 함
-  }, []);
+  // }, []);
 
   return (
     <MobileLayout>
