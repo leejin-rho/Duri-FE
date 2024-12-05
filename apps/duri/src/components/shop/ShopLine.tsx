@@ -14,6 +14,7 @@ import {
 import styled from '@emotion/styled';
 
 interface ShopLineProps {
+  id: number;
   title: string;
   score: string;
   reviewNum: number;
@@ -21,9 +22,11 @@ interface ShopLineProps {
   address: string;
   phone: string;
   isClicked?: boolean;
+  onClick: () => void;
 }
 
 export const ShopLine = ({
+  id,
   title,
   score,
   reviewNum,
@@ -31,9 +34,10 @@ export const ShopLine = ({
   address,
   phone,
   isClicked = false,
+  onClick,
 }: ShopLineProps) => {
   return (
-    <HeightFitFlex gap={20}>
+    <HeightFitFlex gap={20} key={id}>
       <SalonImg src={salonDefault} />
       <Flex direction="column" align="flex-start" gap={8}>
         <Flex gap={17} justify="flex-start">
@@ -80,6 +84,7 @@ export const ShopLine = ({
           width="42px"
           height="42px"
           borderRadius="40px"
+          onClick={onClick}
           bg={isClicked ? theme.palette.Normal600 : theme.palette.Normal100}
           padding="0"
         >

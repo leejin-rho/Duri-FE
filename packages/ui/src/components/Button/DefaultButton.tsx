@@ -44,3 +44,9 @@ export const Button = styled.button<ButtonProps>`
       disabled ? 'none' : hoverFontColor || theme.palette.White}; */
   }
 `;
+
+export const FrontBtn = styled(Button)`
+  position: fixed;
+  bottom: 92px;
+  z-index: 3;
+`;

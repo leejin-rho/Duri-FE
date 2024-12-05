@@ -6,7 +6,9 @@ import {
   DownArrow,
   Filter,
   Flex,
+  FrontBtn,
   HardText,
+  Send,
   Seperator,
   Text,
   theme,
@@ -25,6 +27,16 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
 
   const handleDismiss = () => {
     setOpen(false);
+  };
+
+  // 선택된 가게 취합용
+  const [selectedShops, setSelectedShops] = useState<number[]>([]);
+  const toggleShopSelection = (id: number) => {
+    setSelectedShops((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((shopId) => shopId !== id)
+        : [...prevSelected, id],
+    );
   };
 
   return (
@@ -88,58 +100,71 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
           direction="column"
           justify="flex-start"
           gap={28}
-          padding="17px 20px 28px 20px"
+          padding={
+            selectedShops.length > 0
+              ? '17px 20px 81px 20px'
+              : '17px 20px 28px 20px'
+          }
         >
           <ShopLine
+            id={1}
             title="댕댕샵"
             score="4.9"
             reviewNum={120}
             distance={354}
             address="경기 성남시 분당구"
             phone="031)123-1234"
+            isClicked={selectedShops.includes(1)}
+            onClick={() => toggleShopSelection(1)}
           />
           <ShopLine
+            id={2}
             title="댕댕샵"
             score="4.9"
             reviewNum={120}
             distance={354}
             address="경기 성남시 분당구"
             phone="031)123-1234"
-            isClicked={true}
+            isClicked={selectedShops.includes(2)}
+            onClick={() => toggleShopSelection(2)}
           />
           <ShopLine
+            id={3}
             title="댕댕샵"
             score="4.9"
             reviewNum={120}
             distance={354}
             address="경기 성남시 분당구"
             phone="031)123-1234"
+            isClicked={selectedShops.includes(3)}
+            onClick={() => toggleShopSelection(3)}
           />
           <ShopLine
+            id={4}
             title="댕댕샵"
             score="4.9"
             reviewNum={120}
             distance={354}
             address="경기 성남시 분당구"
             phone="031)123-1234"
-          />
-          <ShopLine
-            title="댕댕샵"
-            score="4.9"
-            reviewNum={120}
-            distance={354}
-            address="경기 성남시 분당구"
-            phone="031)123-1234"
-          />
-          <ShopLine
-            title="댕댕샵"
-            score="4.9"
-            reviewNum={120}
-            distance={354}
-            address="경기 성남시 분당구"
-            phone="031)123-1234"
+            isClicked={selectedShops.includes(4)}
+            onClick={() => toggleShopSelection(4)}
           />
         </ScrollFlex>
+
+        {selectedShops.length > 0 ? (
+          <FrontBtn
+            height="53px"
+            borderRadius="0"
+            bg={theme.palette.Black}
+            fontColor={theme.palette.White}
+          >
+            <Send width={18} height={17} color={theme.palette.White} />
+            <Text typo="Body2" margin="0 0 0 12px">
+              요청서 보내기
+            </Text>
+          </FrontBtn>
+        ) : null}
 
         <BottomSheet
           open={open}
