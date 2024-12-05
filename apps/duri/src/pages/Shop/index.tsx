@@ -91,7 +91,7 @@ export const RelativeMobile = styled(MobileLayout)`
 
 const SearchWrapper = styled(Flex)`
   position: absolute;
-  max-width: 480px;
+  max-width: 375px;
   top: 62px;
   z-index: 1;
   height: fit-content;

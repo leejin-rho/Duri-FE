@@ -107,7 +107,7 @@ const MapWrapper = styled(Flex)`
 const LocationBtn = styled(Flex)`
   position: absolute;
   height: fit-content;
-  max-width: 480px;
+  max-width: 375px;
   bottom: 120px;
   z-index: 10;
 `;

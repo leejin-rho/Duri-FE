@@ -250,10 +250,10 @@ const StyledBottomCss = css`
   [data-rsbs-root]::after {
     border-radius: 16px 16px 0px 0px;
     z-index: 20;
-    max-width: 480px;
+    max-width: 375px;
 
     @media (min-width: 480px) {
-      left: calc(50% - 240px);
+      left: calc(50% - 187.5px);
     }
   }
 

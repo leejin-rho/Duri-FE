@@ -165,4 +165,10 @@ export const typo = {
     font-weight: 300;
     line-height: normal;
   `,
+  Letter: css`
+    font-family: 'OwnglyphRyryu';
+    font-size: ${calcRem(18)};
+    font-weight: 400;
+    line-height: normal;
+  `,
 } as const;
