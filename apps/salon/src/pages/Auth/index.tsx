@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { Flex, MobileLayout, NaverLogo, SpeechBallonContainer, Text, theme } from "@duri-fe/ui";
 import { useSalonNaverLogin } from "@duri-fe/utils";
 import styled from "@emotion/styled";
 
 const AuthPage = () => {
+  const navigate = useNavigate();
   const [query, ] = useSearchParams();
   const providerId = query.get('providerId') || '';
 
@@ -17,9 +18,9 @@ const AuthPage = () => {
     } else if (isSuccess && data) {
       localStorage.setItem(`${data.client}`, data.token);
       if (data.newUser) {
-        window.location.href = '/onboarding';
+        navigate('/onboarding');
       } else {
-        window.location.href = '/';
+        navigate('/');
       }
     }
   }, [data, error]);
