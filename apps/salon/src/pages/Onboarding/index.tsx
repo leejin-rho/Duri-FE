@@ -46,6 +46,7 @@ const OnboardingPage = () => {
 
   const handlePostSalon = () => {
     console.log(salonFormData);
+    console.log(salonOwnerFormData);
     // TODO : 데이터 post하기
     navigate('/');
   }

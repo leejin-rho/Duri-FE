@@ -171,6 +171,7 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                 <Flex justify="flex-start" gap={8}>
                   {genders.map((gender) => (
                     <Button
+                      type='button'
                       key={gender}
                       onClick={() => handleToggleGender(gender)}
                       bg={salonOwnerFormState.gender === gender ? theme.palette.Black : theme.palette.White}
