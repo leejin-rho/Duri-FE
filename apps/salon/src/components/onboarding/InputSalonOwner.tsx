@@ -135,9 +135,9 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
 
               <FormInputWrapper widthPer={50}>
                 <TextField 
-                  label="성함" placeholder="이름 입력" value={salonOwnerFormState.name}
+                  label="성함" placeholder="이름 입력" value={salonOwnerFormState.name} maxLength={10}
                   onChange={(e) => handleChange('name', e.target.value)}
-                  width={130} height={40} isEssential isNoBorder isShadow
+                  width={130} height={40} isEssential isNoBorder shadow='0px 0px 4px 0px rgba(0, 0, 0, 0.10)'
                 />
               </FormInputWrapper>
             </Flex>
@@ -153,9 +153,9 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                 </label>
                 <Flex justify="flex-start" gap={8}>
                   <TextField
-                    type="number" placeholder="나이 입력" value={salonOwnerFormState.age} 
+                    type="number" placeholder="나이 입력" value={salonOwnerFormState.age} maxLength={2}
                     onChange={(e) => handleChange('age', e.target.value)}
-                    width={83} height={40} isNoBorder isShadow
+                    width={83} height={40} isNoBorder shadow='0px 0px 4px 0px rgba(0, 0, 0, 0.10)'
                   />
                   <Text>세</Text>
                 </Flex>
@@ -197,15 +197,15 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
               </label>
               <Flex justify="flex-start" gap={8}>
                 <TextField
-                  type="number" max={99} placeholder="경력 입력" value={salonOwnerFormState.experienceYears}
+                  type="number" max={99} placeholder="경력 입력" value={salonOwnerFormState.experienceYears} maxLength={2}
                   onChange={(e) => handleChange('experienceYears', e.target.value)}
-                  width={83} height={40} isNoBorder isShadow
+                  width={83} height={40} isNoBorder shadow='0px 0px 4px 0px rgba(0, 0, 0, 0.10)'
                 />
                 <Text>년</Text>
                 <TextField
-                  type="number" max={99} placeholder="경력 입력" value={salonOwnerFormState.experienceMonths}
+                  type="number" max={12} placeholder="경력 입력" value={salonOwnerFormState.experienceMonths} maxLength={2}
                   onChange={(e) => handleChange('experienceMonths', e.target.value)}
-                  width={83} height={40} isNoBorder isShadow
+                  width={83} height={40} isNoBorder shadow='0px 0px 4px 0px rgba(0, 0, 0, 0.10)'
                 />
                 <Text>개월</Text>
               </Flex>

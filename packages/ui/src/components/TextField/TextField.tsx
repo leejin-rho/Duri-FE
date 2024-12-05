@@ -75,6 +75,13 @@ export const TextField = forwardRef<
     },
     ref,
   ) => {
+    function maxLengthCheck(event: React.ChangeEvent<HTMLInputElement>){
+      if (event.target.value.length > event.target.maxLength){
+        //object.maxLength : 매게변수 오브젝트의 maxlength 속성 값입니다.
+        event.target.value = event.target.value.slice(0, event.target.maxLength);
+      }    
+    }
+
     return (
       <Container per={widthPer} width={isSubTextField ? width + 37 : width}>
         <HeightFitFlex
@@ -119,6 +126,7 @@ export const TextField = forwardRef<
                 ref={ref as ForwardedRef<HTMLInputElement>}
                 placeholder={placeholder}
                 spellCheck={false}
+                onInput={maxLengthCheck}
                 height={height}
                 fontColor={fontColor}
                 isRight={Boolean(right)}
@@ -205,12 +213,6 @@ const StyledInput = styled.input<{
   color: ${({ isError, fontColor }) =>
     isError ? theme.palette.Alert : fontColor};
   text-align: ${({ isRound }) => (isRound ? 'center' : 'flex-start')};
-
-  ${({ isShadow }) =>
-    isShadow &&
-    `
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
-  `}
 
   & + div {
     color: ${({ value }) =>
