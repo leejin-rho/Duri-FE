@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AlertStar, Button, Flex, Text, theme } from '@duri-fe/ui';
+import { AlertStar, Button, Flex, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 import { SalonOwnerFormData } from '@salon/types/onboarding';
 
 import {
@@ -27,7 +27,7 @@ const SalonOwnerConfirm = ({ salonOwnerFormData }: SalonOwnerConfirmProps) => {
             <Text typo="Heading2">입력하신 정보를</Text>
             <Text typo="Heading2">확인해주세요</Text>
           </Flex>
-          <Text typo="Label2" colorCode={theme.palette.Gray500}>
+          <Text typo="Body3" colorCode={theme.palette.Gray500}>
             등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!
           </Text>
         </Flex>
@@ -38,7 +38,7 @@ const SalonOwnerConfirm = ({ salonOwnerFormData }: SalonOwnerConfirmProps) => {
               성함
               <AlertStar isUpper />
             </Text>
-            <Text typo="Label2">{salonOwnerFormData.name}</Text>
+            <Text typo="Body4">{salonOwnerFormData.name}</Text>
           </Flex>
 
           <Flex justify="flex-start" gap={36}>
@@ -46,7 +46,7 @@ const SalonOwnerConfirm = ({ salonOwnerFormData }: SalonOwnerConfirmProps) => {
               성별
               <AlertStar isUpper />
             </Text>
-            <Text typo="Label2">{salonOwnerFormData.gender}</Text>
+            <Text typo="Body4">{salonOwnerFormData.gender}</Text>
           </Flex>
 
           <Flex justify="flex-start" gap={36}>
@@ -54,7 +54,7 @@ const SalonOwnerConfirm = ({ salonOwnerFormData }: SalonOwnerConfirmProps) => {
               나이
               <AlertStar isUpper />
             </Text>
-            <Text typo="Label2">{salonOwnerFormData.age}세</Text>
+            <Text typo="Body4">{salonOwnerFormData.age}세</Text>
           </Flex>
 
           <Flex justify="flex-start" gap={36}>
@@ -62,18 +62,22 @@ const SalonOwnerConfirm = ({ salonOwnerFormData }: SalonOwnerConfirmProps) => {
               경력
               <AlertStar isUpper />
             </Text>
-            <Text typo="Label2">
+            <Text typo="Body4">
               {salonOwnerFormData.experienceYears}년{' '}
               {salonOwnerFormData.experienceMonths}개월
             </Text>
           </Flex>
 
-          <Flex justify="flex-start" gap={36}>
+          <Flex justify="flex-start" align='flex-start' gap={36}>
             <Text typo="Label1">
               자격
               <AlertStar isUpper />
             </Text>
-            <Text typo="Label2">{salonOwnerFormData.license}</Text>
+            <WidthFitFlex direction='column' justify='flex-start' align='start' gap={12}>
+              {salonOwnerFormData.license && salonOwnerFormData.license.map((item) => (
+                <Text key={item} typo="Body4">{item}</Text>
+              ))}
+            </WidthFitFlex>
           </Flex>
         </Flex>
       </Flex>

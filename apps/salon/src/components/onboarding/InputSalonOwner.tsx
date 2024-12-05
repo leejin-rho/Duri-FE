@@ -9,6 +9,7 @@ import {
   Text,
   TextField,
   theme,
+  WidthFitFlex,
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 import { SalonOwnerFormData } from '@salon/types/onboarding';
@@ -32,19 +33,20 @@ const certificateOptions: string[] = [
   '피어프리 인증',
 ];
 
+const genders: string[] = ['male', 'female'];
+
 const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
-  const [salonOwnerFormState, setSalonOwnerFormState] =
-    useState<SalonOwnerFormData>({
-      profile: '',
-      name: '',
-      age: '',
-      gender: '',
-      experienceYears: '',
-      experienceMonths: '',
-      license: '',
-    });
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [salonOwnerFormState, setSalonOwnerFormState] = useState<SalonOwnerFormData>({
+    profile: '',
+    name: '',
+    age: '',
+    gender: '',
+    experienceYears: '',
+    experienceMonths: '',
+    license: [],
+  });
   const [isEmpty, setIsEmpty] = useState<boolean>(true);
+  const [imgUrl, setImgUrl] = useState<string>('');
 
   useEffect(() => {
     const isFilled = Object.values(salonOwnerFormState).every(
@@ -54,57 +56,52 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
     console.log(salonOwnerFormState);
   }, [salonOwnerFormState]);
 
-  const handleChange = (field: keyof SalonOwnerFormData, value: string) => {
+  /** 변경 함수 */
+  const handleChange = (field: keyof SalonOwnerFormData, value: string | string[]) => {
     setSalonOwnerFormState({ ...salonOwnerFormState, [field]: value });
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      handleChange('profile', file.name);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      const fileUrl = URL.createObjectURL(file);
+      setImgUrl(fileUrl);
+      handleChange('profile', fileUrl);
     } else {
-      setPreviewImage(null);
       handleChange('profile', '');
     }
   };
 
   const handleToggleGender = (selectedGender: string) => {
-    setSalonOwnerFormState({
-      ...salonOwnerFormState,
-      gender: selectedGender,
-    });
+    handleChange('gender', selectedGender);
   };
 
   const handleSelectLicense = (selectedLicense: string) => {
-    setSalonOwnerFormState({
-      ...salonOwnerFormState,
-      license: selectedLicense,
-    });
+    const set = new Set(salonOwnerFormState.license);
+    set.add(selectedLicense);
+    handleChange('license', [...set])
   };
 
+  const handleRemoveLicense = (selectedLicense: string) => {
+    const set = new Set(salonOwnerFormState.license);
+    set.delete(selectedLicense);
+    handleChange('license', [...set]);
+  }
+
   const handleSubmit = () => {
+    URL.revokeObjectURL(imgUrl);
     onNext(salonOwnerFormState);
   };
 
   return (
     <>
       <Flex direction="column" align="flex-start" padding="48px 0 96px 0">
-        <Flex
-          direction="column"
-          align="flex-start"
-          gap={24}
-          padding="0 0 24px 0"
-        >
+        <Flex direction="column" align="flex-start" gap={24} padding="0 0 24px 0">
           <Flex direction="column" align="flex-start">
             <Text typo="Heading2">원장님의</Text>
             <Text typo="Heading2">정보를 입력해주세요</Text>
           </Flex>
-          <Text typo="Label2" colorCode={theme.palette.Gray500}>
+          <Text typo="Body3" colorCode={theme.palette.Gray500}>
             등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!
           </Text>
         </Flex>
@@ -121,24 +118,11 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                   </Text>
                 </label>
                 <ImageUploadContainer width={70} height={70}>
-                  {previewImage ? (
-                    <ImagePreview
-                      src={previewImage}
-                      alt="선택된 파일 미리보기"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                    />
+                  {imgUrl && salonOwnerFormState.profile ? (
+                    <ImagePreview src={imgUrl} alt="선택된 파일 미리보기" />
                   ) : (
-                    <Flex
-                      width={70}
-                      height={70}
-                      backgroundColor={theme.palette.Gray20}
-                      borderRadius={35}
-                    >
-                      <Profile width={52} height={52} />
+                    <Flex width={70} height={70} backgroundColor={theme.palette.Gray20} borderRadius={35}>
+                      <Profile width={52} height={52} color={theme.palette.Gray200} />
                     </Flex>
                   )}
                   <FileInput
@@ -151,14 +135,10 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
               </Flex>
 
               <FormInputWrapper widthPer={50}>
-                <TextField
-                  label="성함"
-                  placeholder="이름 입력"
-                  value={salonOwnerFormState.name}
+                <TextField 
+                  label="성함" placeholder="이름 입력" value={salonOwnerFormState.name}
                   onChange={(e) => handleChange('name', e.target.value)}
-                  isEssential
-                  width={130}
-                  height={40}
+                  width={130} height={40} isEssential isNoBorder isShadow
                 />
               </FormInputWrapper>
             </Flex>
@@ -174,12 +154,9 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                 </label>
                 <Flex justify="flex-start" gap={8}>
                   <TextField
-                    type="number"
-                    placeholder="나이 입력"
-                    value={salonOwnerFormState.age}
+                    type="number" placeholder="나이 입력" value={salonOwnerFormState.age} 
                     onChange={(e) => handleChange('age', e.target.value)}
-                    width={83}
-                    height={40}
+                    width={83} height={40} isNoBorder isShadow
                   />
                   <Text>세</Text>
                 </Flex>
@@ -193,55 +170,20 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                   </Text>
                 </label>
                 <Flex justify="flex-start" gap={8}>
-                  {salonOwnerFormState.gender === 'male' ? (
-                    <>
-                      <Button
-                        onClick={() => handleToggleGender('female')}
-                        bg={theme.palette.White}
-                        fontColor={theme.palette.Black}
-                        border={`1px solid ${theme.palette.Gray100}`}
-                        height="43px"
-                        typo="Body2"
-                        width="fit-content"
-                      >
-                        여
-                      </Button>
-                      <Button
-                        onClick={() => handleToggleGender('male')}
-                        bg={theme.palette.Black}
-                        fontColor={theme.palette.White}
-                        height="43px"
-                        typo="Body2"
-                        width="fit-content"
-                      >
-                        남
-                      </Button>
-                    </>
-                  ) : (
-                    <>
-                      <Button
-                        onClick={() => handleToggleGender('female')}
-                        bg={theme.palette.Black}
-                        fontColor={theme.palette.White}
-                        height="43px"
-                        typo="Body2"
-                        width="fit-content"
-                      >
-                        여
-                      </Button>
-                      <Button
-                        onClick={() => handleToggleGender('male')}
-                        bg={theme.palette.White}
-                        fontColor={theme.palette.Black}
-                        border={`1px solid ${theme.palette.Gray100}`}
-                        height="43px"
-                        typo="Body2"
-                        width="fit-content"
-                      >
-                        남
-                      </Button>
-                    </>
-                  )}
+                  {genders.map((gender) => (
+                    <Button
+                      key={gender}
+                      onClick={() => handleToggleGender(gender)}
+                      bg={salonOwnerFormState.gender === gender ? theme.palette.Black : theme.palette.White}
+                      fontColor={salonOwnerFormState.gender === gender ? theme.palette.White : theme.palette.Black}
+                      border={`1px solid ${theme.palette.Gray100}`}
+                      height="43px"
+                      typo="Body2"
+                      width="fit-content"
+                    >
+                      {gender === 'male' ? '남' : '여'}
+                    </Button>
+                  ))}
                 </Flex>
               </FormInputWrapper>
             </Flex>
@@ -256,28 +198,15 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
               </label>
               <Flex justify="flex-start" gap={8}>
                 <TextField
-                  type="number"
-                  placeholder="경력 입력"
-                  value={salonOwnerFormState.experienceYears}
-                  onChange={(e) =>
-                    handleChange('experienceYears', e.target.value)
-                  }
-                  width={83}
-                  height={40}
-                  max={99}
+                  type="number" max={99} placeholder="경력 입력" value={salonOwnerFormState.experienceYears}
+                  onChange={(e) => handleChange('experienceYears', e.target.value)}
+                  width={83} height={40} isNoBorder isShadow
                 />
                 <Text>년</Text>
                 <TextField
-                  type="number"
-                  placeholder="경력 입력"
-                  value={salonOwnerFormState.experienceMonths}
-                  onChange={(e) =>
-                    handleChange('experienceMonths', e.target.value)
-                  }
-                  width={83}
-                  height={40}
-                  maxLength={2}
-                  max={12}
+                  type="number" max={99} placeholder="경력 입력" value={salonOwnerFormState.experienceMonths}
+                  onChange={(e) => handleChange('experienceMonths', e.target.value)}
+                  width={83} height={40} isNoBorder isShadow
                 />
                 <Text>개월</Text>
               </Flex>
@@ -297,6 +226,11 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                 onSelect={handleSelectLicense}
                 width={235}
               />
+              <WidthFitFlex padding='8px 0 0 16px' direction='column' justify='flex-start' align='start' gap={12}>
+                {salonOwnerFormState.license && salonOwnerFormState.license.map((item) => (
+                  <Text key={item} typo="Body4" onClick={() => handleRemoveLicense(item)}>{item}</Text>
+                ))}
+              </WidthFitFlex>
             </FormInputWrapper>
           </Flex>
         </FormWrapper>
@@ -370,6 +304,3 @@ const FileInput = styled.input`
 `;
 
 export default InputSalonOwner;
-
-// 원장 정보 입력할 때 사진
-// 성별에 공용 컴포넌트 적용

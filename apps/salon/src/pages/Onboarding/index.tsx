@@ -25,7 +25,7 @@ const OnboardingPage = () => {
       gender: '',
       experienceYears: '',
       experienceMonths: '',
-      license: '',
+      license: [],
     });
 
   const nextStep = () => {

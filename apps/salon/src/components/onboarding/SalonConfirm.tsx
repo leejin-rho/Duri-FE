@@ -28,7 +28,7 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
             <Text typo="Heading2">입력하신 정보를</Text>
             <Text typo="Heading2">확인해주세요</Text>
           </Flex>
-          <Text typo="Label2" colorCode={theme.palette.Gray500}>
+          <Text typo="Body3" colorCode={theme.palette.Gray500}>
             등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!
           </Text>
         </Flex>
@@ -39,17 +39,19 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
               매장 이름
               <AlertStar isUpper />
             </Text>
-            <Text typo="Label2">{salonFormData.name}</Text>
+            <Text typo="Body4">{salonFormData.name}</Text>
           </Flex>
 
-          <Flex justify="flex-start" gap={36}>
+          <Flex justify="flex-start" align='flex-start' gap={36}>
             <Text typo="Label1">
               매장 위치
               <AlertStar isUpper />
             </Text>
-            <Text typo="Label2">
-              {salonFormData.address}&nbsp;{salonFormData.addressDetail}
-            </Text>
+            <Flex widthPer={70}>
+              <Text typo="Body4">
+                {salonFormData.addressDetail}[{salonFormData.address}]
+              </Text>
+            </Flex>
           </Flex>
 
           <Flex justify="flex-start" gap={36}>
@@ -57,7 +59,7 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
               사업자 등록번호
               <AlertStar isUpper />
             </Text>
-            <Text typo="Label2">{salonFormData.registrationNumber}</Text>
+            <Text typo="Body4">{salonFormData.registrationNumber}</Text>
           </Flex>
 
           <Flex justify="flex-start" gap={36}>
@@ -65,20 +67,12 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
               미용사 면허번호
               <AlertStar isUpper />
             </Text>
-            <Text typo="Label2">{salonFormData.licenseNumber}</Text>
+            <Text typo="Body4">{salonFormData.licenseNumber}</Text>
           </Flex>
         </Flex>
 
         {/* 매장 위치 네이버 지도로부터 가져오기 */}
-        <div
-          style={{
-            width: '335px',
-            height: '115px',
-            backgroundColor: 'lightgray',
-            borderRadius: '8px',
-            margin: '62px 0 28px 0',
-          }}
-        ></div>
+        <Flex height={115} backgroundColor={theme.palette.Gray50} borderRadius={8} margin='60px 0 0 0'></Flex>
       </Flex>
       {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
       <ContactContainer gap={4}>

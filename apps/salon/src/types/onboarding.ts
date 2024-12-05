@@ -13,5 +13,5 @@ export interface SalonOwnerFormData {
   gender: string;
   experienceYears: string;
   experienceMonths: string;
-  license: string;
+  license: string[];
 }

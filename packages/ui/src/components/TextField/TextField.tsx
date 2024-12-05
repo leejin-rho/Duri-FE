@@ -206,6 +206,12 @@ const StyledInput = styled.input<{
     isError ? theme.palette.Alert : fontColor};
   text-align: ${({ isRound }) => (isRound ? 'center' : 'flex-start')};
 
+  ${({ isShadow }) =>
+    isShadow &&
+    `
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+  `}
+
   & + div {
     color: ${({ value }) =>
       value ? theme.palette.Gray500 : theme.palette.Gray300};
