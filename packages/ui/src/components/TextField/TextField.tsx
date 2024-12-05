@@ -26,6 +26,9 @@ interface TextFieldProps
   isError?: boolean;
   isEssential?: boolean;
   isNoBorder?: boolean;
+  background?: string;
+  shadow?: string;
+  widthPer?: string;
 }
 
 /**
@@ -37,10 +40,13 @@ interface TextFieldProps
  * @param {boolean} isSubTextField: 하위 TextField 여부
  * @param {boolean} fontColor: TextField 내부 폰트 색상
  * @param {ReactNode} right: 우측 아이콘
- * @param {ReactNode} isRound: 둥근 인풋 여부
- * @param {ReactNode} isError: 에러일 경우
- * @param {ReactNode} isEssential: 필수 항목일 경우
- * @param {ReactNode} isNoBorder: 테두리가 없을 경우
+ * @param {boolean} isRound: 둥근 인풋 여부
+ * @param {boolean} isError: 에러일 경우
+ * @param {boolean} isEssential: 필수 항목일 경우
+ * @param {boolean} isNoBorder: 테두리가 없을 경우
+ * @param {string} background: 배경색
+ * @param {string} shadow: 그림자
+ * @param {string} widthPer: 너비 퍼센티지
  *
  */
 export const TextField = forwardRef<
@@ -62,12 +68,15 @@ export const TextField = forwardRef<
       isRound = false,
       isEssential = false,
       isNoBorder = false,
+      background = theme.palette.White,
+      shadow = 'none',
+      widthPer,
       ...props
     },
     ref,
   ) => {
     return (
-      <Container width={isSubTextField ? width + 37 : width}>
+      <Container per={widthPer} width={isSubTextField ? width + 37 : width}>
         <HeightFitFlex
           direction="row"
           gap={19}
@@ -116,6 +125,8 @@ export const TextField = forwardRef<
                 isError={isError}
                 isRound={isRound}
                 isNoBorder={isNoBorder}
+                background={background}
+                shadow={shadow}
               />
               {right && <StyledIcon className="icon">{right}</StyledIcon>}
             </InputContainer>
@@ -128,8 +139,11 @@ export const TextField = forwardRef<
 
 TextField.displayName = 'TextField';
 
-const Container = styled(Flex)<{ width: number }>`
-  width: ${({ width }) => width}px;
+const Container = styled(Flex)<{
+  per?: string;
+  width: number;
+}>`
+  width: ${({ width, per }) => per ?? `${width}px`};
 
   flex-direction: column;
   align-items: flex-start;
@@ -160,6 +174,8 @@ const StyledInput = styled.input<{
   isError?: boolean;
   isRound?: boolean;
   isNoBorder?: boolean;
+  background?: string;
+  shadow?: string;
 }>`
   width: inherit;
   height: ${({ height }) => height ?? 40}px;
@@ -167,7 +183,9 @@ const StyledInput = styled.input<{
 
   box-sizing: border-box;
 
-  background: ${theme.palette.White};
+  background: ${({ background }) => background ?? theme.palette.White};
+  box-shadow: ${({ shadow }) => shadow ?? 'none'};
+
   border-radius: ${({ isRound, isNoBorder }) =>
     isNoBorder ? '12px' : isRound ? '99px' : '8px'};
 

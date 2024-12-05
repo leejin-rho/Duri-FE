@@ -14,9 +14,10 @@ interface ButtonProps {
   border?: string;
   disabled?: boolean;
   padding?: string;
+  shadow?: string;
 }
 
-export const Button = styled.div<ButtonProps>`
+export const Button = styled.button<ButtonProps>`
   display: flex;
   padding: ${({ padding }) => padding ?? '16px 20px'};
   justify-content: center;
@@ -33,6 +34,7 @@ export const Button = styled.div<ButtonProps>`
   flex-shrink: 0;
   ${({ typo }) => (typo ? theme.typo[typo as KeyOfTypo] : theme.typo.Label1)};
   color: ${({ fontColor }) => (fontColor ? fontColor : theme.palette.Black)};
+  box-shadow: ${({ shadow }) => shadow ?? 'none'};
 
   &:hover {
     cursor: ${({ disabled }) => (disabled ? 'disabled' : 'pointer')};
@@ -41,4 +43,10 @@ export const Button = styled.div<ButtonProps>`
     color: ${({ hoverFontColor, disabled }) =>
       disabled ? 'none' : hoverFontColor || theme.palette.White}; */
   }
+`;
+
+export const FrontBtn = styled(Button)`
+  position: fixed;
+  bottom: 92px;
+  z-index: 3;
 `;

@@ -8,7 +8,14 @@ interface NavItemProps {
   isActive: boolean;
   text: string;
   onClick: () => void;
-  iconType: 'home' | 'shop' | 'quotation' | 'diary' | 'my';
+  iconType:
+    | 'home'
+    | 'shop'
+    | 'quotation'
+    | 'diary'
+    | 'my'
+    | 'portfolio'
+    | 'timetable';
   children: ReactNode;
 }
 
@@ -44,8 +51,8 @@ const inactive = css`
 `;
 
 const textStyle = css`
-  margin-top: 4px;
-  font-size: 0.7rem;
+  margin-top: 10px;
+  font-size: 12px;
 `;
 
 export default NavItem;

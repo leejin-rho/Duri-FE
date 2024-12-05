@@ -1,12 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
-  DiaryIcon,
   HomeIcon,
   MyIcon,
+  PortfolioIcon,
   QuotationIcon,
-  ShopIcon,
   theme,
+  TimetableIcon,
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
@@ -14,7 +14,7 @@ import { Flex } from '../FlexBox';
 
 import NavItem from './NavItem';
 
-export const DuriNavbar = () => {
+export const SalonNavbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname; // 현재 경로
@@ -41,12 +41,12 @@ export const DuriNavbar = () => {
             <HomeIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/shop'}
-            text="내주변"
-            onClick={() => handleNavigate('/shop')}
-            iconType="shop"
+            isActive={pathname === '/timetable'}
+            text="시간표"
+            onClick={() => handleNavigate('/timetable')}
+            iconType="timetable"
           >
-            <ShopIcon height={24} />
+            <TimetableIcon height={24} />
           </NavItem>
           <NavItem
             isActive={pathname === '/quotation'}
@@ -57,12 +57,12 @@ export const DuriNavbar = () => {
             <QuotationIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/diary'}
-            text="일기"
-            onClick={() => handleNavigate('/diary')}
-            iconType="diary"
+            isActive={pathname === '/portfolio'}
+            text="포트폴리오"
+            onClick={() => handleNavigate('/portfolio')}
+            iconType="portfolio"
           >
-            <DiaryIcon height={24} />
+            <PortfolioIcon height={24} />
           </NavItem>
           <NavItem
             isActive={pathname === '/my'}
@@ -89,7 +89,7 @@ const TabContainer = styled(Flex)`
   min-width: 360px;
   position: fixed;
   bottom: 0;
-  z-index: 20;
+  z-index: 2;
   border-top: 0.5px solid
     hsla(224.99999999999997, 5.084745762711864%, 46.27450980392157%, 0.16);
 `;

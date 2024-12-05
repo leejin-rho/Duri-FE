@@ -7,7 +7,7 @@ const SvgLocation = (props: React.SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#200E32"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={3}
@@ -15,7 +15,7 @@ const SvgLocation = (props: React.SVGProps<SVGSVGElement>) => (
       clipRule="evenodd"
     />
     <path
-      stroke="#200E32"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={3}
