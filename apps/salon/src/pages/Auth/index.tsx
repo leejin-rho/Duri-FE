@@ -1,11 +1,28 @@
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+
 import { Flex, MobileLayout, NaverLogo, SpeechBallonContainer, Text, theme } from "@duri-fe/ui";
-import { salonNaverLoginRedirect } from "@duri-fe/utils";
+import { useSalonNaverLogin } from "@duri-fe/utils";
 import styled from "@emotion/styled";
 
-const LoginPage = () => {
-  const handleNaverLogin = () => {
-    salonNaverLoginRedirect();
-  }
+const AuthPage = () => {
+  const [query, ] = useSearchParams();
+  const providerId = query.get('providerId') || '';
+
+  const { data, error, isSuccess } = useSalonNaverLogin(providerId);
+
+  useEffect(() => {
+    if (error) {
+      window.alert('로그인에 실패했습니다.');
+    } else if (isSuccess && data) {
+      localStorage.setItem(`${data.client}`, data.token);
+      if (data.newUser) {
+        window.location.href = '/onboarding';
+      } else {
+        window.location.href = '/';
+      }
+    }
+  }, [data, error]);
 
   return (
     <MobileLayout>
@@ -24,7 +41,7 @@ const LoginPage = () => {
             label="3초만에 시작하기 🚀"
             textColor={theme.palette.Gray400}
           />
-          <LoginButton onClick={handleNaverLogin}>
+          <LoginButton>
             <NaverLogo />
           </LoginButton>
         </Flex>
@@ -57,4 +74,4 @@ const Contact = styled(Flex)`
   height: fit-content;
 `;
 
-export default LoginPage;
+export default AuthPage;
