@@ -1,4 +1,4 @@
-import { ClosetGroomingType, QuotationRequestType, ScheduleType } from '@assets/types/home';
+import { ClosetGroomingType, QuotationRequestType, ScheduleType, ShopInfoType } from '@assets/types/home';
 import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
@@ -74,6 +74,14 @@ const quoataionRequestData: QuotationRequestType[] = [
   }
 ]
 
+const shopInfoData: ShopInfoType = {
+  "id": 1,
+  "name": "강남 미용샵",
+  "address": "서울시 강남구",
+  "imageURL": null,
+  "phone": "02-123-4567"
+}
+
 const Home = () => {
   const date = new Date();
   const dateStr = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
@@ -83,12 +91,13 @@ const Home = () => {
       <HomeHeaderContainer direction='column' height={260} align='start' justify='space-between'>
         <Header logoColor={theme.palette.Black} iconColor={theme.palette.White} badge />
         
+        {/** 매장 정보 */}
         <TextContainer direction='column' align='start' padding="36px 20px" gap={4}>
           <Flex gap={12}>
-            <Text typo='Heading3' colorCode={theme.palette.White}>댕댕샵</Text>
+            <Text typo='Heading3' colorCode={theme.palette.White}>{shopInfoData.name}</Text>
             <Pencil width={20} />
           </Flex>
-          <Text typo='Body3' colorCode={theme.palette.White}>경기도 성남시</Text>
+          <Text typo='Body3' colorCode={theme.palette.White}>{shopInfoData.address}</Text>
         </TextContainer>
 
         <ShopNotice justify='start' padding="16px" backgroundColor={theme.palette.Normal200}>
@@ -98,6 +107,7 @@ const Home = () => {
         </ShopNotice>
       </HomeHeaderContainer>
 
+      {/** 진행중인 시술 */}
       <Flex padding='0 20px' margin='45px 0 0 0'>
         <Card height='195' borderRadius={16} shadow='large'>
           <OngoingGrooming
@@ -115,6 +125,7 @@ const Home = () => {
         </Card>
       </Flex>
 
+      {/** 오늘 스케줄 */}
       <Flex direction='column' align='flex-start' padding='0 20px' margin='31px 0 0 0' gap={32}>
         <Flex direction='column' align='flex-start' gap={6}>
           <Text typo='Caption1'>{dateStr}</Text>
@@ -129,6 +140,7 @@ const Home = () => {
         </Card>
       </Flex>
 
+      {/** 요청서 확인 */}
       <Flex direction='column' align='flex-start' margin='28px 0 120px 0'>
         <Flex justify='flex-start' gap={16} margin='0 20px 16px 20px'>
           <Text typo='Title1'>요청서 확인하기</Text>
@@ -137,7 +149,6 @@ const Home = () => {
             <NextArrow width={20} color={theme.palette.Gray300} />
           </WidthFitFlex>
         </Flex>
-        
         <NewRequestItemWrapper justify='flex-start' padding="0 20px" gap={8}>
           {quoataionRequestData.map((request, index) => (
             <NewRequestItem
@@ -162,10 +173,11 @@ const Home = () => {
   );
 };
 
-const HomeHeaderContainer = styled(Flex)`
+const HomeHeaderContainer = styled(Flex)<{backgroundImg?: string}>`
   position: relative;
   background-size: cover;
   background-position: center;
+  ${props => props.backgroundImg && `background-image: url(${props.backgroundImg});`}
 
   &::before {
     content: '';

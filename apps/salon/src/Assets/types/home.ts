@@ -1,3 +1,11 @@
+export interface ShopInfoType {
+  id: number;
+  name: string;
+  address: string;
+  imageURL: string | null;
+  phone: string;
+}
+
 export interface ClosetGroomingType {
   petId: number;
   petName: string;
