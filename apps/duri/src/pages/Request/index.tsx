@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { addMenu, designMenu, menu, specialMenu } from '@duri/assets/data';
 import { PetInfoProps } from '@duri/assets/types/pet';
 import { RequestProps } from '@duri/assets/types/request';
-import MonthlyCalendar from '@duri/components/quotation/Calendar';
-import EtcRequest from '@duri/components/quotation/EtcRequest';
-import PetInfo from '@duri/components/quotation/PetInfo';
-import SelectGrooming from '@duri/components/quotation/SelectGrooming';
-import TimeTable from '@duri/components/quotation/TimeTable';
+import MonthlyCalendar from '@duri/components/request/Calendar';
+import EtcRequest from '@duri/components/request/EtcRequest';
+import PetInfo from '@duri/components/request/PetInfo';
+import SelectGrooming from '@duri/components/request/SelectGrooming';
+import TimeTable from '@duri/components/request/TimeTable';
 import {
   Button,
   DuriNavbar,
