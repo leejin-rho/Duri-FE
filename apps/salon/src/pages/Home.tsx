@@ -3,7 +3,7 @@ import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, NextArrow,
 import styled from '@emotion/styled';
 
 import OngoingGrooming from '@components/home/ClosetGrooming';
-import DailySchedule from '@components/home/DailySchedule';
+import DailyScheduleItem from '@components/home/DailyScheduleItem';
 import NewRequestItem from '@components/home/NewRequestItem';
 
 const closetGroomingData: ClosetGroomingType = {
@@ -131,12 +131,22 @@ const Home = () => {
           <Text typo='Caption1'>{dateStr}</Text>
           <Text typo='Title1'>오늘 일정 빠르게 보기</Text>
         </Flex>
-        <Card
-          height='237'
-          borderRadius={8}
-          shadow='large'
-        >
-          <DailySchedule dailyScheduleData={dailyScheduleData}/>
+        <Card height='237' borderRadius={8} shadow='large'>
+          <ScheduleWrapper direction="column" align="flex-start" justify="flex-start" padding="20px 14px">
+            <ScheduleContainer direction="column" align="flex-start" justify="flex-start">
+              {dailyScheduleData.map((schedule, index) => (
+                <DailyScheduleItem 
+                  key={index}
+                  startTime={schedule.startTime}
+                  petName={schedule.petName}
+                  breed={schedule.breed}
+                  gender={schedule.gender}
+                  weight={schedule.weight}
+                  groomerName={schedule.groomerName}
+                />
+              ))}
+            </ScheduleContainer>
+          </ScheduleWrapper>
         </Card>
       </Flex>
 
@@ -211,6 +221,15 @@ const ShopNoticeText = styled(Text)`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+
+
+const ScheduleWrapper = styled(Flex)`
+  overflow-y: hidden;
+`
+
+const ScheduleContainer = styled(Flex)`
+  overflow-y: scroll;
 `;
 
 const NewRequestItemWrapper = styled(Flex)`
