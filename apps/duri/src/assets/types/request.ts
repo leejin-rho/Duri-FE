@@ -1,5 +1,5 @@
 export interface RequestProps extends TimeProps{
-  petId?: number;
+  petId: number | undefined;
   menu: string[];
   addMenu: string[];
   specialMenu: string[];

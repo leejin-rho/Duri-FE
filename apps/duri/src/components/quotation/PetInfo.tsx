@@ -31,7 +31,6 @@ const PetInfo = ({
         <HeightFitFlex direction="column" gap={12} align="flex-start">
           <Text typo="Body2">{petName}</Text>
           <Text typo="Caption2" colorCode={theme.palette.Gray400}>
-            {' '}
             {breed}, {age}, {gender}, {weight}kg
           </Text>
         </HeightFitFlex>

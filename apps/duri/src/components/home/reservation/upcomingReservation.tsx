@@ -72,7 +72,7 @@ const UpcomingReservation = (upcomingReservation: UpcomingReservationProps) => {
           })}
         </Text>
         <Text typo='Label2' colorCode={theme.palette.Normal800}>
-          {upcomingReservation.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원
+          {upcomingReservation.totalPrice.toLocaleString()} 원
         </Text>
       </BottomWrapper>
     </Wrapper>
