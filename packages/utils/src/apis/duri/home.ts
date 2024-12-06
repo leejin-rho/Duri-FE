@@ -1,6 +1,3 @@
-// import axios from 'axios';
-// import { HttpResponse } from 'msw';
-
 import { duriInstance } from '../axiosConfig';
 
 export async function getRegularShopInfo() {
@@ -24,3 +21,13 @@ export async function getRecommendedShopInfo() {
     console.error(error);
   }
 }
+
+export const getUpcomingReservation = async () => {
+  const response = await duriInstance.get('/reservation');
+  return response.data;
+};
+
+export const getLastReservation = async () => {
+  const response = await duriInstance.get('/last/reservation');
+  return response.data;
+};

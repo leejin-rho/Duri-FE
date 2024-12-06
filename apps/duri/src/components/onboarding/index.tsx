@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import { breedMapping } from '@duri/assets/data';
 import { Button, Flex, StatusBar, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
@@ -100,7 +101,10 @@ const MultiStepForm = () => {
   };
 
   const onSubmit = (data: FormData) => {
-    console.log('Form Data:', data);
+    setValue('breed',breedMapping[data.breed])
+    
+    //API 호출 필요
+
     navigate('/');
   };
 

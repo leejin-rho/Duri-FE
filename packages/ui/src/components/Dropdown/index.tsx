@@ -12,7 +12,7 @@ import { Select } from './Select';
 interface DropdownProps {
   width?: number | string;
   margin?: string;
-  options?: string[]; // select 목록
+  options?: string[] ; // select 목록
   defaultValue: string;
   onSelect: (value: string) => void; // 선택된 값을 부모로 전달
 }

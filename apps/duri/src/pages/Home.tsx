@@ -37,7 +37,7 @@ const Home = () => {
   const reservationData = useGetUpcomingReservation();
   const lastReservationData = useGetLastReservation();
   const navigate = useNavigate();
-  const handleClickSearchIcon = () => navigate('/search');
+  const handleClickSearchIcon = () => navigate('/shop');
 
   useEffect(() => {
     if (recommendedListData) setRecommendedShopList(recommendedListData);
