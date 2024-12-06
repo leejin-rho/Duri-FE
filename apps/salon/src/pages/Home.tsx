@@ -99,7 +99,7 @@ const Home = () => {
   return (
     <MobileLayout>
       <HomeHeaderContainer direction='column' height={260} align='start' justify='space-between'>
-        <Header logoColor={theme.palette.Black} iconColor={theme.palette.White} badge />
+        <Header logoColor={theme.palette.Black} iconColor={theme.palette.Normal800} badge />
         
         {/** 매장 정보 */}
         <TextContainer direction='column' align='start' padding="36px 20px" gap={4}>

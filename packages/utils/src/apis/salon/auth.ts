@@ -1,4 +1,4 @@
-import { BASE_URL_AUTH, NaverLoginResponse, salonInstance } from "@duri-fe/utils";
+import { BASE_URL_AUTH, NaverLoginResponse, publicInstance } from "@duri-fe/utils";
 
 /** 네이버 소셜 로그인 하이퍼링크 - 리다이렉트 반환 */
 export const salonNaverLoginRedirect = () => {
@@ -8,7 +8,7 @@ export const salonNaverLoginRedirect = () => {
 /** 네이버 소셜 로그인 */
 export const salonNaverLogin = async (providerId: string): Promise<NaverLoginResponse['response']> => {
   try {
-    const response = await salonInstance.get('auth/shop/token', {
+    const response = await publicInstance.get('auth/shop/token', {
       params: {
         providerId
       }
