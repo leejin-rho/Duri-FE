@@ -1,6 +1,6 @@
+import { ScheduleType } from "@assets/types/home";
 import { Flex } from "@duri-fe/ui";
 import styled from "@emotion/styled";
-import { ScheduleType } from "@salon/Assets/types/home";
 
 import DailyScheduleItem from "./DailyScheduleItem";
 

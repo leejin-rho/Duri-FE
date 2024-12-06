@@ -1,9 +1,10 @@
+import { ClosetGroomingType, ScheduleType } from '@assets/types/home';
 import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
-import { ClosetGroomingType, ScheduleType } from '@salon/Assets/types/home';
-import OngoingGrooming from '@salon/components/home/ClosetGrooming';
-import DailySchedule from '@salon/components/home/DailySchedule';
-import NewRequestItem from '@salon/components/home/NewRequestItem';
+
+import OngoingGrooming from '@components/home/ClosetGrooming';
+import DailySchedule from '@components/home/DailySchedule';
+import NewRequestItem from '@components/home/NewRequestItem';
 
 const closetGroomingData: ClosetGroomingType = {
   "petId": 0,
