@@ -42,7 +42,17 @@ const dailyScheduleData: ScheduleType[] = [
     "gender": "MALE",
     "weight": 20,
     "groomerName": "한지민"
-  }
+  },
+  {
+    "date": "12-03",
+    "startTime": "09:00",
+    "petId": 3,
+    "petName": "몽이",
+    "breed": "말티즈",
+    "gender": "MALE",
+    "weight": 7,
+    "groomerName": "한지민"
+  },
 ]
 
 const quoataionRequestData: QuotationRequestType[] = [
@@ -131,9 +141,10 @@ const Home = () => {
           <Text typo='Caption1'>{dateStr}</Text>
           <Text typo='Title1'>오늘 일정 빠르게 보기</Text>
         </Flex>
-        <Card height='237' borderRadius={8} shadow='large'>
+        <Card maxHeight="240px" borderRadius={8} shadow='large'>
           <ScheduleWrapper direction="column" align="flex-start" justify="flex-start" padding="20px 14px">
             <ScheduleContainer direction="column" align="flex-start" justify="flex-start">
+              <SideBar margin="0 10px 0 3px" width={1} backgroundColor={theme.palette.Gray200} />
               {dailyScheduleData.map((schedule, index) => (
                 <DailyScheduleItem 
                   key={index}
@@ -151,7 +162,7 @@ const Home = () => {
       </Flex>
 
       {/** 요청서 확인 */}
-      <Flex direction='column' align='flex-start' margin='28px 0 120px 0'>
+      <NewRequestWrapper direction='column' align='flex-start' margin='28px 0 120px 0'>
         <Flex justify='flex-start' gap={16} margin='0 20px 16px 20px'>
           <Text typo='Title1'>요청서 확인하기</Text>
           <WidthFitFlex>
@@ -177,7 +188,7 @@ const Home = () => {
             />
           ))}
         </NewRequestItemWrapper>
-      </Flex>
+      </NewRequestWrapper>
       <DuriNavbar />
     </MobileLayout>
   );
@@ -223,17 +234,25 @@ const ShopNoticeText = styled(Text)`
   text-overflow: ellipsis;
 `;
 
-
 const ScheduleWrapper = styled(Flex)`
   overflow-y: hidden;
-`
+`;
 
 const ScheduleContainer = styled(Flex)`
   overflow-y: scroll;
+  position: relative;
 `;
+
+const SideBar = styled(Flex)`
+  position: absolute;
+`;
+
+const NewRequestWrapper = styled(Flex)`
+  overflow: hidden;
+`
 
 const NewRequestItemWrapper = styled(Flex)`
   overflow-x: scroll;
-`
+`;
 
 export default Home;
