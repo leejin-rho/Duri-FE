@@ -21,6 +21,8 @@ export const calcRem = (px: number) => `${px / 16}rem`;
  * @param Body2: 스케줄러 이름 텍스트
  * @param Body3: 팝업 부가 설명 텍스트
  * @param Body3: 스케줄러 담당쌤 텍스트 / 스케줄러 성별/특징 텍스트
+ *
+ * @param Letter: 피드백 텍스트
  */
 
 export const typo = {

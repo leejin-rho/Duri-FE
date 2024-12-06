@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BottomSheetRef } from 'react-spring-bottom-sheet';
 
 import { MapInfo } from '@duri/components/shop';
@@ -15,6 +15,7 @@ import {
   TextField,
   theme,
 } from '@duri-fe/ui';
+import { ShopInfoType, useGetNearByShopInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 const Shop = () => {
@@ -22,10 +23,43 @@ const Shop = () => {
   const sheetRef = useRef<BottomSheetRef>(null);
 
   const [isMap, setIsMap] = useState<boolean>(true);
+  const [nearbyShops, setNearbyShops] = useState<ShopInfoType[] | null>([]);
 
   const changeMapType = () => {
     setIsMap(!isMap);
   };
+
+  const [sortBy, setSortBy] = useState<'distance' | 'rating'>('distance');
+
+  const handleFilterChange = (filter: '거리순' | '별점순') => {
+    console.log(`필터 변경됨: ${filter}`);
+    if (filter === '거리순') {
+      setSortBy('distance');
+    } else {
+      setSortBy('rating');
+    }
+  };
+
+  const { data } = useGetNearByShopInfo(
+    // location.coordinates
+    //   ? {
+    //       // lat: location.coordinates.lat,
+    //       // long: location.coordinates.lng,
+    //       // radius: 500,
+    //       lat: 37.5156,
+    //       lon: 127.0451005,
+    //       radius: 500,
+    //     }
+    //   :
+    { lat: 37.5156, lon: 127.0451005, radius: 500 },
+    sortBy,
+  );
+
+  useEffect(() => {
+    if (data) {
+      setNearbyShops(data);
+    }
+  }, [data]);
 
   return (
     <RelativeMobile>
@@ -51,7 +85,11 @@ const Shop = () => {
             <MapInfo ref={mapRef} />
           </>
         ) : (
-          <ShopList ref={sheetRef} />
+          <ShopList
+            ref={sheetRef}
+            nearbyShops={nearbyShops}
+            onFilterChange={handleFilterChange}
+          />
         )}
         <ListWrapper>
           <Button
