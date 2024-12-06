@@ -1,6 +1,23 @@
 import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, Pencil, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
+import { ClosetGroomingType } from '@salon/Assets/types/home';
 import OngoingGrooming from '@salon/components/home/OngoingGrooming';
+
+const closetGroomingData: ClosetGroomingType = {
+  "petId": 0,
+  "petName": "string",
+  "breed": "string",
+  "gender": "string",
+  "age": 0,
+  "weight": 0,
+  "memo": "string",
+  "userId": 0,
+  "userPhone": "string",
+  "quotationId": 0,
+  "startTime": "string",
+  "complete": true,
+  "isNow": true
+}
 
 const Home = () => {
   return (
@@ -25,7 +42,7 @@ const Home = () => {
 
       <Flex padding='0 20px' margin='45px 0 0 0'>
         <Card height='195' borderRadius={16} shadow='large'>
-          <OngoingGrooming />
+          <OngoingGrooming {...closetGroomingData} />
         </Card>
       </Flex>
       <DuriNavbar />

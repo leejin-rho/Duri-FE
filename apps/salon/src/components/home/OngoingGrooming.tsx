@@ -1,7 +1,20 @@
 import { Approve, Button, Call, Flex, HeightFitFlex, Profile, Text, theme, WidthFitFlex, Write } from "@duri-fe/ui";
+import { parsePetInfo } from "@duri-fe/utils";
 import styled from "@emotion/styled";
+import { ClosetGroomingType } from "@salon/Assets/types/home";
 
-const OngoingGrooming = () => {
+const OngoingGrooming = (data: ClosetGroomingType) => {
+  const petInfoStr = parsePetInfo(data.breed, data.gender, data.weight, data.age);
+  const startHour = new Date(data.startTime).getHours();
+
+  const handleCallUser = (userPhone: string) => {
+    window.open(`tel:${userPhone}`);
+  }
+
+  const handleCompleteGrooming = (quotationId: number) => {
+    console.log(`미용 완료: ${quotationId}`);
+  }
+
   return (
     <Flex direction="column" justify="flex-start">
       <Flex justify="flex-start" padding="0 0 0 20px" height={31} backgroundColor={theme.palette.Normal500}>
@@ -13,19 +26,21 @@ const OngoingGrooming = () => {
           <ProfileContainer width={64} height={64} backgroundColor={theme.palette.Gray20} borderRadius={20}>
             <Profile width={52} height={52} color={theme.palette.Gray200} />
           </ProfileContainer>
-          <WidthFitFlex direction="column" justify="flex-start" align="flex-start" gap={8}>
+          <Flex direction="column" justify="flex-start" align="flex-start" gap={8}>
             <HeightFitFlex justify="space-between">
-              <Text typo="Title3" colorCode={theme.palette.Black}>김댕댕</Text>
-              <Text typo="Title3" colorCode={theme.palette.Gray600}>2:00 PM</Text>
+              <Text typo="Title3" colorCode={theme.palette.Black}>{data.petName}</Text>
+              <Text typo="Title3" colorCode={theme.palette.Gray600}>{startHour}</Text>
             </HeightFitFlex>
-            <Text typo="Caption3" colorCode={theme.palette.Gray400}>시츄, 여아, 7세, 7.3kg</Text>
+            <Text typo="Caption3" colorCode={theme.palette.Gray400}>
+              {petInfoStr}
+            </Text>
             <WidthFitFlex justify="flex-start" align="flex-start" gap={4}>
               <Write width={16} height={16} color={theme.palette.Gray500} />
               <MemoText typo="Caption3" colorCode={theme.palette.Gray500}>
-                여기에 손님이 적은 메모노출됩니다. 최대 두줄 노출 가능.넘으면 쩜쩜쩜넘으면 쩜쩜쩜넘으면 쩜쩜쩜넘으면 쩜쩜쩜
+                {data.memo}
               </MemoText>
             </WidthFitFlex>
-          </WidthFitFlex>
+          </Flex>
         </Flex>
 
         {/** 버튼 */}
@@ -33,6 +48,7 @@ const OngoingGrooming = () => {
           <StyledButton
             borderRadius="8px"
             bg={theme.palette.Gray20}
+            onClick={() => handleCallUser(data.userPhone)}
           >
             <Call width={16} />
             <Text typo="Label2">보호자 전화</Text>
@@ -40,6 +56,7 @@ const OngoingGrooming = () => {
           <StyledButton
             borderRadius="8px"
             bg={theme.palette.Black}
+            onClick={() => handleCompleteGrooming(data.quotationId)}
           >
             <Approve width={16} color={theme.palette.White} />
             <Text typo="Label2" colorCode={theme.palette.White}>미용 완료했어요</Text>
