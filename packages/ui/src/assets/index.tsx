@@ -118,6 +118,7 @@ import UnionDown from './UnionDown';
 import UnionUp from './UnionUp';
 import Unlock from './Unlock';
 import UpArrow from './UpArrow';
+import Write from './Write';
 
 export const icons = {
   Add,
@@ -172,6 +173,7 @@ export const icons = {
   SelectBoxUn,
   PortfolioIcon,
   TimetableIcon,
+  Write,
 };
 
 export default icons;

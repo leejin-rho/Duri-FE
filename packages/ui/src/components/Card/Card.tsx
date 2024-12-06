@@ -2,20 +2,22 @@ import { Flex, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 interface CardProps {
-  height: string;
+  height?: string;
   borderRadius: number;
   shadow?: 'small' | 'large';
   padding?: string;
   borderColor?: string;
+  maxHeight?: string;
   children: React.ReactNode;
 }
 
 export const Card = ({
-  height,
+  height = 'auto',
   borderRadius,
   shadow = 'small',
   borderColor,
   padding,
+  maxHeight,
   children,
 }: CardProps) => {
   return (
@@ -26,6 +28,7 @@ export const Card = ({
       shadow={shadow}
       padding={padding}
       borderColor={borderColor}
+      maxHeight={maxHeight}
     >
       {children}
     </CardContainer>
@@ -41,4 +44,6 @@ const CardContainer = styled(Flex)<CardProps>`
   padding: ${({ padding }) => (padding ? `${padding}` : '0px')};
   border: ${({ borderColor }) =>
     borderColor ? `1px solid ${borderColor}` : 'none'};
+  overflow: hidden;
+  max-height: ${({ maxHeight }) => (maxHeight ? `${maxHeight}` : 'none')};
 `;
