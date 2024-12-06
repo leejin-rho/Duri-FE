@@ -24,13 +24,13 @@ import { ShopLine } from './ShopLine';
 
 interface ShopListProps {
   nearbyShops: ShopInfoType[] | null;
-  onFilterChange?: (filter: '거리순' | '별점순') => void;
+  filter: 'distance' | 'rating';
+  onFilterChange: (filter: 'distance' | 'rating') => void;
 }
 
 export const ShopList = forwardRef<BottomSheetRef, ShopListProps>(
-  ({ nearbyShops }, ref) => {
+  ({ nearbyShops, filter, onFilterChange }, ref) => {
     const [open, setOpen] = useState<boolean>(false);
-    const [filter, setFilter] = useState<'거리순' | '별점순'>('거리순');
 
     const handleDismiss = () => {
       setOpen(false);
@@ -96,7 +96,7 @@ export const ShopList = forwardRef<BottomSheetRef, ShopListProps>(
                 disabled={true}
               >
                 <HardText typo="Label3" colorCode={theme.palette.Gray600}>
-                  {filter}
+                  {filter == 'distance' ? '거리순' : '별점순'}
                 </HardText>
                 <DownArrow width={18} />
               </Button>
@@ -172,12 +172,12 @@ export const ShopList = forwardRef<BottomSheetRef, ShopListProps>(
                   bg="transparent"
                   width="fit-content"
                   padding="0"
-                  onClick={() => setFilter('거리순')}
+                  onClick={() => onFilterChange('distance')}
                 >
                   <Text
                     typo="Title3"
                     colorCode={
-                      filter == '거리순'
+                      filter == 'distance'
                         ? theme.palette.Normal600
                         : theme.palette.Black
                     }
@@ -189,12 +189,12 @@ export const ShopList = forwardRef<BottomSheetRef, ShopListProps>(
                   bg="transparent"
                   width="fit-content"
                   padding="0"
-                  onClick={() => setFilter('별점순')}
+                  onClick={() => onFilterChange('rating')}
                 >
                   <Text
                     typo="Title3"
                     colorCode={
-                      filter == '별점순'
+                      filter == 'rating'
                         ? theme.palette.Normal600
                         : theme.palette.Black
                     }

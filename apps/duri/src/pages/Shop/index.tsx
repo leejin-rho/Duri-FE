@@ -29,14 +29,10 @@ const Shop = () => {
     setIsMap(!isMap);
   };
 
-  const [sortBy, setSortBy] = useState<'distance' | 'rating'>('distance');
-
-  const handleFilterChange = (filter: '거리순' | '별점순') => {
-    console.log(`필터 변경됨: ${filter}`);
-    if (filter === '거리순') {
-      setSortBy('distance');
-    } else {
-      setSortBy('rating');
+  const [filter, setFilter] = useState<'distance' | 'rating'>('distance');
+  const handleFilterChange = (filter: 'distance' | 'rating') => {
+    if (filter) {
+      setFilter(filter);
     }
   };
 
@@ -52,7 +48,7 @@ const Shop = () => {
     //     }
     //   :
     { lat: 37.5156, lon: 127.0451005, radius: 500 },
-    sortBy,
+    filter,
   );
 
   useEffect(() => {
@@ -88,6 +84,7 @@ const Shop = () => {
           <ShopList
             ref={sheetRef}
             nearbyShops={nearbyShops}
+            filter={filter}
             onFilterChange={handleFilterChange}
           />
         )}
