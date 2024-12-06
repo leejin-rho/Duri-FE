@@ -1,8 +1,9 @@
-import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, Pencil, Text, theme } from '@duri-fe/ui';
+import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 import { ClosetGroomingType, ScheduleType } from '@salon/Assets/types/home';
 import OngoingGrooming from '@salon/components/home/ClosetGrooming';
 import DailySchedule from '@salon/components/home/DailySchedule';
+import NewRequestItem from '@salon/components/home/NewRequestItem';
 
 const closetGroomingData: ClosetGroomingType = {
   "petId": 0,
@@ -98,7 +99,19 @@ const Home = () => {
         </Card>
       </Flex>
 
-      <Flex direction='column' align='flex-start' padding='0 20px 120px 20px'>
+      <Flex direction='column' align='flex-start' padding='0 20px' margin='28px 0 120px 0'>
+        <Flex justify='flex-start' gap={16} margin='0 0 16px 0'>
+          <Text typo='Title1'>요청서 확인하기</Text>
+          <WidthFitFlex>
+            <Text typo='Caption1' colorCode={theme.palette.Gray300}>더보기</Text>
+            <NextArrow width={20} color={theme.palette.Gray300} />
+          </WidthFitFlex>
+        </Flex>
+        
+        <NewRequestItemWrapper justify='flex-start' gap={8}>
+          <NewRequestItem />
+          <NewRequestItem />
+        </NewRequestItemWrapper>
 
       </Flex>
       <DuriNavbar />
@@ -144,5 +157,9 @@ const ShopNoticeText = styled(Text)`
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
+
+const NewRequestItemWrapper = styled(Flex)`
+  overflow-x: scroll;
+`
 
 export default Home;

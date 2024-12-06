@@ -14,3 +14,4 @@ export * from './Tag';
 export * from './Header';
 export * from './Card';
 export * from './Toast';
+export * from './ProfileImage';

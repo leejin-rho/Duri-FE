@@ -1,4 +1,4 @@
-import { Approve, Button, Call, Flex, HeightFitFlex, Profile, Text, theme, WidthFitFlex, Write } from "@duri-fe/ui";
+import { Approve, Button, Call, Flex, HeightFitFlex, ProfileImage, Text, theme, WidthFitFlex, Write } from "@duri-fe/ui";
 import { parsePetInfo } from "@duri-fe/utils";
 import styled from "@emotion/styled";
 
@@ -53,9 +53,7 @@ const ClosetGrooming = ({
 
         {/** 반려견 정보 */}
         <Flex align="flex-start" justify="flex-start" padding="0 6px" gap={12}>
-          <ProfileContainer width={64} height={64} backgroundColor={theme.palette.Gray20} borderRadius={20}>
-            <Profile width={52} height={52} color={theme.palette.Gray200} />
-          </ProfileContainer>
+          <ProfileImage width={64} height={64} borderRadius={20} iconSize={52} />
           <Flex direction="column" justify="flex-start" align="flex-start" gap={8}>
             <HeightFitFlex justify="space-between">
               <Text typo="Title3" colorCode={theme.palette.Black}>{petName}</Text>
@@ -116,10 +114,6 @@ const TitleText = styled(Text)`
   font-weight: 500;
   font-size: 15px;
 `;
-
-const ProfileContainer = styled(Flex)`
-  flex-shrink: 0;
-`
 
 const MemoText = styled(Text)`
   width: calc(100% - 20px);
