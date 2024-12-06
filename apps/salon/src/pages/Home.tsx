@@ -2,6 +2,7 @@ import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, Pencil, Te
 import styled from '@emotion/styled';
 import { ClosetGroomingType } from '@salon/Assets/types/home';
 import OngoingGrooming from '@salon/components/home/ClosetGrooming';
+import DailySchedule from '@salon/components/home/DailySchedule';
 
 const closetGroomingData: ClosetGroomingType = {
   "petId": 0,
@@ -61,8 +62,24 @@ const Home = () => {
         </Card>
       </Flex>
 
-      <Flex padding='0 20px' margin='31px 0 0 0'>
-        <Text>{dateStr}</Text>
+      <Flex direction='column' align='flex-start' padding='0 20px' margin='31px 0 0 0' gap={32}>
+        <Flex direction='column' align='flex-start' gap={6}>
+          <Text typo='Caption1'>{dateStr}</Text>
+          <Text typo='Title1'>오늘 일정 빠르게 보기</Text>
+        </Flex>
+        <Card
+          height='237'
+          borderRadius={8}
+          shadow='large'
+        >
+          <DailySchedule 
+            
+          />
+        </Card>
+      </Flex>
+
+      <Flex direction='column' align='flex-start' padding='0 20px 120px 20px'>
+
       </Flex>
       <DuriNavbar />
     </MobileLayout>

@@ -27,7 +27,7 @@ const ClosetGrooming = ({
   startTime,
   isNow,
 }: ClosetGroomingProps) => {
-  const petInfoStr = parsePetInfo(breed, gender, weight, age);
+  const petInfoStr = parsePetInfo({breed: breed, gender: gender, weight: weight, age: age});
   const startHour = new Date(startTime).getHours();
 
   const handleCallUser = (userPhone: string) => {
