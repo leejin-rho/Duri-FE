@@ -11,5 +11,5 @@ export interface ClosetGroomingType {
   quotationId: number;
   startTime: string;
   complete: boolean;
-  isNow: boolean;
+  isNow: boolean | null;
 }

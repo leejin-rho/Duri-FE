@@ -1,7 +1,7 @@
 import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, Pencil, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 import { ClosetGroomingType } from '@salon/Assets/types/home';
-import OngoingGrooming from '@salon/components/home/OngoingGrooming';
+import OngoingGrooming from '@salon/components/home/ClosetGrooming';
 
 const closetGroomingData: ClosetGroomingType = {
   "petId": 0,
@@ -16,10 +16,13 @@ const closetGroomingData: ClosetGroomingType = {
   "quotationId": 0,
   "startTime": "string",
   "complete": true,
-  "isNow": true
+  "isNow": false,
 }
 
 const Home = () => {
+  const date = new Date();
+  const dateStr = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
+
   return (
     <MobileLayout>
       <HomeHeaderContainer direction='column' height={260} align='start' justify='space-between'>
@@ -42,8 +45,24 @@ const Home = () => {
 
       <Flex padding='0 20px' margin='45px 0 0 0'>
         <Card height='195' borderRadius={16} shadow='large'>
-          <OngoingGrooming {...closetGroomingData} />
+          <OngoingGrooming
+            petName={closetGroomingData.petName}
+            breed={closetGroomingData.breed}
+            gender={closetGroomingData.gender}
+            age={closetGroomingData.age}
+            weight={closetGroomingData.weight}
+            memo={closetGroomingData.memo}
+            userPhone={closetGroomingData.userPhone}
+            quotationId={closetGroomingData.quotationId}
+            startTime={closetGroomingData.startTime}
+            isNow={closetGroomingData.isNow}
+
+          />
         </Card>
+      </Flex>
+
+      <Flex padding='0 20px' margin='31px 0 0 0'>
+        <Text>{dateStr}</Text>
       </Flex>
       <DuriNavbar />
     </MobileLayout>
