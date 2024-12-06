@@ -41,4 +41,5 @@ const CardContainer = styled(Flex)<CardProps>`
   padding: ${({ padding }) => (padding ? `${padding}` : '0px')};
   border: ${({ borderColor }) =>
     borderColor ? `1px solid ${borderColor}` : 'none'};
+  overflow: hidden;
 `;

@@ -1,5 +1,6 @@
-import { DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, Pencil, Text, theme } from '@duri-fe/ui';
+import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, Pencil, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
+import OngoingGrooming from '@salon/components/home/OngoingGrooming';
 
 const Home = () => {
   return (
@@ -21,7 +22,12 @@ const Home = () => {
           </ShopNoticeText>
         </ShopNotice>
       </HomeHeaderContainer>
-      
+
+      <Flex padding='0 20px' margin='45px 0 0 0'>
+        <Card height='195' borderRadius={16} shadow='large'>
+          <OngoingGrooming />
+        </Card>
+      </Flex>
       <DuriNavbar />
     </MobileLayout>
   );
