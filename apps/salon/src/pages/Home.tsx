@@ -1,4 +1,4 @@
-import { ClosetGroomingType, ScheduleType } from '@assets/types/home';
+import { ClosetGroomingType, QuotationRequestType, ScheduleType } from '@assets/types/home';
 import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
@@ -42,6 +42,35 @@ const dailyScheduleData: ScheduleType[] = [
     "gender": "MALE",
     "weight": 20,
     "groomerName": "한지민"
+  }
+]
+
+const quoataionRequestData: QuotationRequestType[] = [
+  {
+    "requestId": 3,
+    "petId": 3,
+    "imageURL": "https://example.com/dog3.jpg",
+    "name": "몽이",
+    "breed": "말티즈",
+    "gender": "M",
+    "age": 4,
+    "weight": 7,
+    "neutering": false,
+    "quotationReqId": 3,
+    "memo": ""
+  },
+  {
+    "requestId": 4,
+    "petId": 2,
+    "imageURL": "https://example.com/dog2.jpg",
+    "name": "초코",
+    "breed": "푸들",
+    "gender": "F",
+    "age": 3,
+    "weight": 10,
+    "neutering": true,
+    "quotationReqId": 2,
+    "memo": "깔끔하게 부탁드립니다."
   }
 ]
 
@@ -100,8 +129,8 @@ const Home = () => {
         </Card>
       </Flex>
 
-      <Flex direction='column' align='flex-start' padding='0 20px' margin='28px 0 120px 0'>
-        <Flex justify='flex-start' gap={16} margin='0 0 16px 0'>
+      <Flex direction='column' align='flex-start' margin='28px 0 120px 0'>
+        <Flex justify='flex-start' gap={16} margin='0 20px 16px 20px'>
           <Text typo='Title1'>요청서 확인하기</Text>
           <WidthFitFlex>
             <Text typo='Caption1' colorCode={theme.palette.Gray300}>더보기</Text>
@@ -109,11 +138,24 @@ const Home = () => {
           </WidthFitFlex>
         </Flex>
         
-        <NewRequestItemWrapper justify='flex-start' gap={8}>
-          <NewRequestItem />
-          <NewRequestItem />
+        <NewRequestItemWrapper justify='flex-start' padding="0 20px" gap={8}>
+          {quoataionRequestData.map((request, index) => (
+            <NewRequestItem
+              key={index}
+              requestId={request.requestId}
+              petId={request.petId}
+              imageURL={request.imageURL}
+              name={request.name}
+              breed={request.breed}
+              gender={request.gender}
+              age={request.age}
+              weight={request.weight}
+              neutering={request.neutering}
+              quotationReqId={request.quotationReqId}
+              memo={request.memo}
+            />
+          ))}
         </NewRequestItemWrapper>
-
       </Flex>
       <DuriNavbar />
     </MobileLayout>

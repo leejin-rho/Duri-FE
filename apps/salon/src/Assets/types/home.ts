@@ -24,3 +24,17 @@ export interface ScheduleType {
   weight: number;
   groomerName: string;
 }
+
+export interface QuotationRequestType {
+  requestId: number;
+  petId: number;
+  imageURL: string;
+  name: string;
+  breed: string;
+  gender: string;
+  age: number;
+  weight: number;
+  neutering: boolean;
+  quotationReqId: number;
+  memo: string;
+}
