@@ -13,3 +13,14 @@ export interface ClosetGroomingType {
   complete: boolean;
   isNow: boolean | null;
 }
+
+export interface ScheduleType {
+  date: string;
+  startTime: string;
+  petId: number;
+  petName: string;
+  breed: string;
+  gender: string;
+  weight: number;
+  groomerName: string;
+}

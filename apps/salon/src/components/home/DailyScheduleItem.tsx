@@ -1,22 +1,43 @@
-import { Flex, Text, theme } from "@duri-fe/ui";
+import { Flex, Text, theme, WidthFitFlex } from "@duri-fe/ui";
 import { parsePetInfo } from "@duri-fe/utils";
 import styled from "@emotion/styled";
 
+interface DailyScheduleItemProps {
+  startTime: string;
+  petName: string;
+  breed: string;
+  gender: string;
+  weight: number;
+  groomerName: string;
+}
 
-const DailyScheduleItem = () => {
-  const petInfoStr = parsePetInfo({breed: '시츄', 'gender': 'F', weight: 7.3});
+
+const DailyScheduleItem = ({
+  startTime,
+  petName,
+  breed,
+  gender,
+  weight,
+  groomerName
+}: DailyScheduleItemProps) => {
+  const petInfoStr = parsePetInfo({breed: breed, 'gender': gender, weight: weight});
   return (
-    <ItemWrapper height={50} justify="flex-start">
-      <SideBar margin="0 3px" width={1} height={50} backgroundColor={theme.palette.Gray200}>
-        <Dot width={7} height={7} backgroundColor={theme.palette.Normal600} borderRadius={7} />
-      </SideBar>
+    <ItemWrapper height={50} justify="flex-start" gap={16}>
+      <WidthFitFlex>
+        <SideBar margin="0 10px 0 3px" width={1} height={50} backgroundColor={theme.palette.Gray200}>
+          <Dot width={7} height={7} backgroundColor={theme.palette.Normal600} borderRadius={7} />
+        </SideBar>
 
-      <Text typo="Label4" colorCode={theme.palette.Normal600} margin="0 16px 0 6px">12:00</Text>
+        <Flex width={40} justify="flex-start">
+          <Text typo="Label4" colorCode={theme.palette.Normal600}>{startTime}</Text>
+        </Flex>
+
+      </WidthFitFlex>
 
       <Flex justify="space-between">
-        <Text typo="Body2">신참이</Text>
+        <Text typo="Body2">{petName}</Text>
         <Text typo="Body4" colorCode={theme.palette.Gray500}>{petInfoStr}</Text>
-        <Text typo="Body4" >000쌤</Text>
+        <Text typo="Body4" >{groomerName}쌤</Text>
       </Flex>
     </ItemWrapper>
   )

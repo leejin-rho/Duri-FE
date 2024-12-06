@@ -1,6 +1,6 @@
 import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, Pencil, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
-import { ClosetGroomingType } from '@salon/Assets/types/home';
+import { ClosetGroomingType, ScheduleType } from '@salon/Assets/types/home';
 import OngoingGrooming from '@salon/components/home/ClosetGrooming';
 import DailySchedule from '@salon/components/home/DailySchedule';
 
@@ -19,6 +19,29 @@ const closetGroomingData: ClosetGroomingType = {
   "complete": true,
   "isNow": false,
 }
+
+const dailyScheduleData: ScheduleType[] = [
+  {
+    "date": "12-03",
+    "startTime": "09:00",
+    "petId": 3,
+    "petName": "몽이",
+    "breed": "말티즈",
+    "gender": "MALE",
+    "weight": 7,
+    "groomerName": "한지민"
+  },
+  {
+    "date": "12-03",
+    "startTime": "12:00",
+    "petId": 1,
+    "petName": "바둑이",
+    "breed": "진돗개",
+    "gender": "MALE",
+    "weight": 20,
+    "groomerName": "한지민"
+  }
+]
 
 const Home = () => {
   const date = new Date();
@@ -57,7 +80,6 @@ const Home = () => {
             quotationId={closetGroomingData.quotationId}
             startTime={closetGroomingData.startTime}
             isNow={closetGroomingData.isNow}
-
           />
         </Card>
       </Flex>
@@ -72,9 +94,7 @@ const Home = () => {
           borderRadius={8}
           shadow='large'
         >
-          <DailySchedule 
-            
-          />
+          <DailySchedule dailyScheduleData={dailyScheduleData}/>
         </Card>
       </Flex>
 
