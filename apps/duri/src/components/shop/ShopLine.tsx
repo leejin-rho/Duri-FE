@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import salonDefault from '@assets/images/pngs/salonDefault.png';
 import {
   Button,
@@ -38,8 +40,13 @@ export const ShopLine = ({
   onClick,
   tags,
 }: ShopLineProps) => {
+  const navigate = useNavigate();
+  const moveToDetail = (shopId: number | string) => {
+    navigate(`/shop/${shopId}`);
+  };
+
   return (
-    <HeightFitFlex gap={20} key={id}>
+    <HeightFitFlex gap={20} key={id} onClick={() => moveToDetail(id)}>
       <SalonImg src={salonDefault} />
       <Flex direction="column" align="flex-start" gap={8}>
         <Flex gap={17} justify="flex-start">

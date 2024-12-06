@@ -14,13 +14,15 @@ import SuccessPage from '@pages/PaymentPage/Success';
 import RequestPage from '@pages/RequestPage';
 import Shop from '@pages/Shop';
 
+import ShopDetail from './pages/Shop/ShopDetail';
+
 function App() {
   return (
     <BrowserRouter>
       <Global styles={globalStyle} />
       <Routes>
         <Route path="/" element={<Home />} />
-        
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth" element={<AuthPage />} />
 
@@ -32,6 +34,7 @@ function App() {
         <Route path="/payment/fail" element={<FailPage />} />
         <Route path="/quotation/request" element={<RequestPage />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/shop/:shopId" element={<ShopDetail />} />
       </Routes>
     </BrowserRouter>
   );

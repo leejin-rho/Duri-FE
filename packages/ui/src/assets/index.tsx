@@ -65,6 +65,7 @@ export { default as PortfolioIcon } from './PortfolioIcon';
 export { default as TimetableIcon } from './TimetableIcon';
 export { default as CurLocation } from './CurLocation';
 export { default as Pencil } from './Pencil';
+export { default as Time } from './Time';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -113,6 +114,7 @@ import Send from './Send';
 import Shield from './Shield';
 import Shopping from './Shopping';
 import Star from './Star';
+import Time from './Time';
 import TimetableIcon from './TimetableIcon';
 import UnionDown from './UnionDown';
 import UnionUp from './UnionUp';
@@ -172,6 +174,7 @@ export const icons = {
   SelectBoxUn,
   PortfolioIcon,
   TimetableIcon,
+  Time,
 };
 
 export default icons;
