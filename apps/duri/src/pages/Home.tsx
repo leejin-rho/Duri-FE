@@ -15,6 +15,7 @@ import {
   Flex,
   Header,
   HeightFitFlex,
+  MainHeader,
   MobileLayout,
   Text,
   theme,
@@ -63,7 +64,7 @@ const Home = () => {
           backgroundColor={theme.palette.Normal500}
           padding="0 0 37px 0"
         >
-          <Header
+          <MainHeader
             logoColor={theme.palette.Black}
             iconColor={theme.palette.Normal800}
             searchIcon={true}
