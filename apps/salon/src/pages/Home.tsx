@@ -2,25 +2,10 @@ import { ClosetGroomingType, QuotationRequestType, ScheduleType, ShopInfoType } 
 import { Card, DuriNavbar, Flex, HeightFitFlex, MainHeader, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-import OngoingGrooming from '@components/home/ClosetGrooming';
+import ClosetGrooming from '@components/home/ClosetGrooming';
 import DailyScheduleItem from '@components/home/DailyScheduleItem';
 import NewRequestItem from '@components/home/NewRequestItem';
 
-const closetGroomingData: ClosetGroomingType = {
-  "petId": 0,
-  "petName": "string",
-  "breed": "string",
-  "gender": "string",
-  "age": 0,
-  "weight": 0,
-  "memo": "string",
-  "userId": 0,
-  "userPhone": "string",
-  "quotationId": 0,
-  "startTime": "string",
-  "complete": true,
-  "isNow": false,
-}
 
 const dailyScheduleData: ScheduleType[] = [
   {
@@ -96,6 +81,8 @@ const Home = () => {
   const date = new Date();
   const dateStr = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
 
+  const { data: closetGroomingData } = useGetClosetGrooming();
+
   return (
     <MobileLayout>
       <HomeHeaderContainer direction='column' height={260} align='start' justify='space-between'>
@@ -120,7 +107,8 @@ const Home = () => {
       {/** 진행중인 시술 */}
       <Flex padding='0 20px' margin='45px 0 0 0'>
         <Card height='195' borderRadius={16} shadow='large'>
-          <OngoingGrooming
+          {closetGroomingData &&
+          <ClosetGrooming
             petName={closetGroomingData.petName}
             breed={closetGroomingData.breed}
             gender={closetGroomingData.gender}
@@ -132,6 +120,7 @@ const Home = () => {
             startTime={closetGroomingData.startTime}
             isNow={closetGroomingData.isNow}
           />
+}
         </Card>
       </Flex>
 
