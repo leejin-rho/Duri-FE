@@ -11,26 +11,36 @@ const meta: Meta<typeof Header> = {
   component: Header,
   tags: ['autodocs'],
   argTypes: {
+    backIcon: { control: 'boolean' },
+    logo: { control: 'boolean' },
     logoColor: { control: 'color' },
+    title: { control: 'text' },
+    titleAlign: { control: 'text' },
     iconColor: { control: 'color' },
     searchIcon: { control: 'boolean' },
+    notificationIcon: { control: 'boolean' },
     badge: { control: 'boolean' },
+    backgroundColor: { control: 'color' },
     onClickLogo: { action: 'onClickLogo' },
     onClickSearch: { action: 'onClickSearch' },
     onClickNotification: { action: 'onClickNotification' },
+    onClickBack: { action: 'onClickBack' },
   },
 };
 
 export default meta;
 
 /**
- * `DuriDefaultHeader`는 `Header` 컴포넌트의 고객 스토리입니다.
+ * `MainHeader`는 `Header` 컴포넌트의 메인화면 스토리입니다.
  */
-export const DuriDefaultHeader: Story = {
+export const MainHeader: Story = {
   args: {
+    logo: true,
     logoColor: theme.palette.Black,
     iconColor: theme.palette.Normal700,
     searchIcon: true,
+    notificationIcon: true,
+    badge: true,
     onClickLogo: () => console.log('홈화면 라우팅'),
     onClickSearch: () => console.log('검색창 열기'),
     onClickNotification: () => console.log('알림창 열기'),
@@ -38,13 +48,27 @@ export const DuriDefaultHeader: Story = {
 };
 
 /**
- * `SalonDefaultHeader`는 `Header` 컴포넌트의 미용사 스토리입니다.
+ * `TextCenterHeader`는 `Header` 컴포넌트의 텍스트 중앙 정렬 스토리입니다.
  */
-export const SalonDefaultHeader: Story = {
+export const TextCenterHeader: Story = {
   args: {
-    logoColor: theme.palette.Black,
-    iconColor: theme.palette.White,
-    onClickLogo: () => console.log('홈화면 라우팅'),
-    onClickNotification: () => console.log('알림창 열기'),
+    backIcon: true,
+    title: '타이틀',
+    titleAlign: 'center',
+    iconColor: theme.palette.Black,
+    onClickBack: () => console.log('뒤로가기'),
+  }
+};
+
+/**
+ * `TextStartHeader`는 `Header` 컴포넌트의 텍스트 시작 정렬 스토리입니다.
+ */
+export const TextStartHeader: Story = {
+  args: {
+    backIcon: true,
+    title: '타이틀',
+    titleAlign: 'start',
+    iconColor: theme.palette.Black,
+    onClickBack: () => console.log('뒤로가기'),
   }
 };

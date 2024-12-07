@@ -1,5 +1,5 @@
 import { ClosetGroomingType, QuotationRequestType, ScheduleType, ShopInfoType } from '@assets/types/home';
-import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
+import { Card, DuriNavbar, Flex, HeightFitFlex, MainHeader, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 import OngoingGrooming from '@components/home/ClosetGrooming';
@@ -99,7 +99,7 @@ const Home = () => {
   return (
     <MobileLayout>
       <HomeHeaderContainer direction='column' height={260} align='start' justify='space-between'>
-        <Header logoColor={theme.palette.Black} iconColor={theme.palette.Normal800} badge />
+        <MainHeader logoColor={theme.palette.Black} iconColor={theme.palette.Normal800} badge />
         
         {/** 매장 정보 */}
         <TextContainer direction='column' align='start' padding="36px 20px" gap={4}>
