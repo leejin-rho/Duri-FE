@@ -1,5 +1,9 @@
-import { ClosetGroomingType, QuotationRequestType, ScheduleType, ShopInfoType } from '@assets/types/home';
+import { forwardRef } from 'react';
+import { BottomSheetRef } from 'react-spring-bottom-sheet';
+
+import { ShopInfoType } from '@assets/types/home';
 import { Card, DuriNavbar, Flex, HeightFitFlex, MainHeader, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
+import { useGetClosetGrooming, useGetDailySchedule, useGetHomeQuotationRequest } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 import ClosetGrooming from '@components/home/ClosetGrooming';
@@ -25,6 +29,9 @@ const Home = forwardRef<BottomSheetRef>(() => {
   return (
     <MobileLayout>
       <HomeHeaderContainer direction='column' height={260} align='start' justify='space-between'>
+        <HomeImageWrapper>
+          {shopInfoData.imageURL && <img width="100%" src={shopInfoData.imageURL} />}
+        </HomeImageWrapper>
         <MainHeader logoColor={theme.palette.Black} iconColor={theme.palette.Normal800} badge />
         
         {/** 매장 정보 */}
