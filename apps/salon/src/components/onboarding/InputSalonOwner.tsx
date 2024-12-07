@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { SalonOwnerFormData } from '@assets/types/onboarding';
 import {
   AlertStar,
   Button,
@@ -12,7 +13,6 @@ import {
   WidthFitFlex,
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
-import { SalonOwnerFormData } from '@salon/types/onboarding';
 
 import {
   ButtonWrapper,

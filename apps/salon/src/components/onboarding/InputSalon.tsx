@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+import { SalonFormData } from '@assets/types/onboarding';
 import { Button, Flex, Text, TextField, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
-import { SalonFormData } from '@salon/types/onboarding';
 
 import {
   ButtonWrapper,
