@@ -6,69 +6,6 @@ import ClosetGrooming from '@components/home/ClosetGrooming';
 import DailyScheduleItem from '@components/home/DailyScheduleItem';
 import NewRequestItem from '@components/home/NewRequestItem';
 
-
-const dailyScheduleData: ScheduleType[] = [
-  {
-    "date": "12-03",
-    "startTime": "09:00",
-    "petId": 3,
-    "petName": "몽이",
-    "breed": "말티즈",
-    "gender": "MALE",
-    "weight": 7,
-    "groomerName": "한지민"
-  },
-  {
-    "date": "12-03",
-    "startTime": "12:00",
-    "petId": 1,
-    "petName": "바둑이",
-    "breed": "진돗개",
-    "gender": "MALE",
-    "weight": 20,
-    "groomerName": "한지민"
-  },
-  {
-    "date": "12-03",
-    "startTime": "09:00",
-    "petId": 3,
-    "petName": "몽이",
-    "breed": "말티즈",
-    "gender": "MALE",
-    "weight": 7,
-    "groomerName": "한지민"
-  },
-]
-
-const quoataionRequestData: QuotationRequestType[] = [
-  {
-    "requestId": 3,
-    "petId": 3,
-    "imageURL": "https://example.com/dog3.jpg",
-    "name": "몽이",
-    "breed": "말티즈",
-    "gender": "M",
-    "age": 4,
-    "weight": 7,
-    "neutering": false,
-    "quotationReqId": 3,
-    "memo": ""
-  },
-  {
-    "requestId": 4,
-    "petId": 2,
-    "imageURL": "https://example.com/dog2.jpg",
-    "name": "초코",
-    "breed": "푸들",
-    "gender": "F",
-    "age": 3,
-    "weight": 10,
-    "neutering": true,
-    "quotationReqId": 2,
-    "memo": "깔끔하게 부탁드립니다."
-  }
-]
-
 const shopInfoData: ShopInfoType = {
   "id": 1,
   "name": "강남 미용샵",
@@ -82,6 +19,8 @@ const Home = () => {
   const dateStr = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
 
   const { data: closetGroomingData } = useGetClosetGrooming();
+  const { data: dailyScheduleData } = useGetDailySchedule();
+  const { data: quotationRequestData } = useGetHomeQuotationRequest();
 
   return (
     <MobileLayout>
@@ -108,19 +47,19 @@ const Home = () => {
       <Flex padding='0 20px' margin='45px 0 0 0'>
         <Card height='195' borderRadius={16} shadow='large'>
           {closetGroomingData &&
-          <ClosetGrooming
-            petName={closetGroomingData.petName}
-            breed={closetGroomingData.breed}
-            gender={closetGroomingData.gender}
-            age={closetGroomingData.age}
-            weight={closetGroomingData.weight}
-            memo={closetGroomingData.memo}
-            userPhone={closetGroomingData.userPhone}
-            quotationId={closetGroomingData.quotationId}
-            startTime={closetGroomingData.startTime}
-            isNow={closetGroomingData.isNow}
-          />
-}
+            <ClosetGrooming
+              petName={closetGroomingData.petName}
+              breed={closetGroomingData.breed}
+              gender={closetGroomingData.gender}
+              age={closetGroomingData.age}
+              weight={closetGroomingData.weight}
+              memo={closetGroomingData.memo}
+              userPhone={closetGroomingData.userPhone}
+              quotationId={closetGroomingData.quotationId}
+              startTime={closetGroomingData.startTime}
+              isNow={closetGroomingData.isNow}
+            />
+          }
         </Card>
       </Flex>
 
@@ -134,7 +73,7 @@ const Home = () => {
           <ScheduleWrapper direction="column" align="flex-start" justify="flex-start" padding="20px 14px">
             <ScheduleContainer direction="column" align="flex-start" justify="flex-start">
               <SideBar margin="0 10px 0 3px" width={1} backgroundColor={theme.palette.Gray200} />
-              {dailyScheduleData.map((schedule, index) => (
+              {dailyScheduleData && dailyScheduleData.map((schedule, index) => (
                 <DailyScheduleItem 
                   key={index}
                   startTime={schedule.startTime}
@@ -160,7 +99,7 @@ const Home = () => {
           </WidthFitFlex>
         </Flex>
         <NewRequestItemWrapper justify='flex-start' padding="0 20px" gap={8}>
-          {quoataionRequestData.map((request, index) => (
+          {quotationRequestData && quotationRequestData.map((request, index) => (
             <NewRequestItem
               key={index}
               requestId={request.requestId}

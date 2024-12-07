@@ -17,3 +17,32 @@ export interface ClosetGroomingResponse extends BaseResponse {
     isNow: boolean | null;
   }
 }
+
+export interface DailyScheduleResponse extends BaseResponse {
+  response: {
+    date: string;
+    startTime: string;
+    petId: number;
+    petName: string;
+    breed: string;
+    gender: string;
+    weight: number;
+    groomerName: string;
+  }
+}
+
+export interface HomeQuotationRequestResponse extends BaseResponse {
+  response: {
+    requestId: number;
+    petId: number;
+    imageURL: string;
+    name: string;
+    breed: string;
+    gender: string;
+    age: number;
+    weight: number;
+    neutering: boolean;
+    quotationReqId: number;
+    memo: string;
+  }
+}
