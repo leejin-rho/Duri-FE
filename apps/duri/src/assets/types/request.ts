@@ -1,4 +1,4 @@
-export interface RequestProps extends TimeProps{
+export interface RequestProps extends TimeType {
   petId: number | undefined;
   menu: string[];
   addMenu: string[];
@@ -9,15 +9,15 @@ export interface RequestProps extends TimeProps{
   shopIds: number[];
 }
 
-export interface TimeProps {
-    time9: boolean;
-    time10: boolean;
-    time11: boolean;
-    time12: boolean;
-    time13: boolean;
-    time14: boolean;
-    time15: boolean;
-    time16: boolean;
-    time17: boolean;
-    time18: boolean;
-  };
+export interface TimeType {
+  time9: boolean;
+  time10: boolean;
+  time11: boolean;
+  time12: boolean;
+  time13: boolean;
+  time14: boolean;
+  time15: boolean;
+  time16: boolean;
+  time17: boolean;
+  time18: boolean;
+}

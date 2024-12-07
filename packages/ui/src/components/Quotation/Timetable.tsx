@@ -1,12 +1,12 @@
 import { Button, Flex, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-import { TimeProps } from '../../types';
+import { TimeType } from '../../types';
 
 interface TimeTableProps {
   timeList: string[];
   onSelect?: (key: string, value: boolean) => void;
-  selectedTimeList: TimeProps;
+  selectedTimeList: TimeType;
 }
 
 export const TimeTable = ({
@@ -24,7 +24,7 @@ export const TimeTable = ({
     <Flex align="center">
       <TimeWrapper>
         {timeList?.map((time, index) => {
-          const key = `time${9 + index}` as keyof TimeProps;
+          const key = `time${9 + index}` as keyof TimeType;
           const isSelected = selectedTimeList[key];
           return (
             <>

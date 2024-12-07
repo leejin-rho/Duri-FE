@@ -12,13 +12,13 @@ import {
 import { defaultRequestQuotationData, defaultTimeData } from '@duri-fe/ui';
 import { format } from 'date-fns';
 
-import { RequestProps, TimeProps } from '../../types';
+import { RequestType, TimeType } from '../../types';
 
 import { DetailGrooming } from './DetailGrooming';
 import { PetInfo } from './PetInfo';
 import { TimeTable } from './Timetable';
 
-interface RequestQuotationProps extends RequestProps {
+interface RequestQuotationProps extends RequestType {
   userName: string;
   userPhone: string;
 }
@@ -36,7 +36,7 @@ export const RequestQuotation = ({
     defaultRequestQuotationData,
   );
 
-  const [selectedTimeList] = useState<TimeProps>(defaultTimeData);
+  const [selectedTimeList] = useState<TimeType>(defaultTimeData);
   const { groomingMenu, additionalGrooming, specialCare, designCut } =
     requestList.quotationDetails;
   return (

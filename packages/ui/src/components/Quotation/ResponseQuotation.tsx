@@ -13,7 +13,7 @@ import {
 } from '@duri-fe/ui';
 import { format } from 'date-fns';
 
-import { ResponseProps } from '../../types';
+import { ResponseType } from '../../types';
 
 import { DetailGrooming } from './DetailGrooming';
 
@@ -22,7 +22,7 @@ export const ResponseQuotation = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [responseList] = useState<ResponseProps>(defaultResponseData);
+  const [responseList] = useState<ResponseType>(defaultResponseData);
   const { groomingMenu, additionalGrooming, specialCare, designCut } =
     responseList.quotationDetails;
   return (

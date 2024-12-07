@@ -1,22 +1,21 @@
-export interface RequestProps extends TimeProps {
+export interface RequestType extends TimeType {
   pet: PetInfoType | undefined;
-  quotationDetails: QuotationDetails;
+  quotationDetails: QuotationDetailsType;
 }
 
-export interface ResponseProps {
+export interface ResponseType {
   name: string;
   address: string;
   phone: string;
   designerName: string;
-  quotationDetails: QuotationDetails;
+  quotationDetails: QuotationDetailsType;
   startDateTime: Date;
   endDateTime: Date;
   requestTime: Date;
   totalPrice: number;
 }
 
-
-export interface QuotationDetails {
+export interface QuotationDetailsType {
   groomingMenu: string[];
   additionalGrooming: string[];
   specialCare: string[];
@@ -26,7 +25,7 @@ export interface QuotationDetails {
   shopIds?: number[];
 }
 
-export interface TimeProps {
+export interface TimeType {
   time9: boolean;
   time10: boolean;
   time11: boolean;
