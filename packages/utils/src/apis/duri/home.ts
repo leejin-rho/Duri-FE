@@ -10,7 +10,6 @@ interface PetInfoResponse extends BaseResponse {
     age: number;
     weight: number;
     gender: string;
-    neutering: boolean;
     lastGrooming: Date | null;
   };
 }
@@ -66,7 +65,7 @@ export const getUpcomingReservation = async (): Promise<
 //   return response.data;
 // }; 이게 없고 펫 정보에 lastGroomingDate 데이터를 이용해야됨!!
 
-export async function getPetInfo(): Promise<PetInfoResponse['response']> {
-  const response = await duriInstance.get(`user/pet/petId`);
+export const getPetInfo = async (): Promise<PetInfoResponse['response']> => {
+  const response = await duriInstance.get(`user/pet`);
   return response.data.response;
-}
+};

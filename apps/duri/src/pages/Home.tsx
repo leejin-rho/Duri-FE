@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  LastReservationProps,
-  UpcomingReservationProps,
-} from '@duri/assets/types/reservation';
+import { defaultPetInfo } from '@duri/assets/data/pet';
+import { PetInfoType } from '@duri/assets/types';
+import { UpcomingReservationProps } from '@duri/assets/types/reservation';
 import { RecommendeShopProps, RegularShopProps } from '@duri/assets/types/shop';
 import CarouselHome from '@duri/components/home/Home';
 import RecommendedShop from '@duri/components/home/RecommendedShop';
 import SpeedQuotation from '@duri/components/home/SpeedQuotation';
 import {
   AiStyleBanner,
+  Button,
   DuriNavbar,
   Flex,
   Header,
@@ -20,20 +20,16 @@ import {
   theme,
 } from '@duri-fe/ui';
 import {
-  // useGetLastReservation,
   useGetPetInfo,
   useGetRecommendedShopList,
   useGetRegularShopList,
   useGetUpcomingReservation,
 } from '@duri-fe/utils';
-import { usePetStore } from '@duri-fe/utils';
 import styled from '@emotion/styled';
-
 
 const Home = () => {
   const petData = useGetPetInfo();
-  const setPetInfo = usePetStore((state) => state.setPetInfo);
-
+  const [petInfo, setPetInfo] = useState<PetInfoType>(defaultPetInfo);
   const [regularShopList, setRegularShopList] = useState<RegularShopProps[]>(
     [],
   );
@@ -42,30 +38,22 @@ const Home = () => {
   >([]);
   const [upcomingReservation, setUpcomingReservation] =
     useState<UpcomingReservationProps>();
-  const [lastReservation, ] =
-    useState<LastReservationProps>();
   const recommendedListData = useGetRecommendedShopList();
   const regularListData = useGetRegularShopList();
   const reservationData = useGetUpcomingReservation();
   // const lastReservationData = useGetLastReservation();
   const navigate = useNavigate();
-  const handleClickSearchIcon = () => navigate('/shop');
+  const handleNavigate = () => navigate('/shop');
 
   useEffect(() => {
     if (recommendedListData) setRecommendedShopList(recommendedListData);
     if (regularListData) setRegularShopList(regularListData);
     if (reservationData) setUpcomingReservation(reservationData);
-    // if (lastReservationData) setLastReservation(lastReservationData);
-  }, [
-    recommendedListData,
-    regularListData,
-    reservationData,
-    // lastReservationData,
-  ]);
+  }, [recommendedListData, regularListData, reservationData]);
 
-  useEffect(()=>{
-    if(petData) setPetInfo(petData)
-  },[petData])
+  useEffect(() => {
+    if (petData) setPetInfo(petData);
+  }, [petData]);
 
   return (
     <MobileLayout>
@@ -79,25 +67,51 @@ const Home = () => {
             logoColor={theme.palette.Black}
             iconColor={theme.palette.Normal800}
             searchIcon={true}
-            onClickSearch={handleClickSearchIcon}
+            onClickSearch={handleNavigate}
           />
           <CarouselHome
             upcomingReservation={upcomingReservation}
-            lastReservation={lastReservation}
+            lastReservation={petData?.lastGrooming ?? undefined}
           />
         </HeightFitFlex>
         {/* 단골 빠른입찰 */}
         <Flex direction="column" padding="0 20px">
           <Flex direction="column" align="flex-start" margin="28px 0 0 0">
-            <Text
-              typo="Caption1"
-              colorCode={theme.palette.Gray400}
-              margin="0 0 6px 0"
-            >
-              {/* {pet?.name}가 3회 이상 방문한 샵들이에요. */}
-            </Text>
+            {petData && (
+              <Text
+                typo="Caption1"
+                colorCode={theme.palette.Gray400}
+                margin="0 0 6px 0"
+              >
+                {petInfo.name}가 3회 이상 방문한 샵들이에요.
+              </Text>
+            )}
             <Text typo="Title1">단골 샵 빠른 입찰</Text>
-            {regularShopList && <SpeedQuotation shopList={regularShopList} />}
+            {regularShopList.length > 0 ? (
+              <SpeedQuotation shopList={regularShopList} />
+            ) : (
+              <Flex direction="column" padding="62px 99px" gap={12}>
+                <Flex direction="column">
+                  <Text typo="Caption4" colorCode={theme.palette.Gray400}>
+                    아직 단골샵이 없어요!
+                  </Text>
+                  <Text typo="Caption4" colorCode={theme.palette.Gray400}>
+                    단골샵을 찾으러 가볼까요?
+                  </Text>
+                </Flex>
+                <Button
+                  width="135px"
+                  height="37px"
+                  typo="Label4"
+                  borderRadius="8px"
+                  bg={theme.palette.Black}
+                  fontColor={theme.palette.White}
+                  onClick={handleNavigate}
+                >
+                  샵 둘러보기
+                </Button>
+              </Flex>
+            )}
           </Flex>
 
           {/* AI 스타일링 배너 */}
@@ -110,7 +124,7 @@ const Home = () => {
           </StyleBannerWrapper>
 
           {/* 추천 샵 */}
-          {recommendedShopList && (
+          {recommendedShopList.length > 0 && (
             <RecommendedShop shopList={recommendedShopList} />
           )}
         </Flex>

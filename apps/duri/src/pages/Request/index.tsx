@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import { addMenu, designMenu, menu, specialMenu } from '@duri/assets/data';
-import { RequestProps } from '@duri/assets/types';
+import { defaultRequestInfo } from '@duri/assets/data/request';
+import { RequestType } from '@duri/assets/types';
 import MonthlyCalendar from '@duri/components/request/Calendar';
 import EtcRequest from '@duri/components/request/EtcRequest';
 import PetInfo from '@duri/components/request/PetInfo';
@@ -15,49 +16,29 @@ import {
   theme,
 } from '@duri-fe/ui';
 import { TimeTable } from '@duri-fe/ui';
-import { usePetStore } from '@duri-fe/utils';
+import { useGetPetInfo } from '@duri-fe/utils';
 
 interface PetInfoType {
   id: number;
   name: string;
-  image: string | null;
+  image: null;
   breed: string;
   age: number;
   weight: number;
   gender: string;
-  neutering: boolean;
   lastGrooming: Date | null;
 }
 
 const timeList = Array(10).fill(0).map((_, i) => `${9 + i}:00`);
 
 const RequestPage = () => {
-  const [requestList, setRequestList] = useState<RequestProps>({
-    petId: undefined,
-    menu: [],
-    addMenu: [],
-    specialMenu: [],
-    design: [],
-    etc: '',
-    day: new Date(),
-    time9: false,
-    time10: false,
-    time11: false,
-    time12: false,
-    time13: false,
-    time14: false,
-    time15: false,
-    time16: false,
-    time17: false,
-    time18: false,
-    shopIds: [1, 2],
-  });
+  const [requestList, setRequestList] = useState<RequestType>(defaultRequestInfo);
   const [petInfo, setPetInfo] = useState<PetInfoType | null>(null);
   const [isButton, setIsButton] = useState<boolean>(false);
 
   const handleSelect = (
     key: string,
-    value: number | string | string[] | boolean | Date| undefined,
+    value: number | string | string[] | boolean | Date | undefined,
   ) => {
     if (key === 'petId') {
       setRequestList((prev) => ({
@@ -73,13 +54,13 @@ const RequestPage = () => {
     }));
   };
 
-  const petData = usePetStore();
+  const petData = useGetPetInfo();
 
   useEffect(() => {
     if (petData) {
-      setPetInfo(petData.pet);
-      if (petData.pet && petData.pet.id !== undefined) {
-        handleSelect('petId', petData.pet.id); // id가 null이 아닌 경우만 설정
+      setPetInfo(petData);
+      if (petData && petData.id !== undefined) {
+        handleSelect('petId', petData.id); // id가 null이 아닌 경우만 설정
       }
     }
   }, [petData]);

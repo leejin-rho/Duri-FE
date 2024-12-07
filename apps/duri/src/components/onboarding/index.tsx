@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,7 +34,7 @@ const MultiStepForm = () => {
   const [progress, setProgress] = useState<number>(0);
   const [characterList, setcharacterList] = useState<string[]>([]); // 성격 선택리스트 관리
   const [diseasesList, setdiseasesList] = useState<string[]>([]); // 성격 선택리스트 관리
-  const { mutate: postPetInfo} = usePostPetInfo(()=>navigate('/')) //반려견 정보 등록 hook
+  const { mutate: postPetInfo } = usePostPetInfo(() => navigate('/')); //반려견 정보 등록 hook
 
   useEffect(() => {
     if (step <= 3) setProgress(1);
@@ -103,16 +104,15 @@ const MultiStepForm = () => {
   };
 
   const onSubmit = (data: FormData) => {
-    setValue('breed',breedMapping[data.breed])
+    setValue('breed', breedMapping[data.breed]);
     console.log(data);
 
     //API 호출 필요
     postPetInfo(data);
-
   };
 
   return (
-    <>
+    <Flex direction='column'>
       <Wrapper direction="column" padding="107px 20px 0 20px">
         <Wrapper
           direction="column"
@@ -218,9 +218,9 @@ const MultiStepForm = () => {
               완료
             </Button>
           ))}
-          <Toast />
       </Flex>
-    </>
+      <Toast />
+    </Flex>
   );
 };
 

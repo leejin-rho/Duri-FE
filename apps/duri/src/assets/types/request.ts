@@ -1,4 +1,4 @@
-export interface RequestProps extends TimeType {
+export interface RequestType extends TimeType {
   petId: number | undefined;
   menu: string[];
   addMenu: string[];
