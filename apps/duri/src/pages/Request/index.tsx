@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { addMenu, designMenu, menu, specialMenu } from '@duri/assets/data';
-import { PetInfoProps } from '@duri/assets/types/pet';
-import { RequestProps } from '@duri/assets/types/request';
-import MonthlyCalendar from '@duri/components/quotation/Calendar';
-import EtcRequest from '@duri/components/quotation/EtcRequest';
-import PetInfo from '@duri/components/quotation/PetInfo';
-import SelectGrooming from '@duri/components/quotation/SelectGrooming';
-import TimeTable from '@duri/components/quotation/TimeTable';
+import { defaultRequestInfo } from '@duri/assets/data/request';
+import { RequestType } from '@duri/assets/types';
+import MonthlyCalendar from '@duri/components/request/Calendar';
+import EtcRequest from '@duri/components/request/EtcRequest';
+import PetInfo from '@duri/components/request/PetInfo';
+import SelectGrooming from '@duri/components/request/SelectGrooming';
 import {
   Button,
   DuriNavbar,
@@ -16,45 +15,35 @@ import {
   Text,
   theme,
 } from '@duri-fe/ui';
+import { TimeTable } from '@duri-fe/ui';
 import { useGetPetInfo } from '@duri-fe/utils';
 
-const timeList = Array(10)
-  .fill(0)
-  .map((_, i) => `${9 + i}:00`);
+interface PetInfoType {
+  id: number;
+  name: string;
+  image: null;
+  breed: string;
+  age: number;
+  weight: number;
+  gender: string;
+  lastGrooming: Date | null;
+}
+
+const timeList = Array(10).fill(0).map((_, i) => `${9 + i}:00`);
 
 const RequestPage = () => {
-  const [requestList, setRequestList] = useState<RequestProps>({
-    petId: undefined,
-    menu: [],
-    addMenu: [],
-    specialMenu: [],
-    design: [],
-    etc: '',
-    day: new Date(),
-    time9: false,
-    time10: false,
-    time11: false,
-    time12: false,
-    time13: false,
-    time14: false,
-    time15: false,
-    time16: false,
-    time17: false,
-    time18: false,
-    shopIds: [1, 2],
-  });
-  const [petInfo, setPetInfo] = useState<PetInfoProps>();
+  const [requestList, setRequestList] = useState<RequestType>(defaultRequestInfo);
+  const [petInfo, setPetInfo] = useState<PetInfoType | null>(null);
   const [isButton, setIsButton] = useState<boolean>(false);
 
   const handleSelect = (
     key: string,
-    value: number | string | string[] | boolean | Date,
+    value: number | string | string[] | boolean | Date | undefined,
   ) => {
     if (key === 'petId') {
       setRequestList((prev) => ({
         ...prev,
-        petId:
-          typeof value === 'number' || value === undefined ? value : undefined,
+        petId: value === undefined || typeof value === 'number' ? value : undefined,  // petId만 undefined일 경우 처리가 필요
       }));
       return;
     }
@@ -65,15 +54,16 @@ const RequestPage = () => {
     }));
   };
 
-  const data = useGetPetInfo();
+  const petData = useGetPetInfo();
 
   useEffect(() => {
-    if (data) {
-      setPetInfo(data);
-      handleSelect('petId', data.petId); // petId는 따로 설정
-      console.log(data)
+    if (petData) {
+      setPetInfo(petData);
+      if (petData && petData.id !== undefined) {
+        handleSelect('petId', petData.id); // id가 null이 아닌 경우만 설정
+      }
     }
-  }, [data]);
+  }, [petData]);
 
   // 버튼 활성화 조건 업데이트
   useEffect(() => {
@@ -97,9 +87,8 @@ const RequestPage = () => {
         >
           {petInfo && (
             <PetInfo
-              petId={petInfo.petId}
-              petName={petInfo.petName}
-              petImage={petInfo.petImage}
+              name={petInfo.name}
+              image={petInfo.image}
               age={petInfo.age}
               breed={petInfo.breed}
               gender={petInfo.gender}

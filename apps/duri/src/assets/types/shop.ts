@@ -1,12 +1,12 @@
 export interface RegularShopProps {
-  shopIdx: string;
-  shopName: string;
-  shopImg: string;
-  shopScore?: number;
-  shopReview?: number;
+  salonIdx: string;
+  salonName: string;
+  salonImage: string;
+  salonScore?: number;
+  salonReviewCount?: number;
 }
 
 export interface RecommendeShopProps extends RegularShopProps {
-  shopAddress: string;
-  shopTag: string[];
+  salonAddress: string;
+  salonTag: string[];
 }

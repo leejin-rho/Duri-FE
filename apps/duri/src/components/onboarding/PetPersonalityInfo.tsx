@@ -34,10 +34,10 @@ const PetPersonalityInfo = ({
 
     if (currentValues.includes(value)) {
       // 이미 포함된 값이면 제거
-      toggleArrayValue('personality', value); // 상위에서 상태 업데이트
+      toggleArrayValue('character', value); // 상위에서 상태 업데이트
     } else {
       // 포함되지 않은 값이면 추가
-      toggleArrayValue('personality', value); // 상위에서 상태 업데이트
+      toggleArrayValue('character', value); // 상위에서 상태 업데이트
     }
   };
 
@@ -55,7 +55,7 @@ const PetPersonalityInfo = ({
         입력된 성격은 MY에서 변경가능해요.
       </Text>
       <Controller
-        name="personality"
+        name="character"
         control={control}
         rules={{
           validate: (value: string[]) =>

@@ -8,10 +8,11 @@ import { Global } from '@emotion/react';
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import StartPage from '@pages/Onboarding/StartPage';
-import PaymentPage from '@pages/PaymentPage';
-import FailPage from '@pages/PaymentPage/Fail';
-import SuccessPage from '@pages/PaymentPage/Success';
-import RequestPage from '@pages/RequestPage';
+import PaymentPage from '@pages/Payment';
+import FailPage from '@pages/Payment/Fail';
+import SuccessPage from '@pages/Payment/Success';
+import QuotationPage from '@pages/Quotation';
+import RequestPage from '@pages/Request';
 import Shop from '@pages/Shop';
 
 import Portfolio from './pages/Shop/Portfolio';
@@ -23,7 +24,6 @@ function App() {
       <Global styles={globalStyle} />
       <Routes>
         <Route path="/" element={<Home />} />
-
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth" element={<AuthPage />} />
 
@@ -33,10 +33,12 @@ function App() {
         <Route path="/payment/:quotationId" element={<PaymentPage />} />
         <Route path="/payment/success" element={<SuccessPage />} />
         <Route path="/payment/fail" element={<FailPage />} />
-        <Route path="/quotation/request" element={<RequestPage />} />
+        <Route path="/shop/request" element={<RequestPage />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:shopId" element={<ShopDetail />} />
         <Route path="/portfolio/:designerId" element={<Portfolio />} />
+
+        <Route path="/quotation" element={<QuotationPage />} />
       </Routes>
     </BrowserRouter>
   );

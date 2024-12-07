@@ -16,8 +16,10 @@ export const StatusBar: React.FC<StatusBarProps> = ({
   mode,
 }) => {
   const dots = Array.from({ length: total+1 }, (_, index) => {
-    if (index <= current) {
-      return <HiddenDot key={index} width={5} height={5} borderRadius={5} backgroundColor={theme.palette.Gray200} />
+    if (index === 0) {
+      return <HiddenDot key={index} width={9} height={9} borderRadius={5} backgroundColor={theme.palette.Normal500} />
+    } else if (index <= current) {
+      return <Dot key={index} width={9} height={9} borderRadius={5} backgroundColor={theme.palette.Normal500} />
     } else {
       return <Dot key={index} width={5} height={5} borderRadius={5} backgroundColor={theme.palette.Gray200} />
     }
@@ -38,7 +40,6 @@ export const StatusBar: React.FC<StatusBarProps> = ({
         borderRadius={10}
         justify="end"
       >
-        {mode === "main" && <Dot width={9} height={9} borderRadius={9} color={theme.palette.Normal500} backgroundColor={theme.palette.Normal500} />}
       </CurrentStatus>
     </StatusBarContainer>
   )

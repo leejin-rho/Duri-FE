@@ -1,8 +1,5 @@
+import { Dropdown } from '@duri-fe/ui';
 import type { Meta, StoryFn } from '@storybook/react';
-
-import Dropdown from '../../components/Dropdown';
-
-
 
 const meta: Meta<typeof Dropdown> = {
   title: 'components/Dropdown',

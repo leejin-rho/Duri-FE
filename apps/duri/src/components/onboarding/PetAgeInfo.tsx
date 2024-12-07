@@ -11,10 +11,7 @@ interface PetBirthYearInfoProps {
 
 const PetAgeInfo = ({ control, name }: PetBirthYearInfoProps) => {
   // 나이 리스트 생성 (현재 연도 - 0세부터 25세까지)
-  const ageList = Array.from({ length: 26 }, (_, i) => {
-    if (i === 0) return '0살 이하';
-    else return i.toString() + '살';
-  });
+  const ageList = Array.from({ length: 26 }, (_, i) => i);
 
   return (
     <Flex direction="column" align="flex-start" gap={28} >
@@ -34,6 +31,7 @@ const PetAgeInfo = ({ control, name }: PetBirthYearInfoProps) => {
             defaultValue="나이 입력"
             width={100}
             onSelect={field.onChange}
+            suffix='살'
           />
           </Flex>
         )}

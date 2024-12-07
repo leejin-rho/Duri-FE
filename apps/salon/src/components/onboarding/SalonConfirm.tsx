@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { SalonFormData } from '@assets/types/onboarding';
 import { AlertStar, Button, Flex, Text, theme } from '@duri-fe/ui';
-import { SalonFormData } from '@salon/types/onboarding';
 
 import {
   ButtonWrapper,
