@@ -1,5 +1,5 @@
 import { Approve, Button, Call, Flex, HeightFitFlex, ProfileImage, Text, theme, WidthFitFlex, Write } from "@duri-fe/ui";
-import { parsePetInfo } from "@duri-fe/utils";
+import { parsePetInfo, parseTimeStr } from "@duri-fe/utils";
 import styled from "@emotion/styled";
 
 interface ClosetGroomingProps {
@@ -28,12 +28,7 @@ const ClosetGrooming = ({
   isNow,
 }: ClosetGroomingProps) => {
   const petInfoStr = parsePetInfo({breed: breed, gender: gender, weight: weight, age: age});
-  const date = new Date(startTime);
-  const isPM = date.getHours() >= 12;
-
-  const startHour = isPM ? (date.getHours() - 12).toString() : date.getHours().toString();
-  const startMinute = date.getMinutes().toString().padStart(2, '0');
-  const startTimeStr = startHour + ':' + startMinute + (isPM ? ' PM' : ' AM');
+  const startTimeStr = parseTimeStr(startTime);
 
   const handleCallUser = (userPhone: string) => {
     window.open(`tel:${userPhone}`);
