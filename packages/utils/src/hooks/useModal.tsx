@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 export const useModal = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -10,10 +10,10 @@ export const useModal = () => {
     return () => {
       document.removeEventListener('mousedown', handleOutsideClick);
     };
-  }, [isOpen]);
+  }, [isOpenModal]);
 
   const toggleModal = () => {
-    setIsOpen((prevIsOpen) => {
+    setIsOpenModal((prevIsOpen) => {
       if (!prevIsOpen) document.body.style.overflowY = 'hidden';
       else document.body.style.overflowY = 'auto';
       return !prevIsOpen;
@@ -22,21 +22,21 @@ export const useModal = () => {
 
   const openModal = () => {
     document.body.style.overflowY = 'hidden';
-    setIsOpen(true);
+    setIsOpenModal(true);
   };
 
   const closeModal = () => {
     document.body.style.overflowY = 'auto';
-    setIsOpen(false);
+    setIsOpenModal(false);
   };
 
   const handleOutsideClick = (e: Event) => {
     const current = modalRef.current;
-    if (isOpen && current && !current.contains(e.target as Node)) {
+    if (isOpenModal && current && !current.contains(e.target as Node)) {
       document.body.style.overflowY = 'auto';
-      setIsOpen(false);
+      setIsOpenModal(false);
     }
   };
 
-  return { isOpen, modalRef, toggleModal, closeModal, openModal };
+  return { isOpenModal, modalRef, toggleModal, closeModal, openModal };
 };

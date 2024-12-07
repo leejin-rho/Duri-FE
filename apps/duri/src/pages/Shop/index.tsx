@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { BottomSheetRef } from 'react-spring-bottom-sheet';
 
 import { MapInfo } from '@duri/components/shop';
 import { ShopList } from '@duri/components/shop/ShopList';
@@ -20,7 +19,6 @@ import styled from '@emotion/styled';
 
 const Shop = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const sheetRef = useRef<BottomSheetRef>(null);
 
   const [isMap, setIsMap] = useState<boolean>(true);
   const [nearbyShops, setNearbyShops] = useState<ShopInfoType[] | null>([]);
@@ -82,7 +80,6 @@ const Shop = () => {
           </>
         ) : (
           <ShopList
-            ref={sheetRef}
             nearbyShops={nearbyShops}
             filter={filter}
             onFilterChange={handleFilterChange}

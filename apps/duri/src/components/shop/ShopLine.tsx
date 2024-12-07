@@ -45,6 +45,11 @@ export const ShopLine = ({
     navigate(`/shop/${shopId}`);
   };
 
+  const handleSendClick = (event: React.MouseEvent) => {
+    event.stopPropagation(); // 이벤트 전파 차단
+    onClick?.();
+  };
+
   return (
     <HeightFitFlex gap={20} key={id} onClick={() => moveToDetail(id)}>
       <SalonImg src={salonDefault} />
@@ -93,7 +98,7 @@ export const ShopLine = ({
             width="42px"
             height="42px"
             borderRadius="40px"
-            onClick={onClick}
+            onClick={handleSendClick}
             bg={isClicked ? theme.palette.Normal600 : theme.palette.Normal100}
             padding="0"
           >
