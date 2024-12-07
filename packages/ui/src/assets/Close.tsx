@@ -6,8 +6,8 @@ export interface CloseProps {
   width?: number;
   height?: number;
   margin?: string;
-  isOpen: boolean;
-  toggleModal: () => void;
+  isOpen?: boolean;
+  toggleModal?: () => void;
   currentColor?: string;
 }
 

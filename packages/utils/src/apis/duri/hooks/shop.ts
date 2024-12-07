@@ -1,12 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-<<<<<<< HEAD
 import { CenterInfoType } from '../../types';
-import {
-  getNearByShopInfo,
-  getRecommendedShopInfo,
-  getRegularShopInfo,
-} from '../shop';
+import { getNearByShopInfo } from '../shop';
 import { a, b } from '../shop';
 
 export const useA = () => {
@@ -18,6 +13,14 @@ export const useA = () => {
   return data;
 };
 
+export const useB = () => {
+  const { data } = useQuery({
+    queryKey: ['getRecommendedShopList'],
+    queryFn: () => b(),
+    staleTime: 1000 * 60 * 10,
+  });
+  return data;
+};
 
 export const useGetNearByShopInfo = (
   centerInfo: CenterInfoType,
@@ -30,14 +33,3 @@ export const useGetNearByShopInfo = (
   });
   return { data, refetch, isPending };
 };
-
-
-export const useB = () => {
-  const { data } = useQuery({
-    queryKey: ['getRecommendedShopList'],
-    queryFn: () => b(),
-    staleTime: 1000 * 60 * 10,
-  });
-  return data;
-}; 
-
