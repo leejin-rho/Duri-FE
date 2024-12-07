@@ -13,8 +13,9 @@ import {
   SwiperSlide as OriginalSwiperSlide,
 } from 'swiper/react';
 
-import LastReservation from './reservation/lastReservation';
-import UpcomingReservation from './reservation/upcomingReservation';
+import LastReservation from './reservation/LastReservation';
+import UpcomingReservation from './reservation/UpcomingReservation';
+
 
 const CarouselHome = ({
   upcomingReservation,

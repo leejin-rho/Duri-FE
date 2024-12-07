@@ -2,7 +2,7 @@ import { duriInstance } from '../axiosConfig';
 import { BaseResponse } from '../types';
 
 interface PetInfoResponse extends BaseResponse {
-  data: {
+  response: {
     id: number;
     name: string;
     image: null;
@@ -16,7 +16,7 @@ interface PetInfoResponse extends BaseResponse {
 }
 
 interface UpcomingReservationResponse extends BaseResponse {
-  data: {
+  response: {
     petId: number;
     lastSinceDay: number;
     shopId: number;
@@ -55,10 +55,10 @@ export async function getRecommendedShopInfo() {
 }
 
 export const getUpcomingReservation = async (): Promise<
-  UpcomingReservationResponse
+  UpcomingReservationResponse['response']
 > => {
   const response = await duriInstance.get('/user/home/schedule');
-  return response.data;
+  return response.data.response;
 };
 
 // export const getLastReservation = async () => {
@@ -66,7 +66,7 @@ export const getUpcomingReservation = async (): Promise<
 //   return response.data;
 // }; 이게 없고 펫 정보에 lastGroomingDate 데이터를 이용해야됨!!
 
-export async function getPetInfo(): Promise<PetInfoResponse> {
+export async function getPetInfo(): Promise<PetInfoResponse['response']> {
   const response = await duriInstance.get(`user/pet/petId`);
-  return response.data;
+  return response.data.response;
 }
