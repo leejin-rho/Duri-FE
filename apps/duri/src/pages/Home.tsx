@@ -54,7 +54,7 @@ const Home = () => {
   useEffect(() => {
     if (recommendedListData) setRecommendedShopList(recommendedListData);
     if (regularListData) setRegularShopList(regularListData);
-    if (reservationData) setUpcomingReservation(reservationData.data);
+    if (reservationData) setUpcomingReservation(reservationData);
     // if (lastReservationData) setLastReservation(lastReservationData);
   }, [
     recommendedListData,
@@ -64,7 +64,7 @@ const Home = () => {
   ]);
 
   useEffect(()=>{
-    if(petData) setPetInfo(petData.data)
+    if(petData) setPetInfo(petData)
   },[petData])
 
   return (
