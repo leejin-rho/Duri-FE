@@ -4,7 +4,7 @@ import React from 'react';
 import {
   LastReservationProps,
   UpcomingReservationProps,
-} from '@duri/assets/types/reservation';
+} from '@duri/assets/types';
 import { Button, Flex, HeightFitFlex, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 import { differenceInDays } from 'date-fns';
@@ -35,7 +35,7 @@ const CarouselHome = ({
     ); // 일수 차이 계산
 
   const slides = [
-    upcomingReservation && (
+    upcomingReservation ? (
       <UpcomingReservation reservationDate={upcomingReservation.reservationDate}
       shopId={upcomingReservation.shopId}
       address={upcomingReservation.address}
@@ -46,20 +46,23 @@ const CarouselHome = ({
       kakaoURL={upcomingReservation.kakaoURL}
       reserveDday={upcomingReservation.reserveDday}
       />
-    ),
-    lastReservation && daysDifference && (
+    ) : (<Wrapper
+      borderRadius={12}
+      padding="27px 20px"
+      backgroundColor={theme.palette.White}
+    >
+      <Text colorCode={theme.palette.Gray400}>예약된 미용이 없어요😔</Text>
+    </Wrapper>) //다가오는 예약이 없는 경우
+    ,
+    lastReservation ? (
       <LastReservation daysDifference={daysDifference} />
-    ),
-    // 여기는 이제 아무것도 이력이 없는 유저한테 띄울 컴포넌트가 드가야 함!
-    // (!upcomingReservation && !lastReservation) ?? (
-    //   <Wrapper
-    //     borderRadius={12}
-    //     padding="27px 20px"
-    //     backgroundColor={theme.palette.White}
-    //   >
-    //     <Text>예약하시오</Text>
-    //   </Wrapper>
-    // ),
+    ) : (<Wrapper
+      borderRadius={12}
+      padding="27px 20px"
+      backgroundColor={theme.palette.White}
+    >
+      <Text colorCode={theme.palette.Gray400}> 시술 이력이 없어요😔</Text>
+    </Wrapper>),
   ];
 
   return (
@@ -145,4 +148,9 @@ const CustomSwiperSlide = styled(OriginalSwiperSlide)<{ isActive: boolean }>`
 const Bullet = styled(Button)`
   padding: 0;
   transition: all 0.3s ease;
+`;
+
+const Wrapper = styled(Flex)`
+  flex-shrink: 0;
+  position: relative;
 `;
