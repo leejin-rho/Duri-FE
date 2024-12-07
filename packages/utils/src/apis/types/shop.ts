@@ -1,3 +1,5 @@
+import { BaseResponse } from './base';
+
 export interface ShopTime {
   hour: number;
   minute: number;
@@ -18,3 +20,13 @@ export interface ShopInfoType {
   distance: number; // 거리
   tags: string[]; // 태그 배열
 }
+
+export interface ShopInfoResponse extends BaseResponse {
+  response: ShopInfoType[];
+}
+
+export type CenterInfoType = {
+  lat: number;
+  lon: number;
+  radius: number;
+};

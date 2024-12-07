@@ -21,7 +21,7 @@ const Shop = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   const [isMap, setIsMap] = useState<boolean>(true);
-  const [nearbyShops, setNearbyShops] = useState<ShopInfoType[] | null>([]);
+  const [nearbyShops, setNearbyShops] = useState<ShopInfoType[]>([]);
 
   const changeMapType = () => {
     setIsMap(!isMap);

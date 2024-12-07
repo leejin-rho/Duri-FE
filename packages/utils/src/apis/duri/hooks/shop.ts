@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { CenterInfoType } from '../../types';
 import {
-  CenterInfoType,
   getNearByShopInfo,
   getRecommendedShopInfo,
   getRegularShopInfo,
