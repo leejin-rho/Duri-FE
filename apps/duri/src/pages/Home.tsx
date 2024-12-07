@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { LastReservationProps, UpcomingReservationProps } from '@duri/assets/types/reservation';
+import {
+  LastReservationProps,
+  UpcomingReservationProps,
+} from '@duri/assets/types/reservation';
 import { RecommendeShopProps, RegularShopProps } from '@duri/assets/types/shop';
 import CarouselHome from '@duri/components/home/Home';
 import RecommendedShop from '@duri/components/home/RecommendedShop';
@@ -13,38 +16,56 @@ import {
   Header,
   HeightFitFlex,
   MobileLayout,
+  Text,
   theme,
 } from '@duri-fe/ui';
 import {
-  useGetLastReservation,
+  // useGetLastReservation,
+  useGetPetInfo,
   useGetRecommendedShopList,
   useGetRegularShopList,
   useGetUpcomingReservation,
 } from '@duri-fe/utils';
+import { usePetStore } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
+
 const Home = () => {
+  const petData = useGetPetInfo();
+  const setPetInfo = usePetStore((state) => state.setPetInfo);
+
   const [regularShopList, setRegularShopList] = useState<RegularShopProps[]>(
     [],
   );
   const [recommendedShopList, setRecommendedShopList] = useState<
     RecommendeShopProps[]
   >([]);
-  const [upcomingReservation, setUpcomingReservation] = useState<UpcomingReservationProps>();
-  const [lastReservation, setLastReservation] = useState<LastReservationProps>();
+  const [upcomingReservation, setUpcomingReservation] =
+    useState<UpcomingReservationProps>();
+  const [lastReservation, ] =
+    useState<LastReservationProps>();
   const recommendedListData = useGetRecommendedShopList();
   const regularListData = useGetRegularShopList();
   const reservationData = useGetUpcomingReservation();
-  const lastReservationData = useGetLastReservation();
+  // const lastReservationData = useGetLastReservation();
   const navigate = useNavigate();
-  const handleClickSearchIcon = () => navigate('/search');
+  const handleClickSearchIcon = () => navigate('/shop');
 
   useEffect(() => {
     if (recommendedListData) setRecommendedShopList(recommendedListData);
     if (regularListData) setRegularShopList(regularListData);
-    if(reservationData) setUpcomingReservation(reservationData);
-    if(lastReservationData) setLastReservation(lastReservationData);
-  }, [recommendedListData, regularListData, reservationData, lastReservationData]);
+    if (reservationData) setUpcomingReservation(reservationData);
+    // if (lastReservationData) setLastReservation(lastReservationData);
+  }, [
+    recommendedListData,
+    regularListData,
+    reservationData,
+    // lastReservationData,
+  ]);
+
+  useEffect(()=>{
+    if(petData) setPetInfo(petData)
+  },[petData])
 
   return (
     <MobileLayout>
@@ -60,11 +81,24 @@ const Home = () => {
             searchIcon={true}
             onClickSearch={handleClickSearchIcon}
           />
-          <CarouselHome upcomingReservation={upcomingReservation} lastReservation={lastReservation} />
+          <CarouselHome
+            upcomingReservation={upcomingReservation}
+            lastReservation={lastReservation}
+          />
         </HeightFitFlex>
+        {/* 단골 빠른입찰 */}
         <Flex direction="column" padding="0 20px">
-          {/* 단골 빠른입찰 */}
-          {regularShopList && <SpeedQuotation shopList={regularShopList} />}
+          <Flex direction="column" align="flex-start" margin="28px 0 0 0">
+            <Text
+              typo="Caption1"
+              colorCode={theme.palette.Gray400}
+              margin="0 0 6px 0"
+            >
+              {/* {pet?.name}가 3회 이상 방문한 샵들이에요. */}
+            </Text>
+            <Text typo="Title1">단골 샵 빠른 입찰</Text>
+            {regularShopList && <SpeedQuotation shopList={regularShopList} />}
+          </Flex>
 
           {/* AI 스타일링 배너 */}
           <StyleBannerWrapper
@@ -76,7 +110,9 @@ const Home = () => {
           </StyleBannerWrapper>
 
           {/* 추천 샵 */}
-          {recommendedShopList && <RecommendedShop shopList={recommendedShopList} />}
+          {recommendedShopList && (
+            <RecommendedShop shopList={recommendedShopList} />
+          )}
         </Flex>
         <DuriNavbar />
       </Flex>

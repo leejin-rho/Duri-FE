@@ -13,8 +13,9 @@ import {
   SwiperSlide as OriginalSwiperSlide,
 } from 'swiper/react';
 
-import LastReservation from './reservation/lastReservation';
-import UpcomingReservation from './reservation/upcomingReservation';
+import LastReservation from './reservation/LastReservation';
+import UpcomingReservation from './reservation/UpcomingReservation';
+
 
 const CarouselHome = ({
   upcomingReservation,
@@ -36,11 +37,14 @@ const CarouselHome = ({
   const slides = [
     upcomingReservation && (
       <UpcomingReservation reservationDate={upcomingReservation.reservationDate}
-      salonAddress={upcomingReservation.salonAddress}
-      salonName={upcomingReservation.salonName}
-      salonImage={upcomingReservation.salonImage}
-      totalPrice={upcomingReservation.totalPrice}
-      salonPhone={upcomingReservation.salonPhone}
+      shopId={upcomingReservation.shopId}
+      address={upcomingReservation.address}
+      name={upcomingReservation.name}
+      imageURL={upcomingReservation.imageURL}
+      price={upcomingReservation.price}
+      phone={upcomingReservation.phone}
+      kakaoURL={upcomingReservation.kakaoURL}
+      reserveDday={upcomingReservation.reserveDday}
       />
     ),
     lastReservation && daysDifference && (

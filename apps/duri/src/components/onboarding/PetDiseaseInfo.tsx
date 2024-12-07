@@ -31,16 +31,16 @@ const PetDiseaseInfo = ({
 
     if (currentValues.includes(value)) {
       // 이미 포함된 값이면 제거
-      toggleArrayValue('disease', value); // 상위에서 상태 업데이트
+      toggleArrayValue('diseases', value); // 상위에서 상태 업데이트
     } else {
       // 포함되지 않은 값이면 추가
-      toggleArrayValue('disease', value); // 상위에서 상태 업데이트
+      toggleArrayValue('diseases', value); // 상위에서 상태 업데이트
     }
   };
   return (
     <>
       <Controller
-        name="disease"
+        name="diseases"
         control={control}
         rules={{
           validate: (value: string[]) =>

@@ -29,7 +29,7 @@ const PetWeightInfo = ({ control, name }: PetWeightInfoProps) => {
         rules={{
           required: '몸무게를 선택해주세요.',
           validate: (value) => {
-            const [integer, decimal] = value.split('.'); // 정수와 소수 분리
+            const [integer, decimal] = value.toString().split('.'); // 정수와 소수 분리
             const weight = parseFloat(`${integer}.${decimal}`);
             return weight > 0;
           },
@@ -42,10 +42,10 @@ const PetWeightInfo = ({ control, name }: PetWeightInfoProps) => {
               <Dropdown
                 width={85}
                 options={integerList}
-                defaultValue={field.value.split('.')[0] || '0'} // 정수 부분 초기값
+                defaultValue={field.value.toString().split('.')[0] || '0'} // 정수 부분 초기값
                 onSelect={(value) => {
-                  const decimal = field.value.split('.')[1] || '0'; // 소수 추출
-                  field.onChange(`${value}.${decimal}`); // 정수와 소수 조합
+                  const decimal = field.value.toString().split('.')[1] || 0; // 소수 추출
+                  field.onChange(parseFloat(`${value}.${decimal}`)); // 정수와 소수 조합
                 }}
               />
               <Text typo="Body2" margin="0 0 6px 0">.</Text>
@@ -53,10 +53,10 @@ const PetWeightInfo = ({ control, name }: PetWeightInfoProps) => {
               <Dropdown
                 width={85}
                 options={decimalList}
-                defaultValue={field.value.split('.')[1] || '0'} // 소수 부분 초기값
+                defaultValue={field.value.toString().split('.')[1] || '0'} // 소수 부분 초기값
                 onSelect={(value) => {
-                  const integer = field.value.split('.')[0] || '0'; // 정수 추출
-                  field.onChange(`${integer}.${value}`); // 정수와 소수 조합
+                  const integer = field.value.toString().split('.')[0] || 0; // 정수 추출
+                  field.onChange(parseFloat(`${integer}.${value}`)); // 정수와 소수 조합
                 }}
               />
               <Text typo="Body2" margin="0 0 6px 0">

@@ -3,7 +3,7 @@
 
 import { duriInstance } from '../axiosConfig';
 
-export async function getRegularShopInfo() {
+export async function a() {
   try {
     const response = await duriInstance.get(`shop/regular`, {
       withCredentials: true,
@@ -14,7 +14,7 @@ export async function getRegularShopInfo() {
   }
 }
 
-export async function getRecommendedShopInfo() {
+export async function b() {
   try {
     const response = await duriInstance.get(`shop/recommend`, {
       withCredentials: true,

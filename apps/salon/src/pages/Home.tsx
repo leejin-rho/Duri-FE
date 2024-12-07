@@ -1,6 +1,6 @@
-import { ClosetGroomingType, QuotationRequestType, ScheduleType, ShopInfoType } from '@assets/types/home';
 import { Card, DuriNavbar, Flex, Header, HeightFitFlex, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
+import { ClosetGroomingType, QuotationRequestType, ScheduleType, ShopInfoType } from '@salon/Assets/types/home';
 
 import OngoingGrooming from '@components/home/ClosetGrooming';
 import DailyScheduleItem from '@components/home/DailyScheduleItem';

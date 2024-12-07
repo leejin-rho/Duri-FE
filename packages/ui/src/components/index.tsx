@@ -15,3 +15,4 @@ export * from './Header';
 export * from './Card';
 export * from './Toast';
 export * from './ProfileImage';
+export * from './Quotation';

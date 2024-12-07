@@ -1,22 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getRecommendedShopInfo, getRegularShopInfo } from '../shop';
+import { a, b } from '../shop';
 
-export const useGetRegularShopList = () => {
-    const {data} =  useQuery({
-      queryKey: ['getRegularShopList'],
-      queryFn: () => getRegularShopInfo(),
-      staleTime : 1000 * 60 * 10,
-    })
+export const useA = () => {
+  const { data } = useQuery({
+    queryKey: ['getRegularShopList'],
+    queryFn: () => a(),
+    staleTime: 1000 * 60 * 10,
+  });
 
-    return data;
-  };
+  return data;
+}; //얘네 삭제해줘잉
 
-  export const useGetRecommendedShopList = () => {
-    const {data} =  useQuery({
-      queryKey: ['getRecommendedShopList'],
-      queryFn: () => getRecommendedShopInfo(),
-      staleTime : 1000 * 60 * 10,
-    })
-    return data;
-  };
+export const useB = () => {
+  const { data } = useQuery({
+    queryKey: ['getRecommendedShopList'],
+    queryFn: () => b(),
+    staleTime: 1000 * 60 * 10,
+  });
+  return data;
+}; //삭제삭제

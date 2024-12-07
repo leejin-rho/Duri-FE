@@ -1,9 +1,9 @@
-export interface PetInfoProps {
-    petId: number;
-    petName: string;
-    petImage: string;
-    breed: string;
-    age: string;
-    weight: string;
-    gender: string;
+export interface PetInfoType {
+  id: number | undefined;
+  image: string | null;
+  name: string;
+  breed: string;
+  age: number;
+  weight: number;
+  gender: string;
 }

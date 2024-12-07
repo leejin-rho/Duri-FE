@@ -12,6 +12,6 @@
       "@mocks/*": ["./apps/duri/src/mocks/*"]
     }
   },
-  "include": ["src/**/*", "../../**/*.d.ts", "public/svg/MyLocation.tsx"],
+  "include": ["src/**/*", "../../**/*.d.ts", "public/svg/MyLocation.tsx", "../../packages/utils/src/stores"],
   "exclude": ["node_modules", "dist"]
 }

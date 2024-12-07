@@ -1,0 +1,66 @@
+export const defaultTimeData = {
+    time9: false,
+    time10: false,
+    time11: false,
+    time12: false,
+    time13: false,
+    time14: false,
+    time15: false,
+    time16: false,
+    time17: false,
+    time18: false,
+  }
+
+export const defaultRequestQuotationData = {
+    userName: '',
+    userPhone: '',
+    pet: {
+      id: undefined,
+      name: '',
+      image: '',
+      breed: '',
+      age: 0,
+      weight: 0,
+      gender: '',
+      neutering: false,
+      character: [],
+      diseases: [],
+      lastGrooming: new Date(),
+    },
+    quotationDetails: {
+      groomingMenu: [],
+      additionalGrooming: [],
+      specialCare: [],
+      designCut: [],
+      otherRequests: '',
+      day: new Date(),
+      shopIds: [],
+    },
+    time9: false,
+    time10: false,
+    time11: false,
+    time12: false,
+    time13: false,
+    time14: false,
+    time15: false,
+    time16: false,
+    time17: false,
+    time18: false,
+  }
+
+export const defaultResponseData = {
+  name: '',
+  phone: '',
+  address: '',
+  designerName: '',
+  quotationDetails: {
+    groomingMenu: [],
+    additionalGrooming: [],
+    specialCare: [],
+    designCut: [],
+  },
+  startDateTime: new Date(),
+  endDateTime: new Date(),
+  totalPrice: 0,
+  requestTime: new Date()
+}
