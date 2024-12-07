@@ -10,7 +10,7 @@ import {
   WidthFitFlex,
 } from '@duri-fe/ui';
 import { defaultRequestQuotationData, defaultTimeData } from '@duri-fe/ui';
-import { RequestProps, TimeProps } from '@duri-fe/ui/assets/types/quotation';
+import { RequestProps, TimeProps } from '@duri-fe/ui/types';
 import { format } from 'date-fns';
 
 import { DetailGrooming } from './DetailGrooming';
@@ -98,7 +98,9 @@ export const RequestQuotation = ({
           designCut={designCut}
         />
       </HeightFitFlex>
-      <Flex gap={7} margin='6px 0' padding='16px 18.5px'>{children}</Flex>
+      <Flex gap={7} margin="6px 0" padding="16px 18.5px">
+        {children}
+      </Flex>
     </>
   );
 };

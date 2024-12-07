@@ -1,5 +1,5 @@
 import { Button, Flex, theme } from '@duri-fe/ui';
-import { TimeProps } from '@duri-fe/ui/assets/types/quotation';
+import { TimeProps } from '@duri-fe/ui/types/quotation';
 import styled from '@emotion/styled';
 
 interface TimeTableProps {
