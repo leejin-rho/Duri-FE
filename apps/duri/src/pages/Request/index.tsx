@@ -7,7 +7,6 @@ import MonthlyCalendar from '@duri/components/request/Calendar';
 import EtcRequest from '@duri/components/request/EtcRequest';
 import PetInfo from '@duri/components/request/PetInfo';
 import SelectGrooming from '@duri/components/request/SelectGrooming';
-import TimeTable from '@duri/components/request/TimeTable';
 import {
   Button,
   DuriNavbar,
@@ -16,6 +15,7 @@ import {
   Text,
   theme,
 } from '@duri-fe/ui';
+import { TimeTable } from '@duri-fe/ui';
 import { usePetStore } from '@duri-fe/utils';
 
 const timeList = Array(10)
