@@ -1,6 +1,7 @@
 import { Button, Flex, theme } from '@duri-fe/ui';
-import { TimeProps } from '@duri-fe/ui/types/quotation';
 import styled from '@emotion/styled';
+
+import { TimeProps } from '../../types';
 
 interface TimeTableProps {
   timeList: string[];

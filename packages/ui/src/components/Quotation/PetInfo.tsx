@@ -1,5 +1,6 @@
 import { Flex, HeightFitFlex, Image, Text, theme } from '@duri-fe/ui';
-import { PetInfoProps } from '@duri-fe/ui/types/quotation';
+
+import { PetInfoProps } from '../../types';
 
 export const PetInfo = ({
   image,

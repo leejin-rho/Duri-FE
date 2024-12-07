@@ -11,8 +11,9 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
-import { ResponseProps } from '@duri-fe/ui/types';
 import { format } from 'date-fns';
+
+import { ResponseProps } from '../../types';
 
 import { DetailGrooming } from './DetailGrooming';
 

@@ -10,8 +10,9 @@ import {
   WidthFitFlex,
 } from '@duri-fe/ui';
 import { defaultRequestQuotationData, defaultTimeData } from '@duri-fe/ui';
-import { RequestProps, TimeProps } from '@duri-fe/ui/types';
 import { format } from 'date-fns';
+
+import { RequestProps, TimeProps } from '../../types';
 
 import { DetailGrooming } from './DetailGrooming';
 import { PetInfo } from './PetInfo';
