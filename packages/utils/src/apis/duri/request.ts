@@ -2,15 +2,6 @@
 import { duriInstance } from '../axiosConfig';
 import { RequestProps } from '../types/quotation';
 
-export async function getPetInfo() {
-  try {
-    const response = await duriInstance.get(`pet`);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 export const postRequestQuotation = async (request: RequestProps) => {
   // ): Promise<RequestResponse> => {
   const response = await duriInstance.post(`quotation/request`, request);

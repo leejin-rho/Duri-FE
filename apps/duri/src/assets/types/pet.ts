@@ -1,9 +1,9 @@
 export interface PetInfoProps {
-    petId: number;
-    petName: string;
-    petImage: string;
+    id: number | undefined;
+    image: string | null;
+    name: string;
     breed: string;
-    age: string;
-    weight: string;
+    age: number;
+    weight: number;
     gender: string;
 }

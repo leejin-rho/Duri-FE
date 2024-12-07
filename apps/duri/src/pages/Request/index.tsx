@@ -16,7 +16,7 @@ import {
   Text,
   theme,
 } from '@duri-fe/ui';
-import { useGetPetInfo } from '@duri-fe/utils';
+import { usePetStore } from '@duri-fe/utils';
 
 const timeList = Array(10)
   .fill(0)
@@ -43,18 +43,17 @@ const RequestPage = () => {
     time18: false,
     shopIds: [1, 2],
   });
-  const [petInfo, setPetInfo] = useState<PetInfoProps>();
+  const [petInfo, setPetInfo] = useState<PetInfoProps | null>(null);
   const [isButton, setIsButton] = useState<boolean>(false);
 
   const handleSelect = (
     key: string,
-    value: number | string | string[] | boolean | Date,
+    value: number | string | string[] | boolean | Date| undefined,
   ) => {
     if (key === 'petId') {
       setRequestList((prev) => ({
         ...prev,
-        petId:
-          typeof value === 'number' || value === undefined ? value : undefined,
+        petId: value === undefined || typeof value === 'number' ? value : undefined,  // petId만 undefined일 경우 처리가 필요
       }));
       return;
     }
@@ -65,15 +64,16 @@ const RequestPage = () => {
     }));
   };
 
-  const data = useGetPetInfo();
+  const petData = usePetStore();
 
   useEffect(() => {
-    if (data) {
-      setPetInfo(data);
-      handleSelect('petId', data.petId); // petId는 따로 설정
-      console.log(data)
+    if (petData) {
+      setPetInfo(petData.pet);
+      if (petData.pet && petData.pet.id !== undefined) {
+        handleSelect('petId', petData.pet.id); // id가 null이 아닌 경우만 설정
+      }
     }
-  }, [data]);
+  }, [petData]);
 
   // 버튼 활성화 조건 업데이트
   useEffect(() => {
@@ -97,9 +97,8 @@ const RequestPage = () => {
         >
           {petInfo && (
             <PetInfo
-              petId={petInfo.petId}
-              petName={petInfo.petName}
-              petImage={petInfo.petImage}
+              name={petInfo.name}
+              image={petInfo.image}
               age={petInfo.age}
               breed={petInfo.breed}
               gender={petInfo.gender}

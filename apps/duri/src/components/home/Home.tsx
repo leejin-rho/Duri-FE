@@ -36,11 +36,14 @@ const CarouselHome = ({
   const slides = [
     upcomingReservation && (
       <UpcomingReservation reservationDate={upcomingReservation.reservationDate}
-      salonAddress={upcomingReservation.salonAddress}
-      salonName={upcomingReservation.salonName}
-      salonImage={upcomingReservation.salonImage}
-      totalPrice={upcomingReservation.totalPrice}
-      salonPhone={upcomingReservation.salonPhone}
+      shopId={upcomingReservation.shopId}
+      address={upcomingReservation.address}
+      name={upcomingReservation.name}
+      imageURL={upcomingReservation.imageURL}
+      price={upcomingReservation.price}
+      phone={upcomingReservation.phone}
+      kakaoURL={upcomingReservation.kakaoURL}
+      reserveDday={upcomingReservation.reserveDday}
       />
     ),
     lastReservation && daysDifference && (

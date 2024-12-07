@@ -36,7 +36,7 @@ const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
       </Text>
 
       <Controller
-        name="isNeutered"
+        name="neutering"
         control={control}
         rules={{
           validate: (value) =>

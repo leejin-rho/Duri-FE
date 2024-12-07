@@ -1,7 +1,7 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { RequestProps } from '../../types/quotation';
-import { getPetInfo, postRequestQuotation } from '../request';
+import { postRequestQuotation } from '../request';
 
 // import { BaseResponse } from './../../types/base';
 
@@ -19,14 +19,14 @@ import { getPetInfo, postRequestQuotation } from '../request';
 //     response: PetInfoProps
 // }
 
-export const useGetPetInfo = () => {
-    const {data} = useQuery({
-      queryKey: ['getPetInfo'],
-      queryFn: () => getPetInfo(),
-      staleTime: 1000 * 60 * 10,
-    });
-    return data;
-  };
+// export const useGetPetInfo = () => {
+//     const {data} = useQuery({
+//       queryKey: ['getPetInfo'],
+//       queryFn: () => getPetInfo(),
+//       staleTime: 1000 * 60 * 10,
+//     });
+//     return data;
+//   };
 
 export const useRequestQuotation = () => {
   return useMutation<void, Error, RequestProps>({

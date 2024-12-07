@@ -22,8 +22,8 @@ const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
   };
 
   const options = [
-    { label: '왕자님', value: '남아' },
-    { label: '공주님', value: '여아' },
+    { label: '왕자님', value: 'M' },
+    { label: '공주님', value: 'F' },
   ];
 
   return (

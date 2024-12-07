@@ -1,7 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getLastReservation, getRecommendedShopInfo, getRegularShopInfo, getUpcomingReservation } from '../home';
+import {
+  // getLastReservation,
+  getPetInfo,
+  getRecommendedShopInfo,
+  getRegularShopInfo,
+  getUpcomingReservation,
+} from '../home';
 
+export const useGetPetInfo = () => {
+  const { data } = useQuery({
+    queryKey: ['getPetInfo'],
+    queryFn: () => getPetInfo(),
+    staleTime: 1000 * 60 * 10,
+  });
+  return data;
+};
 
 export const useGetRegularShopList = () => {
   const { data } = useQuery({
@@ -31,11 +45,11 @@ export const useGetUpcomingReservation = () => {
   return data;
 };
 
-export const useGetLastReservation = () => {
-  const { data } = useQuery({
-    queryKey: ['getLastReservation'],
-    queryFn: () => getLastReservation(),
-    staleTime: 1000 * 60 * 10,
-  });
-  return data;
-};
+// export const useGetLastReservation = () => {
+//   const { data } = useQuery({
+//     queryKey: ['getLastReservation'],
+//     queryFn: () => getLastReservation(),
+//     staleTime: 1000 * 60 * 10,
+//   });
+//   return data;
+// };

@@ -3,13 +3,13 @@ import { Button, Card, Flex, HeightFitFlex, Image, Text, theme } from '@duri-fe/
 import styled from '@emotion/styled';
 
 const PetInfo = ({
-  petName,
-  petImage,
+  name,
+  image,
   age,
   breed,
   gender,
   weight,
-}: PetInfoProps) => {
+}: Partial<PetInfoProps>) => {
   return (
     <HeightFitFlex direction="column" align="flex-start" gap={16}>
       <Text typo="Title2">반려견 선택</Text>
@@ -26,10 +26,10 @@ const PetInfo = ({
           >
             선택
           </SelectedTag>
-          <Image src={petImage} borderRadius={8} width={100} height={100} />
+          <Image src={image} borderRadius={8} width={100} height={100} />
         </PetImageWrapper>
         <HeightFitFlex direction="column" gap={12} align="flex-start">
-          <Text typo="Body2">{petName}</Text>
+          <Text typo="Body2">{name}</Text>
           <Text typo="Caption2" colorCode={theme.palette.Gray400}>
             {breed}, {age}, {gender}, {weight}kg
           </Text>

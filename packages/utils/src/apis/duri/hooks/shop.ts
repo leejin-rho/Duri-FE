@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { a, b } from '../test';
+import { a, b } from '../shop';
 
 export const useA = () => {
   const { data } = useQuery({
@@ -10,7 +10,7 @@ export const useA = () => {
   });
 
   return data;
-};
+}; //얘네 삭제해줘잉
 
 export const useB = () => {
   const { data } = useQuery({
@@ -19,4 +19,4 @@ export const useB = () => {
     staleTime: 1000 * 60 * 10,
   });
   return data;
-};
+}; //삭제삭제
