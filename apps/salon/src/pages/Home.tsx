@@ -10,11 +10,11 @@ const shopInfoData: ShopInfoType = {
   "id": 1,
   "name": "강남 미용샵",
   "address": "서울시 강남구",
-  "imageURL": null,
+  "imageURL": "https://s3-alpha-sig.figma.com/img/6ae5/2907/1605954d65e7c8d959c7fcaecd4e0e98?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=czjs3XT0-ZqRY6iOmf0ZCXPiCFu8QM9WDWrmxH~4YvCrLWFBZZnIdiKFk~xDmyvVrrUNzP2IvsX~EXXwS5JEMnyV8lH~afmVJGMhWvaQNp4A0m8ZNjVX-xo~Kd-rMlImbq6VFP6boXFloqm8jJ5SgDhDvJ~8B71nSILBIfOYkjUvEaI1ZqFMRdJi9o10jiLF1csY7C9ezeQRMwN~qryG02dSqpCODQ5fyf0~mOGlxywjPhcTn8ZhV9CY1l~5iayN2EWcBb1~SFmVulqH~3T~6ARB3XpAK6I3Wo5lB2iPyfh8axChEFqnIfpUQk0kVEsFi1B58rgoUM9j-tLBdXHWfw__",
   "phone": "02-123-4567"
 }
 
-const Home = () => {
+const Home = forwardRef<BottomSheetRef>(() => {
   const date = new Date();
   const dateStr = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
 
@@ -120,13 +120,13 @@ const Home = () => {
       <DuriNavbar />
     </MobileLayout>
   );
-};
+});
 
-const HomeHeaderContainer = styled(Flex)<{backgroundImg?: string}>`
+Home.displayName = 'Home';
+
+const HomeHeaderContainer = styled(Flex)`
   position: relative;
-  background-size: cover;
-  background-position: center;
-  ${props => props.backgroundImg && `background-image: url(${props.backgroundImg});`}
+  z-index: 100;
 
   &::before {
     content: '';
@@ -138,6 +138,15 @@ const HomeHeaderContainer = styled(Flex)<{backgroundImg?: string}>`
     background: linear-gradient(180deg, rgba(217, 217, 217, 0.00) 0%, #111 100%);
   }
 `;
+
+const HomeImageWrapper = styled(HeightFitFlex)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  z-index: -1;
+`
 
 const TextContainer = styled(Flex)`
   height: fit-content;
