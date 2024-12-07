@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { breedMapping } from '@duri/assets/data';
 import { Button, Flex, StatusBar, theme, Toast } from '@duri-fe/ui';
+import { usePostPetInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 import PetAgeInfo from './PetAgeInfo';
@@ -14,7 +15,6 @@ import PetNameInfo from './PetNameInfo';
 import PetNeuterInfo from './PetNeuterInfo';
 import PetPersonalityInfo from './PetPersonalityInfo';
 import PetWeightInfo from './PetWeightInfo';
-import { usePostPetInfo } from '@duri-fe/utils';
 
 export interface FormData {
   name: string;

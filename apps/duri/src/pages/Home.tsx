@@ -42,7 +42,7 @@ const Home = () => {
   >([]);
   const [upcomingReservation, setUpcomingReservation] =
     useState<UpcomingReservationProps>();
-  const [lastReservation, setLastReservation] =
+  const [lastReservation, ] =
     useState<LastReservationProps>();
   const recommendedListData = useGetRecommendedShopList();
   const regularListData = useGetRegularShopList();
