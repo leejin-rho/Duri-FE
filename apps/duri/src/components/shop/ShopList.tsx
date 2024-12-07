@@ -30,8 +30,13 @@ interface ShopListProps {
 
 export const ShopList = forwardRef<BottomSheetRef, ShopListProps>(
   ({ nearbyShops, filter, onFilterChange }, ref) => {
-    const [open, setOpen] = useState<boolean>(false);
+    // const { isOpenSheet, openSheet, closeSheet, bottomSheetProps } =
+    //   useBottomSheet({
+    //     maxHeight: 260,
+    //   });
+    // const { isOpen, openModal, closeModal } = useModal();
 
+    const [open, setOpen] = useState<boolean>(false);
     const handleDismiss = () => {
       setOpen(false);
     };
@@ -153,6 +158,7 @@ export const ShopList = forwardRef<BottomSheetRef, ShopListProps>(
             snapPoints={({ maxHeight }) => [maxHeight]}
             onDismiss={handleDismiss}
           >
+            {/* <BottomSheet {...bottomSheetProps}> */}
             <Flex
               direction="column"
               align="flex-start"

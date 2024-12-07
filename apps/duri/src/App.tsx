@@ -14,6 +14,7 @@ import SuccessPage from '@pages/PaymentPage/Success';
 import RequestPage from '@pages/RequestPage';
 import Shop from '@pages/Shop';
 
+import Portfolio from './pages/Shop/Portfolio';
 import ShopDetail from './pages/Shop/ShopDetail';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/quotation/request" element={<RequestPage />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:shopId" element={<ShopDetail />} />
+        <Route path="/portfolio/:designerId" element={<Portfolio />} />
       </Routes>
     </BrowserRouter>
   );

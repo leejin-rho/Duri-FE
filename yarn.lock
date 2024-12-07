@@ -604,6 +604,7 @@ __metadata:
     eslint-plugin-simple-import-sort: "npm:^12.1.1"
     msw: "npm:^2.6.6"
     react: "npm:^18.3.1"
+    react-spring-bottom-sheet: "npm:^3.4.1"
     typescript: "npm:^5.7.2"
     vite: "npm:^6.0.1"
   languageName: unknown

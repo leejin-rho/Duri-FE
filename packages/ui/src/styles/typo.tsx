@@ -91,7 +91,6 @@ export const typo = {
   `,
   Caption3: css`
     /* 박스 안에 들어가는 타이틀 밑 부가설명 텍스트 */
-
     font-family: 'Pretendard';
     font-size: ${calcRem(13)};
     font-weight: 400;

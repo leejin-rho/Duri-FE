@@ -22,6 +22,11 @@ export const ShopInfo = () => {
       align="flex-start"
       padding="0 20px 112px 20px"
     >
+      <MainImg
+        src={
+          'https://s3-alpha-sig.figma.com/img/b451/cdeb/1b126206922d93851b0f7d50c8e39562?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZI~FkT7vXniXT8Kwm-tEkVdtP0PUf8YfdcOEtpO0P1PQAJlG6dJz-VvaTRl8k-IiXvleuMayGOw8k53CfVHh7Qnw9Q0U9QRyhDZ71dxK7NWKSghjD6O4LcTalyZ0-RNYovDwZEfc90WDYmHid49LMyhX0qlxFyhNQtqKt-dvtu92SGG1LiTbKkH3xoeLg3QsJBTezqIvQA7UE16KuPQx-73RML9nR3gPs9~69sI-Aw3lcZC8s0xEo9lIqZ-WhjbyRWdFoXYpl8TDM8x160IDZG51zx-R3n-OFoaLHYntEj2jZchfuKNsX8GJvN6ia8XCouQ5bdvPU2lBWNDAdx9EcA__'
+        }
+      />
       {/**헤더 */}
       <Flex direction="column" gap={8}>
         <Flex gap={17} justify="flex-start">
@@ -134,6 +139,13 @@ const TextLine = styled(Text)`
 
 const TextHeight = styled(Text)`
   line-height: 140%;
+`;
+
+const MainImg = styled.img`
+  width: 100%;
+  aspect-ratio: 330 / 180;
+  border-radius: 12px;
+  object-fit: cover;
 `;
 
 const ReviewerImg = styled.img`
