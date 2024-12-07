@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -29,7 +30,6 @@ import {
 } from '@duri-fe/utils';
 import { usePetStore } from '@duri-fe/utils';
 import styled from '@emotion/styled';
-import React from 'react';
 
 const Home = () => {
   const petData = useGetPetInfo();
