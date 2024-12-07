@@ -5,7 +5,7 @@ import { postRequestQuotation } from '../request';
 
 // import { BaseResponse } from './../../types/base';
 
-// interface PetInfoProps {
+// interface PetInfoType {
 //     petId: number;
 //     petName: string;
 //     petImage: string;
@@ -16,7 +16,7 @@ import { postRequestQuotation } from '../request';
 // }
 
 // interface PetInfoResponse extends BaseResponse{
-//     response: PetInfoProps
+//     response: PetInfoType
 // }
 
 // export const useGetPetInfo = () => {

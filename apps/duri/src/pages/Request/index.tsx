@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { addMenu, designMenu, menu, specialMenu } from '@duri/assets/data';
-import { PetInfoProps } from '@duri/assets/types/pet';
-import { RequestProps } from '@duri/assets/types/request';
+import { RequestProps } from '@duri/assets/types';
 import MonthlyCalendar from '@duri/components/request/Calendar';
 import EtcRequest from '@duri/components/request/EtcRequest';
 import PetInfo from '@duri/components/request/PetInfo';
@@ -18,9 +17,19 @@ import {
 import { TimeTable } from '@duri-fe/ui';
 import { usePetStore } from '@duri-fe/utils';
 
-const timeList = Array(10)
-  .fill(0)
-  .map((_, i) => `${9 + i}:00`);
+interface PetInfoType {
+  id: number;
+  name: string;
+  image: string | null;
+  breed: string;
+  age: number;
+  weight: number;
+  gender: string;
+  neutering: boolean;
+  lastGrooming: Date | null;
+}
+
+const timeList = Array(10).fill(0).map((_, i) => `${9 + i}:00`);
 
 const RequestPage = () => {
   const [requestList, setRequestList] = useState<RequestProps>({
@@ -43,7 +52,7 @@ const RequestPage = () => {
     time18: false,
     shopIds: [1, 2],
   });
-  const [petInfo, setPetInfo] = useState<PetInfoProps | null>(null);
+  const [petInfo, setPetInfo] = useState<PetInfoType | null>(null);
   const [isButton, setIsButton] = useState<boolean>(false);
 
   const handleSelect = (

@@ -1,4 +1,5 @@
-import { PetInfoProps } from '@duri/assets/types/pet';
+import React from 'react';
+
 import {
   Button,
   Card,
@@ -10,6 +11,15 @@ import {
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
+interface PetInfoProps {
+  name: string,
+  image: string | null,
+  age: number,
+  breed: string,
+  gender: string,
+  weight: number,
+}
+
 const PetInfo = ({
   name,
   image,
@@ -17,7 +27,7 @@ const PetInfo = ({
   breed,
   gender,
   weight,
-}: Partial<PetInfoProps>) => {
+}: PetInfoProps) => {
   return (
     <HeightFitFlex direction="column" align="flex-start" gap={16}>
       <Text typo="Title2">반려견 선택</Text>
@@ -39,9 +49,9 @@ const PetInfo = ({
             >
               선택
             </SelectedTag>
-            {image && (
+            {image ? (
               <Image src={image} borderRadius={8} width={100} height={100} />
-            )}
+            ) : <>없으면 디폴트 이미지로 들어가게</>}
           </PetImageWrapper>
           <HeightFitFlex direction="column" gap={12} align="flex-start">
             <Text typo="Body2">{name}</Text>

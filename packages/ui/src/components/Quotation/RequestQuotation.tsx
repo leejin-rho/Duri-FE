@@ -55,7 +55,7 @@ export const RequestQuotation = ({
         </HeightFitFlex>
         {requestList.pet && (
           <PetInfo
-            petId={requestList.pet.petId}
+            gender={requestList.pet.gender}
             name={requestList.pet.name}
             age={requestList.pet.age}
             breed={requestList.pet.breed}

@@ -1,12 +1,12 @@
 export interface RequestProps extends TimeProps {
-  pet: PetInfoProps | undefined;
+  pet: PetInfoType | undefined;
   quotationDetails: QuotationDetails;
 }
 
 export interface ResponseProps {
-  salonName: string;
-  salonAddress: string;
-  salonPhone: string;
+  name: string;
+  address: string;
+  phone: string;
   designerName: string;
   quotationDetails: QuotationDetails;
   startDateTime: Date;
@@ -39,8 +39,8 @@ export interface TimeProps {
   time18: boolean;
 }
 
-export interface PetInfoProps {
-  petId: number | undefined;
+export interface PetInfoType {
+  id: number | undefined;
   name: string;
   image: string;
   breed: string;
@@ -50,5 +50,5 @@ export interface PetInfoProps {
   neutering: boolean;
   character: string[];
   diseases: string[];
-  lastGrooming?: Date;
+  lastGrooming: Date | null;
 }

@@ -15,7 +15,7 @@ export const defaultRequestQuotationData = {
     userName: '',
     userPhone: '',
     pet: {
-      petId: undefined,
+      id: undefined,
       name: '',
       image: '',
       breed: '',
@@ -49,9 +49,9 @@ export const defaultRequestQuotationData = {
   }
 
 export const defaultResponseData = {
-  salonName: '',
-  salonPhone: '',
-  salonAddress: '',
+  name: '',
+  phone: '',
+  address: '',
   designerName: '',
   quotationDetails: {
     groomingMenu: [],

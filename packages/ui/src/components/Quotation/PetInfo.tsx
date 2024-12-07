@@ -1,6 +1,13 @@
 import { Flex, HeightFitFlex, Image, Text, theme } from '@duri-fe/ui';
 
-import { PetInfoProps } from '../../types';
+interface PetInfoType {
+  image: string;
+  name: string;
+  age: number;
+  breed: string;
+  weight: number;
+  gender: string;
+}
 
 export const PetInfo = ({
   image,
@@ -9,7 +16,7 @@ export const PetInfo = ({
   breed,
   weight,
   gender,
-}: Partial<PetInfoProps>) => {
+}: PetInfoType) => {
   return (
     <HeightFitFlex gap={18} margin="19px 0 0 0">
       <Image borderRadius={40} width={133} height={133} src={image} />
