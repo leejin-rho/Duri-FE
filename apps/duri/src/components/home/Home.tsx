@@ -50,7 +50,7 @@ const CarouselHome = ({
       padding="27px 20px"
       backgroundColor={theme.palette.White}
     >
-      <Text colorCode={theme.palette.Gray400}>예약된 미용이 없어요😔</Text>
+      <Text typo='Caption4' colorCode={theme.palette.Gray400}>예약된 미용이 없어요😔</Text>
     </Wrapper>) //다가오는 예약이 없는 경우
     ,
     lastReservation ? (
@@ -60,7 +60,7 @@ const CarouselHome = ({
       padding="27px 20px"
       backgroundColor={theme.palette.White}
     >
-      <Text colorCode={theme.palette.Gray400}> 시술 이력이 없어요😔</Text>
+      <Text typo='Caption4' colorCode={theme.palette.Gray400}> 시술 이력이 없어요😔</Text>
     </Wrapper>),
   ];
 
