@@ -1,5 +1,5 @@
 export interface RequestType extends TimeType {
-  pet: PetInfoType | undefined;
+  pet: PetInfoType | null;
   quotationDetails: QuotationDetailsType;
 }
 
@@ -39,7 +39,7 @@ export interface TimeType {
 }
 
 export interface PetInfoType {
-  id: number | undefined;
+  id: number | null;
   name: string;
   image: string;
   breed: string;

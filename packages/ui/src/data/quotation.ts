@@ -15,7 +15,7 @@ export const defaultRequestQuotationData = {
     userName: '',
     userPhone: '',
     pet: {
-      id: undefined,
+      id: null,
       name: '',
       image: '',
       breed: '',
