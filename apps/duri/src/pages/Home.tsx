@@ -13,7 +13,6 @@ import {
   Button,
   DuriNavbar,
   Flex,
-  Header,
   HeightFitFlex,
   MainHeader,
   MobileLayout,
