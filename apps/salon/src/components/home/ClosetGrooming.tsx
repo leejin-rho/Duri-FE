@@ -28,7 +28,12 @@ const ClosetGrooming = ({
   isNow,
 }: ClosetGroomingProps) => {
   const petInfoStr = parsePetInfo({breed: breed, gender: gender, weight: weight, age: age});
-  const startHour = new Date(startTime).getHours();
+  const date = new Date(startTime);
+  const isPM = date.getHours() >= 12;
+
+  const startHour = isPM ? (date.getHours() - 12).toString() : date.getHours().toString();
+  const startMinute = date.getMinutes().toString().padStart(2, '0');
+  const startTimeStr = startHour + ':' + startMinute + (isPM ? ' PM' : ' AM');
 
   const handleCallUser = (userPhone: string) => {
     window.open(`tel:${userPhone}`);
@@ -57,7 +62,7 @@ const ClosetGrooming = ({
           <Flex direction="column" justify="flex-start" align="flex-start" gap={8}>
             <HeightFitFlex justify="space-between">
               <Text typo="Title3" colorCode={theme.palette.Black}>{petName}</Text>
-              <Text typo="Title3" colorCode={theme.palette.Gray600}>{startHour}</Text>
+              <Text typo="Title3" colorCode={theme.palette.Gray600}>{startTimeStr}</Text>
             </HeightFitFlex>
             <Text typo="Caption3" colorCode={theme.palette.Gray400}>
               {petInfoStr}
