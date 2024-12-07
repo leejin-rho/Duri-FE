@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { defaultPetInfo } from '@duri/assets/data/pet';
+import { PetInfoType } from '@duri/assets/types';
 import { UpcomingReservationProps } from '@duri/assets/types/reservation';
 import { RecommendeShopProps, RegularShopProps } from '@duri/assets/types/shop';
 import CarouselHome from '@duri/components/home/Home';
@@ -24,13 +25,11 @@ import {
   useGetRegularShopList,
   useGetUpcomingReservation,
 } from '@duri-fe/utils';
-import { usePetStore } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 const Home = () => {
   const petData = useGetPetInfo();
-  const setPetInfo = usePetStore((state) => state.setPetInfo);
-
+  const [petInfo, setPetInfo] = useState<PetInfoType>(defaultPetInfo);
   const [regularShopList, setRegularShopList] = useState<RegularShopProps[]>(
     [],
   );
@@ -84,7 +83,7 @@ const Home = () => {
                 colorCode={theme.palette.Gray400}
                 margin="0 0 6px 0"
               >
-                {petData.name}가 3회 이상 방문한 샵들이에요.
+                {petInfo.name}가 3회 이상 방문한 샵들이에요.
               </Text>
             )}
             <Text typo="Title1">단골 샵 빠른 입찰</Text>

@@ -23,7 +23,6 @@ const CarouselHome = ({
   upcomingReservation?: UpcomingReservationProps;
   lastReservation: Date | undefined;
 }) => {
-  console.log(upcomingReservation, lastReservation)
   const [swiperIndex, setSwiperIndex] = useState<number>(0); // 슬라이드 인덱스 상태
   const currentDate = new Date();
   let daysDifference;
@@ -66,8 +65,7 @@ const CarouselHome = ({
 
   return (
     <HeightFitFlex direction="column" align="flex-start">
-      {  }
-      <Text
+      {lastReservation ? (      <Text
         typo="Body1"
         colorCode={theme.palette.Normal900}
         margin="18px 0 23px 25px"
@@ -75,7 +73,15 @@ const CarouselHome = ({
         미용한지 <br />
         {daysDifference}일이 지났어요 <br />
         매일매일 빗질 잘 해주세요!
-      </Text>
+      </Text>) : (      <Text
+        typo="Body1"
+        colorCode={theme.palette.Normal900}
+        margin="18px 0 23px 25px"
+      >
+        두리 서비스가 처음이시네요! <br />
+        두리와 찾아볼까요? 👀
+      </Text>)}
+
 
       <CustomSwiperWrapper>
         <CustomSwiper

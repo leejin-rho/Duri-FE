@@ -44,12 +44,3 @@ export const useGetUpcomingReservation = () => {
   });
   return data;
 };
-
-// export const useGetLastReservation = () => {
-//   const { data } = useQuery({
-//     queryKey: ['getLastReservation'],
-//     queryFn: () => getLastReservation(),
-//     staleTime: 1000 * 60 * 10,
-//   });
-//   return data;
-// };
