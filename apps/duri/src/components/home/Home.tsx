@@ -2,7 +2,6 @@ import { SetStateAction, useState } from 'react';
 import React from 'react';
 
 import {
-  LastReservationProps,
   UpcomingReservationProps,
 } from '@duri/assets/types';
 import { Button, Flex, HeightFitFlex, Text, theme } from '@duri-fe/ui';
@@ -22,7 +21,7 @@ const CarouselHome = ({
   lastReservation,
 }: {
   upcomingReservation?: UpcomingReservationProps;
-  lastReservation?: LastReservationProps;
+  lastReservation: Date | undefined;
 }) => {
   console.log(upcomingReservation, lastReservation)
   const [swiperIndex, setSwiperIndex] = useState<number>(0); // 슬라이드 인덱스 상태
@@ -31,7 +30,7 @@ const CarouselHome = ({
   if (lastReservation)
     daysDifference = differenceInDays(
       currentDate,
-      lastReservation.reservationDate,
+      lastReservation,
     ); // 일수 차이 계산
 
   const slides = [
@@ -67,6 +66,7 @@ const CarouselHome = ({
 
   return (
     <HeightFitFlex direction="column" align="flex-start">
+      {  }
       <Text
         typo="Body1"
         colorCode={theme.palette.Normal900}

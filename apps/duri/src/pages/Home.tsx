@@ -2,10 +2,7 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  LastReservationProps,
-  UpcomingReservationProps,
-} from '@duri/assets/types/reservation';
+import { UpcomingReservationProps } from '@duri/assets/types/reservation';
 import { RecommendeShopProps, RegularShopProps } from '@duri/assets/types/shop';
 import CarouselHome from '@duri/components/home/Home';
 import RecommendedShop from '@duri/components/home/RecommendedShop';
@@ -22,7 +19,6 @@ import {
   theme,
 } from '@duri-fe/ui';
 import {
-  // useGetLastReservation,
   useGetPetInfo,
   useGetRecommendedShopList,
   useGetRegularShopList,
@@ -43,7 +39,6 @@ const Home = () => {
   >([]);
   const [upcomingReservation, setUpcomingReservation] =
     useState<UpcomingReservationProps>();
-  const [lastReservation] = useState<LastReservationProps>();
   const recommendedListData = useGetRecommendedShopList();
   const regularListData = useGetRegularShopList();
   const reservationData = useGetUpcomingReservation();
@@ -55,13 +50,7 @@ const Home = () => {
     if (recommendedListData) setRecommendedShopList(recommendedListData);
     if (regularListData) setRegularShopList(regularListData);
     if (reservationData) setUpcomingReservation(reservationData);
-    // if (lastReservationData) setLastReservation(lastReservationData);
-  }, [
-    recommendedListData,
-    regularListData,
-    reservationData,
-    // lastReservationData,
-  ]);
+  }, [recommendedListData, regularListData, reservationData]);
 
   useEffect(() => {
     if (petData) setPetInfo(petData);
@@ -83,7 +72,7 @@ const Home = () => {
           />
           <CarouselHome
             upcomingReservation={upcomingReservation}
-            lastReservation={lastReservation}
+            lastReservation={petData?.lastGrooming ?? undefined}
           />
         </HeightFitFlex>
         {/* 단골 빠른입찰 */}
@@ -102,20 +91,20 @@ const Home = () => {
             {regularShopList.length > 0 ? (
               <SpeedQuotation shopList={regularShopList} />
             ) : (
-              <Flex direction='column' padding='62px 99px' gap={12}>
-                <Flex direction='column'>
-                <Text typo='Caption4' colorCode={theme.palette.Gray400}>
-                  아직 단골샵이 없어요!
-                </Text>
-                <Text typo='Caption4' colorCode={theme.palette.Gray400}>
-                  단골샵을 찾으러 가볼까요?
-                </Text>
+              <Flex direction="column" padding="62px 99px" gap={12}>
+                <Flex direction="column">
+                  <Text typo="Caption4" colorCode={theme.palette.Gray400}>
+                    아직 단골샵이 없어요!
+                  </Text>
+                  <Text typo="Caption4" colorCode={theme.palette.Gray400}>
+                    단골샵을 찾으러 가볼까요?
+                  </Text>
                 </Flex>
                 <Button
-                  width='135px'
-                  height='37px'
-                  typo='Label4'
-                  borderRadius='8px'
+                  width="135px"
+                  height="37px"
+                  typo="Label4"
+                  borderRadius="8px"
                   bg={theme.palette.Black}
                   fontColor={theme.palette.White}
                   onClick={handleNavigate}
