@@ -23,7 +23,7 @@ export const PetInfo = ({
       <Flex direction="column" gap={15} align="flex-start">
         <Text typo="Body2">{name}</Text>
         <Text typo="Caption2" colorCode={theme.palette.Gray400}>
-          {breed}, {gender === '여아' ? '암컷' : '수컷'}, {age}세, {weight}kg
+          {breed}, {gender === 'F' ? '암컷' : '수컷'}, {age}세, {weight}kg
         </Text>
       </Flex>
     </HeightFitFlex>
