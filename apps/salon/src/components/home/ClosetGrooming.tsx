@@ -1,5 +1,5 @@
 import { Approve, Button, Call, Flex, HeightFitFlex, ProfileImage, Text, theme, WidthFitFlex, Write } from "@duri-fe/ui";
-import { parsePetInfo } from "@duri-fe/utils";
+import { parsePetInfo, parseTimeStr } from "@duri-fe/utils";
 import styled from "@emotion/styled";
 
 interface ClosetGroomingProps {
@@ -28,7 +28,7 @@ const ClosetGrooming = ({
   isNow,
 }: ClosetGroomingProps) => {
   const petInfoStr = parsePetInfo({breed: breed, gender: gender, weight: weight, age: age});
-  const startHour = new Date(startTime).getHours();
+  const startTimeStr = parseTimeStr(startTime);
 
   const handleCallUser = (userPhone: string) => {
     window.open(`tel:${userPhone}`);
@@ -57,7 +57,7 @@ const ClosetGrooming = ({
           <Flex direction="column" justify="flex-start" align="flex-start" gap={8}>
             <HeightFitFlex justify="space-between">
               <Text typo="Title3" colorCode={theme.palette.Black}>{petName}</Text>
-              <Text typo="Title3" colorCode={theme.palette.Gray600}>{startHour}</Text>
+              <Text typo="Title3" colorCode={theme.palette.Gray600}>{startTimeStr}</Text>
             </HeightFitFlex>
             <Text typo="Caption3" colorCode={theme.palette.Gray400}>
               {petInfoStr}

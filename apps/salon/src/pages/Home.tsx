@@ -1,104 +1,37 @@
-import { ClosetGroomingType, QuotationRequestType, ScheduleType, ShopInfoType } from '@assets/types/home';
+import { forwardRef } from 'react';
+import { BottomSheetRef } from 'react-spring-bottom-sheet';
+
+import { ShopInfoType } from '@assets/types/home';
 import { Card, DuriNavbar, Flex, HeightFitFlex, MainHeader, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
+import { useGetClosetGrooming, useGetDailySchedule, useGetHomeQuotationRequest } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
-import OngoingGrooming from '@components/home/ClosetGrooming';
+import ClosetGrooming from '@components/home/ClosetGrooming';
 import DailyScheduleItem from '@components/home/DailyScheduleItem';
 import NewRequestItem from '@components/home/NewRequestItem';
-
-const closetGroomingData: ClosetGroomingType = {
-  "petId": 0,
-  "petName": "string",
-  "breed": "string",
-  "gender": "string",
-  "age": 0,
-  "weight": 0,
-  "memo": "string",
-  "userId": 0,
-  "userPhone": "string",
-  "quotationId": 0,
-  "startTime": "string",
-  "complete": true,
-  "isNow": false,
-}
-
-const dailyScheduleData: ScheduleType[] = [
-  {
-    "date": "12-03",
-    "startTime": "09:00",
-    "petId": 3,
-    "petName": "몽이",
-    "breed": "말티즈",
-    "gender": "MALE",
-    "weight": 7,
-    "groomerName": "한지민"
-  },
-  {
-    "date": "12-03",
-    "startTime": "12:00",
-    "petId": 1,
-    "petName": "바둑이",
-    "breed": "진돗개",
-    "gender": "MALE",
-    "weight": 20,
-    "groomerName": "한지민"
-  },
-  {
-    "date": "12-03",
-    "startTime": "09:00",
-    "petId": 3,
-    "petName": "몽이",
-    "breed": "말티즈",
-    "gender": "MALE",
-    "weight": 7,
-    "groomerName": "한지민"
-  },
-]
-
-const quoataionRequestData: QuotationRequestType[] = [
-  {
-    "requestId": 3,
-    "petId": 3,
-    "imageURL": "https://example.com/dog3.jpg",
-    "name": "몽이",
-    "breed": "말티즈",
-    "gender": "M",
-    "age": 4,
-    "weight": 7,
-    "neutering": false,
-    "quotationReqId": 3,
-    "memo": ""
-  },
-  {
-    "requestId": 4,
-    "petId": 2,
-    "imageURL": "https://example.com/dog2.jpg",
-    "name": "초코",
-    "breed": "푸들",
-    "gender": "F",
-    "age": 3,
-    "weight": 10,
-    "neutering": true,
-    "quotationReqId": 2,
-    "memo": "깔끔하게 부탁드립니다."
-  }
-]
 
 const shopInfoData: ShopInfoType = {
   "id": 1,
   "name": "강남 미용샵",
   "address": "서울시 강남구",
-  "imageURL": null,
+  "imageURL": "https://s3-alpha-sig.figma.com/img/6ae5/2907/1605954d65e7c8d959c7fcaecd4e0e98?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=czjs3XT0-ZqRY6iOmf0ZCXPiCFu8QM9WDWrmxH~4YvCrLWFBZZnIdiKFk~xDmyvVrrUNzP2IvsX~EXXwS5JEMnyV8lH~afmVJGMhWvaQNp4A0m8ZNjVX-xo~Kd-rMlImbq6VFP6boXFloqm8jJ5SgDhDvJ~8B71nSILBIfOYkjUvEaI1ZqFMRdJi9o10jiLF1csY7C9ezeQRMwN~qryG02dSqpCODQ5fyf0~mOGlxywjPhcTn8ZhV9CY1l~5iayN2EWcBb1~SFmVulqH~3T~6ARB3XpAK6I3Wo5lB2iPyfh8axChEFqnIfpUQk0kVEsFi1B58rgoUM9j-tLBdXHWfw__",
   "phone": "02-123-4567"
 }
 
-const Home = () => {
+const Home = forwardRef<BottomSheetRef>(() => {
   const date = new Date();
   const dateStr = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
+
+  const { data: closetGroomingData } = useGetClosetGrooming();
+  const { data: dailyScheduleData } = useGetDailySchedule();
+  const { data: quotationRequestData } = useGetHomeQuotationRequest();
 
   return (
     <MobileLayout>
       <HomeHeaderContainer direction='column' height={260} align='start' justify='space-between'>
+        <HomeImageWrapper>
+          {shopInfoData.imageURL && <img width="100%" src={shopInfoData.imageURL} />}
+        </HomeImageWrapper>
         <MainHeader logoColor={theme.palette.Black} iconColor={theme.palette.Normal800} badge />
         
         {/** 매장 정보 */}
@@ -120,18 +53,20 @@ const Home = () => {
       {/** 진행중인 시술 */}
       <Flex padding='0 20px' margin='45px 0 0 0'>
         <Card height='195' borderRadius={16} shadow='large'>
-          <OngoingGrooming
-            petName={closetGroomingData.petName}
-            breed={closetGroomingData.breed}
-            gender={closetGroomingData.gender}
-            age={closetGroomingData.age}
-            weight={closetGroomingData.weight}
-            memo={closetGroomingData.memo}
-            userPhone={closetGroomingData.userPhone}
-            quotationId={closetGroomingData.quotationId}
-            startTime={closetGroomingData.startTime}
-            isNow={closetGroomingData.isNow}
-          />
+          {closetGroomingData &&
+            <ClosetGrooming
+              petName={closetGroomingData.petName}
+              breed={closetGroomingData.breed}
+              gender={closetGroomingData.gender}
+              age={closetGroomingData.age}
+              weight={closetGroomingData.weight}
+              memo={closetGroomingData.memo}
+              userPhone={closetGroomingData.userPhone}
+              quotationId={closetGroomingData.quotationId}
+              startTime={closetGroomingData.startTime}
+              isNow={closetGroomingData.isNow}
+            />
+          }
         </Card>
       </Flex>
 
@@ -145,7 +80,7 @@ const Home = () => {
           <ScheduleWrapper direction="column" align="flex-start" justify="flex-start" padding="20px 14px">
             <ScheduleContainer direction="column" align="flex-start" justify="flex-start">
               <SideBar margin="0 10px 0 3px" width={1} backgroundColor={theme.palette.Gray200} />
-              {dailyScheduleData.map((schedule, index) => (
+              {dailyScheduleData && dailyScheduleData.map((schedule, index) => (
                 <DailyScheduleItem 
                   key={index}
                   startTime={schedule.startTime}
@@ -171,7 +106,7 @@ const Home = () => {
           </WidthFitFlex>
         </Flex>
         <NewRequestItemWrapper justify='flex-start' padding="0 20px" gap={8}>
-          {quoataionRequestData.map((request, index) => (
+          {quotationRequestData && quotationRequestData.map((request, index) => (
             <NewRequestItem
               key={index}
               requestId={request.requestId}
@@ -192,13 +127,13 @@ const Home = () => {
       <DuriNavbar />
     </MobileLayout>
   );
-};
+});
 
-const HomeHeaderContainer = styled(Flex)<{backgroundImg?: string}>`
+Home.displayName = 'Home';
+
+const HomeHeaderContainer = styled(Flex)`
   position: relative;
-  background-size: cover;
-  background-position: center;
-  ${props => props.backgroundImg && `background-image: url(${props.backgroundImg});`}
+  z-index: 100;
 
   &::before {
     content: '';
@@ -210,6 +145,15 @@ const HomeHeaderContainer = styled(Flex)<{backgroundImg?: string}>`
     background: linear-gradient(180deg, rgba(217, 217, 217, 0.00) 0%, #111 100%);
   }
 `;
+
+const HomeImageWrapper = styled(HeightFitFlex)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  z-index: -1;
+`
 
 const TextContainer = styled(Flex)`
   height: fit-content;
