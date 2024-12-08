@@ -1,15 +1,15 @@
-import { useRef, useState } from 'react';
-import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
+import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import { ShopInfoType } from '@assets/types/home';
-import { Card, DuriNavbar, Flex, HeightFitFlex, MainHeader, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
-import { useGetClosetGrooming, useGetDailySchedule, useGetHomeQuotationRequest } from '@duri-fe/utils';
-import { css } from '@emotion/react';
+import { Button, Card, Flex, HeightFitFlex, MainHeader, MobileLayout, NextArrow, Pencil, SalonNavbar, Text, theme, WidthFitFlex } from '@duri-fe/ui';
+import { useBottomSheet, useGetClosetGrooming, useGetDailySchedule, useGetHomeQuotationRequest } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 import ClosetGrooming from '@components/home/ClosetGrooming';
 import DailyScheduleItem from '@components/home/DailyScheduleItem';
 import NewRequestItem from '@components/home/NewRequestItem';
+
+import 'react-spring-bottom-sheet/dist/style.css';
 
 const shopInfoData: ShopInfoType = {
   "id": 1,
@@ -22,24 +22,17 @@ const shopInfoData: ShopInfoType = {
 const Home = () => {
   const date = new Date();
   const dateStr = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
-  const sheetRef = useRef<BottomSheetRef>(null);
-  const [open, setOpen] = useState<boolean>(false);
-
-  const handleOpenCompleteSheet = () => {
-    setOpen(true);
-  }
-
-  const handleDismiss = () => {
-    setOpen(false);
-  }
-
+  
+  const { openSheet, bottomSheetProps } = useBottomSheet({
+    maxHeight: 317,
+  })
 
   const { data: closetGroomingData } = useGetClosetGrooming();
   const { data: dailyScheduleData } = useGetDailySchedule();
   const { data: quotationRequestData } = useGetHomeQuotationRequest();
 
   return (
-    <RelativeMobile>
+    <MobileLayout>
       <HomeHeaderContainer direction='column' height={260} align='start' justify='space-between'>
         <HomeImageWrapper>
           {shopInfoData.imageURL && <img width="100%" src={shopInfoData.imageURL} />}
@@ -77,7 +70,7 @@ const Home = () => {
               quotationId={closetGroomingData.quotationId}
               startTime={closetGroomingData.startTime}
               isNow={closetGroomingData.isNow}
-              handleOpenCompleteSheet={handleOpenCompleteSheet}
+              handleOpenCompleteSheet={openSheet}
             />
           }
         </Card>
@@ -138,37 +131,27 @@ const Home = () => {
         </NewRequestItemWrapper>
       </NewRequestWrapper>
 
-      <DuriNavbar />
+      <SalonNavbar />
       
-      <BottomSheet
-        open={open}
-        ref={sheetRef}
-        maxHeight={260}
-        snapPoints={({ maxHeight }) => [maxHeight]}
-        css={StyledBottomCss}
-        onDismiss={handleDismiss}
-      >
+      <BottomSheet {...bottomSheetProps}>
         <Flex
           direction="column"
           align="flex-start"
           padding="24px 16px 0 16px"
-          height={260}
+          height={317}
+          backgroundColor={theme.palette.White}
         >
+          이거 왜 여기생겨~~ 애니메이션도 없어 !!!!
+          <Button onClick={bottomSheetProps.onDismiss}>닫아버려</Button>
         </Flex>
       </BottomSheet>
-    </RelativeMobile>
+    </MobileLayout>
   );
 };
 
-export const RelativeMobile = styled(MobileLayout)`
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-`;
-
 const HomeHeaderContainer = styled(Flex)`
   position: relative;
-  z-index: 100;
+  z-index: 1;
 
   &::before {
     content: '';
@@ -232,25 +215,6 @@ const NewRequestWrapper = styled(Flex)`
 
 const NewRequestItemWrapper = styled(Flex)`
   overflow-x: scroll;
-`;
-
-const StyledBottomCss = css`
-  position: relative;
-
-  [data-rsbs-overlay],
-  [data-rsbs-root]::after {
-    border-radius: 16px 16px 0px 0px;
-    z-index: 20;
-    max-width: 480px;
-
-    @media (min-width: 480px) {
-      left: calc(50% - 240px);
-    }
-  }
-
-  [data-rsbs-backdrop] {
-    background-color: rgba(49, 48, 54, 0.5);
-  }
 `;
 
 export default Home;
