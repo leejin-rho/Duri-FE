@@ -3,14 +3,11 @@ import { useState } from 'react';
 import { RequestItemType } from '@duri/assets/types';
 import { RequestItem } from '@duri/components/quotation/RequestItem';
 import {
-  Button,
   FilledLocation,
   Flex,
   Header,
   HeightFitFlex,
   MobileLayout,
-  RequestQuotation,
-  ResponseQuotation,
   Text,
   theme,
 } from '@duri-fe/ui';
