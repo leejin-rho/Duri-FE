@@ -39,7 +39,7 @@ const ClosetGrooming = ({
   }
 
   if (isNow === null) {
-    return <TitleText colorCode={theme.palette.Normal800} onClick={handleOpenCompleteSheet}>예정된 시술이 없어요.</TitleText>
+    return <TitleText colorCode={theme.palette.Normal800}>예정된 시술이 없어요.</TitleText>
   }
 
   return (
@@ -94,6 +94,7 @@ const ClosetGrooming = ({
             <StyledButton
               borderRadius="8px"
               bg={theme.palette.Gray100}
+              disabled
             >
               <Approve width={16} color={theme.palette.White} />
               <Text typo="Label2" colorCode={theme.palette.White}>미용 완료했어요</Text>
