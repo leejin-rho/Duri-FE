@@ -1,5 +1,4 @@
-import { useRef, useState } from 'react';
-import { BottomSheetRef } from 'react-spring-bottom-sheet';
+import { useEffect, useRef, useState } from 'react';
 
 import { MapInfo } from '@duri/components/shop';
 import { ShopList } from '@duri/components/shop/ShopList';
@@ -15,17 +14,46 @@ import {
   TextField,
   theme,
 } from '@duri-fe/ui';
+import { ShopInfoType, useGetNearByShopInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 const Shop = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const sheetRef = useRef<BottomSheetRef>(null);
 
   const [isMap, setIsMap] = useState<boolean>(true);
+  const [nearbyShops, setNearbyShops] = useState<ShopInfoType[]>([]);
 
   const changeMapType = () => {
     setIsMap(!isMap);
   };
+
+  const [filter, setFilter] = useState<'distance' | 'rating'>('distance');
+  const handleFilterChange = (filter: 'distance' | 'rating') => {
+    if (filter) {
+      setFilter(filter);
+    }
+  };
+
+  const { data } = useGetNearByShopInfo(
+    // location.coordinates
+    //   ? {
+    //       // lat: location.coordinates.lat,
+    //       // long: location.coordinates.lng,
+    //       // radius: 500,
+    //       lat: 37.5156,
+    //       lon: 127.0451005,
+    //       radius: 500,
+    //     }
+    //   :
+    { lat: 37.5156, lon: 127.0451005, radius: 500 },
+    filter,
+  );
+
+  useEffect(() => {
+    if (data) {
+      setNearbyShops(data);
+    }
+  }, [data]);
 
   return (
     <RelativeMobile>
@@ -51,7 +79,11 @@ const Shop = () => {
             <MapInfo ref={mapRef} />
           </>
         ) : (
-          <ShopList ref={sheetRef} />
+          <ShopList
+            nearbyShops={nearbyShops}
+            filter={filter}
+            onFilterChange={handleFilterChange}
+          />
         )}
         <ListWrapper>
           <Button
@@ -91,7 +123,7 @@ export const RelativeMobile = styled(MobileLayout)`
 
 const SearchWrapper = styled(Flex)`
   position: absolute;
-  max-width: 480px;
+  max-width: 375px;
   top: 62px;
   z-index: 1;
   height: fit-content;

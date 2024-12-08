@@ -1,1 +1,8 @@
-export { Flex, HeightFitFlex, WidthFitFlex, AbsoluteFlex } from './Flex';
+export {
+  Flex,
+  HeightFitFlex,
+  WidthFitFlex,
+  AbsoluteFlex,
+  RelativeFlex,
+  FixedFlex,
+} from './Flex';

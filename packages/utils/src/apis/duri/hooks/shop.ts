@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { CenterInfoType } from '../../types';
+import { getNearByShopInfo } from '../shop';
 import { a, b } from '../shop';
 
 export const useA = () => {
@@ -8,9 +10,8 @@ export const useA = () => {
     queryFn: () => a(),
     staleTime: 1000 * 60 * 10,
   });
-
   return data;
-}; //얘네 삭제해줘잉
+};
 
 export const useB = () => {
   const { data } = useQuery({
@@ -19,4 +20,16 @@ export const useB = () => {
     staleTime: 1000 * 60 * 10,
   });
   return data;
-}; //삭제삭제
+};
+
+export const useGetNearByShopInfo = (
+  centerInfo: CenterInfoType,
+  sortby: string,
+) => {
+  const { data, refetch, isPending } = useQuery({
+    queryKey: ['getNearByShopInfo', centerInfo],
+    queryFn: () => getNearByShopInfo(centerInfo, sortby),
+    enabled: !!centerInfo,
+  });
+  return { data, refetch, isPending };
+};

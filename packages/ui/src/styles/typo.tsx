@@ -21,6 +21,8 @@ export const calcRem = (px: number) => `${px / 16}rem`;
  * @param Body2: 스케줄러 이름 텍스트
  * @param Body3: 팝업 부가 설명 텍스트
  * @param Body3: 스케줄러 담당쌤 텍스트 / 스케줄러 성별/특징 텍스트
+ *
+ * @param Letter: 피드백 텍스트
  */
 
 export const typo = {
@@ -89,7 +91,6 @@ export const typo = {
   `,
   Caption3: css`
     /* 박스 안에 들어가는 타이틀 밑 부가설명 텍스트 */
-
     font-family: 'Pretendard';
     font-size: ${calcRem(13)};
     font-weight: 400;
@@ -163,6 +164,12 @@ export const typo = {
     font-family: 'Pretendard';
     font-size: ${calcRem(15)};
     font-weight: 300;
+    line-height: normal;
+  `,
+  Letter: css`
+    font-family: 'OwnglyphRyryu';
+    font-size: ${calcRem(18)};
+    font-weight: 400;
     line-height: normal;
   `,
 } as const;

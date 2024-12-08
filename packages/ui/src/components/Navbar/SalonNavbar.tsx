@@ -85,7 +85,7 @@ const Wrapper = styled(Flex)`
 `;
 
 const TabContainer = styled(Flex)`
-  max-width: 480px;
+  max-width: 375px;
   min-width: 360px;
   position: fixed;
   bottom: 0;

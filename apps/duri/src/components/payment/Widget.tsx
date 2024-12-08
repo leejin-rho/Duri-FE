@@ -13,7 +13,7 @@ import { QuotationProps } from '../../assets/types/quotation';
 import PaymentInfo from './Info';
 
 const clientKey = import.meta.env.VITE_CLIENT_KEY;
-const customerKey = crypto.randomUUID(); //user Idx값으로 대체하기!
+const customerKey = '1'; //user Idx값으로 대체하기!
 
 interface QuotationInfo {
   quotationInfo: QuotationProps;

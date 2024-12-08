@@ -82,17 +82,16 @@ export const handlers = [
   }),
 
   http.get('https://api.example.com/api/v1/pet', () => {
-    return HttpResponse.json(
-      {
-        petId:1,
-        petName: "멍이",
-        petImage: 'https://s3-alpha-sig.figma.com/img/be2d/15b9/6d6d9c56fd4e47388fa79cdfb8f3c4b6?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=X1cOpSTMbxxMWxuaqTEsv4id96BVzSloxASEzxOzX87IO8neIKfYCuO8K04E5O8RniSoRCRo7JIlyuYn0AZd6Nda2W7tS8rN36WT7Ewzg-bnozvaUzH5Low6mzAGqUFhQY558k~oAoKolnCTzLEb1DSKR3Zq3Gj073fUrLrxyNnQmXqtbmMObX39c-Flw0~8kzap-ls787b58MKEnfTQ1AVHB8o-Y2~2mQWpFCMY8iKMjIsk84ToA0LhLmiGf5XkRLEtZwwWXFqsTXm0OFB2m~3uqsxFBkuW3gootLBj2ocEp400Za4j8C-IAFj1lNqPeoW9rpLdKLh0xOvoftqeaQ__',
-        breed: "시츄",
-        gender: "여아",
-        age: "7살",
-        weight: "1.4"
-      },
-    );
+    return HttpResponse.json({
+      petId: 1,
+      petName: '멍이',
+      petImage:
+        'https://s3-alpha-sig.figma.com/img/be2d/15b9/6d6d9c56fd4e47388fa79cdfb8f3c4b6?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=X1cOpSTMbxxMWxuaqTEsv4id96BVzSloxASEzxOzX87IO8neIKfYCuO8K04E5O8RniSoRCRo7JIlyuYn0AZd6Nda2W7tS8rN36WT7Ewzg-bnozvaUzH5Low6mzAGqUFhQY558k~oAoKolnCTzLEb1DSKR3Zq3Gj073fUrLrxyNnQmXqtbmMObX39c-Flw0~8kzap-ls787b58MKEnfTQ1AVHB8o-Y2~2mQWpFCMY8iKMjIsk84ToA0LhLmiGf5XkRLEtZwwWXFqsTXm0OFB2m~3uqsxFBkuW3gootLBj2ocEp400Za4j8C-IAFj1lNqPeoW9rpLdKLh0xOvoftqeaQ__',
+      breed: '시츄',
+      gender: '여아',
+      age: '7살',
+      weight: '1.4',
+    });
   }),
 
   http.get('https://api.example.com/api/v1/reservation', () => {

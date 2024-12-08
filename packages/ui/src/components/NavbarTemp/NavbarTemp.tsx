@@ -1,9 +1,9 @@
-import { theme } from "@duri-fe/ui";
-import styled from "@emotion/styled";
+import { theme } from '@duri-fe/ui';
+import styled from '@emotion/styled';
 
 export const NavbarTemp = styled.div`
   width: 100%;
-  max-width: 480px;
+  max-width: 375px;
   height: 50px;
   background-color: ${theme.palette.Gray700};
 
@@ -11,4 +11,4 @@ export const NavbarTemp = styled.div`
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-`
+`;

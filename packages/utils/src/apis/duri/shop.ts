@@ -1,7 +1,5 @@
-// import axios from 'axios';
-// import { HttpResponse } from 'msw';
-
-import { duriInstance } from '../axiosConfig';
+import { duriInstance, publicInstance } from '../axiosConfig';
+import { CenterInfoType, ShopInfoResponse } from '../types';
 
 export async function a() {
   try {
@@ -24,3 +22,13 @@ export async function b() {
     console.error(error);
   }
 }
+
+export const getNearByShopInfo = async (
+  { lat, lon, radius }: CenterInfoType,
+  sortby: string,
+): Promise<ShopInfoResponse['response']> => {
+  const { data } = await publicInstance.get(`/shop/nearby/sort/${sortby}`, {
+    params: { lat, lon, radius },
+  });
+  return data.response;
+};
