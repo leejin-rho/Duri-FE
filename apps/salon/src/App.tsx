@@ -5,6 +5,7 @@ import { globalStyle } from '@duri-fe/ui';
 import { Global } from '@emotion/react';
 
 import AuthPage from '@pages/Auth';
+import { FeedBackPage } from '@pages/Feedback';
 import Home from '@pages/Home';
 import IncomePage from '@pages/Income/Income';
 import LoginPage from '@pages/Login';
@@ -56,6 +57,7 @@ function App() {
           <Route path="/my/review" element={<ReviewPage />} />
 
           <Route path="/income" element={<IncomePage />} />
+          <Route path="/feedback" element={<FeedBackPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
