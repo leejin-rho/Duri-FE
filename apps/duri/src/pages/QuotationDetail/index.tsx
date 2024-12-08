@@ -1,21 +1,42 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { IncomingQuotation } from '@duri/components/quotation/IncomingQuotation';
 import { RequestInfo } from '@duri/components/quotation/RequestInfo';
 import { SalonCard } from '@duri/components/quotation/SalonCard';
 import {
+  Button,
   Card,
+  defaultResponseData,
   DuriNavbar,
   Flex,
   Header,
   MobileLayout,
+  Modal,
+  ResponseQuotation,
   Text,
   theme,
 } from '@duri-fe/ui';
+import { useModal } from '@duri-fe/utils';
 
 const QuotationDetailPage = () => {
-//   const [QuotationSalonList, setQuotationSalonList] = useState();
+  const { isOpenModal, toggleModal } = useModal();
+  const [selectedQuotationId, setSelectedQuotationId] = useState<number>();
+//   const [responseInfo, setResponseInfo] =
+//     useState<ResponseQuotationType | null>(null);
+  const navigate = useNavigate();
+  const handleNavigate = () =>
+    navigate('/payment', { state: { selectedQuotationId } });
+  const onSelect = (value: number) => {
+    setSelectedQuotationId(value);
+    toggleModal();
+    // const response = useGetQuotationInfo(value);
+    // setResponseInfo(response);
+  };
+
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
-      <Header title="견적서" />
+      <Header title="요청서 및 견적서" />
       <Flex direction="column" padding="0 20px" margin="0 0 100px 0">
         <Card borderRadius={16} padding="26px 28px">
           <RequestInfo
@@ -68,13 +89,60 @@ const QuotationDetailPage = () => {
         <Flex direction="column" align="flex-start" margin="31px 0 0 0">
           <Text typo="Title2">들어온 견적</Text>
           <Flex direction="column" margin="17px 0 0 0" gap={8}>
-            <IncomingQuotation salonName='댕댕냥냥샵' price={100000} />
-            <IncomingQuotation salonName='댕댕냥냥샵' price={null} />
-            <IncomingQuotation salonName='댕댕냥냥샵' price={100000}/>
-            <IncomingQuotation salonName='댕댕냥냥샵' price={100000}/>
+            <IncomingQuotation
+              quotationId={1}
+              salonName="댕댕냥냥샵"
+              price={100000}
+              onSelect={onSelect}
+            />
+            <IncomingQuotation
+              quotationId={2}
+              salonName="댕댕냥냥샵"
+              price={null}
+              onSelect={onSelect}
+            />
+            <IncomingQuotation
+              quotationId={3}
+              salonName="댕댕냥냥샵"
+              price={100000}
+              onSelect={onSelect}
+            />
+            <IncomingQuotation
+              quotationId={4}
+              salonName="댕댕냥냥샵"
+              price={100000}
+              onSelect={onSelect}
+            />
           </Flex>
         </Flex>
       </Flex>
+      <Modal isOpen={isOpenModal} toggleModal={toggleModal} title="견적서">
+        {(
+          <ResponseQuotation responseList={defaultResponseData}>
+            <Button
+              bg={theme.palette.Gray20}
+              borderRadius="8px"
+              typo="Body3"
+              width="123px"
+              height="47px"
+              onClick={toggleModal}
+            >
+              닫기
+            </Button>
+            <Button
+              bg={theme.palette.Black}
+              fontColor={theme.palette.White}
+              borderRadius="8px"
+              typo="Body3"
+              width="173px"
+              height="47px"
+              onClick={handleNavigate}
+            >
+              수락 및 결제진행
+            </Button>
+          </ResponseQuotation>
+        )}
+      </Modal>
       <DuriNavbar />
     </MobileLayout>
   );

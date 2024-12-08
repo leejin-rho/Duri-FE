@@ -1,27 +1,5 @@
-import { duriInstance, publicInstance } from '../axiosConfig';
+import { publicInstance } from '../axiosConfig';
 import { CenterInfoType, ShopInfoResponse } from '../types';
-
-export async function a() {
-  try {
-    const response = await duriInstance.get(`shop/regular`, {
-      withCredentials: true,
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function b() {
-  try {
-    const response = await duriInstance.get(`shop/recommend`, {
-      withCredentials: true,
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 export const getNearByShopInfo = async (
   { lat, lon, radius }: CenterInfoType,

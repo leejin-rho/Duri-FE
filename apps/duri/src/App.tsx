@@ -16,7 +16,6 @@ import RequestPage from '@pages/Request';
 import Shop from '@pages/Shop';
 
 import QuotationDetailPage from './pages/QuotationDetail';
-
 import Portfolio from './pages/Shop/Portfolio';
 import ShopDetail from './pages/Shop/ShopDetail';
 
@@ -32,7 +31,7 @@ function App() {
         <Route path="/onboarding" element={<StartPage />} />
         <Route path="/onboarding/detail" element={<Onboarding />} />
 
-        <Route path="/payment/:quotationId" element={<PaymentPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
         <Route path="/payment/success" element={<SuccessPage />} />
         <Route path="/payment/fail" element={<FailPage />} />
         <Route path="/shop/request" element={<RequestPage />} />
