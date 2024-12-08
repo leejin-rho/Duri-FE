@@ -1,22 +1,18 @@
+import { IncomingQuotation } from '@duri/components/quotation/IncomingQuotation';
 import { RequestInfo } from '@duri/components/quotation/RequestInfo';
 import { SalonCard } from '@duri/components/quotation/SalonCard';
 import {
-  Button,
   Card,
   DuriNavbar,
   Flex,
   Header,
   MobileLayout,
-  NextArrow,
   Text,
   theme,
 } from '@duri-fe/ui';
-import styled from '@emotion/styled';
-import { useState } from 'react';
-import { IncomingQuotation } from '@duri/components/quotation/IncomingQuotation';
 
 const QuotationDetailPage = () => {
-  const [QuotationSalonList, setQuotationSalonList] = useState();
+//   const [QuotationSalonList, setQuotationSalonList] = useState();
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
       <Header title="견적서" />
