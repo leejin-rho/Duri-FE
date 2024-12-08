@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { RequestItemType } from '@duri/assets/types';
 import { RequestItem } from '@duri/components/quotation/RequestItem';
 import {
+  DuriNavbar,
   FilledLocation,
   Flex,
   Header,
@@ -88,6 +89,7 @@ const QuotationPage = () => {
               수락 및 결제진행
             </Button>
           </ResponseQuotation> */}
+          <DuriNavbar />
     </MobileLayout>
   );
 };

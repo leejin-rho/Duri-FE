@@ -49,7 +49,7 @@ export const DuriNavbar = () => {
             <ShopIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/quotation'}
+            isActive={pathname.startsWith('/quotation')}
             text="견적서"
             onClick={() => handleNavigate('/quotation')}
             iconType="quotation"
