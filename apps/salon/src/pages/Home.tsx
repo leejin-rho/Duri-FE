@@ -1,9 +1,10 @@
-import { forwardRef } from 'react';
-import { BottomSheetRef } from 'react-spring-bottom-sheet';
+import { useRef, useState } from 'react';
+import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 
 import { ShopInfoType } from '@assets/types/home';
 import { Card, DuriNavbar, Flex, HeightFitFlex, MainHeader, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 import { useGetClosetGrooming, useGetDailySchedule, useGetHomeQuotationRequest } from '@duri-fe/utils';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import ClosetGrooming from '@components/home/ClosetGrooming';
@@ -18,16 +19,27 @@ const shopInfoData: ShopInfoType = {
   "phone": "02-123-4567"
 }
 
-const Home = forwardRef<BottomSheetRef>(() => {
+const Home = () => {
   const date = new Date();
   const dateStr = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
+  const sheetRef = useRef<BottomSheetRef>(null);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleOpenCompleteSheet = () => {
+    setOpen(true);
+  }
+
+  const handleDismiss = () => {
+    setOpen(false);
+  }
+
 
   const { data: closetGroomingData } = useGetClosetGrooming();
   const { data: dailyScheduleData } = useGetDailySchedule();
   const { data: quotationRequestData } = useGetHomeQuotationRequest();
 
   return (
-    <MobileLayout>
+    <RelativeMobile>
       <HomeHeaderContainer direction='column' height={260} align='start' justify='space-between'>
         <HomeImageWrapper>
           {shopInfoData.imageURL && <img width="100%" src={shopInfoData.imageURL} />}
@@ -65,6 +77,7 @@ const Home = forwardRef<BottomSheetRef>(() => {
               quotationId={closetGroomingData.quotationId}
               startTime={closetGroomingData.startTime}
               isNow={closetGroomingData.isNow}
+              handleOpenCompleteSheet={handleOpenCompleteSheet}
             />
           }
         </Card>
@@ -124,12 +137,34 @@ const Home = forwardRef<BottomSheetRef>(() => {
           ))}
         </NewRequestItemWrapper>
       </NewRequestWrapper>
-      <DuriNavbar />
-    </MobileLayout>
-  );
-});
 
-Home.displayName = 'Home';
+      <DuriNavbar />
+      
+      <BottomSheet
+        open={open}
+        ref={sheetRef}
+        maxHeight={260}
+        snapPoints={({ maxHeight }) => [maxHeight]}
+        css={StyledBottomCss}
+        onDismiss={handleDismiss}
+      >
+        <Flex
+          direction="column"
+          align="flex-start"
+          padding="24px 16px 0 16px"
+          height={260}
+        >
+        </Flex>
+      </BottomSheet>
+    </RelativeMobile>
+  );
+};
+
+export const RelativeMobile = styled(MobileLayout)`
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+`;
 
 const HomeHeaderContainer = styled(Flex)`
   position: relative;
@@ -197,6 +232,25 @@ const NewRequestWrapper = styled(Flex)`
 
 const NewRequestItemWrapper = styled(Flex)`
   overflow-x: scroll;
+`;
+
+const StyledBottomCss = css`
+  position: relative;
+
+  [data-rsbs-overlay],
+  [data-rsbs-root]::after {
+    border-radius: 16px 16px 0px 0px;
+    z-index: 20;
+    max-width: 480px;
+
+    @media (min-width: 480px) {
+      left: calc(50% - 240px);
+    }
+  }
+
+  [data-rsbs-backdrop] {
+    background-color: rgba(49, 48, 54, 0.5);
+  }
 `;
 
 export default Home;

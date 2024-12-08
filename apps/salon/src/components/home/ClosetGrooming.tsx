@@ -1,3 +1,5 @@
+// import { BottomSheet } from "react-spring-bottom-sheet";
+
 import { Approve, Button, Call, Flex, HeightFitFlex, ProfileImage, Text, theme, WidthFitFlex, Write } from "@duri-fe/ui";
 import { parsePetInfo, parseTimeStr } from "@duri-fe/utils";
 import styled from "@emotion/styled";
@@ -13,6 +15,7 @@ interface ClosetGroomingProps {
   quotationId: number;
   startTime: string;
   isNow: boolean | null;
+  handleOpenCompleteSheet?: () => void;
 }
 
 const ClosetGrooming = ({
@@ -23,19 +26,16 @@ const ClosetGrooming = ({
   weight,
   memo,
   userPhone,
-  quotationId,
+  // quotationId,
   startTime,
   isNow,
+  handleOpenCompleteSheet,
 }: ClosetGroomingProps) => {
   const petInfoStr = parsePetInfo({breed: breed, gender: gender, weight: weight, age: age});
   const startTimeStr = parseTimeStr(startTime);
 
   const handleCallUser = (userPhone: string) => {
     window.open(`tel:${userPhone}`);
-  }
-
-  const handleCompleteGrooming = (quotationId: number) => {
-    console.log(`미용 완료: ${quotationId}`);
   }
 
   if (isNow === null) {
@@ -85,7 +85,7 @@ const ClosetGrooming = ({
             <StyledButton
               borderRadius="8px"
               bg={theme.palette.Black}
-              onClick={() => handleCompleteGrooming(quotationId)}
+              onClick={handleOpenCompleteSheet}
             >
               <Approve width={16} color={theme.palette.White} />
               <Text typo="Label2" colorCode={theme.palette.White}>미용 완료했어요</Text>
@@ -94,7 +94,7 @@ const ClosetGrooming = ({
             <StyledButton
               borderRadius="8px"
               bg={theme.palette.Gray100}
-              disabled
+              onClick={handleOpenCompleteSheet}
             >
               <Approve width={16} color={theme.palette.White} />
               <Text typo="Label2" colorCode={theme.palette.White}>미용 완료했어요</Text>
