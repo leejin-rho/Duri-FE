@@ -6,6 +6,7 @@ import {
   Button,
   FilledLocation,
   Flex,
+  Header,
   HeightFitFlex,
   MobileLayout,
   RequestQuotation,
@@ -50,7 +51,8 @@ const QuotationPage = () => {
     useState<RequestItemType[] | null>(defaultRequestItems);
   return (
     <MobileLayout>
-      <Flex direction="column" gap={12} padding="0 20px">
+      <Header title="견적서" />
+      <Flex direction="column" gap={12} padding="0 20px" margin='10px 0'>
         <HeightFitFlex gap={5} justify="flex-start">
           <FilledLocation
             width={22}
@@ -65,7 +67,9 @@ const QuotationPage = () => {
           {requestList && requestList.map((requestItem) => (
             <RequestItem key={requestItem.quotationId} requestItem={requestItem} />
           ))}
-          <RequestQuotation />
+        </Flex>
+      </Flex>
+      {/* <RequestQuotation />
           <ResponseQuotation>
             <Button
               bg={theme.palette.Gray20}
@@ -86,9 +90,7 @@ const QuotationPage = () => {
             >
               수락 및 결제진행
             </Button>
-          </ResponseQuotation>
-        </Flex>
-      </Flex>
+          </ResponseQuotation> */}
     </MobileLayout>
   );
 };

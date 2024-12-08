@@ -16,6 +16,7 @@ import { format } from 'date-fns';
 import { ResponseType } from '../../types';
 
 import { DetailGrooming } from './DetailGrooming';
+import styled from '@emotion/styled';
 
 export const ResponseQuotation = ({
   children,
@@ -46,7 +47,7 @@ export const ResponseQuotation = ({
           <Flex justify="space-between" padding="0 30.5px">
             <WidthFitFlex direction="column" align='flex-start'>
               <Text typo="Caption5">{responseList.address}</Text>
-              <Text typo="Caption5">{responseList.designerName}</Text>
+              <Text typo="Caption5">대표 : {responseList.designerName}</Text>
             </WidthFitFlex>
             <WidthFitFlex direction='column' align='flex-end'>
             <Text typo="Caption5">{responseList.phone}</Text>
@@ -57,11 +58,11 @@ export const ResponseQuotation = ({
         <Seperator mode="dotted" height="2px" />
         <HeightFitFlex direction="column" gap={18}>
           <Flex justify="space-between" padding="0 30.5px">
-            <Text typo="Body2">예약 시간</Text>
-            <Text typo="Body2">
-              {format(responseList.startDateTime, 'yyyy-MM-dd HH:mm')} ~{' '}
+            <LineText typo="Body2">예약 시간</LineText>
+            <LineText typo="Body2" align='end'>
+              {format(responseList.startDateTime, 'yyyy-MM-dd HH:mm')}~
               {format(responseList.endDateTime, 'HH:mm')}
-            </Text>
+            </LineText>
           </Flex>
         </HeightFitFlex>
         <Seperator mode="dotted" height="2px" />
@@ -87,3 +88,7 @@ export const ResponseQuotation = ({
     </Flex>
   );
 };
+
+const LineText = styled(Text)`
+  white-space: nowrap;
+`

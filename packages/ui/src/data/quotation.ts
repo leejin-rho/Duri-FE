@@ -51,8 +51,8 @@ export const defaultRequestQuotationData = {
 export const defaultResponseData = {
   name: '',
   phone: '',
-  address: '',
-  designerName: '',
+  address: '선릉세화빌딩 강남구 테헤란로 64길 18',
+  designerName: '최예랑',
   quotationDetails: {
     groomingMenu: [],
     additionalGrooming: [],
