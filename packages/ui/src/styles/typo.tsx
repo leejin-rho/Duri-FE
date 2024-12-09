@@ -24,6 +24,7 @@ export const calcRem = (px: number) => `${px / 16}rem`;
  * @param Body1Light: 정렬 본문 텍스트 (라이트)
  *
  * @param Letter: 피드백 텍스트
+ * @param Heading: 온보딩 텍스트
  */
 
 export const typo = {
@@ -46,6 +47,13 @@ export const typo = {
     /* 박스 안에 들어가는 타이틀 */
     font-family: 'Pretendard';
     font-size: ${calcRem(16)};
+    font-weight: 600;
+    line-height: normal;
+  `,
+  Title4: css`
+    /* 살롱 홈 타이틀 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(22)};
     font-weight: 600;
     line-height: normal;
   `,
@@ -149,9 +157,18 @@ export const typo = {
     line-height: normal;
   `,
   Letter: css`
+    /* 피드백 텍스트 */
     font-family: 'OwnglyphRyryu';
     font-size: ${calcRem(18)};
     font-weight: 400;
     line-height: normal;
+  `,
+
+  Heading: css`
+    /* 온보딩 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(24)};
+    font-weight: 600;
+    line-height: 170%;
   `,
 } as const;

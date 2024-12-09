@@ -19,8 +19,6 @@ const PetPersonalityInfo = ({
   personalityList, // 상위에서 전달된 리스트 사용
   name,
 }: PetPersonalityInfoProps) => {
-
-
   // 성격 선택 토글 처리 함수
   const handleToggle = (key: string) => {
     const currentValues = [...personalityList]; // 현재 선택된 값들을 복사
@@ -36,7 +34,7 @@ const PetPersonalityInfo = ({
 
   return (
     <Flex direction="column" align="flex-start" gap={28}>
-      <Text typo="Heading2" justify="flex-start">
+      <Text typo="Heading" justify="flex-start">
         {name}는 <br />
         어떤 성격을 가지고 있나요?
       </Text>
@@ -56,7 +54,7 @@ const PetPersonalityInfo = ({
         }}
         render={() => (
           <FitFlex justify="flex-start" gap={8} margin="47px 0">
-            {personalityOptions.map(({key, label}) => (
+            {personalityOptions.map(({ key, label }) => (
               <Button
                 key={key}
                 typo="Body3"

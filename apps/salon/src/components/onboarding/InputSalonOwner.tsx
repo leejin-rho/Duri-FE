@@ -108,8 +108,8 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
           padding="0 0 24px 0"
         >
           <Flex direction="column" align="flex-start">
-            <Text typo="Heading2">원장님의</Text>
-            <Text typo="Heading2">정보를 입력해주세요</Text>
+            <Text typo="Heading">원장님의</Text>
+            <Text typo="Heading">정보를 입력해주세요</Text>
           </Flex>
           <Text typo="Body3" colorCode={theme.palette.Gray500}>
             등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!

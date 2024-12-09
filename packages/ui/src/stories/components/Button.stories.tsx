@@ -57,7 +57,7 @@ const meta: Meta<typeof Button> = {
       defaultValue: 'Label1',
       control: {
         type: 'select',
-        options: ['Heading1', 'Heading2', 'Body1', 'Body2', 'Label1', 'Label2'],
+        options: ['Heading', 'Body1', 'Body2', 'Label1', 'Label2'],
       },
     },
     hoverFontColor: {
