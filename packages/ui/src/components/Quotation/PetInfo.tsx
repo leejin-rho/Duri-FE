@@ -2,9 +2,9 @@ import {
   diseaseMapping,
   Flex,
   HeightFitFlex,
-  Image,
   KeyOfTypo,
   personalityMapping,
+  ProfileImage,
   SalonTag,
   Text,
   theme,
@@ -40,7 +40,7 @@ export const PetInfo = ({
   return (
     <Flex direction="column" gap={16}>
       <HeightFitFlex gap={18}>
-        <Image
+        <ProfileImage
           borderRadius={imageSize.borderRadius}
           width={imageSize.width}
           height={imageSize.height}
