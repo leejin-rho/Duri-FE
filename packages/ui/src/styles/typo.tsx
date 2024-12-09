@@ -169,6 +169,6 @@ export const typo = {
     font-family: 'Pretendard';
     font-size: ${calcRem(24)};
     font-weight: 600;
-    line-height: 170%;
+    line-height: 140%;
   `,
 } as const;
