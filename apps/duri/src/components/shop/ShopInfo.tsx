@@ -2,7 +2,6 @@ import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useNavigate } from 'react-router-dom';
 
 import {
-  Button,
   Call,
   DownArrow,
   FilledLocation,
@@ -11,11 +10,8 @@ import {
   HardText,
   HeightFitFlex,
   Image,
-  NextArrow,
   RatingStars,
-  RelativeFlex,
   Send,
-  SendColor,
   Star,
   Text,
   theme,
