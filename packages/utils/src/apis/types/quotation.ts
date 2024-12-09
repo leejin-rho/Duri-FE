@@ -37,3 +37,42 @@ export interface NewRequestListResponse {
     requestCreatedAt: Date | string | null
   }
 }
+
+export interface RequestDetailResponse {
+  response: {
+    userName: string;
+    userPhone: string;
+    pet: RequestDetailPetType;
+    groomer: RequestDetailGroomerType;
+    quotationDetails: QuotationDetailsType;
+  }
+}
+
+export interface RequestDetailPetType {
+  image: string;
+  name: string;
+  age: number;
+  gender: string;
+  breed: string;
+  weight: number;
+  neutering: boolean;
+  character: string[];
+  diseases: string[];
+  lastGrooming: Date;
+}
+
+export interface RequestDetailGroomerType {
+  image: string;
+  name: string;
+  history: number;
+  info: string;
+}
+
+export interface QuotationDetailsType extends TimeType {
+  groomingMenu: string;
+  additionalGrooming: string;
+  specialCare: string;
+  designCut: string;
+  otherRequests: string;
+  day: Date;
+}

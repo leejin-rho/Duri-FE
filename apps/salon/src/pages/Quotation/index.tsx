@@ -1,11 +1,20 @@
-import { Card, Flex, MobileLayout, Modal, PetInfo, RequestQuotation, SalonNavbar, theme } from "@duri-fe/ui"
+import { useState } from "react";
+
+import { Card, Flex, MobileLayout, Modal, PetInfo, SalonNavbar, theme } from "@duri-fe/ui"
 import { useGetNewRequestList, useModal } from "@duri-fe/utils";
+import { DetailRequest } from "@salon/components/quotation/DetailRequest";
 import { TabBarItem } from "@salon/components/quotation/TabBarItem"
 
 export const QuotationPage = () => {
   const { isOpenModal, openModal, closeModal } = useModal();
+  const [selectedRequestId, setSelectedRequestId] = useState<number | null>(null);
 
   const { data: newRequestList } = useGetNewRequestList();
+
+  const handleRequestClick = (requestId: number) => {
+    setSelectedRequestId(requestId);
+    openModal();
+  }
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
@@ -34,24 +43,32 @@ export const QuotationPage = () => {
       </Flex>
 
       <Flex direction="column" gap={8} padding="30px 20px">
-        <Card borderRadius={12} padding="6px">
-          <PetInfo
-            themeVariant="medium"
-            name="신참이"
-            breed="시츄"
-            gender="F"
-            age={7}
-            weight={7.3}
-            neutering={true}
-          />
-        </Card>
+        {newRequestList?.map((request) => (
+          <Flex key={request.requestId} onClick={() => handleRequestClick(request.requestId)}>
+            <Card borderRadius={12} padding="6px">
+              <PetInfo
+                themeVariant="medium"
+                name="신참이"
+                breed="시츄"
+                gender="F"
+                age={7}
+                weight={7.3}
+                neutering={true}
+              />
+            </Card>
+          </Flex>
+        ))}
+
+
       </Flex>
 
       <SalonNavbar />
 
-      <Modal title='요청서' isOpen={isOpenModal} toggleModal={closeModal}>
-        <RequestQuotation />
-      </Modal>
+      {selectedRequestId &&
+        <Modal title='요청서' isOpen={isOpenModal} toggleModal={closeModal}>
+          <DetailRequest requestId={selectedRequestId} />
+        </Modal>
+      }
     </MobileLayout>
   );
 };
