@@ -21,7 +21,7 @@ const CarouselHome = ({
   lastReservation,
 }: {
   upcomingReservation?: UpcomingReservationProps;
-  lastReservation: Date | null;
+  lastReservation: string | null;
 }) => {
   const [swiperIndex, setSwiperIndex] = useState<number>(0); // 슬라이드 인덱스 상태
   const currentDate = new Date();
@@ -29,7 +29,7 @@ const CarouselHome = ({
   if (lastReservation)
     daysDifference = differenceInDays(
       currentDate,
-      lastReservation,
+      new Date(lastReservation),
     ); // 일수 차이 계산
 
   const slides = [

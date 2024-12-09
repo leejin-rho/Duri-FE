@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { IncomingQuotation } from '@duri/components/quotation/IncomingQuotation';
 import { RequestInfo } from '@duri/components/quotation/RequestInfo';
@@ -20,10 +20,11 @@ import {
 import { useModal } from '@duri-fe/utils';
 
 const QuotationDetailPage = () => {
+  const { quotationId } = useParams();
   const { isOpenModal, toggleModal } = useModal();
   const [selectedQuotationId, setSelectedQuotationId] = useState<number>();
-//   const [responseInfo, setResponseInfo] =
-//     useState<ResponseQuotationType | null>(null);
+  //   const [responseInfo, setResponseInfo] =
+  //     useState<ResponseQuotationType | null>(null);
   const navigate = useNavigate();
   const handleNavigate = () =>
     navigate('/payment', { state: { selectedQuotationId } });
@@ -40,7 +41,7 @@ const QuotationDetailPage = () => {
       <Flex direction="column" padding="0 20px" margin="0 0 100px 0">
         <Card borderRadius={16} padding="26px 28px">
           <RequestInfo
-            quotationId={1}
+            requestId={Number(quotationId)}
             createdAt="2024-12-22 23:00"
             expiredAt="2024-12-22 23:00"
           />
@@ -117,7 +118,7 @@ const QuotationDetailPage = () => {
         </Flex>
       </Flex>
       <Modal isOpen={isOpenModal} toggleModal={toggleModal} title="견적서">
-        {(
+        {
           <ResponseQuotation responseList={defaultResponseData}>
             <Button
               bg={theme.palette.Gray20}
@@ -141,7 +142,7 @@ const QuotationDetailPage = () => {
               수락 및 결제진행
             </Button>
           </ResponseQuotation>
-        )}
+        }
       </Modal>
       <DuriNavbar />
     </MobileLayout>

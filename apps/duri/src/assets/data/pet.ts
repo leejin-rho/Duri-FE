@@ -1,7 +1,7 @@
 export const defaultPetInfo = {
-    id: -1,
+    petId: null,
     name: '',
-    image: null,
+    imageURL: null,
     breed: '',
     age: -1,
     weight: -1,

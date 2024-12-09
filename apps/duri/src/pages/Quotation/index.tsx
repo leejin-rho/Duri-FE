@@ -50,7 +50,7 @@ const QuotationPage = () => {
   return (
     <MobileLayout>
       <Header title="견적서" />
-      <Flex direction="column" gap={12} padding="0 20px" margin='10px 0'>
+      <Flex direction="column" gap={12} padding="0 20px" margin='10px 0 102px 0'>
         <HeightFitFlex gap={5} justify="flex-start">
           <FilledLocation
             width={22}

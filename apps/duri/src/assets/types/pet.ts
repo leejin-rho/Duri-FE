@@ -1,9 +1,10 @@
 export interface PetInfoType {
-  id: number | undefined;
-  image: string | null;
+  petId: number | null;
+  imageURL: string | null;
   name: string;
   breed: string;
   age: number;
   weight: number;
   gender: string;
+  lastGrooming: string | null;
 }

@@ -2,7 +2,7 @@ import { Flex, NextArrow, Text, theme } from '@duri-fe/ui';
 import { format } from 'date-fns';
 
 interface RequestInfoProps {
-    quotationId: number;
+    requestId: number;
     createdAt: string;
     expiredAt: string;
     expired?: boolean;
@@ -10,7 +10,7 @@ interface RequestInfoProps {
   }
 
 export const RequestInfo = ({
-  quotationId,
+  requestId,
   createdAt,
   expiredAt,
   expired = false,
@@ -25,7 +25,7 @@ export const RequestInfo = ({
   >
       <Flex gap={8} justify="flex-start">
         <Text typo="Title3" colorCode={expired ? theme.palette.Gray300 : theme.palette.Normal700}>
-          요청서{quotationId}
+          요청서{requestId}
         </Text>
         <NextArrow width={22} height={23} />
       </Flex>

@@ -73,7 +73,7 @@ export const ResponseQuotation = ({
         <Seperator mode="dotted" height="2px" />
         <Flex direction="column" align="flex-start" padding="0 35.5px" gap={24}>
           <Text typo="Body2">요청사항</Text>
-          <TextField value={memo} width={266} multiline={true}/>
+          <TextField value={memo} width={266} multiline={true} height={108} />
         </Flex>
         <Seperator mode="dotted" height="2px" />
         <HeightFitFlex direction="column" gap={18}>

@@ -30,6 +30,7 @@ export interface ResponseQuotationType {
     groomerName: string;
   };
   quotationCreatedAt: string;
+
   menuDetail: {
     groomingMenu: string[];
     additionalGrooming: string[];

@@ -31,7 +31,7 @@ export const RequestItem = ({
           bg={theme.palette.Gray20}
         >
           <RequestInfo
-            quotationId={requestItem.quotationId}
+            requestId={requestItem.quotationId}
             createdAt={requestItem.createdAt}
             expiredAt={requestItem.expiredAt}
             margin="0 0 20px 0"
@@ -56,7 +56,7 @@ export const RequestItem = ({
       ) : (
         <Card borderRadius={16} shadow="small" padding="20px 14px">
           <RequestInfo
-            quotationId={requestItem.quotationId}
+            requestId={requestItem.quotationId}
             createdAt={requestItem.createdAt}
             expiredAt={requestItem.expiredAt}
             margin="0 0 20px 0"
