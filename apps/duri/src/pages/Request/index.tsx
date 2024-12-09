@@ -26,7 +26,7 @@ interface PetInfoType {
   age: number;
   weight: number;
   gender: string;
-  lastGrooming: string | null;
+  lastGrooming?: string;
 }
 
 const timeList = Array(10)
@@ -36,8 +36,6 @@ const timeList = Array(10)
 const RequestPage = () => {
   const petData = useGetPetInfo();
   const [requestInfo, setrequestInfo] = useState<RequestType>(defaultRequestInfo);
-  const [requestList, setRequestList] =
-    useState<RequestType>(defaultRequestInfo);
   const [petInfo, setPetInfo] = useState<PetInfoType | null>({  petId: 1,
     name: '멍뭉이',
     breed: '시츄',

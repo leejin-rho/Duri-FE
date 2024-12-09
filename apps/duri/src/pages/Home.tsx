@@ -71,7 +71,7 @@ const Home = () => {
           />
           <CarouselHome
             upcomingReservation={upcomingReservation}
-            lastReservation={petData?.lastGrooming ?? null}
+            lastReservation={petData?.lastGrooming}
           />
         </HeightFitFlex>
         {/* 단골 빠른입찰 */}

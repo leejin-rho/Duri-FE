@@ -6,5 +6,5 @@ export interface PetInfoType {
   age: number;
   weight: number;
   gender: string;
-  lastGrooming: string | null;
+  lastGrooming?: string;
 }
