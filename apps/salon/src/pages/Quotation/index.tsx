@@ -65,7 +65,7 @@ export const QuotationPage = () => {
       <SalonNavbar />
 
       {selectedRequestId &&
-        <Modal title='요청서' isOpen={isOpenModal} toggleModal={closeModal}>
+        <Modal title='요청서' margin="20px" isOpen={isOpenModal} toggleModal={closeModal}>
           <DetailRequest requestId={selectedRequestId} />
         </Modal>
       }
