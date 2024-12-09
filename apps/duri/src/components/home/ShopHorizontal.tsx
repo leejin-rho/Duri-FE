@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { RegularShopProps } from '@duri/assets/types/shop';
+import { RegularShopType } from '@duri/assets/types/shop';
 import {
   Button,
   Flex,
@@ -14,20 +14,20 @@ import {
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-export const ShopHorizontal = ({ shopList }: { shopList: RegularShopProps[] }) => {
+export const ShopHorizontal = ({ shopList }: { shopList: RegularShopType[] }) => {
   const navigate = useNavigate();
-  const handleClickShop = (shopIdx: string) => navigate(`/shop/${shopIdx}`);
+  const handleClickShop = (shopIdx: number) => navigate(`/shop/${shopIdx}`);
   return (
     <Flex direction="column" gap={15} margin="28px 0 0 0">
       {shopList &&
-        shopList.map((shop: RegularShopProps) => (
-          <HeightFitFlex key={shop.salonIdx} justify="flex-start" gap={15}>
+        shopList.map((shop: RegularShopType) => (
+          <HeightFitFlex key={shop.shopId} justify="flex-start" gap={15}>
             <Image
               width={100}
               height={100}
               borderRadius={8}
-              src={shop.salonImage}
-              onClick={() => handleClickShop(shop.salonIdx)}
+              src={shop.imageURL}
+              onClick={() => handleClickShop(shop.shopId)}
             />
             <Flex
               direction="column"
@@ -38,17 +38,17 @@ export const ShopHorizontal = ({ shopList }: { shopList: RegularShopProps[] }) =
               <Wrapper direction='column' align='flex-start'>
                 {/* onClick함수 추가해야 함!!! */}
                 <Flex justify='flex-start' gap={2}>
-                  <Text typo='Title3'>{shop.salonName}</Text>
+                  <Text typo='Title3'>{shop.shopName}</Text>
                   <NextArrow width={20} height={20} />
                 </Flex>
                 <HeightFitFlex align='flex-start' gap={7}>
                   <Star width={14} height={14} />
                   <Flex justify='flex-start' gap={3}>
                   <Text typo='Label1'>
-                    {shop.salonScore}
+                    {shop.rating}
                   </Text>
                   <Text typo='Label3' justify='flex-start'>
-                  ({shop.salonReviewCount})
+                  ({shop.reviewCnt})
                   </Text>
                   </Flex>
                 </HeightFitFlex>

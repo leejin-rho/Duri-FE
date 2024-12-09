@@ -19,19 +19,20 @@ import { TimeTable } from '@duri-fe/ui';
 import { useGetPetInfo } from '@duri-fe/utils';
 
 interface PetInfoType {
-  id: number;
+  petId: number;
   name: string;
-  image: null;
+  imageURL: string | null;
   breed: string;
   age: number;
   weight: number;
   gender: string;
-  lastGrooming: Date | null;
+  lastGrooming: string | null;
 }
 
 const timeList = Array(10).fill(0).map((_, i) => `${9 + i}:00`);
 
 const RequestPage = () => {
+  const petData = useGetPetInfo();
   const [requestInfo, setrequestInfo] = useState<RequestType>(defaultRequestInfo);
   const [petInfo, setPetInfo] = useState<PetInfoType | null>(null);
   const [isButton, setIsButton] = useState<boolean>(false);
@@ -43,7 +44,7 @@ const RequestPage = () => {
     if (key === 'petId') {
       setrequestInfo((prev) => ({
         ...prev,
-        petId: value === undefined || typeof value === 'number' ? value : undefined,  // petId만 undefined일 경우 처리가 필요
+        petId: value === null || typeof value === 'number' ? value : null,  // petId만 undefined일 경우 처리가 필요
       }));
       return;
     }
@@ -54,13 +55,12 @@ const RequestPage = () => {
     }));
   };
 
-  const petData = useGetPetInfo();
 
   useEffect(() => {
     if (petData) {
       setPetInfo(petData);
-      if (petData && petData.id !== undefined) {
-        handleSelect('petId', petData.id); // id가 null이 아닌 경우만 설정
+      if (petData && petData.petId !== null) {
+        handleSelect('petId', petData.petId); // id가 null이 아닌 경우만 설정
       }
     }
   }, [petData]);
@@ -88,7 +88,7 @@ const RequestPage = () => {
           {petInfo && (
             <PetInfo
               name={petInfo.name}
-              image={petInfo.image}
+              image={petInfo.imageURL}
               age={petInfo.age}
               breed={petInfo.breed}
               gender={petInfo.gender}

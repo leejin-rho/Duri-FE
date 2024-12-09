@@ -1,5 +1,5 @@
 export const defaultRequestInfo = {
-  petId: undefined,
+  petId: null,
   menu: [],
   addMenu: [],
   specialMenu: [],

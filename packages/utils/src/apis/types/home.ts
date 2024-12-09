@@ -99,11 +99,10 @@ export interface RecommendShopResponse extends BaseResponse {
     homeShopList: {
       shopId: number;
       imageURL: string;
-      name: string;
+      shopName: string;
       address: string;
       phone: string;
-      shopTag1: string;
-      shopTag2: string;
+      shopTags: string[];
     }[];
   };
 }
