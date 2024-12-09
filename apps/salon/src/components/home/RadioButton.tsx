@@ -1,5 +1,4 @@
 import { Card, Flex, HeightFitFlex, RadioSelect, RadioUnselect, Text, theme } from "@duri-fe/ui"
-import styled from "@emotion/styled"
 
 interface RadioButtonProps {
   selected: boolean;
@@ -15,14 +14,12 @@ export const RadioButton = ({
 }: RadioButtonProps) => {
   return (
     <HeightFitFlex onClick={onClick}>
-      <ButtonCard height="46" borderColor={selected ? theme.palette.Normal500 : theme.palette.White} borderRadius={12}>
+      <Card height="46" borderColor={selected ? theme.palette.Normal500 : theme.palette.White} borderRadius={12}>
         <Flex justify="flex-start" gap={4} padding="0 4px">
           {selected ? <RadioSelect width={36} /> : <RadioUnselect width={36} />}
           <Text typo="Body3" colorCode={theme.palette.Gray400}>{label}</Text>
         </Flex>
-      </ButtonCard>
+      </Card>
     </HeightFitFlex>
   )
 }
-
-const ButtonCard = styled(Card)``
