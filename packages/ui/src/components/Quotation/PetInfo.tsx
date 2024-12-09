@@ -17,7 +17,7 @@ interface PetInfoType {
   breed: string;
   weight: number;
   gender: string;
-  themeVariant?: 'compact' | 'spacious';
+  themeVariant?: 'compact' | 'spacious' | 'medium';
   neutering?: boolean;
   character?: string[];
   diseases?: string[];
@@ -108,11 +108,16 @@ interface ThemeVariant {
   };
 }
 
-const PetInfoTheme: Record<'compact' | 'spacious', ThemeVariant> = {
+const PetInfoTheme: Record<'compact' | 'spacious' | 'medium', ThemeVariant> = {
   compact: {
     imageSize: { width: 77, height: 77, borderRadius: 99 },
     gap: { vertical: 20, horizontal: 6 },
     typo: { name: 'Label1', description: 'Label3' },
+  },
+  medium: {
+    imageSize: { width: 100, height: 100, borderRadius: 8 },
+    gap: { vertical: 18, horizontal: 6 },
+    typo: { name: 'Body2', description: 'Caption2' },
   },
   spacious: {
     imageSize: { width: 133, height: 133, borderRadius: 40 },
