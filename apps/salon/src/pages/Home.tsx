@@ -1,14 +1,18 @@
-import { forwardRef } from 'react';
-import { BottomSheetRef } from 'react-spring-bottom-sheet';
+import { useState } from 'react';
+import { BottomSheet } from 'react-spring-bottom-sheet';
+import { useNavigate } from 'react-router-dom';
 
 import { ShopInfoType } from '@assets/types/home';
-import { Card, DuriNavbar, Flex, HeightFitFlex, MainHeader, MobileLayout, NextArrow, Pencil, Text, theme, WidthFitFlex } from '@duri-fe/ui';
-import { useGetClosetGrooming, useGetDailySchedule, useGetHomeQuotationRequest } from '@duri-fe/utils';
+import { Button, Card, Flex, HeightFitFlex, MainHeader, MobileLayout, NextArrow, Pencil, SalonNavbar, Text, theme, WidthFitFlex } from '@duri-fe/ui';
+import { useBottomSheet, useGetClosetGrooming, useGetDailySchedule, useGetHomeQuotationRequest } from '@duri-fe/utils';
 import styled from '@emotion/styled';
+import { RadioButton } from '@salon/components/home/RadioButton';
 
 import ClosetGrooming from '@components/home/ClosetGrooming';
 import DailyScheduleItem from '@components/home/DailyScheduleItem';
 import NewRequestItem from '@components/home/NewRequestItem';
+
+import 'react-spring-bottom-sheet/dist/style.css';
 
 const shopInfoData: ShopInfoType = {
   "id": 1,
@@ -18,13 +22,32 @@ const shopInfoData: ShopInfoType = {
   "phone": "02-123-4567"
 }
 
-const Home = forwardRef<BottomSheetRef>(() => {
+const completeToggleData = [
+  "노쇼했어요.",
+  "네, 완료했어요!"
+]
+
+const Home = () => {
   const date = new Date();
   const dateStr = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
+  const naviagte = useNavigate();
+  
+  const { openSheet, bottomSheetProps } = useBottomSheet({
+    maxHeight: 300,
+  })
+
+  const [completeToggle, setCompleteToggle] = useState<number>();
 
   const { data: closetGroomingData } = useGetClosetGrooming();
   const { data: dailyScheduleData } = useGetDailySchedule();
   const { data: quotationRequestData } = useGetHomeQuotationRequest();
+
+  const handleCompleteGrooming = () => {
+    if (completeToggle === 1) naviagte('/feedback');
+    // TODO : quotationId 함께 전달
+    else return;
+    // TODO : 노쇼 시에는 어떻게 하지??
+  }
 
   return (
     <MobileLayout>
@@ -65,6 +88,7 @@ const Home = forwardRef<BottomSheetRef>(() => {
               quotationId={closetGroomingData.quotationId}
               startTime={closetGroomingData.startTime}
               isNow={closetGroomingData.isNow}
+              handleOpenCompleteSheet={openSheet}
             />
           }
         </Card>
@@ -124,16 +148,58 @@ const Home = forwardRef<BottomSheetRef>(() => {
           ))}
         </NewRequestItemWrapper>
       </NewRequestWrapper>
-      <DuriNavbar />
+
+      <SalonNavbar />
+      
+      <BottomSheet {...bottomSheetProps}>
+        <Flex
+          direction="column"
+          align="flex-start"
+          justify="space-between"
+          padding="24px 36px 0 36px"
+          backgroundColor={theme.palette.White}
+        >
+          <Text typo="Title1" colorCode={theme.palette.Black}>미용이 완료되었나요?</Text>
+          <Flex direction='column' gap={8} padding='24px 0 40px 0'>
+            {completeToggleData.map((text, index) => (
+              <RadioButton
+                key={index}
+                selected={completeToggle === index}
+                label={text}
+                onClick={() => setCompleteToggle(index)}
+              />
+            ))}
+          </Flex>
+          <HeightFitFlex gap={8}>
+            <Button 
+              width='120px'
+              height='47px'
+              bg={theme.palette.Gray20}
+              borderRadius='8px'
+              onClick={bottomSheetProps.onDismiss}
+            >
+              <Text typo='Body3'>나중에 쓰기</Text>
+            </Button>
+            <CompleteButton 
+              height='47px'
+              bg={completeToggle ? theme.palette.Black : theme.palette.Gray20}
+              fontColor={completeToggle ? theme.palette.White : theme.palette.Black}
+              disabled={!completeToggle}
+              borderRadius='8px'
+              onClick={completeToggle ? handleCompleteGrooming : bottomSheetProps.onDismiss} 
+            >
+              일지 쓰기
+            </CompleteButton>
+          </HeightFitFlex>
+        </Flex>
+      </BottomSheet>
     </MobileLayout>
   );
-});
-
-Home.displayName = 'Home';
+};
 
 const HomeHeaderContainer = styled(Flex)`
   position: relative;
-  z-index: 100;
+  z-index: 1;
 
   &::before {
     content: '';
@@ -198,5 +264,9 @@ const NewRequestWrapper = styled(Flex)`
 const NewRequestItemWrapper = styled(Flex)`
   overflow-x: scroll;
 `;
+
+const CompleteButton = styled(Button)`
+  flex-shrink: 1;
+`
 
 export default Home;
