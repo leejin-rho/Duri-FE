@@ -42,11 +42,14 @@ const StyledBottomCss = css`
   [data-rsbs-root]::after {
     border-radius: 16px 16px 0px 0px;
     z-index: 20;
-    max-width: 375px;
+    --max-width: 375px;
 
-    @media (min-width: 480px) {
-      left: calc(50% - 187.5px);
+    @media (max-width: 420px) {
+      --max-width: 100%;
     }
+
+    max-width: var(--max-width);
+    left: calc(50% - (var(--max-width) / 2));
   }
 
   [data-rsbs-backdrop] {

@@ -5,6 +5,7 @@ export const calcRem = (px: number) => `${px / 16}rem`;
  * @param Title1: 페이지 제목 타이틀
  * @param Title2: 본문 타이틀
  * @param Title3: 박스 안에 들어가는 타이틀
+ * @param Title4: 가게 상세 페이지 타이틀
  *
  * @param Caption1: 타이틀 위/아래 부가설명 텍스트
  * @param Caption2: 거리표시 텍스트
@@ -71,6 +72,13 @@ export const typo = {
     /* 박스 안에 들어가는 타이틀 */
     font-family: 'Pretendard';
     font-size: ${calcRem(16)};
+    font-weight: 600;
+    line-height: normal;
+  `,
+  Title4: css`
+    /* 가게 상세 타이틀 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(22)};
     font-weight: 600;
     line-height: normal;
   `,
