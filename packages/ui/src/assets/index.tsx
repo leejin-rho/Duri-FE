@@ -1,3 +1,4 @@
+export { default as Dot } from './Dot';
 export { default as Add } from './Add';
 export { default as AddNew } from './AddNew';
 export { default as Approve } from './Approve';
@@ -84,6 +85,7 @@ import Chatting from './Chatting';
 import Close from './Close';
 import CloseCircle from './CloseCircle';
 import CurLocation from './CurLocation';
+import Dot from './Dot';
 import DownArrow from './DownArrow';
 import FilledHeart from './FilledHeart';
 import FilledLocation from './FilledLocation';
@@ -177,6 +179,7 @@ export const icons = {
   TimetableIcon,
   Write,
   Time,
+  Dot,
 };
 
 export default icons;

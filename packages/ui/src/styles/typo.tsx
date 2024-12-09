@@ -27,32 +27,6 @@ export const calcRem = (px: number) => `${px / 16}rem`;
  */
 
 export const typo = {
-  Heading1: css`
-    font-family: 'Pretendard';
-    font-weight: 600;
-    font-size: ${calcRem(36)};
-    line-height: 120%;
-  `,
-  Heading2: css`
-    font-family: 'Pretendard';
-    font-weight: 600;
-    font-size: ${calcRem(24)};
-    line-height: 150%;
-  `,
-  Heading3: css`
-    font-family: 'Pretendard';
-    font-weight: 600;
-    font-size: ${calcRem(20)};
-    line-height: 150%;
-  `,
-
-  Heading4: css`
-    font-family: 'Pretendard';
-    font-weight: 600;
-    font-size: ${calcRem(18)};
-    line-height: 170%;
-  `,
-
   // 타이포 시스템
   Title1: css`
     /* 페이지 타이틀 */
