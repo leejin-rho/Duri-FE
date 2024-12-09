@@ -1,5 +1,5 @@
 export interface RequestType extends TimeType {
-  petId: number | null;
+  petId?: number;
   menu: string[];
   addMenu: string[];
   specialMenu: string[];

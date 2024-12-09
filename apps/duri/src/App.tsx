@@ -15,8 +15,10 @@ import QuotationPage from '@pages/Quotation';
 import QuotationDetailPage from '@pages/QuotationDetail';
 import RequestPage from '@pages/Request';
 import Shop from '@pages/Shop';
-import Portfolio from '@pages/Shop/Portfolio';
-import ShopDetail from '@pages/Shop/ShopDetail';
+
+import MyPage from './pages/My';
+import Portfolio from './pages/Shop/Portfolio';
+import ShopDetail from './pages/Shop/ShopDetail';
 
 function App() {
   return (
@@ -33,13 +35,18 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/payment/success" element={<SuccessPage />} />
         <Route path="/payment/fail" element={<FailPage />} />
+        
         <Route path="/shop/request" element={<RequestPage />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:shopId" element={<ShopDetail />} />
+        
         <Route path="/portfolio/:designerId" element={<Portfolio />} />
 
         <Route path="/quotation" element={<QuotationPage />} />
         <Route path="/quotation/:quotationId" element={<QuotationDetailPage />} />
+        
+        <Route path="/my" element={<MyPage />} />
+
       </Routes>
     </BrowserRouter>
   );

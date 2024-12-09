@@ -21,7 +21,7 @@ import { useGetPetInfo } from '@duri-fe/utils';
 interface PetInfoType {
   petId: number;
   name: string;
-  imageURL: string | null;
+  imageURL?: string;
   breed: string;
   age: number;
   weight: number;
@@ -29,12 +29,22 @@ interface PetInfoType {
   lastGrooming: string | null;
 }
 
-const timeList = Array(10).fill(0).map((_, i) => `${9 + i}:00`);
+const timeList = Array(10)
+  .fill(0)
+  .map((_, i) => `${9 + i}:00`);
 
 const RequestPage = () => {
   const petData = useGetPetInfo();
   const [requestInfo, setrequestInfo] = useState<RequestType>(defaultRequestInfo);
-  const [petInfo, setPetInfo] = useState<PetInfoType | null>(null);
+  const [requestList, setRequestList] =
+    useState<RequestType>(defaultRequestInfo);
+  const [petInfo, setPetInfo] = useState<PetInfoType | null>({  petId: 1,
+    name: '멍뭉이',
+    breed: '시츄',
+    age: 4,
+    weight: 3.7,
+    gender: 'F',
+    lastGrooming: "2024-12-01"});
   const [isButton, setIsButton] = useState<boolean>(false);
 
   const handleSelect = (
@@ -44,7 +54,7 @@ const RequestPage = () => {
     if (key === 'petId') {
       setrequestInfo((prev) => ({
         ...prev,
-        petId: value === null || typeof value === 'number' ? value : null,  // petId만 undefined일 경우 처리가 필요
+        petId: value === undefined || typeof value === 'number' ? value : undefined, // petId만 undefined일 경우 처리가 필요
       }));
       return;
     }
@@ -59,7 +69,7 @@ const RequestPage = () => {
   useEffect(() => {
     if (petData) {
       setPetInfo(petData);
-      if (petData && petData.petId !== null) {
+      if (petData && petData.petId !== undefined) {
         handleSelect('petId', petData.petId); // id가 null이 아닌 경우만 설정
       }
     }

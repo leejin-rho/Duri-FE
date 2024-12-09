@@ -21,7 +21,7 @@ const CarouselHome = ({
   lastReservation,
 }: {
   upcomingReservation?: UpcomingReservationProps;
-  lastReservation: string | null;
+  lastReservation?: string;
 }) => {
   const [swiperIndex, setSwiperIndex] = useState<number>(0); // 슬라이드 인덱스 상태
   const currentDate = new Date();
