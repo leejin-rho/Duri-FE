@@ -22,7 +22,7 @@ const PortfolioDetail = () => {
 
   return (
     <MobileLayout>
-      <RelativeFlex direction="column" padding="42.25px 0">
+      <RelativeFlex direction="column">
         <AbsoluteHeader
           backIcon={true}
           titleAlign="center"
@@ -82,13 +82,14 @@ export default PortfolioDetail;
 
 const AbsoluteHeader = styled(Header)`
   position: absolute;
-  z-index: 1;
+  z-index: 2;
 `;
 
 const AbsoluteWrapper = styled(HeightFitFlex)`
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 0;
 `;
 
 const LetterBox = styled(Flex)`

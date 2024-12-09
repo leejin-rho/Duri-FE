@@ -91,7 +91,6 @@ export const typo = {
   `,
   Caption2: css`
     /* 거리표시 텍스트 */
-
     font-family: 'Pretendard';
     font-size: ${calcRem(13)};
     font-weight: 500;
