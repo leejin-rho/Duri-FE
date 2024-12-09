@@ -1,41 +1,105 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Approve, Flex, Text } from '@duri-fe/ui';
+import { Approve, Flex, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-export const DesignerInfo = () => {
-  const navigate = useNavigate();
-  const moveToDetail = (designerId: number | string) => {
-    navigate(`/portfolio/${designerId}`);
-  };
-  return (
-    <Flex direction="column" align="flex-start" onClick={() => moveToDetail(1)}>
-      <DesignerImg
-        src={
-          'https://s3-alpha-sig.figma.com/img/06a3/855c/666ff7b8f7c18c7121369ac3b3132d84?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kHnZaYFZ9lw11funsRnXLgiFg5Rwsg7mFn7dItWEmC-GWXDmtViBiw1KYXRDvjiutCH3s32c4r2kyPD10nx86gKJxZJWeJMVAfXaTRJVMlkBDHRajnbgbaQXd1s7JKwyNMZVxf64jzNBjyrhdCPZJk8npT8Ubb-OKkhsHGIq2zn9soSWjKqcmV9nsclfu6hFEnQlnUi77tBHKLROr8baKtikIlyYVqvOencSVUwSi~tU2Yq4DE3zhHyt9oVhIFwPcxAmS8M8d245IgP4Oehq2FUHEPyxExXdlVW6iZdRSas0SojaIv3ksehA3EH-8IMraM1RQGixX~iXhGZj6OPPtg__'
-        }
-      />
+interface DesignerInfoProps {
+  version?: 'vertical' | 'horizontal';
+  designerId: number | string;
+  name: string;
+  age: number;
+  gender: string;
+  experience: number;
+  roles: string[];
+  imageUrl: string;
+}
 
-      <Text>김댕댕</Text>
-      <Flex justify="flex-start">
-        <Text>경력 5년</Text>,<Text>30세</Text>,<Text>남성</Text>
+export const DesignerInfo = ({
+  version = 'vertical',
+  designerId,
+  name,
+  age,
+  gender,
+  experience,
+  roles,
+  imageUrl,
+}: DesignerInfoProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (version === 'vertical') {
+      navigate(`/portfolio/${designerId}`);
+    }
+  };
+
+  return (
+    <Container
+      version={version}
+      onClick={handleClick} // 조건부로 동작
+      clickable={version === 'vertical'} // 세로형일 때만 클릭 가능 스타일 추가
+      direction={version === 'horizontal' ? 'row' : 'column'}
+      align={version === 'horizontal' ? 'center' : 'flex-start'}
+      gap={version === 'horizontal' ? 16 : 8}
+    >
+      <ImageWrapper version={version}>
+        <DesignerImg
+          version={version}
+          src={imageUrl}
+          alt={`${name}'s profile`}
+        />
+      </ImageWrapper>
+
+      <Flex direction="column" align="flex-start" justify="flex-start" gap={8}>
+        <Text typo="Title3">{name}</Text>
+
+        <Text
+          typo="Caption4"
+          colorCode={theme.palette.Gray400}
+        >{`경력 ${experience}년, ${age}세, ${gender}`}</Text>
+
+        <Flex direction="column" gap={8}>
+          {roles.map((item, idx) => (
+            <Role key={idx}>
+              <Text typo="Caption3" colorCode={theme.palette.Link}>
+                {item}
+              </Text>
+              <Approve width={11} height={10} />
+            </Role>
+          ))}
+        </Flex>
       </Flex>
-      <Flex direction="column">
-        {['반려견 스타일리스트', '펫테이너'].map((item, idx) => (
-          <Flex key={idx} justify="flex-start">
-            <Text>{item}</Text>
-            <Approve width={11} height={10} />
-          </Flex>
-        ))}
-      </Flex>
-    </Flex>
+    </Container>
   );
 };
 
-const DesignerImg = styled.img`
-  display: flex;
-  width: 160px;
-  height: 160px;
-  border-radius: 8px;
+// 컨테이너 스타일
+const Container = styled(Flex)<{
+  version: 'vertical' | 'horizontal';
+  clickable: boolean;
+}>`
+  cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
+`;
+
+// 이미지 스타일
+const DesignerImg = styled.img<{ version: 'vertical' | 'horizontal' }>`
+  width: ${({ version }) => (version === 'horizontal' ? '124px' : '160px')};
+  height: ${({ version }) => (version === 'horizontal' ? '124px' : '160px')};
+  border-radius: ${({ version }) =>
+    version === 'horizontal' ? '99px' : '8px'};
   object-fit: cover;
+`;
+
+// 이미지 래퍼 스타일
+const ImageWrapper = styled.div<{ version: 'vertical' | 'horizontal' }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+`;
+
+// 역할 태그 스타일
+const Role = styled(Flex)`
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
 `;

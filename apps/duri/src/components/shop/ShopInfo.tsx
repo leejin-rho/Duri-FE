@@ -72,7 +72,16 @@ export const ShopInfo = () => {
 
       {/**디자이너 */}
       <Text typo="Title3">디자이너 소개</Text>
-      <DesignerInfo />
+      <DesignerInfo
+        version="vertical"
+        designerId={1}
+        name="김댕댕"
+        age={30}
+        gender="남성"
+        experience={5}
+        roles={['반려견 스타일리스트', '펫테이너']}
+        imageUrl="https://s3-alpha-sig.figma.com/img/06a3/855c/666ff7b8f7c18c7121369ac3b3132d84?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kHnZaYFZ9lw11funsRnXLgiFg5Rwsg7mFn7dItWEmC-GWXDmtViBiw1KYXRDvjiutCH3s32c4r2kyPD10nx86gKJxZJWeJMVAfXaTRJVMlkBDHRajnbgbaQXd1s7JKwyNMZVxf64jzNBjyrhdCPZJk8npT8Ubb-OKkhsHGIq2zn9soSWjKqcmV9nsclfu6hFEnQlnUi77tBHKLROr8baKtikIlyYVqvOencSVUwSi~tU2Yq4DE3zhHyt9oVhIFwPcxAmS8M8d245IgP4Oehq2FUHEPyxExXdlVW6iZdRSas0SojaIv3ksehA3EH-8IMraM1RQGixX~iXhGZj6OPPtg__"
+      />
 
       {/**샵 내부 */}
       <Text typo="Title3">샵 내부</Text>
