@@ -41,7 +41,7 @@ export default MonthlyCalendar;
 
 const CustomCalendarCss = css`
   .react-calendar__tile {
-    height: 55px;
+    height: 45px;
     border-radius: 99px;
     font-size: 15px;
   }

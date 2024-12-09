@@ -1,18 +1,37 @@
 export interface RequestType extends TimeType {
-  pet: PetInfoType | undefined;
+  pet: PetInfoType | null;
   quotationDetails: QuotationDetailsType;
 }
 
-export interface ResponseType {
-  name: string;
-  address: string;
-  phone: string;
-  designerName: string;
-  quotationDetails: QuotationDetailsType;
-  startDateTime: Date;
-  endDateTime: Date;
-  requestTime: Date;
-  totalPrice: number;
+export interface ResponseQuotationType {
+  shopDetail: {
+    shopName: string;
+    shopAddress: string;
+    shopPhone: string;
+    groomerName: string;
+  };
+  quotationCreatedAt: string;
+  menuDetail: {
+    groomingMenu: string[];
+    additionalGrooming: string[];
+    specialCare: string[];
+    designCut: string[];
+    otherRequests: string;
+  };
+  quotation: {
+    requestId: number;
+    memo: string;
+    startDateTime: string;
+    endDateTime: string;
+    priceDetail: {
+      groomingPrice?: number;
+      additionalPrice?: number;
+      specialCarePrice?: number;
+      designPrice?: number;
+      customPrice?: number;
+      totalPrice: number;
+    };
+  };
 }
 
 export interface QuotationDetailsType {
@@ -21,7 +40,7 @@ export interface QuotationDetailsType {
   specialCare: string[];
   designCut: string[];
   otherRequests?: string;
-  day?: Date;
+  day?: string;
   shopIds?: number[];
 }
 
@@ -39,7 +58,7 @@ export interface TimeType {
 }
 
 export interface PetInfoType {
-  id: number | undefined;
+  id: number | null;
   name: string;
   image: string;
   breed: string;
@@ -49,5 +68,5 @@ export interface PetInfoType {
   neutering: boolean;
   character: string[];
   diseases: string[];
-  lastGrooming: Date | null;
+  lastGrooming: string | null;
 }

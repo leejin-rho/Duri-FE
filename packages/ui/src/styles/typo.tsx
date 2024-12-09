@@ -21,7 +21,8 @@ export const calcRem = (px: number) => `${px / 16}rem`;
  * @param Body1: 정렬 본문 텍스트
  * @param Body2: 스케줄러 이름 텍스트
  * @param Body3: 팝업 부가 설명 텍스트
- * @param Body3: 스케줄러 담당쌤 텍스트 / 스케줄러 성별/특징 텍스트
+ * @param Body4: 스케줄러 담당쌤 텍스트 / 스케줄러 성별/특징 텍스트
+ * @param Body1Light: 정렬 본문 텍스트 (라이트)
  *
  * @param Letter: 피드백 텍스트
  */
@@ -170,6 +171,13 @@ export const typo = {
     /* 스케줄러 성별,특징 / 담당쌤 텍스트 */
     font-family: 'Pretendard';
     font-size: ${calcRem(15)};
+    font-weight: 300;
+    line-height: normal;
+  `,
+  Body1Light: css`
+    /* 정렬 본문 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(20)};
     font-weight: 300;
     line-height: normal;
   `,

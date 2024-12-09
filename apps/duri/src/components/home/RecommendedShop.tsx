@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Flex, Text, theme } from '@duri-fe/ui';
 
-import { RecommendeShopProps } from '../../assets/types/shop';
+import { RecommendeShopType } from '../../assets/types/shop';
 
 import { ShopVertical } from './ShopVertical';
 
-const RecommendedShop = ({ shopList }: { shopList: RecommendeShopProps[] }) => {
+const RecommendedShop = ({ shopList }: { shopList: RecommendeShopType[] }) => {
   return (
     <>
       <Flex direction="column" align="flex-start">

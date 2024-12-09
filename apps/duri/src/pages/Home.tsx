@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { defaultPetInfo } from '@duri/assets/data/pet';
 import { PetInfoType } from '@duri/assets/types';
 import { UpcomingReservationProps } from '@duri/assets/types/reservation';
-import { RecommendeShopProps, RegularShopProps } from '@duri/assets/types/shop';
+import { RecommendeShopType, RegularShopType } from '@duri/assets/types/shop';
 import CarouselHome from '@duri/components/home/Home';
 import RecommendedShop from '@duri/components/home/RecommendedShop';
 import SpeedQuotation from '@duri/components/home/SpeedQuotation';
@@ -30,11 +30,11 @@ import styled from '@emotion/styled';
 const Home = () => {
   const petData = useGetPetInfo();
   const [petInfo, setPetInfo] = useState<PetInfoType>(defaultPetInfo);
-  const [regularShopList, setRegularShopList] = useState<RegularShopProps[]>(
+  const [regularShopList, setRegularShopList] = useState<RegularShopType[]>(
     [],
   );
   const [recommendedShopList, setRecommendedShopList] = useState<
-    RecommendeShopProps[]
+    RecommendeShopType[]
   >([]);
   const [upcomingReservation, setUpcomingReservation] =
     useState<UpcomingReservationProps>();
@@ -46,8 +46,8 @@ const Home = () => {
   const handleNavigate = () => navigate('/shop');
 
   useEffect(() => {
-    if (recommendedListData) setRecommendedShopList(recommendedListData);
-    if (regularListData) setRegularShopList(regularListData);
+    if (recommendedListData) setRecommendedShopList(recommendedListData.homeShopList);
+    if (regularListData) setRegularShopList(regularListData.homeShopList);
     if (reservationData) setUpcomingReservation(reservationData);
   }, [recommendedListData, regularListData, reservationData]);
 
@@ -71,7 +71,7 @@ const Home = () => {
           />
           <CarouselHome
             upcomingReservation={upcomingReservation}
-            lastReservation={petData?.lastGrooming ?? undefined}
+            lastReservation={petData?.lastGrooming}
           />
         </HeightFitFlex>
         {/* 단골 빠른입찰 */}

@@ -9,6 +9,7 @@ import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import OnboardingPage from '@pages/Onboarding';
 import StartPage from '@pages/Onboarding/StartPage';
+import { QuotationPage } from '@pages/Quotation';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
 
         <Route path="/onboarding" element={<StartPage />} />
         <Route path="/onboarding/detail" element={<OnboardingPage />} />
+
+        <Route path="/quotation" element={<QuotationPage />} />
       </Routes>
     </BrowserRouter>
   );

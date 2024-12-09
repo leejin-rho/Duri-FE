@@ -3,14 +3,22 @@ import React from 'react';
 import { Flex, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-export const MobileLayout = ({ children }: { children: React.ReactNode }) => {
+interface MobileLayoutProps {
+  children: React.ReactNode;
+  backgroundColor?: string;
+}
+
+export const MobileLayout = ({
+  children,
+  backgroundColor = `${theme.palette.White}`,
+}: MobileLayoutProps) => {
   return (
     <Container
       direction="column"
       margin="0 auto"
       justify="flex-start"
       align="flex-start"
-      backgroundColor={theme.palette.White}
+      backgroundColor={backgroundColor}
     >
       {children}
     </Container>

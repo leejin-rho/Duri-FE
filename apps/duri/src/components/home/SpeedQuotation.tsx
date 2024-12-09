@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { RegularShopProps } from '@duri/assets/types/shop';
+import { RegularShopType } from '@duri/assets/types/shop';
 import { Flex } from '@duri-fe/ui';
 
 import { ShopHorizontal } from './ShopHorizontal';
 
-const SpeedQuotation = ({ shopList }: { shopList: RegularShopProps[] }) => {
+const SpeedQuotation = ({ shopList }: { shopList: RegularShopType[] }) => {
   return (
     <>
       <Flex gap={15}>

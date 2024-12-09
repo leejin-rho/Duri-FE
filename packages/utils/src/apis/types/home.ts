@@ -1,4 +1,4 @@
-import { BaseResponse } from "./base";
+import { BaseResponse } from './base';
 
 export interface ClosetGroomingResponse extends BaseResponse {
   response: {
@@ -15,7 +15,7 @@ export interface ClosetGroomingResponse extends BaseResponse {
     startTime: string;
     complete: boolean;
     isNow: boolean | null;
-  }
+  };
 }
 
 export interface DailyScheduleResponse extends BaseResponse {
@@ -28,7 +28,7 @@ export interface DailyScheduleResponse extends BaseResponse {
     gender: string;
     weight: number;
     groomerName: string;
-  }
+  };
 }
 
 export interface HomeQuotationRequestResponse extends BaseResponse {
@@ -44,5 +44,65 @@ export interface HomeQuotationRequestResponse extends BaseResponse {
     neutering: boolean;
     quotationReqId: number;
     memo: string;
-  }
+  };
+}
+
+export interface PetInfoResponse extends BaseResponse {
+  response: {
+    petId: number;
+    name: string;
+    imageURL: string | null;
+    breed: string;
+    age: number;
+    weight: number;
+    gender: string;
+    lastGrooming: string | null;
+  };
+}
+
+export interface UpcomingReservationResponse extends BaseResponse {
+  response: {
+    petId: number;
+    lastSinceDay: number;
+    shopId: number;
+    imageURL: string;
+    name: string;
+    address: string;
+    phone: string;
+    kakaoURL: string;
+    quotationId: number;
+    reserveDday: number;
+    reservationDate: string;
+    price: number;
+  };
+}
+
+export interface RegularShopResponse extends BaseResponse {
+  response: {
+    petId: number;
+    petName: string;
+    homeShopList: {
+      shopId: number;
+      imageURL: string;
+      shopName: string;
+      rating: number;
+      reviewCnt: number;
+      visitCnt: number;
+    }[];
+  };
+}
+
+export interface RecommendShopResponse extends BaseResponse {
+  response: {
+    petId: number;
+    feature: string[];
+    homeShopList: {
+      shopId: number;
+      imageURL: string;
+      shopName: string;
+      address: string;
+      phone: string;
+      shopTags: string[];
+    }[];
+  };
 }

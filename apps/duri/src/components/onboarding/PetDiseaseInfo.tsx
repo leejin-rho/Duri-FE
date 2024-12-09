@@ -1,5 +1,6 @@
 import { Control, Controller } from 'react-hook-form';
 
+import { diseaseOptions } from '@duri/assets/data/pet';
 import { Button, Flex, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
@@ -17,13 +18,7 @@ const PetDiseaseInfo = ({
   name,
   diseaseList,
 }: PetDiseaseInfoProps) => {
-  const diseaseOptions = [
-    '피부 질환',
-    '귀 염증',
-    '관절 질환',
-    '기저 질환',
-    '딱히 없어요',
-  ];
+
 
   // 성격 선택 토글 처리 함수
   const handleToggle = (value: string) => {
@@ -60,30 +55,30 @@ const PetDiseaseInfo = ({
               입력된 성격은 MY에서 변경가능해요.
             </Text>
             <Flex direction="column" align="flex-start" gap={8} margin='47px 0'>
-              {diseaseOptions.map((value) => (
+              {diseaseOptions.map(({key, label}) => (
                 <Button
-                  key={value}
+                  key={key}
                   typo='Body3'
                   width="fit-content"
                   height="43px"
                   bg={
-                    diseaseList.includes(value)
+                    diseaseList.includes(key)
                       ? theme.palette.Black
                       : theme.palette.White
                   }
                   fontColor={
-                    diseaseList.includes(value)
+                    diseaseList.includes(key)
                       ? theme.palette.White
                       : theme.palette.Black
                   }
                   border={
-                    diseaseList.includes(value)
+                    diseaseList.includes(key)
                       ? 'none'
                       : `1px solid ${theme.palette.Gray100}`
                   }
-                  onClick={() => handleToggle(value)}
+                  onClick={() => handleToggle(key)}
                 >
-                  {value}
+                  {label}
                 </Button>
               ))}
             </Flex>

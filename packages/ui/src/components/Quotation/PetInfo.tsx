@@ -1,20 +1,29 @@
 import {
+  diseaseMapping,
   Flex,
   HeightFitFlex,
   Image,
   KeyOfTypo,
+  personalityMapping,
+  ProfileImage,
+  SalonTag,
   Text,
   theme,
 } from '@duri-fe/ui';
 
 interface PetInfoType {
-  image: string;
+  image?: string;
   name: string;
   age: number;
   breed: string;
   weight: number;
   gender: string;
   themeVariant?: 'compact' | 'spacious';
+  neutering?: boolean;
+  character?: string[];
+  diseases?: string[];
+  imageSize?: number;
+  imageBorderRadius?: number;
 }
 
 export const PetInfo = ({
@@ -29,16 +38,11 @@ export const PetInfo = ({
   const { imageSize, gap, typo } = PetInfoTheme[themeVariant];
 
   return (
-    <HeightFitFlex gap={gap.vertical}>
-      <Image
-        borderRadius={imageSize.borderRadius}
-        width={imageSize.width}
-        height={imageSize.height}
-        src={image}
-      />
-      <Flex direction="column" gap={gap.horizontal} align="flex-start">
-        <Text typo={typo.name}>{name}</Text>
-        <Text typo={typo.description} colorCode={theme.palette.Gray400}>
+    <HeightFitFlex gap={18} margin="19px 0 0 0">
+      <Image borderRadius={40} width={133} height={133} src={image} />
+      <Flex direction="column" gap={15} align="flex-start">
+        <Text typo="Body2">{name}</Text>
+        <Text typo="Caption2" colorCode={theme.palette.Gray400}>
           {breed}, {gender === 'F' ? '암컷' : '수컷'}, {age}세, {weight}kg
         </Text>
       </Flex>
