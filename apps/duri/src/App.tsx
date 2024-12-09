@@ -12,11 +12,11 @@ import PaymentPage from '@pages/Payment';
 import FailPage from '@pages/Payment/Fail';
 import SuccessPage from '@pages/Payment/Success';
 import QuotationPage from '@pages/Quotation';
+import QuotationDetailPage from '@pages/QuotationDetail';
 import RequestPage from '@pages/Request';
 import Shop from '@pages/Shop';
-
-import Portfolio from './pages/Shop/Portfolio';
-import ShopDetail from './pages/Shop/ShopDetail';
+import Portfolio from '@pages/Shop/Portfolio';
+import ShopDetail from '@pages/Shop/ShopDetail';
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
         <Route path="/onboarding" element={<StartPage />} />
         <Route path="/onboarding/detail" element={<Onboarding />} />
 
-        <Route path="/payment/:quotationId" element={<PaymentPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
         <Route path="/payment/success" element={<SuccessPage />} />
         <Route path="/payment/fail" element={<FailPage />} />
         <Route path="/shop/request" element={<RequestPage />} />
@@ -39,6 +39,7 @@ function App() {
         <Route path="/portfolio/:designerId" element={<Portfolio />} />
 
         <Route path="/quotation" element={<QuotationPage />} />
+        <Route path="/quotation/:quotationId" element={<QuotationDetailPage />} />
       </Routes>
     </BrowserRouter>
   );

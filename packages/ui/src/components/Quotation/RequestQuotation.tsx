@@ -99,6 +99,11 @@ export const RequestQuotation = ({
           designCut={designCut}
         />
       </HeightFitFlex>
+      <Seperator mode="dotted" height="2px" />
+        <Flex direction="column" align="flex-start" padding="0 35.5px" gap={24}>
+          <Text typo="Body2">요청사항</Text>
+          {/* <TextField value={memo} width={266} multiline={true}/> */}
+        </Flex>
       <Flex gap={7} margin="6px 0" padding="16px 18.5px">
         {children}
       </Flex>

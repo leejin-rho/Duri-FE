@@ -19,20 +19,21 @@ import { TimeTable } from '@duri-fe/ui';
 import { useGetPetInfo } from '@duri-fe/utils';
 
 interface PetInfoType {
-  id: number;
+  petId: number;
   name: string;
-  image: null;
+  imageURL: string | null;
   breed: string;
   age: number;
   weight: number;
   gender: string;
-  lastGrooming: Date | null;
+  lastGrooming: string | null;
 }
 
 const timeList = Array(10).fill(0).map((_, i) => `${9 + i}:00`);
 
 const RequestPage = () => {
-  const [requestList, setRequestList] = useState<RequestType>(defaultRequestInfo);
+  const petData = useGetPetInfo();
+  const [requestInfo, setrequestInfo] = useState<RequestType>(defaultRequestInfo);
   const [petInfo, setPetInfo] = useState<PetInfoType | null>(null);
   const [isButton, setIsButton] = useState<boolean>(false);
 
@@ -41,26 +42,25 @@ const RequestPage = () => {
     value: number | string | string[] | boolean | Date | undefined,
   ) => {
     if (key === 'petId') {
-      setRequestList((prev) => ({
+      setrequestInfo((prev) => ({
         ...prev,
-        petId: value === undefined || typeof value === 'number' ? value : undefined,  // petId만 undefined일 경우 처리가 필요
+        petId: value === null || typeof value === 'number' ? value : null,  // petId만 undefined일 경우 처리가 필요
       }));
       return;
     }
 
-    setRequestList((prev) => ({
+    setrequestInfo((prev) => ({
       ...prev,
       [key]: value,
     }));
   };
 
-  const petData = useGetPetInfo();
 
   useEffect(() => {
     if (petData) {
       setPetInfo(petData);
-      if (petData && petData.id !== undefined) {
-        handleSelect('petId', petData.id); // id가 null이 아닌 경우만 설정
+      if (petData && petData.petId !== null) {
+        handleSelect('petId', petData.petId); // id가 null이 아닌 경우만 설정
       }
     }
   }, [petData]);
@@ -68,12 +68,12 @@ const RequestPage = () => {
   // 버튼 활성화 조건 업데이트
   useEffect(() => {
     const isValid =
-      !!requestList.petId && !!requestList.menu && requestList.menu.length > 0;
+      !!requestInfo.petId && !!requestInfo.menu && requestInfo.menu.length > 0;
     setIsButton(isValid);
-  }, [requestList]);
+  }, [requestInfo]);
 
   const handleClickButton = () => {
-    console.log(requestList);
+    console.log(requestInfo);
   };
 
   return (
@@ -88,7 +88,7 @@ const RequestPage = () => {
           {petInfo && (
             <PetInfo
               name={petInfo.name}
-              image={petInfo.image}
+              image={petInfo.imageURL}
               age={petInfo.age}
               breed={petInfo.breed}
               gender={petInfo.gender}
@@ -102,35 +102,35 @@ const RequestPage = () => {
             </Text>
             <SelectGrooming
               title="기본 미용"
-              description={requestList.menu}
+              description={requestInfo.menu}
               menuKey="menu"
               onSelect={handleSelect}
               options={menu}
-              selected={requestList.menu.length > 0}
+              selected={requestInfo.menu.length > 0}
             />
             <SelectGrooming
               title="추가 미용"
               menuKey="addMenu"
-              description={requestList.addMenu}
+              description={requestInfo.addMenu}
               onSelect={handleSelect}
               options={addMenu}
-              selected={requestList.addMenu.length > 0}
+              selected={requestInfo.addMenu.length > 0}
             />
             <SelectGrooming
               title="스페셜 미용"
-              description={requestList.specialMenu}
+              description={requestInfo.specialMenu}
               menuKey="specialMenu"
               onSelect={handleSelect}
               options={specialMenu}
-              selected={requestList.specialMenu.length > 0}
+              selected={requestInfo.specialMenu.length > 0}
             />
             <SelectGrooming
               title="디자인 컷"
-              description={requestList.design}
+              description={requestInfo.design}
               menuKey="design"
               onSelect={handleSelect}
               options={designMenu}
-              selected={requestList.design.length > 0}
+              selected={requestInfo.design.length > 0}
             />
           </HeightFitFlex>
           <HeightFitFlex direction="column" align="flex-start" gap={8}>
@@ -149,7 +149,7 @@ const RequestPage = () => {
             <TimeTable
               timeList={timeList}
               onSelect={handleSelect}
-              selectedTimeList={requestList}
+              selectedTimeList={requestInfo}
             />
           </HeightFitFlex>
           <HeightFitFlex direction="column" gap={12} margin="0 0 40px 0">

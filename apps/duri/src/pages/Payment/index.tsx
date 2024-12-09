@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { QuotationProps } from '@duri/assets/types/quotation';
 import PaymentWidget from '@duri/components/payment/Widget';
@@ -7,18 +7,17 @@ import { DuriNavbar, Flex, MobileLayout } from '@duri-fe/ui';
 import { useGetQuotationInfo } from '@duri-fe/utils';
 
 const PaymentPage = () => {
-  const { quotationId } = useParams<{ quotationId: string }>();
-  //고객 정보 - 전역변수
+  const location = useLocation();
+  const { selectedQuotationId } = location.state; // state에서 quotationId 가져오기
 
   //매장 및 시술 정보
   const [quotationInfo, setQuotationInfo] = useState<QuotationProps>();
-  if(quotationId === undefined) return
-  const response = useGetQuotationInfo(quotationId);
+  if(selectedQuotationId === undefined) return
+  else console.log(selectedQuotationId);
+  const response = useGetQuotationInfo(selectedQuotationId);
 
   useEffect(()=>{
-    if(response){
-      setQuotationInfo(response);
-    }
+    if(response) setQuotationInfo(response);
   }, [response])
 
   //쿠폰 정보 - 후순위!!!!!!

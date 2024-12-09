@@ -22,8 +22,8 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
       onClick={props.toggleModal}
       className={props.isOpen ? 'open' : ''}
     >
-      <ModalBox ref={ref} onClick={handleClickInnerModal} direction="column">
-        <Flex justify="flex-end">
+      <ModalBox ref={ref} onClick={handleClickInnerModal} direction="column" justify='flex-start'>
+        <Flex justify="flex-end" padding='0 0 17px 0'>
           {props.title && (
             <Text
               typo="Body3"
@@ -71,6 +71,8 @@ const ModalBox = styled(Flex)`
   background-color: ${theme.palette.White};
   box-sizing: border-box;
   border-radius: 8px;
+  max-height: 80vh;
+  overflow-y: auto;
 `;
 
 const ModalContent = styled.div`

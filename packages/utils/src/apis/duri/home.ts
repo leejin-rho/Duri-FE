@@ -1,56 +1,14 @@
 import { duriInstance } from '../axiosConfig';
-import { BaseResponse } from '../types';
+import { PetInfoResponse, RecommendShopResponse, RegularShopResponse, UpcomingReservationResponse } from '../types';
 
-interface PetInfoResponse extends BaseResponse {
-  response: {
-    id: number;
-    name: string;
-    image: null;
-    breed: string;
-    age: number;
-    weight: number;
-    gender: string;
-    lastGrooming: Date | null;
-  };
+export const getRegularShopInfo = async(): Promise<RegularShopResponse['response']> => {
+  const response = await duriInstance.get(`home/regular/1`);
+    return response.data.response;
 }
 
-interface UpcomingReservationResponse extends BaseResponse {
-  response: {
-    petId: number;
-    lastSinceDay: number;
-    shopId: number;
-    imageURL: string;
-    name: string;
-    address: string;
-    phone: string;
-    kakaoURL: string;
-    quotationId: number;
-    reserveDday: number;
-    reservationDate: string;
-    price: number;
-  };
-}
-
-export async function getRegularShopInfo() {
-  try {
-    const response = await duriInstance.get(`shop/regular`, {
-      withCredentials: true,
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function getRecommendedShopInfo() {
-  try {
-    const response = await duriInstance.get(`shop/recommend`, {
-      withCredentials: true,
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
+export const getRecommendedShopInfo = async(): Promise<RecommendShopResponse['response']> => {
+    const response = await duriInstance.get(`home/recommend/1`);
+    return response.data.response;
 }
 
 export const getUpcomingReservation = async (): Promise<
@@ -66,6 +24,7 @@ export const getUpcomingReservation = async (): Promise<
 // }; 이게 없고 펫 정보에 lastGroomingDate 데이터를 이용해야됨!!
 
 export const getPetInfo = async (): Promise<PetInfoResponse['response']> => {
-  const response = await duriInstance.get(`user/pet`);
+  const response = await duriInstance.get(`user/home/pet/1`);
+  console.log(response);
   return response.data.response;
 };
