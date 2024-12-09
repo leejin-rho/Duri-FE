@@ -7,6 +7,7 @@ import { Global } from '@emotion/react';
 
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
+import MyPage from '@pages/My';
 import StartPage from '@pages/Onboarding/StartPage';
 import PaymentPage from '@pages/Payment';
 import FailPage from '@pages/Payment/Fail';
@@ -15,10 +16,8 @@ import QuotationPage from '@pages/Quotation';
 import QuotationDetailPage from '@pages/QuotationDetail';
 import RequestPage from '@pages/Request';
 import Shop from '@pages/Shop';
-
-import MyPage from './pages/My';
-import Portfolio from './pages/Shop/Portfolio';
-import ShopDetail from './pages/Shop/ShopDetail';
+import Portfolio from '@pages/Shop/Portfolio';
+import ShopDetail from '@pages/Shop/ShopDetail';
 
 function App() {
   return (
