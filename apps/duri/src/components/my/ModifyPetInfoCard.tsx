@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Flex, PetInfoA, theme, Trash } from '@duri-fe/ui';
+import { Flex, PetInfo, theme, Trash } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 const character = ['character1'];
@@ -60,7 +60,7 @@ export const ModifyPetInfoCard = ({ petId }: { petId: number }) => {
           swipePosition={swipePosition}
           isSwiped={isSwiped}
         >
-          <PetInfoA
+          <PetInfo
             modify={true}
             age={4}
             breed="시츄"

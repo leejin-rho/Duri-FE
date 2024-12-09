@@ -4,6 +4,7 @@ import {
   Close,
   Flex,
   HeightFitFlex,
+  PetInfo,
   Seperator,
   Text,
   theme,
@@ -15,7 +16,6 @@ import { format } from 'date-fns';
 import { RequestType, TimeType } from '../../types';
 
 import { DetailGrooming } from './DetailGrooming';
-import { PetInfo } from './PetInfo';
 import { TimeTable } from './Timetable';
 
 interface RequestQuotationProps extends RequestType {

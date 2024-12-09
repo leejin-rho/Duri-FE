@@ -3,12 +3,15 @@ import {
   Flex,
   HeightFitFlex,
   KeyOfTypo,
+  Pencil,
   personalityMapping,
   ProfileImage,
   SalonTag,
   Text,
   theme,
+  WidthFitFlex,
 } from '@duri-fe/ui';
+import styled from '@emotion/styled';
 
 interface PetInfoType {
   image?: string;
@@ -17,10 +20,12 @@ interface PetInfoType {
   breed: string;
   weight: number;
   gender: string;
-  themeVariant?: 'compact' | 'spacious' | 'medium';
   neutering?: boolean;
   character?: string[];
   diseases?: string[];
+  modify?: boolean;
+  onClick?: () => void | Promise<void>;
+  themeVariant?: 'compact' | 'spacious' | 'medium';
 }
 
 export const PetInfo = ({
@@ -33,6 +38,8 @@ export const PetInfo = ({
   neutering,
   character,
   diseases,
+  modify = false,
+  onClick,
   themeVariant = 'spacious',
 }: PetInfoType) => {
   const { imageSize, gap, typo } = PetInfoTheme[themeVariant];
@@ -40,16 +47,35 @@ export const PetInfo = ({
   return (
     <Flex direction="column" gap={16}>
       <HeightFitFlex gap={18}>
-        <ProfileImage
+        {modify ? (
+          <ProfileImageWrapper onClick={onClick}>
+                    <ProfileImage
           borderRadius={imageSize.borderRadius}
           width={imageSize.width}
           height={imageSize.height}
           src={image}
         />
-        <Flex direction="column" gap={gap.horizontal} align="flex-start">
+            <PencilWrapper
+              backgroundColor={theme.palette.Black}
+              borderRadius={99}
+              height={29}
+              imageSize={imageSize.width}
+            >
+              <Pencil width={17} height={17} />
+            </PencilWrapper>
+          </ProfileImageWrapper>
+        ) : (
+          <ProfileImage
+          borderRadius={imageSize.borderRadius}
+          width={imageSize.width}
+          height={imageSize.height}
+          src={image}
+        />
+        )}
+       <Flex direction="column" gap={gap.horizontal} align="flex-start">
           <Text typo={typo.name}>{name}</Text>
           <Text typo={typo.description} colorCode={theme.palette.Gray400}>
-            {breed}, {gender === 'F' ? '암컷' : '수컷'}, {age}세, {weight}kg
+            {breed}, {gender === 'F' ? '여아' : '남아'}, {age}세, {weight}kg
           </Text>
           {neutering && <SalonTag content="중성화 완료" />}
         </Flex>
@@ -91,6 +117,19 @@ export const PetInfo = ({
     </Flex>
   );
 };
+
+const ProfileImageWrapper = styled(WidthFitFlex)`
+  position: relative;
+  cursor: pointer;
+`;
+const PencilWrapper = styled(WidthFitFlex)<{ imageSize: number }>`
+  position: absolute;
+  border: 1.094px solid ${theme.palette.White};
+  padding: 6px;
+  top: ${({ imageSize }) => `${imageSize-32}px`};
+  left: ${({ imageSize }) => `${imageSize-30}px`};
+`;
+
 
 interface ThemeVariant {
   imageSize: {

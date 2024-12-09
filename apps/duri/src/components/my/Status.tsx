@@ -11,7 +11,7 @@ export const Status = ({ reservationCnt, noShowCnt }: StatusProps) => {
     <Flex
       borderRadius={16}
       backgroundColor={theme.palette.Normal500}
-      padding="20px 30px"
+      padding="20px 0px"
       margin="0 0 22px 0"
     >
       <Flex direction="column" gap={15}>
