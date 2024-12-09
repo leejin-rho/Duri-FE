@@ -1,5 +1,17 @@
 import { duriInstance } from '../axiosConfig';
-import { PetInfoResponse, RecommendShopResponse, RegularShopResponse, UpcomingReservationResponse } from '../types';
+import { BaseResponse, RecommendShopResponse, RegularShopResponse, UpcomingReservationResponse } from '../types';
+interface PetInfoResponse extends BaseResponse {
+  response: {
+    petId: number;
+    name: string;
+    imageURL?: string;
+    breed: string;
+    age: number;
+    weight: number;
+    gender: string;
+    lastGrooming?: string;
+  };
+}
 
 export const getRegularShopInfo = async(): Promise<RegularShopResponse['response']> => {
   const response = await duriInstance.get(`home/regular/1`);

@@ -6,6 +6,7 @@ import {
   Flex,
   HeightFitFlex,
   Image,
+  ProfileImage,
   Text,
   theme,
 } from '@duri-fe/ui';
@@ -13,7 +14,7 @@ import styled from '@emotion/styled';
 
 interface PetInfoProps {
   name: string,
-  image: string | null,
+  image?: string,
   age: number,
   breed: string,
   gender: string,
@@ -51,12 +52,12 @@ const PetInfo = ({
             </SelectedTag>
             {image ? (
               <Image src={image} borderRadius={8} width={100} height={100} />
-            ) : <>없으면 디폴트 이미지로 들어가게</>}
+            ) : <ProfileImage borderRadius={8} width={100} height={100} />}
           </PetImageWrapper>
           <HeightFitFlex direction="column" gap={12} align="flex-start">
             <Text typo="Body2">{name}</Text>
             <Text typo="Caption2" colorCode={theme.palette.Gray400}>
-              {breed}, {age}, {gender}, {weight}kg
+              {breed}, {gender === 'F' ? '여아' : '남아'}, {age}살, {weight}kg
             </Text>
           </HeightFitFlex>
         </Flex>

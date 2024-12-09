@@ -1,5 +1,6 @@
 import { Control, Controller } from 'react-hook-form';
 
+import { personalityOptions } from '@duri/assets/data/pet';
 import { Button, Flex, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
@@ -18,26 +19,18 @@ const PetPersonalityInfo = ({
   personalityList, // 상위에서 전달된 리스트 사용
   name,
 }: PetPersonalityInfoProps) => {
-  // 성격 목록
-  const personalityOptions = [
-    '예민해요',
-    '낯가려요',
-    '입질이 있어요',
-    '사람을 좋아해요',
-    '얌전해요',
-    '낯선 손길은 무서워요',
-  ];
+
 
   // 성격 선택 토글 처리 함수
-  const handleToggle = (value: string) => {
+  const handleToggle = (key: string) => {
     const currentValues = [...personalityList]; // 현재 선택된 값들을 복사
 
-    if (currentValues.includes(value)) {
+    if (currentValues.includes(key)) {
       // 이미 포함된 값이면 제거
-      toggleArrayValue('character', value); // 상위에서 상태 업데이트
+      toggleArrayValue('character', key); // 상위에서 상태 업데이트
     } else {
       // 포함되지 않은 값이면 추가
-      toggleArrayValue('character', value); // 상위에서 상태 업데이트
+      toggleArrayValue('character', key); // 상위에서 상태 업데이트
     }
   };
 
@@ -63,30 +56,30 @@ const PetPersonalityInfo = ({
         }}
         render={() => (
           <FitFlex justify="flex-start" gap={8} margin="47px 0">
-            {personalityOptions.map((value) => (
+            {personalityOptions.map(({key, label}) => (
               <Button
-                key={value}
+                key={key}
                 typo="Body3"
                 width="fit-content"
                 height="43px"
                 bg={
-                  personalityList.includes(value)
+                  personalityList.includes(key)
                     ? theme.palette.Black
                     : theme.palette.White
                 }
                 fontColor={
-                  personalityList.includes(value)
+                  personalityList.includes(key)
                     ? theme.palette.White
                     : theme.palette.Black
                 }
                 border={
-                  personalityList.includes(value)
+                  personalityList.includes(key)
                     ? `1px solid ${theme.palette.Black}`
                     : `1px solid ${theme.palette.Gray100}`
                 }
-                onClick={() => handleToggle(value)}
+                onClick={() => handleToggle(key)}
               >
-                {value}
+                {label}
               </Button>
             ))}
           </FitFlex>
