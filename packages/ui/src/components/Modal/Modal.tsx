@@ -75,7 +75,7 @@ const ModalBox = styled(Flex)`
   overflow-y: auto;
 `;
 
-const ModalContent = styled.div`
+const ModalContent = styled(Flex)`
   display: flex;
   flex-direction: column;
   text-align: center;
