@@ -12,6 +12,7 @@ interface DesignerInfoProps {
   experience: number;
   roles: string[];
   imageUrl: string;
+  padding?: string;
 }
 
 export const DesignerInfo = ({
@@ -23,10 +24,11 @@ export const DesignerInfo = ({
   experience,
   roles,
   imageUrl,
+  padding,
 }: DesignerInfoProps) => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const moveToPortfolio = () => {
     if (version === 'vertical') {
       navigate(`/portfolio/${designerId}`);
     }
@@ -35,11 +37,12 @@ export const DesignerInfo = ({
   return (
     <Container
       version={version}
-      onClick={handleClick} // 조건부로 동작
-      clickable={version === 'vertical'} // 세로형일 때만 클릭 가능 스타일 추가
+      onClick={moveToPortfolio}
+      clickable={version === 'vertical'}
       direction={version === 'horizontal' ? 'row' : 'column'}
       align={version === 'horizontal' ? 'center' : 'flex-start'}
       gap={version === 'horizontal' ? 16 : 8}
+      padding={padding}
     >
       <ImageWrapper version={version}>
         <DesignerImg
@@ -72,7 +75,6 @@ export const DesignerInfo = ({
   );
 };
 
-// 컨테이너 스타일
 const Container = styled(Flex)<{
   version: 'vertical' | 'horizontal';
   clickable: boolean;
@@ -80,7 +82,6 @@ const Container = styled(Flex)<{
   cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
 `;
 
-// 이미지 스타일
 const DesignerImg = styled.img<{ version: 'vertical' | 'horizontal' }>`
   width: ${({ version }) => (version === 'horizontal' ? '124px' : '160px')};
   height: ${({ version }) => (version === 'horizontal' ? '124px' : '160px')};
@@ -89,7 +90,6 @@ const DesignerImg = styled.img<{ version: 'vertical' | 'horizontal' }>`
   object-fit: cover;
 `;
 
-// 이미지 래퍼 스타일
 const ImageWrapper = styled.div<{ version: 'vertical' | 'horizontal' }>`
   display: flex;
   align-items: center;

@@ -17,8 +17,6 @@ import {
 import { ShopInfoType, useBottomSheet } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
-import 'react-spring-bottom-sheet/dist/style.css';
-
 import { ShopLine } from './ShopLine';
 
 interface ShopListProps {
