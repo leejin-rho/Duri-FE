@@ -70,6 +70,8 @@ export { default as Pencil } from './Pencil';
 export { default as Time } from './Time';
 export { default as Scissors } from './Scissors';
 export { default as Store } from './Store';
+export { default as Trash } from './Trash';
+
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -124,6 +126,7 @@ import Star from './Star';
 import Store from './Store';
 import Time from './Time';
 import TimetableIcon from './TimetableIcon';
+import Trash from './Trash';
 import UnionDown from './UnionDown';
 import UnionUp from './UnionUp';
 import Unlock from './Unlock';
@@ -148,6 +151,7 @@ export const icons = {
   Chatting,
   Close,
   CloseCircle,
+  Trash,
   UpArrow,
   DownArrow,
   Help,
