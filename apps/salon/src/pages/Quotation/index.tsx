@@ -1,14 +1,12 @@
-import {
-  Card,
-  Flex,
-  MobileLayout,
-  PetInfo,
-  SalonNavbar,
-  theme,
-} from '@duri-fe/ui';
-import { TabBarItem } from '@salon/components/quotation/TabBarItem';
+import { Card, Flex, MobileLayout, Modal, PetInfo, RequestQuotation, SalonNavbar, theme } from "@duri-fe/ui"
+import { useGetNewRequestList, useModal } from "@duri-fe/utils";
+import { TabBarItem } from "@salon/components/quotation/TabBarItem"
 
 export const QuotationPage = () => {
+  const { isOpenModal, openModal, closeModal } = useModal();
+
+  const { data: newRequestList } = useGetNewRequestList();
+
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
       <Flex
@@ -50,6 +48,10 @@ export const QuotationPage = () => {
       </Flex>
 
       <SalonNavbar />
+
+      <Modal title='요청서' isOpen={isOpenModal} toggleModal={closeModal}>
+        <RequestQuotation />
+      </Modal>
     </MobileLayout>
   );
 };

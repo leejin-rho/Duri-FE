@@ -10,6 +10,7 @@ export interface TimeType {
   time17: boolean;
   time18: boolean;
 }
+
 export interface RequestProps extends TimeType {
   petId?: number;
   menu: string[];
@@ -19,4 +20,20 @@ export interface RequestProps extends TimeType {
   etc: string;
   day: Date;
   shopIds: number[];
+}
+
+export interface NewRequestListResponse {
+  response: {
+    requestId: number;
+    userId: number;
+    petId: number;
+    petImage: string;
+    petName: string;
+    petAge: number;
+    petBreed: string;
+    petNeutering: boolean;
+    petCharacter: string[];
+    petDiseases: string[];
+    requestCreatedAt: Date | string | null
+  }
 }
