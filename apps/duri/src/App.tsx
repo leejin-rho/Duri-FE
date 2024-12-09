@@ -16,11 +16,12 @@ import QuotationPage from '@pages/Quotation';
 import QuotationDetailPage from '@pages/QuotationDetail';
 import RequestPage from '@pages/Request';
 import Shop from '@pages/Shop';
+import Portfolio from '@pages/Shop/Portfolio';
+import ShopDetail from '@pages/Shop/ShopDetail';
 
 import 'react-spring-bottom-sheet/dist/style.css';
-import Portfolio from '@pages/Shop/Portfolio';
+
 import PortfolioDetail from './pages/Shop/PortfolioDetail';
-import ShopDetail from '@pages/Shop/ShopDetail';
 
 function App() {
   return (

@@ -182,6 +182,7 @@ export const ShopInfo = () => {
                 breed="시츄"
                 gender="여아"
                 weight={7.3}
+                neutering={true}
               />
             </HeightFitFlex>
           </ShadowFlex>
