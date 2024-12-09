@@ -66,7 +66,7 @@ export const QuotationPage = () => {
 
       {selectedRequestId &&
         <Modal title='요청서' margin="20px" isOpen={isOpenModal} toggleModal={closeModal}>
-          <DetailRequest requestId={selectedRequestId} />
+          <DetailRequest requestId={selectedRequestId} closeModal={closeModal} />
         </Modal>
       }
     </MobileLayout>

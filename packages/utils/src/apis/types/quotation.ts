@@ -58,7 +58,7 @@ export interface RequestDetailPetType {
   neutering: boolean;
   character: string[];
   diseases: string[];
-  lastGrooming: Date;
+  lastGrooming: string | Date;
 }
 
 export interface RequestDetailGroomerType {
@@ -74,5 +74,5 @@ export interface QuotationDetailsType extends TimeType {
   specialCare: string;
   designCut: string;
   otherRequests: string;
-  day: Date;
+  day: string;
 }
