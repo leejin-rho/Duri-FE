@@ -19,7 +19,7 @@ const Portfolio = () => {
   const [isMarked, setIsMarked] = useState<boolean>(false);
 
   // image dummy
-  const { designerId } = useParams<{ designerId: string | number }>();
+  const { designerId } = useParams<{ designerId: string }>();
 
   const images = [
     {
