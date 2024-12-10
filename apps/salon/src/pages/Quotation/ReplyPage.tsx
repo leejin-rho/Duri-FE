@@ -97,15 +97,9 @@ const ReplyPage = () => {
           </WidthFitFlex>
         </Flex>
 
-        <Flex direction="column" align="flex-start" padding="0 20px" backgroundColor={theme.palette.White}>
+        <Flex direction="column" align="flex-start" padding="0 20px 200px 20px" backgroundColor={theme.palette.White}>
           {step === 1 ? (
-            <>
-              <Flex padding="16px 0" justify="flex-start" gap={4}>
-                <StepTag step={1} label="기본사항 입력" status="active"/>
-                <StepTag step={2} label="예상금액 입력" status="disabled"/>
-              </Flex>
-              <ReplyForm control={control} setValue={setValue} />
-            </>
+            <ReplyForm control={control} setValue={setValue} request={request} />
           ) : (
             <>
               <Flex padding="16px 0" justify="flex-start" gap={4}>
