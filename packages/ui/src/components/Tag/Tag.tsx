@@ -18,6 +18,7 @@ interface TagProps {
   height?: number;
   typo?: keyof TypeOfTypo;
   colorCode?: string;
+  padding?: string;
 }
 
 export const SalonTag = ({
@@ -27,12 +28,13 @@ export const SalonTag = ({
   height,
   colorCode = theme.palette.Gray500,
   typo = 'Caption5',
+  padding
 }: TagProps) => {
   return (
     <WidthFitFlex
       backgroundColor={bg ?? theme.palette.Gray50}
       borderRadius={borderRadius ?? 2}
-      padding="5.5px 4px"
+      padding={padding ?? '5.5px 4px'}
       height={height ?? 20}
       width={height ?? 20}
     >

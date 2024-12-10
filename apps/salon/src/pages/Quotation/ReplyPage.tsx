@@ -6,6 +6,7 @@ import { Card, Flex, FrontBtn, Header, HeightFitFlex, MobileLayout, Modal, PetIn
 import { useGetDetailRequest, useModal } from "@duri-fe/utils";
 import ReplyForm from "@salon/components/quotation/ReplyForm";
 import ReplyFormDetail from "@salon/components/quotation/ReplyFormDetail";
+import StepTag from "@salon/components/quotation/StepTag";
 
 export interface QuotationFormData {
   requestId: number;
@@ -96,11 +97,23 @@ const ReplyPage = () => {
           </WidthFitFlex>
         </Flex>
 
-        <Flex>
+        <Flex direction="column" align="flex-start" padding="0 20px" backgroundColor={theme.palette.White}>
           {step === 1 ? (
-            <ReplyForm control={control} setValue={setValue} />
+            <>
+              <Flex padding="16px 0" justify="flex-start" gap={4}>
+                <StepTag step={1} label="기본사항 입력" status="active"/>
+                <StepTag step={2} label="예상금액 입력" status="disabled"/>
+              </Flex>
+              <ReplyForm control={control} setValue={setValue} />
+            </>
           ) : (
-            <ReplyFormDetail control={control} setValue={setValue}  />
+            <>
+              <Flex padding="16px 0" justify="flex-start" gap={4}>
+                <StepTag step={1} label="기본사항 입력" status="done"/>
+                <StepTag step={2} label="예상금액 입력" status="active"/>
+              </Flex>
+              <ReplyFormDetail control={control} setValue={setValue}  />
+            </>
           )}
         </Flex>
       </Flex>
