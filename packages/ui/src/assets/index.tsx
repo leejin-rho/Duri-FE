@@ -1,4 +1,5 @@
 export { default as SendColor } from './SendColor';
+export { default as Dot } from './Dot';
 export { default as Add } from './Add';
 export { default as AddNew } from './AddNew';
 export { default as Approve } from './Approve';
@@ -34,7 +35,7 @@ export { default as QuotationIcon } from './QuotationIcon';
 export { default as ShopIcon } from './ShopIcon';
 export { default as Calendar } from './Calendar';
 export { default as Call } from './Call';
-export {default as CallCenter} from './CallCenter';
+export { default as CallCenter } from './CallCenter';
 export { default as Doori } from './Doori';
 export { default as FilledHeart } from './FilledHeart';
 export { default as FilledLocation } from './FilledLocation';
@@ -72,7 +73,6 @@ export { default as Scissors } from './Scissors';
 export { default as Store } from './Store';
 export { default as Trash } from './Trash';
 
-
 import Add from './Add';
 import AddNew from './AddNew';
 import Approve from './Approve';
@@ -91,6 +91,7 @@ import Chatting from './Chatting';
 import Close from './Close';
 import CloseCircle from './CloseCircle';
 import CurLocation from './CurLocation';
+import Dot from './Dot';
 import DownArrow from './DownArrow';
 import FilledHeart from './FilledHeart';
 import FilledLocation from './FilledLocation';
@@ -193,6 +194,7 @@ export const icons = {
   TimetableIcon,
   Write,
   Time,
+  Dot,
 };
 
 export default icons;

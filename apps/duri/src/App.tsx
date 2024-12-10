@@ -23,6 +23,8 @@ import ShopDetail from '@pages/Shop/ShopDetail';
 
 import 'react-spring-bottom-sheet/dist/style.css';
 
+import PetDiary from './pages/Diary';
+import PetDiaryDetail from './pages/Diary/DiaryDetail';
 import QuotationDetailPage from './pages/Quotation/QuotationDetail';
 import PortfolioDetail from './pages/Shop/PortfolioDetail';
 
@@ -53,13 +55,23 @@ function App() {
         />
 
         <Route path="/quotation" element={<QuotationPage />} />
-        <Route path="/quotation/:quotationId" element={<QuotationDetailPage />} />
+        <Route
+          path="/quotation/:quotationId"
+          element={<QuotationDetailPage />}
+        />
+
+        <Route
+          path="/quotation/:quotationId"
+          element={<QuotationDetailPage />}
+        />
+
+        <Route path="/diary" element={<PetDiary />} />
+        <Route path="/diary/:diaryId" element={<PetDiaryDetail />} />
 
         <Route path="/my" element={<MyPage />} />
         <Route path="/my/pet" element={<MyPetPage />} />
         <Route path="/my/pet/modify" element={<MyPetModifyPage />} />
         <Route path="/my/shop" element={<MyShopPage />} />
-
         <Route path="/my" element={<MyPage />} />
       </Routes>
     </BrowserRouter>

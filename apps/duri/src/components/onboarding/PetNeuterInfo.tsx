@@ -12,11 +12,14 @@ interface PetNeuterInfoProps {
 const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
   const [isNeutered, setIsNeutered] = useState<boolean | undefined>();
 
-  const handleClickButton = (field: {
-    onChange: (value: boolean) => void;
-    value: boolean;
-    name: string;
-  }, value: boolean) => {
+  const handleClickButton = (
+    field: {
+      onChange: (value: boolean) => void;
+      value: boolean;
+      name: string;
+    },
+    value: boolean,
+  ) => {
     field.onChange(value);
     setIsNeutered(value);
   };
@@ -27,11 +30,15 @@ const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
   ];
 
   return (
-    <Flex direction="column" align="flex-start" gap={28} >
-      <Text typo="Heading2" justify="flex-start">
+    <Flex direction="column" align="flex-start" gap={28}>
+      <Text typo="Heading" justify="flex-start">
         중성화 여부를 알려주세요!
       </Text>
-      <Text typo="Caption1" justify="flex-start" colorCode={theme.palette.Gray500}>
+      <Text
+        typo="Caption1"
+        justify="flex-start"
+        colorCode={theme.palette.Gray500}
+      >
         등록한 반려견은 MY에서 변경할 수 있어요.
       </Text>
 
@@ -43,7 +50,7 @@ const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
             value !== undefined || '중성화 여부를 선택해주세요.',
         }}
         render={({ field }) => (
-          <Flex direction='column' align='flex-start' gap={8} margin='47px 0'>
+          <Flex direction="column" align="flex-start" gap={8} margin="47px 0">
             {options.map(({ label, value }) => (
               <Button
                 key={value ? 'yes' : 'no'}

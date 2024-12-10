@@ -18,8 +18,6 @@ const PetDiseaseInfo = ({
   name,
   diseaseList,
 }: PetDiseaseInfoProps) => {
-
-
   // 성격 선택 토글 처리 함수
   const handleToggle = (value: string) => {
     const currentValues = [...diseaseList]; // 현재 선택된 값들을 복사
@@ -43,7 +41,7 @@ const PetDiseaseInfo = ({
         }}
         render={() => (
           <Flex direction="column" align="flex-start" gap={28}>
-            <Text typo="Heading2" justify="flex-start">
+            <Text typo="Heading" justify="flex-start">
               {name}가 <br />
               갖고있는 질환이 있나요?
             </Text>
@@ -54,11 +52,11 @@ const PetDiseaseInfo = ({
             >
               입력된 질환은 MY에서 변경가능해요.
             </Text>
-            <Flex direction="column" align="flex-start" gap={8} margin='47px 0'>
-              {diseaseOptions.map(({key, label}) => (
+            <Flex direction="column" align="flex-start" gap={8} margin="47px 0">
+              {diseaseOptions.map(({ key, label }) => (
                 <Button
                   key={key}
-                  typo='Body3'
+                  typo="Body3"
                   width="fit-content"
                   height="43px"
                   bg={
