@@ -16,7 +16,6 @@ const MyPetPage = () => {
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
-      <>
         <Header
           title="마이펫"
           titleAlign="start"
@@ -24,7 +23,6 @@ const MyPetPage = () => {
           onClickBack={() => navigate(-1)}
         />
       <ModifyPetInfoCard petId={Number(location.state)}/>
-      </>
     </MobileLayout>
   );
 };

@@ -13,7 +13,7 @@ interface DropdownProps {
   width?: number | string;
   margin?: string;
   options?: string[] | number[]; // select 목록
-  defaultValue: string;
+  defaultValue: string | number;
   onSelect: (value: string | number) => void; // 선택된 값을 부모로 전달
   suffix?: string; //접미사 (ex. 살 등등)
 }

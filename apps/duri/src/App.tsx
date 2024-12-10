@@ -9,6 +9,7 @@ import { Global } from '@emotion/react';
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import MyPage from '@pages/My';
+import MyPetModifyPage from '@pages/My/MyPetModify';
 import MyShopPage from '@pages/My/MyShop';
 import StartPage from '@pages/Onboarding/StartPage';
 import PaymentPage from '@pages/Payment';
@@ -53,9 +54,10 @@ function App() {
 
         <Route path="/quotation" element={<QuotationPage />} />
         <Route path="/quotation/:quotationId" element={<QuotationDetailPage />} />
-        
+
         <Route path="/my" element={<MyPage />} />
         <Route path="/my/pet" element={<MyPetPage />} />
+        <Route path="/my/pet/modify" element={<MyPetModifyPage />} />
         <Route path="/my/shop" element={<MyShopPage />} />
 
         <Route path="/my" element={<MyPage />} />
