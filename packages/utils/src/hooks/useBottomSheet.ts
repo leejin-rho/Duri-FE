@@ -44,7 +44,7 @@ const StyledBottomCss = css`
     z-index: 20;
     --max-width: 375px;
 
-    @media (max-width: 420px) {
+    @media (max-width: 480px) {
       --max-width: 100%;
     }
 
