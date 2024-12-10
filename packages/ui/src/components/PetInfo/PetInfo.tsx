@@ -49,12 +49,12 @@ export const PetInfo = ({
       <HeightFitFlex gap={18}>
         {modify ? (
           <ProfileImageWrapper onClick={onClick}>
-                    <ProfileImage
-          borderRadius={imageSize.borderRadius}
-          width={imageSize.width}
-          height={imageSize.height}
-          src={image}
-        />
+            <ProfileImage
+              borderRadius={imageSize.borderRadius}
+              width={imageSize.width}
+              height={imageSize.height}
+              src={image}
+            />
             <PencilWrapper
               backgroundColor={theme.palette.Black}
               borderRadius={99}

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Card, Flex, FrontBtn, Header, HeightFitFlex, MobileLayout, Modal, SalonNavbar, Text, theme, WidthFitFlex } from "@duri-fe/ui";
-import { useModal } from "@duri-fe/utils";
+import { Card, Flex, FrontBtn, Header, HeightFitFlex, MobileLayout, Modal, PetInfo, SalonNavbar, Text, theme, WidthFitFlex } from "@duri-fe/ui";
+import { useGetDetailRequest, useModal } from "@duri-fe/utils";
 import ReplyForm from "@salon/components/quotation/ReplyForm";
 import ReplyFormDetail from "@salon/components/quotation/ReplyFormDetail";
 
@@ -24,13 +24,16 @@ export interface QuotationFormData {
 
 const ReplyPage = () => {
   const navigate = useNavigate();
-  const { requestId } = useParams();
+  const param = useParams();
+  const requestId = param.requestId ? parseInt(param.requestId, 10) : 0;
   const [step, setStep] = useState<number>(1);
+
+  const { data: request } = useGetDetailRequest(requestId);
 
   const { control, handleSubmit, setValue, trigger, formState: {isValid} } = useForm({
     mode: 'onChange',
     defaultValues: {
-      requestId: requestId ? parseInt(requestId, 10) : 0,
+      requestId: requestId,
       priceDetail: {
         groomingPrice: 0,
         additionalPrice: 0,
@@ -59,6 +62,8 @@ const ReplyPage = () => {
     // API 호출 필요
   };
 
+  if (!requestId) return null;
+
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
       <Header backIcon title="요청서 보기" titleAlign="start" backgroundColor={theme.palette.White} onClickBack={() => navigate(-1)}/>
@@ -66,8 +71,19 @@ const ReplyPage = () => {
       <Flex direction="column" gap={2}>
         {/** 펫 정보 */}
         <HeightFitFlex padding="14px 20px"  backgroundColor={theme.palette.White}>
-          <Card height="235" borderRadius={16}>
-            펫정보는 머지되면 수정
+          <Card height="235" borderRadius={16} padding="12px 16px">
+            {request && <PetInfo 
+              themeVariant="spacious"
+              image={request.pet.image}
+              name={request.pet.name}
+              breed={request.pet.breed}
+              age={request.pet.age}
+              weight={request.pet.weight}
+              gender={request.pet.gender}
+              neutering={request.pet.neutering}
+              character={request.pet.character}
+              diseases={request.pet.diseases}
+            /> }
           </Card>
         </HeightFitFlex>
         

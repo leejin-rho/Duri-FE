@@ -48,18 +48,19 @@ const QuotationPage = () => {
             <Card borderRadius={12} padding="6px">
               <PetInfo
                 themeVariant="medium"
-                name="신참이"
-                breed="시츄"
+                image={request.petImage}
+                name={request.petName}
+                breed={request.petBreed}
+                age={request.petAge}
+                neutering={request.petNeutering}
+
+                // TODO : gender, weight API 수정 필요함
                 gender="F"
-                age={7}
                 weight={7.3}
-                neutering={true}
               />
             </Card>
           </Flex>
         ))}
-
-
       </Flex>
 
       <SalonNavbar />

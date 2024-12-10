@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { Button, Flex, HeightFitFlex, RequestQuotation, Text, theme } from "@duri-fe/ui";
 import { useGetDetailRequest } from "@duri-fe/utils";
 import styled from "@emotion/styled";
@@ -11,7 +13,13 @@ export const DetailRequest = ({
   requestId,
   closeModal,
 }: DetailRequestProps) => {
+  const navigate = useNavigate();
+
   const { data: request } = useGetDetailRequest(requestId);
+
+  const handleReply = () => {
+    navigate(`/quotation/reply/${requestId}`);
+  }
 
   if (!request) return null;
 
@@ -33,6 +41,7 @@ export const DetailRequest = ({
             bg={theme.palette.Black}
             fontColor={theme.palette.White}
             borderRadius='8px'
+            onClick={handleReply}
           >
             <Text typo='Body3'>견적서 작성</Text>
           </CompleteButton>
