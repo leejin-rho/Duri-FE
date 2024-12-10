@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import {
   defaultRequestDetailData,
   Flex,
@@ -25,25 +23,15 @@ const timeList = Array(10)
 
 interface RequestQuotationProps {
   requestList?: RequestDetailProps;
+  selectedTimeList?: TimeType;
   children?: React.ReactNode;
 }
 
 export const RequestQuotation = ({
   requestList = defaultRequestDetailData,
+  selectedTimeList,
   children,
 }: RequestQuotationProps) => {
-  const [selectedTimeList] = useState<TimeType>({
-    time9: requestList.quotationDetails.time9,
-    time10: requestList.quotationDetails.time10,
-    time11: requestList.quotationDetails.time11,
-    time12: requestList.quotationDetails.time12,
-    time13: requestList.quotationDetails.time13,
-    time14: requestList.quotationDetails.time14,
-    time15: requestList.quotationDetails.time15,
-    time16: requestList.quotationDetails.time16,
-    time17: requestList.quotationDetails.time17,
-    time18: requestList.quotationDetails.time18,
-  });
   const { groomingMenu, additionalGrooming, specialCare, designCut } = requestList.quotationDetails;
 
   return (
@@ -97,10 +85,12 @@ export const RequestQuotation = ({
         <Seperator mode="dotted" height="2px" />
 
         {/** 희망 예약 시간 */}
-        <Flex direction="column">
-          <Text typo="Body2">희망 예약 시간</Text>
-          <TimeTable timeList={timeList} selectedTimeList={selectedTimeList} />
-        </Flex>
+        {selectedTimeList && (        
+          <Flex direction="column">
+            <Text typo="Body2">희망 예약 시간</Text>
+            <TimeTable timeList={timeList} selectedTimeList={selectedTimeList} />
+          </Flex>
+        )}
       </HeightFitFlex>
 
       <Seperator mode="dotted" height="2px" />

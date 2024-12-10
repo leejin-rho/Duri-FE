@@ -15,7 +15,7 @@ export const DetailRequest = ({
 }: DetailRequestProps) => {
   const navigate = useNavigate();
 
-  const { data: request } = useGetDetailRequest(requestId);
+  const { data: request, timeList } = useGetDetailRequest(requestId);
 
   const handleReply = () => {
     navigate(`/quotation/reply/${requestId}`);
@@ -25,7 +25,7 @@ export const DetailRequest = ({
 
   return (
     <Flex direction="column">
-      <RequestQuotation requestList={request}>
+      <RequestQuotation requestList={request} selectedTimeList={timeList}>
         <HeightFitFlex gap={8}>
           <Button 
             width='120px'

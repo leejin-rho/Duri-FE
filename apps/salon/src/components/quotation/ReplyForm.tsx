@@ -1,6 +1,6 @@
 import { Control, Controller, UseFormSetValue } from "react-hook-form";
 
-import { Flex, ProfileImage, Text, theme, WidthFitFlex } from "@duri-fe/ui";
+import { Flex, ProfileImage, Text, theme, TimeTable, TimeType, WidthFitFlex } from "@duri-fe/ui";
 import { RequestDetailResponse } from "@duri-fe/utils";
 import { QuotationFormData } from "@salon/pages/Quotation/ReplyPage";
 
@@ -23,8 +23,13 @@ export interface QuotationFormData {
 }
 */
 
+const timeList = Array(10)
+  .fill(0)
+  .map((_, i) => `${9 + i}:00`);
+
 interface ReplyFormProps {
   request: RequestDetailResponse['response'] | undefined;
+  selectedTimeList: TimeType;
   control: Control<QuotationFormData>;
   setValue: UseFormSetValue<QuotationFormData>;
   // getValue: UseFormGetValues<QuotationFormData>;
@@ -32,6 +37,7 @@ interface ReplyFormProps {
 
 const ReplyForm = ({
   request,
+  selectedTimeList,
   control,
   // setValue,
   // getValue
@@ -66,7 +72,7 @@ const ReplyForm = ({
       <Flex direction="column" align="flex-start" gap={8}>
         <Text typo="Title2" colorCode={theme.palette.Black}>희망 예약 시간</Text>
         <Text typo="Label3" colorCode={theme.palette.Gray400}>예약자분이 희망하는 예약 날짜에요.</Text>
-        
+        <TimeTable timeList={timeList} selectedTimeList={selectedTimeList} color="green" />
       </Flex>
 
       <Flex direction="column" align="flex-start" gap={8}>

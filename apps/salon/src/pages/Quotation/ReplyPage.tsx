@@ -29,7 +29,7 @@ const ReplyPage = () => {
   const requestId = param.requestId ? parseInt(param.requestId, 10) : 0;
   const [step, setStep] = useState<number>(1);
 
-  const { data: request } = useGetDetailRequest(requestId);
+  const { data: request, timeList } = useGetDetailRequest(requestId);
 
   const { control, handleSubmit, setValue, trigger, formState: {isValid} } = useForm({
     mode: 'onChange',
@@ -99,7 +99,7 @@ const ReplyPage = () => {
 
         <Flex direction="column" align="flex-start" padding="0 20px 200px 20px" backgroundColor={theme.palette.White}>
           {step === 1 ? (
-            <ReplyForm control={control} setValue={setValue} request={request} />
+            <ReplyForm control={control} setValue={setValue} request={request} selectedTimeList={timeList} />
           ) : (
             <>
               <Flex padding="16px 0" justify="flex-start" gap={4}>
