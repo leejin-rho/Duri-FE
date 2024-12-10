@@ -1,5 +1,5 @@
 import { HistoryCard } from '@duri/components/diary/HistoryCard';
-import { Flex, Header, MobileLayout, theme } from '@duri-fe/ui';
+import { DuriNavbar, Flex, Header, MobileLayout, theme } from '@duri-fe/ui';
 
 const PetDiary = () => {
   return (
@@ -26,6 +26,7 @@ const PetDiary = () => {
           dayOfWeek="금"
         />
       </Flex>
+      <DuriNavbar />
     </MobileLayout>
   );
 };
