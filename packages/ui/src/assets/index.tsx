@@ -1,3 +1,4 @@
+export { default as SendColor } from './SendColor';
 export { default as Add } from './Add';
 export { default as AddNew } from './AddNew';
 export { default as Approve } from './Approve';
@@ -111,6 +112,7 @@ import SecurityWarning from './SecurityWarning';
 import SelectBox from './SelectBox';
 import SelectBoxUn from './SelectBoxUn';
 import Send from './Send';
+import SendColor from './SendColor';
 import Shield from './Shield';
 import Shopping from './Shopping';
 import Star from './Star';
@@ -160,6 +162,7 @@ export const icons = {
   CurLocation,
   Notification,
   FilledNotification,
+  SendColor,
   Report,
   FilledReport,
   Menu,

@@ -17,8 +17,7 @@ import {
 import { ShopInfoType, useBottomSheet } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
-import 'react-spring-bottom-sheet/dist/style.css';
-
+import { SendRequestQBox } from './SendRequesQBox';
 import { ShopLine } from './ShopLine';
 
 interface ShopListProps {
@@ -32,9 +31,17 @@ export const ShopList = ({
   filter,
   onFilterChange,
 }: ShopListProps) => {
-  const { openSheet, bottomSheetProps } = useBottomSheet({
-    maxHeight: 260,
-  });
+  // 필터용
+  const { openSheet: openFilterSheet, bottomSheetProps: filterSheetProps } =
+    useBottomSheet({
+      maxHeight: 260,
+    });
+
+  // 요청서 전송용
+  const { openSheet: openRequestSheet, bottomSheetProps: requestSheetProps } =
+    useBottomSheet({
+      maxHeight: 552,
+    });
 
   // 선택된 가게 취합용
   const [selectedShops, setSelectedShops] = useState<number[]>([]);
@@ -61,7 +68,7 @@ export const ShopList = ({
             borderRadius="99px"
             padding="10px"
             shadow={'0px 0px 4px 0px rgba(0, 0, 0, 0.25)'}
-            onClick={openSheet}
+            onClick={openFilterSheet}
           >
             <Filter width={18} height={18} color={theme.palette.Gray600} />
             <HardText
@@ -137,6 +144,7 @@ export const ShopList = ({
             borderRadius="0"
             bg={theme.palette.Black}
             fontColor={theme.palette.White}
+            onClick={openRequestSheet}
           >
             <Send width={18} height={17} color={theme.palette.White} />
             <Text typo="Body2" margin="0 0 0 12px">
@@ -145,7 +153,7 @@ export const ShopList = ({
           </FrontBtn>
         ) : null}
 
-        <BottomSheet {...bottomSheetProps}>
+        <BottomSheet {...filterSheetProps}>
           <Flex
             direction="column"
             align="flex-start"
@@ -197,6 +205,9 @@ export const ShopList = ({
               </Button>
             </Flex>
           </Flex>
+        </BottomSheet>
+        <BottomSheet {...requestSheetProps}>
+          <SendRequestQBox />
         </BottomSheet>
       </Flex>
     </>

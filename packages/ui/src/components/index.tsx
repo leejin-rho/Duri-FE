@@ -17,3 +17,4 @@ export * from './Toast';
 export * from './Modal';
 export * from './ProfileImage';
 export * from './Quotation';
+export * from './RatingStars';

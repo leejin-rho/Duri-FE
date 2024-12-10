@@ -19,6 +19,10 @@ import Shop from '@pages/Shop';
 import Portfolio from '@pages/Shop/Portfolio';
 import ShopDetail from '@pages/Shop/ShopDetail';
 
+import 'react-spring-bottom-sheet/dist/style.css';
+
+import PortfolioDetail from './pages/Shop/PortfolioDetail';
+
 function App() {
   return (
     <BrowserRouter>
@@ -34,18 +38,24 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/payment/success" element={<SuccessPage />} />
         <Route path="/payment/fail" element={<FailPage />} />
-        
+
         <Route path="/shop/request" element={<RequestPage />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:shopId" element={<ShopDetail />} />
-        
+
         <Route path="/portfolio/:designerId" element={<Portfolio />} />
+        <Route
+          path="/portfolio/:designerId/:portfolioId"
+          element={<PortfolioDetail />}
+        />
 
         <Route path="/quotation" element={<QuotationPage />} />
-        <Route path="/quotation/:quotationId" element={<QuotationDetailPage />} />
-        
-        <Route path="/my" element={<MyPage />} />
+        <Route
+          path="/quotation/:quotationId"
+          element={<QuotationDetailPage />}
+        />
 
+        <Route path="/my" element={<MyPage />} />
       </Routes>
     </BrowserRouter>
   );
