@@ -39,7 +39,7 @@ export const UserInfo = ({
   return (
     <>
       <Flex justify="space-between" padding="0 6px">
-        <Text typo="Heading2">
+        <Text typo="Heading">
           {userName}님,
           <br />
           안녕하세요!
