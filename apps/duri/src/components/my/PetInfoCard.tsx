@@ -53,10 +53,9 @@ export const PetInfoCard = ({
           weight={weight}
           neutering={neutering}
           image={imageURL}
-          imageSize={70}
-          imageBorderRadius={99}
+          themeVariant='compact'
         />
-        <WidthFitFlex margin="46px 0 0 0">
+        <WidthFitFlex align='flex-start' margin="5px 0 0 0">
           <NextArrow width={29} height={31} />
         </WidthFitFlex>
       </Flex>
