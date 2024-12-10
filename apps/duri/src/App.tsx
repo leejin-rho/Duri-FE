@@ -30,6 +30,7 @@ import 'react-spring-bottom-sheet/dist/style.css';
 
 import MyHistoryPage from './pages/My/MyHistory';
 import MyReviewPage from './pages/My/MyReview';
+import MyReviewDetailPage from './pages/My/MyReviewDetail';
 
 function App() {
   return (
@@ -76,8 +77,9 @@ function App() {
         <Route path="/my/pet/modify" element={<MyPetModifyPage />} />
         <Route path="/my/info" element={<MyInfoModifyPage />} />
         <Route path="/my/shop" element={<MyShopPage />} />
-        <Route path="/my/review" element={<MyReviewPage />} />
         <Route path="/my/history" element={<MyHistoryPage />} />
+        <Route path="/my/review" element={<MyReviewPage />} />
+        <Route path="/my/review/:reviewId" element={<MyReviewDetailPage />} />
       </Routes>
     </BrowserRouter>
   );

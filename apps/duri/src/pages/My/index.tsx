@@ -51,7 +51,7 @@ const MyPage = () => {
               padding="13px 35px"
               backgroundColor={theme.palette.White}
               borderRadius={8}
-              gap={10}
+              gap={5}
               onClick={() => handleNavigate('/my/shop')}
             >
               <Store width={28} height={28} />
@@ -61,7 +61,7 @@ const MyPage = () => {
               padding="15px 35px"
               backgroundColor={theme.palette.White}
               borderRadius={8}
-              gap={10}
+              gap={5}
               onClick={() => handleNavigate('/my/history')}
             >
               <Scissors width={24} height={24} />

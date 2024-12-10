@@ -60,6 +60,7 @@ export { default as AlertStar } from './AlertStar';
 export { default as NaverLogo } from './NaverLogo';
 export { default as SpeechBallon } from './SpeechBallon';
 export { default as ListIcon } from './List';
+export { default as EmptyImage } from './EmptyImage';
 export { default as LocationShop } from './LocationShop';
 export { default as RadioSelect } from './RadioSelect';
 export { default as RadioUnselect } from './RadioUnselect';
@@ -94,6 +95,7 @@ import CloseCircle from './CloseCircle';
 import CurLocation from './CurLocation';
 import Dot from './Dot';
 import DownArrow from './DownArrow';
+import EmptyImage from './EmptyImage';
 import FilledHeart from './FilledHeart';
 import FilledLocation from './FilledLocation';
 import FilledNotification from './FilledNotification';
@@ -159,6 +161,7 @@ export const icons = {
   DownArrow,
   Help,
   Information,
+  EmptyImage,
   SafetyHelp,
   SecurityWarning,
   Shield,

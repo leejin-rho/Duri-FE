@@ -35,7 +35,7 @@ const timeList = Array(10)
 
 const RequestPage = () => {
   const petData = useGetPetInfo();
-  const [requestInfo, setrequestInfo] =
+  const [requestInfo, setRequestInfo] =
     useState<RequestType>(defaultRequestInfo);
   const [petInfo, setPetInfo] = useState<PetInfoType | null>({
     petId: 1,
@@ -53,7 +53,7 @@ const RequestPage = () => {
     value: number | string | string[] | boolean | Date | undefined,
   ) => {
     if (key === 'petId') {
-      setrequestInfo((prev) => ({
+      setRequestInfo((prev) => ({
         ...prev,
         petId:
           value === undefined || typeof value === 'number' ? value : undefined, // petId만 undefined일 경우 처리가 필요
@@ -61,7 +61,7 @@ const RequestPage = () => {
       return;
     }
 
-    setrequestInfo((prev) => ({
+    setRequestInfo((prev) => ({
       ...prev,
       [key]: value,
     }));

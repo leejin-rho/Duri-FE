@@ -53,7 +53,6 @@ const Home = () => {
     // if (recommendedListData) console.log(recommendedListData)
     // if (recommendedListData) setRecommendedShopList(recommendedListData);
     if (reservationData) setUpcomingReservation(reservationData);
-    console.log(upcomingReservation);
   }, [reservationData]);
 
   useEffect(() => {
