@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { PetInfoCard } from '@duri/components/my/PetInfoCard';
@@ -23,6 +24,9 @@ const MyPage = () => {
     sessionStorage.removeItem('token');
     navigate('/login');
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
