@@ -1,12 +1,11 @@
 import { useState } from 'react';
 
 import {
-  Close,
   Flex,
   HeightFitFlex,
+  PetInfo,
   Seperator,
   Text,
-  theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
 import { defaultRequestQuotationData, defaultTimeData } from '@duri-fe/ui';
@@ -15,7 +14,6 @@ import { format } from 'date-fns';
 import { RequestType, TimeType } from '../../types';
 
 import { DetailGrooming } from './DetailGrooming';
-import { PetInfo } from './PetInfo';
 import { TimeTable } from './Timetable';
 
 interface RequestQuotationProps extends RequestType {
@@ -47,12 +45,6 @@ export const RequestQuotation = ({
         padding="19px 5px"
         margin="0 0 14px 0"
       >
-        <HeightFitFlex justify="space-between" padding="0 23.5px ">
-          <Text typo="Body3" colorCode={theme.palette.Gray400}>
-            요청서
-          </Text>
-          <Close width={17} height={17} />
-        </HeightFitFlex>
         {requestList.pet && (
           <PetInfo
             gender={requestList.pet.gender}
@@ -61,6 +53,7 @@ export const RequestQuotation = ({
             breed={requestList.pet.breed}
             image={requestList.pet.image}
             weight={requestList.pet.weight}
+            themeVariant='spacious'
           />
         )}
       </Flex>

@@ -26,7 +26,10 @@ export const MobileLayout = ({
 };
 
 const Container = styled(Flex)`
-  max-width: 375px;
   min-height: 100vh;
   box-sizing: border-box;
+
+  @media (min-width: 420px) {
+    max-width: 375px;
+  }
 `;

@@ -14,12 +14,12 @@ interface PetInfoResponse extends BaseResponse {
 }
 
 export const getRegularShopInfo = async(): Promise<RegularShopResponse['response']> => {
-  const response = await duriInstance.get(`home/regular/1`);
+  const response = await duriInstance.get(`home/regular`);
     return response.data.response;
 }
 
 export const getRecommendedShopInfo = async(): Promise<RecommendShopResponse['response']> => {
-    const response = await duriInstance.get(`home/recommend/1`);
+    const response = await duriInstance.get(`home/recommend`);
     return response.data.response;
 }
 
@@ -36,7 +36,6 @@ export const getUpcomingReservation = async (): Promise<
 // }; 이게 없고 펫 정보에 lastGroomingDate 데이터를 이용해야됨!!
 
 export const getPetInfo = async (): Promise<PetInfoResponse['response']> => {
-  const response = await duriInstance.get(`user/home/pet/1`);
-  console.log(response);
+  const response = await duriInstance.get(`user/home/pet`);
   return response.data.response;
 };

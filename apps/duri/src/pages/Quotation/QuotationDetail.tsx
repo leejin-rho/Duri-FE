@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { IncomingQuotation } from '@duri/components/quotation/IncomingQuotation';
@@ -34,6 +34,9 @@ const QuotationDetailPage = () => {
     // const response = useGetQuotationInfo(value);
     // setResponseInfo(response);
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>

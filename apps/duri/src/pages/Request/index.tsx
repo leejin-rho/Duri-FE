@@ -35,14 +35,17 @@ const timeList = Array(10)
 
 const RequestPage = () => {
   const petData = useGetPetInfo();
-  const [requestInfo, setrequestInfo] = useState<RequestType>(defaultRequestInfo);
-  const [petInfo, setPetInfo] = useState<PetInfoType | null>({  petId: 1,
+  const [requestInfo, setrequestInfo] =
+    useState<RequestType>(defaultRequestInfo);
+  const [petInfo, setPetInfo] = useState<PetInfoType | null>({
+    petId: 1,
     name: '멍뭉이',
     breed: '시츄',
     age: 4,
     weight: 3.7,
     gender: 'F',
-    lastGrooming: "2024-12-01"});
+    lastGrooming: '2024-12-01',
+  });
   const [isButton, setIsButton] = useState<boolean>(false);
 
   const handleSelect = (
@@ -52,7 +55,8 @@ const RequestPage = () => {
     if (key === 'petId') {
       setrequestInfo((prev) => ({
         ...prev,
-        petId: value === undefined || typeof value === 'number' ? value : undefined, // petId만 undefined일 경우 처리가 필요
+        petId:
+          value === undefined || typeof value === 'number' ? value : undefined, // petId만 undefined일 경우 처리가 필요
       }));
       return;
     }
@@ -63,6 +67,9 @@ const RequestPage = () => {
     }));
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (petData) {

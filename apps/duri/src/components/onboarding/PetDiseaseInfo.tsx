@@ -50,7 +50,7 @@ const PetDiseaseInfo = ({
               justify="flex-start"
               colorCode={theme.palette.Gray500}
             >
-              입력된 성격은 MY에서 변경가능해요.
+              입력된 질환은 MY에서 변경가능해요.
             </Text>
             <Flex direction="column" align="flex-start" gap={8} margin="47px 0">
               {diseaseOptions.map(({ key, label }) => (
