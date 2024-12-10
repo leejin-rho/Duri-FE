@@ -11,11 +11,13 @@ import {
   RelativeFlex,
   SalonTag,
   Seperator,
+  Tape,
   Text,
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
 const PetDiaryDetail = () => {
   const navigate = useNavigate();
@@ -111,6 +113,9 @@ const PetDiaryDetail = () => {
       </Flex>
       <Seperator height="5px" />
       <RelativeFlex padding="25px 20px 117px 20px">
+        <TapeWrapper>
+          <Tape width={70} />
+        </TapeWrapper>
         <HeightFitFlex
           backgroundColor={theme.palette.Normal50}
           borderRadius={24}
@@ -132,4 +137,12 @@ export default PetDiaryDetail;
 
 const LightBody2 = css`
   font-weight: 400;
+`;
+
+const TapeWrapper = styled.div`
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
 `;

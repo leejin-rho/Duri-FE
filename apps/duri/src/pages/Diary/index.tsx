@@ -1,11 +1,25 @@
 import { HistoryCard } from '@duri/components/diary/HistoryCard';
 import { DuriNavbar, Flex, Header, MobileLayout, theme } from '@duri-fe/ui';
+import styled from '@emotion/styled';
 
 const PetDiary = () => {
   return (
-    <MobileLayout backgroundColor={theme.palette.Gray_White}>
-      <Header title="일지" backgroundColor={theme.palette.White} />
-      <Flex padding="45px 20px 0 20px" direction="column" gap={32}>
+    <RelativeMobile backgroundColor={theme.palette.Gray_White}>
+      <AbsoluteHeader title="일지" iconColor={theme.palette.White} />
+      <Flex
+        height={315}
+        backgroundColor={theme.palette.Normal500}
+        borderRadius={12}
+        margin="-70px 0 0 0"
+        padding="38px 28px 26px 28px"
+      >
+        <Flex
+          height={171}
+          borderRadius={12}
+          backgroundColor={theme.palette.Normal300}
+        ></Flex>
+      </Flex>
+      <Flex padding="45px 20px 124px 20px" direction="column" gap={32}>
         <HistoryCard
           visitMonth="12월"
           tagContent="미용 완료"
@@ -27,8 +41,17 @@ const PetDiary = () => {
         />
       </Flex>
       <DuriNavbar />
-    </MobileLayout>
+    </RelativeMobile>
   );
 };
 
 export default PetDiary;
+
+const RelativeMobile = styled(MobileLayout)`
+  position: relative;
+`;
+
+const AbsoluteHeader = styled(Header)`
+  position: absolute;
+  top: 0;
+`;
