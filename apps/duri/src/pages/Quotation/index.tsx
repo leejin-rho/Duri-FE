@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { RequestItemType } from '@duri/assets/types';
 import { RequestItem } from '@duri/components/quotation/RequestItem';
@@ -24,7 +24,7 @@ const defaultRequestItems = [
         shopName: '강남 미용샵',
       },
     ],
-    expired: true
+    expired: true,
   },
   {
     quotationId: 3,
@@ -40,17 +40,26 @@ const defaultRequestItems = [
         shopName: '홍대 펫샵',
       },
     ],
-    expired: false
+    expired: false,
   },
 ];
 
 const QuotationPage = () => {
-  const [requestList, ] =
-    useState<RequestItemType[] | null>(defaultRequestItems);
+  const [requestList] = useState<RequestItemType[] | null>(defaultRequestItems);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <MobileLayout>
       <Header title="요청서 및 견적서" />
-      <Flex direction="column" gap={12} padding="0 20px" margin='10px 0 102px 0'>
+      <Flex
+        direction="column"
+        gap={12}
+        padding="0 20px"
+        margin="10px 0 102px 0"
+      >
         <HeightFitFlex gap={5} justify="flex-start">
           <FilledLocation
             width={22}
@@ -62,9 +71,13 @@ const QuotationPage = () => {
           </Text>
         </HeightFitFlex>
         <Flex direction="column" padding="0 22px" align="flex-start" gap={12}>
-          {requestList && requestList.map((requestItem) => (
-            <RequestItem key={requestItem.quotationId} requestItem={requestItem} />
-          ))}
+          {requestList &&
+            requestList.map((requestItem) => (
+              <RequestItem
+                key={requestItem.quotationId}
+                requestItem={requestItem}
+              />
+            ))}
         </Flex>
       </Flex>
       {/* <RequestQuotation />
@@ -89,7 +102,7 @@ const QuotationPage = () => {
               수락 및 결제진행
             </Button>
           </ResponseQuotation> */}
-          <DuriNavbar />
+      <DuriNavbar />
     </MobileLayout>
   );
 };

@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import AuthPage from '@duri/pages/Auth';
+import MyPetPage from '@duri/pages/My/MyPet';
 import Onboarding from '@duri/pages/Onboarding';
 import { globalStyle } from '@duri-fe/ui';
 import { Global } from '@emotion/react';
@@ -8,12 +9,13 @@ import { Global } from '@emotion/react';
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import MyPage from '@pages/My';
+import MyPetModifyPage from '@pages/My/MyPetModify';
+import MyShopPage from '@pages/My/MyShop';
 import StartPage from '@pages/Onboarding/StartPage';
 import PaymentPage from '@pages/Payment';
 import FailPage from '@pages/Payment/Fail';
 import SuccessPage from '@pages/Payment/Success';
 import QuotationPage from '@pages/Quotation';
-import QuotationDetailPage from '@pages/QuotationDetail';
 import RequestPage from '@pages/Request';
 import Shop from '@pages/Shop';
 import Portfolio from '@pages/Shop/Portfolio';
@@ -21,6 +23,7 @@ import ShopDetail from '@pages/Shop/ShopDetail';
 
 import 'react-spring-bottom-sheet/dist/style.css';
 
+import QuotationDetailPage from './pages/Quotation/QuotationDetail';
 import PortfolioDetail from './pages/Shop/PortfolioDetail';
 
 function App() {
@@ -50,10 +53,12 @@ function App() {
         />
 
         <Route path="/quotation" element={<QuotationPage />} />
-        <Route
-          path="/quotation/:quotationId"
-          element={<QuotationDetailPage />}
-        />
+        <Route path="/quotation/:quotationId" element={<QuotationDetailPage />} />
+
+        <Route path="/my" element={<MyPage />} />
+        <Route path="/my/pet" element={<MyPetPage />} />
+        <Route path="/my/pet/modify" element={<MyPetModifyPage />} />
+        <Route path="/my/shop" element={<MyShopPage />} />
 
         <Route path="/my" element={<MyPage />} />
       </Routes>

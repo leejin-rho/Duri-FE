@@ -65,6 +65,7 @@ export const breedMapping: Record<string, string> = {
 
 
 export const breeds: string[] = [
+  // '견종 입력',
     '도베르만',
     '래브라도 리트리버',
     '러시안블루',

@@ -34,6 +34,7 @@ export { default as QuotationIcon } from './QuotationIcon';
 export { default as ShopIcon } from './ShopIcon';
 export { default as Calendar } from './Calendar';
 export { default as Call } from './Call';
+export {default as CallCenter} from './CallCenter';
 export { default as Doori } from './Doori';
 export { default as FilledHeart } from './FilledHeart';
 export { default as FilledLocation } from './FilledLocation';
@@ -67,6 +68,10 @@ export { default as TimetableIcon } from './TimetableIcon';
 export { default as CurLocation } from './CurLocation';
 export { default as Pencil } from './Pencil';
 export { default as Time } from './Time';
+export { default as Scissors } from './Scissors';
+export { default as Store } from './Store';
+export { default as Trash } from './Trash';
+
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -80,6 +85,7 @@ import Backup from './Backup';
 import BeforeArrow from './BeforeArrow';
 import Calendar from './Calendar';
 import Call from './Call';
+import CallCenter from './CallCenter';
 import Chat from './Chat';
 import Chatting from './Chatting';
 import Close from './Close';
@@ -108,6 +114,7 @@ import RadioSelect from './RadioSelect';
 import RadioUnselect from './RadioUnselect';
 import Report from './Report';
 import SafetyHelp from './SafetyHelp';
+import Scissors from './Scissors';
 import SecurityWarning from './SecurityWarning';
 import SelectBox from './SelectBox';
 import SelectBoxUn from './SelectBoxUn';
@@ -116,8 +123,10 @@ import SendColor from './SendColor';
 import Shield from './Shield';
 import Shopping from './Shopping';
 import Star from './Star';
+import Store from './Store';
 import Time from './Time';
 import TimetableIcon from './TimetableIcon';
+import Trash from './Trash';
 import UnionDown from './UnionDown';
 import UnionUp from './UnionUp';
 import Unlock from './Unlock';
@@ -137,10 +146,12 @@ export const icons = {
   BeforeArrow,
   Calendar,
   Call,
+  CallCenter,
   Chat,
   Chatting,
   Close,
   CloseCircle,
+  Trash,
   UpArrow,
   DownArrow,
   Help,
@@ -174,6 +185,8 @@ export const icons = {
   Hold,
   RadioSelect,
   RadioUnselect,
+  Scissors,
+  Store,
   SelectBox,
   SelectBoxUn,
   PortfolioIcon,

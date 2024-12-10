@@ -1,4 +1,5 @@
-import { Flex, NextArrow, Text, theme } from '@duri-fe/ui';
+import { Flex, Modal, NextArrow, RequestQuotation, Text, theme } from '@duri-fe/ui';
+import { useModal } from '@duri-fe/utils';
 import { format } from 'date-fns';
 
 interface RequestInfoProps {
@@ -14,14 +15,16 @@ export const RequestInfo = ({
   createdAt,
   expiredAt,
   expired = false,
-  margin
+  margin,
 }: RequestInfoProps) => {
+  const { isOpenModal, toggleModal } = useModal();
   return (
     <Flex
     direction="column"
     gap={20}
     padding="0 11px"
     margin={margin ?? `${margin}`}
+    onClick={toggleModal}
   >
       <Flex gap={8} justify="flex-start">
         <Text typo="Title3" colorCode={expired ? theme.palette.Gray300 : theme.palette.Normal700}>
@@ -47,6 +50,9 @@ export const RequestInfo = ({
           </Text>
         </Flex>
       </Flex>
+      <Modal isOpen={isOpenModal} toggleModal={toggleModal} title='요청서'>
+        <RequestQuotation />
+      </Modal>
     </Flex>
   );
 };

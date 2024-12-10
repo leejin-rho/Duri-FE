@@ -18,8 +18,10 @@ export const RequestItem = ({
   requestItem: RequestItemType;
 }) => {
   const navigate = useNavigate();
-  const handleNavigate = () =>
-    navigate(`/quotation/${requestItem.quotationId}`);
+  const handleNavigate = () =>{
+    const quotationId = requestItem.quotationId
+    navigate(`/quotation/${quotationId}`);
+}
 
   return (
     <>
