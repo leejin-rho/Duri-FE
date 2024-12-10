@@ -35,7 +35,7 @@ export const UserInfo = ({
   imageURL,
 }: UserInfoProps) => {
   const navigate = useNavigate();
-  const handleNavigate = () => navigate('/my/user', { state: userId });
+  const handleNavigate = () => navigate('/my/info', { state: userId });
   return (
     <>
       <Flex justify="space-between" padding="0 6px">

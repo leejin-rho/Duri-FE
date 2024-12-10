@@ -1,9 +1,7 @@
 import { SetStateAction, useState } from 'react';
 import React from 'react';
 
-import {
-  UpcomingReservationProps,
-} from '@duri/assets/types';
+import { UpcomingReservationType } from '@duri/assets/types';
 import { Button, Flex, HeightFitFlex, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 import { differenceInDays } from 'date-fns';
@@ -15,73 +13,82 @@ import {
 import LastReservation from './reservation/LastReservation';
 import UpcomingReservation from './reservation/UpcomingReservation';
 
-
 const CarouselHome = ({
   upcomingReservation,
   lastReservation,
 }: {
-  upcomingReservation?: UpcomingReservationProps;
-  lastReservation?: string;
+  upcomingReservation?: UpcomingReservationType;
+  lastReservation?: string
 }) => {
   const [swiperIndex, setSwiperIndex] = useState<number>(0); // 슬라이드 인덱스 상태
   const currentDate = new Date();
+  
   let daysDifference;
   if (lastReservation)
-    daysDifference = differenceInDays(
-      currentDate,
-      new Date(lastReservation),
-    ); // 일수 차이 계산
-
+    daysDifference = differenceInDays(currentDate, new Date(lastReservation)); // 일수 차이 계산
   const slides = [
     upcomingReservation ? (
-      <UpcomingReservation reservationDate={upcomingReservation.reservationDate}
-      shopId={upcomingReservation.shopId}
-      address={upcomingReservation.address}
-      name={upcomingReservation.name}
-      imageURL={upcomingReservation.imageURL}
-      price={upcomingReservation.price}
-      phone={upcomingReservation.phone}
-      kakaoURL={upcomingReservation.kakaoURL}
-      reserveDday={upcomingReservation.reserveDday}
+      <UpcomingReservation
+        reservationDate={upcomingReservation.reservationDate}
+        lastSinceDay={upcomingReservation.lastSinceDay}
+        shopId={upcomingReservation.shopId}
+        address={upcomingReservation.address}
+        name={upcomingReservation.name}
+        imageURL={upcomingReservation.imageURL}
+        price={upcomingReservation.price}
+        phone={upcomingReservation.phone}
+        kakaoURL={upcomingReservation.kakaoURL}
+        reserveDday={upcomingReservation.reserveDday}
       />
-    ) : (<Wrapper
-      borderRadius={12}
-      padding="27px 20px"
-      backgroundColor={theme.palette.White}
-    >
-      <Text typo='Caption4' colorCode={theme.palette.Gray400}>예약된 미용이 없어요😔</Text>
-    </Wrapper>) //다가오는 예약이 없는 경우
-    ,
+    ) : (
+      <Wrapper
+        borderRadius={12}
+        padding="27px 20px"
+        backgroundColor={theme.palette.White}
+      >
+        <Text typo="Caption4" colorCode={theme.palette.Gray400}>
+          예약된 미용이 없어요😔
+        </Text>
+      </Wrapper>
+    ), //다가오는 예약이 없는 경우
     lastReservation ? (
       <LastReservation daysDifference={daysDifference} />
-    ) : (<Wrapper
-      borderRadius={12}
-      padding="27px 20px"
-      backgroundColor={theme.palette.White}
-    >
-      <Text typo='Caption4' colorCode={theme.palette.Gray400}> 시술 이력이 없어요😔</Text>
-    </Wrapper>),
+    ) : (
+      <Wrapper
+        borderRadius={12}
+        padding="27px 20px"
+        backgroundColor={theme.palette.White}
+      >
+        <Text typo="Caption4" colorCode={theme.palette.Gray400}>
+          시술 이력이 없어요😔
+        </Text>
+      </Wrapper>
+    ),
   ];
+
 
   return (
     <HeightFitFlex direction="column" align="flex-start">
-      {lastReservation ? (      <Text
-        typo="Body1"
-        colorCode={theme.palette.Normal900}
-        margin="18px 0 23px 25px"
-      >
-        미용한지 <br />
-        {daysDifference}일이 지났어요 <br />
-        매일매일 빗질 잘 해주세요!
-      </Text>) : (      <Text
-        typo="Body1"
-        colorCode={theme.palette.Normal900}
-        margin="18px 0 23px 25px"
-      >
-        두리 서비스가 처음이시네요! <br />
-        두리와 찾아볼까요? 👀
-      </Text>)}
-
+      {lastReservation ? (
+        <Text
+          typo="Body1"
+          colorCode={theme.palette.Normal900}
+          margin="18px 0 23px 25px"
+        >
+          미용한지 <br />
+          {daysDifference}일이 지났어요 <br />
+          매일매일 빗질 잘 해주세요!
+        </Text>
+      ) : (
+        <Text
+          typo="Body1"
+          colorCode={theme.palette.Normal900}
+          margin="18px 0 23px 25px"
+        >
+          두리 서비스가 처음이시네요! <br />
+          두리와 찾아볼까요? 👀
+        </Text>
+      )}
 
       <CustomSwiperWrapper>
         <CustomSwiper
@@ -148,8 +155,6 @@ const CustomSwiperSlide = styled(OriginalSwiperSlide)<{ isActive: boolean }>`
   width: ${({ isActive }) =>
     isActive ? '317px !important' : '316px !important'};
 `;
-
-
 
 const Bullet = styled(Button)`
   padding: 0;

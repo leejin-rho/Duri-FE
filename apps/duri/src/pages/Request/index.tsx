@@ -159,7 +159,7 @@ const RequestPage = () => {
           <HeightFitFlex direction="column" align="flex-start" gap={8}>
             <Text typo="Title2">시간 선택</Text>
             <Text typo="Caption1" colorCode={theme.palette.Gray400}>
-              원하는 미용의 종류를 모두 선택해주세요
+              미용 가능한 모든 시간대를 선택해주세요.
             </Text>
             <TimeTable
               timeList={timeList}

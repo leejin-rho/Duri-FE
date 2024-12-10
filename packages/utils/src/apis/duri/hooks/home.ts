@@ -14,7 +14,8 @@ export const useGetPetInfo = () => {
     queryFn: () => getPetInfo(),
     staleTime: 1000 * 60 * 10,
   });
-  return data;
+
+  if(data) return data;
 };
 
 export const useGetRegularShopList = () => {
@@ -23,7 +24,6 @@ export const useGetRegularShopList = () => {
     queryFn: () => getRegularShopInfo(),
     staleTime: 1000 * 60 * 30,
   });
-
   return data;
 };
 
