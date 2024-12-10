@@ -1,9 +1,63 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { Card, Flex, FrontBtn, Header, HeightFitFlex, MobileLayout, SalonNavbar, Text, theme, WidthFitFlex } from "@duri-fe/ui";
+import { Card, Flex, FrontBtn, Header, HeightFitFlex, MobileLayout, Modal, SalonNavbar, Text, theme, WidthFitFlex } from "@duri-fe/ui";
+import { useModal } from "@duri-fe/utils";
+import ReplyForm from "@salon/components/quotation/ReplyForm";
+import ReplyFormDetail from "@salon/components/quotation/ReplyFormDetail";
+
+export interface QuotationFormData {
+  requestId: number;
+  priceDetail: {
+    groomingPrice: number;
+    additionalPrice: number;
+    specialCarePrice: number;
+    designPrice: number;
+    customPrice: number;
+    totalPrice: number;
+  };
+  memo: string;
+  startDateTime: string;
+  endDateTime: string;
+}
 
 const ReplyPage = () => {
   const navigate = useNavigate();
+  const { requestId } = useParams();
+  const [step, setStep] = useState<number>(1);
+
+  const { control, handleSubmit, setValue, trigger, formState: {isValid} } = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      requestId: requestId ? parseInt(requestId, 10) : 0,
+      priceDetail: {
+        groomingPrice: 0,
+        additionalPrice: 0,
+        specialCarePrice: 0,
+        designPrice: 0,
+        customPrice: 0,
+        totalPrice: 0
+      },
+      memo: '',
+      startDateTime: '',
+      endDateTime: ''
+    }
+  });
+
+  const { isOpenModal, openModal, closeModal } = useModal();
+  
+  const onNextStep = async () => {
+    const isValidStep = await trigger();
+    if (isValidStep) {
+      setStep(step + 1);
+    }
+  };
+
+  const onSubmit = (data: QuotationFormData) => {
+    console.log(data);
+    // API 호출 필요
+  };
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
@@ -27,20 +81,34 @@ const ReplyPage = () => {
         </Flex>
 
         <Flex>
-
+          {step === 1 ? (
+            <ReplyForm control={control} setValue={setValue} />
+          ) : (
+            <ReplyFormDetail control={control} setValue={setValue}  />
+          )}
         </Flex>
       </Flex>
       
       {/** 하단 버튼 */}
       <FrontBtn
-        bg={theme.palette.Black}
+        bg={isValid ? theme.palette.Black : theme.palette.Gray200}
         padding="10px 0"
         height="53px"
         borderRadius="0"
+        onClick={step === 1 ? onNextStep : openModal}
+        disabled={!isValid}
       >
-        <Text typo="Title3" colorCode={theme.palette.White}>다음</Text>
+        <Text typo="Title3" colorCode={theme.palette.White}>
+          {step === 1 ? '다음' : '견적서 발송'}
+        </Text>
       </FrontBtn>
       <SalonNavbar />
+
+      <Modal title="요청서 제출" isOpen={isOpenModal} toggleModal={closeModal}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <button type="submit">확인</button>
+        </form>
+      </Modal>
     </MobileLayout>
   );
 }

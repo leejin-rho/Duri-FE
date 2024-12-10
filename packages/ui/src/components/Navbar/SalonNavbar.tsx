@@ -18,7 +18,6 @@ export const SalonNavbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname; // 현재 경로
-  console.log('pathname', pathname);
 
   const handleNavigate = (path: string) => {
     navigate(path);
