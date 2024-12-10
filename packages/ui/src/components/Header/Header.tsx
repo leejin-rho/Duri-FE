@@ -22,6 +22,7 @@ interface HeaderProps {
   iconColor?: string;
   badge?: boolean;
   backgroundColor?: string;
+  height?: string;
 
   onClickLogo?: () => void;
   onClickSearch?: () => void;

@@ -5,7 +5,7 @@ import { useGetNewRequestList, useModal } from "@duri-fe/utils";
 import { DetailRequest } from "@salon/components/quotation/DetailRequest";
 import { TabBarItem } from "@salon/components/quotation/TabBarItem"
 
-export const QuotationPage = () => {
+const QuotationPage = () => {
   const { isOpenModal, openModal, closeModal } = useModal();
   const [selectedRequestId, setSelectedRequestId] = useState<number | null>(null);
 
@@ -70,5 +70,7 @@ export const QuotationPage = () => {
         </Modal>
       }
     </MobileLayout>
-  );
-};
+  )
+}
+
+export default QuotationPage;
