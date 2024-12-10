@@ -58,13 +58,6 @@ export const typo = {
     font-weight: 600;
     line-height: normal;
   `,
-  Title4: css`
-    /* 살롱 홈 타이틀 */
-    font-family: 'Pretendard';
-    font-size: ${calcRem(22)};
-    font-weight: 600;
-    line-height: normal;
-  `,
   Caption1: css`
     /* 타이틀 위/아래 부가설명 텍스트 */
     font-family: 'Pretendard';
