@@ -1,7 +1,7 @@
 import { TimeType } from "@salon/assets/types/quotation";
 
 /** 연속된 시간인지 확인 */
-export const useIsContinuousTime = (reservationTimeList: TimeType, requestDay: string) => {
+export const checkContinuousTime = (reservationTimeList: TimeType, requestDay: string) => {
   const selectedTime = Object.keys(reservationTimeList).filter(
     (key) => reservationTimeList[key as keyof TimeType]
   )

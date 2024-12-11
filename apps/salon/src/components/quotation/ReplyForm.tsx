@@ -4,7 +4,7 @@ import { QuotationFormData, TimeType } from "@assets/types/quotation";
 import { Flex, ProfileImage, Text, theme, TimeTableGroomer, WidthFitFlex } from "@duri-fe/ui";
 import { RequestDetailResponse } from "@duri-fe/utils";
 import { defaultTimeList } from "@salon/assets/data/quotation";
-import { useIsContinuousTime } from "@salon/hooks/useIsContinuousTime";
+import { checkContinuousTime } from "@salon/utils/checkContinuousTime";
 
 const timeList = Array(10)
   .fill(0)
@@ -37,7 +37,7 @@ const ReplyForm = ({
   };
 
   useEffect(() => {
-    const { isEmpty, isCountinuous, startDateTime, endDateTime } = useIsContinuousTime(reservationTimeList, requestDay);
+    const { isEmpty, isCountinuous, startDateTime, endDateTime } = checkContinuousTime(reservationTimeList, requestDay);
 
     if (isEmpty) {
       setIsValid(false);
