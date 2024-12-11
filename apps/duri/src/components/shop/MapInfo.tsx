@@ -36,9 +36,6 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
     } = useBottomSheet({
       maxHeight: 300,
       isMap: true,
-      onDismiss: () => {
-        console.log('onDismiss called'); // 디버깅용 로그
-      },
     });
 
     // 요청서 전송용
@@ -46,12 +43,6 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
       useBottomSheet({
         maxHeight: 552,
       });
-
-    const StopSheetEvent = (e: React.MouseEvent) => {
-      e.stopPropagation();
-      e.preventDefault();
-      openRequestSheet();
-    };
 
     const [selectedShop, setSelectedShop] = useState<ShopInfoType | null>(null);
     let markers: naver.maps.Marker[] = [];
@@ -74,7 +65,7 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
       });
 
       naver.maps.Event.addListener(marker, 'click', () => {
-        map?.setZoom(16);
+        map?.setZoom(17);
         map?.panTo(position);
         setSelectedShop(shop);
         openShopInfoSheet();
@@ -218,7 +209,7 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
                 bg={theme.palette.Black}
                 fontColor={theme.palette.White}
                 padding="12px"
-                onClick={StopSheetEvent}
+                onClick={openRequestSheet}
               >
                 <Send width={18} height={17} color={theme.palette.White} />
                 <Text margin="0 0 0 10px">입찰 넣기</Text>
