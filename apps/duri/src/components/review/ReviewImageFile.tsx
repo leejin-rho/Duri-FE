@@ -5,9 +5,16 @@ import { ReviewFormData } from '@duri/pages/Review';
 import { Flex, Image, Text, theme, Trash, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-export const ReviewImageFile = ({ imageURL, onChange }: { imageURL?: string, onChange: UseFormSetValue<ReviewFormData> }) => {
+export const ReviewImageFile = ({
+  imageURL,
+  onChange,
+}: {
+  imageURL?: string;
+  onChange: UseFormSetValue<ReviewFormData>;
+}) => {
   const [imageFile, setImageFile] = useState<string | undefined>(imageURL);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
     const file = e.target.files?.[0];
     if (file) {
       const fileUrl = URL.createObjectURL(file);
@@ -17,14 +24,15 @@ export const ReviewImageFile = ({ imageURL, onChange }: { imageURL?: string, onC
   };
   const handleFileDelete = () => {
     setImageFile(undefined);
-    onChange('image', ''); // 폼 상태에서 이미지 URL 삭제
+    onChange('image', '');
+
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     if (imageURL) {
-      setImageFile(imageURL); // imageURL prop 변경시 업데이트
+      setImageFile(imageURL);
     }
-  },[imageURL])
+  }, [imageURL]); //url 변경 시 렌더링되도록
 
   return (
     <ImageUploadContainer borderRadius={8}>
@@ -46,7 +54,7 @@ export const ReviewImageFile = ({ imageURL, onChange }: { imageURL?: string, onC
           </AddImageWrapper>
         ) : (
           <TrashWrapper
-          padding='6.5px 9.1px'
+            padding="6.5px 9.1px"
             backgroundColor={theme.palette.Alert}
             borderRadius={64.4}
             height={26}
@@ -75,14 +83,11 @@ const FileInput = styled.input`
   left: 0;
   opacity: 0;
   cursor: pointer;
-  border: none;
-  pointer-events: none;
 `;
 
 const ReviewImageWrapper = styled(WidthFitFlex)`
   position: relative;
   cursor: pointer;
-  border: none;
 `;
 const AddImageWrapper = styled(WidthFitFlex)`
   position: absolute;
@@ -97,4 +102,5 @@ const TrashWrapper = styled(Flex)`
   padding: 6px;
   top: 5px;
   left: 58px;
+  z-index: 10;
 `;

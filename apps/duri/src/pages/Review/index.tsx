@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ReviewImageFile } from '@duri/components/review/ReviewImageFile';
+import { SelectStar } from '@duri/components/review/SelectStar';
 import {
   Button,
   DuriNavbar,
@@ -10,7 +11,6 @@ import {
   Header,
   MobileLayout,
   // PetInfo,
-  RatingStars,
   Text,
   TextField,
   theme,
@@ -34,13 +34,13 @@ const ReviewWritePage = () => {
     mode: 'onChange',
     defaultValues: {
       quotationId: location.state,
-      rating: 0,
+      rating: 5,
       comment: '',
       image: '',
     },
   });
-
-
+  const handleImageChange = (file: string) => setValue('image', file);
+  const handleRatingChange = (rating: number) => setValue('rating', rating);
 
   return (
     <MobileLayout>
@@ -50,7 +50,7 @@ const ReviewWritePage = () => {
         onClickBack={handleNavigate}
         titleAlign="start"
       />
-      <FlexGrow direction="column" justify='flex-start'>
+      <FlexGrow direction="column" justify="flex-start">
         {/* <ShopLine /> */}
         <Flex direction="column" gap={12} margin="42px 0 12px 0">
           <Text typo="Body2">미용이 만족스러우셨나요?</Text>
@@ -59,9 +59,13 @@ const ReviewWritePage = () => {
           </Text>
         </Flex>
         <Flex margin="0 0 15px 0">
-          <RatingStars score={4} size={24} reviewMode={true} />
+          <SelectStar initialScore={5} onChange={handleRatingChange} size={29} />
         </Flex>
-        <ReviewImageFile imageURL={getValues('image')} onChange={setValue}/>
+        <Flex gap={8}>
+        <ReviewImageFile imageURL={getValues('image')} onChange={handleImageChange} />
+        <ShadowImageBox width={90} height={90} borderRadius={8} />
+        <ShadowImageBox width={90} height={90} borderRadius={8} />
+        </Flex>
         <Flex margin="15px 0">
           <TextField
             multiline={true}
@@ -88,3 +92,7 @@ export default ReviewWritePage;
 const FlexGrow = styled(Flex)`
   flex: 1;
 `;
+
+const ShadowImageBox = styled(Flex)`
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+`
