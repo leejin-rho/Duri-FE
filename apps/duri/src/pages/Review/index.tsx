@@ -9,6 +9,7 @@ import {
   DuriNavbar,
   Flex,
   Header,
+  HeightFitFlex,
   MobileLayout,
   // PetInfo,
   Text,
@@ -41,6 +42,10 @@ const ReviewWritePage = () => {
   });
   const handleImageChange = (file: string) => setValue('image', file);
   const handleRatingChange = (rating: number) => setValue('rating', rating);
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setValue('comment', e.target.value);
+  const handleSubmit = () => {
+    console.log(getValues());
+  };
 
   return (
     <MobileLayout>
@@ -69,19 +74,24 @@ const ReviewWritePage = () => {
         <Flex margin="15px 0">
           <TextField
             multiline={true}
+            height={108}
             placeholder="후기를 작성해주세요!"
             placeholderTypo={theme.typo.Caption1}
+            onChange={handleTextChange}
           />
         </Flex>
         {/* <PetInfo /> */}
       </FlexGrow>
+      <HeightFitFlex margin='0 0 93px 0'>
       <Button
         bg={theme.palette.Black}
         fontColor={theme.palette.White}
         borderRadius="0px"
+        onClick={handleSubmit}
       >
         등록
       </Button>
+      </HeightFitFlex>
       <DuriNavbar />
     </MobileLayout>
   );

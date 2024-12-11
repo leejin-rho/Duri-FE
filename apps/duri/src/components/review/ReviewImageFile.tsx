@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import { UseFormSetValue } from 'react-hook-form';
 
-import { ReviewFormData } from '@duri/pages/Review';
 import { Flex, Image, Text, theme, Trash, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
@@ -10,7 +8,7 @@ export const ReviewImageFile = ({
   onChange,
 }: {
   imageURL?: string;
-  onChange: UseFormSetValue<ReviewFormData>;
+  onChange: (file: string) => void;
 }) => {
   const [imageFile, setImageFile] = useState<string | undefined>(imageURL);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,12 +17,12 @@ export const ReviewImageFile = ({
     if (file) {
       const fileUrl = URL.createObjectURL(file);
       setImageFile(fileUrl);
-      onChange('image', fileUrl);
+      onChange(fileUrl);
     }
   };
   const handleFileDelete = () => {
     setImageFile(undefined);
-    onChange('image', '');
+    onChange('');
 
   };
 
@@ -101,6 +99,6 @@ const TrashWrapper = styled(Flex)`
   position: absolute;
   padding: 6px;
   top: 5px;
-  left: 58px;
+  left: 70px;
   z-index: 10;
 `;
