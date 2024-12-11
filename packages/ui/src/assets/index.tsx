@@ -19,6 +19,7 @@ export { default as DownArrow } from './DownArrow';
 export { default as Help } from './Help';
 export { default as Information } from './Information';
 export { default as Magnifier } from './Magnifier';
+export { default as EmptyStar } from './EmptyStar';
 export { default as Menu } from './Menu';
 export { default as Notification } from './Notification';
 export { default as SafetyHelp } from './SafetyHelp';
@@ -96,6 +97,7 @@ import CurLocation from './CurLocation';
 import Dot from './Dot';
 import DownArrow from './DownArrow';
 import EmptyImage from './EmptyImage';
+import EmptyStar from './EmptyStar';
 import FilledHeart from './FilledHeart';
 import FilledLocation from './FilledLocation';
 import FilledNotification from './FilledNotification';
@@ -162,6 +164,7 @@ export const icons = {
   Help,
   Information,
   EmptyImage,
+  EmptyStar,
   SafetyHelp,
   SecurityWarning,
   Shield,

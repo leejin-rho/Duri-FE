@@ -29,8 +29,9 @@ const MyInfoModifyPage = () => {
     //API 연결
     console.log(data);
   };
+  // const onChange = () => 
 
-  const { handleSubmit, getValues } = useForm<UserFormData>({
+  const { handleSubmit, getValues, setValue } = useForm<UserFormData>({
     mode: 'onChange',
     defaultValues: {
       imageURL:
@@ -49,7 +50,7 @@ const MyInfoModifyPage = () => {
         onClickBack={handleNavigate}
       />
       <FlexGrow direction="column" gap={20} justify="flex-start">
-        <InputImageFile imageURL={getValues('imageURL')} />
+        <InputImageFile imageURL={getValues('imageURL')} onChange={setValue}/>
         <Text typo="Label3" colorCode={theme.palette.Gray300}>
           프로필 사진만 변경가능해요!
         </Text>
