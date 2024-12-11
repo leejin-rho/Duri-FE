@@ -4,16 +4,18 @@ interface StepTagProps {
   step: number;
   label: string;
   status: 'active' | 'done' | 'disabled';
+  onClick?: () => void;
 }
 
 const StepTag = ({
   step,
   label,
   status,
+  onClick,
 }: StepTagProps) => {
   const { backgroundColor, tagBackgroundColor, fontColor, typo } = StepTagTheme[status];
   return (
-    <Flex width="fit-content" padding="10px" borderRadius={8} backgroundColor={backgroundColor} gap={10}>
+    <Flex width="fit-content" padding="10px" borderRadius={8} backgroundColor={backgroundColor} gap={10} onClick={onClick}>
       <SalonTag
         content={step.toString()}
         typo="Label3"

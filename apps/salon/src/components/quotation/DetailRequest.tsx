@@ -18,6 +18,7 @@ export const DetailRequest = ({
   const { data: request, timeList } = useGetDetailRequest(requestId);
 
   const handleReply = () => {
+    closeModal();
     navigate(`/quotation/reply/${requestId}`);
   }
 

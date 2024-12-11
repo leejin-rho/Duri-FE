@@ -1,66 +1,42 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Card, Flex, FrontBtn, Header, HeightFitFlex, MobileLayout, Modal, PetInfo, SalonNavbar, Text, theme, WidthFitFlex } from "@duri-fe/ui";
 import { useGetDetailRequest, useModal } from "@duri-fe/utils";
+import { defaultQuotationFormData } from "@salon/assets/data/quotation";
+import { QuotationFormData } from "@salon/assets/types/quotation";
 import ReplyForm from "@salon/components/quotation/ReplyForm";
 import ReplyFormDetail from "@salon/components/quotation/ReplyFormDetail";
 import StepTag from "@salon/components/quotation/StepTag";
-
-export interface QuotationFormData {
-  requestId: number;
-  priceDetail: {
-    groomingPrice: number;
-    additionalPrice: number;
-    specialCarePrice: number;
-    designPrice: number;
-    customPrice: number;
-    totalPrice: number;
-  };
-  memo: string;
-  startDateTime: string;
-  endDateTime: string;
-}
 
 const ReplyPage = () => {
   const navigate = useNavigate();
   const param = useParams();
   const requestId = param.requestId ? parseInt(param.requestId, 10) : 0;
   const [step, setStep] = useState<number>(1);
+  const [formData, setFormData] = useState<QuotationFormData>({
+    ...defaultQuotationFormData,
+    requestId,
+  });
+  const [isValid, setIsValid] = useState<boolean>(false);
 
   const { data: request, timeList } = useGetDetailRequest(requestId);
 
-  const { control, handleSubmit, setValue, trigger, formState: {isValid} } = useForm({
-    mode: 'onChange',
-    defaultValues: {
-      requestId: requestId,
-      priceDetail: {
-        groomingPrice: 0,
-        additionalPrice: 0,
-        specialCarePrice: 0,
-        designPrice: 0,
-        customPrice: 0,
-        totalPrice: 0
-      },
-      memo: '',
-      startDateTime: '',
-      endDateTime: ''
-    }
-  });
-
   const { isOpenModal, openModal, closeModal } = useModal();
-  
-  const onNextStep = async () => {
-    const isValidStep = await trigger();
-    if (isValidStep) {
-      setStep(step + 1);
+
+  const onNextStep = () => {
+    if (step === 1) {
+      setStep(2);
+    } else {
+      openModal();
     }
   };
 
-  const onSubmit = (data: QuotationFormData) => {
-    console.log(data);
+  const handleSubmit = () => {
+    console.log(formData);
     // API 호출 필요
+    closeModal();
+    // 네비게이션 필요
   };
 
   if (!requestId) return null;
@@ -92,23 +68,33 @@ const ReplyPage = () => {
         <Flex height={48} padding="0 20px" justify="space-between" backgroundColor={theme.palette.White}>
           <Text typo="Title3" colorCode={theme.palette.Black}>보호자</Text>
           <WidthFitFlex gap={28}>
-            <Text typo="Body3" colorCode={theme.palette.Black}>김김김</Text>
-            <Text typo="Body4" colorCode={theme.palette.Gray500}>010-7664-6286</Text>
+            {request && 
+              <>
+                <Text typo="Body3" colorCode={theme.palette.Black}>{request.userName}</Text>
+                <Text typo="Body4" colorCode={theme.palette.Gray500}>{request.userPhone}</Text>
+              </>
+            }
           </WidthFitFlex>
         </Flex>
 
-        <Flex direction="column" align="flex-start" padding="0 20px 200px 20px" backgroundColor={theme.palette.White}>
-          {step === 1 ? (
-            <ReplyForm control={control} setValue={setValue} request={request} selectedTimeList={timeList} />
+        <Flex direction="column" align="flex-start" padding="0 20px 145px 20px" backgroundColor={theme.palette.White}>
+          {request && (step === 1 ? (
+            <>
+              <Flex padding="16px 0" justify="flex-start" gap={4}>
+                <StepTag step={1} label="기본사항 입력" status="active"/>
+                <StepTag step={2} label="예상금액 입력" status="disabled" onClick={onNextStep}/>
+              </Flex>
+              <ReplyForm request={request} selectedTimeList={timeList} setFormData={setFormData} setIsValid={setIsValid} />
+            </>
           ) : (
             <>
               <Flex padding="16px 0" justify="flex-start" gap={4}>
-                <StepTag step={1} label="기본사항 입력" status="done"/>
+                <StepTag step={1} label="기본사항 입력" status="done" onClick={() => setStep(1)}/>
                 <StepTag step={2} label="예상금액 입력" status="active"/>
               </Flex>
-              <ReplyFormDetail control={control} setValue={setValue}  />
+              <ReplyFormDetail  />
             </>
-          )}
+          ))}
         </Flex>
       </Flex>
       
@@ -118,7 +104,7 @@ const ReplyPage = () => {
         padding="10px 0"
         height="53px"
         borderRadius="0"
-        onClick={step === 1 ? onNextStep : openModal}
+        onClick={isValid ? onNextStep : undefined}
         disabled={!isValid}
       >
         <Text typo="Title3" colorCode={theme.palette.White}>
@@ -128,9 +114,7 @@ const ReplyPage = () => {
       <SalonNavbar />
 
       <Modal title="요청서 제출" isOpen={isOpenModal} toggleModal={closeModal}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <button type="submit">확인</button>
-        </form>
+        <button onClick={handleSubmit}>ㅎㅎ</button>
       </Modal>
     </MobileLayout>
   );
