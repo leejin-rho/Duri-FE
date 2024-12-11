@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { PetInfoType } from '@duri/assets/types';
 import { PetInfoCard } from '@duri/components/my/PetInfoCard';
 import { Status } from '@duri/components/my/Status';
 import { UserInfo } from '@duri/components/my/UserInfo';
@@ -15,9 +16,12 @@ import {
   theme,
   Write,
 } from '@duri-fe/ui';
+import { useGetPetInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 const MyPage = () => {
+  const petData = useGetPetInfo();
+  const [petInfo, setPetInfo] = useState<PetInfoType>();
   const navigate = useNavigate();
   const handleNavigate = (path: string) => navigate(path);
   const logout = () => {
@@ -27,6 +31,9 @@ const MyPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  useEffect(() => {
+    if (petData) setPetInfo(petData);
+  }, [petData]);
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
@@ -34,16 +41,16 @@ const MyPage = () => {
         <Header />
         <UserInfo userId={1} userName="김찬별" phone="01051778747" />
         <Status reservationCnt={3} noShowCnt={0} />
-        <PetInfoCard
-          petId={1}
-          age={4}
-          name="신참이"
-          breed="시츄"
-          gender="F"
-          neutering={true}
-          weight={3.5}
-          imageURL={undefined}
-        />
+        {petInfo && <PetInfoCard
+          petId={petInfo.petId}
+          age={petInfo.age}
+          name={petInfo.name}
+          breed={petInfo.breed}
+          gender={petInfo.gender}
+          neutering={petInfo.neutering ?? false}
+          weight={petInfo.weight}
+          imageURL={petInfo.image}
+        />}
 
         <Flex direction="column" margin="8px 0" gap={8}>
           <Flex gap={10}>
@@ -51,7 +58,7 @@ const MyPage = () => {
               padding="13px 35px"
               backgroundColor={theme.palette.White}
               borderRadius={8}
-              gap={10}
+              gap={5}
               onClick={() => handleNavigate('/my/shop')}
             >
               <Store width={28} height={28} />
@@ -61,7 +68,7 @@ const MyPage = () => {
               padding="15px 35px"
               backgroundColor={theme.palette.White}
               borderRadius={8}
-              gap={10}
+              gap={5}
               onClick={() => handleNavigate('/my/history')}
             >
               <Scissors width={24} height={24} />

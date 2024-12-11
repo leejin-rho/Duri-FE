@@ -1,14 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { RequestItemType } from '@duri/assets/types';
-import {
-  Button,
-  Card,
-  Flex,
-  Seperator,
-  Text,
-  theme,
-} from '@duri-fe/ui';
+import { Button, Card, Flex, Seperator, Text, theme } from '@duri-fe/ui';
 
 import { RequestInfo } from './RequestInfo';
 
@@ -18,10 +11,10 @@ export const RequestItem = ({
   requestItem: RequestItemType;
 }) => {
   const navigate = useNavigate();
-  const handleNavigate = () =>{
-    const quotationId = requestItem.quotationId
+  const handleNavigate = () => {
+    const quotationId = requestItem.quotationId;
     navigate(`/quotation/${quotationId}`);
-}
+  };
 
   return (
     <>
@@ -40,7 +33,7 @@ export const RequestItem = ({
           />
           <Seperator height="2px" colorCode={theme.palette.Gray50} />
           <Flex justify="flex-start" padding="0 11px" margin="20px 0">
-            <Text typo="Caption2" colorCode={theme.palette.Gray300}>
+            <Text typo="Caption3" colorCode={theme.palette.Gray300}>
               {requestItem.shops.length > 1
                 ? `${requestItem.shops[0].shopName} 외 ${requestItem.shops.length - 1}`
                 : `${requestItem.shops[0].shopName}`}
@@ -51,6 +44,7 @@ export const RequestItem = ({
             fontColor={theme.palette.White}
             bg={theme.palette.Gray100}
             disabled
+            padding="10px"
           >
             견적서 보기
           </Button>
@@ -65,7 +59,7 @@ export const RequestItem = ({
           />
           <Seperator height="2px" />
           <Flex justify="flex-start" padding="0 11px" margin="20px 0">
-            <Text typo="Caption2" colorCode={theme.palette.Gray300}>
+            <Text typo="Caption3" colorCode={theme.palette.Gray300}>
               {requestItem.shops.length > 1
                 ? `${requestItem.shops[0].shopName} 외 ${requestItem.shops.length - 1}`
                 : `${requestItem.shops[0].shopName}`}
@@ -74,7 +68,9 @@ export const RequestItem = ({
           <Button
             borderRadius="8px"
             fontColor={theme.palette.Normal700}
+            padding="10px"
             onClick={handleNavigate}
+            typo="Caption2"
           >
             견적서 보기
           </Button>

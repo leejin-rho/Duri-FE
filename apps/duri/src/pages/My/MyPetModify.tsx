@@ -37,6 +37,9 @@ const MyPetModifyPage = () => {
 
     navigate('/my/pet', { state: location.state });
   };
+  const onChange = (file: string) => {
+    setValue('imageURL',file)
+  }
 
   const { control, handleSubmit, setValue, getValues } = useForm<FormData>({
     mode: 'onChange',
@@ -62,7 +65,7 @@ const MyPetModifyPage = () => {
         onClickBack={() => navigate(-1)}
       />
       <Flex direction="column" padding="0 20px" margin="0 0 30px 0">
-        <InputImageFile imageURL={getValues('imageURL')} />
+        <InputImageFile imageURL={getValues('imageURL')} onChange={onChange} />
         <PetModifyForm
           control={control}
           getValues={getValues}

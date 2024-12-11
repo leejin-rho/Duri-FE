@@ -1,7 +1,7 @@
 
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { ModifyPetInfoCard } from '@duri/components/my/ModifyPetInfoCard';
+import { ModifyPetInfoCard } from '@duri/components/my/modify/ModifyPetInfoCard';
 import {
   Header,
   MobileLayout,

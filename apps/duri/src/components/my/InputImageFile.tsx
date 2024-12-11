@@ -3,13 +3,14 @@ import { useState } from 'react';
 import { Pencil, ProfileImage, theme, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-export const InputImageFile = ({ imageURL }: { imageURL?: string }) => {
+export const InputImageFile = ({ imageURL, onChange }: { imageURL?: string, onChange: (file: string)=>void }) => {
   const [imageFile, setImageFile] = useState<string | undefined>(imageURL);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const fileUrl = URL.createObjectURL(file);
       setImageFile(fileUrl);
+      onChange(fileUrl)
     }
   };
 

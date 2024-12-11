@@ -6,27 +6,31 @@ import Onboarding from '@duri/pages/Onboarding';
 import { globalStyle } from '@duri-fe/ui';
 import { Global } from '@emotion/react';
 
+import PetDiary from '@pages/Diary';
+import PetDiaryDetail from '@pages/Diary/DiaryDetail';
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import MyPage from '@pages/My';
+import MyHistoryPage from '@pages/My/MyHistory';
+import MyInfoModifyPage from '@pages/My/MyInfoModify';
 import MyPetModifyPage from '@pages/My/MyPetModify';
+import MyReviewPage from '@pages/My/MyReview';
+import MyReviewDetailPage from '@pages/My/MyReviewDetail';
 import MyShopPage from '@pages/My/MyShop';
 import StartPage from '@pages/Onboarding/StartPage';
 import PaymentPage from '@pages/Payment';
 import FailPage from '@pages/Payment/Fail';
 import SuccessPage from '@pages/Payment/Success';
 import QuotationPage from '@pages/Quotation';
+import QuotationDetailPage from '@pages/Quotation/QuotationDetail';
 import RequestPage from '@pages/Request';
+import ReviewWritePage from '@pages/Review';
 import Shop from '@pages/Shop';
 import Portfolio from '@pages/Shop/Portfolio';
+import PortfolioDetail from '@pages/Shop/PortfolioDetail';
 import ShopDetail from '@pages/Shop/ShopDetail';
 
 import 'react-spring-bottom-sheet/dist/style.css';
-
-import PetDiary from './pages/Diary';
-import PetDiaryDetail from './pages/Diary/DiaryDetail';
-import QuotationDetailPage from './pages/Quotation/QuotationDetail';
-import PortfolioDetail from './pages/Shop/PortfolioDetail';
 
 function App() {
   return (
@@ -71,8 +75,12 @@ function App() {
         <Route path="/my" element={<MyPage />} />
         <Route path="/my/pet" element={<MyPetPage />} />
         <Route path="/my/pet/modify" element={<MyPetModifyPage />} />
+        <Route path="/my/info" element={<MyInfoModifyPage />} />
         <Route path="/my/shop" element={<MyShopPage />} />
-        <Route path="/my" element={<MyPage />} />
+        <Route path="/my/history" element={<MyHistoryPage />} />
+        <Route path="/my/review" element={<MyReviewPage />} />
+        <Route path="/my/review/:reviewId" element={<MyReviewDetailPage />} />
+        <Route path="/my/review/write" element={<ReviewWritePage />} />
       </Routes>
     </BrowserRouter>
   );

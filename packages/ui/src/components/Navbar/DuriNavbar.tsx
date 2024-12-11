@@ -65,7 +65,7 @@ export const DuriNavbar = () => {
             <DiaryIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/my'}
+            isActive={pathname.startsWith('/my')}
             text="마이"
             onClick={() => handleNavigate('/my')}
             iconType="my"

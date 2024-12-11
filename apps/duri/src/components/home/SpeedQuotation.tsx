@@ -9,7 +9,7 @@ const SpeedQuotation = ({ shopList }: { shopList: RegularShopType[] }) => {
   return (
     <>
       <Flex gap={15}>
-        <ShopHorizontal shopList={shopList} />
+        <ShopHorizontal shopList={shopList} home={false}/>
       </Flex>
     </>
   );
