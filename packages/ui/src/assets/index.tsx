@@ -1,3 +1,4 @@
+export { default as Tape } from './Tape';
 export { default as SendColor } from './SendColor';
 export { default as Dot } from './Dot';
 export { default as Add } from './Add';
@@ -125,6 +126,7 @@ import Shield from './Shield';
 import Shopping from './Shopping';
 import Star from './Star';
 import Store from './Store';
+import Tape from './Tape';
 import Time from './Time';
 import TimetableIcon from './TimetableIcon';
 import Trash from './Trash';
@@ -195,6 +197,7 @@ export const icons = {
   Write,
   Time,
   Dot,
+  Tape,
 };
 
 export default icons;

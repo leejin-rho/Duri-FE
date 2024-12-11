@@ -82,7 +82,6 @@ export default PortfolioDetail;
 
 const AbsoluteHeader = styled(Header)`
   position: absolute;
-  z-index: 2;
 `;
 
 const AbsoluteWrapper = styled(HeightFitFlex)`
