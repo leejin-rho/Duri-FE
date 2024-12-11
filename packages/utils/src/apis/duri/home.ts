@@ -15,6 +15,7 @@ interface PetInfoResponse extends BaseResponse {
     weight: number;
     gender: string;
     lastGrooming?: string;
+    neutering?: boolean;
   };
 }
 

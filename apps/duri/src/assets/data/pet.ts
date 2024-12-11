@@ -1,12 +1,12 @@
 export const defaultPetInfo = {
-  petId: undefined,
+  petId: -1,
   name: '',
-  image: undefined,
+  image: '',
   breed: '',
   age: -1,
   weight: -1,
   gender: '',
-  lastGrooming: undefined,
+  lastGrooming: '',
 };
 
 // 성격 매핑

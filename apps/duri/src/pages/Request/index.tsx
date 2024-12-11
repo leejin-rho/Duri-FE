@@ -27,6 +27,7 @@ interface PetInfoType {
   weight: number;
   gender: string;
   lastGrooming?: string;
+  neutering?: boolean;
 }
 
 const timeList = Array(10)

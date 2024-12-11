@@ -2,6 +2,7 @@ import { Flex, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 interface CardProps {
+  direction?: string;
   height?: string;
   borderRadius: number;
   shadow?: 'small' | 'large';
@@ -13,6 +14,7 @@ interface CardProps {
 }
 
 export const Card = ({
+  direction = 'column',
   height = 'auto',
   borderRadius,
   shadow = 'small',
@@ -24,7 +26,7 @@ export const Card = ({
 }: CardProps) => {
   return (
     <CardContainer
-      direction="column"
+      direction={direction}
       height={height}
       borderRadius={borderRadius}
       shadow={shadow}
@@ -43,10 +45,11 @@ const CardContainer = styled(Flex)<CardProps>`
     shadow === 'small'
       ? '0px 0px 4px 0px rgba(0, 0, 0, 0.10)'
       : '0px 0px 10px 0px rgba(0, 0, 0, 0.10)'};
-  background-color: ${({ bg }) => (bg ?? `${theme.palette.White}`)};
+  background-color: ${({ bg }) => bg ?? `${theme.palette.White}`};
   padding: ${({ padding }) => (padding ? `${padding}` : '0px')};
   border: ${({ borderColor }) =>
     borderColor ? `1px solid ${borderColor}` : 'none'};
   overflow: hidden;
   max-height: ${({ maxHeight }) => (maxHeight ? `${maxHeight}` : 'none')};
+  flex-direction: ${({ direction }) => `${direction}`};
 `;

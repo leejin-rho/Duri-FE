@@ -11,8 +11,11 @@ import PetDiaryDetail from '@pages/Diary/DiaryDetail';
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import MyPage from '@pages/My';
+import MyHistoryPage from '@pages/My/MyHistory';
 import MyInfoModifyPage from '@pages/My/MyInfoModify';
 import MyPetModifyPage from '@pages/My/MyPetModify';
+import MyReviewPage from '@pages/My/MyReview';
+import MyReviewDetailPage from '@pages/My/MyReviewDetail';
 import MyShopPage from '@pages/My/MyShop';
 import StartPage from '@pages/Onboarding/StartPage';
 import PaymentPage from '@pages/Payment';
@@ -21,16 +24,13 @@ import SuccessPage from '@pages/Payment/Success';
 import QuotationPage from '@pages/Quotation';
 import QuotationDetailPage from '@pages/Quotation/QuotationDetail';
 import RequestPage from '@pages/Request';
+import ReviewWritePage from '@pages/Review';
 import Shop from '@pages/Shop';
 import Portfolio from '@pages/Shop/Portfolio';
 import PortfolioDetail from '@pages/Shop/PortfolioDetail';
 import ShopDetail from '@pages/Shop/ShopDetail';
 
 import 'react-spring-bottom-sheet/dist/style.css';
-
-import MyHistoryPage from './pages/My/MyHistory';
-import MyReviewPage from './pages/My/MyReview';
-import MyReviewDetailPage from './pages/My/MyReviewDetail';
 
 function App() {
   return (
@@ -80,6 +80,7 @@ function App() {
         <Route path="/my/history" element={<MyHistoryPage />} />
         <Route path="/my/review" element={<MyReviewPage />} />
         <Route path="/my/review/:reviewId" element={<MyReviewDetailPage />} />
+        <Route path="/my/review/write" element={<ReviewWritePage />} />
       </Routes>
     </BrowserRouter>
   );
