@@ -58,7 +58,7 @@ export const RequestQuotation = ({
       </Flex>
 
       <HeightFitFlex direction="column" gap={18}>
-        <Seperator mode="dotted" height="2px" />
+        <Seperator width='90%' mode="dotted" height="2px" />
 
         {/** 보호자 */}
         <Flex justify="space-between" padding="0 30.5px">
@@ -72,7 +72,7 @@ export const RequestQuotation = ({
         {/** 희망 예약 날짜 */}
         {requestList.quotationDetails.day && (
           <>
-            <Seperator mode="dotted" height="2px" />
+            <Seperator width='90%' mode="dotted" height="2px" />
             <Flex justify="space-between" padding="0 30.5px">
               <Text typo="Body2">희망 예약 날짜</Text>
               <Text typo="Body2">
@@ -82,7 +82,7 @@ export const RequestQuotation = ({
           </>
         )}
 
-        <Seperator mode="dotted" height="2px" />
+        <Seperator width='90%' mode="dotted" height="2px" />
 
         {/** 희망 예약 시간 */}
         {selectedTimeList && (        
@@ -93,7 +93,7 @@ export const RequestQuotation = ({
         )}
       </HeightFitFlex>
 
-      <Seperator mode="dotted" height="2px" />
+      <Seperator width='90%' mode="dotted" height="2px" />
 
       {/** 상세 미용 */}
       <HeightFitFlex direction="column" padding='28px 0'>
@@ -105,7 +105,7 @@ export const RequestQuotation = ({
         />
       </HeightFitFlex>
 
-      <Seperator mode="dotted" height="2px" />
+      <Seperator width='90%' mode="dotted" height="2px" />
 
       {/** 요청사항 */}
       <Flex direction="column" align="flex-start" padding="28px 30.5px" gap={12}>

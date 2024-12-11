@@ -27,6 +27,7 @@ const ReplyPage = () => {
   const onNextStep = () => {
     if (step === 1) {
       setStep(2);
+      setIsValid(false); // 초기화
     } else {
       openModal();
     }
@@ -92,7 +93,7 @@ const ReplyPage = () => {
                 <StepTag step={1} label="기본사항 입력" status="done" onClick={() => setStep(1)}/>
                 <StepTag step={2} label="예상금액 입력" status="active"/>
               </Flex>
-              <ReplyFormDetail  />
+              <ReplyFormDetail request={request} formData={formData} setFormData={setFormData} setIsValid={setIsValid} />
             </>
           ))}
         </Flex>
@@ -107,7 +108,7 @@ const ReplyPage = () => {
         onClick={isValid ? onNextStep : undefined}
         disabled={!isValid}
       >
-        <Text typo="Title3" colorCode={theme.palette.White}>
+        <Text typo="Body2" colorCode={theme.palette.White}>
           {step === 1 ? '다음' : '견적서 발송'}
         </Text>
       </FrontBtn>
