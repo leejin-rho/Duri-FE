@@ -75,6 +75,7 @@ export { default as Time } from './Time';
 export { default as Scissors } from './Scissors';
 export { default as Store } from './Store';
 export { default as Trash } from './Trash';
+export { default as CheckCircle } from './CheckCircle';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -91,6 +92,7 @@ import Call from './Call';
 import CallCenter from './CallCenter';
 import Chat from './Chat';
 import Chatting from './Chatting';
+import CheckCircle from './CheckCircle';
 import Close from './Close';
 import CloseCircle from './CloseCircle';
 import CurLocation from './CurLocation';
@@ -204,6 +206,7 @@ export const icons = {
   Time,
   Dot,
   Tape,
+  CheckCircle,
 };
 
 export default icons;

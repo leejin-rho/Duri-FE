@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Card, Flex, FrontBtn, Header, HeightFitFlex, MobileLayout, Modal, PetInfo, SalonNavbar, Text, theme, WidthFitFlex } from "@duri-fe/ui";
+import { Button, Card, CheckCircle, Flex, FrontBtn, Header, HeightFitFlex, MobileLayout, Modal, PetInfo, SalonNavbar, Text, theme, WidthFitFlex } from "@duri-fe/ui";
 import { useGetDetailRequest, useModal } from "@duri-fe/utils";
 import { defaultQuotationFormData } from "@salon/assets/data/quotation";
 import { QuotationFormData } from "@salon/assets/types/quotation";
@@ -29,6 +29,7 @@ const ReplyPage = () => {
       setStep(2);
       setIsValid(false); // 초기화
     } else {
+      handleSubmit();
       openModal();
     }
   };
@@ -114,8 +115,18 @@ const ReplyPage = () => {
       </FrontBtn>
       <SalonNavbar />
 
-      <Modal title="요청서 제출" isOpen={isOpenModal} toggleModal={closeModal}>
-        <button onClick={handleSubmit}>ㅎㅎ</button>
+      <Modal isOpen={isOpenModal} toggleModal={closeModal} closeIcon={false} margin="40px">
+        <Flex direction="column" padding="12px 28px" gap={36}>
+          <CheckCircle width={56} />
+          <Flex direction="column">
+            <Text typo="Body2" colorCode={theme.palette.Black} margin="0 0 18px 0">견적서 보내기 완료!</Text>
+            <Text typo="Caption2" colorCode={theme.palette.Gray400}>보낸 견적서는</Text>
+            <Text typo="Caption2" colorCode={theme.palette.Gray400}>보관함에서 확인이 가능해요</Text>
+          </Flex>
+          <Button onClick={closeModal} width="100%" borderRadius="8px" bg={theme.palette.Black}>
+            <Text typo="Body3" colorCode={theme.palette.White}>확인</Text>
+          </Button>
+        </Flex>
       </Modal>
     </MobileLayout>
   );

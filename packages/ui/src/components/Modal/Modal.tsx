@@ -7,6 +7,7 @@ interface ModalProps {
   title?: string;
   width?: string | number;
   margin?: string;
+  closeIcon?: boolean;
   isOpen: boolean;
   toggleModal: () => void;
   children: React.ReactNode;
@@ -14,6 +15,7 @@ interface ModalProps {
 
 export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
   width = '337',
+  closeIcon = true,
   ...props
 }, ref) => {
   const handleClickInnerModal = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -38,14 +40,16 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
               {props.title}
             </Text>
           )}
-          <Close
-            isOpen={props.isOpen}
-            toggleModal={props.toggleModal}
-            margin="0 26px auto auto"
-            width={17}
-            height={17}
-            currentColor={theme.palette.Gray400}
-          />
+          {closeIcon && (
+            <Close
+              isOpen={props.isOpen}
+              toggleModal={props.toggleModal}
+              margin="0 26px auto auto"
+              width={17}
+              height={17}
+              currentColor={theme.palette.Gray400}
+            />
+          )}
         </Flex>
         <ModalContent>{props.children}</ModalContent>
       </ModalBox>
