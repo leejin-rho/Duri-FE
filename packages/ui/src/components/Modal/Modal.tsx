@@ -5,12 +5,19 @@ import styled from '@emotion/styled';
 
 interface ModalProps {
   title?: string;
+  width?: string | number;
+  margin?: string;
+  closeIcon?: boolean;
   isOpen: boolean;
   toggleModal: () => void;
   children: React.ReactNode;
 }
 
-export const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
+export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
+  width = '337',
+  closeIcon = true,
+  ...props
+}, ref) => {
   const handleClickInnerModal = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
@@ -22,7 +29,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
       onClick={props.toggleModal}
       className={props.isOpen ? 'open' : ''}
     >
-      <ModalBox ref={ref} onClick={handleClickInnerModal} direction="column" justify='flex-start'>
+      <ModalBox ref={ref} onClick={handleClickInnerModal} width={width} margin={props.margin} direction="column" justify='flex-start'>
         <Flex justify="flex-end" padding='0 0 17px 0'>
           {props.title && (
             <Text
@@ -33,14 +40,16 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
               {props.title}
             </Text>
           )}
-          <Close
-            isOpen={props.isOpen}
-            toggleModal={props.toggleModal}
-            margin="0 26px auto auto"
-            width={17}
-            height={17}
-            currentColor={theme.palette.Gray400}
-          />
+          {closeIcon && (
+            <Close
+              isOpen={props.isOpen}
+              toggleModal={props.toggleModal}
+              margin="0 26px auto auto"
+              width={17}
+              height={17}
+              currentColor={theme.palette.Gray400}
+            />
+          )}
         </Flex>
         <ModalContent>{props.children}</ModalContent>
       </ModalBox>
@@ -63,8 +72,7 @@ const Backdrop = styled.div`
   z-index: 10000;
 `;
 
-const ModalBox = styled(Flex)`
-  width: 337px;
+const ModalBox = styled(Flex)<{margin?: string}>`
   height: fit-content;
   padding: 18.5px 0;
   position: relative;
@@ -73,9 +81,13 @@ const ModalBox = styled(Flex)`
   border-radius: 8px;
   max-height: 80vh;
   overflow-y: auto;
+
+  @media (max-width: 480px) {
+    width: ${({ margin }) => (margin ? `calc(100vw - ${margin})` : '337px')};
+  }
 `;
 
-const ModalContent = styled.div`
+const ModalContent = styled(Flex)`
   display: flex;
   flex-direction: column;
   text-align: center;

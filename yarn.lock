@@ -550,6 +550,7 @@ __metadata:
     msw: "npm:^2.6.6"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
+    react-hook-form: "npm:^7.54.0"
     react-router-dom: "npm:^7.0.1"
     react-spring-bottom-sheet: "npm:^3.4.1"
     typescript: "npm:5.5.4"
@@ -8944,7 +8945,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:^7.53.2":
+"react-hook-form@npm:^7.53.2, react-hook-form@npm:^7.54.0":
   version: 7.54.0
   resolution: "react-hook-form@npm:7.54.0"
   peerDependencies:

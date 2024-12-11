@@ -9,7 +9,8 @@ import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import OnboardingPage from '@pages/Onboarding';
 import StartPage from '@pages/Onboarding/StartPage';
-import { QuotationPage } from '@pages/Quotation';
+import QuotationPage from '@pages/Quotation';
+import ReplyPage from '@pages/Quotation/ReplyPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/onboarding/detail" element={<OnboardingPage />} />
 
         <Route path="/quotation" element={<QuotationPage />} />
+        <Route path="/quotation/reply/:requestId" element={<ReplyPage />} />
       </Routes>
     </BrowserRouter>
   );

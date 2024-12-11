@@ -1,14 +1,21 @@
-import {
-  Card,
-  Flex,
-  MobileLayout,
-  PetInfo,
-  SalonNavbar,
-  theme,
-} from '@duri-fe/ui';
-import { TabBarItem } from '@salon/components/quotation/TabBarItem';
+import { useState } from "react";
 
-export const QuotationPage = () => {
+import { Card, Flex, MobileLayout, Modal, PetInfo, SalonNavbar, theme } from "@duri-fe/ui"
+import { useGetNewRequestList, useModal } from "@duri-fe/utils";
+import { DetailRequest } from "@salon/components/quotation/DetailRequest";
+import { TabBarItem } from "@salon/components/quotation/TabBarItem"
+
+const QuotationPage = () => {
+  const { isOpenModal, openModal, closeModal } = useModal();
+  const [selectedRequestId, setSelectedRequestId] = useState<number | null>(null);
+
+  const { data: newRequestList } = useGetNewRequestList();
+
+  const handleRequestClick = (requestId: number) => {
+    setSelectedRequestId(requestId);
+    openModal();
+  }
+
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
       <Flex
@@ -36,20 +43,35 @@ export const QuotationPage = () => {
       </Flex>
 
       <Flex direction="column" gap={8} padding="30px 20px">
-        <Card borderRadius={12} padding="6px">
-          <PetInfo
-            themeVariant="medium"
-            name="신참이"
-            breed="시츄"
-            gender="F"
-            age={7}
-            weight={7.3}
-            neutering={true}
-          />
-        </Card>
+        {newRequestList?.map((request) => (
+          <Flex key={request.requestId} onClick={() => handleRequestClick(request.requestId)}>
+            <Card borderRadius={12} padding="6px">
+              <PetInfo
+                themeVariant="medium"
+                image={request.petImage}
+                name={request.petName}
+                breed={request.petBreed}
+                age={request.petAge}
+                neutering={request.petNeutering}
+
+                // TODO : gender, weight API 수정 필요함
+                gender="F"
+                weight={7.3}
+              />
+            </Card>
+          </Flex>
+        ))}
       </Flex>
 
       <SalonNavbar />
+
+      {selectedRequestId &&
+        <Modal title='요청서' margin="20px" isOpen={isOpenModal} toggleModal={closeModal}>
+          <DetailRequest requestId={selectedRequestId} closeModal={closeModal} />
+        </Modal>
+      }
     </MobileLayout>
-  );
-};
+  )
+}
+
+export default QuotationPage;
