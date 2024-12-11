@@ -52,7 +52,7 @@ const ReviewWritePage = () => {
       />
       <FlexGrow direction="column" justify="flex-start">
         {/* <ShopLine /> */}
-        <Flex direction="column" gap={12} margin="42px 0 12px 0">
+        <Flex direction="column" gap={4} margin="42px 0 12px 0">
           <Text typo="Body2">미용이 만족스러우셨나요?</Text>
           <Text typo="Caption5" colorCode={theme.palette.Gray400}>
             미용에 대한 후기를 남겨주세요👀
