@@ -2,10 +2,11 @@ import { forwardRef, Suspense, useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import { RelativeMobile } from '@duri/pages/Shop';
-import { Button, Flex, MyLocation, theme } from '@duri-fe/ui';
+import { Button, Flex, MyLocation, Send, Text, theme } from '@duri-fe/ui';
 import { ShopInfoType, useBottomSheet, useGeolocation } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
+import { SendRequestQBox } from './SendRequesQBox';
 import { ShopLine } from './ShopLine';
 
 let mapInstance: naver.maps.Map | undefined = undefined;
@@ -28,9 +29,29 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
     const { loaded, coordinates } = location;
     const { naver } = window;
 
-    const { openSheet, bottomSheetProps } = useBottomSheet({
-      maxHeight: 208,
+    // 가게 정보 바텀시트
+    const {
+      openSheet: openShopInfoSheet,
+      bottomSheetProps: shopInfoSheetProps,
+    } = useBottomSheet({
+      maxHeight: 300,
+      isMap: true,
+      onDismiss: () => {
+        console.log('onDismiss called'); // 디버깅용 로그
+      },
     });
+
+    // 요청서 전송용
+    const { openSheet: openRequestSheet, bottomSheetProps: requestSheetProps } =
+      useBottomSheet({
+        maxHeight: 552,
+      });
+
+    const StopSheetEvent = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      e.preventDefault();
+      openRequestSheet();
+    };
 
     const [selectedShop, setSelectedShop] = useState<ShopInfoType | null>(null);
     let markers: naver.maps.Marker[] = [];
@@ -47,15 +68,16 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
         position: position,
         icon: {
           url: SHOP_MARKER_URL,
-          size: new naver.maps.Size(40, 40),
+          size: new naver.maps.Size(42, 42),
           anchor: new naver.maps.Point(13, 36),
         },
       });
 
       naver.maps.Event.addListener(marker, 'click', () => {
+        map?.setZoom(16);
         map?.panTo(position);
         setSelectedShop(shop);
-        openSheet();
+        openShopInfoSheet();
       });
 
       return marker;
@@ -176,8 +198,8 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
           </Button>
         </LocationBtn>
         {selectedShop && (
-          <BottomSheet {...bottomSheetProps}>
-            <Flex direction="column" padding="16px 24px">
+          <BottomSheet {...shopInfoSheetProps}>
+            <Flex direction="column" padding="4px 24px" gap={14}>
               <ShopLine
                 key={selectedShop.shopId}
                 id={selectedShop.shopId}
@@ -190,9 +212,23 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
                 tags={selectedShop.tags}
                 hasBtn={false}
               />
+              <Button
+                height="36px"
+                borderRadius="8px"
+                bg={theme.palette.Black}
+                fontColor={theme.palette.White}
+                padding="12px"
+                onClick={StopSheetEvent}
+              >
+                <Send width={18} height={17} color={theme.palette.White} />
+                <Text margin="0 0 0 10px">입찰 넣기</Text>
+              </Button>
             </Flex>
           </BottomSheet>
         )}
+        <BottomSheet {...requestSheetProps}>
+          <SendRequestQBox />
+        </BottomSheet>
       </RelativeMobile>
     );
   },
@@ -209,5 +245,5 @@ const LocationBtn = styled(Flex)`
   height: fit-content;
   max-width: 375px;
   bottom: 120px;
-  z-index: 10;
+  z-index: 2;
 `;

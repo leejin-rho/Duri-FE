@@ -6,11 +6,13 @@ import { css } from '@emotion/react';
 interface UseBottomSheetProps {
   maxHeight: number;
   onDismiss?: () => void;
+  isMap?: boolean;
 }
 
 export const useBottomSheet = ({
   maxHeight,
   onDismiss,
+  isMap = false,
 }: UseBottomSheetProps) => {
   const [isOpenSheet, setIsOpenSheet] = useState<boolean>(false);
   const ref = useRef<BottomSheetRef>(null);
@@ -26,7 +28,7 @@ export const useBottomSheet = ({
   const bottomSheetProps = {
     open: isOpenSheet,
     ref,
-    css: StyledBottomCss,
+    css: StyledBottomCss(isMap),
     maxHeight,
     snapPoints: ({ maxHeight }: { maxHeight: number }) => [maxHeight],
     onDismiss: handleDismiss,
@@ -35,13 +37,13 @@ export const useBottomSheet = ({
   return { isOpenSheet, openSheet, closeSheet, bottomSheetProps };
 };
 
-const StyledBottomCss = css`
+const StyledBottomCss = (isMap: boolean) => css`
   position: relative;
 
   [data-rsbs-overlay],
   [data-rsbs-root]::after {
     border-radius: 16px 16px 0px 0px;
-    z-index: 20;
+    z-index: ${isMap ? '2' : '20'};
     --max-width: 375px;
 
     @media (max-width: 420px) {
@@ -53,6 +55,7 @@ const StyledBottomCss = css`
   }
 
   [data-rsbs-backdrop] {
-    background-color: rgba(49, 48, 54, 0.5);
+    z-index: ${isMap ? 0 : 10};
+    background-color: ${isMap ? 'transparent' : 'rgba(49, 48, 54, 0.5)'};
   }
 `;
