@@ -3,7 +3,7 @@ import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import { RelativeMobile } from '@duri/pages/Shop';
 import { Button, Flex, MyLocation, Send, Text, theme } from '@duri-fe/ui';
-import { ShopInfoType, useBottomSheet, useGeolocation } from '@duri-fe/utils';
+import { ShopInfoType, useBottomSheet } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 import { SendRequestQBox } from './SendRequesQBox';
@@ -21,17 +21,18 @@ const loadScript = (src: string, callback: () => void) => {
 
 interface MapProps {
   nearbyShops: ShopInfoType[];
+  location: { loaded: boolean; coordinates?: { lat: number; lng: number } };
 }
 
 export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
-  ({ nearbyShops }, ref) => {
-    const location = useGeolocation(); // 위치 정보 가져오기
+  ({ nearbyShops, location }, ref) => {
     const { loaded, coordinates } = location;
     const { naver } = window;
 
     // 가게 정보 바텀시트
     const {
       openSheet: openShopInfoSheet,
+      closeSheet: closeShopInfoSheet,
       bottomSheetProps: shopInfoSheetProps,
     } = useBottomSheet({
       maxHeight: 300,
@@ -39,10 +40,13 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
     });
 
     // 요청서 전송용
-    const { openSheet: openRequestSheet, bottomSheetProps: requestSheetProps } =
-      useBottomSheet({
-        maxHeight: 552,
-      });
+    const {
+      openSheet: openRequestSheet,
+      closeSheet: closeRequestSheet,
+      bottomSheetProps: requestSheetProps,
+    } = useBottomSheet({
+      maxHeight: 552,
+    });
 
     const [selectedShop, setSelectedShop] = useState<ShopInfoType | null>(null);
     let markers: naver.maps.Marker[] = [];
@@ -53,13 +57,13 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
       map: naver.maps.Map | undefined,
       position: naver.maps.Coord | naver.maps.CoordLiteral,
       shop: ShopInfoType,
-    ) => {
+    ): naver.maps.Marker => {
       const marker = new naver.maps.Marker({
         map: map,
         position: position,
         icon: {
           url: SHOP_MARKER_URL,
-          size: new naver.maps.Size(42, 42),
+          size: new naver.maps.Size(40, 40),
           anchor: new naver.maps.Point(13, 36),
         },
       });
@@ -99,7 +103,7 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
         mapInstance = new naver.maps.Map('map', mapOptions);
       }
 
-      // Marker 생성
+      // 현제 위치 마커 생성
       const MARKER_URL = '/svg/CurLocation.svg';
       const currentLocationMarker = new naver.maps.Marker({
         position: new naver.maps.LatLng(coordinates.lat, coordinates.lng),
@@ -196,12 +200,13 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
                 id={selectedShop.shopId}
                 title={selectedShop.shopName}
                 score={selectedShop.shopRating}
-                reviewNum={120}
+                reviewNum={selectedShop.reviewCnt}
                 distance={selectedShop.distance}
                 address={selectedShop.shopAddress}
                 phone={selectedShop.shopPhone}
                 tags={selectedShop.tags}
                 hasBtn={false}
+                shopImg={selectedShop.shopImage}
               />
               <Button
                 height="36px"
@@ -209,7 +214,10 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
                 bg={theme.palette.Black}
                 fontColor={theme.palette.White}
                 padding="12px"
-                onClick={openRequestSheet}
+                onClick={() => {
+                  openRequestSheet();
+                  closeShopInfoSheet();
+                }}
               >
                 <Send width={18} height={17} color={theme.palette.White} />
                 <Text margin="0 0 0 10px">입찰 넣기</Text>
@@ -218,7 +226,7 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
           </BottomSheet>
         )}
         <BottomSheet {...requestSheetProps}>
-          <SendRequestQBox />
+          <SendRequestQBox closeBottomSheet={closeRequestSheet} />
         </BottomSheet>
       </RelativeMobile>
     );

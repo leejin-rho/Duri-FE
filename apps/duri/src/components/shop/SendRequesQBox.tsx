@@ -12,9 +12,14 @@ import {
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-export const SendRequestQBox = () => {
+export const SendRequestQBox = ({
+  closeBottomSheet,
+}: {
+  closeBottomSheet?: () => void;
+}) => {
   const navigate = useNavigate();
   const moveToShopRequest = () => {
+    if (closeBottomSheet) closeBottomSheet();
     navigate('/shop/request');
   };
   return (

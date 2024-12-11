@@ -1,12 +1,5 @@
 import { BaseResponse } from './base';
 
-export interface ShopTime {
-  hour: number;
-  minute: number;
-  second: number;
-  nano: number;
-}
-
 export interface ShopInfoType {
   shopId: number;
   shopName: string;
@@ -14,11 +7,13 @@ export interface ShopInfoType {
   shopLat: number;
   shopLon: number;
   shopPhone: string;
-  shopOpenTime: ShopTime;
-  shopCloseTime: ShopTime;
+  shopOpenTime: string;
+  shopCloseTime: string;
   shopRating: number; // 별점
+  reviewCnt: number; // 리뷰 개수
   distance: number; // 거리
   tags: string[]; // 태그 배열
+  shopImage: string;
 }
 
 export interface ShopInfoResponse extends BaseResponse {

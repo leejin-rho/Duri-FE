@@ -8,5 +8,6 @@ export const getNearByShopInfo = async (
   const { data } = await publicInstance.get(`/shop/nearby/sort/${sortby}`, {
     params: { lat, lon, radius },
   });
+  console.log(data.response);
   return data.response;
 };

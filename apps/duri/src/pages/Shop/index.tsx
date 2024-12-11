@@ -14,13 +14,19 @@ import {
   TextField,
   theme,
 } from '@duri-fe/ui';
-import { ShopInfoType, useGetNearByShopInfo } from '@duri-fe/utils';
+import {
+  ShopInfoType,
+  useGeolocation,
+  useGetNearByShopInfo,
+} from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 const Shop = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   const [isMap, setIsMap] = useState<boolean>(true);
+  const location = useGeolocation(); // 현재 위치 정보 가져오기
+
   const [nearbyShops, setNearbyShops] = useState<ShopInfoType[]>([]);
 
   const changeMapType = () => {
@@ -34,20 +40,20 @@ const Shop = () => {
     }
   };
 
-  const { data } = useGetNearByShopInfo(
-    // location.coordinates
-    //   ? {
-    //       // lat: location.coordinates.lat,
-    //       // long: location.coordinates.lng,
-    //       // radius: 500,
-    //       lat: 37.5156,
-    //       lon: 127.0451005,
-    //       radius: 500,
-    //     }
-    //   :
-    { lat: 37.5156, lon: 127.0451005, radius: 500 },
+  const { data, refetch } = useGetNearByShopInfo(
+    location.coordinates
+      ? {
+          lat: location.coordinates.lat,
+          lon: location.coordinates.lng,
+          radius: 2000,
+        }
+      : { lat: 37.5031348, lon: 127.0497028, radius: 2000 },
     filter,
   );
+
+  useEffect(() => {
+    refetch();
+  }, [filter]);
 
   useEffect(() => {
     if (data) {
@@ -76,7 +82,11 @@ const Shop = () => {
         </SearchWrapper>
         {isMap ? (
           <>
-            <MapInfo nearbyShops={nearbyShops} ref={mapRef} />
+            <MapInfo
+              nearbyShops={nearbyShops}
+              location={location}
+              ref={mapRef}
+            />
           </>
         ) : (
           <ShopList

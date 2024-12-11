@@ -127,13 +127,14 @@ export const ShopList = ({
               id={shop.shopId}
               title={shop.shopName}
               score={shop.shopRating}
-              reviewNum={120}
+              reviewNum={shop.reviewCnt}
               distance={shop.distance}
               address={shop.shopAddress}
               phone={shop.shopPhone}
               isClicked={selectedShops.includes(shop.shopId)}
               onClick={() => toggleShopSelection(shop.shopId)}
               tags={shop.tags}
+              shopImg={shop.shopImage}
             />
           ))}
         </ScrollFlex>

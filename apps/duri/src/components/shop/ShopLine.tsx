@@ -19,6 +19,7 @@ interface ShopLineProps {
   id: number;
   title: string;
   score: number;
+  shopImg: string;
   reviewNum: number;
   distance: number;
   address: string;
@@ -35,6 +36,7 @@ export const ShopLine = ({
   title,
   score,
   reviewNum,
+  shopImg,
   distance,
   address,
   phone,
@@ -56,12 +58,7 @@ export const ShopLine = ({
 
   return (
     <HeightFitFlex gap={20} key={id} onClick={() => moveToDetail(id)}>
-      <ProfileImage
-        height={92}
-        width={92}
-        // src="../../assets/images/pngs/salonDefault.png"
-        borderRadius={8}
-      />
+      <ProfileImage height={92} width={92} src={shopImg} borderRadius={8} />
       <Flex direction="column" align="flex-start" gap={8}>
         <Flex gap={17} justify="flex-start">
           <Text typo="Body2">{title}</Text>
