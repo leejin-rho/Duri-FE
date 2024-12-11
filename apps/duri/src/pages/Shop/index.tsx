@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { MapInfo } from '@duri/components/shop';
 import { ShopList } from '@duri/components/shop/ShopList';
@@ -18,16 +19,35 @@ import {
   ShopInfoType,
   useGeolocation,
   useGetNearByShopInfo,
+  useGetSearchShopResult,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
+
+interface SearchFormInterface {
+  search: string;
+}
 
 const Shop = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   const [isMap, setIsMap] = useState<boolean>(true);
+  const [isSearch, setIsSearch] = useState<boolean>(false);
   const location = useGeolocation(); // 현재 위치 정보 가져오기
 
   const [nearbyShops, setNearbyShops] = useState<ShopInfoType[]>([]);
+  const [searchShops, setSearchShops] = useState<ShopInfoType[]>([]);
+
+  const {
+    getValues,
+    register,
+    formState: { errors },
+  } = useForm<SearchFormInterface>({
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    defaultValues: {
+      search: '',
+    },
+  });
 
   const changeMapType = () => {
     setIsMap(!isMap);
@@ -51,6 +71,37 @@ const Shop = () => {
     filter,
   );
 
+  const { data: searchResultData, refetch: searchRefetch } =
+    useGetSearchShopResult(
+      location.coordinates
+        ? {
+            search: getValues('search'),
+            lat: location.coordinates.lat,
+            lon: location.coordinates.lng,
+          }
+        : { search: '강남', lat: 37.5031348, lon: 127.0497028 },
+    );
+
+  const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const searchValue = getValues('search');
+    console.log(searchValue);
+
+    if (searchValue) {
+      try {
+        const { data } = await searchRefetch();
+        if (data) {
+          setSearchShops(data);
+          setIsSearch(true);
+        }
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      }
+    } else {
+      setIsSearch(false);
+    }
+  };
+
   useEffect(() => {
     refetch();
   }, [filter]);
@@ -61,29 +112,53 @@ const Shop = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (searchResultData) {
+      setSearchShops(searchResultData);
+    }
+  }, [searchResultData]);
+
   return (
     <RelativeMobile>
       <OuterWrapper direction="column">
         <SearchWrapper>
-          <TextField
-            placeholder="경기 성남시 분당구 안양판교로 1192"
-            height={46}
-            right={
-              <Magnifier
-                width={24}
-                height={24}
-                color={theme.palette.Normal800}
-              />
-            }
-            isNoBorder={true}
-            shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-            widthPer="100%"
-          />
+          <FormWrapper onSubmit={handleSearchSubmit}>
+            <TextField
+              {...register('search', {
+                required: true,
+                pattern: {
+                  value: /^[a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ0-9\s]+$/,
+                  message: '검색어는 한글, 영어, 숫자, 공백만 입력 가능합니다.',
+                },
+                maxLength: {
+                  value: 50,
+                  message: '검색어는 최대 50자까지 가능합니다.',
+                },
+              })}
+              placeholder="경기 성남시 분당구 안양판교로 1192"
+              height={46}
+              right={
+                <Magnifier
+                  width={24}
+                  height={24}
+                  color={theme.palette.Normal800}
+                />
+              }
+              helperText={
+                errors.search
+                  ? [{ type: 'error', text: errors.search.message || '' }]
+                  : []
+              }
+              isNoBorder={true}
+              shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+              widthPer="100%"
+            />
+          </FormWrapper>
         </SearchWrapper>
         {isMap ? (
           <>
             <MapInfo
-              nearbyShops={nearbyShops}
+              shops={isSearch ? searchShops : nearbyShops}
               location={location}
               ref={mapRef}
             />
@@ -149,4 +224,11 @@ const ListWrapper = styled(Flex)`
 
 const OuterWrapper = styled(Flex)`
   overflow: hidden;
+`;
+
+const FormWrapper = styled.form`
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: contents;
 `;

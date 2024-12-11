@@ -25,3 +25,9 @@ export type CenterInfoType = {
   lon: number;
   radius: number;
 };
+
+export type SearchParamType = {
+  search: string;
+  lat: number;
+  lon: number;
+};

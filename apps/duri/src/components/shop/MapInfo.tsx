@@ -20,12 +20,12 @@ const loadScript = (src: string, callback: () => void) => {
 };
 
 interface MapProps {
-  nearbyShops: ShopInfoType[];
+  shops: ShopInfoType[];
   location: { loaded: boolean; coordinates?: { lat: number; lng: number } };
 }
 
 export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
-  ({ nearbyShops, location }, ref) => {
+  ({ shops, location }, ref) => {
     const { loaded, coordinates } = location;
     const { naver } = window;
 
@@ -49,7 +49,7 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
     });
 
     const [selectedShop, setSelectedShop] = useState<ShopInfoType | null>(null);
-    let markers: naver.maps.Marker[] = [];
+    const [markers, setMarkers] = useState<naver.maps.Marker[]>([]);
 
     // 샵 마커를 만들기 위한 코드
     const SHOP_MARKER_URL = '/svg/ShopLocation.svg';
@@ -81,6 +81,9 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
     // 맵 초기화
     const initMap = () => {
       if (!coordinates || !loaded) return;
+      markers.forEach((marker) => marker.setMap(null));
+
+      console.log(shops);
 
       // 추가 옵션 설정
       const mapOptions = {
@@ -112,13 +115,15 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
       });
 
       // 가게용 마커 만들기
-      markers = nearbyShops.map((shop) =>
+      const shopMarkers = shops.map((shop) =>
         makeMarker(
           mapInstance,
           new naver.maps.LatLng(shop.shopLat, shop.shopLon),
           shop, //가게 정보를 함께 넣어준다.
         ),
       );
+
+      setMarkers(shopMarkers);
 
       function updateMarkers(
         map: naver.maps.Map | undefined,
@@ -161,7 +166,7 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
       } else {
         initMap();
       }
-    }, [coordinates, loaded]);
+    }, [coordinates, loaded, shops]);
 
     const moveToCurrentLocation = () => {
       if (mapInstance && coordinates) {
