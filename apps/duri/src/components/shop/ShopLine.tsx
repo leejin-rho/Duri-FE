@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
-import salonDefault from '@assets/images/pngs/salonDefault.png';
 import {
   Button,
   Flex,
   HardText,
   HeightFitFlex,
+  ProfileImage,
   SalonTag,
   Send,
   Star,
@@ -24,8 +24,9 @@ interface ShopLineProps {
   address: string;
   phone: string;
   isClicked?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   tags: string[];
+  hasBtn?: boolean;
 }
 
 export const ShopLine = ({
@@ -39,6 +40,7 @@ export const ShopLine = ({
   isClicked = false,
   onClick,
   tags,
+  hasBtn = true,
 }: ShopLineProps) => {
   const navigate = useNavigate();
   const moveToDetail = (shopId: number | string) => {
@@ -52,7 +54,12 @@ export const ShopLine = ({
 
   return (
     <HeightFitFlex gap={20} key={id} onClick={() => moveToDetail(id)}>
-      <SalonImg src={salonDefault} />
+      <ProfileImage
+        height={92}
+        width={92}
+        // src="../../assets/images/pngs/salonDefault.png"
+        borderRadius={8}
+      />
       <Flex direction="column" align="flex-start" gap={8}>
         <Flex gap={17} justify="flex-start">
           <Text typo="Body2">{title}</Text>
@@ -94,27 +101,23 @@ export const ShopLine = ({
               ))}
             </TagList>
           </Flex>
-          <Button
-            width="42px"
-            height="42px"
-            borderRadius="40px"
-            onClick={handleSendClick}
-            bg={isClicked ? theme.palette.Normal600 : theme.palette.Normal100}
-            padding="0"
-          >
-            <Send width={21} height={21} color={theme.palette.Normal800} />
-          </Button>
+          {hasBtn && (
+            <Button
+              width="42px"
+              height="42px"
+              borderRadius="40px"
+              onClick={handleSendClick}
+              bg={isClicked ? theme.palette.Normal600 : theme.palette.Normal100}
+              padding="0"
+            >
+              <Send width={21} height={21} color={theme.palette.Normal800} />
+            </Button>
+          )}
         </Flex>
       </Flex>
     </HeightFitFlex>
   );
 };
-
-const SalonImg = styled.img`
-  display: flex;
-  width: 92px;
-  height: 92px;
-`;
 
 const MarkText = styled.span`
   font-weight: 600;

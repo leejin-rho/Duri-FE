@@ -76,7 +76,7 @@ const Shop = () => {
         </SearchWrapper>
         {isMap ? (
           <>
-            <MapInfo ref={mapRef} />
+            <MapInfo nearbyShops={nearbyShops} ref={mapRef} />
           </>
         ) : (
           <ShopList
