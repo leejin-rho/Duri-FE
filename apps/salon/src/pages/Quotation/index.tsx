@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-import { Card, Flex, MobileLayout, Modal, PetInfo, SalonNavbar, theme } from "@duri-fe/ui"
+import { Card, Flex, MobileLayout, Modal, PetInfo, SalonNavbar, Text, theme } from "@duri-fe/ui"
 import { useGetNewRequestList, useModal } from "@duri-fe/utils";
+import styled from "@emotion/styled";
 import { DetailRequest } from "@salon/components/quotation/DetailRequest";
 import { TabBarItem } from "@salon/components/quotation/TabBarItem"
 
@@ -42,26 +43,33 @@ const QuotationPage = () => {
         <TabBarItem label="답장한 견적" selected={false} typo="Body3" />
       </Flex>
 
-      <Flex direction="column" gap={8} padding="30px 20px">
-        {newRequestList?.map((request) => (
-          <Flex key={request.requestId} onClick={() => handleRequestClick(request.requestId)}>
-            <Card borderRadius={12} padding="6px">
-              <PetInfo
-                themeVariant="medium"
-                image={request.petImage}
-                name={request.petName}
-                breed={request.petBreed}
-                age={request.petAge}
-                neutering={request.petNeutering}
+      {newRequestList && newRequestList.length > 0 ? (
+        <Flex direction="column" gap={8} padding="30px 20px">
+          {newRequestList.map((request) => (
+            <Flex key={request.requestId} onClick={() => handleRequestClick(request.requestId)}>
+              <Card borderRadius={12} padding="6px">
+                <PetInfo
+                  themeVariant="medium"
+                  image={request.petImage}
+                  name={request.petName}
+                  breed={request.petBreed}
+                  age={request.petAge}
+                  neutering={request.petNeutering}
 
-                // TODO : gender, weight API 수정 필요함
-                gender="F"
-                weight={7.3}
-              />
-            </Card>
-          </Flex>
-        ))}
-      </Flex>
+                  // TODO : gender, weight API 수정 필요함
+                  gender="F"
+                  weight={7.3}
+                />
+              </Card>
+            </Flex>
+          ))}
+        </Flex>
+      ) : (
+        // TODO : 임시 대체뷰 수정 필요
+        <FlexGrow>
+          <Text>새로운 요청이 없어요.</Text>
+        </FlexGrow>
+      )}
 
       <SalonNavbar />
 
@@ -73,5 +81,9 @@ const QuotationPage = () => {
     </MobileLayout>
   )
 }
+
+const FlexGrow = styled(Flex)`
+  flex-grow: 1;
+`
 
 export default QuotationPage;

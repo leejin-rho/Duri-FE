@@ -3,7 +3,7 @@ import { NewRequestListResponse, RequestDetailResponse } from "../types";
 
 /** 새로운 견적요청 리스트 */
 export const getNewRequestList = async (): Promise<NewRequestListResponse['response'][]>  => {
-  const response = await salonInstance.get(`/quotation/request/new?shopId=1`);
+  const response = await salonInstance.get(`/quotation/request/new`);
   return response.data.response;
 }
 
