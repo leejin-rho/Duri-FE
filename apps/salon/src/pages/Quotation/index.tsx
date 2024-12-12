@@ -11,7 +11,7 @@ const QuotationPage = () => {
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState<string>('new')
   const [selectedRequestId, setSelectedRequestId] = useState<number | null>(null);
-  const [selectedQuotationId, setSelectedQuotationId] = useState<number | null>(null);
+
   const { isOpenModal, openModal, closeModal } = useModal();
 
   const { data: newRequestList } = useGetNewRequestList();
@@ -20,11 +20,6 @@ const QuotationPage = () => {
   const handleRequestClick = (requestId: number) => {
     setSelectedRequestId(requestId);
     openModal();
-  }
-
-  const handleQuotationClick = (requestId: number) => {
-    setSelectedQuotationId(requestId);
-    // openModal();
   }
 
   const handleNavigate = () => {
@@ -77,7 +72,7 @@ const QuotationPage = () => {
           <Flex direction="column" gap={8} padding="30px 20px">
             {newRequestList.map((request) => (
               <Flex key={request.requestId} onClick={() => handleRequestClick(request.requestId)}>
-                <Card borderRadius={12} padding="6px">
+                <Card borderRadius={12} padding="6px" shadow="none">
                   <PetInfo
                     themeVariant="medium"
                     image={request.petImage}
@@ -103,8 +98,8 @@ const QuotationPage = () => {
           approvedQuotationList && approvedQuotationList.length > 0 ? (
             <Flex direction="column" gap={8} padding="30px 20px">
             {approvedQuotationList.map((quotation) => (
-              <Flex key={quotation.requestId} onClick={() => handleQuotationClick(quotation.requestId)}>
-                <Card borderRadius={12} padding="6px" direction="row">
+              <Flex key={quotation.requestId} onClick={() => handleRequestClick(quotation.requestId)}>
+                <Card borderRadius={12} padding="6px" direction="row" shadow="none">
                   <PetInfo
                     themeVariant="medium"
                     image={quotation.petImage}
@@ -144,15 +139,15 @@ const QuotationPage = () => {
       <SalonNavbar />
 
       {selectedRequestId &&
-        <Modal title='요청서' margin="20px" isOpen={isOpenModal && (selectedTab === 'new')} toggleModal={closeModal}>
-          <DetailRequest requestId={selectedRequestId} closeModal={closeModal} />
-        </Modal>
-      }
+        <>
+          <Modal title='요청서' margin="20px" isOpen={isOpenModal && (selectedTab === 'new')} toggleModal={closeModal}>
+            <DetailRequest requestId={selectedRequestId} closeModal={closeModal} />
+          </Modal>
 
-      {selectedQuotationId &&
-        <Modal title='견적서' margin="20px" isOpen={isOpenModal && (selectedTab === 'approved')} toggleModal={closeModal}>
-          <DetailRequest requestId={selectedQuotationId} closeModal={closeModal} />
-        </Modal>
+          <Modal title='견적서' margin="20px" isOpen={isOpenModal && (selectedTab === 'approved')} toggleModal={closeModal}>
+            견적서 작성 완료!!
+          </Modal>
+        </>
       }
     </MobileLayout>
   )

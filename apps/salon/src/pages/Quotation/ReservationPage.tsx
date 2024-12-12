@@ -9,12 +9,16 @@ import { TabBarItem } from "@salon/components/quotation/TabBarItem"
 const ReservationPage = () => {
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState<string>('reserved')
+  const [selectedRequestId, setSelectedRequestId] = useState<number | null>(null);
+
+
   const { isOpenModal, openModal, closeModal } = useModal();
+
   const { data: reservationList } = useGetReservedQuotationList();
   const { data: completedQuotationList } = useGetCompletedQuotationList();
 
-  const handleReservationClick = (requestId: number) => {
-    console.log(requestId)
+  const handleRequestClick = (requestId: number) => {
+    setSelectedRequestId(requestId);
     openModal();
   }
 
@@ -61,8 +65,8 @@ const ReservationPage = () => {
       (reservationList && reservationList.length > 0 ? (
         <Flex direction="column" gap={8} padding="30px 20px">
           {reservationList.map((item) => (
-            <Flex key={item.requestId} onClick={() => handleReservationClick(item.requestId)}>
-              <Card borderRadius={12} padding="12px">
+            <Flex key={item.requestId} onClick={() => handleRequestClick(item.requestId)}>
+              <Card borderRadius={12} padding="12px" shadow="none">
                 <PetInfo
                   themeVariant="medium"
                   image={item.petDetailResponse.image}
@@ -93,8 +97,8 @@ const ReservationPage = () => {
         completedQuotationList && completedQuotationList.length > 0 ? (
           <Flex direction="column" gap={8} padding="30px 20px">
             {completedQuotationList.map((item) => (
-              <Flex key={item.requestId}>
-                <Card borderRadius={12} padding="12px">
+              <Flex key={item.requestId} onClick={() => handleRequestClick(item.requestId)}>
+                <Card borderRadius={12} padding="12px" shadow="none">
                   <PetInfo
                     themeVariant="medium"
                     image={item.petDetailResponse.image}
@@ -126,10 +130,17 @@ const ReservationPage = () => {
 
       <SalonNavbar />
 
-      {reservationList &&
-        <Modal title='견적서' margin="20px" isOpen={isOpenModal} toggleModal={closeModal}>
-          예약 견적
-        </Modal>
+
+      {selectedRequestId &&
+        <>
+          <Modal title='견적서' margin="20px" isOpen={isOpenModal && (selectedTab === 'reserved')} toggleModal={closeModal}>
+            시술 예정!!
+          </Modal>
+
+          <Modal title='견적서' margin="20px" isOpen={isOpenModal && (selectedTab === 'complete')} toggleModal={closeModal}>
+            시술 완료 !!
+          </Modal>
+        </>
       }
     </MobileLayout>
   )
