@@ -77,7 +77,7 @@ export const PetInfo = ({
           <Text typo={typo.description} colorCode={theme.palette.Gray400}>
             {breed}, {gender === 'F' ? '여아' : '남아'}, {age}세, {weight}kg
           </Text>
-          {neutering && <SalonTag content="중성화 완료" />}
+          {neutering && <SalonTag content="중성화 완료" padding='4px' />}
         </Flex>
       </HeightFitFlex>
       {character && (

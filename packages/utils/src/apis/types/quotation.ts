@@ -104,3 +104,9 @@ export interface PostQuotationResponse extends BaseResponse {
     data: string;
   }
 }
+
+export interface ApprovedQuotationListResponse extends BaseResponse {
+  response: (NewRequestListResponse['response'] & {
+    status: string;
+  })
+}
