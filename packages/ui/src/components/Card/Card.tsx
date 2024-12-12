@@ -11,6 +11,7 @@ interface CardProps {
   maxHeight?: string;
   children: React.ReactNode;
   bg?: string;
+  className?: string;
 }
 
 export const Card = ({
@@ -23,6 +24,7 @@ export const Card = ({
   padding,
   maxHeight,
   children,
+  className,
 }: CardProps) => {
   return (
     <CardContainer
@@ -34,6 +36,7 @@ export const Card = ({
       borderColor={borderColor}
       maxHeight={maxHeight}
       bg={bg}
+      className={className}
     >
       {children}
     </CardContainer>

@@ -83,35 +83,68 @@ export const PetInfo = ({
           </ProfileImageWrapper>
         ) : (
           <ProfileImage
-          borderRadius={imageSize.borderRadius}
-          width={imageSize.width}
-          height={imageSize.height}
-          src={image}
-        />
+            borderRadius={imageSize.borderRadius}
+            width={imageSize.width}
+            height={imageSize.height}
+            src={image}
+          />
         )}
-       <Flex direction="column" gap={gap.horizontal} align="flex-start">
-        <Flex justify='flex-start' gap={8}>
-          <Text typo={typo.name}>{name}</Text>
-          {(dday === 0 || dday) && (
-            <SalonTag content={dday === 0 ? `D-day` : `D-${dday}`} bg={theme.palette.Normal500} colorCode={theme.palette.Black} typo='Label2' padding='8px 10px' height={26} borderRadius={99} />
-          )}
-          {complete && (
-            <SalonTag content='미용 완료' bg={theme.palette.Gray50} colorCode={theme.palette.Gray300} typo='Label2' padding='8px 10px' height={26} borderRadius={99} />
-          )}
-        </Flex>
+        <Flex direction="column" gap={gap.horizontal} align="flex-start">
+          <Flex justify="flex-start" gap={8}>
+            <Text typo={typo.name}>{name}</Text>
+            {(dday === 0 || dday) && (
+              <SalonTag
+                content={dday === 0 ? `D-day` : `D-${dday}`}
+                bg={theme.palette.Normal500}
+                colorCode={theme.palette.Black}
+                typo="Label2"
+                padding="8px 10px"
+                height={26}
+                borderRadius={99}
+              />
+            )}
+            {complete && (
+              <SalonTag
+                content="미용 완료"
+                bg={theme.palette.Gray50}
+                colorCode={theme.palette.Gray300}
+                typo="Label2"
+                padding="8px 10px"
+                height={26}
+                borderRadius={99}
+              />
+            )}
+          </Flex>
           <Text typo={typo.description} colorCode={theme.palette.Gray400}>
-            {parsePetInfo({ age, breed, weight, gender})}
+            {parsePetInfo({ age, breed, weight, gender })}
           </Text>
-          {neutering && <SalonTag content="중성화 완료" padding='4px' />}
+          {neutering && <SalonTag content="중성화 완료" padding="4px" />}
           {groomer && (
-            <Flex direction="column" padding='8px 0 0 0' gap={8} align="flex-start">
-              <Flex justify='flex-start' gap={8}>
-                <Image src={groomer.groomerImage} width={24} height={24} borderRadius={24} />
-                <Text typo="Label2" colorCode={theme.palette.Black}>{groomer.groomerName}</Text>
+            <Flex
+              direction="column"
+              padding="8px 0 0 0"
+              gap={8}
+              align="flex-start"
+            >
+              <Flex justify="flex-start" gap={8}>
+                <Image
+                  src={groomer.groomerImage}
+                  width={24}
+                  height={24}
+                  borderRadius={24}
+                />
+                <Text typo="Label2" colorCode={theme.palette.Black}>
+                  {groomer.groomerName}
+                </Text>
               </Flex>
-              <Flex justify='space-between'>
-                <Text typo="Label2" colorCode={theme.palette.Black}>{groomer.date}</Text>
-                <Text typo="Label3" colorCode={theme.palette.Gray400}>{format(groomer.startTime, 'hh:mm')} ~ {format(groomer.endTime, 'hh:mm')}</Text>
+              <Flex justify="space-between">
+                <Text typo="Label2" colorCode={theme.palette.Black}>
+                  {groomer.date}
+                </Text>
+                <Text typo="Label3" colorCode={theme.palette.Gray400}>
+                  {format(groomer.startTime, 'hh:mm')} ~{' '}
+                  {format(groomer.endTime, 'hh:mm')}
+                </Text>
               </Flex>
             </Flex>
           )}
@@ -163,10 +196,9 @@ const PencilWrapper = styled(WidthFitFlex)<{ imageSize: number }>`
   position: absolute;
   border: 1.094px solid ${theme.palette.White};
   padding: 6px;
-  top: ${({ imageSize }) => `${imageSize-32}px`};
-  left: ${({ imageSize }) => `${imageSize-30}px`};
+  top: ${({ imageSize }) => `${imageSize - 32}px`};
+  left: ${({ imageSize }) => `${imageSize - 30}px`};
 `;
-
 
 interface ThemeVariant {
   imageSize: {
