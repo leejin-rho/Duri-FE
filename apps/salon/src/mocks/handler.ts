@@ -2,20 +2,55 @@ import { BASE_URL } from '@duri-fe/utils';
 import { http, HttpResponse } from 'msw';
 
 export const handlers = [
+  http.get(BASE_URL+'/quotation/request/new', () => {
+    return HttpResponse.json(
+      {
+        "success": true,
+        "response": [
+          {
+            "requestId": 2,
+            "userId": 2,
+            "petId": 2,
+            "petImage": "https://s3-alpha-sig.figma.com/img/8c29/fc5b/55e75730409ed6ff39b368807143b832?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=flUI1B-Bl~5cwqSYAgqYroBEts6ZN4Aa4zT0Nm91CHF0RsdVBLPESYMk~JviN3gbPl0ameQj8IEh5GiloS~6AtuxIhsQpWxEewYe~BrjtcHGpO0NU4Vq5HcWgI0v~o1NvS6dXNkLqVh~nxvf807K~ufbnaSOg6Du4IFzEbxmhAQS~Peb3I2~zn-g5yoRpFKkEwIbaaYr3NdGQ8XCgB~7j0Qb9yeTnYjrj25EjaO~QBumJ-aztNLkdj2Hw228~8GueNT9ttrI884wIeetJe36TXFknK-d8cjxrEdk3DPF8pqFYcuLNmztrPVNH0wUOqySp6MF~8cxRlEPJoKvLB3IiQ__",
+            "petName": "초코",
+            "petAge": 3,
+            "petGender": "F",
+            "petBreed": "푸들",
+            "petWeight": 10,
+            "petNeutering": true,
+            "petCharacter": [
+              "string"
+            ],
+            "petDiseases": [
+              "string"
+            ],
+            "totalPrice": 0,
+            "status": "string"
+          }
+        ],
+        "error": {
+          "message": "string",
+          "status": 0
+        }
+      }
+    )
+  }),
+
   http.get(BASE_URL+'/quotation/request/approved', () => {
     return HttpResponse.json(
       {
         "success": true,
         "response": [
           {
-            "requestId": 0,
-            "userId": 0,
-            "petId": 0,
-            "petImage": "string",
-            "petName": "string",
-            "petAge": 0,
-            "petBreed": "string",
-            "petWeight": 0,
+            "requestId": 2,
+            "userId": 2,
+            "petId": 2,
+            "petImage": "https://s3-alpha-sig.figma.com/img/8c29/fc5b/55e75730409ed6ff39b368807143b832?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=flUI1B-Bl~5cwqSYAgqYroBEts6ZN4Aa4zT0Nm91CHF0RsdVBLPESYMk~JviN3gbPl0ameQj8IEh5GiloS~6AtuxIhsQpWxEewYe~BrjtcHGpO0NU4Vq5HcWgI0v~o1NvS6dXNkLqVh~nxvf807K~ufbnaSOg6Du4IFzEbxmhAQS~Peb3I2~zn-g5yoRpFKkEwIbaaYr3NdGQ8XCgB~7j0Qb9yeTnYjrj25EjaO~QBumJ-aztNLkdj2Hw228~8GueNT9ttrI884wIeetJe36TXFknK-d8cjxrEdk3DPF8pqFYcuLNmztrPVNH0wUOqySp6MF~8cxRlEPJoKvLB3IiQ__",
+            "petName": "초코",
+            "petAge": 3,
+            "petGender": "F",
+            "petBreed": "푸들",
+            "petWeight": 10,
             "petNeutering": true,
             "petCharacter": [
               "string"
@@ -73,5 +108,48 @@ export const handlers = [
         "error": null
       }
     )
-  })
+  }),
+
+  http.get(BASE_URL+'/quotation/request/reservation/complete', () => {
+    return HttpResponse.json(
+      {
+        "success": true,
+        "response": [
+          {
+            "requestId": 2,
+            "userId": 2,
+            "petId": 2,
+            "petDetailResponse": {
+              "image": "https://s3-alpha-sig.figma.com/img/8c29/fc5b/55e75730409ed6ff39b368807143b832?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=flUI1B-Bl~5cwqSYAgqYroBEts6ZN4Aa4zT0Nm91CHF0RsdVBLPESYMk~JviN3gbPl0ameQj8IEh5GiloS~6AtuxIhsQpWxEewYe~BrjtcHGpO0NU4Vq5HcWgI0v~o1NvS6dXNkLqVh~nxvf807K~ufbnaSOg6Du4IFzEbxmhAQS~Peb3I2~zn-g5yoRpFKkEwIbaaYr3NdGQ8XCgB~7j0Qb9yeTnYjrj25EjaO~QBumJ-aztNLkdj2Hw228~8GueNT9ttrI884wIeetJe36TXFknK-d8cjxrEdk3DPF8pqFYcuLNmztrPVNH0wUOqySp6MF~8cxRlEPJoKvLB3IiQ__",
+              "name": "초코",
+              "age": 3,
+              "gender": "F",
+              "breed": "푸들",
+              "weight": 10,
+              "neutering": true,
+              "character": [
+                "사람을 잘 따름",
+                "조용한 성격"
+              ],
+              "diseases": [
+                "딱히 없음"
+              ],
+              "lastGrooming": "2023-10-14T15:00:00.000+00:00"
+            },
+            "groomerName": "한지민",
+            "groomerImage": "https://s3-alpha-sig.figma.com/img/f20d/81d2/49c56662ac9bb09ec774324f866934de?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=AgiZSnY6SflgT2CFcJNQF5jYXiDfc68oxS1ywO3JOBgKaVo9fCC94iVxi3G1kKGPxxErBv~xg0dov5JS97OAC0Q7XeAboylEXD0WcQypOOrqnAHsezCHutMDk-wWK1BylcTziztuOVOnL6v4Xu00LjNCpm5Sgogqto-bxs6p-jkq4UkKDWf5IWuh096Jn2W4ypOKQEXBnDGGkp57z5pvHWyWH9nROJS8xv0ORsbtyt-QUXbBGzIZ53i-~lfemuQm5wyAUh72xn5F0WwQv687glBwZXZ6KsDOVCee~SW1Wvito6Kn~96PXVtDsbZRWADP3tadWT3hv2DcAqUt7Aeb~Q__",
+            "totalPrice": 220,
+            "dday": 0,
+            "date": "2024-12-07",
+            "startTime": "2024-12-12T06:53:16.989Z",
+            "endTime": "2024-12-12T06:53:16.989Z"
+          }
+        ],
+        "error": {
+          "message": "string",
+          "status": 0
+        }
+      }
+    )
+  }),
 ];

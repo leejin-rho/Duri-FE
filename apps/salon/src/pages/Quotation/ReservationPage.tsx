@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Card, Flex, MobileLayout, Modal, PetInfo, SalonNavbar, Text, theme } from "@duri-fe/ui"
-import { useGetReservedQuotationList, useModal } from "@duri-fe/utils";
+import { useGetCompletedQuotationList, useGetReservedQuotationList, useModal } from "@duri-fe/utils";
 import styled from "@emotion/styled";
 import { TabBarItem } from "@salon/components/quotation/TabBarItem"
 
@@ -11,7 +11,7 @@ const ReservationPage = () => {
   const [selectedTab, setSelectedTab] = useState<string>('reserved')
   const { isOpenModal, openModal, closeModal } = useModal();
   const { data: reservationList } = useGetReservedQuotationList();
-
+  const { data: completedQuotationList } = useGetCompletedQuotationList();
 
   const handleReservationClick = (requestId: number) => {
     console.log(requestId)
@@ -57,7 +57,8 @@ const ReservationPage = () => {
         />
       </Flex>
 
-      {reservationList && reservationList.length > 0 ? (
+      {selectedTab === 'reserved' ?
+      (reservationList && reservationList.length > 0 ? (
         <Flex direction="column" gap={8} padding="30px 20px">
           {reservationList.map((item) => (
             <Flex key={item.requestId} onClick={() => handleReservationClick(item.requestId)}>
@@ -88,6 +89,39 @@ const ReservationPage = () => {
         <FlexGrow>
           <Text>예약된 일정이 없어요.</Text>
         </FlexGrow>
+      )) : (
+        completedQuotationList && completedQuotationList.length > 0 ? (
+          <Flex direction="column" gap={8} padding="30px 20px">
+            {completedQuotationList.map((item) => (
+              <Flex key={item.requestId}>
+                <Card borderRadius={12} padding="12px">
+                  <PetInfo
+                    themeVariant="medium"
+                    image={item.petDetailResponse.image}
+                    name={item.petDetailResponse.name}
+                    breed={item.petDetailResponse.breed}
+                    age={item.petDetailResponse.age}
+                    gender={item.petDetailResponse.gender}
+                    weight={item.petDetailResponse.weight}
+                    complete
+                    groomer={{
+                      groomerName: item.groomerName,
+                      groomerImage: item.groomerImage,
+                      date: item.date,
+                      startTime: item.startTime,
+                      endTime: item.endTime
+                    }}
+                  />
+                </Card>
+              </Flex>
+            ))}
+          </Flex>
+        ) : (
+          // TODO : 임시 대체뷰 수정 필요
+          <FlexGrow>
+            <Text>완료된 일정이 없어요.</Text>
+          </FlexGrow>
+        )
       )}
 
       <SalonNavbar />

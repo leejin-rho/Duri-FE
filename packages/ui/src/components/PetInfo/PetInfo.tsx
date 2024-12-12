@@ -33,6 +33,7 @@ interface PetInfoType {
   gender: string;
   neutering?: boolean;
   dday?: number;
+  complete?: boolean;
   groomer?: GroomerInfoType;
   character?: string[];
   diseases?: string[];
@@ -50,6 +51,7 @@ export const PetInfo = ({
   gender,
   neutering,
   dday,
+  complete,
   groomer,
   character,
   diseases,
@@ -92,6 +94,9 @@ export const PetInfo = ({
           <Text typo={typo.name}>{name}</Text>
           {(dday === 0 || dday) && (
             <SalonTag content={dday === 0 ? `D-day` : `D-${dday}`} bg={theme.palette.Normal500} colorCode={theme.palette.Black} typo='Label2' padding='8px 10px' height={26} borderRadius={99} />
+          )}
+          {complete && (
+            <SalonTag content='미용 완료' bg={theme.palette.Gray50} colorCode={theme.palette.Gray300} typo='Label2' padding='8px 10px' height={26} borderRadius={99} />
           )}
         </Flex>
           <Text typo={typo.description} colorCode={theme.palette.Gray400}>

@@ -1,5 +1,5 @@
 import { salonInstance } from "../axiosConfig";
-import { ApprovedQuotationListResponse, PostQuotationRequest, PostQuotationResponse, ReservedQuotationListResponse } from "../types";
+import { ApprovedQuotationListResponse, CompletedQuotationListResponse, PostQuotationRequest, PostQuotationResponse, ReservedQuotationListResponse } from "../types";
 
 export const postQuoatation = async (request: PostQuotationRequest): Promise<PostQuotationResponse['response']> => {
   const response = await salonInstance.post(`/quotation`, request);
@@ -13,5 +13,10 @@ export const getApprovedQuotationList = async (): Promise<ApprovedQuotationListR
 
 export const getReservedQuotationList = async (): Promise<ReservedQuotationListResponse['response'][]> => {
   const response = await salonInstance.get(`/quotation/request/reservation`);
+  return response.data.response;
+}
+
+export const getCompletedQuotationList = async (): Promise<CompletedQuotationListResponse['response'][]> => {
+  const response = await salonInstance.get(`/quotation/request/reservation/complete`);
   return response.data.response;
 }

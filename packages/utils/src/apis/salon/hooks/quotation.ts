@@ -1,4 +1,4 @@
-import { getApprovedQuotationList, getReservedQuotationList, postQuoatation,PostQuotationRequest, PostQuotationResponse } from "@duri-fe/utils";
+import { getApprovedQuotationList, getCompletedQuotationList, getReservedQuotationList, postQuoatation,PostQuotationRequest, PostQuotationResponse } from "@duri-fe/utils";
 import { useMutation, UseMutationResult, useQuery } from "@tanstack/react-query"
 
 export const usePostQuotation = (): UseMutationResult<PostQuotationResponse['response'], void, PostQuotationRequest> => {
@@ -26,6 +26,17 @@ export const useGetReservedQuotationList = () => {
   const { data } = useQuery({
     queryKey: ['reservedQuotationList'],
     queryFn: () => getReservedQuotationList(),
+    enabled: true,
+    staleTime: 10 * 60 * 1000,
+  });
+
+  return { data };
+}
+
+export const useGetCompletedQuotationList = () => {
+  const { data } = useQuery({
+    queryKey: ['completedQuotationList'],
+    queryFn: () => getCompletedQuotationList(),
     enabled: true,
     staleTime: 10 * 60 * 1000,
   });
