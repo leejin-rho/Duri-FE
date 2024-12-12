@@ -142,3 +142,21 @@ export interface CompletedQuotationListResponse extends BaseResponse {
     endTime: string;
   }
 }
+
+export interface QuotationDetailResponse extends BaseResponse {
+  response: {
+    shopDetail: ShopDetailType;
+    quotationCreatedAt: string; 
+    petDetail: RequestDetailPetType;
+    menuDetail: QuotationDetailsType;
+    quotation: PostQuotationRequest;
+    status: string;
+  }
+}
+
+interface ShopDetailType {
+  shopName: string;
+  shopAddress: string;
+  shopPhone: string;
+  groomerName: string;
+}

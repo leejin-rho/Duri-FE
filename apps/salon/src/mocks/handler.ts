@@ -152,4 +152,80 @@ export const handlers = [
       }
     )
   }),
+
+  http.get(BASE_URL+'/quotation/request/reservation/complete', () => {
+    return HttpResponse.json(
+      {
+        "success": true,
+        "response": {
+          "shopDetail": {
+            "shopName": "강남 미용샵",
+            "shopAddress": "서울시 강남구",
+            "shopPhone": "02-123-4567",
+            "groomerName": "한지민"
+          },
+          "quotationCreatedAt": "2024-12-07T09:31:48.965428",
+          "petDetail": {
+            "image": "https://example.com/dog2.jpg",
+            "name": "초코",
+            "age": 3,
+            "gender": "F",
+            "breed": "푸들",
+            "weight": 10,
+            "neutering": true,
+            "character": [
+              "사람을 잘 따름",
+              "조용한 성격"
+            ],
+            "diseases": [
+              "딱히 없음"
+            ],
+            "lastGrooming": "2023-10-14T15:00:00.000+00:00"
+          },
+          "menuDetail": {
+            "groomingMenu": [
+              "string"
+            ],
+            "additionalGrooming": [
+              "stringaa"
+            ],
+            "specialCare": [
+              "stringaa"
+            ],
+            "designCut": [
+              "stringaa"
+            ],
+            "otherRequests": "stringaaa",
+            "day": "2024-12-06",
+            "time9": false,
+            "time10": false,
+            "time11": false,
+            "time12": false,
+            "time13": true,
+            "time14": true,
+            "time15": true,
+            "time16": true,
+            "time17": false,
+            "time18": false
+          },
+          "quotation": {
+            "requestId": 2,
+            "priceDetail": {
+              "groomingPrice": 220,
+              "additionalPrice": 220,
+              "specialCarePrice": 220,
+              "designPrice": 220,
+              "customPrice": 220,
+              "totalPrice": 220
+            },
+            "memo": "2222string",
+            "startDateTime": "2024-12-07T00:31:30.495",
+            "endDateTime": "2024-12-07T00:31:30.495"
+          },
+          "status": "결제 완료"
+        },
+        "error": null
+      }
+    )
+  }),
 ];
