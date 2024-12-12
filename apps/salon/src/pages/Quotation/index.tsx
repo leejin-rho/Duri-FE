@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, Flex, MobileLayout, Modal, PetInfo, SalonNavbar, SalonTag, Text, theme, WidthFitFlex } from "@duri-fe/ui"
 import { useGetApprovedQuotationList, useGetNewRequestList, useModal } from "@duri-fe/utils";
 import styled from "@emotion/styled";
+import { DetailQuotation } from "@salon/components/quotation/DetailQuotation";
 import { DetailRequest } from "@salon/components/quotation/DetailRequest";
 import { TabBarItem } from "@salon/components/quotation/TabBarItem"
 
@@ -145,7 +146,7 @@ const QuotationPage = () => {
           </Modal>
 
           <Modal title='견적서' margin="20px" isOpen={isOpenModal && (selectedTab === 'approved')} toggleModal={closeModal}>
-            견적서 작성 완료!!
+            <DetailQuotation requestId={selectedRequestId} closeModal={closeModal} />
           </Modal>
         </>
       }

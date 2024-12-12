@@ -153,7 +153,7 @@ export const handlers = [
     )
   }),
 
-  http.get(BASE_URL+'/quotation/request/reservation/complete', () => {
+  http.get(BASE_URL+'/quotation/2', () => {
     return HttpResponse.json(
       {
         "success": true,
