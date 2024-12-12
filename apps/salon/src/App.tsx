@@ -11,6 +11,7 @@ import OnboardingPage from '@pages/Onboarding';
 import StartPage from '@pages/Onboarding/StartPage';
 import QuotationPage from '@pages/Quotation';
 import ReplyPage from '@pages/Quotation/ReplyPage';
+import ReservationPage from '@pages/Quotation/ReservationPage';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/onboarding/detail" element={<OnboardingPage />} />
 
         <Route path="/quotation" element={<QuotationPage />} />
+        <Route path="/quotation/reservation" element={<ReservationPage />} />
         <Route path="/quotation/reply/:requestId" element={<ReplyPage />} />
       </Routes>
     </BrowserRouter>
