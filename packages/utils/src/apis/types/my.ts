@@ -1,3 +1,4 @@
+import { PetInfo } from '@duri-fe/ui';
 export interface MyReviewResponseType {
   response: {
     reviewCnt: number;
@@ -16,4 +17,24 @@ export interface MyReviewResponseType {
       },
     ];
   };
+}
+
+export interface PetListInfo {
+  response: {
+    petProfileList: PetInfo[];
+  };
+}
+
+export interface PetInfo {
+  id: number;
+  name: string;
+  image?: string;
+  breed: string;
+  age: number;
+  weight: number;
+  gender: string;
+  neutering?: boolean;
+  lastGrooming?: string | null;
+  character: string[];
+  diseases: string[];
 }

@@ -24,44 +24,40 @@ import {
 } from '@duri-fe/ui';
 import {
   useGetPetInfo,
-  // useGetRecommendedShopList,
-  // useGetRegularShopList,
+  useGetRecommendedShopList,
+  useGetRegularShopList,
   useGetUpcomingReservation,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 const Home = () => {
-  const petData = useGetPetInfo();
+  const { data: petData, isError: getPetInfoError } = useGetPetInfo();
   const [petInfo, setPetInfo] = useState<PetInfoType>(defaultPetInfo);
-  // const [regularShopList, setRegularShopList] = useState<RegularShopType[]>([]);
-  const [regularShopList] = useState<RegularShopType[]>([]);
+  const [regularShopList, setRegularShopList] = useState<RegularShopType[]>([]);
   // 사용자 lat, lon 정보가 필요함!!!!
-  // const [recommendedShopList, setRecommendedShopList] = useState<
-  const [recommendedShopList, ] = useState<
+  const [recommendedShopList, setRecommendedShopList] = useState<
     RecommendedShopType[]
   >([]);
   const [upcomingReservation, setUpcomingReservation] =
     useState<UpcomingReservationType>();
-  // const recommendedListData = useGetRecommendedShopList();
-  // const regularListData = useGetRegularShopList();
-  const reservationData = useGetUpcomingReservation();
+  const { data: recommendedListData } = useGetRecommendedShopList();
+  const { data: regularListData } = useGetRegularShopList();
+  const { data: reservationData } = useGetUpcomingReservation();
 
   const navigate = useNavigate();
   const handleNavigate = () => navigate('/shop');
 
   useEffect(() => {
     // if (recommendedListData) console.log(recommendedListData)
-    // if (recommendedListData) setRecommendedShopList(recommendedListData);
+    if (regularListData) setRegularShopList(regularListData.homeShopList);
+    if (recommendedListData) setRecommendedShopList(recommendedListData);
     if (reservationData) setUpcomingReservation(reservationData);
-  }, [reservationData]);
+  }, [reservationData, regularListData, recommendedListData]);
 
   useEffect(() => {
     if (petData) setPetInfo(petData);
-  }, [petData]);
-
-  // useEffect(()=>{
-  //   if(regularListData) setRegularShopList(regularListData.homeShopList)
-  // },[regularListData])
+    if (getPetInfoError) navigate('/login');
+  }, [petData, getPetInfoError]);
 
   return (
     <MobileLayout>
@@ -135,9 +131,10 @@ const Home = () => {
           >
             <AiStyleBanner height={70} />
           </StyleBannerWrapper>
-
+        </Flex>
+        <Flex direction="column">
           {/* 추천 샵 */}
-          {recommendedShopList.length > 0 && (
+          {recommendedShopList && (
             <RecommendedShop shopList={recommendedShopList} />
           )}
         </Flex>

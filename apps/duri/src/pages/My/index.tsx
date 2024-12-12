@@ -20,12 +20,13 @@ import { useGetPetInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 const MyPage = () => {
-  const petData = useGetPetInfo();
+  // const { data: petData, isError: getPetInfoError } = useGetPetInfo();
+  const { data: petData, } = useGetPetInfo();
   const [petInfo, setPetInfo] = useState<PetInfoType>();
   const navigate = useNavigate();
   const handleNavigate = (path: string) => navigate(path);
   const logout = () => {
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('authorization_user');
     navigate('/login');
   };
   useEffect(() => {
@@ -41,16 +42,18 @@ const MyPage = () => {
         <Header />
         <UserInfo userId={1} userName="김찬별" phone="01051778747" />
         <Status reservationCnt={3} noShowCnt={0} />
-        {petInfo && <PetInfoCard
-          petId={petInfo.petId}
-          age={petInfo.age}
-          name={petInfo.name}
-          breed={petInfo.breed}
-          gender={petInfo.gender}
-          neutering={petInfo.neutering ?? false}
-          weight={petInfo.weight}
-          imageURL={petInfo.image}
-        />}
+        {petInfo && (
+          <PetInfoCard
+            petId={petInfo.petId}
+            age={petInfo.age}
+            name={petInfo.name}
+            breed={petInfo.breed}
+            gender={petInfo.gender}
+            neutering={petInfo.neutering ?? false}
+            weight={petInfo.weight}
+            imageURL={petInfo.image}
+          />
+        )}
 
         <Flex direction="column" margin="8px 0" gap={8}>
           <Flex gap={10}>

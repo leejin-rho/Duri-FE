@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Control, Controller, UseFormSetValue } from 'react-hook-form';
+import { Control, Controller, UseFormSetValue, useWatch } from 'react-hook-form';
 
 import { personalityOptions } from '@duri/assets/data/pet';
 import { FormData } from '@duri/pages/My/MyPetModify';
@@ -8,26 +7,25 @@ import styled from '@emotion/styled';
 
 export const PetPersonalityModify = ({
   control,
-  getStringArrayValues,
   setValue,
 }: {
   control: Control<FormData>;
   setValue: UseFormSetValue<FormData>;
-  getStringArrayValues: (name: keyof FormData) => string[];
 }) => {
-  const [personalityList, setPersonalityList] = useState<string[]>(
-    getStringArrayValues('character'),
-  );
+  const personalityList = useWatch({
+    control,
+    name: 'character', // 'character' 필드를 감시
+    defaultValue: [], // 기본값 설정
+  });
+
   const handlePersonalityToggle = (key: string) => {
-    if (personalityList.includes(key)) {
-      setPersonalityList(
-        personalityList.filter((disease: string) => disease !== key),
-      );
-    } else {
-      setPersonalityList([...personalityList, key]);
-    }
-    setValue('character', personalityList);
-  }
+    const updatedList = personalityList.includes(key)
+      ? personalityList.filter((item: string) => item !== key)
+      : [...personalityList, key];
+
+    setValue('character', updatedList); // 폼 상태 업데이트
+  };
+
   return (
     <Flex direction="column" align="flex-start" margin="17px 0 0 0">
       <Text typo="Title3">성격</Text>
@@ -38,7 +36,7 @@ export const PetPersonalityModify = ({
           validate: (value: string[]) =>
             value.length > 0 || '성격에 대해 알려주세요.',
         }}
-        render={() => (
+        render={({field}) => (
           <FitFlex justify="flex-start" gap={8} margin="19px 0 0 0">
             {personalityOptions.map(({ key, label }) => (
               <Button
@@ -47,17 +45,17 @@ export const PetPersonalityModify = ({
                 width="fit-content"
                 height="43px"
                 bg={
-                  personalityList.includes(key)
+                  field.value?.includes(key)
                     ? theme.palette.Black
                     : theme.palette.White
                 }
                 fontColor={
-                  personalityList.includes(key)
+                  field.value?.includes(key)
                     ? theme.palette.White
                     : theme.palette.Black
                 }
                 border={
-                  personalityList.includes(key)
+                  field.value?.includes(key)
                     ? `1px solid ${theme.palette.Black}`
                     : `1px solid ${theme.palette.Gray100}`
                 }

@@ -29,7 +29,7 @@ export const getRegularShopInfo = async (): Promise<
 export const getRecommendedShopInfo = async (): Promise<
   RecommendShopResponse['response']
 > => {
-  const response = await duriInstance.get(`/user/home/recommend`);
+  const response = await duriInstance.get(`/user/home/recommend?lat=1&lon=1`);
   return response.data.response;
 };
 

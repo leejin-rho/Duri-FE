@@ -1,5 +1,5 @@
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { ModifyPetInfoCard } from '@duri/components/my/modify/ModifyPetInfoCard';
 import {
@@ -11,7 +11,6 @@ import {
 
 
 const MyPetPage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
 
   return (
@@ -22,7 +21,7 @@ const MyPetPage = () => {
           backIcon={true}
           onClickBack={() => navigate(-1)}
         />
-      <ModifyPetInfoCard petId={Number(location.state)}/>
+      <ModifyPetInfoCard />
     </MobileLayout>
   );
 };

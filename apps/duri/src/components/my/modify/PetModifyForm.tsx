@@ -28,11 +28,6 @@ export const PetModifyForm = ({
   setValue: UseFormSetValue<FormData>;
   getValues: (name: keyof FormData) => string | number | string[] | boolean;
 }) => {
-  const getStringArrayValues = (name: keyof FormData) => {
-    const value = getValues(name);
-    return Array.isArray(value) ? value : [];
-  };
-
   // 드롭다운에서 선택된 값 업데이트!!!
   const handleBreedSelect = (value: string | number) => {
     if (typeof value === 'string') setValue('breed', value);
@@ -48,15 +43,25 @@ export const PetModifyForm = ({
     <Flex direction="column" gap={17} margin="23px 0 92px 0">
       <Flex justify="flex-start" gap={65}>
         <Text typo="Title3">이름</Text>
-        <Text typo="Body3">{getValues('name')}</Text>
+        <Controller
+          name="name"
+          control={control}
+          render={({ field }) => <Text typo="Body3">{field.value}</Text>}
+        />
       </Flex>
       <Flex justify="flex-start" gap={65}>
         <Text typo="Title3">견종</Text>
-        <Dropdown
-          options={breeds}
-          defaultValue={(getValues('breed') as string | number) ?? '견종 입력'}
-          width={114}
-          onSelect={handleBreedSelect}
+        <Controller
+          name="breed"
+          control={control}
+          render={({ field }) => (
+            <Dropdown
+              options={breeds}
+              defaultValue={field.value}
+              width={114}
+              onSelect={handleBreedSelect}
+            />
+          )}
         />
       </Flex>
       <Flex justify="flex-start" gap={65}>
@@ -138,12 +143,18 @@ export const PetModifyForm = ({
 
       <Flex justify="flex-start" gap={65}>
         <Text typo="Title3">나이</Text>
-        <Dropdown
-          options={ageList}
-          defaultValue={`${getValues('age')}살`}
-          width={114}
-          onSelect={handleBreedSelect}
-          suffix="살"
+        <Controller
+          name="age"
+          control={control}
+          render={({ field }) => (
+            <Dropdown
+              options={ageList}
+              defaultValue={`${field.value}살`}
+              width={114}
+              onSelect={handleBreedSelect}
+              suffix="살"
+            />
+          )}
         />
       </Flex>
 
@@ -162,15 +173,16 @@ export const PetModifyForm = ({
           }}
           render={({ field }) => (
             <>
-              {/* style={{ display: 'flex', alignItems: 'center', gap: '4px' } */}
               <WidthFitFlex gap={12} justify="flex-start" align="flex-end">
                 {/* 정수 Dropdown */}
                 <Dropdown
                   width={45}
                   options={integerList}
-                  defaultValue={field.value.toString().split('.')[0] || '0'} // 정수 부분 초기값
+                  defaultValue={
+                    field.value ? field.value?.toString().split('.')[0] : 0
+                  } // 정수 부분 초기값
                   onSelect={(value) => {
-                    const decimal = field.value.toString().split('.')[1] || 0; // 소수 추출
+                    const decimal = field.value?.toString().split('.')[1] || 0; // 소수 추출
                     field.onChange(parseFloat(`${value}.${decimal}`)); // 정수와 소수 조합
                   }}
                 />
@@ -181,9 +193,11 @@ export const PetModifyForm = ({
                 <Dropdown
                   width={45}
                   options={decimalList}
-                  defaultValue={field.value.toString().split('.')[1] || '0'} // 소수 부분 초기값
+                  defaultValue={
+                    field.value?.toString().split('.')[1] ?? 0
+                  } // 소수 부분 초기값
                   onSelect={(value) => {
-                    const integer = field.value.toString().split('.')[0] || 0; // 정수 추출
+                    const integer = field.value?.toString().split('.')[0] || 0; // 정수 추출
                     field.onChange(parseFloat(`${integer}.${value}`)); // 정수와 소수 조합
                   }}
                 />
@@ -195,16 +209,8 @@ export const PetModifyForm = ({
           )}
         />
       </Flex>
-      <PetPersonalityModify
-        control={control}
-        getStringArrayValues={getStringArrayValues}
-        setValue={setValue}
-      />
-      <PetDiseaseModify
-        control={control}
-        getStringArrayValues={getStringArrayValues}
-        setValue={setValue}
-      />
+      <PetPersonalityModify control={control} setValue={setValue} />
+      <PetDiseaseModify control={control} setValue={setValue} />
     </Flex>
   );
 };

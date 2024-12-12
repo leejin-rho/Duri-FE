@@ -22,7 +22,6 @@ interface PetInfoCardProps {
 }
 
 export const PetInfoCard = ({
-  petId,
   name,
   imageURL,
   age,
@@ -32,7 +31,7 @@ export const PetInfoCard = ({
   neutering,
 }: PetInfoCardProps) => {
   const navigate = useNavigate();
-  const handleNavigate = () => navigate('/my/pet', { state: petId });
+  const handleNavigate = () => navigate('/my/pet');
   return (
     <FlexButton
       direction="column"

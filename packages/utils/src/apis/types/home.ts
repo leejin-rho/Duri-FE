@@ -104,5 +104,5 @@ export interface RecommendShopResponse extends BaseResponse {
     shopTag1: string;
     shopTag2: string;
     score: number;
-  };
+  }[];
 }
