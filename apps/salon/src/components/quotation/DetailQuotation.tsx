@@ -1,4 +1,4 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Button, Flex, HeightFitFlex, ResponseQuotation, Text, theme } from "@duri-fe/ui";
 import { useGetDetailQuotation } from "@duri-fe/utils";
@@ -15,15 +15,20 @@ export const DetailQuotation = ({
   enableCompleteButton = false,
   closeModal,
 }: DetailQuotationProps) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { data: quotation } = useGetDetailQuotation(requestId);
+
+  const handleNavigate = () => {
+    closeModal();
+    navigate(`/feedback`);
+  }
 
   if (!quotation) return null;
 
   return (
     <Flex direction="column">
-      <ResponseQuotation responseList={quotation}>
+      <ResponseQuotation responseList={quotation} isSalon>
         <HeightFitFlex gap={8}>
           <Button 
             width='120px'
@@ -40,11 +45,7 @@ export const DetailQuotation = ({
             fontColor={theme.palette.White}
             disabled={!enableCompleteButton}
             borderRadius="8px"
-            // onClick={
-            //   completeToggle
-            //     ? handleCompleteGrooming
-            //     : bottomSheetProps.onDismiss
-            // }
+            onClick={enableCompleteButton ? handleNavigate : undefined}
           >
             <Text typo='Body3'>일지 쓰기</Text>
           </CompleteButton>
