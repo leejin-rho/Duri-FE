@@ -22,10 +22,17 @@ import styled from '@emotion/styled';
 import { DetailQuotation } from '@salon/components/quotation/DetailQuotation';
 import { DetailRequest } from '@salon/components/quotation/DetailRequest';
 import { TabBarItem } from '@salon/components/quotation/TabBarItem';
+import {
+  differenceInDays,
+  differenceInHours,
+  differenceInMinutes,
+} from 'date-fns';
 
 const QuotationPage = () => {
   const navigate = useNavigate();
+
   const [selectedTab, setSelectedTab] = useState<string>('new');
+
   const [selectedRequestId, setSelectedRequestId] = useState<number | null>(
     null,
   );
@@ -34,6 +41,23 @@ const QuotationPage = () => {
 
   const { data: newRequestList } = useGetNewRequestList();
   const { data: approvedQuotationList } = useGetApprovedQuotationList();
+
+  /** n시간 전 출력 */
+  const calculateTimeAgo = (date: string | Date) => {
+    const now = new Date();
+
+    const diffDays = differenceInDays(now, date);
+    const diffHours = differenceInHours(now, date);
+    const diffMinutes = differenceInMinutes(now, date);
+
+    if (diffDays > 0) {
+      return `${diffDays}일 전`;
+    } else if (diffHours > 0) {
+      return `${diffHours}시간 전`;
+    } else {
+      return `${diffMinutes}분 전`;
+    }
+  };
 
   const handleRequestClick = (requestId: number) => {
     setSelectedRequestId(requestId);
@@ -166,7 +190,8 @@ const QuotationPage = () => {
                   />
                 </TagWrapper>
                 <TimeAgoText typo="Caption3" colorCode={theme.palette.Gray300}>
-                  1시간전
+                  {quotation.requestCreatedAt &&
+                    calculateTimeAgo(quotation.requestCreatedAt)}
                 </TimeAgoText>
               </PetInfoCard>
             </Flex>

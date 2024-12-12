@@ -1,4 +1,4 @@
-import { BaseResponse } from "./base";
+import { BaseResponse } from './base';
 
 export interface TimeType {
   time9: boolean;
@@ -38,8 +38,8 @@ export interface NewRequestListResponse {
     petNeutering: boolean;
     petCharacter: string[];
     petDiseases: string[];
-    requestCreatedAt: Date | string | null
-  }
+    requestCreatedAt: Date | string | null;
+  };
 }
 
 /** [GET] 견적 요청서 세부 response */
@@ -50,7 +50,7 @@ export interface RequestDetailResponse {
     pet: RequestDetailPetType;
     groomer: RequestDetailGroomerType;
     quotationDetails: QuotationDetailsType;
-  }
+  };
 }
 
 export interface RequestDetailPetType {
@@ -101,13 +101,13 @@ export interface PostQuotationRequest {
 export interface PostQuotationResponse extends BaseResponse {
   response: {
     data: string;
-  }
+  };
 }
 
 export interface ApprovedQuotationListResponse extends BaseResponse {
-  response: (NewRequestListResponse['response'] & {
+  response: NewRequestListResponse['response'] & {
     status: string;
-  })
+  };
 }
 
 export interface ReservedQuotationListResponse extends BaseResponse {
@@ -123,7 +123,7 @@ export interface ReservedQuotationListResponse extends BaseResponse {
     date: string;
     startTime: string;
     endTime: string;
-  }
+  };
 }
 
 export interface CompletedQuotationListResponse extends BaseResponse {
@@ -139,18 +139,18 @@ export interface CompletedQuotationListResponse extends BaseResponse {
     date: string;
     startTime: string;
     endTime: string;
-  }
+  };
 }
 
 export interface QuotationDetailResponse extends BaseResponse {
   response: {
     shopDetail: ShopDetailType;
-    quotationCreatedAt: string; 
+    quotationCreatedAt: string;
     petDetail: RequestDetailPetType;
     menuDetail: QuotationDetailsType;
     quotation: PostQuotationRequest;
     status: string;
-  }
+  };
 }
 
 interface ShopDetailType {

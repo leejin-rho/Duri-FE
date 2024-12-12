@@ -76,11 +76,12 @@ export const ResponseQuotation = ({
         <Flex direction="column" align="flex-start" padding="0 35.5px" gap={24}>
           <Text typo="Body2">요청사항</Text>
           {isSalon ? (
-            <TextField value={memo} width={266} multiline={true} height={108} onChange={undefined} />
+            <MemoText typo="Label3" colorCode={theme.palette.Gray500}>
+              {memo}
+            </MemoText>
           ) : (
             <TextField value={memo} width={266} multiline={true} height={108} />
           )}
-
         </Flex>
         <Seperator mode="dotted" height="2px" />
         <HeightFitFlex direction="column" gap={18}>
@@ -111,4 +112,8 @@ const SingleLineText = styled(Text)`
 
 const MaxWidthFlex = styled(Flex)`
   max-width: 337px;
+`;
+
+const MemoText = styled(Text)`
+  text-align: start;
 `;
