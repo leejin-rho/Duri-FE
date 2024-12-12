@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import salonDefault from '@assets/images/pngs/salonDefault.png';
 import {
   Button,
@@ -16,13 +18,14 @@ import styled from '@emotion/styled';
 interface ShopLineProps {
   id: number;
   title: string;
-  score: string;
+  score: number;
   reviewNum: number;
   distance: number;
   address: string;
   phone: string;
   isClicked?: boolean;
   onClick: () => void;
+  tags: string[];
 }
 
 export const ShopLine = ({
@@ -35,9 +38,20 @@ export const ShopLine = ({
   phone,
   isClicked = false,
   onClick,
+  tags,
 }: ShopLineProps) => {
+  const navigate = useNavigate();
+  const moveToDetail = (shopId: number | string) => {
+    navigate(`/shop/${shopId}`);
+  };
+
+  const handleSendClick = (event: React.MouseEvent) => {
+    event.stopPropagation(); // 이벤트 전파 차단
+    onClick?.();
+  };
+
   return (
-    <HeightFitFlex gap={20} key={id}>
+    <HeightFitFlex gap={20} key={id} onClick={() => moveToDetail(id)}>
       <SalonImg src={salonDefault} />
       <Flex direction="column" align="flex-start" gap={8}>
         <Flex gap={17} justify="flex-start">
@@ -54,43 +68,44 @@ export const ShopLine = ({
           <MarkText>{`${distance}m | `}</MarkText>
           {address}
         </TextLine>
-
-        <Flex gap={6} justify="flex-start">
+        <Flex>
+          <Flex direction="column" gap={8}>
+            <Flex gap={6} justify="flex-start">
+              <Button
+                width="53px"
+                height="22px"
+                padding="6.5px 9.5px"
+                borderRadius="2px"
+                bg={theme.palette.White}
+                border={`0.8px solid ${theme.palette.Gray100}`}
+                disabled={true}
+              >
+                <HardText typo="Caption2" colorCode={theme.palette.Gray500}>
+                  영업중
+                </HardText>
+              </Button>
+              <Text typo="Caption2" colorCode={theme.palette.Link}>
+                {phone}
+              </Text>
+            </Flex>
+            <TagList gap={8} justify="flex-start">
+              {tags.map((tag, idx) => (
+                <SalonTag key={idx} content={tag} />
+              ))}
+            </TagList>
+          </Flex>
           <Button
-            width="53px"
-            height="22px"
-            padding="6.5px 9.5px"
-            borderRadius="2px"
-            bg={theme.palette.White}
-            border={`0.8px solid ${theme.palette.Gray100}`}
-            disabled={true}
+            width="42px"
+            height="42px"
+            borderRadius="40px"
+            onClick={handleSendClick}
+            bg={isClicked ? theme.palette.Normal600 : theme.palette.Normal100}
+            padding="0"
           >
-            <HardText typo="Caption2" colorCode={theme.palette.Gray500}>
-              영업중
-            </HardText>
+            <Send width={21} height={21} color={theme.palette.Normal800} />
           </Button>
-          <Text typo="Caption2" colorCode={theme.palette.Link}>
-            {phone}
-          </Text>
-        </Flex>
-        <Flex gap={8} justify="flex-start">
-          <SalonTag content="노견전문" />
-          <SalonTag content="소형견" />
-          <SalonTag content="노견전문" />
         </Flex>
       </Flex>
-      <WidthFitFlex direction="column" justify="flex-end">
-        <Button
-          width="42px"
-          height="42px"
-          borderRadius="40px"
-          onClick={onClick}
-          bg={isClicked ? theme.palette.Normal600 : theme.palette.Normal100}
-          padding="0"
-        >
-          <Send width={21} height={21} color={theme.palette.Normal800} />
-        </Button>
-      </WidthFitFlex>
     </HeightFitFlex>
   );
 };
@@ -107,4 +122,8 @@ const MarkText = styled.span`
 
 const TextLine = styled(Text)`
   display: inline;
+`;
+
+const TagList = styled(Flex)`
+  flex-wrap: wrap;
 `;

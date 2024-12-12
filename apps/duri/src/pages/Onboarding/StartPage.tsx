@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import Instruction from '@components/onboarding/Instructions';
 import Welcome from '@components/onboarding/Welcome';
 
+
 const StartPage = () => {
   const navigate = useNavigate();
 

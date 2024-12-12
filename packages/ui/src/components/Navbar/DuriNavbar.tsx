@@ -49,7 +49,7 @@ export const DuriNavbar = () => {
             <ShopIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/quotation'}
+            isActive={pathname.startsWith('/quotation')}
             text="견적서"
             onClick={() => handleNavigate('/quotation')}
             iconType="quotation"
@@ -65,7 +65,7 @@ export const DuriNavbar = () => {
             <DiaryIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/my'}
+            isActive={pathname.startsWith('/my')}
             text="마이"
             onClick={() => handleNavigate('/my')}
             iconType="my"
@@ -90,6 +90,9 @@ const TabContainer = styled(Flex)`
   position: fixed;
   bottom: 0;
   z-index: 20;
-  border-top: 0.5px solid
-    hsla(224.99999999999997, 5.084745762711864%, 46.27450980392157%, 0.16);
+  border-top: 0.5px solid hsla(224.99999999999997, 5.084745762711864%, 46.27450980392157%, 0.16);
+
+  @media (min-width: 480px) {
+    max-width: 375px;
+  }
 `;

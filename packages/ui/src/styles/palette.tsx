@@ -13,6 +13,7 @@ export const palette = {
 
   //Gray Scale
   White: '#FFFFFF',
+  Gray_White: '#FAFAFA',
   Gray20: '#F4F4F6',
   Gray50: '#EFEEF1',
   Gray100: '#DFDFE2',

@@ -49,4 +49,9 @@ export const FrontBtn = styled(Button)`
   position: fixed;
   bottom: 92px;
   z-index: 3;
+  max-width: 480px;
+
+  @media (min-width: 480px) {
+    width: 375px;
+  }
 `;

@@ -1,7 +1,14 @@
 import React from 'react';
 
-import { AlertStar, Button, Flex, Text, theme, WidthFitFlex } from '@duri-fe/ui';
-import { SalonOwnerFormData } from '@salon/types/onboarding';
+import { SalonOwnerFormData } from '@assets/types/onboarding';
+import {
+  AlertStar,
+  Button,
+  Flex,
+  Text,
+  theme,
+  WidthFitFlex,
+} from '@duri-fe/ui';
 
 import {
   ButtonWrapper,
@@ -14,7 +21,10 @@ interface SalonOwnerConfirmProps {
   onNext: () => void;
 }
 
-const SalonOwnerConfirm = ({ salonOwnerFormData, onNext }: SalonOwnerConfirmProps) => {
+const SalonOwnerConfirm = ({
+  salonOwnerFormData,
+  onNext,
+}: SalonOwnerConfirmProps) => {
   return (
     <>
       <Flex direction="column" align="flex-start" padding="48px 0 96px 0">
@@ -25,8 +35,8 @@ const SalonOwnerConfirm = ({ salonOwnerFormData, onNext }: SalonOwnerConfirmProp
           padding="0 0 48px 0"
         >
           <Flex direction="column" align="flex-start">
-            <Text typo="Heading2">입력하신 정보를</Text>
-            <Text typo="Heading2">확인해주세요</Text>
+            <Text typo="Heading">입력하신 정보를</Text>
+            <Text typo="Heading">확인해주세요</Text>
           </Flex>
           <Text typo="Body3" colorCode={theme.palette.Gray500}>
             등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!
@@ -69,15 +79,23 @@ const SalonOwnerConfirm = ({ salonOwnerFormData, onNext }: SalonOwnerConfirmProp
             </Text>
           </Flex>
 
-          <Flex justify="flex-start" align='flex-start' gap={36}>
+          <Flex justify="flex-start" align="flex-start" gap={36}>
             <Text typo="Label1">
               자격
               <AlertStar isUpper />
             </Text>
-            <WidthFitFlex direction='column' justify='flex-start' align='start' gap={12}>
-              {salonOwnerFormData.license && salonOwnerFormData.license.map((item) => (
-                <Text key={item} typo="Body4">{item}</Text>
-              ))}
+            <WidthFitFlex
+              direction="column"
+              justify="flex-start"
+              align="start"
+              gap={12}
+            >
+              {salonOwnerFormData.license &&
+                salonOwnerFormData.license.map((item) => (
+                  <Text key={item} typo="Body4">
+                    {item}
+                  </Text>
+                ))}
             </WidthFitFlex>
           </Flex>
         </Flex>
@@ -97,7 +115,11 @@ const SalonOwnerConfirm = ({ salonOwnerFormData, onNext }: SalonOwnerConfirmProp
       </ContactContainer>
 
       <ButtonWrapper padding="0 20px">
-        <Button bg={theme.palette.Black} fontColor={theme.palette.White} onClick={onNext}>
+        <Button
+          bg={theme.palette.Black}
+          fontColor={theme.palette.White}
+          onClick={onNext}
+        >
           다음
         </Button>
       </ButtonWrapper>

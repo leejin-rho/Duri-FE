@@ -41,7 +41,7 @@ export const SalonNavbar = () => {
             <HomeIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/timetable'}
+            isActive={pathname.startsWith('/timetable')}
             text="시간표"
             onClick={() => handleNavigate('/timetable')}
             iconType="timetable"
@@ -49,7 +49,7 @@ export const SalonNavbar = () => {
             <TimetableIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/quotation'}
+            isActive={pathname.startsWith('/quotation')}
             text="견적서"
             onClick={() => handleNavigate('/quotation')}
             iconType="quotation"
@@ -57,7 +57,7 @@ export const SalonNavbar = () => {
             <QuotationIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/portfolio'}
+            isActive={pathname.startsWith('/portfolio')}
             text="포트폴리오"
             onClick={() => handleNavigate('/portfolio')}
             iconType="portfolio"
@@ -65,7 +65,7 @@ export const SalonNavbar = () => {
             <PortfolioIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/my'}
+            isActive={pathname.startsWith('/my')}
             text="마이"
             onClick={() => handleNavigate('/my')}
             iconType="my"
@@ -92,4 +92,8 @@ const TabContainer = styled(Flex)`
   z-index: 2;
   border-top: 0.5px solid
     hsla(224.99999999999997, 5.084745762711864%, 46.27450980392157%, 0.16);
+
+  @media (min-width: 480px) {
+    max-width: 375px;
+  }
 `;

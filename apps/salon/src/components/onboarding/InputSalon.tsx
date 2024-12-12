@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
+import { SalonFormData } from '@assets/types/onboarding';
 import { Button, Flex, Text, TextField, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
-import { SalonFormData } from '@salon/types/onboarding';
 
 import {
   ButtonWrapper,
@@ -49,8 +49,8 @@ const InputSalon = ({ onNext }: InputSalonProps) => {
           padding="0 0 24px 0"
         >
           <Flex direction="column" align="flex-start">
-            <Text typo="Heading2">미용샵의</Text>
-            <Text typo="Heading2">정보를 입력해주세요</Text>
+            <Text typo="Heading">미용샵의</Text>
+            <Text typo="Heading">정보를 입력해주세요</Text>
           </Flex>
           <Text typo="Label2" colorCode={theme.palette.Gray500}>
             등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!

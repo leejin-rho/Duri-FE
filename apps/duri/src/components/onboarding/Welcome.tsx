@@ -12,10 +12,10 @@ const Welcome = ({ userName, show }: WelcomeProps) => {
   return (
     <Container show={show} direction="column">
       <Wrapper direction="column">
-        <Text typo="Heading2" align="center">
+        <Text typo="Heading" align="center">
           {userName}님 안녕하세요!
         </Text>
-        <Text typo="Heading2" align="center">
+        <Text typo="Heading" align="center">
           두리묭실에 오신 것을 환영합니다 👋🏻
         </Text>
       </Wrapper>
@@ -29,6 +29,7 @@ export const Container = styled(Flex)<{ show: boolean }>`
   z-index: ${({ show }) => (show ? 1000 : 0)};
   transition: opacity 0.5s;
   position: absolute;
+  max-width: 375px;
 `;
 
 export const Wrapper = styled(Flex)`

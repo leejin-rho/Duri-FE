@@ -1,3 +1,6 @@
+export { default as Tape } from './Tape';
+export { default as SendColor } from './SendColor';
+export { default as Dot } from './Dot';
 export { default as Add } from './Add';
 export { default as AddNew } from './AddNew';
 export { default as Approve } from './Approve';
@@ -16,6 +19,7 @@ export { default as DownArrow } from './DownArrow';
 export { default as Help } from './Help';
 export { default as Information } from './Information';
 export { default as Magnifier } from './Magnifier';
+export { default as EmptyStar } from './EmptyStar';
 export { default as Menu } from './Menu';
 export { default as Notification } from './Notification';
 export { default as SafetyHelp } from './SafetyHelp';
@@ -33,6 +37,7 @@ export { default as QuotationIcon } from './QuotationIcon';
 export { default as ShopIcon } from './ShopIcon';
 export { default as Calendar } from './Calendar';
 export { default as Call } from './Call';
+export { default as CallCenter } from './CallCenter';
 export { default as Doori } from './Doori';
 export { default as FilledHeart } from './FilledHeart';
 export { default as FilledLocation } from './FilledLocation';
@@ -56,6 +61,7 @@ export { default as AlertStar } from './AlertStar';
 export { default as NaverLogo } from './NaverLogo';
 export { default as SpeechBallon } from './SpeechBallon';
 export { default as ListIcon } from './List';
+export { default as EmptyImage } from './EmptyImage';
 export { default as LocationShop } from './LocationShop';
 export { default as RadioSelect } from './RadioSelect';
 export { default as RadioUnselect } from './RadioUnselect';
@@ -65,6 +71,11 @@ export { default as PortfolioIcon } from './PortfolioIcon';
 export { default as TimetableIcon } from './TimetableIcon';
 export { default as CurLocation } from './CurLocation';
 export { default as Pencil } from './Pencil';
+export { default as Time } from './Time';
+export { default as Scissors } from './Scissors';
+export { default as Store } from './Store';
+export { default as Trash } from './Trash';
+export { default as CheckCircle } from './CheckCircle';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -78,12 +89,17 @@ import Backup from './Backup';
 import BeforeArrow from './BeforeArrow';
 import Calendar from './Calendar';
 import Call from './Call';
+import CallCenter from './CallCenter';
 import Chat from './Chat';
 import Chatting from './Chatting';
+import CheckCircle from './CheckCircle';
 import Close from './Close';
 import CloseCircle from './CloseCircle';
 import CurLocation from './CurLocation';
+import Dot from './Dot';
 import DownArrow from './DownArrow';
+import EmptyImage from './EmptyImage';
+import EmptyStar from './EmptyStar';
 import FilledHeart from './FilledHeart';
 import FilledLocation from './FilledLocation';
 import FilledNotification from './FilledNotification';
@@ -106,18 +122,25 @@ import RadioSelect from './RadioSelect';
 import RadioUnselect from './RadioUnselect';
 import Report from './Report';
 import SafetyHelp from './SafetyHelp';
+import Scissors from './Scissors';
 import SecurityWarning from './SecurityWarning';
 import SelectBox from './SelectBox';
 import SelectBoxUn from './SelectBoxUn';
 import Send from './Send';
+import SendColor from './SendColor';
 import Shield from './Shield';
 import Shopping from './Shopping';
 import Star from './Star';
+import Store from './Store';
+import Tape from './Tape';
+import Time from './Time';
 import TimetableIcon from './TimetableIcon';
+import Trash from './Trash';
 import UnionDown from './UnionDown';
 import UnionUp from './UnionUp';
 import Unlock from './Unlock';
 import UpArrow from './UpArrow';
+import Write from './Write';
 
 export const icons = {
   Add,
@@ -132,14 +155,18 @@ export const icons = {
   BeforeArrow,
   Calendar,
   Call,
+  CallCenter,
   Chat,
   Chatting,
   Close,
   CloseCircle,
+  Trash,
   UpArrow,
   DownArrow,
   Help,
   Information,
+  EmptyImage,
+  EmptyStar,
   SafetyHelp,
   SecurityWarning,
   Shield,
@@ -157,6 +184,7 @@ export const icons = {
   CurLocation,
   Notification,
   FilledNotification,
+  SendColor,
   Report,
   FilledReport,
   Menu,
@@ -168,10 +196,17 @@ export const icons = {
   Hold,
   RadioSelect,
   RadioUnselect,
+  Scissors,
+  Store,
   SelectBox,
   SelectBoxUn,
   PortfolioIcon,
   TimetableIcon,
+  Write,
+  Time,
+  Dot,
+  Tape,
+  CheckCircle,
 };
 
 export default icons;

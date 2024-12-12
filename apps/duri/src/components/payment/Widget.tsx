@@ -12,9 +12,8 @@ import { QuotationProps } from '../../assets/types/quotation';
 
 import PaymentInfo from './Info';
 
-
 const clientKey = import.meta.env.VITE_CLIENT_KEY;
-const customerKey = crypto.randomUUID(); //user Idx값으로 대체하기!
+const customerKey = '1'; //user Idx값으로 대체하기!
 
 interface QuotationInfo {
   quotationInfo: QuotationProps;
@@ -25,10 +24,12 @@ interface Amount {
 }
 
 const PaymentWidget = ({ quotationInfo }: QuotationInfo) => {
+  const vat = quotationInfo.groomingTotalPrice * 0.1;
+  const totalPrice = quotationInfo.groomingTotalPrice + vat;
   // const [amount, setAmount] = useState<Amount>({
   const [amount] = useState<Amount>({
     currency: 'KRW',
-    value: quotationInfo.groomingTotalPrice,
+    value: totalPrice,
   });
   const [ready, setReady] = useState<boolean>(false);
   const [widgets, setWidgets] = useState<TossPaymentsWidgets | null>(null);
@@ -147,6 +148,10 @@ const PaymentWidget = ({ quotationInfo }: QuotationInfo) => {
                 failUrl: window.location.origin + '/payment/fail',
                 customerName: '김토스',
                 customerMobilePhone: '01012341234',
+                metadata: {
+                  salonName: quotationInfo.salonName,
+                  date: new Date().toISOString(),
+                },
               });
           } catch (error) {
             // 에러 처리하기

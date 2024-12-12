@@ -14,3 +14,8 @@ export * from './Tag';
 export * from './Header';
 export * from './Card';
 export * from './Toast';
+export * from './Modal';
+export * from './ProfileImage';
+export * from './Quotation';
+export * from './RatingStars';
+export * from './PetInfo';

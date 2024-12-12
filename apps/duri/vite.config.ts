@@ -10,10 +10,11 @@ export default defineConfig({
       { find: '@components', replacement: '/src/components' },
       { find: '@styles', replacement: '/src/styles' },
       { find: '@assets', replacement: '/src/assets' },
-      { find: '@mocks', replacement: '/src/mocks' }
+      { find: '@mocks', replacement: '/src/mocks' },
     ],
   },
   server: {
+    host: '0.0.0.0',
     port: 3000,
   },
 });

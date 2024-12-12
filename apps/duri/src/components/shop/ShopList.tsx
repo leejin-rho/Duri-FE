@@ -1,5 +1,5 @@
-import { forwardRef, useState } from 'react';
-import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
+import { useState } from 'react';
+import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import {
   Button,
@@ -14,20 +14,34 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
-import { css } from '@emotion/react';
+import { ShopInfoType, useBottomSheet } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
-import 'react-spring-bottom-sheet/dist/style.css';
-
+import { SendRequestQBox } from './SendRequesQBox';
 import { ShopLine } from './ShopLine';
 
-export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [filter, setFilter] = useState<'거리순' | '별점순'>('거리순');
+interface ShopListProps {
+  nearbyShops: ShopInfoType[] | null;
+  filter: 'distance' | 'rating';
+  onFilterChange: (filter: 'distance' | 'rating') => void;
+}
 
-  const handleDismiss = () => {
-    setOpen(false);
-  };
+export const ShopList = ({
+  nearbyShops,
+  filter,
+  onFilterChange,
+}: ShopListProps) => {
+  // 필터용
+  const { openSheet: openFilterSheet, bottomSheetProps: filterSheetProps } =
+    useBottomSheet({
+      maxHeight: 260,
+    });
+
+  // 요청서 전송용
+  const { openSheet: openRequestSheet, bottomSheetProps: requestSheetProps } =
+    useBottomSheet({
+      maxHeight: 552,
+    });
 
   // 선택된 가게 취합용
   const [selectedShops, setSelectedShops] = useState<number[]>([]);
@@ -54,7 +68,7 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
             borderRadius="99px"
             padding="10px"
             shadow={'0px 0px 4px 0px rgba(0, 0, 0, 0.25)'}
-            onClick={() => setOpen(true)}
+            onClick={openFilterSheet}
           >
             <Filter width={18} height={18} color={theme.palette.Gray600} />
             <HardText
@@ -89,7 +103,7 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
               disabled={true}
             >
               <HardText typo="Label3" colorCode={theme.palette.Gray600}>
-                {filter}
+                {filter == 'distance' ? '거리순' : '별점순'}
               </HardText>
               <DownArrow width={18} />
             </Button>
@@ -106,50 +120,22 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
               : '17px 20px 28px 20px'
           }
         >
-          <ShopLine
-            id={1}
-            title="댕댕샵"
-            score="4.9"
-            reviewNum={120}
-            distance={354}
-            address="경기 성남시 분당구"
-            phone="031)123-1234"
-            isClicked={selectedShops.includes(1)}
-            onClick={() => toggleShopSelection(1)}
-          />
-          <ShopLine
-            id={2}
-            title="댕댕샵"
-            score="4.9"
-            reviewNum={120}
-            distance={354}
-            address="경기 성남시 분당구"
-            phone="031)123-1234"
-            isClicked={selectedShops.includes(2)}
-            onClick={() => toggleShopSelection(2)}
-          />
-          <ShopLine
-            id={3}
-            title="댕댕샵"
-            score="4.9"
-            reviewNum={120}
-            distance={354}
-            address="경기 성남시 분당구"
-            phone="031)123-1234"
-            isClicked={selectedShops.includes(3)}
-            onClick={() => toggleShopSelection(3)}
-          />
-          <ShopLine
-            id={4}
-            title="댕댕샵"
-            score="4.9"
-            reviewNum={120}
-            distance={354}
-            address="경기 성남시 분당구"
-            phone="031)123-1234"
-            isClicked={selectedShops.includes(4)}
-            onClick={() => toggleShopSelection(4)}
-          />
+          {/** 각 가게 정보 박스*/}
+          {nearbyShops?.map((shop) => (
+            <ShopLine
+              key={shop.shopId}
+              id={shop.shopId}
+              title={shop.shopName}
+              score={shop.shopRating}
+              reviewNum={120}
+              distance={shop.distance}
+              address={shop.shopAddress}
+              phone={shop.shopPhone}
+              isClicked={selectedShops.includes(shop.shopId)}
+              onClick={() => toggleShopSelection(shop.shopId)}
+              tags={shop.tags}
+            />
+          ))}
         </ScrollFlex>
 
         {selectedShops.length > 0 ? (
@@ -158,6 +144,7 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
             borderRadius="0"
             bg={theme.palette.Black}
             fontColor={theme.palette.White}
+            onClick={openRequestSheet}
           >
             <Send width={18} height={17} color={theme.palette.White} />
             <Text typo="Body2" margin="0 0 0 12px">
@@ -166,14 +153,7 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
           </FrontBtn>
         ) : null}
 
-        <BottomSheet
-          open={open}
-          ref={ref}
-          css={StyledBottomCss}
-          maxHeight={260}
-          snapPoints={({ maxHeight }) => [maxHeight]}
-          onDismiss={handleDismiss}
-        >
+        <BottomSheet {...filterSheetProps}>
           <Flex
             direction="column"
             align="flex-start"
@@ -193,12 +173,12 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
                 bg="transparent"
                 width="fit-content"
                 padding="0"
-                onClick={() => setFilter('거리순')}
+                onClick={() => onFilterChange('distance')}
               >
                 <Text
                   typo="Title3"
                   colorCode={
-                    filter == '거리순'
+                    filter == 'distance'
                       ? theme.palette.Normal600
                       : theme.palette.Black
                   }
@@ -210,12 +190,12 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
                 bg="transparent"
                 width="fit-content"
                 padding="0"
-                onClick={() => setFilter('별점순')}
+                onClick={() => onFilterChange('rating')}
               >
                 <Text
                   typo="Title3"
                   colorCode={
-                    filter == '별점순'
+                    filter == 'rating'
                       ? theme.palette.Normal600
                       : theme.palette.Black
                   }
@@ -226,12 +206,13 @@ export const ShopList = forwardRef<BottomSheetRef>((_, ref) => {
             </Flex>
           </Flex>
         </BottomSheet>
+        <BottomSheet {...requestSheetProps}>
+          <SendRequestQBox />
+        </BottomSheet>
       </Flex>
     </>
   );
-});
-
-ShopList.displayName = 'ShopList';
+};
 
 const ScrollFlex = styled(Flex)`
   height: calc(100vh - 274.5px);
@@ -240,24 +221,5 @@ const ScrollFlex = styled(Flex)`
   .scroll {
     -ms-overflow-style: none;
     scrollbar-width: none;
-  }
-`;
-
-const StyledBottomCss = css`
-  position: relative;
-
-  [data-rsbs-overlay],
-  [data-rsbs-root]::after {
-    border-radius: 16px 16px 0px 0px;
-    z-index: 20;
-    max-width: 480px;
-
-    @media (min-width: 480px) {
-      left: calc(50% - 240px);
-    }
-  }
-
-  [data-rsbs-backdrop] {
-    background-color: rgba(49, 48, 54, 0.5);
   }
 `;

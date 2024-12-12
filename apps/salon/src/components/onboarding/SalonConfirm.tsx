@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { SalonFormData } from '@assets/types/onboarding';
 import { AlertStar, Button, Flex, Text, theme } from '@duri-fe/ui';
-import { SalonFormData } from '@salon/types/onboarding';
 
 import {
   ButtonWrapper,
@@ -25,8 +25,8 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
           padding="0 0 48px 0"
         >
           <Flex direction="column" align="flex-start">
-            <Text typo="Heading2">입력하신 정보를</Text>
-            <Text typo="Heading2">확인해주세요</Text>
+            <Text typo="Heading">입력하신 정보를</Text>
+            <Text typo="Heading">확인해주세요</Text>
           </Flex>
           <Text typo="Body3" colorCode={theme.palette.Gray500}>
             등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!
@@ -42,12 +42,12 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
             <Text typo="Body4">{salonFormData.name}</Text>
           </Flex>
 
-          <Flex justify="flex-start" align='flex-start' gap={36}>
+          <Flex justify="flex-start" align="flex-start" gap={36}>
             <Text typo="Label1">
               매장 위치
               <AlertStar isUpper />
             </Text>
-            <Flex widthPer={70} justify='flex-start'>
+            <Flex widthPer={70} justify="flex-start">
               <Text typo="Body4">
                 {salonFormData.addressDetail}[{salonFormData.address}]
               </Text>
@@ -72,7 +72,12 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
         </Flex>
 
         {/* 매장 위치 네이버 지도로부터 가져오기 */}
-        <Flex height={115} backgroundColor={theme.palette.Gray50} borderRadius={8} margin='60px 0 0 0'></Flex>
+        <Flex
+          height={115}
+          backgroundColor={theme.palette.Gray50}
+          borderRadius={8}
+          margin="60px 0 0 0"
+        ></Flex>
       </Flex>
       {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
       <ContactContainer gap={4}>

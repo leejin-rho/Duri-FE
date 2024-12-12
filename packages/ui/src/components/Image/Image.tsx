@@ -10,4 +10,5 @@ export const Image = styled.img<{
   border-radius: ${({ borderRadius }) =>
     borderRadius ? `${borderRadius}px` : '0px'};
   flex-shrink: 0;
+  object-fit: cover;
 `;

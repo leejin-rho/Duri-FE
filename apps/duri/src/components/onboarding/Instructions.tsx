@@ -10,29 +10,24 @@ interface InstructionProps {
 
 const Instruction = ({ onNext, show }: InstructionProps) => {
   return (
-    <Container
-      show={show}
-      direction="column"
-    >
+    <Container show={show} direction="column">
       <Wrapper direction="column">
-        <Text typo="Heading2" align="center">
+        <Text typo="Heading" align="center">
           두리묭실 서비스에 등록하기 위해
         </Text>
-        <Text typo="Heading2" align="center">
+        <Text typo="Heading" align="center">
           반려견의 정보를 입력해주세요!
         </Text>
       </Wrapper>
 
-      <ButtonWrapper padding='0 20px'>
-        <Button onClick={onNext}>
-          입력하러 가기
-        </Button>
+      <ButtonWrapper padding="0 20px">
+        <Button onClick={onNext}>입력하러 가기</Button>
       </ButtonWrapper>
     </Container>
   );
 };
 
-export const Container = styled(Flex)<{show: boolean}>`
+export const Container = styled(Flex)<{ show: boolean }>`
   flex-grow: 1;
   opacity: ${({ show }) => (show ? 1 : 0)};
   transition: opacity 1s;

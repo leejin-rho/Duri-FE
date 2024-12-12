@@ -1,11 +1,18 @@
-import { Flex, MobileLayout, NaverLogo, SpeechBallonContainer, Text, theme } from "@duri-fe/ui";
-import { duriNaverLoginRedirect } from "@duri-fe/utils";
-import styled from "@emotion/styled";
+import {
+  Flex,
+  MobileLayout,
+  NaverLogo,
+  SpeechBallonContainer,
+  Text,
+  theme,
+} from '@duri-fe/ui';
+import { duriNaverLoginRedirect } from '@duri-fe/utils';
+import styled from '@emotion/styled';
 
 const LoginPage = () => {
   const handleNaverLogin = () => {
     duriNaverLoginRedirect();
-  }
+  };
 
   return (
     <MobileLayout>
@@ -13,9 +20,15 @@ const LoginPage = () => {
         {/** 로고 */}
         <Logo src="/images/logo.png" />
         <Flex direction="column" margin="24px 0 0 0">
-          <Text typo="Heading2">두리묭실로</Text>
-          <Text typo="Heading2">쉽고 빠르게 예약해요!</Text>
-          <Text typo="Body3" colorCode={theme.palette.Gray300} margin="8px 0 0 0">최저가 예약부터 근처 미용샵까지</Text>
+          <Text typo="Heading">두리묭실로</Text>
+          <Text typo="Heading">쉽고 빠르게 예약해요!</Text>
+          <Text
+            typo="Body3"
+            colorCode={theme.palette.Gray300}
+            margin="8px 0 0 0"
+          >
+            최저가 예약부터 근처 미용샵까지
+          </Text>
         </Flex>
 
         {/** 로그인 버튼 */}
@@ -31,12 +44,14 @@ const LoginPage = () => {
 
         {/** 문의하기 */}
         <Contact>
-          <Text typo="Body3" colorCode={theme.palette.Gray300}>문의하기</Text>
+          <Text typo="Body3" colorCode={theme.palette.Gray300}>
+            문의하기
+          </Text>
         </Contact>
       </Container>
     </MobileLayout>
-  )
-}
+  );
+};
 
 const Container = styled(Flex)`
   flex-grow: 1;

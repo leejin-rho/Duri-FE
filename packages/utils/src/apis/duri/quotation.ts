@@ -1,13 +1,32 @@
 import { duriInstance } from "../axiosConfig";
+import { BaseResponse } from "../types";
 
-export async function getQuotationList() {
-    try {
-      const response = await duriInstance.get(`quotation/my`, {
-        withCredentials: true,
-      });
-      return response.data;
-    } catch (error) {
-      console.error(error);
-    }
+interface RequestItemsType {
+    quotationId: number;
+    createdAt: Date;
+    expiredAt: Date;
+    shops: [
+      {
+        shopId: number;
+        shopName: string;
+      },
+    ];
   }
-  
+
+  interface RequestItemsResponse extends BaseResponse {
+    response: RequestItemsType[];
+  }
+
+export const getRequestItems = async (): Promise<RequestItemsResponse['response']> => {
+    const response = await duriInstance.get(`quotation/request`);
+    return response.data;
+  };
+
+
+export const getQuotationInfo = async (
+    quotationId: number,
+    // ): Promise<QuotationResponse> => {
+  ) => {
+    const response = await duriInstance.get(`quotation/${quotationId}`);
+    return response.data;
+  };

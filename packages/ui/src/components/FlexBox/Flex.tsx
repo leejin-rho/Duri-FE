@@ -41,6 +41,10 @@ export const WidthFitFlex = styled(Flex)`
   width: fit-content;
 `;
 
+export const RelativeFlex = styled(Flex)`
+  position: relative;
+`;
+
 export const AbsoluteFlex = styled(Flex)`
   position: absolute;
   top: 0;

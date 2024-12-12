@@ -1,26 +1,12 @@
-// import axios from 'axios';
-// import { HttpResponse } from 'msw';
+import { publicInstance } from '../axiosConfig';
+import { CenterInfoType, ShopInfoResponse } from '../types';
 
-import { duriInstance } from '../axiosConfig';
-
-export async function getRegularShopInfo() {
-  try {
-    const response = await duriInstance.get(`shop/regular`, {
-      withCredentials: true,
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export async function getRecommendedShopInfo() {
-  try {
-    const response = await duriInstance.get(`shop/recommend`, {
-      withCredentials: true,
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-}
+export const getNearByShopInfo = async (
+  { lat, lon, radius }: CenterInfoType,
+  sortby: string,
+): Promise<ShopInfoResponse['response']> => {
+  const { data } = await publicInstance.get(`/shop/nearby/sort/${sortby}`, {
+    params: { lat, lon, radius },
+  });
+  return data.response;
+};

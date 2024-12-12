@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, Flex, StatusBar, theme } from '@duri-fe/ui';
+import { breedMapping } from '@duri/assets/data';
+import { Button, Flex, StatusBar, theme, Toast } from '@duri-fe/ui';
+import { usePostPetInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 import PetAgeInfo from './PetAgeInfo';
@@ -16,21 +19,22 @@ import PetWeightInfo from './PetWeightInfo';
 
 export interface FormData {
   name: string;
-  weight: string;
+  weight: number;
   breed: string;
   gender: string;
-  isNeutered: boolean;
-  age: string;
-  personality: string[];
-  disease: string[];
+  neutering: boolean;
+  age: number;
+  character: string[];
+  diseases: string[];
 }
 
 const MultiStepForm = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<number>(0);
   const [progress, setProgress] = useState<number>(0);
-  const [personalityList, setPersonalityList] = useState<string[]>([]); // 성격 선택리스트 관리
-  const [diseaseList, setDiseaseList] = useState<string[]>([]); // 성격 선택리스트 관리
+  const [characterList, setcharacterList] = useState<string[]>([]); // 성격 선택리스트 관리
+  const [diseasesList, setdiseasesList] = useState<string[]>([]); // 성격 선택리스트 관리
+  const { mutate: postPetInfo } = usePostPetInfo(() => navigate('/')); //반려견 정보 등록 hook
 
   useEffect(() => {
     if (step <= 3) setProgress(1);
@@ -51,21 +55,21 @@ const MultiStepForm = () => {
   ];
 
   const toggleArrayValue = async (field: keyof FormData, value: string) => {
-    if (field === 'personality') {
+    if (field === 'character') {
       // 상위 컴포넌트에서 상태 업데이트
-      const newPersonalityList = personalityList.includes(value)
-        ? personalityList.filter((v) => v !== value) // 값 제거
-        : [...personalityList, value]; // 값 추가
+      const newcharacterList = characterList.includes(value)
+        ? characterList.filter((v) => v !== value) // 값 제거
+        : [...characterList, value]; // 값 추가
 
-      setPersonalityList(newPersonalityList);
-      setValue('personality', newPersonalityList); // react-hook-form 값 업데이트
-    } else if (field === 'disease') {
-      const newDiseaseList = diseaseList.includes(value)
-        ? diseaseList.filter((v) => v !== value) // 값 제거
-        : [...diseaseList, value]; // 값 추가
+      setcharacterList(newcharacterList);
+      setValue('character', newcharacterList); // react-hook-form 값 업데이트
+    } else if (field === 'diseases') {
+      const newdiseasesList = diseasesList.includes(value)
+        ? diseasesList.filter((v) => v !== value) // 값 제거
+        : [...diseasesList, value]; // 값 추가
 
-      setDiseaseList(newDiseaseList);
-      setValue('disease', newDiseaseList); // react-hook-form 값 업데이트
+      setdiseasesList(newdiseasesList);
+      setValue('diseases', newdiseasesList); // react-hook-form 값 업데이트
     }
   };
 
@@ -81,13 +85,13 @@ const MultiStepForm = () => {
     mode: 'onChange',
     defaultValues: {
       name: '',
-      weight: '',
+      weight: 0,
       breed: '',
       gender: '',
-      isNeutered: undefined,
-      age: '',
-      personality: [],
-      disease: [],
+      neutering: undefined,
+      age: 0,
+      character: [],
+      diseases: [],
     },
   });
 
@@ -100,12 +104,14 @@ const MultiStepForm = () => {
   };
 
   const onSubmit = (data: FormData) => {
-    console.log('Form Data:', data);
-    navigate('/');
+    setValue('breed', breedMapping[data.breed]);
+
+    //API 호출 필요
+    postPetInfo(data);
   };
 
   return (
-    <>
+    <Flex direction='column'>
       <Wrapper direction="column" padding="107px 20px 0 20px">
         <Wrapper
           direction="column"
@@ -139,7 +145,7 @@ const MultiStepForm = () => {
               <PetPersonalityInfo
                 control={control}
                 toggleArrayValue={toggleArrayValue}
-                personalityList={personalityList}
+                personalityList={characterList}
                 name={getValues('name')}
               />
             )}
@@ -147,7 +153,7 @@ const MultiStepForm = () => {
               <PetDiseaseInfo
                 control={control}
                 toggleArrayValue={toggleArrayValue}
-                diseaseList={diseaseList}
+                diseaseList={diseasesList}
                 name={getValues('name')}
               />
             )}
@@ -174,7 +180,7 @@ const MultiStepForm = () => {
           </Button>
         )}
         {stepList[step] === '성격' &&
-          (personalityList.length > 0 ? (
+          (characterList.length > 0 ? (
             <Button
               height="54px"
               bg={theme.palette.Black}
@@ -188,13 +194,12 @@ const MultiStepForm = () => {
               height="54px"
               bg={theme.palette.Gray50}
               fontColor={theme.palette.White}
-              onClick={() => setStep(step - 1)}
             >
               다음 단계
             </Button>
           ))}
         {stepList[step] === '질환' &&
-          (diseaseList.length > 0 ? (
+          (diseasesList.length > 0 ? (
             <Button
               height="54px"
               bg={theme.palette.Black}
@@ -213,7 +218,8 @@ const MultiStepForm = () => {
             </Button>
           ))}
       </Flex>
-    </>
+      <Toast />
+    </Flex>
   );
 };
 
