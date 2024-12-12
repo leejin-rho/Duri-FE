@@ -38,3 +38,16 @@ export interface PetInfo {
   character: string[];
   diseases: string[];
 }
+
+export interface UserInfo {
+  response: {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+    profileImg: string | null;
+    reservationCount: number;
+    noShowCount: number;
+    stamp: number;
+  };
+}

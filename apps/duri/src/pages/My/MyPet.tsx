@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { ModifyPetInfoCard } from '@duri/components/my/modify/ModifyPetInfoCard';
 import {
+  DuriNavbar,
   Header,
   MobileLayout,
   theme,
@@ -22,6 +23,7 @@ const MyPetPage = () => {
           onClickBack={() => navigate(-1)}
         />
       <ModifyPetInfoCard />
+      <DuriNavbar />
     </MobileLayout>
   );
 };

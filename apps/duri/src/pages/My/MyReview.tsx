@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 
 // import { ReviewType } from '@duri/assets/types/my';
 import { PreviewOfReviews } from '@duri/components/my/review/PreviewOfReviews';
-import { Flex, Header, MobileLayout, Text } from '@duri-fe/ui';
+import { Flex, Header, MobileLayout, Text, theme } from '@duri-fe/ui';
 import { useGetMyReviews } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 const MyReviewPage = () => {
   const navigate = useNavigate();
   const handleNavigate = () => navigate(-1);
-  const reviewListData = useGetMyReviews();
+  const { data: reviewListData } = useGetMyReviews();
   // const [reviewList, setReviewList] = useState<ReviewType[]>();
   const [reviewCnt, setReviewCnt] = useState<number>(0);
 
@@ -71,12 +71,12 @@ const MyReviewPage = () => {
         onClickBack={handleNavigate}
       />
       <Flex direction="column" justify="flex-start" padding="0 20px">
-        <Flex justify="flex-start" margin='0 0 37px 0'>
+        <Flex justify="flex-start" margin="0 0 37px 0">
           <Text typo="Title1">총 {reviewCnt}건</Text>
         </Flex>
-        <ReviewGrid>
-          {dummy.length > 0 &&
-            dummy.map((review, index) => {
+        {reviewCnt > 0 ? (
+          <ReviewGrid>
+            {dummy.map((review, index) => {
               return (
                 <div key={index}>
                   <PreviewOfReviews
@@ -85,10 +85,21 @@ const MyReviewPage = () => {
                     createdAt={review.createdAt}
                     reviewImageURL={review.reviewImageURL}
                   />
-                  </div>
+                </div>
               );
             })}
-        </ReviewGrid>
+          </ReviewGrid>
+        ) : (
+          <Flex>
+            <Text
+              typo="Body2"
+              margin="92px 0 0 0"
+              colorCode={theme.palette.Gray300}
+            >
+              작성한 후기가 없어요😅
+            </Text>
+          </Flex>
+        )}
       </Flex>
     </MobileLayout>
   );
@@ -101,7 +112,6 @@ const ReviewGrid = styled.div`
   grid-template-columns: repeat(2, 1fr); /* 2열로 배치 */
   gap: 4px;
   padding: 0 12px;
-
 
   @media (max-width: 375px) {
     grid-template-columns: repeat(2, 1fr); /* 2열 유지 */

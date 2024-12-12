@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { PetInfoType } from '@duri/assets/types';
+import { UserInfoType } from '@duri/assets/types/my';
 import { PetInfoCard } from '@duri/components/my/PetInfoCard';
 import { Status } from '@duri/components/my/Status';
 import { UserInfo } from '@duri/components/my/UserInfo';
@@ -16,12 +16,28 @@ import {
   theme,
   Write,
 } from '@duri-fe/ui';
-import { useGetPetInfo } from '@duri-fe/utils';
+import { useGetPetListInfo, useGetUserInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
+
+interface PetInfoType {
+  id: number;
+  name: string;
+  image?: string;
+  breed: string;
+  age: number;
+  weight: number;
+  gender: string;
+  neutering?: boolean;
+  lastGrooming?: string | null;
+  character: string[];
+  diseases: string[];
+}
 
 const MyPage = () => {
   // const { data: petData, isError: getPetInfoError } = useGetPetInfo();
-  const { data: petData, } = useGetPetInfo();
+  const { data: userData } = useGetUserInfo();
+  const {data: petListData} = useGetPetListInfo();
+  const [userInfo, setUserInfo] = useState<UserInfoType>();
   const [petInfo, setPetInfo] = useState<PetInfoType>();
   const navigate = useNavigate();
   const handleNavigate = (path: string) => navigate(path);
@@ -33,23 +49,35 @@ const MyPage = () => {
     window.scrollTo(0, 0);
   }, []);
   useEffect(() => {
-    if (petData) setPetInfo(petData);
-  }, [petData]);
+    if (petListData) setPetInfo(petListData.petProfileList[0]);
+    if (userData) setUserInfo(userData);
+  }, [petListData, userData]);
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
       <Flex direction="column" padding="0 18px" margin="0 0 100px 0">
         <Header />
-        <UserInfo userId={1} userName="김찬별" phone="01051778747" />
-        <Status reservationCnt={3} noShowCnt={0} />
+        {userInfo && (
+          <UserInfo
+            name={userInfo.name}
+            phone={userInfo.phone}
+            profileImg={userInfo.profileImg}
+          />
+        )}
+        {userInfo && (
+          <Status
+            reservationCnt={userInfo.reservationCount}
+            noShowCnt={userInfo.noShowCount}
+          />
+        )}
         {petInfo && (
           <PetInfoCard
-            petId={petInfo.petId}
+            petId={petInfo.id}
             age={petInfo.age}
             name={petInfo.name}
             breed={petInfo.breed}
             gender={petInfo.gender}
-            neutering={petInfo.neutering ?? false}
+            neutering={petInfo.neutering === undefined ? false : petInfo.neutering}
             weight={petInfo.weight}
             imageURL={petInfo.image}
           />

@@ -14,7 +14,7 @@ import {
   MobileLayout,
   theme,
 } from '@duri-fe/ui';
-import { useGetPetDetailInfo, usePatchPetInfo } from '@duri-fe/utils';
+import { useGetPetDetailInfo, usePutPetInfo } from '@duri-fe/utils';
 
 export interface FormData {
   id: number;
@@ -39,8 +39,8 @@ const MyPetModifyPage = () => {
   // const { data: getPetDetailData, isError: getPetDetailError } =
   const { data: getPetDetailData } = useGetPetDetailInfo(petId);
 
-  const { mutateAsync: modify } = usePatchPetInfo(() =>
-    navigate('/my/pet', { state: petId }),
+  const { mutateAsync: modify } = usePutPetInfo(
+    () => (window.location.href = `/my/pet?state=${petId}`),
   );
 
   const { control, handleSubmit, setValue, getValues } = useForm<FormData>({

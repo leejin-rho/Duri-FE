@@ -8,10 +8,11 @@ import styled from '@emotion/styled';
 interface PetListInfo {
   id: number;
   name: string;
-  image: string | null;
+  image: string | undefined;
   breed: string;
   age: number;
   weight: number;
+  neutering: boolean;
   gender: string;
   lastGrooming: string | null;
   character: string[];
@@ -119,12 +120,12 @@ export const SwipeCard = ({ petInfo }: { petInfo: PetListInfo }) => {
               age={petInfo.age}
               breed={petInfo.breed}
               gender={petInfo.gender}
-              neutering={true}
+              neutering={petInfo.neutering}
               name={petInfo.name}
               weight={petInfo.weight}
               character={petInfo.character}
               diseases={petInfo.diseases}
-              image={petInfo.image}
+              image={petInfo?.image}
               onClick={handleClickModifyButton}
               themeVariant='spacious'
             />

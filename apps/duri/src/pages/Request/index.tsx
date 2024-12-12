@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { addMenu, designMenu, menu, specialMenu } from '@duri/assets/data';
 import { defaultRequestInfo } from '@duri/assets/data/request';
-import { RequestType } from '@duri/assets/types';
+import { PetInfoType, RequestType } from '@duri/assets/types';
 import MonthlyCalendar from '@duri/components/request/Calendar';
 import EtcRequest from '@duri/components/request/EtcRequest';
 import PetInfo from '@duri/components/request/PetInfo';
@@ -18,40 +18,20 @@ import {
 import { TimeTable } from '@duri-fe/ui';
 import { useGetPetInfo } from '@duri-fe/utils';
 
-interface PetInfoType {
-  petId: number;
-  name: string;
-  imageURL?: string;
-  breed: string;
-  age: number;
-  weight: number;
-  gender: string;
-  lastGrooming?: string;
-  neutering?: boolean;
-}
-
 const timeList = Array(10)
   .fill(0)
   .map((_, i) => `${9 + i}:00`);
 
 const RequestPage = () => {
-  const petData = useGetPetInfo();
+  const { data: petData } = useGetPetInfo();
   const [requestInfo, setRequestInfo] =
     useState<RequestType>(defaultRequestInfo);
-  const [petInfo, setPetInfo] = useState<PetInfoType | null>({
-    petId: 1,
-    name: '멍뭉이',
-    breed: '시츄',
-    age: 4,
-    weight: 3.7,
-    gender: 'F',
-    lastGrooming: '2024-12-01',
-  });
+  const [petInfo, setPetInfo] = useState<PetInfoType>();
   const [isButton, setIsButton] = useState<boolean>(false);
 
   const handleSelect = (
     key: string,
-    value: number | string | string[] | boolean | Date | undefined,
+    value: number | string | string[] | boolean | undefined | Date,
   ) => {
     if (key === 'petId') {
       setRequestInfo((prev) => ({

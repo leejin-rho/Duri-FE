@@ -4,7 +4,9 @@ import {
   getMyReviews,
   getPetDetailInfo,
   getPetListInfo,
-  patchPetInfo,
+  getUserInfo,
+  putPetInfo,
+  putUserInfo,
 } from '../my';
 
 export const useGetMyReviews = () => {
@@ -33,12 +35,32 @@ export const useGetPetDetailInfo = (petId: number) => {
   return { data, isError };
 };
 
-export const usePatchPetInfo = (handleNavigate: () => void) => {
+export const usePutPetInfo = (handleNavigate: () => void) => {
   const { mutateAsync } = useMutation({
-    mutationKey: ['patchPetInfo'],
+    mutationKey: ['putPetInfo'],
     mutationFn: ({ petId, formData }: { petId: number; formData: FormData }) =>
-      patchPetInfo(petId, formData),
-    onSuccess: () => handleNavigate,
+      putPetInfo(petId, formData),
+    onSuccess: () => handleNavigate(),
+    onError: (error) => console.log(error),
+  });
+  return { mutateAsync };
+};
+
+export const useGetUserInfo = () => {
+  const { data, isError } = useQuery({
+    queryKey: ['getUserInfo'],
+    queryFn: () => getUserInfo(),
+    staleTime: 1000 * 60 * 30,
+  });
+  return { data, isError };
+};
+
+export const usePutUserInfo = (handleNavigate: () => void) => {
+  const { mutateAsync } = useMutation({
+    mutationKey: ['putUserInfo'],
+    mutationFn: (formData: FormData) =>
+      putUserInfo(formData),
+    onSuccess: () => handleNavigate(),
     onError: (error) => console.log(error),
   });
   return { mutateAsync };
