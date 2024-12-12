@@ -125,7 +125,7 @@ const QuotationPage = () => {
                       typo="Label3"
                       borderRadius={99}
                       width="auto"
-                      height="auto"
+                      height={26}
                       padding="6px 10px"
                     />
                   </TagWrapper>
