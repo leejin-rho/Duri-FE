@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Card, Flex, MobileLayout, Modal, PetInfo, SalonNavbar, Text, theme } from "@duri-fe/ui"
-import { useGetNewRequestList, useModal } from "@duri-fe/utils";
+import { useGetReservedQuotationList, useModal } from "@duri-fe/utils";
 import styled from "@emotion/styled";
 import { DetailRequest } from "@salon/components/quotation/DetailRequest";
 import { TabBarItem } from "@salon/components/quotation/TabBarItem"
@@ -12,7 +12,8 @@ const ReservationPage = () => {
   const [selectedTab, setSelectedTab] = useState<string>('reserved')
   const [selectedRequestId, setSelectedRequestId] = useState<number | null>(null);
   const { isOpenModal, openModal, closeModal } = useModal();
-  const { data: newRequestList } = useGetNewRequestList();
+  const { data: reservationList } = useGetReservedQuotationList();
+
 
   const handleRequestClick = (requestId: number) => {
     setSelectedRequestId(requestId);
@@ -58,22 +59,20 @@ const ReservationPage = () => {
         />
       </Flex>
 
-      {newRequestList && newRequestList.length > 0 ? (
+      {reservationList && reservationList.length > 0 ? (
         <Flex direction="column" gap={8} padding="30px 20px">
-          {newRequestList.map((request) => (
-            <Flex key={request.requestId} onClick={() => handleRequestClick(request.requestId)}>
+          {reservationList.map((item) => (
+            <Flex key={item.requestId} onClick={() => handleRequestClick(item.requestId)}>
               <Card borderRadius={12} padding="6px">
                 <PetInfo
                   themeVariant="medium"
-                  image={request.petImage}
-                  name={request.petName}
-                  breed={request.petBreed}
-                  age={request.petAge}
-                  neutering={request.petNeutering}
-
-                  // TODO : gender, weight API 수정 필요함
-                  gender="F"
-                  weight={7.3}
+                  image={item.petDetailResponse.image}
+                  name={item.petDetailResponse.name}
+                  breed={item.petDetailResponse.breed}
+                  age={item.petDetailResponse.age}
+                  neutering={item.petDetailResponse.neutering}
+                  gender={item.petDetailResponse.gender}
+                  weight={item.petDetailResponse.weight}
                 />
               </Card>
             </Flex>
@@ -82,7 +81,7 @@ const ReservationPage = () => {
       ) : (
         // TODO : 임시 대체뷰 수정 필요
         <FlexGrow>
-          <Text>새로운 요청이 없어요.</Text>
+          <Text>예약된 일정이 없어요.</Text>
         </FlexGrow>
       )}
 
