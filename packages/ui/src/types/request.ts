@@ -40,6 +40,7 @@ interface RequestDetailGroomerType {
   info: string;
 }
 
+/** TODO: string[] 변경시 적용 */
 interface QuotationDetailsType extends TimeType {
   groomingMenu: string;
   additionalGrooming: string;

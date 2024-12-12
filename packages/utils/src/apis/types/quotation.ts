@@ -1,3 +1,5 @@
+import { BaseResponse } from "./base";
+
 export interface TimeType {
   time9: boolean;
   time10: boolean;
@@ -11,6 +13,7 @@ export interface TimeType {
   time18: boolean;
 }
 
+/** [POST] 견적 요청서 작성 request */
 export interface RequestProps extends TimeType {
   petId?: number;
   menu: string[];
@@ -22,6 +25,7 @@ export interface RequestProps extends TimeType {
   shopIds: number[];
 }
 
+/** [GET] 견적 요청서 리스트 response */
 export interface NewRequestListResponse {
   response: {
     requestId: number;
@@ -38,6 +42,7 @@ export interface NewRequestListResponse {
   }
 }
 
+/** [GET] 견적 요청서 세부 response */
 export interface RequestDetailResponse {
   response: {
     userName: string;
@@ -68,6 +73,7 @@ export interface RequestDetailGroomerType {
   info: string;
 }
 
+/** TODO: string[] 변경시 적용 */
 export interface QuotationDetailsType extends TimeType {
   groomingMenu: string;
   additionalGrooming: string;
@@ -75,4 +81,26 @@ export interface QuotationDetailsType extends TimeType {
   designCut: string;
   otherRequests: string;
   day: string;
+}
+
+/** [POST] 견적서 작성 request */
+export interface PostQuotationRequest {
+  requestId: number;
+  priceDetail: {
+    groomingPrice: number;
+    additionalPrice: number;
+    specialCarePrice: number;
+    designPrice: number;
+    customPrice: number;
+    totalPrice: number;
+  };
+  memo: string;
+  startDateTime: string;
+  endDateTime: string;
+}
+
+export interface PostQuotationResponse extends BaseResponse {
+  response: {
+    data: string;
+  }
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Button, Card, CheckCircle, Flex, FrontBtn, Header, HeightFitFlex, MobileLayout, Modal, PetInfo, SalonNavbar, Text, theme, WidthFitFlex } from "@duri-fe/ui";
-import { useGetDetailRequest, useModal } from "@duri-fe/utils";
+import { useGetDetailRequest, useModal, usePostQuotation } from "@duri-fe/utils";
 import { defaultQuotationFormData } from "@salon/assets/data/quotation";
 import { QuotationFormData } from "@salon/assets/types/quotation";
 import ReplyForm from "@salon/components/quotation/ReplyForm";
@@ -21,25 +21,35 @@ const ReplyPage = () => {
   const [isValid, setIsValid] = useState<boolean>(false);
 
   const { data: request, timeList } = useGetDetailRequest(requestId);
+  const { mutateAsync: submitQuotation, error: postQuotationError } = usePostQuotation();
 
   const { isOpenModal, openModal, closeModal } = useModal();
 
-  const onNextStep = () => {
+  const onNextStep = async () => {
     if (step === 1) {
       setStep(2);
       setIsValid(false); // 초기화
     } else {
-      handleSubmit();
+      await handleSubmit();
+    }
+  };
+
+  const handleSubmit = async () => {
+    console.log(formData);
+    await submitQuotation(formData);
+    
+    if (postQuotationError) {
+      console.error(postQuotationError);
+      return;
+    } else {
       openModal();
     }
   };
 
-  const handleSubmit = () => {
-    console.log(formData);
-    // API 호출 필요
+  const onCloseModal = () => {
     closeModal();
-    // 네비게이션 필요
-  };
+    navigate('/');
+  }
 
   if (!requestId) return null;
 
@@ -123,7 +133,7 @@ const ReplyPage = () => {
             <Text typo="Caption2" colorCode={theme.palette.Gray400}>보낸 견적서는</Text>
             <Text typo="Caption2" colorCode={theme.palette.Gray400}>보관함에서 확인이 가능해요</Text>
           </Flex>
-          <Button onClick={closeModal} width="100%" borderRadius="8px" bg={theme.palette.Black}>
+          <Button onClick={onCloseModal} width="100%" borderRadius="8px" bg={theme.palette.Black}>
             <Text typo="Body3" colorCode={theme.palette.White}>확인</Text>
           </Button>
         </Flex>
