@@ -18,12 +18,12 @@ const StartPage = () => {
 
     return () => clearTimeout(timer);
   }, []);
-  
+
   const handleClickButton = () => navigate('/onboarding/detail');
 
   return (
     <MobileLayout>
-      <Welcome userName='심숭숭' show={showSplash} />
+      <Welcome show={showSplash} />
       <PageContainer padding="72px 20px" direction="column" justify="start">
         <Instruction onNext={handleClickButton} show={!showSplash} />
       </PageContainer>
