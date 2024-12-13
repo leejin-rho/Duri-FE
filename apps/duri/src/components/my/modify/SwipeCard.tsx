@@ -8,18 +8,28 @@ import styled from '@emotion/styled';
 interface PetListInfo {
   id: number;
   name: string;
-  image: string | undefined;
+  image: string | null;
   breed: string;
   age: number;
   weight: number;
   neutering: boolean;
   gender: string;
-  lastGrooming: string | null;
   character: string[];
   diseases: string[];
 }
 
-export const SwipeCard = ({ petInfo }: { petInfo: PetListInfo }) => {
+export const SwipeCard = ({
+  age,
+  breed,
+  character,
+  diseases,
+  gender,
+  id,
+  image,
+  name,
+  neutering,
+  weight,
+}: PetListInfo) => {
   const navigate = useNavigate();
   const { isOpenModal, toggleModal } = useModal();
   const [isSwiped, setIsSwiped] = useState<boolean>(false);
@@ -95,8 +105,8 @@ export const SwipeCard = ({ petInfo }: { petInfo: PetListInfo }) => {
     }
   };
 
-    const handleClickModifyButton = () =>
-      navigate('/my/pet/modify', { state: petInfo.id });
+  const handleClickModifyButton = () =>
+    navigate('/my/pet/modify', { state: id });
 
   return (
     <>
@@ -116,18 +126,18 @@ export const SwipeCard = ({ petInfo }: { petInfo: PetListInfo }) => {
             isSwiped={isSwiped}
           >
             <PetInfo
-              modify={true}
-              age={petInfo.age}
-              breed={petInfo.breed}
-              gender={petInfo.gender}
-              neutering={petInfo.neutering}
-              name={petInfo.name}
-              weight={petInfo.weight}
-              character={petInfo.character}
-              diseases={petInfo.diseases}
-              image={petInfo?.image}
+              modify
+              age={age}
+              breed={breed}
+              gender={gender}
+              neutering={neutering}
+              name={name}
+              weight={weight}
+              character={character}
+              diseases={diseases}
+              image={image === null ? undefined : image}
               onClick={handleClickModifyButton}
-              themeVariant='spacious'
+              themeVariant="spacious"
             />
           </SwipeFlex>
           <DeleteButton
@@ -144,14 +154,14 @@ export const SwipeCard = ({ petInfo }: { petInfo: PetListInfo }) => {
         <Flex direction="column" gap={5}>
           <Flex direction="column">
             <Text typo="Body2">반려견 정보 삭제 시</Text>
-            <Text typo="Body2">새롭게 서비스를 시작해야 해요.</Text>
+            <Text typo="Body2">복구가 불가능해요.</Text>
           </Flex>
           <Flex direction="column">
             <Text typo="Caption3" colorCode={theme.palette.Gray400}>
-              온보딩으로 돌아가게 됩니다.
+              정보 삭제 시 복구가 불가능합니다.
             </Text>
             <Text typo="Caption3" colorCode={theme.palette.Gray400}>
-              삭제하시겠습니까?
+              신중히 선택해주세요.
             </Text>
           </Flex>
           <Flex gap={6} margin="28px 0 0 0">
@@ -163,7 +173,7 @@ export const SwipeCard = ({ petInfo }: { petInfo: PetListInfo }) => {
               borderRadius="8px"
               onClick={handleNotDelete}
             >
-              아니요
+              취소
             </Button>
             <Button
               typo="Body3"
@@ -173,7 +183,7 @@ export const SwipeCard = ({ petInfo }: { petInfo: PetListInfo }) => {
               height="47px"
               borderRadius="8px"
             >
-              네
+              삭제할게요
             </Button>
           </Flex>
         </Flex>

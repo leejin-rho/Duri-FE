@@ -1,4 +1,3 @@
-import { PetInfo } from '@duri-fe/ui';
 export interface MyReviewResponseType {
   response: {
     reviewCnt: number;
@@ -50,4 +49,17 @@ export interface UserInfo {
     noShowCount: number;
     stamp: number;
   };
+}
+
+export interface RequestQuotationType {
+  response: {
+    quotationReqId: number;
+    createdAt: Date;
+    expiredAt: Date;
+    shops: {
+      shopId: number;
+      shopName: string;
+    }[];
+    isExpired: boolean;
+  }[];
 }

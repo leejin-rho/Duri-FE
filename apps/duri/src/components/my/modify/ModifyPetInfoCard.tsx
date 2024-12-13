@@ -9,7 +9,7 @@ import { SwipeCard } from './SwipeCard';
 interface PetListInfo {
   id: number;
   name: string;
-  image: string | undefined;
+  image: string | null;
   breed: string;
   age: number;
   weight: number;
@@ -21,18 +21,18 @@ interface PetListInfo {
 }
 
 export const ModifyPetInfoCard = () => {
-  const petListData = useGetPetListInfo();
+  const {data: petListData} = useGetPetListInfo();
   const [petListInfo, setPetListInfo] = useState<PetListInfo[]>([]);
   useEffect(() => {
-    if (petListData.data) setPetListInfo(petListData.data.petProfileList);
+    if (petListData) setPetListInfo(petListData);
     console.log(petListData)
   });
 
   return (
     <Flex direction='column' gap={20} padding='0 0 114px 0'>
       {petListInfo &&
-        petListInfo.map((petInfo, index) => (
-          <SwipeCard key={index} petInfo={petInfo} />
+        petListInfo.map(({age,breed,character,diseases,gender,id,image,name,neutering,weight}:PetListInfo, index) => (
+          <SwipeCard key={index} age={age} breed={breed} character={character} diseases={diseases} gender={gender} id={id} image={image} name={name} neutering={neutering} weight={weight} />
         ))}
     </Flex>
   );

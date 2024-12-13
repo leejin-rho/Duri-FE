@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const DEFAULT_REQUEST_INFO = {
   petId: undefined,
   menu: [],
@@ -5,7 +7,7 @@ export const DEFAULT_REQUEST_INFO = {
   specialMenu: [],
   design: [],
   etc: '',
-  day: new Date(),
+  day: format(new Date(),'yyyy-MM-dd'),
   time9: false,
   time10: false,
   time11: false,
@@ -16,5 +18,5 @@ export const DEFAULT_REQUEST_INFO = {
   time16: false,
   time17: false,
   time18: false,
-  shopIds: [],
+  shopIds: [1],
 };

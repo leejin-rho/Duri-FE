@@ -110,4 +110,5 @@ const NotificationBadge = styled(Flex)`
 
 const HeaderContainer = styled(HeightFitFlex)`
   z-index: 2;
+  height: 70px;
 `;

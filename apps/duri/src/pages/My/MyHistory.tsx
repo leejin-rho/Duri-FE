@@ -8,7 +8,7 @@ import { useModal } from '@duri-fe/utils';
 const MyHistoryPage = () => {
   //   미용일지 조회 데이터 상태관리 필요!
   const navigate = useNavigate();
-  const handleNavigate = () => navigate(-1);
+  const handleNavigate = () => navigate('/my');
   const moveToWriteReview = () => {
     //quotationId 전달
     navigate('/my/review/write', { state: 1 });

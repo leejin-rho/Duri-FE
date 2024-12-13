@@ -4,6 +4,7 @@ import {
   getMyReviews,
   getPetDetailInfo,
   getPetListInfo,
+  getRequestHistory,
   getUserInfo,
   putPetInfo,
   putUserInfo,
@@ -69,4 +70,12 @@ export const usePutUserInfo = (handleNavigate: () => void) => {
     onError: (error) => console.log(error),
   });
   return { mutateAsync };
+};
+
+export const useGetRequestHistory = () => {
+  return useQuery({
+    queryKey: ['getRequestHistory'],
+    queryFn: () => getRequestHistory(),
+    staleTime: 1000 * 60 * 10,
+  });
 };

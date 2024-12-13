@@ -21,7 +21,7 @@ import styled from '@emotion/styled';
 interface PetInfoType {
   id: number;
   name: string;
-  image?: string;
+  image: string | null;
   breed: string;
   age: number;
   weight: number;
@@ -76,7 +76,7 @@ const MyPage = () => {
                   petInfo.neutering === undefined ? false : petInfo.neutering
                 }
                 weight={petInfo.weight}
-                imageURL={petInfo.image}
+                imageURL={petInfo.image === null ? '' : petInfo.image}
               />
             ) : (
               <Flex

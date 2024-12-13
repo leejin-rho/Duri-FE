@@ -11,8 +11,8 @@ import { format } from 'date-fns';
 
 interface RequestInfoProps {
   requestId: number;
-  createdAt: string;
-  expiredAt: string;
+  createdAt: Date;
+  expiredAt: Date;
   expired?: boolean;
   margin?: string;
 }

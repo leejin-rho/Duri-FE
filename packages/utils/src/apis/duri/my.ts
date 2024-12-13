@@ -3,23 +3,24 @@ import {
   MyReviewResponseType,
   PetInfo,
   PetListInfo,
+  RequestQuotationType,
   UserInfo,
 } from '../types/my';
 
 export const getMyReviews = async (): Promise<
   MyReviewResponseType['response']
 > => {
-  const response = await duriInstance.get(`/user/review`);
+  const response = await duriInstance.get('/user/review');
   return response.data.response;
 };
 
 export const getUserInfo = async (): Promise<UserInfo['response']> => {
-  const response = await duriInstance.get(`/user/profile`);
+  const response = await duriInstance.get('/user/profile');
   return response.data.response;
 };
 
 export const getPetListInfo = async (): Promise<PetListInfo['response']> => {
-  const response = await duriInstance.get(`/user/pets`);
+  const response = await duriInstance.get('/user/pets');
   return response.data.response;
 };
 
@@ -48,6 +49,13 @@ export const putUserInfo = async (formData: FormData) => {
       'Content-Type': 'multipart/form-data', // 데이터 형식 지정
     },
   };
-  const response = await duriInstance.put(`/user/profile`, formData, config);
+  const response = await duriInstance.put('/user/profile', formData, config);
+  return response.data.response;
+};
+
+export const getRequestHistory = async (): Promise<
+  RequestQuotationType['response']
+> => {
+  const response = await duriInstance.get('/quotation/request/user');
   return response.data.response;
 };

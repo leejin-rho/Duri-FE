@@ -61,34 +61,38 @@ const MyReviewPage = () => {
         onClickBack={handleNavigate}
       />
       <Flex direction="column" justify="flex-start" padding="0 20px">
-        <Flex justify="flex-start" margin="0 0 37px 0">
-          <Text typo="Title1">총 {reviewListData?.reviewCnt}건</Text>
-        </Flex>
-        {reviewListData && reviewListData.reviewCnt > 0 ? (
-          <ReviewGrid>
-            {dummy.map((review, index) => {
-              return (
-                <div key={index}>
-                  <PreviewOfReviews
-                    reviewId={review.reviewId}
-                    shopName={review.shopName}
-                    createdAt={review.createdAt}
-                    reviewImageURL={review.reviewImageURL}
-                  />
-                </div>
-              );
-            })}
-          </ReviewGrid>
+        {reviewListData ? (
+          <>
+            <Flex justify="flex-start" margin="0 0 37px 0">
+              <Text typo="Title1">총 {reviewListData?.reviewCnt}건</Text>
+            </Flex>
+            {reviewListData.reviewList.length > 0 && (
+              <ReviewGrid>
+                {dummy.map(
+                  ({ reviewId, shopName, createdAt, reviewImageURL }) => {
+                    return (
+                      <li key={reviewId}>
+                        <PreviewOfReviews
+                          reviewId={reviewId}
+                          shopName={shopName}
+                          createdAt={createdAt}
+                          reviewImageURL={reviewImageURL}
+                        />
+                      </li>
+                    );
+                  },
+                )}
+              </ReviewGrid>
+            )}
+          </>
         ) : (
-          <Flex>
-            <Text
-              typo="Body2"
-              margin="92px 0 0 0"
-              colorCode={theme.palette.Gray300}
-            >
-              작성한 후기가 없어요😅
-            </Text>
-          </Flex>
+          <Text
+            typo="Body2"
+            margin="92px 0 0 0"
+            colorCode={theme.palette.Gray300}
+          >
+            작성한 후기가 없어요😅
+          </Text>
         )}
       </Flex>
     </MobileLayout>
@@ -97,7 +101,7 @@ const MyReviewPage = () => {
 
 export default MyReviewPage;
 
-const ReviewGrid = styled.div`
+const ReviewGrid = styled.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2열로 배치 */
   gap: 4px;

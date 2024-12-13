@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { RequestType } from '@duri/assets/types';
 import MonthlyCalendar from '@duri/components/request/Calendar';
@@ -11,27 +12,58 @@ import {
   Button,
   DuriNavbar,
   Flex,
+  Header,
   HeightFitFlex,
   MobileLayout,
   Text,
   theme,
 } from '@duri-fe/ui';
 import { TimeTable } from '@duri-fe/ui';
-import { useGetPetInfo } from '@duri-fe/utils';
+import {
+  TimeType,
+  useGetPetInfo,
+  usePostRequestQuotation,
+} from '@duri-fe/utils';
 
 const timeList = Array(10)
   .fill(0)
   .map((_, i) => `${9 + i}:00`);
 
+const validateRequestInfo = (requestInfo: RequestType): boolean => {
+  // 시간 조건: time9~time18 중 하나라도 true여야 함
+  const hasValidTime = Object.keys(requestInfo).some(
+    (key) => key.startsWith('time') && requestInfo[key as keyof TimeType],
+  );
+
+  // 전체 유효성 검사값을 리턴
+  return (
+    !!requestInfo.petId &&
+    requestInfo.menu.length > 0 &&
+    !!requestInfo.shopIds &&
+    !!requestInfo.day &&
+    hasValidTime
+  );
+};
+
 const RequestPage = () => {
+  const navigate = useNavigate();
   const { data: petInfo } = useGetPetInfo();
+  const {
+    mutateAsync: request,
+    isError: requestError,
+    error,
+  } = usePostRequestQuotation();
+
   const [requestInfo, setRequestInfo] =
     useState<RequestType>(DEFAULT_REQUEST_INFO);
+
   const [isButton, setIsButton] = useState<boolean>(false);
+
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSelect = (
     key: string,
-    value: number | string | string[] | boolean | undefined | Date,
+    value: number | string | string[] | boolean | undefined,
   ) => {
     if (key === 'petId') {
       setRequestInfo((prev) => ({
@@ -42,33 +74,56 @@ const RequestPage = () => {
       return;
     }
 
+
     setRequestInfo((prev) => ({
       ...prev,
       [key]: value,
     }));
   };
 
+  const handleSaveButtonClick = () => {
+    console.log(requestInfo);
+    request(requestInfo);
+  };
+
+  const handleBackButtonClick = () => {
+    navigate(-1);
+  }
+
+  // const handle
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (petInfo) {
+      setRequestInfo((prev) => ({ ...prev, petId: petInfo.petId }));
+    }
+  }, [petInfo]);
+
   // 버튼 활성화 조건 업데이트
   useEffect(() => {
-    const isValid =
-      !!requestInfo.petId && !!requestInfo.menu && requestInfo.menu.length > 0;
+    const isValid = validateRequestInfo(requestInfo);
     setIsButton(isValid);
   }, [requestInfo]);
 
-  const handleClickButton = () => {
-    console.log(requestInfo);
-  };
+  // 오류 처리
+  useEffect(() => {
+    if (requestError) {
+      setErrorMessage('오류가 발생했습니다. 다시 시도해주세요.');
+    } else {
+      setErrorMessage(null);
+    }
+  }, [requestError, error]);
 
   return (
     <MobileLayout>
-      <HeightFitFlex direction="column" margin="30px 0 91.6px 0">
+      <Header backIcon title='입찰 요청서 작성' titleAlign='start' onClickBack={handleBackButtonClick}/>
+      <HeightFitFlex direction="column" margin="0 0 91.6px">
         <HeightFitFlex
           direction="column"
-          align="flex-start"
+          // align="flex-start"
           padding="0 20px"
           gap={40}
         >
@@ -86,8 +141,8 @@ const RequestPage = () => {
               direction="column"
               borderRadius={12}
               padding="25px 22px 27px 13px"
-              height={168}
-              backgroundColor={theme.palette.White}
+              height={75.5}
+              backgroundColor={theme.palette.Gray_White}
             >
               <Text typo="Caption4" colorCode={theme.palette.Gray300}>
                 등록된 반려견 정보가 없습니다.
@@ -161,12 +216,17 @@ const RequestPage = () => {
             </HeightFitFlex>
           </HeightFitFlex>
         </HeightFitFlex>
+        {requestError && errorMessage && (
+          <Text typo="Caption3" colorCode={theme.palette.Alert}>
+            {errorMessage}
+          </Text>
+        )}
         {isButton ? (
           <Button
             bg={theme.palette.Black}
             fontColor={theme.palette.White}
             borderRadius="0"
-            onClick={handleClickButton}
+            onClick={handleSaveButtonClick}
             typo="Body2"
           >
             요청서 저장
