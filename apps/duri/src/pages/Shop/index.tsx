@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import { MapInfo } from '@duri/components/shop';
 import { ShopList } from '@duri/components/shop/ShopList';
+import { useDebounce } from '@duri/hooks/useDebounce';
 import { useMapCenter } from '@duri/hooks/useMapCenter';
 import { useNaverMap } from '@duri/hooks/useNaverMap';
 import {
@@ -21,6 +22,7 @@ import {
   ShopInfoType,
   useGeolocation,
   useGetNearByShopInfo,
+  useGetSearchShopResult,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
@@ -32,35 +34,32 @@ const Shop = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   const [isMap, setIsMap] = useState<boolean>(true);
-  // const [isSearch, setIsSearch] = useState<boolean>(false);
-  const [isSearch] = useState<boolean>(false);
 
   const location = useGeolocation(); // 현재 위치 정보 가져오기
+
   const { mapInstance } = useNaverMap({
     lat: location.coordinates?.lat || 37.5031348,
     lng: location.coordinates?.lng || 127.0497028,
   });
 
+  // 현재 중심 위치 정보 가져오기
   const mapCenter = useMapCenter(
     {
       lat: location.coordinates?.lat || 37.5031348,
       lng: location.coordinates?.lng || 127.0497028,
     },
     mapInstance,
-  ); // 현재 중심 위치 정보 가져오기
+  );
 
-  // useEffect(() => {
-  //   console.log(mapCenter);
-  // }, [mapCenter.lat, mapCenter.lng]);
+  // API가 너무 자주 호출되지 않도록 조정
+  const debouncedCenter = useDebounce(mapCenter, 300);
 
   const [nearbyShops, setNearbyShops] = useState<ShopInfoType[]>([]);
-  // const [searchShops, setSearchShops] = useState<ShopInfoType[]>([]);
-
-  // const [nearbyShops] = useState<ShopInfoType[]>([]);
-  const [searchShops] = useState<ShopInfoType[]>([]);
+  const [searchShops, setSearchShops] = useState<ShopInfoType[]>([]);
+  const [shops, setShops] = useState<ShopInfoType[]>([]);
 
   const {
-    // getValues,
+    getValues,
     register,
     formState: { errors },
   } = useForm<SearchFormInterface>({
@@ -85,42 +84,41 @@ const Shop = () => {
   const { data, refetch } = useGetNearByShopInfo(
     location.coordinates
       ? {
-          lat: mapCenter.lat,
-          lon: mapCenter.lng,
+          lat: debouncedCenter.lat,
+          lon: debouncedCenter.lng,
           radius: 1000,
         }
       : { lat: 37.5031348, lon: 127.0497028, radius: 2000 },
     filter,
   );
 
-  // const { data: searchResultData, refetch: searchRefetch } =
-  //   useGetSearchShopResult(
-  //     location.coordinates
-  //       ? {
-  //           search: getValues('search'),
-  //           lat: location.coordinates.lat,
-  //           lon: location.coordinates.lng,
-  //         }
-  //       : { search: '강남', lat: 37.5031348, lon: 127.0497028 },
-  //   );
+  const { data: searchResultData, refetch: searchRefetch } =
+    useGetSearchShopResult(
+      location.coordinates
+        ? {
+            search: getValues('search'),
+            lat: location.coordinates.lat,
+            lon: location.coordinates.lng,
+          }
+        : { search: '강남', lat: 37.5031348, lon: 127.0497028 },
+    );
 
   const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const searchValue = getValues('search');
-    // console.log('검색:', searchValue);
-    // if (searchValue) {
-    //   try {
-    //     const { data } = await searchRefetch();
-    //     if (data) {
-    //       setSearchShops(data);
-    //       setIsSearch(true);
-    //     }
-    //   } catch (error) {
-    //     console.error('Error fetching search results:', error);
-    //   }
-    // } else {
-    //   setIsSearch(false);
-    // }
+    const searchValue = getValues('search').trim();
+    console.log('검색:', searchValue);
+    if (searchValue) {
+      try {
+        const { data } = await searchRefetch();
+        if (data) {
+          setSearchShops(data);
+        }
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      }
+    } else {
+      refetch();
+    }
   };
 
   useEffect(() => {
@@ -133,11 +131,20 @@ const Shop = () => {
     }
   }, [data]);
 
-  // useEffect(() => {
-  //   if (searchResultData) {
-  //     setSearchShops(searchResultData);
-  //   }
-  // }, [searchResultData]);
+  useEffect(() => {
+    if (searchResultData) {
+      setSearchShops(searchResultData);
+    }
+  }, [searchResultData]);
+
+  useEffect(() => {
+    // 검색 결과가 있으면 검색 결과를 표시, 없으면 주변 가게 표시
+    if (searchShops.length > 0) {
+      setShops(searchShops);
+    } else {
+      setShops(nearbyShops);
+    }
+  }, [searchShops, nearbyShops]);
 
   return (
     <RelativeMobile>
@@ -159,11 +166,13 @@ const Shop = () => {
               placeholder="펫 미용실 이름, 주소 검색"
               height={46}
               right={
-                <Magnifier
-                  width={24}
-                  height={24}
-                  color={theme.palette.Normal800}
-                />
+                <button type="button">
+                  <Magnifier
+                    width={24}
+                    height={24}
+                    color={theme.palette.Normal800}
+                  />
+                </button>
               }
               helperText={
                 errors.search
@@ -173,13 +182,14 @@ const Shop = () => {
               isNoBorder={true}
               shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
               widthPer="100%"
+              maxLength={36}
             />
           </FormWrapper>
         </SearchWrapper>
         {isMap ? (
           <>
             <MapInfo
-              shops={isSearch ? searchShops : nearbyShops}
+              shops={shops}
               location={location}
               mapInstance={mapInstance}
               ref={mapRef}
@@ -187,7 +197,7 @@ const Shop = () => {
           </>
         ) : (
           <ShopList
-            nearbyShops={nearbyShops}
+            nearbyShops={shops}
             filter={filter}
             onFilterChange={handleFilterChange}
           />
