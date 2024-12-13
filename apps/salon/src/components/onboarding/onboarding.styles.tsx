@@ -9,9 +9,13 @@ export const UnderlinedText = styled.a`
 `;
 
 export const ContactContainer = styled(HeightFitFlex)`
+  position: absolute;
+  width: calc(100% - 40px);
   bottom: 100px;
 `;
 
 export const ButtonWrapper = styled(HeightFitFlex)`
+  position: absolute;
+  width: calc(100% - 40px);
   bottom: 40px;
 `;

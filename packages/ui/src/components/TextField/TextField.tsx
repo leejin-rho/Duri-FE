@@ -5,7 +5,7 @@ import {
   ReactNode,
 } from 'react';
 
-import { AlertStar, Text } from '@duri-fe/ui';
+import { AlertStar } from '@duri-fe/ui';
 import { SerializedStyles } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -31,7 +31,6 @@ interface TextFieldProps
   background?: string;
   shadow?: string;
   placeholderTypo?: SerializedStyles;
-  errorMessage?: string;
 }
 
 /**
@@ -75,7 +74,6 @@ export const TextField = forwardRef<
       isNoBorder = false,
       background = theme.palette.White,
       shadow = 'none',
-      errorMessage,
 
       ...props
     },
@@ -98,9 +96,10 @@ export const TextField = forwardRef<
       <Container per={widthPer} width={isSubTextField ? width + 37 : width}>
         <HeightFitFlex
           direction="row"
-          gap={19}
+          gap={4}
           justify="flex-start"
-          align="flex-end"
+          align="center"
+          margin="0 0 8px 0"
         >
           <Flex width="fit-content" gap={1}>
             {label && <StyledLabel>{label}</StyledLabel>}
@@ -133,32 +132,25 @@ export const TextField = forwardRef<
               fontColor={fontColor}
             />
           ) : (
-            <Flex direction="column" align="flex-start" gap={4}>
-              <InputContainer fontColor={fontColor}>
-                <StyledInput
-                  {...props}
-                  ref={ref as ForwardedRef<HTMLInputElement>}
-                  placeholder={placeholder}
-                  placeholderTypo={placeholderTypo}
-                  spellCheck={false}
-                  onInput={maxLengthCheck}
-                  height={height}
-                  fontColor={fontColor}
-                  isRight={Boolean(right)}
-                  isError={isError}
-                  isRound={isRound}
-                  isNoBorder={isNoBorder}
-                  background={background}
-                  shadow={shadow}
-                />
-                {right && <StyledIcon className="icon">{right}</StyledIcon>}
-              </InputContainer>
-              {errorMessage && isError && (
-                <Text typo="Caption4" colorCode={theme.palette.Alert}>
-                  {errorMessage}
-                </Text>
-              )}
-            </Flex>
+            <InputContainer fontColor={fontColor}>
+              <StyledInput
+                {...props}
+                ref={ref as ForwardedRef<HTMLInputElement>}
+                placeholder={placeholder}
+                placeholderTypo={placeholderTypo}
+                spellCheck={false}
+                onInput={maxLengthCheck}
+                height={height}
+                fontColor={fontColor}
+                isRight={Boolean(right)}
+                isError={isError}
+                isRound={isRound}
+                isNoBorder={isNoBorder}
+                background={background}
+                shadow={shadow}
+              />
+              {right && <StyledIcon className="icon">{right}</StyledIcon>}
+            </InputContainer>
           )}
         </Flex>
       </Container>
@@ -178,7 +170,7 @@ const Container = styled(Flex)<{
   align-items: flex-start;
 `;
 const StyledHelperTextBox = styled.div`
-  margin-top: 8px;
+  /* margin-top: 8px; */
 `;
 const InputContainer = styled.div<{
   fontColor: string;
@@ -315,14 +307,12 @@ const StyledIcon = styled.div`
 `;
 
 const StyledLabel = styled.p`
-  margin-bottom: 12px;
-
   ${theme.typo.Label1};
   color: ${theme.palette.Black};
 `;
 
 const StyledHelperText = styled.p<{ isError: boolean }>`
-  ${theme.typo.Body3};
+  ${theme.typo.Label3};
   color: ${({ isError }) =>
     isError ? theme.palette.Alert : theme.palette.Gray300};
 `;

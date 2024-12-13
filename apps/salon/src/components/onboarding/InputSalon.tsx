@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { Button, Flex, Text, TextField, theme } from '@duri-fe/ui';
@@ -27,13 +27,14 @@ const InputSalon = ({
   onNext,
 }: InputSalonProps) => {
   const [zipCode, setZipCode] = useState<string>('');
-
+  const [isEmpty, setIsEmpty] = useState<boolean>(true);
   const {
     control,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<ShopOnboardingInfoType>({
-    mode: 'onSubmit',
+    mode: 'onChange',
     defaultValues: salonFormData,
   });
 
@@ -51,6 +52,12 @@ const InputSalon = ({
     onNext();
   };
 
+  const watchAllFields = watch();
+
+  useEffect(() => {
+    const isValid = Object.keys(watchAllFields).every((value) => value !== '');
+    setIsEmpty(isValid);
+  });
   return (
     <StyledForm onSubmit={handleSubmit(onSubmitSalonData)}>
       <Flex direction="column" align="flex-start" padding="48px 0 96px 0">
@@ -75,7 +82,7 @@ const InputSalon = ({
               name="name"
               control={control}
               rules={{ required: '매장 이름을 입력해주세요.' }}
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <TextField
                   {...field}
                   type="text"
@@ -85,8 +92,10 @@ const InputSalon = ({
                   widthPer="40%"
                   isNoBorder
                   shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-                  errorMessage={errors.name?.message}
-                  isError={!!errors.name}
+                  helperText={
+                    errors.name ? [{ type: 'error', text: '필수' }] : []
+                  }
+                  isError={!!fieldState.error}
                 />
               )}
             />
@@ -111,15 +120,17 @@ const InputSalon = ({
                   widthPer="55%"
                   isNoBorder
                   shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-                  errorMessage={errors.phone?.message}
+                  helperText={
+                    errors.phone ? [{ type: 'error', text: '필수' }] : []
+                  }
                   isError={!!errors.phone}
                 />
               )}
             />
           </Flex>
 
-          <Flex direction="column" align="flex-start" gap={5}>
-            <Flex justify="flex-start" align="flex-end" gap={8} width={244}>
+          <Flex direction="column" align="flex-start" gap={8}>
+            <Flex justify="flex-start" align="flex-end" gap={6} width={244}>
               <TextField
                 type="number"
                 label="매장 위치"
@@ -144,7 +155,7 @@ const InputSalon = ({
             <Controller
               name="address"
               control={control}
-              rules={{ required: '매장 도로명 주소를 입력해주세요.' }}
+              rules={{ required: '필수항목입니다.' }}
               render={({ field }) => (
                 <TextField
                   {...field}
@@ -153,7 +164,9 @@ const InputSalon = ({
                   width={244}
                   isNoBorder
                   shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-                  errorMessage={errors.address?.message}
+                  helperText={
+                    errors.address ? [{ type: 'error', text: '필수' }] : []
+                  }
                   isError={!!errors.address}
                 />
               )}
@@ -175,7 +188,11 @@ const InputSalon = ({
                 maxLength={12}
                 isNoBorder
                 shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-                errorMessage={errors.businessRegistrationNumber?.message}
+                helperText={
+                  errors.businessRegistrationNumber
+                    ? [{ type: 'error', text: '필수' }]
+                    : []
+                }
                 isError={!!errors.businessRegistrationNumber}
               />
             )}
@@ -194,7 +211,11 @@ const InputSalon = ({
                 width={175}
                 isNoBorder
                 shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-                errorMessage={errors.groomerLicenseNumber?.message}
+                helperText={
+                  errors.groomerLicenseNumber
+                    ? [{ type: 'error', text: '필수' }]
+                    : []
+                }
                 isError={!!errors.groomerLicenseNumber}
               />
             )}
@@ -218,7 +239,7 @@ const InputSalon = ({
       <ButtonWrapper>
         <Button
           type="submit"
-          bg={theme.palette.Black}
+          bg={isEmpty ? theme.palette.Gray200 : theme.palette.Black}
           fontColor={theme.palette.White}
         >
           다음 단계
