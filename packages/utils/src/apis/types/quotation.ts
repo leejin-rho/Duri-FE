@@ -36,6 +36,8 @@ export interface NewRequestListResponse {
     petAge: number;
     petBreed: string;
     petNeutering: boolean;
+    petGender: string;
+    petWeight: number;
     petCharacter: string[];
     petDiseases: string[];
     requestCreatedAt: Date | string | null;

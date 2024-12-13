@@ -112,26 +112,36 @@ const QuotationPage = () => {
       {selectedTab === 'new' ? (
         newRequestList && newRequestList.length > 0 ? (
           <Flex direction="column" gap={8} padding="30px 20px">
-            {newRequestList.map((request) => (
-              <Flex
-                key={request.requestId}
-                onClick={() => handleRequestClick(request.requestId)}
-              >
-                <Card borderRadius={12} padding="6px" shadow="none">
-                  <PetInfo
-                    themeVariant="medium"
-                    image={request.petImage}
-                    name={request.petName}
-                    breed={request.petBreed}
-                    age={request.petAge}
-                    neutering={request.petNeutering}
-                    // TODO : gender, weight API 수정 필요함
-                    gender="F"
-                    weight={7.3}
-                  />
-                </Card>
-              </Flex>
-            ))}
+            {newRequestList.map(
+              ({
+                requestId,
+                petImage,
+                petName,
+                petBreed,
+                petAge,
+                petNeutering,
+                petGender,
+                petWeight,
+              }) => (
+                <Flex
+                  key={requestId}
+                  onClick={() => handleRequestClick(requestId)}
+                >
+                  <Card borderRadius={12} padding="6px" shadow="none">
+                    <PetInfo
+                      themeVariant="medium"
+                      image={petImage}
+                      name={petName}
+                      breed={petBreed}
+                      age={petAge}
+                      neutering={petNeutering}
+                      gender={petGender}
+                      weight={petWeight}
+                    />
+                  </Card>
+                </Flex>
+              ),
+            )}
           </Flex>
         ) : (
           // TODO : 임시 대체뷰 수정 필요
@@ -141,61 +151,75 @@ const QuotationPage = () => {
         )
       ) : approvedQuotationList && approvedQuotationList.length > 0 ? (
         <Flex direction="column" gap={8} padding="30px 20px">
-          {approvedQuotationList.map((quotation) => (
-            <Flex
-              key={quotation.requestId}
-              onClick={() => handleRequestClick(quotation.requestId)}
-            >
-              <PetInfoCard
-                borderRadius={12}
-                padding="6px"
-                direction="row"
-                shadow="none"
+          {approvedQuotationList.map(
+            ({
+              requestId,
+              petImage,
+              petName,
+              petBreed,
+              petAge,
+              petNeutering,
+              petGender,
+              petWeight,
+              status,
+              requestCreatedAt,
+            }) => (
+              <Flex
+                key={requestId}
+                onClick={() => handleRequestClick(requestId)}
               >
-                <PetInfo
-                  themeVariant="medium"
-                  image={quotation.petImage}
-                  name={quotation.petName}
-                  breed={quotation.petBreed}
-                  age={quotation.petAge}
-                  neutering={quotation.petNeutering}
-                  // TODO : gender, weight API 수정 필요함
-                  gender="F"
-                  weight={7.3}
-                />
-                <TagWrapper margin="0 14px">
-                  <SalonTag
-                    content={
-                      quotation.status === 'approved'
-                        ? '수락됨'
-                        : quotation.status === 'expired'
-                          ? '만료됨'
-                          : '대기중'
-                    }
-                    bg={
-                      quotation.status === 'approved'
-                        ? theme.palette.Normal100
-                        : theme.palette.Gray50
-                    }
-                    colorCode={
-                      quotation.status === 'approved'
-                        ? theme.palette.Normal700
-                        : theme.palette.Gray300
-                    }
-                    typo="Label3"
-                    borderRadius={99}
-                    width="auto"
-                    height={26}
-                    padding="6px 10px"
+                <PetInfoCard
+                  borderRadius={12}
+                  padding="6px"
+                  direction="row"
+                  shadow="none"
+                >
+                  <PetInfo
+                    themeVariant="medium"
+                    image={petImage}
+                    name={petName}
+                    breed={petBreed}
+                    age={petAge}
+                    neutering={petNeutering}
+                    gender={petGender}
+                    weight={petWeight}
                   />
-                </TagWrapper>
-                <TimeAgoText typo="Caption3" colorCode={theme.palette.Gray300}>
-                  {quotation.requestCreatedAt &&
-                    calculateTimeAgo(quotation.requestCreatedAt)}
-                </TimeAgoText>
-              </PetInfoCard>
-            </Flex>
-          ))}
+                  <TagWrapper margin="0 14px">
+                    <SalonTag
+                      content={
+                        status === 'approved'
+                          ? '수락됨'
+                          : status === 'expired'
+                            ? '만료됨'
+                            : '대기중'
+                      }
+                      bg={
+                        status === 'approved'
+                          ? theme.palette.Normal100
+                          : theme.palette.Gray50
+                      }
+                      colorCode={
+                        status === 'approved'
+                          ? theme.palette.Normal700
+                          : theme.palette.Gray300
+                      }
+                      typo="Label3"
+                      borderRadius={99}
+                      width="auto"
+                      height={26}
+                      padding="6px 10px"
+                    />
+                  </TagWrapper>
+                  <TimeAgoText
+                    typo="Caption3"
+                    colorCode={theme.palette.Gray300}
+                  >
+                    {requestCreatedAt && calculateTimeAgo(requestCreatedAt)}
+                  </TimeAgoText>
+                </PetInfoCard>
+              </Flex>
+            ),
+          )}
         </Flex>
       ) : (
         // TODO : 임시 대체뷰 수정 필요

@@ -1,8 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-import { Button, Flex, HeightFitFlex, ResponseQuotation, Text, theme } from "@duri-fe/ui";
-import { useGetDetailQuotation } from "@duri-fe/utils";
-import styled from "@emotion/styled";
+import {
+  Button,
+  Flex,
+  HeightFitFlex,
+  ResponseQuotation,
+  Text,
+  theme,
+} from '@duri-fe/ui';
+import { useGetDetailQuotation } from '@duri-fe/utils';
+import styled from '@emotion/styled';
 
 interface DetailQuotationProps {
   requestId: number;
@@ -22,39 +29,43 @@ export const DetailQuotation = ({
   const handleNavigate = () => {
     closeModal();
     navigate(`/feedback`);
-  }
+  };
 
-  if (!quotation) return null;
+  if (!quotation) {
+    return null;
+  }
 
   return (
     <Flex direction="column">
       <ResponseQuotation responseList={quotation} isSalon>
         <HeightFitFlex gap={8}>
-          <Button 
-            width='120px'
-            height='47px'
+          <Button
+            width="120px"
+            height="47px"
             bg={theme.palette.Gray20}
-            borderRadius='8px'
+            borderRadius="8px"
             onClick={closeModal}
           >
-            <Text typo='Body3'>나중에 쓰기</Text>
+            <Text typo="Body3">나중에 쓰기</Text>
           </Button>
-          <CompleteButton 
+          <CompleteButton
             height="47px"
-            bg={enableCompleteButton ? theme.palette.Black : theme.palette.Gray200}
+            bg={
+              enableCompleteButton ? theme.palette.Black : theme.palette.Gray200
+            }
             fontColor={theme.palette.White}
             disabled={!enableCompleteButton}
             borderRadius="8px"
             onClick={enableCompleteButton ? handleNavigate : undefined}
           >
-            <Text typo='Body3'>일지 쓰기</Text>
+            <Text typo="Body3">일지 쓰기</Text>
           </CompleteButton>
         </HeightFitFlex>
       </ResponseQuotation>
     </Flex>
   );
-}
+};
 
 const CompleteButton = styled(Button)`
   flex-shrink: 1;
-`
+`;

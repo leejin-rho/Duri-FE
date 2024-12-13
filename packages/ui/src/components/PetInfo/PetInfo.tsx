@@ -194,7 +194,7 @@ const ProfileImageWrapper = styled(WidthFitFlex)`
 `;
 const PencilWrapper = styled(WidthFitFlex)<{ imageSize: number }>`
   position: absolute;
-  border: 1.094px solid ${theme.palette.White};
+  border: 1px solid ${theme.palette.White};
   padding: 6px;
   top: ${({ imageSize }) => `${imageSize - 32}px`};
   left: ${({ imageSize }) => `${imageSize - 30}px`};

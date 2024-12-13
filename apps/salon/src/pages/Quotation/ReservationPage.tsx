@@ -85,32 +85,43 @@ const ReservationPage = () => {
       {selectedTab === 'reserved' ? (
         reservationList && reservationList.length > 0 ? (
           <Flex direction="column" gap={8} padding="30px 20px">
-            {reservationList.map((item) => (
-              <Flex
-                key={item.requestId}
-                onClick={() => handleRequestClick(item.requestId)}
-              >
-                <Card borderRadius={12} padding="12px" shadow="none">
-                  <PetInfo
-                    themeVariant="medium"
-                    image={item.petDetailResponse.image}
-                    name={item.petDetailResponse.name}
-                    breed={item.petDetailResponse.breed}
-                    age={item.petDetailResponse.age}
-                    gender={item.petDetailResponse.gender}
-                    weight={item.petDetailResponse.weight}
-                    dday={item.dday}
-                    groomer={{
-                      groomerName: item.groomerName,
-                      groomerImage: item.groomerImage,
-                      date: item.date,
-                      startTime: item.startTime,
-                      endTime: item.endTime,
-                    }}
-                  />
-                </Card>
-              </Flex>
-            ))}
+            {reservationList.map(
+              ({
+                requestId,
+                petDetailResponse,
+                dday,
+                groomerName,
+                groomerImage,
+                date,
+                startTime,
+                endTime,
+              }) => (
+                <Flex
+                  key={requestId}
+                  onClick={() => handleRequestClick(requestId)}
+                >
+                  <Card borderRadius={12} padding="12px" shadow="none">
+                    <PetInfo
+                      themeVariant="medium"
+                      image={petDetailResponse.image}
+                      name={petDetailResponse.name}
+                      breed={petDetailResponse.breed}
+                      age={petDetailResponse.age}
+                      gender={petDetailResponse.gender}
+                      weight={petDetailResponse.weight}
+                      dday={dday}
+                      groomer={{
+                        groomerName: groomerName,
+                        groomerImage: groomerImage,
+                        date: date,
+                        startTime: startTime,
+                        endTime: endTime,
+                      }}
+                    />
+                  </Card>
+                </Flex>
+              ),
+            )}
           </Flex>
         ) : (
           // TODO : 임시 대체뷰 수정 필요
@@ -120,32 +131,42 @@ const ReservationPage = () => {
         )
       ) : completedQuotationList && completedQuotationList.length > 0 ? (
         <Flex direction="column" gap={8} padding="30px 20px">
-          {completedQuotationList.map((item) => (
-            <Flex
-              key={item.requestId}
-              onClick={() => handleRequestClick(item.requestId)}
-            >
-              <Card borderRadius={12} padding="12px" shadow="none">
-                <PetInfo
-                  themeVariant="medium"
-                  image={item.petDetailResponse.image}
-                  name={item.petDetailResponse.name}
-                  breed={item.petDetailResponse.breed}
-                  age={item.petDetailResponse.age}
-                  gender={item.petDetailResponse.gender}
-                  weight={item.petDetailResponse.weight}
-                  complete
-                  groomer={{
-                    groomerName: item.groomerName,
-                    groomerImage: item.groomerImage,
-                    date: item.date,
-                    startTime: item.startTime,
-                    endTime: item.endTime,
-                  }}
-                />
-              </Card>
-            </Flex>
-          ))}
+          {completedQuotationList.map(
+            ({
+              requestId,
+              petDetailResponse,
+              groomerName,
+              groomerImage,
+              date,
+              startTime,
+              endTime,
+            }) => (
+              <Flex
+                key={requestId}
+                onClick={() => handleRequestClick(requestId)}
+              >
+                <Card borderRadius={12} padding="12px" shadow="none">
+                  <PetInfo
+                    themeVariant="medium"
+                    image={petDetailResponse.image}
+                    name={petDetailResponse.name}
+                    breed={petDetailResponse.breed}
+                    age={petDetailResponse.age}
+                    gender={petDetailResponse.gender}
+                    weight={petDetailResponse.weight}
+                    complete
+                    groomer={{
+                      groomerName: groomerName,
+                      groomerImage: groomerImage,
+                      date: date,
+                      startTime: startTime,
+                      endTime: endTime,
+                    }}
+                  />
+                </Card>
+              </Flex>
+            ),
+          )}
         </Flex>
       ) : (
         // TODO : 임시 대체뷰 수정 필요

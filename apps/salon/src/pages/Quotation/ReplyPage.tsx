@@ -40,10 +40,13 @@ const ReplyPage = () => {
   const [isValid, setIsValid] = useState<boolean>(false);
 
   const { data: request, timeList } = useGetDetailRequest(requestId);
+
   const { mutateAsync: submitQuotation, error: postQuotationError } =
     usePostQuotation();
 
   const { isOpenModal, openModal, closeModal } = useModal();
+
+  const { userName, userPhone, pet } = request || {};
 
   const onNextStep = async () => {
     if (step === 1) {
@@ -55,10 +58,10 @@ const ReplyPage = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(formData);
     await submitQuotation(formData);
 
     if (postQuotationError) {
+      // TODO: 에러 처리
       console.error(postQuotationError);
       return;
     } else {
@@ -89,22 +92,22 @@ const ReplyPage = () => {
           padding="14px 20px"
           backgroundColor={theme.palette.White}
         >
-          <Card height="235" borderRadius={16} padding="12px 16px">
-            {request && (
+          {pet && (
+            <Card height="235" borderRadius={16} padding="12px 16px">
               <PetInfo
                 themeVariant="spacious"
-                image={request.pet.image}
-                name={request.pet.name}
-                breed={request.pet.breed}
-                age={request.pet.age}
-                weight={request.pet.weight}
-                gender={request.pet.gender}
-                neutering={request.pet.neutering}
-                character={request.pet.character}
-                diseases={request.pet.diseases}
+                image={pet.image}
+                name={pet.name}
+                breed={pet.breed}
+                age={pet.age}
+                weight={pet.weight}
+                gender={pet.gender}
+                neutering={pet.neutering}
+                character={pet.character}
+                diseases={pet.diseases}
               />
-            )}
-          </Card>
+            </Card>
+          )}
         </HeightFitFlex>
 
         {/** 보호자 정보 */}
@@ -121,10 +124,10 @@ const ReplyPage = () => {
             {request && (
               <>
                 <Text typo="Body3" colorCode={theme.palette.Black}>
-                  {request.userName}
+                  {userName}
                 </Text>
                 <Text typo="Body4" colorCode={theme.palette.Gray500}>
-                  {request.userPhone}
+                  {userPhone}
                 </Text>
               </>
             )}
