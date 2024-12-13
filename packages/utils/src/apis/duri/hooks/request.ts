@@ -1,12 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { BaseResponse } from '../../types';
 import { RequestProps } from '../../types/quotation';
 import { postRequestQuotation } from '../request';
-
-// import { BaseResponse } from './../../types/base';
+interface RequestResponse extends BaseResponse {
+  response: number;
+}
 
 export const usePostRequestQuotation = () => {
-  return useMutation<void, Error, RequestProps>({
+  return useMutation<RequestResponse, Error, RequestProps>({
     mutationFn: (request: RequestProps) => postRequestQuotation(request),
     onSuccess: () => {
       window.location.href = '/quotation';
