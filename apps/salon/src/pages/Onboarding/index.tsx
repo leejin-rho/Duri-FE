@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Flex, MobileLayout, StatusBar } from '@duri-fe/ui';
-import styled from '@emotion/styled';
 import {
-  SalonFormData,
-  SalonOwnerFormData,
-} from '@salon/assets/types/onboarding';
-import InputSalong from '@salon/components/onboarding/InputSalon';
+  GroomerOnboardingInfoType,
+  ShopOnboardingInfoType,
+} from '@duri-fe/utils';
+import styled from '@emotion/styled';
+import InputSalon from '@salon/components/onboarding/InputSalon';
 import InputSalonOwner from '@salon/components/onboarding/InputSalonOwner';
 import SalonConfirm from '@salon/components/onboarding/SalonConfirm';
 import SalonOwnerConfirm from '@salon/components/onboarding/SalonOwnerConfirm';
@@ -16,21 +16,22 @@ const OnboardingPage = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<number>(1);
 
-  const [salonFormData, setSalonFormData] = useState<SalonFormData>({
+  const [salonFormData, setSalonFormData] = useState<ShopOnboardingInfoType>({
     name: '',
     address: '',
-    addressDetail: '',
-    registrationNumber: '',
-    licenseNumber: '',
+    lat: 0,
+    lon: 0,
+    phone: '',
+    businessRegistrationNumber: '',
+    groomerLicenseNumber: '',
   });
+
   const [salonOwnerFormData, setSalonOnwerFormData] =
-    useState<SalonOwnerFormData>({
-      profile: '',
+    useState<GroomerOnboardingInfoType>({
       name: '',
-      age: '',
       gender: '',
-      experienceYears: '',
-      experienceMonths: '',
+      age: 0,
+      history: 0,
       license: [],
     });
 
@@ -38,19 +39,17 @@ const OnboardingPage = () => {
     setStep((prev) => prev + 1);
   };
 
-  const handleNextSalon = (data: SalonFormData) => {
+  const handleNextSalon = (data: ShopOnboardingInfoType) => {
     setSalonFormData(data);
     nextStep();
   };
 
-  const handleNextSalonOwner = (data: SalonOwnerFormData) => {
+  const handleNextSalonOwner = (data: GroomerOnboardingInfoType) => {
     setSalonOnwerFormData(data);
     nextStep();
   };
 
   const handlePostSalon = () => {
-    console.log(salonFormData);
-    console.log(salonOwnerFormData);
     // TODO : 데이터 post하기
     navigate('/');
   };
@@ -59,8 +58,13 @@ const OnboardingPage = () => {
     <MobileLayout>
       <PageContainer padding="72px 20px" direction="column" justify="start">
         <StatusBar current={step} total={4} mode="onboarding" />
-
-        {step === 1 && <InputSalong onNext={handleNextSalon} />}
+        {step === 1 && (
+          <InputSalon
+            salonFormData={salonFormData}
+            setSalonFormData={setSalonFormData}
+            onNext={handleNextSalon}
+          />
+        )}
         {step === 2 && <InputSalonOwner onNext={handleNextSalonOwner} />}
         {step === 3 && (
           <SalonConfirm salonFormData={salonFormData} onNext={nextStep} />

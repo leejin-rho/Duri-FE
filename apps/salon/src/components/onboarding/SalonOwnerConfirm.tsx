@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { SalonOwnerFormData } from '@assets/types/onboarding';
 import {
   AlertStar,
   Button,
@@ -9,6 +8,7 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
+import { GroomerOnboardingInfoType } from '@duri-fe/utils';
 
 import {
   ButtonWrapper,
@@ -17,7 +17,7 @@ import {
 } from './onboarding.styles';
 
 interface SalonOwnerConfirmProps {
-  salonOwnerFormData: SalonOwnerFormData;
+  salonOwnerFormData: GroomerOnboardingInfoType;
   onNext: () => void;
 }
 
@@ -74,8 +74,7 @@ const SalonOwnerConfirm = ({
               <AlertStar isUpper />
             </Text>
             <Text typo="Body4">
-              {salonOwnerFormData.experienceYears}년{' '}
-              {salonOwnerFormData.experienceMonths}개월
+              {salonOwnerFormData.history}년 {salonOwnerFormData.history}개월
             </Text>
           </Flex>
 
@@ -106,7 +105,7 @@ const SalonOwnerConfirm = ({
         <Text typo="Label2" colorCode={theme.palette.Gray300}>
           문제가 발생한다면
         </Text>
-        <UnderlinedText typo="Label2" colorCode={theme.palette.Gray300}>
+        <UnderlinedText href="mailto:fodo9898@inha.edu">
           문의하기
         </UnderlinedText>
         <Text typo="Label2" colorCode={theme.palette.Gray300}>

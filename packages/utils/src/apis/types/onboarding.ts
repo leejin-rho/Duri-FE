@@ -17,7 +17,6 @@ export interface ShopOnboardingInfoType {
 
 export interface GroomerOnboardingInfoType {
   name: string;
-  profileImage: string;
   gender: string;
   age: number;
   history: number;

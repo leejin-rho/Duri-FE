@@ -79,11 +79,17 @@ export const TextField = forwardRef<
     },
     ref,
   ) => {
-    function maxLengthCheck(event: React.ChangeEvent<HTMLInputElement>){
-      if (event.target.maxLength > 0 && event.target.value.length > event.target.maxLength){
+    function maxLengthCheck(event: React.ChangeEvent<HTMLInputElement>) {
+      if (
+        event.target.maxLength > 0 &&
+        event.target.value.length > event.target.maxLength
+      ) {
         //object.maxLength : 매게변수 오브젝트의 maxlength 속성 값입니다.
-        event.target.value = event.target.value.slice(0, event.target.maxLength);
-      }    
+        event.target.value = event.target.value.slice(
+          0,
+          event.target.maxLength,
+        );
+      }
     }
 
     return (
@@ -98,7 +104,7 @@ export const TextField = forwardRef<
             {label && <StyledLabel>{label}</StyledLabel>}
             {isEssential && (
               <Flex width={8} align="flex-start">
-                <AlertStar width={8} isUpper={true} />
+                <AlertStar width={8} isUpper />
               </Flex>
             )}
           </Flex>

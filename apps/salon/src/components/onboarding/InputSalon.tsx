@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import { SalonFormData } from '@assets/types/onboarding';
 import { Button, Flex, Text, TextField, theme } from '@duri-fe/ui';
+import { ShopOnboardingInfoType } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 import {
@@ -11,32 +11,50 @@ import {
 } from './onboarding.styles';
 
 interface InputSalonProps {
-  onNext: (data: SalonFormData) => void;
+  salonFormData: ShopOnboardingInfoType;
+  setSalonFormData: React.Dispatch<
+    React.SetStateAction<ShopOnboardingInfoType>
+  >;
+  onNext: (data: ShopOnboardingInfoType) => void;
 }
 
-const InputSalon = ({ onNext }: InputSalonProps) => {
-  const [salonFormState, setSalonFormState] = useState<SalonFormData>({
-    name: '',
-    address: '',
-    addressDetail: '',
-    registrationNumber: '',
-    licenseNumber: '',
-  });
+const InputSalon = ({
+  salonFormData,
+  setSalonFormData,
+  onNext,
+}: InputSalonProps) => {
   const [isEmpty, setIsEmpty] = useState<boolean>(true);
+  const [zipCode, setZipCode] = useState<string>('');
 
   useEffect(() => {
-    const isFilled = Object.values(salonFormState).every(
+    const isFilled = Object.values(salonFormData).every(
       (value) => value !== '',
     );
     setIsEmpty(!isFilled);
-  }, [salonFormState]);
+  }, [salonFormData]);
 
-  const handleChange = (field: keyof SalonFormData, value: string) => {
-    setSalonFormState({ ...salonFormState, [field]: value });
+  const handleShopInfoInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    field: keyof ShopOnboardingInfoType,
+  ) => {
+    setSalonFormData({
+      ...salonFormData,
+      [field]: e.target.value,
+    });
   };
 
-  const handleSubmit = () => {
-    onNext(salonFormState);
+  const handleAddressInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setZipCode(e.target.value);
+  };
+
+  const handleAddressSearch = () => {
+    console.log(zipCode);
+    // 우편번호 검색 API 호출
+  };
+
+  const handleShopInfoSubmit = () => {
+    console.log(salonFormData);
+    onNext(salonFormData);
   };
 
   return (
@@ -57,26 +75,42 @@ const InputSalon = ({ onNext }: InputSalonProps) => {
           </Text>
         </Flex>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleShopInfoSubmit}>
           <Flex direction="column" align="flex-start" gap={21}>
-            <TextField
-              label="매장 이름"
-              placeholder="매장이름 입력"
-              value={salonFormState.name}
-              onChange={(e) => handleChange('name', e.target.value)}
-              isEssential
-              width={244}
-              isNoBorder
-              shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-            />
+            <Flex justify="space-between">
+              <TextField
+                type="text"
+                label="매장 이름"
+                placeholder="매장이름 입력"
+                value={salonFormData.name}
+                onChange={(e) => handleShopInfoInputChange(e, 'name')}
+                isEssential
+                widthPer="40%"
+                isNoBorder
+                shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+              />
+
+              <TextField
+                type="text"
+                label="매장 전화번호"
+                placeholder="전화번호 입력"
+                value={salonFormData.phone}
+                onChange={(e) => handleShopInfoInputChange(e, 'phone')}
+                isEssential
+                widthPer="55%"
+                isNoBorder
+                shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+              />
+            </Flex>
 
             <Flex direction="column" align="flex-start" gap={5}>
               <Flex justify="flex-start" align="flex-end" gap={8} width={244}>
                 <TextField
+                  type="number"
                   label="매장 위치"
                   placeholder="우편번호 입력"
-                  value={salonFormState.address}
-                  onChange={(e) => handleChange('address', e.target.value)}
+                  value={zipCode}
+                  onChange={handleAddressInputChange}
                   isEssential
                   isNoBorder
                   shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
@@ -87,14 +121,16 @@ const InputSalon = ({ onNext }: InputSalonProps) => {
                   borderRadius="8px"
                   bg={theme.palette.Black}
                   fontColor={theme.palette.White}
+                  onClick={handleAddressSearch}
                 >
                   <Text typo="Body3">우편번호 검색</Text>
                 </AddressButton>
               </Flex>
               <TextField
+                type="text"
                 placeholder="상세주소 입력"
-                value={salonFormState.addressDetail}
-                onChange={(e) => handleChange('addressDetail', e.target.value)}
+                value={salonFormData.address}
+                onChange={(e) => handleShopInfoInputChange(e, 'address')}
                 width={244}
                 isNoBorder
                 shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
@@ -102,11 +138,12 @@ const InputSalon = ({ onNext }: InputSalonProps) => {
             </Flex>
 
             <TextField
+              type="text"
               label="사업자 등록번호"
               placeholder="사업자 등록번호 입력"
-              value={salonFormState.registrationNumber}
+              value={salonFormData.businessRegistrationNumber}
               onChange={(e) =>
-                handleChange('registrationNumber', e.target.value)
+                handleShopInfoInputChange(e, 'businessRegistrationNumber')
               }
               isEssential
               width={175}
@@ -115,10 +152,13 @@ const InputSalon = ({ onNext }: InputSalonProps) => {
             />
 
             <TextField
+              type="text"
               label="미용사 면허번호"
               placeholder="미용사 면허번호 입력"
-              value={salonFormState.licenseNumber}
-              onChange={(e) => handleChange('licenseNumber', e.target.value)}
+              value={salonFormData.groomerLicenseNumber}
+              onChange={(e) =>
+                handleShopInfoInputChange(e, 'groomerLicenseNumber')
+              }
               isEssential
               width={175}
               isNoBorder
@@ -133,7 +173,7 @@ const InputSalon = ({ onNext }: InputSalonProps) => {
         <Text typo="Label2" colorCode={theme.palette.Gray300}>
           문제가 발생한다면
         </Text>
-        <UnderlinedText typo="Label2" colorCode={theme.palette.Gray300}>
+        <UnderlinedText href="mailto:fodo9898@inha.edu">
           문의하기
         </UnderlinedText>
         <Text typo="Label2" colorCode={theme.palette.Gray300}>
@@ -148,7 +188,7 @@ const InputSalon = ({ onNext }: InputSalonProps) => {
           </Button>
         ) : (
           <Button
-            onClick={handleSubmit}
+            onClick={handleShopInfoSubmit}
             bg={theme.palette.Black}
             fontColor={theme.palette.White}
           >

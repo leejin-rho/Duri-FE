@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { SalonFormData } from '@assets/types/onboarding';
 import { AlertStar, Button, Flex, Text, theme } from '@duri-fe/ui';
+import { ShopOnboardingInfoType } from '@duri-fe/utils';
 
 import {
   ButtonWrapper,
@@ -10,7 +10,7 @@ import {
 } from './onboarding.styles';
 
 interface SalonConfirmProps {
-  salonFormData: SalonFormData;
+  salonFormData: ShopOnboardingInfoType;
   onNext: () => void;
 }
 
@@ -49,7 +49,7 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
             </Text>
             <Flex widthPer={70} justify="flex-start">
               <Text typo="Body4">
-                {salonFormData.addressDetail}[{salonFormData.address}]
+                {salonFormData.address}[{salonFormData.address}]
               </Text>
             </Flex>
           </Flex>
@@ -59,7 +59,7 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
               사업자 등록번호
               <AlertStar isUpper />
             </Text>
-            <Text typo="Body4">{salonFormData.registrationNumber}</Text>
+            <Text typo="Body4">{salonFormData.businessRegistrationNumber}</Text>
           </Flex>
 
           <Flex justify="flex-start" gap={36}>
@@ -67,7 +67,7 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
               미용사 면허번호
               <AlertStar isUpper />
             </Text>
-            <Text typo="Body4">{salonFormData.licenseNumber}</Text>
+            <Text typo="Body4">{salonFormData.groomerLicenseNumber}</Text>
           </Flex>
         </Flex>
 
@@ -84,7 +84,7 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
         <Text typo="Label2" colorCode={theme.palette.Gray300}>
           문제가 발생한다면
         </Text>
-        <UnderlinedText typo="Label2" colorCode={theme.palette.Gray300}>
+        <UnderlinedText href="mailto:fodo9898@inha.edu">
           문의하기
         </UnderlinedText>
         <Text typo="Label2" colorCode={theme.palette.Gray300}>

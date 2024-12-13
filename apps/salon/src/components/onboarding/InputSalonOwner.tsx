@@ -12,6 +12,7 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
+import { GroomerOnboardingInfoType } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 import {
@@ -21,7 +22,7 @@ import {
 } from './onboarding.styles';
 
 interface InputSalonOwnerProps {
-  onNext: (data: SalonOwnerFormData) => void;
+  onNext: (data: GroomerOnboardingInfoType) => void;
 }
 
 const certificateOptions: string[] = [
@@ -37,13 +38,11 @@ const genders: string[] = ['male', 'female'];
 
 const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
   const [salonOwnerFormState, setSalonOwnerFormState] =
-    useState<SalonOwnerFormData>({
-      profile: '',
+    useState<GroomerOnboardingInfoType>({
       name: '',
-      age: '',
+      age: 0,
       gender: '',
-      experienceYears: '',
-      experienceMonths: '',
+      history: 0,
       license: [],
     });
   const [isEmpty, setIsEmpty] = useState<boolean>(true);
@@ -128,7 +127,7 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                   </Text>
                 </label>
                 <ImageUploadContainer width={70} height={70}>
-                  {imgUrl && salonOwnerFormState.profile ? (
+                  {imgUrl ? (
                     <ImagePreview src={imgUrl} alt="선택된 파일 미리보기" />
                   ) : (
                     <Flex
@@ -241,7 +240,7 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                   type="number"
                   max={99}
                   placeholder="경력 입력"
-                  value={salonOwnerFormState.experienceYears}
+                  value={salonOwnerFormState.history}
                   maxLength={2}
                   onChange={(e) =>
                     handleChange('experienceYears', e.target.value)
@@ -256,7 +255,7 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                   type="number"
                   max={12}
                   placeholder="경력 입력"
-                  value={salonOwnerFormState.experienceMonths}
+                  value={salonOwnerFormState.history}
                   maxLength={2}
                   onChange={(e) =>
                     handleChange('experienceMonths', e.target.value)
@@ -314,7 +313,7 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
         <Text typo="Label2" colorCode={theme.palette.Gray300}>
           문제가 발생한다면
         </Text>
-        <UnderlinedText typo="Label2" colorCode={theme.palette.Gray300}>
+        <UnderlinedText href="mailto:fodo9898@inha.edu">
           문의하기
         </UnderlinedText>
         <Text typo="Label2" colorCode={theme.palette.Gray300}>
