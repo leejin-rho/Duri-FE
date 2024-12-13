@@ -13,8 +13,8 @@ import { format } from 'date-fns';
 
 import { RequestDetailProps } from '../../types';
 
-// import { DetailGrooming } from './DetailGrooming';
-import { DetailGroomingTemp } from './DetailGroomingTemp';
+import { DetailGrooming } from './DetailGrooming';
+// import { DetailGroomingTemp } from './DetailGroomingTemp';
 import { TimeTable } from './Timetable';
 
 const timeList = Array(10)
@@ -97,7 +97,7 @@ export const RequestQuotation = ({
 
       {/** 상세 미용 */}
       <HeightFitFlex direction="column" padding='28px 0'>
-        <DetailGroomingTemp
+        <DetailGrooming
           groomingMenu={groomingMenu}
           additionalGrooming={additionalGrooming}
           specialCare={specialCare}

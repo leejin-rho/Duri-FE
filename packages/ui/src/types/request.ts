@@ -41,10 +41,10 @@ interface RequestDetailGroomerType {
 }
 
 interface QuotationDetailsType extends TimeType {
-  groomingMenu: string;
-  additionalGrooming: string;
-  specialCare: string;
-  designCut: string;
+  groomingMenu: string[];
+  additionalGrooming: string[];
+  specialCare: string[];
+  designCut: string[];
   otherRequests: string;
   day: string;
 }

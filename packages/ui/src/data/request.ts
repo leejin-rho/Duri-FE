@@ -27,10 +27,10 @@ export const defaultRequestDetailData: RequestDetailProps = {
     "info": "강아지 전문 미용사입니다."
   },
   "quotationDetails": {
-    "groomingMenu": "string",
-    "additionalGrooming": "stringaa",
-    "specialCare": "stringaa",
-    "designCut": "stringaa",
+    "groomingMenu": ["string"],
+    "additionalGrooming": ["stringaa"],
+    "specialCare": ["stringaa"],
+    "designCut": ["stringaa"],
     "otherRequests": "stringaaa",
     "day": "2024-12-06",
     "time9": false,

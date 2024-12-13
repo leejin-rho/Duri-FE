@@ -543,6 +543,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.15.0"
     "@vitejs/plugin-react": "npm:^4.3.3"
     axios: "npm:^1.7.7"
+    date-fns: "npm:^4.1.0"
     eslint: "npm:8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-react: "npm:^7.37.2"
