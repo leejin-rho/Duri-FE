@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { Flex, MobileLayout, StatusBar } from '@duri-fe/ui';
 import styled from '@emotion/styled';
-import { SalonFormData, SalonOwnerFormData } from '@salon/assets/types/onboarding';
+import {
+  SalonFormData,
+  SalonOwnerFormData,
+} from '@salon/assets/types/onboarding';
 import InputSalong from '@salon/components/onboarding/InputSalon';
 import InputSalonOwner from '@salon/components/onboarding/InputSalonOwner';
 import SalonConfirm from '@salon/components/onboarding/SalonConfirm';
@@ -12,6 +15,7 @@ import SalonOwnerConfirm from '@salon/components/onboarding/SalonOwnerConfirm';
 const OnboardingPage = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<number>(1);
+
   const [salonFormData, setSalonFormData] = useState<SalonFormData>({
     name: '',
     address: '',
@@ -49,7 +53,7 @@ const OnboardingPage = () => {
     console.log(salonOwnerFormData);
     // TODO : 데이터 post하기
     navigate('/');
-  }
+  };
 
   return (
     <MobileLayout>
@@ -58,8 +62,15 @@ const OnboardingPage = () => {
 
         {step === 1 && <InputSalong onNext={handleNextSalon} />}
         {step === 2 && <InputSalonOwner onNext={handleNextSalonOwner} />}
-        {step === 3 && <SalonConfirm salonFormData={salonFormData} onNext={nextStep} />}
-        {step === 4 && <SalonOwnerConfirm salonOwnerFormData={salonOwnerFormData} onNext={handlePostSalon} />}
+        {step === 3 && (
+          <SalonConfirm salonFormData={salonFormData} onNext={nextStep} />
+        )}
+        {step === 4 && (
+          <SalonOwnerConfirm
+            salonOwnerFormData={salonOwnerFormData}
+            onNext={handlePostSalon}
+          />
+        )}
       </PageContainer>
     </MobileLayout>
   );
