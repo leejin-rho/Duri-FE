@@ -41,7 +41,7 @@ export const DuriNavbar = () => {
             <HomeIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/shop'}
+            isActive={pathname.startsWith('/shop')}
             text="내주변"
             onClick={() => handleNavigate('/shop')}
             iconType="shop"
@@ -57,7 +57,7 @@ export const DuriNavbar = () => {
             <QuotationIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/diary'}
+            isActive={pathname.startsWith('/diary')}
             text="일기"
             onClick={() => handleNavigate('/diary')}
             iconType="diary"
@@ -65,7 +65,7 @@ export const DuriNavbar = () => {
             <DiaryIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname === '/my'}
+            isActive={pathname.startsWith('/my')}
             text="마이"
             onClick={() => handleNavigate('/my')}
             iconType="my"

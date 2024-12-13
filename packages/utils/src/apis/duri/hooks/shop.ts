@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { useQuery } from '@tanstack/react-query';
 
 import { CenterInfoType, SearchParamType } from '../../types';
@@ -13,6 +15,22 @@ export const useGetNearByShopInfo = (
     enabled: !!centerInfo,
   });
   return { data, refetch, isPending };
+};
+
+export const useDebouncedValue = <T>(value: T, delay: number): T => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
 };
 
 export const useGetSearchShopResult = (searchInfo: SearchParamType) => {

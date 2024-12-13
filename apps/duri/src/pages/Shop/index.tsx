@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 
 import { MapInfo } from '@duri/components/shop';
 import { ShopList } from '@duri/components/shop/ShopList';
+import { useMapCenter } from '@duri/hooks/useMapCenter';
+import { useNaverMap } from '@duri/hooks/useNaverMap';
 import {
   Button,
   DuriNavbar,
@@ -19,7 +21,6 @@ import {
   ShopInfoType,
   useGeolocation,
   useGetNearByShopInfo,
-  useGetSearchShopResult,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
@@ -31,14 +32,35 @@ const Shop = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   const [isMap, setIsMap] = useState<boolean>(true);
-  const [isSearch, setIsSearch] = useState<boolean>(false);
+  // const [isSearch, setIsSearch] = useState<boolean>(false);
+  const [isSearch] = useState<boolean>(false);
+
   const location = useGeolocation(); // 현재 위치 정보 가져오기
+  const { mapInstance } = useNaverMap({
+    lat: location.coordinates?.lat || 37.5031348,
+    lng: location.coordinates?.lng || 127.0497028,
+  });
+
+  const mapCenter = useMapCenter(
+    {
+      lat: location.coordinates?.lat || 37.5031348,
+      lng: location.coordinates?.lng || 127.0497028,
+    },
+    mapInstance,
+  ); // 현재 중심 위치 정보 가져오기
+
+  // useEffect(() => {
+  //   console.log(mapCenter);
+  // }, [mapCenter.lat, mapCenter.lng]);
 
   const [nearbyShops, setNearbyShops] = useState<ShopInfoType[]>([]);
-  const [searchShops, setSearchShops] = useState<ShopInfoType[]>([]);
+  // const [searchShops, setSearchShops] = useState<ShopInfoType[]>([]);
+
+  // const [nearbyShops] = useState<ShopInfoType[]>([]);
+  const [searchShops] = useState<ShopInfoType[]>([]);
 
   const {
-    getValues,
+    // getValues,
     register,
     formState: { errors },
   } = useForm<SearchFormInterface>({
@@ -63,43 +85,42 @@ const Shop = () => {
   const { data, refetch } = useGetNearByShopInfo(
     location.coordinates
       ? {
-          lat: location.coordinates.lat,
-          lon: location.coordinates.lng,
-          radius: 2000,
+          lat: mapCenter.lat,
+          lon: mapCenter.lng,
+          radius: 1000,
         }
       : { lat: 37.5031348, lon: 127.0497028, radius: 2000 },
     filter,
   );
 
-  const { data: searchResultData, refetch: searchRefetch } =
-    useGetSearchShopResult(
-      location.coordinates
-        ? {
-            search: getValues('search'),
-            lat: location.coordinates.lat,
-            lon: location.coordinates.lng,
-          }
-        : { search: '강남', lat: 37.5031348, lon: 127.0497028 },
-    );
+  // const { data: searchResultData, refetch: searchRefetch } =
+  //   useGetSearchShopResult(
+  //     location.coordinates
+  //       ? {
+  //           search: getValues('search'),
+  //           lat: location.coordinates.lat,
+  //           lon: location.coordinates.lng,
+  //         }
+  //       : { search: '강남', lat: 37.5031348, lon: 127.0497028 },
+  //   );
 
   const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const searchValue = getValues('search');
-    console.log(searchValue);
-
-    if (searchValue) {
-      try {
-        const { data } = await searchRefetch();
-        if (data) {
-          setSearchShops(data);
-          setIsSearch(true);
-        }
-      } catch (error) {
-        console.error('Error fetching search results:', error);
-      }
-    } else {
-      setIsSearch(false);
-    }
+    // const searchValue = getValues('search');
+    // console.log('검색:', searchValue);
+    // if (searchValue) {
+    //   try {
+    //     const { data } = await searchRefetch();
+    //     if (data) {
+    //       setSearchShops(data);
+    //       setIsSearch(true);
+    //     }
+    //   } catch (error) {
+    //     console.error('Error fetching search results:', error);
+    //   }
+    // } else {
+    //   setIsSearch(false);
+    // }
   };
 
   useEffect(() => {
@@ -112,11 +133,11 @@ const Shop = () => {
     }
   }, [data]);
 
-  useEffect(() => {
-    if (searchResultData) {
-      setSearchShops(searchResultData);
-    }
-  }, [searchResultData]);
+  // useEffect(() => {
+  //   if (searchResultData) {
+  //     setSearchShops(searchResultData);
+  //   }
+  // }, [searchResultData]);
 
   return (
     <RelativeMobile>
@@ -135,7 +156,7 @@ const Shop = () => {
                   message: '검색어는 최대 50자까지 가능합니다.',
                 },
               })}
-              placeholder="경기 성남시 분당구 안양판교로 1192"
+              placeholder="펫 미용실 이름, 주소 검색"
               height={46}
               right={
                 <Magnifier
@@ -160,6 +181,7 @@ const Shop = () => {
             <MapInfo
               shops={isSearch ? searchShops : nearbyShops}
               location={location}
+              mapInstance={mapInstance}
               ref={mapRef}
             />
           </>

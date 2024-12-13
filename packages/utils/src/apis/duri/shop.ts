@@ -19,6 +19,6 @@ export const getSearchShopResult = async ({
   const { data } = await publicInstance.get(`/shop/search`, {
     params: { search, lat, lon },
   });
-  console.log(data.response);
+
   return data.response;
 };

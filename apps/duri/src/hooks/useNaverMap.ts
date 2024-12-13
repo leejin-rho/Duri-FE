@@ -5,9 +5,9 @@ import { LatLngType } from '@duri/assets/types/map';
 export const useNaverMap = (initialCenter: LatLngType, initialZoom = 16) => {
   const [mapInstance, setMapInstance] = useState<naver.maps.Map | undefined>();
 
+  // 스크립트 로더 함수
   const loadScript = useCallback((src: string, callback: () => void) => {
-    const existingScript = document.querySelector(`script[src="${src}"]`);
-    if (existingScript) {
+    if (document.querySelector(`script[src="${src}"]`)) {
       callback();
       return;
     }
@@ -18,6 +18,7 @@ export const useNaverMap = (initialCenter: LatLngType, initialZoom = 16) => {
     document.head.appendChild(script);
   }, []);
 
+  // 맵 초기화 함수
   const initializeMap = useCallback(
     (mapContainer: HTMLElement | null) => {
       if (!mapContainer || !window.naver) return;
@@ -35,18 +36,20 @@ export const useNaverMap = (initialCenter: LatLngType, initialZoom = 16) => {
       const map = new naver.maps.Map(mapContainer, mapOptions);
       setMapInstance(map);
     },
-    [initialCenter, initialZoom],
+    [initialCenter.lat, initialCenter.lng, initialZoom],
   );
 
   useEffect(() => {
     const naverMapId = import.meta.env.VITE_NAVER_MAP_CLIENT_ID;
-    if (typeof naver === 'undefined') {
+    const mapContainer = document.getElementById('map');
+
+    if (!window.naver) {
       loadScript(
         `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${naverMapId}&submodules=geocoder`,
-        () => initializeMap(document.getElementById('map')),
+        () => initializeMap(mapContainer),
       );
     } else {
-      initializeMap(document.getElementById('map'));
+      initializeMap(mapContainer);
     }
   }, [loadScript, initializeMap]);
 
