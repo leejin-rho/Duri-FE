@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
 import { Button, Flex, Text, TextField, theme } from '@duri-fe/ui';
 import { ShopOnboardingInfoType } from '@duri-fe/utils';
@@ -15,33 +16,26 @@ interface InputSalonProps {
   setSalonFormData: React.Dispatch<
     React.SetStateAction<ShopOnboardingInfoType>
   >;
-  onNext: (data: ShopOnboardingInfoType) => void;
+  onNext: () => void;
 }
+
+const PHONE_REGEX = /^0\d{1,2}-?\d{3,4}-?\d{4}$/;
 
 const InputSalon = ({
   salonFormData,
   setSalonFormData,
   onNext,
 }: InputSalonProps) => {
-  const [isEmpty, setIsEmpty] = useState<boolean>(true);
   const [zipCode, setZipCode] = useState<string>('');
 
-  useEffect(() => {
-    const isFilled = Object.values(salonFormData).every(
-      (value) => value !== '',
-    );
-    setIsEmpty(!isFilled);
-  }, [salonFormData]);
-
-  const handleShopInfoInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    field: keyof ShopOnboardingInfoType,
-  ) => {
-    setSalonFormData({
-      ...salonFormData,
-      [field]: e.target.value,
-    });
-  };
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ShopOnboardingInfoType>({
+    mode: 'onSubmit',
+    defaultValues: salonFormData,
+  });
 
   const handleAddressInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setZipCode(e.target.value);
@@ -52,13 +46,13 @@ const InputSalon = ({
     // 우편번호 검색 API 호출
   };
 
-  const handleShopInfoSubmit = () => {
-    console.log(salonFormData);
-    onNext(salonFormData);
+  const onSubmitSalonData = (data: ShopOnboardingInfoType) => {
+    setSalonFormData(data);
+    onNext();
   };
 
   return (
-    <>
+    <StyledForm onSubmit={handleSubmit(onSubmitSalonData)}>
       <Flex direction="column" align="flex-start" padding="48px 0 96px 0">
         <Flex
           direction="column"
@@ -75,97 +69,137 @@ const InputSalon = ({
           </Text>
         </Flex>
 
-        <form onSubmit={handleShopInfoSubmit}>
-          <Flex direction="column" align="flex-start" gap={21}>
-            <Flex justify="space-between">
-              <TextField
-                type="text"
-                label="매장 이름"
-                placeholder="매장이름 입력"
-                value={salonFormData.name}
-                onChange={(e) => handleShopInfoInputChange(e, 'name')}
-                isEssential
-                widthPer="40%"
-                isNoBorder
-                shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-              />
-
-              <TextField
-                type="text"
-                label="매장 전화번호"
-                placeholder="전화번호 입력"
-                value={salonFormData.phone}
-                onChange={(e) => handleShopInfoInputChange(e, 'phone')}
-                isEssential
-                widthPer="55%"
-                isNoBorder
-                shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-              />
-            </Flex>
-
-            <Flex direction="column" align="flex-start" gap={5}>
-              <Flex justify="flex-start" align="flex-end" gap={8} width={244}>
+        <Flex direction="column" align="flex-start" gap={21}>
+          <Flex justify="space-between" align="flex-start">
+            <Controller
+              name="name"
+              control={control}
+              rules={{ required: '매장 이름을 입력해주세요.' }}
+              render={({ field }) => (
                 <TextField
-                  type="number"
-                  label="매장 위치"
-                  placeholder="우편번호 입력"
-                  value={zipCode}
-                  onChange={handleAddressInputChange}
+                  {...field}
+                  type="text"
+                  label="매장 이름"
+                  placeholder="매장이름 입력"
                   isEssential
+                  widthPer="40%"
                   isNoBorder
                   shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-                  maxLength={5}
+                  errorMessage={errors.name?.message}
+                  isError={!!errors.name}
                 />
-                <AddressButton
-                  height="40px"
-                  borderRadius="8px"
-                  bg={theme.palette.Black}
-                  fontColor={theme.palette.White}
-                  onClick={handleAddressSearch}
-                >
-                  <Text typo="Body3">우편번호 검색</Text>
-                </AddressButton>
-              </Flex>
-              <TextField
-                type="text"
-                placeholder="상세주소 입력"
-                value={salonFormData.address}
-                onChange={(e) => handleShopInfoInputChange(e, 'address')}
-                width={244}
-                isNoBorder
-                shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-              />
-            </Flex>
-
-            <TextField
-              type="text"
-              label="사업자 등록번호"
-              placeholder="사업자 등록번호 입력"
-              value={salonFormData.businessRegistrationNumber}
-              onChange={(e) =>
-                handleShopInfoInputChange(e, 'businessRegistrationNumber')
-              }
-              isEssential
-              width={175}
-              isNoBorder
-              shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+              )}
             />
 
-            <TextField
-              type="text"
-              label="미용사 면허번호"
-              placeholder="미용사 면허번호 입력"
-              value={salonFormData.groomerLicenseNumber}
-              onChange={(e) =>
-                handleShopInfoInputChange(e, 'groomerLicenseNumber')
-              }
-              isEssential
-              width={175}
-              isNoBorder
-              shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+            <Controller
+              name="phone"
+              control={control}
+              rules={{
+                required: '매장 전화번호를 입력해주세요.',
+                pattern: {
+                  value: PHONE_REGEX,
+                  message: '전화번호 형식에 맞게 입력해주세요.',
+                },
+              }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  type="text"
+                  label="매장 전화번호"
+                  placeholder="전화번호 입력"
+                  isEssential
+                  widthPer="55%"
+                  isNoBorder
+                  shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+                  errorMessage={errors.phone?.message}
+                  isError={!!errors.phone}
+                />
+              )}
             />
           </Flex>
-        </form>
+
+          <Flex direction="column" align="flex-start" gap={5}>
+            <Flex justify="flex-start" align="flex-end" gap={8} width={244}>
+              <TextField
+                type="number"
+                label="매장 위치"
+                placeholder="우편번호 입력"
+                value={zipCode}
+                onChange={handleAddressInputChange}
+                isEssential
+                isNoBorder
+                shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+                maxLength={5}
+              />
+              <AddressButton
+                height="40px"
+                borderRadius="8px"
+                bg={theme.palette.Black}
+                fontColor={theme.palette.White}
+                onClick={handleAddressSearch}
+              >
+                <Text typo="Body3">우편번호 검색</Text>
+              </AddressButton>
+            </Flex>
+            <Controller
+              name="address"
+              control={control}
+              rules={{ required: '매장 도로명 주소를 입력해주세요.' }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  type="text"
+                  placeholder="상세주소 입력"
+                  width={244}
+                  isNoBorder
+                  shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+                  errorMessage={errors.address?.message}
+                  isError={!!errors.address}
+                />
+              )}
+            />
+          </Flex>
+
+          <Controller
+            name="businessRegistrationNumber"
+            control={control}
+            rules={{ required: '사업자 등록번호를 입력해주세요.' }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                type="text"
+                label="사업자 등록번호"
+                placeholder="사업자 등록번호 입력"
+                isEssential
+                width={175}
+                maxLength={12}
+                isNoBorder
+                shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+                errorMessage={errors.businessRegistrationNumber?.message}
+                isError={!!errors.businessRegistrationNumber}
+              />
+            )}
+          />
+          <Controller
+            name="groomerLicenseNumber"
+            control={control}
+            rules={{ required: '미용사 면허번호를 입력해주세요.' }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                type="text"
+                label="미용사 면허번호"
+                placeholder="미용사 면허번호 입력"
+                isEssential
+                width={175}
+                isNoBorder
+                shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+                errorMessage={errors.groomerLicenseNumber?.message}
+                isError={!!errors.groomerLicenseNumber}
+              />
+            )}
+          />
+        </Flex>
       </Flex>
 
       {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
@@ -181,24 +215,22 @@ const InputSalon = ({
         </Text>
       </ContactContainer>
 
-      <ButtonWrapper padding="0 20px">
-        {isEmpty ? (
-          <Button bg={theme.palette.Gray50} disabled>
-            다음 단계
-          </Button>
-        ) : (
-          <Button
-            onClick={handleShopInfoSubmit}
-            bg={theme.palette.Black}
-            fontColor={theme.palette.White}
-          >
-            다음 단계
-          </Button>
-        )}
+      <ButtonWrapper>
+        <Button
+          type="submit"
+          bg={theme.palette.Black}
+          fontColor={theme.palette.White}
+        >
+          다음 단계
+        </Button>
       </ButtonWrapper>
-    </>
+    </StyledForm>
   );
 };
+
+const StyledForm = styled.form`
+  width: 100%;
+`;
 
 const AddressButton = styled(Button)`
   width: auto;

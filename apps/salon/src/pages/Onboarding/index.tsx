@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Flex, MobileLayout, StatusBar } from '@duri-fe/ui';
@@ -35,21 +35,36 @@ const OnboardingPage = () => {
       license: [],
     });
 
+  useEffect(() => {
+    console.log(salonFormData);
+    console.log(salonOwnerFormData);
+  }, [salonFormData, salonOwnerFormData]);
+
+  // TODO: 프로필 이미지
+  const [profileImage, setProfileImage] = useState<File | null>(null);
+
   const nextStep = () => {
     setStep((prev) => prev + 1);
   };
 
-  const handleNextSalon = (data: ShopOnboardingInfoType) => {
-    setSalonFormData(data);
-    nextStep();
-  };
-
-  const handleNextSalonOwner = (data: GroomerOnboardingInfoType) => {
-    setSalonOnwerFormData(data);
-    nextStep();
-  };
-
   const handlePostSalon = () => {
+    const formData = new FormData();
+    const onboardingFormData = {
+      shopOnboardingInfo: salonFormData,
+      groomerOnboardingInfo: salonOwnerFormData,
+    };
+
+    formData.append(
+      'data',
+      new Blob([JSON.stringify(onboardingFormData)], {
+        type: 'application/json',
+      }),
+    );
+
+    if (profileImage) {
+      formData.append('image', profileImage);
+    }
+
     // TODO : 데이터 post하기
     navigate('/');
   };
@@ -62,10 +77,17 @@ const OnboardingPage = () => {
           <InputSalon
             salonFormData={salonFormData}
             setSalonFormData={setSalonFormData}
-            onNext={handleNextSalon}
+            onNext={nextStep}
           />
         )}
-        {step === 2 && <InputSalonOwner onNext={handleNextSalonOwner} />}
+        {step === 2 && (
+          <InputSalonOwner
+            salonOwnerFormData={salonOwnerFormData}
+            setSalonOwnerFormData={setSalonOnwerFormData}
+            setProfileImage={setProfileImage}
+            onNext={nextStep}
+          />
+        )}
         {step === 3 && (
           <SalonConfirm salonFormData={salonFormData} onNext={nextStep} />
         )}
@@ -81,7 +103,6 @@ const OnboardingPage = () => {
 };
 
 const PageContainer = styled(Flex)`
-  flex-grow: 1;
   position: relative;
 `;
 

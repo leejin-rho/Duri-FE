@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import { SalonOwnerFormData } from '@assets/types/onboarding';
 import {
   AlertStar,
   Button,
@@ -22,7 +21,12 @@ import {
 } from './onboarding.styles';
 
 interface InputSalonOwnerProps {
-  onNext: (data: GroomerOnboardingInfoType) => void;
+  salonOwnerFormData: GroomerOnboardingInfoType;
+  setSalonOwnerFormData: React.Dispatch<
+    React.SetStateAction<GroomerOnboardingInfoType>
+  >;
+  setProfileImage: React.Dispatch<React.SetStateAction<File | null>>;
+  onNext: () => void;
 }
 
 const certificateOptions: string[] = [
@@ -36,41 +40,42 @@ const certificateOptions: string[] = [
 
 const genders: string[] = ['male', 'female'];
 
-const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
-  const [salonOwnerFormState, setSalonOwnerFormState] =
-    useState<GroomerOnboardingInfoType>({
-      name: '',
-      age: 0,
-      gender: '',
-      history: 0,
-      license: [],
-    });
+const InputSalonOwner = ({
+  salonOwnerFormData,
+  setSalonOwnerFormData,
+  setProfileImage,
+  onNext,
+}: InputSalonOwnerProps) => {
   const [isEmpty, setIsEmpty] = useState<boolean>(true);
-  const [imgUrl, setImgUrl] = useState<string>('');
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string>('');
 
   useEffect(() => {
-    const isFilled = Object.values(salonOwnerFormState).every(
+    const isFilled = Object.values(salonOwnerFormData).every(
       (value) => value !== '',
     );
     setIsEmpty(!isFilled);
-  }, [salonOwnerFormState]);
+  }, [salonOwnerFormData]);
 
   /** 변경 함수 */
   const handleChange = (
-    field: keyof SalonOwnerFormData,
+    field: keyof GroomerOnboardingInfoType,
     value: string | string[],
   ) => {
-    setSalonOwnerFormState({ ...salonOwnerFormState, [field]: value });
+    setSalonOwnerFormData({ ...salonOwnerFormData, [field]: value });
+  };
+
+  const handleProfileImageChange = (file: File | null) => {
+    setProfileImage(file);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const fileUrl = URL.createObjectURL(file);
-      setImgUrl(fileUrl);
-      handleChange('profile', fileUrl);
+      setImagePreviewUrl(fileUrl);
+      handleProfileImageChange(file);
     } else {
-      handleChange('profile', '');
+      handleProfileImageChange(null);
     }
   };
 
@@ -79,7 +84,7 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
   };
 
   const handleSelectLicense = (selectedLicense: string | number) => {
-    const set = new Set(salonOwnerFormState.license);
+    const set = new Set(salonOwnerFormData.license);
     if (typeof selectedLicense === 'string') {
       set.add(selectedLicense);
       handleChange('license', [...set]);
@@ -87,14 +92,15 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
   };
 
   const handleRemoveLicense = (selectedLicense: string) => {
-    const set = new Set(salonOwnerFormState.license);
+    const set = new Set(salonOwnerFormData.license);
     set.delete(selectedLicense);
     handleChange('license', [...set]);
   };
 
   const handleSubmit = () => {
-    URL.revokeObjectURL(imgUrl);
-    onNext(salonOwnerFormState);
+    URL.revokeObjectURL(imagePreviewUrl);
+
+    onNext();
   };
 
   return (
@@ -127,8 +133,11 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                   </Text>
                 </label>
                 <ImageUploadContainer width={70} height={70}>
-                  {imgUrl ? (
-                    <ImagePreview src={imgUrl} alt="선택된 파일 미리보기" />
+                  {imagePreviewUrl ? (
+                    <ImagePreview
+                      src={imagePreviewUrl}
+                      alt="선택된 파일 미리보기"
+                    />
                   ) : (
                     <Flex
                       width={70}
@@ -156,7 +165,7 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                 <TextField
                   label="성함"
                   placeholder="이름 입력"
-                  value={salonOwnerFormState.name}
+                  value={salonOwnerFormData.name}
                   maxLength={10}
                   onChange={(e) => handleChange('name', e.target.value)}
                   width={130}
@@ -181,7 +190,7 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                   <TextField
                     type="number"
                     placeholder="나이 입력"
-                    value={salonOwnerFormState.age}
+                    value={salonOwnerFormData.age}
                     maxLength={2}
                     onChange={(e) => handleChange('age', e.target.value)}
                     width={83}
@@ -206,12 +215,12 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                       key={gender}
                       onClick={() => handleToggleGender(gender)}
                       bg={
-                        salonOwnerFormState.gender === gender
+                        salonOwnerFormData.gender === gender
                           ? theme.palette.Black
                           : theme.palette.White
                       }
                       fontColor={
-                        salonOwnerFormState.gender === gender
+                        salonOwnerFormData.gender === gender
                           ? theme.palette.White
                           : theme.palette.Black
                       }
@@ -240,11 +249,9 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                   type="number"
                   max={99}
                   placeholder="경력 입력"
-                  value={salonOwnerFormState.history}
+                  value={salonOwnerFormData.history}
                   maxLength={2}
-                  onChange={(e) =>
-                    handleChange('experienceYears', e.target.value)
-                  }
+                  onChange={(e) => handleChange('history', e.target.value)}
                   width={83}
                   height={40}
                   isNoBorder
@@ -255,11 +262,9 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                   type="number"
                   max={12}
                   placeholder="경력 입력"
-                  value={salonOwnerFormState.history}
+                  value={salonOwnerFormData.history}
                   maxLength={2}
-                  onChange={(e) =>
-                    handleChange('experienceMonths', e.target.value)
-                  }
+                  onChange={(e) => handleChange('history', e.target.value)}
                   width={83}
                   height={40}
                   isNoBorder
@@ -290,8 +295,8 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
                 align="start"
                 gap={12}
               >
-                {salonOwnerFormState.license &&
-                  salonOwnerFormState.license.map((item) => (
+                {salonOwnerFormData.license &&
+                  salonOwnerFormData.license.map((item) => (
                     <Text
                       key={item}
                       typo="Body4"
