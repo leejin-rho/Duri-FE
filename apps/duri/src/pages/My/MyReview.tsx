@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // import { ReviewType } from '@duri/assets/types/my';
@@ -11,8 +10,6 @@ const MyReviewPage = () => {
   const navigate = useNavigate();
   const handleNavigate = () => navigate(-1);
   const { data: reviewListData } = useGetMyReviews();
-  // const [reviewList, setReviewList] = useState<ReviewType[]>();
-  const [reviewCnt, setReviewCnt] = useState<number>(0);
 
   const dummy = [
     {
@@ -55,26 +52,19 @@ const MyReviewPage = () => {
     },
   ];
 
-  useEffect(() => {
-    if (reviewListData) {
-      // setReviewList(reviewListData.reviewList);
-      setReviewCnt(reviewListData.reviewCnt);
-      console.log(reviewListData);
-    }
-  }, [reviewListData]);
   return (
     <MobileLayout>
       <Header
-        backIcon={true}
+        backIcon
         title="내가 쓴 후기"
         titleAlign="start"
         onClickBack={handleNavigate}
       />
       <Flex direction="column" justify="flex-start" padding="0 20px">
         <Flex justify="flex-start" margin="0 0 37px 0">
-          <Text typo="Title1">총 {reviewCnt}건</Text>
+          <Text typo="Title1">총 {reviewListData?.reviewCnt}건</Text>
         </Flex>
-        {reviewCnt > 0 ? (
+        {reviewListData && reviewListData.reviewCnt > 0 ? (
           <ReviewGrid>
             {dummy.map((review, index) => {
               return (

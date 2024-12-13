@@ -42,7 +42,8 @@ const ReviewWritePage = () => {
   });
   const handleImageChange = (file: string) => setValue('image', file);
   const handleRatingChange = (rating: number) => setValue('rating', rating);
-  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setValue('comment', e.target.value);
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+    setValue('comment', e.target.value);
   const handleSubmit = () => {
     console.log(getValues());
   };
@@ -51,7 +52,7 @@ const ReviewWritePage = () => {
     <MobileLayout>
       <Header
         title="후기 작성"
-        backIcon={true}
+        backIcon
         onClickBack={handleNavigate}
         titleAlign="start"
       />
@@ -64,12 +65,19 @@ const ReviewWritePage = () => {
           </Text>
         </Flex>
         <Flex margin="0 0 15px 0">
-          <SelectStar initialScore={5} onChange={handleRatingChange} size={29} />
+          <SelectStar
+            initialScore={5}
+            onChange={handleRatingChange}
+            size={29}
+          />
         </Flex>
         <Flex gap={8}>
-        <ReviewImageFile imageURL={getValues('image')} onChange={handleImageChange} />
-        <ShadowImageBox width={90} height={90} borderRadius={8} />
-        <ShadowImageBox width={90} height={90} borderRadius={8} />
+          <ReviewImageFile
+            imageURL={getValues('image')}
+            onChange={handleImageChange}
+          />
+          <ShadowImageBox width={90} height={90} borderRadius={8} />
+          <ShadowImageBox width={90} height={90} borderRadius={8} />
         </Flex>
         <Flex margin="15px 0">
           <TextField
@@ -82,15 +90,15 @@ const ReviewWritePage = () => {
         </Flex>
         {/* <PetInfo /> */}
       </FlexGrow>
-      <HeightFitFlex margin='0 0 93px 0'>
-      <Button
-        bg={theme.palette.Black}
-        fontColor={theme.palette.White}
-        borderRadius="0px"
-        onClick={handleSubmit}
-      >
-        등록
-      </Button>
+      <HeightFitFlex margin="0 0 93px 0">
+        <Button
+          bg={theme.palette.Black}
+          fontColor={theme.palette.White}
+          borderRadius="0px"
+          onClick={handleSubmit}
+        >
+          등록
+        </Button>
       </HeightFitFlex>
       <DuriNavbar />
     </MobileLayout>
@@ -104,5 +112,5 @@ const FlexGrow = styled(Flex)`
 `;
 
 const ShadowImageBox = styled(Flex)`
-  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
-`
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+`;

@@ -19,12 +19,18 @@ export const useGetMyReviews = () => {
 };
 
 export const useGetPetListInfo = () => {
-  const { data, isError } = useQuery({
+  return useQuery({
     queryKey: ['getPetListInfo'],
     queryFn: () => getPetListInfo(),
     staleTime: 1000 * 60 * 30,
+    select: (data) =>
+      data.petProfileList.map((pet) => ({
+        ...pet,
+        neutering: pet.neutering ?? false,
+        image: pet.image ?? null,
+        lastGrooming: pet.lastGrooming ?? null,
+      })),
   });
-  return { data, isError };
 };
 export const useGetPetDetailInfo = (petId: number) => {
   const { data, isError } = useQuery({
@@ -58,8 +64,7 @@ export const useGetUserInfo = () => {
 export const usePutUserInfo = (handleNavigate: () => void) => {
   const { mutateAsync } = useMutation({
     mutationKey: ['putUserInfo'],
-    mutationFn: (formData: FormData) =>
-      putUserInfo(formData),
+    mutationFn: (formData: FormData) => putUserInfo(formData),
     onSuccess: () => handleNavigate(),
     onError: (error) => console.log(error),
   });

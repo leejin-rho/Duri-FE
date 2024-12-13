@@ -24,7 +24,7 @@ const PortfolioDetail = () => {
     <MobileLayout>
       <RelativeFlex direction="column">
         <AbsoluteHeader
-          backIcon={true}
+          backIcon
           titleAlign="center"
           iconColor={theme.palette.White}
           onClickBack={() => navigate(-1)}

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { defaultPetInfo } from '@duri/assets/data/pet';
 import {
   PetInfoType,
   RecommendedShopType,
@@ -11,6 +10,7 @@ import { UpcomingReservationType } from '@duri/assets/types/reservation';
 import CarouselHome from '@duri/components/home/Home';
 import RecommendedShop from '@duri/components/home/RecommendedShop';
 import SpeedQuotation from '@duri/components/home/SpeedQuotation';
+import { DEFAULT_PET_INFO } from '@duri/constants/pet';
 import {
   AiStyleBanner,
   Button,
@@ -32,7 +32,7 @@ import styled from '@emotion/styled';
 
 const Home = () => {
   const { data: petData, isError: getPetInfoError } = useGetPetInfo();
-  const [petInfo, setPetInfo] = useState<PetInfoType>(defaultPetInfo);
+  const [petInfo, setPetInfo] = useState<PetInfoType>(DEFAULT_PET_INFO);
   const [regularShopList, setRegularShopList] = useState<RegularShopType[]>([]);
   // 사용자 lat, lon 정보가 필요함!!!!
   const [recommendedShopList, setRecommendedShopList] = useState<

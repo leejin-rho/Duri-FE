@@ -8,13 +8,13 @@ import {
   getUpcomingReservation,
 } from '../home';
 
+
 export const useGetPetInfo = () => {
-  const { data, isError } = useQuery({
+ return useQuery({
     queryKey: ['getPetInfo'],
     queryFn: () => getPetInfo(),
     staleTime: 1000 * 60 * 10,
   });
-  return { data, isError };
 };
 
 export const useGetRegularShopList = () => {

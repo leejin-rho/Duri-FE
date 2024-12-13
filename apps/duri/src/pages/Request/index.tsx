@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 
-import { addMenu, designMenu, menu, specialMenu } from '@duri/assets/data';
-import { defaultRequestInfo } from '@duri/assets/data/request';
-import { PetInfoType, RequestType } from '@duri/assets/types';
+import { RequestType } from '@duri/assets/types';
 import MonthlyCalendar from '@duri/components/request/Calendar';
 import EtcRequest from '@duri/components/request/EtcRequest';
 import PetInfo from '@duri/components/request/PetInfo';
 import SelectGrooming from '@duri/components/request/SelectGrooming';
+import { ADD_MENU, DESIGN_MENU, MENU, SPECIAL_MENU } from '@duri/constants';
+import { DEFAULT_REQUEST_INFO } from '@duri/constants/request';
 import {
   Button,
   DuriNavbar,
+  Flex,
   HeightFitFlex,
   MobileLayout,
   Text,
@@ -23,10 +24,9 @@ const timeList = Array(10)
   .map((_, i) => `${9 + i}:00`);
 
 const RequestPage = () => {
-  const { data: petData } = useGetPetInfo();
+  const { data: petInfo } = useGetPetInfo();
   const [requestInfo, setRequestInfo] =
-    useState<RequestType>(defaultRequestInfo);
-  const [petInfo, setPetInfo] = useState<PetInfoType>();
+    useState<RequestType>(DEFAULT_REQUEST_INFO);
   const [isButton, setIsButton] = useState<boolean>(false);
 
   const handleSelect = (
@@ -52,15 +52,6 @@ const RequestPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    if (petData) {
-      setPetInfo(petData);
-      if (petData && petData.petId !== undefined) {
-        handleSelect('petId', petData.petId); // id가 null이 아닌 경우만 설정
-      }
-    }
-  }, [petData]);
-
   // 버튼 활성화 조건 업데이트
   useEffect(() => {
     const isValid =
@@ -81,7 +72,7 @@ const RequestPage = () => {
           padding="0 20px"
           gap={40}
         >
-          {petInfo && (
+          {petInfo ? (
             <PetInfo
               name={petInfo.name}
               image={petInfo.imageURL}
@@ -90,6 +81,18 @@ const RequestPage = () => {
               gender={petInfo.gender}
               weight={petInfo.weight}
             />
+          ) : (
+            <Flex
+              direction="column"
+              borderRadius={12}
+              padding="25px 22px 27px 13px"
+              height={168}
+              backgroundColor={theme.palette.White}
+            >
+              <Text typo="Caption4" colorCode={theme.palette.Gray300}>
+                등록된 반려견 정보가 없습니다.
+              </Text>
+            </Flex>
           )}
           <HeightFitFlex direction="column" align="flex-start" gap={8}>
             <Text typo="Title2">미용 선택</Text>
@@ -101,7 +104,7 @@ const RequestPage = () => {
               description={requestInfo.menu}
               menuKey="menu"
               onSelect={handleSelect}
-              options={menu}
+              options={MENU}
               selected={requestInfo.menu.length > 0}
             />
             <SelectGrooming
@@ -109,7 +112,7 @@ const RequestPage = () => {
               menuKey="addMenu"
               description={requestInfo.addMenu}
               onSelect={handleSelect}
-              options={addMenu}
+              options={ADD_MENU}
               selected={requestInfo.addMenu.length > 0}
             />
             <SelectGrooming
@@ -117,7 +120,7 @@ const RequestPage = () => {
               description={requestInfo.specialMenu}
               menuKey="specialMenu"
               onSelect={handleSelect}
-              options={specialMenu}
+              options={SPECIAL_MENU}
               selected={requestInfo.specialMenu.length > 0}
             />
             <SelectGrooming
@@ -125,7 +128,7 @@ const RequestPage = () => {
               description={requestInfo.design}
               menuKey="design"
               onSelect={handleSelect}
-              options={designMenu}
+              options={DESIGN_MENU}
               selected={requestInfo.design.length > 0}
             />
           </HeightFitFlex>

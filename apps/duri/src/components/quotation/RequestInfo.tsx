@@ -1,14 +1,21 @@
-import { Flex, Modal, NextArrow, RequestQuotation, Text, theme } from '@duri-fe/ui';
+import {
+  Flex,
+  Modal,
+  NextArrow,
+  RequestQuotation,
+  Text,
+  theme,
+} from '@duri-fe/ui';
 import { useModal } from '@duri-fe/utils';
 import { format } from 'date-fns';
 
 interface RequestInfoProps {
-    requestId: number;
-    createdAt: string;
-    expiredAt: string;
-    expired?: boolean;
-    margin?: string;
-  }
+  requestId: number;
+  createdAt: string;
+  expiredAt: string;
+  expired?: boolean;
+  margin?: string;
+}
 
 export const RequestInfo = ({
   requestId,
@@ -20,14 +27,17 @@ export const RequestInfo = ({
   const { isOpenModal, toggleModal } = useModal();
   return (
     <Flex
-    direction="column"
-    gap={20}
-    padding="0 11px"
-    margin={margin ?? `${margin}`}
-    onClick={toggleModal}
-  >
+      direction="column"
+      gap={20}
+      padding="0 11px"
+      margin={margin ?? `${margin}`}
+      onClick={toggleModal}
+    >
       <Flex gap={8} justify="flex-start">
-        <Text typo="Title3" colorCode={expired ? theme.palette.Gray300 : theme.palette.Normal700}>
+        <Text
+          typo="Title3"
+          colorCode={expired ? theme.palette.Gray300 : theme.palette.Normal700}
+        >
           요청서{requestId}
         </Text>
         <NextArrow width={22} height={23} />
@@ -50,7 +60,7 @@ export const RequestInfo = ({
           </Text>
         </Flex>
       </Flex>
-      <Modal isOpen={isOpenModal} toggleModal={toggleModal} title='요청서'>
+      <Modal isOpen={isOpenModal} toggleModal={toggleModal} title="요청서">
         <RequestQuotation />
       </Modal>
     </Flex>

@@ -1,6 +1,11 @@
-import { Control, Controller, UseFormSetValue, useWatch } from 'react-hook-form';
+import {
+  Control,
+  Controller,
+  UseFormSetValue,
+  useWatch,
+} from 'react-hook-form';
 
-import { personalityOptions } from '@duri/assets/data/pet';
+import { PERSONALITY_OPTION_LIST } from '@duri/constants/pet';
 import { FormData } from '@duri/pages/My/MyPetModify';
 import { Button, Flex, HeightFitFlex, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
@@ -36,9 +41,9 @@ export const PetPersonalityModify = ({
           validate: (value: string[]) =>
             value.length > 0 || '성격에 대해 알려주세요.',
         }}
-        render={({field}) => (
+        render={({ field }) => (
           <FitFlex justify="flex-start" gap={8} margin="19px 0 0 0">
-            {personalityOptions.map(({ key, label }) => (
+            {PERSONALITY_OPTION_LIST.map(({ key, label }) => (
               <Button
                 key={key}
                 typo="Body3"

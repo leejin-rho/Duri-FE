@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { UserInfoType } from '@duri/assets/types/my';
 import { InputImageFile } from '@duri/components/my/InputImageFile';
 import { UserModifyForm } from '@duri/components/my/modify/UserModifyForm';
 import {
@@ -20,9 +19,10 @@ import styled from '@emotion/styled';
 const MyInfoModifyPage = () => {
   const navigate = useNavigate();
   const handleNavigate = () => navigate(-1);
-  const { data: userInfoData } = useGetUserInfo();
-  const { mutateAsync: modify } = usePutUserInfo(() => window.location.href = '/my');
-  const [userInfo, setUserInfo] = useState<UserInfoType>();
+  const { data: userInfo } = useGetUserInfo();
+  const { mutateAsync: modify } = usePutUserInfo(
+    () => (window.location.href = '/my'),
+  );
   const [imageFile, setImageFile] = useState<File | undefined>();
   const [imageURL, setImageURL] = useState<string | undefined>();
 
@@ -34,24 +34,24 @@ const MyInfoModifyPage = () => {
     modify(formData);
   };
   useEffect(() => {
-    if (userInfoData) {setUserInfo(userInfoData)
-      setImageURL(userInfoData.profileImg === null ? undefined : userInfoData.profileImg)
-    };
-  },[userInfoData]);
-
+    if (userInfo)
+      setImageURL(
+        userInfo.profileImg === null ? undefined : userInfo.profileImg,
+      );
+  }, [userInfo]);
 
   return (
     <MobileLayout>
       <Header
         title="내정보 수정"
         titleAlign="start"
-        backIcon={true}
+        backIcon
         onClickBack={handleNavigate}
       />
       <FlexGrow direction="column" gap={20} justify="flex-start">
         <InputImageFile
           imageURL={imageURL}
-          onChange={(file: File)=>setImageFile(file)}
+          onChange={(file: File) => setImageFile(file)}
           setImageURL={setImageURL}
         />
         <Text typo="Label3" colorCode={theme.palette.Gray300}>

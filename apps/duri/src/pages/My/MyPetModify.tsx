@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { breedMapping } from '@duri/assets/data';
 import { InputImageFile } from '@duri/components/my/InputImageFile';
 import { PetModifyForm } from '@duri/components/my/modify/PetModifyForm';
+import { BREEDS_MAPPING } from '@duri/constants';
 import {
   Button,
   DuriNavbar,
@@ -64,7 +64,7 @@ const MyPetModifyPage = () => {
 
   const onSubmit = (data: FormData) => {
     // breed 값 업데이트
-    setValue('breed', breedMapping[data.breed]);
+    setValue('breed', BREEDS_MAPPING[data.breed]);
 
     // image와 나머지 데이터를 분리
     const updatedData = getValues();
@@ -92,7 +92,7 @@ const MyPetModifyPage = () => {
       <Header
         title="마이펫 정보 수정"
         titleAlign="start"
-        backIcon={true}
+        backIcon
         onClickBack={() => navigate(-1)}
       />
       {getPetDetailData && (

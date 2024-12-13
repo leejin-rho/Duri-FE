@@ -1,4 +1,4 @@
-export const defaultRequestInfo = {
+export const DEFAULT_REQUEST_INFO = {
   petId: undefined,
   menu: [],
   addMenu: [],

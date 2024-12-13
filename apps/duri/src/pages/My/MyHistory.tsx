@@ -17,7 +17,7 @@ const MyHistoryPage = () => {
   return (
     <MobileLayout>
       <Header
-        backIcon={true}
+        backIcon
         title="이용기록"
         titleAlign="start"
         onClickBack={handleNavigate}

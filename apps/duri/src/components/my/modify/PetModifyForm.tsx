@@ -1,6 +1,6 @@
 import { Control, Controller, UseFormSetValue } from 'react-hook-form';
 
-import { breeds } from '@duri/assets/data';
+import { BREEDS } from '@duri/constants';
 import { FormData } from '@duri/pages/My/MyPetModify';
 import { Button, Dropdown, Flex, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 
@@ -29,7 +29,7 @@ export const PetModifyForm = ({
   getValues: (name: keyof FormData) => string | number | string[] | boolean;
 }) => {
   // 드롭다운에서 선택된 값 업데이트!!!
-  const handleBreedSelect = (value: string | number) => {
+  const handleBREEDSelect = (value: string | number) => {
     if (typeof value === 'string') setValue('breed', value);
   };
   const handleGenderSelect = (value: string | number) => {
@@ -56,10 +56,10 @@ export const PetModifyForm = ({
           control={control}
           render={({ field }) => (
             <Dropdown
-              options={breeds}
+              options={BREEDS}
               defaultValue={field.value}
               width={114}
-              onSelect={handleBreedSelect}
+              onSelect={handleBREEDSelect}
             />
           )}
         />
@@ -151,7 +151,7 @@ export const PetModifyForm = ({
               options={ageList}
               defaultValue={`${field.value}살`}
               width={114}
-              onSelect={handleBreedSelect}
+              onSelect={handleBREEDSelect}
               suffix="살"
             />
           )}
@@ -193,9 +193,7 @@ export const PetModifyForm = ({
                 <Dropdown
                   width={45}
                   options={decimalList}
-                  defaultValue={
-                    field.value?.toString().split('.')[1] ?? 0
-                  } // 소수 부분 초기값
+                  defaultValue={field.value?.toString().split('.')[1] ?? 0} // 소수 부분 초기값
                   onSelect={(value) => {
                     const integer = field.value?.toString().split('.')[0] || 0; // 정수 추출
                     field.onChange(parseFloat(`${integer}.${value}`)); // 정수와 소수 조합

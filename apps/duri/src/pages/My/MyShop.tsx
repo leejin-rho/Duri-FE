@@ -41,12 +41,12 @@ const MyShopPage = () => {
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
       <Header
-        backIcon={true}
+        backIcon
         title="단골가게"
         titleAlign="start"
         onClickBack={handleNavigate}
       />
-      <FlexGrow direction="column" padding="0 20px" margin='0 0 94px 0'>
+      <FlexGrow direction="column" padding="0 20px" margin="0 0 94px 0">
         {regularShopData && regularShopData.homeShopList.length > 0 ? (
           <ShopHorizontal
             shopList={regularShopData.homeShopList}
