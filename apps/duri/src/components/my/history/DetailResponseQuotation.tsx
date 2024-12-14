@@ -1,12 +1,5 @@
-import { useState } from 'react';
-
-import { ResponseQuotationType } from '@duri/assets/types';
-import {
-  Button,
-  defaultResponseData,
-  ResponseQuotation,
-  theme,
-} from '@duri-fe/ui';
+import { Button, ResponseQuotation, theme } from '@duri-fe/ui';
+import { useGetQuotationInfo } from '@duri-fe/utils';
 
 export const DetailResponseQuotation = ({
   quotationId,
@@ -17,13 +10,10 @@ export const DetailResponseQuotation = ({
   handleCloseButton: () => void;
   handleNavigate: (e: React.MouseEvent) => void;
 }) => {
-  // const responseQuotationData  quotationId로 응답견적서 정보 받아와야 함
-  // const [responseList, setResponseList] =
-  const [responseList] =
-    useState<ResponseQuotationType>(defaultResponseData);
-    console.log(quotationId)
+  const { data: quotationData } = useGetQuotationInfo(quotationId);
+
   return (
-    <ResponseQuotation responseList={responseList}>
+    <ResponseQuotation responseList={quotationData}>
       <Button
         bg={theme.palette.Gray20}
         borderRadius="8px"

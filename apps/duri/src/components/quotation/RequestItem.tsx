@@ -1,24 +1,36 @@
 import { useNavigate } from 'react-router-dom';
 
-import { RequestItemType } from '@duri/assets/types';
 import { Button, Card, Flex, Seperator, Text, theme } from '@duri-fe/ui';
 
 import { RequestInfo } from './RequestInfo';
 
+interface RequestItemProps {
+  requestId: number;
+  createdAt: Date;
+  expiredAt: Date;
+  shops: {
+    shopId: number;
+    shopName: string;
+  }[];
+  isExpired: boolean;
+}
+
 export const RequestItem = ({
-  requestItem,
-}: {
-  requestItem: RequestItemType;
-}) => {
+  requestId,
+  createdAt,
+  expiredAt,
+  isExpired,
+  shops,
+}: RequestItemProps) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
-    const quotationId = requestItem.quotationReqId;
+    const quotationId = requestId;
     navigate(`/quotation/${quotationId}`);
   };
 
   return (
     <>
-      {requestItem.isExpired ? (
+      {isExpired ? (
         <Card
           borderRadius={16}
           shadow="small"
@@ -26,17 +38,17 @@ export const RequestItem = ({
           bg={theme.palette.Gray20}
         >
           <RequestInfo
-            requestId={requestItem.quotationReqId}
-            createdAt={requestItem.createdAt}
-            expiredAt={requestItem.expiredAt}
+            requestId={requestId}
+            createdAt={createdAt}
+            expiredAt={expiredAt}
             margin="0 0 20px 0"
           />
           <Seperator height="2px" colorCode={theme.palette.Gray50} />
           <Flex justify="flex-start" padding="0 11px" margin="20px 0">
             <Text typo="Caption3" colorCode={theme.palette.Gray300}>
-              {requestItem.shops.length > 1
-                ? `${requestItem.shops[0].shopName} 외 ${requestItem.shops.length - 1}`
-                : `${requestItem.shops[0].shopName}`}
+              {shops && shops.length > 1
+                ? (`${shops[0]?.shopName} 외 ${shops.length - 1}`)
+                : (`${shops[0]?.shopName}`)}
             </Text>
           </Flex>
           <Button
@@ -52,19 +64,19 @@ export const RequestItem = ({
       ) : (
         <Card borderRadius={16} shadow="small" padding="20px 14px">
           <RequestInfo
-            requestId={requestItem.quotationReqId}
-            createdAt={requestItem.createdAt}
-            expiredAt={requestItem.expiredAt}
+            requestId={requestId}
+            createdAt={createdAt}
+            expiredAt={expiredAt}
             margin="0 0 20px 0"
           />
           <Seperator height="2px" />
           <Flex justify="flex-start" padding="0 11px" margin="20px 0">
             <Text typo="Caption3" colorCode={theme.palette.Gray300}>
-              {requestItem.shops.length > 1
-                ? `${requestItem.shops[0]?.shopName} 외 ${requestItem.shops.length - 1}`
-                : requestItem.shops[0]?.shopName === undefined
+              {shops && shops.length > 1
+                ? `${shops[0]?.shopName} 외 ${shops.length - 1}`
+                : shops[0]?.shopName === undefined
                   ? '정보 없음'
-                  : `${requestItem.shops[0]?.shopName}`}
+                  : `${shops[0]?.shopName}`}
             </Text>
           </Flex>
           <Button

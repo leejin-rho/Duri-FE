@@ -64,25 +64,30 @@ const dummy = {
 
 const MyReviewDetailPage = () => {
   // const [reviewList, setReviewList] = useState<ReviewDetailType[]>(
-  const [reviewList, ] = useState<ReviewDetailType[]>(
-    dummy.reviewList,
-  );
+  const [reviewList] = useState<ReviewDetailType[]>(dummy.reviewList);
 
-  const {data: petInfo} = useGetPetInfo();
+  const { data: petInfo } = useGetPetInfo();
   const navigate = useNavigate();
   const handleClickShopButton = (shopId: number) => navigate(`/shop/${shopId}`);
   const handleNavigate = () => navigate(-1);
 
   return (
     <MobileLayout>
-      <Header backIcon title="내가 쓴 후기" titleAlign="start" onClickBack={handleNavigate}/>
-      <Flex direction="column" justify="flex-start" gap={10} padding="0 10px" margin='0 0 104px 0'>
+      <Header
+        backIcon
+        title="내가 쓴 후기"
+        titleAlign="start"
+        onClickBack={handleNavigate}
+      />
+      <Flex
+        direction="column"
+        justify="flex-start"
+        gap={10}
+        padding="0 10px"
+        margin="0 0 104px 0"
+      >
         {reviewList.map((review, index) => (
-          <Card
-            key={index}
-            borderRadius={16}
-            padding="15px 17px"
-          >
+          <Card key={index} borderRadius={16} padding="15px 17px">
             {/* 사용자 프로필 + 작성일자 + 버튼 */}
             <ReviewUserInfo
               reviewId={review.reviewId}
@@ -93,32 +98,37 @@ const MyReviewDetailPage = () => {
             />
 
             {/* 가게 이동 버튼 */}
-            <Flex margin='15px'>
-            <Button
-              onClick={() => handleClickShopButton(review.shopId)}
-              padding="10px"
-              borderRadius="8px"
-              bg={theme.palette.Gray_White}
-            >
-              <Flex justify="space-between">
-                <Text typo="Body3">{review.shopName}</Text>
-                <NextArrow width={29} height={31} />
-              </Flex>
-            </Button>
+            <Flex margin="15px">
+              <Button
+                onClick={() => handleClickShopButton(review.shopId)}
+                padding="10px"
+                borderRadius="8px"
+                bg={theme.palette.Gray_White}
+              >
+                <Flex justify="space-between">
+                  <Text typo="Body3">{review.shopName}</Text>
+                  <NextArrow width={29} height={31} />
+                </Flex>
+              </Button>
             </Flex>
 
-            <Flex direction="column" padding="0 12.5px" margin='0 0 15px 0' gap={15}>
-              <Flex justify='flex-start'>
-              {/* 리뷰 사진 */}
-              {review.reviewImageURL && (
-                <Image
-                  src={review.reviewImageURL}
-                  alt="리뷰 사진"
-                  borderRadius={8}
-                  width={90}
-                  height={90}
-                />
-              )}
+            <Flex
+              direction="column"
+              padding="0 12.5px"
+              margin="0 0 15px 0"
+              gap={15}
+            >
+              <Flex justify="flex-start">
+                {/* 리뷰 사진 */}
+                {review.reviewImageURL && (
+                  <Image
+                    src={review.reviewImageURL}
+                    alt="리뷰 사진"
+                    borderRadius={8}
+                    width={90}
+                    height={90}
+                  />
+                )}
               </Flex>
 
               {/* 리뷰 텍스트 */}
@@ -135,7 +145,7 @@ const MyReviewDetailPage = () => {
                 name={petInfo.name}
                 weight={petInfo.weight}
                 neutering={petInfo.neutering}
-                themeVariant='compact'
+                themeVariant="compact"
               />
             )}
           </Card>

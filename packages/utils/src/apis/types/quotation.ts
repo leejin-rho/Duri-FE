@@ -40,7 +40,7 @@ export interface NewRequestListResponse {
     petWeight: number;
     petCharacter: string[];
     petDiseases: string[];
-    requestCreatedAt: Date | string | null;
+    requestCreatedAt: Date | null;
   };
 }
 
@@ -155,9 +155,26 @@ export interface QuotationDetailResponse extends BaseResponse {
   };
 }
 
-interface ShopDetailType {
+export interface ShopDetailType {
   shopName: string;
   shopAddress: string;
   shopPhone: string;
   groomerName: string;
+}
+
+export interface RequestItemsType {
+  quotationId: number;
+  createdAt: Date;
+  expiredAt: Date;
+  shops: [
+    {
+      shopId: number;
+      shopName: string;
+    },
+  ];
+  isExpired: boolean;
+}
+
+export interface RequestItemsResponse extends BaseResponse {
+  response: RequestItemsType[];
 }

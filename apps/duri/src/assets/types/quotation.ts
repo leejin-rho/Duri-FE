@@ -13,6 +13,7 @@ export interface QuotationProps {
 
 export interface RequestItemType {
   quotationReqId: number;
+  requestId: number;
   createdAt: Date;
   expiredAt: Date;
   shops: {

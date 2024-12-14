@@ -45,7 +45,11 @@ const QuotationDetailPage = () => {
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
-      <Header title="요청서 및 견적서" backIcon onClickBack={handleBackButtonClick}/>
+      <Header
+        title="요청서 및 견적서"
+        backIcon
+        onClickBack={handleBackButtonClick}
+      />
       <Flex direction="column" padding="0 20px" margin="0 0 100px 0">
         <Card borderRadius={16} padding="26px 28px">
           <RequestInfo

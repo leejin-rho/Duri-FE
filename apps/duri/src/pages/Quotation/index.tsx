@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { RequestItemType } from '@duri/assets/types';
 import { RequestItem } from '@duri/components/quotation/RequestItem';
 import {
   DuriNavbar,
@@ -19,9 +20,7 @@ const QuotationPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  useEffect(() => {
-    console.log(requestList);
-  });
+
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
@@ -45,18 +44,22 @@ const QuotationPage = () => {
 
         {requestList && requestList.length > 0 ? (
           <Flex direction="column" padding="0 22px" align="flex-start" gap={12}>
-            {requestList.map((requestItem) => (
+            {requestList.map(({requestId,createdAt,expiredAt,isExpired,shops}: RequestItemType) => (
               <RequestItem
-                key={requestItem.quotationReqId}
-                requestItem={requestItem}
+                key={requestId}
+                requestId={requestId}
+                createdAt={createdAt}
+                expiredAt={expiredAt}
+                isExpired={isExpired}
+                shops={shops}
               />
             ))}
           </Flex>
         ) : (
-          <Flex margin='92px 0 0'>
-          <Text typo="Body3" colorCode={theme.palette.Gray300}>
-            요청서 및 견적서가 없습니다.
-          </Text>
+          <Flex margin="92px 0 0">
+            <Text typo="Body3" colorCode={theme.palette.Gray300}>
+              요청서 및 견적서가 없습니다.
+            </Text>
           </Flex>
         )}
       </Flex>

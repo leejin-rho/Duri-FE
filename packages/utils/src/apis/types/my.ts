@@ -54,6 +54,7 @@ export interface UserInfo {
 export interface RequestQuotationType {
   response: {
     quotationReqId: number;
+    requestId: number;
     createdAt: Date;
     expiredAt: Date;
     shops: {
