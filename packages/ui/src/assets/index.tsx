@@ -59,7 +59,7 @@ export { default as Write } from './Write';
 export { default as AiStyleBanner } from './AiStyleBanner';
 export { default as AlertStar } from './AlertStar';
 export { default as NaverLogo } from './NaverLogo';
-export { default as SpeechBallon } from './SpeechBallon';
+export { default as SpeechBalloon } from './SpeechBalloon';
 export { default as ListIcon } from './List';
 export { default as EmptyImage } from './EmptyImage';
 export { default as LocationShop } from './LocationShop';

@@ -1,4 +1,4 @@
-import { Flex, SpeechBallon, Text } from '@duri-fe/ui';
+import { Flex, SpeechBalloon, Text } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 interface SpeechBalloonProps {
@@ -11,8 +11,8 @@ export const SpeechBalloonContainer = ({
   textColor,
 }: SpeechBalloonProps) => {
   return (
-    <Container>
-      <SpeechBallon height={46} />
+    <Container direction="column">
+      <SpeechBalloon height={46} />
       <Label typo="Body3" colorCode={textColor}>
         {label}
       </Label>
@@ -26,9 +26,11 @@ const Container = styled(Flex)`
   filter: drop-shadow(0px 0px 7.5px rgba(0, 0, 0, 0.1));
 `;
 
+// const Label = styled(Text)`
+//   transform: translateY(-36px);
+// `;
+
 const Label = styled(Text)`
   position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(25%, 75%);
+  transform: translateY(-4px);
 `;
