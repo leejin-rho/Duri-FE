@@ -37,16 +37,16 @@ const Shop = () => {
 
   const location = useGeolocation(); // 현재 위치 정보 가져오기
 
-  const { mapInstance } = useNaverMap({
-    lat: location.coordinates?.lat || 37.5031348,
-    lng: location.coordinates?.lng || 127.0497028,
+  const { mapInstance, refreshMap } = useNaverMap({
+    lat: location.coordinates?.lat,
+    lng: location.coordinates?.lng,
   });
 
   // 현재 중심 위치 정보 가져오기
   const mapCenter = useMapCenter(
     {
-      lat: location.coordinates?.lat || 37.5031348,
-      lng: location.coordinates?.lng || 127.0497028,
+      lat: location.coordinates?.lat,
+      lng: location.coordinates?.lng,
     },
     mapInstance,
   );
@@ -81,32 +81,34 @@ const Shop = () => {
     }
   };
 
-  const { data, refetch } = useGetNearByShopInfo(
-    location.coordinates
-      ? {
-          lat: debouncedCenter.lat,
-          lon: debouncedCenter.lng,
-          radius: 1000,
-        }
-      : { lat: 37.5031348, lon: 127.0497028, radius: 2000 },
-    filter,
-  );
+  const { data, refetch } = useGetNearByShopInfo({
+    centerInfo: {
+      lat: debouncedCenter.lat,
+      lon: debouncedCenter.lng,
+      radius: 1000,
+    },
+    sortby: filter,
+  });
 
   const { data: searchResultData, refetch: searchRefetch } =
-    useGetSearchShopResult(
-      location.coordinates
-        ? {
-            search: getValues('search'),
-            lat: location.coordinates.lat,
-            lon: location.coordinates.lng,
-          }
-        : { search: '강남', lat: 37.5031348, lon: 127.0497028 },
-    );
+    useGetSearchShopResult({
+      searchInfo: {
+        search: getValues('search').trim(),
+        lat: location.coordinates.lat,
+        lon: location.coordinates.lng,
+      },
+    });
 
   const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const searchValue = getValues('search').trim();
-    console.log('검색:', searchValue);
+    console.log('검색값:', searchValue);
+
+    if (!searchValue) {
+      setSearchShops([]);
+      return;
+    }
+
     if (searchValue) {
       try {
         const { data } = await searchRefetch();
@@ -116,11 +118,27 @@ const Shop = () => {
       } catch (error) {
         console.error('Error fetching search results:', error);
       }
-    } else {
-      refetch();
     }
   };
 
+  useEffect(() => {
+    if (isMap) {
+      refreshMap();
+    }
+  }, [isMap, refreshMap]);
+  useEffect(() => {
+    if (isMap && mapInstance) {
+      const mapContainer = mapRef.current;
+
+      if (mapContainer) {
+        mapInstance.setCenter(
+          new naver.maps.LatLng(mapCenter.lat, mapCenter.lng),
+        );
+      } else {
+        console.error('맵 컨테이너를 찾을 수 없습니다.');
+      }
+    }
+  }, [isMap, mapInstance, mapCenter]);
   useEffect(() => {
     refetch();
   }, [filter]);
@@ -141,8 +159,10 @@ const Shop = () => {
     // 검색 결과가 있으면 검색 결과를 표시, 없으면 주변 가게 표시
     if (searchShops.length > 0) {
       setShops(searchShops);
+      console.log('검색결과:', searchShops);
     } else {
       setShops(nearbyShops);
+      console.log('내주변:', nearbyShops);
     }
   }, [searchShops, nearbyShops]);
 
@@ -189,6 +209,7 @@ const Shop = () => {
         {isMap ? (
           <>
             <MapInfo
+              key={`map-${isMap}`}
               shops={shops}
               location={location}
               mapInstance={mapInstance}
@@ -234,7 +255,6 @@ const Shop = () => {
 export default Shop;
 
 export const RelativeMobile = styled(MobileLayout)`
-  align-items: center;
   position: relative;
 `;
 

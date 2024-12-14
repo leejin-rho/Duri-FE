@@ -38,10 +38,13 @@ export const ShopList = ({
     });
 
   // 요청서 전송용
-  const { openSheet: openRequestSheet, bottomSheetProps: requestSheetProps } =
-    useBottomSheet({
-      maxHeight: 552,
-    });
+  const {
+    openSheet: openRequestSheet,
+    closeSheet: closeRequestSheet,
+    bottomSheetProps: requestSheetProps,
+  } = useBottomSheet({
+    maxHeight: 552,
+  });
 
   // 선택된 가게 취합용
   const [selectedShops, setSelectedShops] = useState<number[]>([]);
@@ -208,7 +211,7 @@ export const ShopList = ({
           </Flex>
         </BottomSheet>
         <BottomSheet {...requestSheetProps}>
-          <SendRequestQBox />
+          <SendRequestQBox closeBottomSheet={closeRequestSheet} />
         </BottomSheet>
       </Flex>
     </>

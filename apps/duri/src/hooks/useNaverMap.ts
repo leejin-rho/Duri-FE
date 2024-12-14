@@ -39,6 +39,13 @@ export const useNaverMap = (initialCenter: LatLngType, initialZoom = 16) => {
     [initialCenter.lat, initialCenter.lng, initialZoom],
   );
 
+  const refreshMap = useCallback(() => {
+    const mapContainer = document.getElementById('map');
+    if (mapContainer) {
+      initializeMap(mapContainer);
+    }
+  }, [initializeMap]);
+
   useEffect(() => {
     const naverMapId = import.meta.env.VITE_NAVER_MAP_CLIENT_ID;
     const mapContainer = document.getElementById('map');
@@ -53,5 +60,5 @@ export const useNaverMap = (initialCenter: LatLngType, initialZoom = 16) => {
     }
   }, [loadScript, initializeMap]);
 
-  return { mapInstance };
+  return { mapInstance, refreshMap };
 };

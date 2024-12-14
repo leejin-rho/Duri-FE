@@ -1,43 +1,56 @@
-import { useEffect, useState } from 'react';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { useQuery } from '@tanstack/react-query';
-
-import { CenterInfoType, SearchParamType } from '../../types';
+import {
+  BaseError,
+  CenterInfoType,
+  SearchParamType,
+  ShopInfoResponse,
+} from '../../types';
+import { UseQueryProps } from '../../types/tanstack';
 import { getNearByShopInfo, getSearchShopResult } from '../shop';
 
-export const useGetNearByShopInfo = (
-  centerInfo: CenterInfoType,
-  sortby: string,
-) => {
+type UseGetNearByShopProps = UseQueryProps<
+  ShopInfoResponse['response'],
+  BaseError
+> & {
+  centerInfo: CenterInfoType;
+  sortby: string;
+};
+
+export const useGetNearByShopInfo = ({
+  queryKey,
+  options,
+  centerInfo,
+  sortby,
+}: UseGetNearByShopProps) => {
   const { data, refetch, isPending } = useQuery({
-    queryKey: ['getNearByShopInfo', centerInfo],
+    queryKey: ['getNearByShopInfo', centerInfo, ...(queryKey || [])],
     queryFn: () => getNearByShopInfo(centerInfo, sortby),
     enabled: !!centerInfo,
+    ...options,
   });
   return { data, refetch, isPending };
 };
 
-export const useDebouncedValue = <T>(value: T, delay: number): T => {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, delay]);
-
-  return debouncedValue;
+type UseGetSearchShopResultProps = UseQueryProps<
+  ShopInfoResponse['response'],
+  BaseError
+> & {
+  searchInfo: SearchParamType;
 };
 
-export const useGetSearchShopResult = (searchInfo: SearchParamType) => {
-  const { data, refetch, isPending } = useQuery({
-    queryKey: ['getSearchShopResult', searchInfo],
+export const useGetSearchShopResult = ({
+  queryKey,
+  options,
+  searchInfo,
+}: UseGetSearchShopResultProps): UseQueryResult<
+  ShopInfoResponse['response'],
+  BaseError
+> => {
+  return useQuery<ShopInfoResponse['response'], BaseError>({
+    queryKey: ['getSearchShopResult', searchInfo, ...(queryKey || [])],
     queryFn: () => getSearchShopResult(searchInfo),
-    enabled: !!searchInfo,
+    enabled: !!searchInfo.search.trim(),
+    ...options,
   });
-  return { data, refetch, isPending };
 };

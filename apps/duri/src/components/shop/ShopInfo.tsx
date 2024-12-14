@@ -28,7 +28,7 @@ import { ShopPhotos } from './ShopPhotos';
 
 export const ShopInfo = () => {
   const navigate = useNavigate();
-  const { openSheet, bottomSheetProps } = useBottomSheet({
+  const { openSheet, closeSheet, bottomSheetProps } = useBottomSheet({
     maxHeight: 556,
   });
 
@@ -201,7 +201,7 @@ export const ShopInfo = () => {
         </Text>
       </FrontBtn>
       <BottomSheet {...bottomSheetProps}>
-        <SendRequestQBox />
+        <SendRequestQBox closeBottomSheet={closeSheet} />
       </BottomSheet>
     </>
   );
