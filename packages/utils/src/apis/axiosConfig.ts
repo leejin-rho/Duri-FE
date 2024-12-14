@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { BaseError } from './errorConfig';
+
 export const BASE_URL = import.meta.env.VITE_SERVER_API + '/api/v1';
 export const BASE_URL_AUTH = import.meta.env.VITE_SERVER_API + '/oauth2';
 
@@ -37,16 +39,6 @@ export const adminInstance = axios.create({
   },
 });
 
-export const authInstance = axios.create({
-  baseURL: BASE_URL_AUTH,
-  timeout: TIME_OUT,
-  withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-  },
-});
-
 export const publicInstance = axios.create({
   baseURL: BASE_URL,
   timeout: TIME_OUT,
@@ -70,13 +62,22 @@ salonInstance.interceptors.request.use((config) => {
 });
 
 duriInstance.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    if (response.data && response.data.success === false) {
+      const { message, status } = response.data.error || {};
+      if (message === DURI_TOKEN_EMPTY) {
+        window.location.href = '/login';
+      }
+      return Promise.reject(
+        new BaseError(message || 'Unknown server error', status || 500),
+      );
+    }
+    return response;
+  },
   (error) => {
     if (error.response) {
-      if (
-        error.response.status === 401 ||
-        error.response.message === DURI_TOKEN_EMPTY
-      ) {
+      const { status } = error.response.data.error || {};
+      if (status === 401) {
         window.location.href = '/login';
       }
     } else {
@@ -87,13 +88,22 @@ duriInstance.interceptors.response.use(
 );
 
 salonInstance.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    if (response.data && response.data.success === false) {
+      const { message, status } = response.data.error || {};
+      if (message === SALON_TOKEN_EMPTY) {
+        window.location.href = '/login';
+      }
+      return Promise.reject(
+        new BaseError(message || 'Unknown server error', status || 500),
+      );
+    }
+    return response;
+  },
   (error) => {
     if (error.response) {
-      if (
-        error.response.status === 401 ||
-        error.response.message === SALON_TOKEN_EMPTY
-      ) {
+      const { status } = error.response.data.error || {};
+      if (status === 401) {
         window.location.href = '/login';
       }
     } else {
