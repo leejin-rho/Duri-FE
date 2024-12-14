@@ -6,7 +6,7 @@ const NAVER_MAP_CLIENT_KEY = import.meta.env.VITE_NAVER_MAP_CLIENT_KEY;
 
 /** 도로명주소 -> 위도/경도 */
 export const getGeocoding = async (query: string): Promise<Coordinates> => {
-  const response = await axios.get('/naver-api/map-geocode/v2/geocod', {
+  const response = await axios.get('/naver-api/map-geocode/v2/geocode', {
     params: {
       query: query,
     },

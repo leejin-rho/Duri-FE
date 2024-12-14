@@ -71,7 +71,7 @@ const OnboardingPage = () => {
     await mutateAsync(formData);
 
     if (isSuccess) {
-      navigate('/');
+      navigate('/onboarding/pending');
     } else {
       alert(error?.message);
     }

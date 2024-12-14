@@ -13,7 +13,7 @@ export const Text = styled.div<{
   color: ${({ colorCode }) => colorCode ?? `${colorCode}`};
 
   display: flex;
-  align-items: ${({ align }) => (align ? align : 'center')};
+  text-align: ${({ align }) => (align ? align : 'center')};
   justify-content: ${({ justify }) => (justify ? justify : 'center')};
   margin: ${({ margin }) => (margin ? margin : '0')};
 `;
