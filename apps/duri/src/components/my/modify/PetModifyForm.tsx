@@ -29,7 +29,7 @@ export const PetModifyForm = ({
   getValues: (name: keyof FormData) => string | number | string[] | boolean;
 }) => {
   // 드롭다운에서 선택된 값 업데이트!!!
-  const handleBREEDSelect = (value: string | number) => {
+  const handleBreedSelect = (value: string | number) => {
     if (typeof value === 'string') setValue('breed', value);
   };
   const handleGenderSelect = (value: string | number) => {
@@ -59,7 +59,7 @@ export const PetModifyForm = ({
               options={BREEDS}
               defaultValue={field.value}
               width={114}
-              onSelect={handleBREEDSelect}
+              onSelect={handleBreedSelect}
             />
           )}
         />
@@ -151,7 +151,7 @@ export const PetModifyForm = ({
               options={ageList}
               defaultValue={`${field.value}살`}
               width={114}
-              onSelect={handleBREEDSelect}
+              onSelect={handleBreedSelect}
               suffix="살"
             />
           )}
