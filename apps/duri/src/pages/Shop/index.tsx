@@ -37,9 +37,21 @@ const Shop = () => {
 
   const location = useGeolocation(); // 현재 위치 정보 가져오기
 
+  const [nearbyShops, setNearbyShops] = useState<ShopInfoType[]>([]);
+  const [searchShops, setSearchShops] = useState<ShopInfoType[]>([]);
+  const [shops, setShops] = useState<ShopInfoType[]>([]);
+
+  const [filter, setFilter] = useState<'distance' | 'rating'>('distance');
+  const handleFilterChange = (filter: 'distance' | 'rating') => {
+    if (filter) {
+      setFilter(filter);
+    }
+  };
+
+  const defaultCenter = { lat: 37.5031348, lng: 127.0497028 };
   const { mapInstance, refreshMap } = useNaverMap({
-    lat: location.coordinates?.lat,
-    lng: location.coordinates?.lng,
+    lat: location.coordinates?.lat || defaultCenter.lat,
+    lng: location.coordinates?.lng || defaultCenter.lng,
   });
 
   // 현재 중심 위치 정보 가져오기
@@ -54,10 +66,6 @@ const Shop = () => {
   // API가 너무 자주 호출되지 않도록 조정
   const debouncedCenter = useDebounce(mapCenter, 300);
 
-  const [nearbyShops, setNearbyShops] = useState<ShopInfoType[]>([]);
-  const [searchShops, setSearchShops] = useState<ShopInfoType[]>([]);
-  const [shops, setShops] = useState<ShopInfoType[]>([]);
-
   const {
     getValues,
     register,
@@ -69,17 +77,6 @@ const Shop = () => {
       search: '',
     },
   });
-
-  const changeMapType = () => {
-    setIsMap(!isMap);
-  };
-
-  const [filter, setFilter] = useState<'distance' | 'rating'>('distance');
-  const handleFilterChange = (filter: 'distance' | 'rating') => {
-    if (filter) {
-      setFilter(filter);
-    }
-  };
 
   const { data, refetch } = useGetNearByShopInfo({
     centerInfo: {
@@ -121,24 +118,47 @@ const Shop = () => {
     }
   };
 
+  const changeMapType = () => {
+    setIsMap(!isMap);
+  };
+
   useEffect(() => {
     if (isMap) {
       refreshMap();
     }
   }, [isMap, refreshMap]);
+
   useEffect(() => {
-    if (isMap && mapInstance) {
+    if (isMap) {
       const mapContainer = mapRef.current;
 
-      if (mapContainer) {
+      if (mapInstance && mapContainer) {
+        // 맵 컨테이너 존재 확인 후 중심 좌표 설정
         mapInstance.setCenter(
           new naver.maps.LatLng(mapCenter.lat, mapCenter.lng),
         );
+        console.log('지도 중심 복구 완료:', mapCenter);
       } else {
-        console.error('맵 컨테이너를 찾을 수 없습니다.');
+        console.warn('맵 인스턴스 또는 컨테이너가 초기화되지 않았습니다.');
       }
     }
-  }, [isMap, mapInstance, mapCenter]);
+  }, [isMap, mapCenter]);
+
+  // 지도 상태 저장
+  // useEffect(() => {
+  //   if (isMap && mapInstance) {
+  //     const mapContainer = mapRef.current;
+
+  //     if (mapContainer) {
+  //       mapInstance.setCenter(
+  //         new naver.maps.LatLng(mapCenter.lat, mapCenter.lng),
+  //       );
+  //     } else {
+  //       console.error('맵 컨테이너를 찾을 수 없습니다.');
+  //     }
+  //   }
+  // }, [isMap, mapInstance, mapCenter]);
+
   useEffect(() => {
     refetch();
   }, [filter]);

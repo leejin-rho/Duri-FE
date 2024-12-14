@@ -1,4 +1,4 @@
-import { forwardRef, Suspense, useState } from 'react';
+import { forwardRef, Suspense, useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import { LatLngType } from '@duri/assets/types/map';
@@ -50,6 +50,7 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
         mapInstance.panTo(
           new naver.maps.LatLng(coordinates.lat, coordinates.lng),
         );
+        console.log('중심:', coordinates);
         mapInstance.setZoom(16);
       }
     };
@@ -59,6 +60,16 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
 
     // 샵 마커 관리
     useMakeShopMarkers(mapInstance, shops, setSelectedShop, openShopInfoSheet);
+
+    // 검색 -> 첫번째 가게 바텀시트
+    useEffect(() => {
+      if (shops.length > 0) {
+        const firstShop = shops[0];
+        setSelectedShop(firstShop);
+
+        openShopInfoSheet();
+      }
+    }, [shops, openShopInfoSheet]);
 
     return (
       <RelativeMobile>
