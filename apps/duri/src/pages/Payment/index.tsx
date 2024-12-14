@@ -14,10 +14,6 @@ const PaymentPage = () => {
   const { data: quotationData } = useGetDetailQuotation(selectedQuotationId);
 
   //쿠폰 정보 - 후순위!!!!!!
-  //   const [coupons, setCoupons] = useState();
-  // useEffect(() => {
-  // 쿠폰 정보 불러와야 함
-  // }, []);
 
   return (
     <MobileLayout>

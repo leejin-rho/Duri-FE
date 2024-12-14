@@ -33,7 +33,8 @@ const Home = () => {
   const { data: petData, isError: getPetInfoError } = useGetPetInfo();
   const { data: regularListData } = useGetRegularShopList();
   const { data: reservationData } = useGetUpcomingReservation();
-  const { data: recommendedListData } = useGetRecommendedShopList(lat, lon);
+  const { data: recommendedListData, isLoading: recommendedListLoading } =
+    useGetRecommendedShopList(lat, lon);
 
   const navigate = useNavigate();
   const handleNavigate = () => {
@@ -45,11 +46,20 @@ const Home = () => {
   }, [petData, getPetInfoError]);
 
   useEffect(() => {
+    if (reservationData) console.log(reservationData);
+    if (petData) console.log(petData);
+  }, [reservationData, petData]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (coordinates) {
       setLat(coordinates.lat);
       setLon(coordinates.lng);
     }
-  });
+  }, [coordinates]);
 
   return (
     <MobileLayout>
@@ -72,7 +82,9 @@ const Home = () => {
                 ? undefined
                 : reservationData
             }
-            lastReservation={petData?.lastGrooming}
+            lastReservation={
+              petData?.lastGrooming === undefined ? null : petData?.lastGrooming
+            }
           />
         </HeightFitFlex>
         {/* 단골 빠른입찰 */}
@@ -126,6 +138,13 @@ const Home = () => {
         </Flex>
         <Flex direction="column">
           {/* 추천 샵 */}
+          {recommendedListLoading && (
+            <Flex margin="31px 0 6px 0">
+              <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+                Loading...
+              </Text>
+            </Flex>
+          )}
           {recommendedListData && (
             <RecommendedShop shopList={recommendedListData} />
           )}

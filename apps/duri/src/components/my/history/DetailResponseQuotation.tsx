@@ -1,7 +1,6 @@
 import { Button, ResponseQuotation, theme } from '@duri-fe/ui';
 import { useGetDetailQuotation } from '@duri-fe/utils';
 
-
 export const DetailResponseQuotation = ({
   quotationId,
   handleCloseButton,
@@ -12,7 +11,6 @@ export const DetailResponseQuotation = ({
   handleNavigate: (e: React.MouseEvent) => void;
 }) => {
   const { data: quotationData } = useGetDetailQuotation(quotationId);
-
 
   return (
     <>
@@ -37,7 +35,7 @@ export const DetailResponseQuotation = ({
             height="47px"
             onClick={handleNavigate}
           >
-            수락 및 결제진행 또는 리뷰작성
+            수락 및 결제진행
           </Button>
         </ResponseQuotation>
       )}

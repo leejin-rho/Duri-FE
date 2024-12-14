@@ -20,14 +20,12 @@ export const IncomingQuotation = ({
 }: IncomingQuotationProps) => {
   const navigate = useNavigate();
   const { isOpenModal, toggleModal } = useModal();
-  const handleNavigate = (selectedQuotationId: number) => {
+  const handleClickNavigateButton = (selectedQuotationId: number) => {
     toggleModal();
 
     navigate('/payment', { state: { selectedQuotationId } });
   };
-  // const handleClickQuotation = () => {
-  //   if (price) onSelect(quotationId);
-  // };
+
   return (
     <>
       <Button
@@ -54,7 +52,7 @@ export const IncomingQuotation = ({
           <DetailResponseQuotation
             quotationId={22}
             handleCloseButton={toggleModal}
-            handleNavigate={() => handleNavigate(quotationId)}
+            handleNavigate={() => handleClickNavigateButton(quotationId)}
           />
         }
       </Modal>
