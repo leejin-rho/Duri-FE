@@ -13,7 +13,7 @@ export const DEFAULT_PET_INFO = {
 export const PERSONALITY_OPTION_LIST = [
   {
     key: 'character1',
-    label: '예민해요test',
+    label: '예민해요',
   },
   {
     key: 'character2',
@@ -62,7 +62,7 @@ export const DISEASE_OPTION_LIST = [
 ];
 
 //온보딩용, 정보 조회 페이지용 성별 매핑
-export const ONBOARDING_GENDER_LIST = [
+export const GENDER_OPTION_LIST = [
   {
     key: 'M',
     label: '왕자님',
@@ -73,13 +73,13 @@ export const ONBOARDING_GENDER_LIST = [
   },
 ];
 
-export const ONBOARDING_NEUTERED_LIST = [
+export const NEUTERED_OPTION_LIST = [
   {
-    key: '네, 했어요!',
-    label: true,
+    key: true,
+    label: '네, 했어요!',
   },
   {
-    key: '아니요, 아직 안했어요.',
-    label: false,
+    key: false,
+    label: '아니요, 아직 안했어요.',
   },
 ];

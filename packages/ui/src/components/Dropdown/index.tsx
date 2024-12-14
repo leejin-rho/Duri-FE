@@ -30,7 +30,7 @@ export const Dropdown = ({
   const [selectedOption, setSelectedOption] = useState<string | number>(defaultValue);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // defaultValue가 변경될 때 selectedOption도 업데이트되도록 useEffect 추가
+  // 펫 수정 페이지 -> defaultValue가 변경될 때 selectedOption도 업데이트되도록 useEffect 추가함!!
   useEffect(() => {
     setSelectedOption(defaultValue);
   }, [defaultValue]);

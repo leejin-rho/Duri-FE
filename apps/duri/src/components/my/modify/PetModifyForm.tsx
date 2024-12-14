@@ -1,20 +1,16 @@
 import { Control, Controller, UseFormSetValue } from 'react-hook-form';
 
-import { BREEDS } from '@duri/constants';
+import {
+  BREEDS,
+  GENDER_OPTION_LIST,
+  NEUTERED_OPTION_LIST,
+} from '@duri/constants';
 import { FormData } from '@duri/pages/My/MyPetModify';
 import { Button, Dropdown, Flex, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 
 import { PetDiseaseModify } from './PetDiseaseModify';
 import { PetPersonalityModify } from './PetPersonalityModify';
 
-const genderMapping = [
-  { label: '왕자님', value: 'M' },
-  { label: '공주님', value: 'F' },
-];
-const neuterMapping = [
-  { label: '완료', value: true },
-  { label: '미완료', value: false },
-];
 const integerList = Array.from({ length: 41 }, (_, i) => i.toString()); // 정수 리스트
 const decimalList = Array.from({ length: 10 }, (_, i) => i.toString()); // 소수 리스트
 const ageList = Array.from({ length: 26 }, (_, i) => i);
@@ -71,29 +67,29 @@ export const PetModifyForm = ({
           control={control}
           render={() => (
             <WidthFitFlex gap={4}>
-              {genderMapping.map(({ label, value }) => (
+              {GENDER_OPTION_LIST.map(({ key, label }) => (
                 <Button
-                  key={value}
+                  key={label}
                   width="fit-content"
                   height="43px"
                   padding="16px 20px"
                   bg={
-                    getValues('gender') === value
+                    getValues('gender') === key
                       ? theme.palette.Black
                       : theme.palette.White
                   }
                   fontColor={
-                    getValues('gender') === value
+                    getValues('gender') === key
                       ? theme.palette.White
                       : theme.palette.Black
                   }
                   typo="Label3"
                   border={
-                    getValues('gender') === value
+                    getValues('gender') === key
                       ? `1px solid ${theme.palette.Black}`
                       : `1px solid ${theme.palette.Gray100}`
                   }
-                  onClick={() => handleGenderSelect(value)}
+                  onClick={() => handleGenderSelect(key)}
                 >
                   {label}
                 </Button>
@@ -109,29 +105,29 @@ export const PetModifyForm = ({
           control={control}
           render={() => (
             <WidthFitFlex gap={4}>
-              {neuterMapping.map(({ label, value }) => (
+              {NEUTERED_OPTION_LIST.map(({ key, label }) => (
                 <Button
-                  key={value ? 'yes' : 'no'}
+                  key={label}
                   width="fit-content"
                   height="43px"
                   padding="16px 20px"
                   bg={
-                    getValues('neutering') === value
+                    getValues('neutering') === key
                       ? theme.palette.Black
                       : theme.palette.White
                   }
                   fontColor={
-                    getValues('neutering') === value
+                    getValues('neutering') === key
                       ? theme.palette.White
                       : theme.palette.Black
                   }
                   typo="Label3"
                   border={
-                    getValues('neutering') === value
+                    getValues('neutering') === key
                       ? `1px solid ${theme.palette.Black}`
                       : `1px solid ${theme.palette.Gray100}`
                   }
-                  onClick={() => handleNeuterSelect(value)}
+                  onClick={() => handleNeuterSelect(key)}
                 >
                   {label}
                 </Button>

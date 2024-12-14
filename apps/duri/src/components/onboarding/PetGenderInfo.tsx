@@ -1,6 +1,6 @@
 import { Control, Controller } from 'react-hook-form';
 
-import { ONBOARDING_GENDER_LIST } from '@duri/constants';
+import { GENDER_OPTION_LIST } from '@duri/constants';
 import { Button, Flex, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
@@ -43,7 +43,7 @@ const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
           rules={{ required: '성별을 선택해주세요.' }}
           render={({ field }) => (
             <Flex margin="47px 0" justify="flex-start" gap={8}>
-              {ONBOARDING_GENDER_LIST.map(({ key, label }) => (
+              {GENDER_OPTION_LIST.map(({ key, label }) => (
                 <Button
                   key={key}
                   width="fit-content"

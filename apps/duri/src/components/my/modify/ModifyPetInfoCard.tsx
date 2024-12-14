@@ -5,7 +5,6 @@ import { useGetPetListInfo } from '@duri-fe/utils';
 
 import { SwipeCard } from './SwipeCard';
 
-
 interface PetListInfo {
   id: number;
   name: string;
@@ -21,19 +20,44 @@ interface PetListInfo {
 }
 
 export const ModifyPetInfoCard = () => {
-  const {data: petListData} = useGetPetListInfo();
+  const { data: petListData } = useGetPetListInfo();
   const [petListInfo, setPetListInfo] = useState<PetListInfo[]>([]);
   useEffect(() => {
     if (petListData) setPetListInfo(petListData);
-    console.log(petListData)
+    console.log(petListData);
   });
 
   return (
-    <Flex direction='column' gap={20} padding='0 0 114px 0'>
+    <Flex direction="column" gap={20} padding="0 0 114px 0">
       {petListInfo &&
-        petListInfo.map(({age,breed,character,diseases,gender,id,image,name,neutering,weight}:PetListInfo, index) => (
-          <SwipeCard key={index} age={age} breed={breed} character={character} diseases={diseases} gender={gender} id={id} image={image} name={name} neutering={neutering} weight={weight} />
-        ))}
+        petListInfo.map(
+          ({
+            age,
+            breed,
+            character,
+            diseases,
+            gender,
+            id,
+            image,
+            name,
+            neutering,
+            weight,
+          }: PetListInfo) => (
+            <SwipeCard
+              key={id}
+              age={age}
+              breed={breed}
+              character={character}
+              diseases={diseases}
+              gender={gender}
+              id={id}
+              image={image}
+              name={name}
+              neutering={neutering}
+              weight={weight}
+            />
+          ),
+        )}
     </Flex>
   );
 };

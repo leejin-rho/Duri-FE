@@ -18,19 +18,18 @@ interface UserInfoProps {
 }
 
 function handleFormatPhone(target: string) {
-  target = target
+  return target
     .replace(/[^0-9]/g, '')
     .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, '$1.$2.$3');
-  return target;
 }
 
-export const UserInfo = ({
-  name,
-  phone,
-  profileImg,
-}: UserInfoProps) => {
+export const UserInfo = ({ name, phone, profileImg }: UserInfoProps) => {
   const navigate = useNavigate();
-  const handleNavigate = () => navigate('/my/info');
+
+  const handleNavigate = () => {
+    navigate('/my/info');
+  };
+
   return (
     <>
       <Flex justify="space-between" padding="0 6px">

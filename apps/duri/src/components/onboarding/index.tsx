@@ -105,7 +105,6 @@ const MultiStepForm = () => {
 
   const onSubmit = (data: FormData) => {
     setValue('breed', BREEDS_MAPPING[data.breed]);
-
     //API 호출 필요
     postPetInfo(data);
   };
