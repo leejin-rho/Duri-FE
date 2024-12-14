@@ -1,10 +1,14 @@
-import { PostShopInfoRequest, PostShopInfoResponse } from '@duri-fe/utils';
+import { PostShopInfoResponse } from '@duri-fe/utils';
 
 import { salonInstance } from '../axiosConfig';
 
 export const postShopInfo = async (
-  request: PostShopInfoRequest,
+  formData: FormData,
 ): Promise<PostShopInfoResponse['response']> => {
-  const response = await salonInstance.post('/shop/onboarding', request);
-  return response.data;
+  const response = await salonInstance.post('/shop/onboarding', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data.response;
 };

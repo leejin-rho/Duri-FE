@@ -5,6 +5,7 @@ import { Flex, MobileLayout, StatusBar } from '@duri-fe/ui';
 import {
   GroomerOnboardingInfoType,
   ShopOnboardingInfoType,
+  usePostShopInfo,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 import InputSalon from '@salon/components/onboarding/InputSalon';
@@ -35,6 +36,8 @@ const OnboardingPage = () => {
       license: [],
     });
 
+  const { mutateAsync, isSuccess, error } = usePostShopInfo();
+
   useEffect(() => {
     console.log(salonFormData);
     console.log(salonOwnerFormData);
@@ -47,7 +50,7 @@ const OnboardingPage = () => {
     setStep((prev) => prev + 1);
   };
 
-  const handlePostSalon = () => {
+  const handlePostSalon = async () => {
     const formData = new FormData();
     const onboardingFormData = {
       shopOnboardingInfo: salonFormData,
@@ -65,8 +68,13 @@ const OnboardingPage = () => {
       formData.append('image', profileImage);
     }
 
-    // TODO : 데이터 post하기
-    navigate('/');
+    await mutateAsync(formData);
+
+    if (isSuccess) {
+      navigate('/');
+    } else {
+      alert(error?.message);
+    }
   };
 
   return (

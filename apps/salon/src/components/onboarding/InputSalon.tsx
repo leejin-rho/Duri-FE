@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { Button, Flex, Modal, Text, TextField, theme } from '@duri-fe/ui';
@@ -63,6 +63,10 @@ const InputSalon = ({
     });
     onNext();
   };
+
+  useEffect(() => {
+    closeModal();
+  }, [coordinates]);
 
   return (
     <>

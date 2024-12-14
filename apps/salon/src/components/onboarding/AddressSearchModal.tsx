@@ -38,13 +38,18 @@ const AddressSearchModal = ({
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
 
-    const { lat, lon } = await getGeocoding(address);
+    await getGeocoding(address)
+      .then((res) => {
+        setCoordinates({ lat: res.lat, lon: res.lon });
+      })
+      .catch(() => {
+        alert('주소를 검색할 수 없습니다.');
+        closeModal();
+        return;
+      });
 
     setAddress(fullAddress);
     setZipCode(zonecode);
-    setCoordinates({ lat, lon });
-
-    closeModal();
   };
 
   return (
