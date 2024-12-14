@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { Button, Flex, Text, TextField, theme } from '@duri-fe/ui';
@@ -27,14 +27,13 @@ const InputSalon = ({
   onNext,
 }: InputSalonProps) => {
   const [zipCode, setZipCode] = useState<string>('');
-  const [isEmpty, setIsEmpty] = useState<boolean>(true);
+
   const {
     control,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<ShopOnboardingInfoType>({
-    mode: 'onChange',
+    mode: 'onSubmit',
     defaultValues: salonFormData,
   });
 
@@ -48,16 +47,14 @@ const InputSalon = ({
   };
 
   const onSubmitSalonData = (data: ShopOnboardingInfoType) => {
+    if (data.lat === 0 || data.lon === 0 || zipCode === '') {
+      alert('주소를 검색해주세요.');
+      return;
+    }
     setSalonFormData(data);
     onNext();
   };
 
-  const watchAllFields = watch();
-
-  useEffect(() => {
-    const isValid = Object.keys(watchAllFields).every((value) => value !== '');
-    setIsEmpty(isValid);
-  });
   return (
     <StyledForm onSubmit={handleSubmit(onSubmitSalonData)}>
       <Flex direction="column" align="flex-start" padding="48px 0 96px 0">
@@ -71,7 +68,7 @@ const InputSalon = ({
             <Text typo="Heading">미용샵의</Text>
             <Text typo="Heading">정보를 입력해주세요</Text>
           </Flex>
-          <Text typo="Label2" colorCode={theme.palette.Gray500}>
+          <Text typo="Body3" colorCode={theme.palette.Gray500}>
             등록된 정보는 변경이 불가능해요. 신중히 작성해주세요!
           </Text>
         </Flex>
@@ -81,7 +78,7 @@ const InputSalon = ({
             <Controller
               name="name"
               control={control}
-              rules={{ required: '매장 이름을 입력해주세요.' }}
+              rules={{ required: '필수' }}
               render={({ field, fieldState }) => (
                 <TextField
                   {...field}
@@ -93,43 +90,47 @@ const InputSalon = ({
                   isNoBorder
                   shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
                   helperText={
-                    errors.name ? [{ type: 'error', text: '필수' }] : []
+                    errors.name
+                      ? [{ type: 'error', text: `${errors.name.message}` }]
+                      : []
                   }
                   isError={!!fieldState.error}
                 />
               )}
             />
-
-            <Controller
-              name="phone"
-              control={control}
-              rules={{
-                required: '매장 전화번호를 입력해주세요.',
-                pattern: {
-                  value: PHONE_REGEX,
-                  message: '전화번호 형식에 맞게 입력해주세요.',
-                },
-              }}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  type="text"
-                  label="매장 전화번호"
-                  placeholder="전화번호 입력"
-                  isEssential
-                  widthPer="55%"
-                  isNoBorder
-                  shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-                  helperText={
-                    errors.phone ? [{ type: 'error', text: '필수' }] : []
-                  }
-                  isError={!!errors.phone}
-                />
-              )}
-            />
           </Flex>
 
-          <Flex direction="column" align="flex-start" gap={8}>
+          <Controller
+            name="phone"
+            control={control}
+            rules={{
+              required: '필수',
+              pattern: {
+                value: PHONE_REGEX,
+                message: '형식에 맞게 입력해주세요.',
+              },
+            }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                type="text"
+                label="매장 전화번호"
+                placeholder="전화번호 입력"
+                isEssential
+                width={244}
+                isNoBorder
+                shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+                helperText={
+                  errors.phone
+                    ? [{ type: 'error', text: `${errors.phone.message}` }]
+                    : []
+                }
+                isError={!!errors.phone}
+              />
+            )}
+          />
+
+          <Flex direction="column" align="flex-start">
             <Flex justify="flex-start" align="flex-end" gap={6} width={244}>
               <TextField
                 type="number"
@@ -155,7 +156,7 @@ const InputSalon = ({
             <Controller
               name="address"
               control={control}
-              rules={{ required: '필수항목입니다.' }}
+              rules={{ required: '필수' }}
               render={({ field }) => (
                 <TextField
                   {...field}
@@ -164,9 +165,6 @@ const InputSalon = ({
                   width={244}
                   isNoBorder
                   shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-                  helperText={
-                    errors.address ? [{ type: 'error', text: '필수' }] : []
-                  }
                   isError={!!errors.address}
                 />
               )}
@@ -176,7 +174,7 @@ const InputSalon = ({
           <Controller
             name="businessRegistrationNumber"
             control={control}
-            rules={{ required: '사업자 등록번호를 입력해주세요.' }}
+            rules={{ required: '필수' }}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -190,7 +188,12 @@ const InputSalon = ({
                 shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
                 helperText={
                   errors.businessRegistrationNumber
-                    ? [{ type: 'error', text: '필수' }]
+                    ? [
+                        {
+                          type: 'error',
+                          text: `${errors.businessRegistrationNumber.message}`,
+                        },
+                      ]
                     : []
                 }
                 isError={!!errors.businessRegistrationNumber}
@@ -200,7 +203,7 @@ const InputSalon = ({
           <Controller
             name="groomerLicenseNumber"
             control={control}
-            rules={{ required: '미용사 면허번호를 입력해주세요.' }}
+            rules={{ required: '필수' }}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -213,7 +216,12 @@ const InputSalon = ({
                 shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
                 helperText={
                   errors.groomerLicenseNumber
-                    ? [{ type: 'error', text: '필수' }]
+                    ? [
+                        {
+                          type: 'error',
+                          text: `${errors.groomerLicenseNumber.message}`,
+                        },
+                      ]
                     : []
                 }
                 isError={!!errors.groomerLicenseNumber}
@@ -239,7 +247,7 @@ const InputSalon = ({
       <ButtonWrapper>
         <Button
           type="submit"
-          bg={isEmpty ? theme.palette.Gray200 : theme.palette.Black}
+          bg={theme.palette.Black}
           fontColor={theme.palette.White}
         >
           다음 단계

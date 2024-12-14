@@ -57,7 +57,9 @@ const SalonOwnerConfirm = ({
               성별
               <AlertStar isUpper />
             </Text>
-            <Text typo="Body4">{salonOwnerFormData.gender}</Text>
+            <Text typo="Body4">
+              {salonOwnerFormData.gender === 'F' ? '여성' : '남성'}
+            </Text>
           </Flex>
 
           <Flex justify="flex-start" gap={36}>
@@ -74,7 +76,9 @@ const SalonOwnerConfirm = ({
               <AlertStar isUpper />
             </Text>
             <Text typo="Body4">
-              {salonOwnerFormData.history}년 {salonOwnerFormData.history}개월
+              {Math.floor(salonOwnerFormData.history / 12)}년{' '}
+              {salonOwnerFormData.history % 12}
+              개월
             </Text>
           </Flex>
 
