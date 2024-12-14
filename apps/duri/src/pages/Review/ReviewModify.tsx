@@ -1,46 +1,66 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { PetInfoType } from '@duri/assets/types';
 import { ReviewImageFile } from '@duri/components/review/ReviewImageFile';
 import { SelectStar } from '@duri/components/review/SelectStar';
 import {
   Button,
+  Card,
   DuriNavbar,
   Flex,
   Header,
   HeightFitFlex,
   MobileLayout,
+  PetInfo,
   Text,
   TextField,
   theme,
 } from '@duri-fe/ui';
-import { usePostReview } from '@duri-fe/utils';
+import { useGetReviewDetail, usePutReview } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
-export interface ReviewFormData {
-  quotationId: number;
+interface ReviewFormData {
   rating: number;
   comment: string;
   image: File | null;
 }
 
-const ReviewWritePage = () => {
-  const location = useLocation();
-
+const ReviewModifyPage = () => {
+  const location = useLocation(); // reviewId state전달
   const navigate = useNavigate();
+  const handleNavigate = () => {
+    window.location.href = `/my/review/${location.state}`;
+  };
+  const reviewId = location.state;
+
+  const { mutateAsync: putReview, isError: isPutError } = usePutReview(() =>
+    handleNavigate(),
+  );
+
+  const { data: reviewData } = useGetReviewDetail(Number(location.state));
 
   const [imageURL, setImageURL] = useState<string | undefined>();
 
-  const { mutateAsync: postReview, isError: isPostError } = usePostReview();
+  const [petInfo, setPetInfo] = useState<PetInfoType>();
+
+  useEffect(() => {
+    if (reviewData) {
+      console.log(reviewData);
+      setPetInfo(reviewData.petInfo);
+      setImageURL(reviewData.imgUrl);
+      setValue('rating', reviewData.rating);
+      setValue('comment', reviewData.comment);
+      setValue('image', null);
+    }
+  }, [reviewData]);
 
   const { control, handleSubmit, setValue } = useForm<ReviewFormData>({
     mode: 'onChange',
     defaultValues: {
-      quotationId: location.state || 0,
       rating: 5,
       comment: '',
-      image: null,
     },
   });
 
@@ -50,13 +70,13 @@ const ReviewWritePage = () => {
 
   const onSubmit = (data: ReviewFormData) => {
     // image와 나머지 데이터를 분리
-    const { image, ...newReviewRequest } = data;
+    const { image, ...updateReviewRequest } = data;
 
     const formData = new FormData();
 
     formData.append(
-      'newReviewRequest',
-      new Blob([JSON.stringify(newReviewRequest)], {
+      'updateReviewRequest',
+      new Blob([JSON.stringify(updateReviewRequest)], {
         type: 'application/json',
       }),
     );
@@ -66,19 +86,18 @@ const ReviewWritePage = () => {
     }
 
     // API 연결
-    console.log(formData);
-    postReview({ quotationId: Number(7), formData });
+    putReview({ reviewId, formData });
   };
 
   return (
     <MobileLayout>
       <Header
-        title="후기 작성"
+        title="후기 수정"
         backIcon
         onClickBack={() => navigate(-1)}
         titleAlign="start"
       />
-      <FlexGrow direction="column" justify="flex-start">
+      <FlexGrow direction="column" justify="flex-start" padding="0 20px">
         <Flex direction="column" gap={4} margin="42px 0 12px 0">
           <Text typo="Body2">미용이 만족스러우셨나요?</Text>
           <Text typo="Caption5" colorCode={theme.palette.Gray400}>
@@ -136,11 +155,27 @@ const ReviewWritePage = () => {
             )}
           />
         </Flex>
+        {petInfo && (
+          <Flex width={331}>
+            <Card borderRadius={8} bg={theme.palette.Gray_White} padding="12px">
+              <PetInfo
+                age={petInfo.age}
+                breed={petInfo.breed}
+                gender={petInfo.gender}
+                image={petInfo.imageURL}
+                name={petInfo.name}
+                weight={petInfo.weight}
+                neutering={petInfo.neutering}
+                themeVariant="compact"
+              />
+            </Card>
+          </Flex>
+        )}
       </FlexGrow>
-      {isPostError && (
+      {isPutError && (
         <Flex>
           <Text typo="Caption3" colorCode={theme.palette.Alert}>
-            등록에 실패했습니다. 잠시 후 다시 시도해주세요.
+            수정에 실패했습니다. 잠시 후 다시 시도해주세요.
           </Text>
         </Flex>
       )}
@@ -151,7 +186,7 @@ const ReviewWritePage = () => {
           borderRadius="0px"
           onClick={handleSubmit(onSubmit)}
         >
-          등록
+          완료
         </Button>
       </HeightFitFlex>
       <DuriNavbar />
@@ -159,7 +194,7 @@ const ReviewWritePage = () => {
   );
 };
 
-export default ReviewWritePage;
+export default ReviewModifyPage;
 
 const FlexGrow = styled(Flex)`
   flex: 1;

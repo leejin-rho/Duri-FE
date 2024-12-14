@@ -4,6 +4,7 @@ import {
   PetInfo,
   PetListInfo,
   RequestQuotationType,
+  ReviewDetailResponse,
   UserInfo,
 } from '../types/my';
 
@@ -58,4 +59,21 @@ export const getRequestHistory = async (): Promise<
 > => {
   const response = await duriInstance.get('/quotation/request/user');
   return response.data.response;
+};
+
+export const getReviewDetail = async (
+  reviewId: number,
+): Promise<ReviewDetailResponse['response']> => {
+  const response = await duriInstance.get(`/review/${reviewId}`);
+
+  // 응답에서 petInfo의 imageURL을 image로 변환
+  const transformedData = {
+    ...response.data.response,
+    petInfo: {
+      ...response.data.response.petInfo,
+      image: response.data.response.petInfo.imageURL, // imageURL을 image로 매핑
+    },
+  };
+
+  return transformedData;
 };

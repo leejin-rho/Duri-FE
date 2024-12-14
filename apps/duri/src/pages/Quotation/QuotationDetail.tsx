@@ -16,10 +16,10 @@ import {
 import { ShopType, useGeolocation, useGetQuotationList } from '@duri-fe/utils';
 
 interface QuotationType {
-    requestId: number;
-    shopName: string;
-    totalPrice: number | null;
-  };
+  requestId: number;
+  shopName: string;
+  totalPrice: number | null;
+}
 
 const QuotationDetailPage = () => {
   const navigate = useNavigate();
@@ -36,7 +36,9 @@ const QuotationDetailPage = () => {
   const [bestPriceShop, setBestPriceShop] = useState<ShopType | null>();
   const [bestRatingShop, setBestRatingShop] = useState<ShopType | null>();
   const [bestShop, setBestShop] = useState<ShopType | null>();
-  const [quotationList, setQuotationList] = useState<QuotationType[] | null>(null);
+  const [quotationList, setQuotationList] = useState<QuotationType[] | null>(
+    null,
+  );
 
   const { data: quotationListData } = useGetQuotationList(
     Number(quotationId),
@@ -67,9 +69,9 @@ const QuotationDetailPage = () => {
       setBestPriceShop(bestPriceShop);
       setBestRatingShop(bestRatingShop);
       setBestShop(bestShop);
-      setQuotationList(quotationListData.quotations)
+      setQuotationList(quotationListData.quotations);
 
-      console.log(quotationListData)
+      console.log(quotationListData);
     }
   }, [quotationListData]);
 
@@ -133,14 +135,16 @@ const QuotationDetailPage = () => {
         <Flex direction="column" align="flex-start" margin="31px 0 17px">
           <Text typo="Title2">들어온 견적</Text>
           <Flex direction="column" margin="17px 0 0 0" gap={8}>
-            {quotationList?.map(({requestId,shopName,totalPrice}: QuotationType) => (
-              <IncomingQuotation
-                key={requestId}
-                quotationId={requestId}
-                salonName={shopName}
-                price={totalPrice}
-              />
-            ))}
+            {quotationList?.map(
+              ({ requestId, shopName, totalPrice }) => (
+                <IncomingQuotation
+                  key={requestId}
+                  quotationId={requestId}
+                  salonName={shopName}
+                  price={totalPrice}
+                />
+              ),
+            )}
           </Flex>
         </Flex>
       </Flex>

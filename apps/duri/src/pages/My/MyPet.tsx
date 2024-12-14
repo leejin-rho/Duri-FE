@@ -12,7 +12,7 @@ const MyPetPage = () => {
         title="마이펫"
         titleAlign="start"
         backIcon
-        onClickBack={() => navigate(-1)}
+        onClickBack={() => navigate('/my')}
       />
       <ModifyPetInfoCard />
       <DuriNavbar />

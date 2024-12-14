@@ -5,18 +5,18 @@ import {
   getPetDetailInfo,
   getPetListInfo,
   getRequestHistory,
+  getReviewDetail,
   getUserInfo,
   putPetInfo,
   putUserInfo,
 } from '../my';
 
 export const useGetMyReviews = () => {
-  const { data, isError } = useQuery({
-    queryKey: ['getUpcomingReservation'],
+  return useQuery({
+    queryKey: ['getMyReviews'],
     queryFn: () => getMyReviews(),
-    staleTime: 1000 * 60 * 10,
+    staleTime: 1000 * 60 * 30,
   });
-  return { data, isError };
 };
 
 export const useGetPetListInfo = () => {
@@ -79,3 +79,11 @@ export const useGetRequestHistory = () => {
     staleTime: 1000 * 60 * 10,
   });
 };
+
+export const useGetReviewDetail = (reviewId: number) => {
+  return useQuery({
+    queryKey: ['getReviewDetail'],
+    queryFn: () => getReviewDetail(reviewId),
+    staleTime: 1000 * 60 * 10,
+  });
+}

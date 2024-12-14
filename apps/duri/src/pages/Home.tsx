@@ -83,7 +83,8 @@ const Home = () => {
                 : reservationData
             }
             lastReservation={
-              petData?.lastGrooming === undefined ? null : petData?.lastGrooming
+              // petData?.lastGrooming === undefined ? '' : petData.lastGrooming
+              "2024-12-11 06:00"
             }
           />
         </HeightFitFlex>
@@ -145,8 +146,14 @@ const Home = () => {
               </Text>
             </Flex>
           )}
-          {recommendedListData && (
+          {recommendedListData ? (
             <RecommendedShop shopList={recommendedListData} />
+          ) : (
+            <Flex margin="31px 0 6px 0">
+              <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+                Loading...
+              </Text>
+            </Flex>
           )}
         </Flex>
         <DuriNavbar />

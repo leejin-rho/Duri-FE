@@ -1,3 +1,4 @@
+import { PetInfoType } from './../../../../../apps/duri/src/assets/types/pet';
 export interface MyReviewResponseType {
   response: {
     reviewCnt: number;
@@ -63,4 +64,20 @@ export interface RequestQuotationType {
     }[];
     isExpired: boolean;
   }[];
+}
+
+export interface ReviewDetailResponse {
+  response: {
+    userId: number;
+    userImageURL: string;
+    userName: string;
+    reviewId: number;
+    rating: number;
+    createdAt: string;
+    shopId: number;
+    shopName: string;
+    comment: string;
+    imgUrl: string;
+    petInfo: PetInfoType;
+  };
 }
