@@ -10,7 +10,7 @@ const OnboardingPendingPage = () => {
           <Doori height={40} />
         </LogoWrapper>
         <Title colorCode={theme.palette.Black}>가입이 완료되었어요!</Title>
-        <Text typo="Body4" colorCode={theme.palette.Gray300} align="center">
+        <Text typo="Body4" colorCode={theme.palette.Gray300} textAlign="center">
           가입 허가까지 3일~7일정도 소요돼요. <br />
           허가가 완료되면 네이버 메일로 알려드릴게요!
         </Text>

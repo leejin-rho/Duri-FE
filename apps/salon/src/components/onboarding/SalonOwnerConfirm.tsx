@@ -104,7 +104,6 @@ const SalonOwnerConfirm = ({
         </Flex>
       </Flex>
 
-      {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
       <ContactContainer gap={4}>
         <Text typo="Label2" colorCode={theme.palette.Gray300}>
           문제가 발생한다면
@@ -117,7 +116,7 @@ const SalonOwnerConfirm = ({
         </Text>
       </ContactContainer>
 
-      <ButtonWrapper padding="0 20px">
+      <ButtonWrapper>
         <Button
           bg={theme.palette.Black}
           fontColor={theme.palette.White}

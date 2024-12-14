@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { AlertStar, Button, Flex, Text, theme } from '@duri-fe/ui';
 import { ShopOnboardingInfoType } from '@duri-fe/utils';
@@ -8,6 +8,7 @@ import {
   ContactContainer,
   UnderlinedText,
 } from './onboarding.styles';
+import SalonMap from './SalonMap';
 
 interface SalonConfirmProps {
   salonFormData: ShopOnboardingInfoType;
@@ -15,6 +16,8 @@ interface SalonConfirmProps {
 }
 
 const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
+  const mapRef = useRef<HTMLDivElement | null>(null);
+
   return (
     <>
       <Flex direction="column" align="flex-start" padding="48px 0 96px 0">
@@ -83,9 +86,14 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
           backgroundColor={theme.palette.Gray50}
           borderRadius={8}
           margin="60px 0 0 0"
-        ></Flex>
+        >
+          <SalonMap
+            ref={mapRef}
+            coordinates={{ lat: salonFormData.lat, lon: salonFormData.lon }}
+          />
+        </Flex>
       </Flex>
-      {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
+
       <ContactContainer gap={4}>
         <Text typo="Label2" colorCode={theme.palette.Gray300}>
           문제가 발생한다면
@@ -98,7 +106,7 @@ const SalonConfirm = ({ salonFormData, onNext }: SalonConfirmProps) => {
         </Text>
       </ContactContainer>
 
-      <ButtonWrapper padding="0 20px">
+      <ButtonWrapper>
         <Button
           onClick={onNext}
           bg={theme.palette.Black}
