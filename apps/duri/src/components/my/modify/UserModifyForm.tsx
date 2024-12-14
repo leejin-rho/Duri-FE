@@ -34,7 +34,7 @@ export const UserModifyForm = ({
           height="40px"
           padding="10px"
           fontColor={theme.palette.Gray300}
-          borderRadius='8px'
+          borderRadius="8px"
         >
           {phone}
         </TextButton>
@@ -48,7 +48,7 @@ export const UserModifyForm = ({
           height="40px"
           padding="10px"
           fontColor={theme.palette.Gray300}
-          borderRadius='8px'
+          borderRadius="8px"
         >
           {email}
         </TextButton>

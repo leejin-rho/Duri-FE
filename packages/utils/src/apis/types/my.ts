@@ -17,3 +17,49 @@ export interface MyReviewResponseType {
     ];
   };
 }
+
+export interface PetListInfo {
+  response: {
+    petProfileList: PetInfo[];
+  };
+}
+
+export interface PetInfo {
+  id: number;
+  name: string;
+  image?: string;
+  breed: string;
+  age: number;
+  weight: number;
+  gender: string;
+  neutering?: boolean;
+  lastGrooming?: string | null;
+  character: string[];
+  diseases: string[];
+}
+
+export interface UserInfo {
+  response: {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+    profileImg: string | null;
+    reservationCount: number;
+    noShowCount: number;
+    stamp: number;
+  };
+}
+
+export interface RequestQuotationType {
+  response: {
+    quotationReqId: number;
+    createdAt: Date;
+    expiredAt: Date;
+    shops: {
+      shopId: number;
+      shopName: string;
+    }[];
+    isExpired: boolean;
+  }[];
+}

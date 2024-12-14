@@ -24,6 +24,10 @@ const QuotationDetailPage = () => {
   //   const [responseInfo, setResponseInfo] =
   //     useState<ResponseQuotationType | null>(null);
   const navigate = useNavigate();
+  const handleBackButtonClick = () => {
+    navigate(-1);
+  };
+
   const handleNavigate = () => {
     toggleModal();
 
@@ -41,13 +45,13 @@ const QuotationDetailPage = () => {
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
-      <Header title="요청서 및 견적서" />
+      <Header title="요청서 및 견적서" backIcon onClickBack={handleBackButtonClick}/>
       <Flex direction="column" padding="0 20px" margin="0 0 100px 0">
         <Card borderRadius={16} padding="26px 28px">
           <RequestInfo
             requestId={Number(quotationId)}
-            createdAt="2024-12-22 23:00"
-            expiredAt="2024-12-22 23:00"
+            createdAt={new Date()}
+            expiredAt={new Date()}
           />
         </Card>
 

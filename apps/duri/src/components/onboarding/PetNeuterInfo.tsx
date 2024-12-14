@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Control, Controller } from 'react-hook-form';
 
+import { NEUTERED_OPTION_LIST } from '@duri/constants';
 import { Button, Flex, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
@@ -10,8 +10,6 @@ interface PetNeuterInfoProps {
 }
 
 const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
-  const [isNeutered, setIsNeutered] = useState<boolean | undefined>();
-
   const handleClickButton = (
     field: {
       onChange: (value: boolean) => void;
@@ -21,13 +19,7 @@ const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
     value: boolean,
   ) => {
     field.onChange(value);
-    setIsNeutered(value);
   };
-
-  const options = [
-    { label: '네, 했어요!', value: true },
-    { label: '아니요, 아직 안했어요.', value: false },
-  ];
 
   return (
     <Flex direction="column" align="flex-start" gap={28}>
@@ -51,28 +43,28 @@ const PetNeuterInfo = ({ control }: PetNeuterInfoProps) => {
         }}
         render={({ field }) => (
           <Flex direction="column" align="flex-start" gap={8} margin="47px 0">
-            {options.map(({ label, value }) => (
+            {NEUTERED_OPTION_LIST.map(({ key, label }) => (
               <Button
-                key={value ? 'yes' : 'no'}
+                key={label}
                 width="fit-content"
                 height="43px"
                 bg={
-                  isNeutered === value
+                  field.value === key
                     ? theme.palette.Black
                     : theme.palette.White
                 }
                 fontColor={
-                  isNeutered === value
+                  field.value === key
                     ? theme.palette.White
                     : theme.palette.Black
                 }
                 typo="Body3"
                 border={
-                  isNeutered === value
+                  field.value === key
                     ? `1px solid ${theme.palette.Black}`
                     : `1px solid ${theme.palette.Gray100}`
                 }
-                onClick={() => handleClickButton(field, value)}
+                onClick={() => handleClickButton(field, key)}
               >
                 {label}
               </Button>

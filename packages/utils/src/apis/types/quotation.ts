@@ -21,7 +21,7 @@ export interface RequestProps extends TimeType {
   specialMenu: string[];
   design: string[];
   etc: string;
-  day: Date;
+  day: string;
   shopIds: number[];
 }
 

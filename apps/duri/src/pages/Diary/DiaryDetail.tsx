@@ -27,11 +27,7 @@ const PetDiaryDetail = () => {
 
   return (
     <MobileLayout>
-      <Header
-        title="일지 보기"
-        backIcon={true}
-        onClickBack={() => navigate(-1)}
-      />
+      <Header title="일지 보기" backIcon onClickBack={() => navigate(-1)} />
       <Flex borderRadius={16} padding="0 20px" margin="0 0 16px 0">
         <PetInfo
           age={4}

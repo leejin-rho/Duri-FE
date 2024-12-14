@@ -1,33 +1,34 @@
-import { useState } from 'react';
-import { Control, Controller, UseFormSetValue } from 'react-hook-form';
+import {
+  Control,
+  Controller,
+  UseFormSetValue,
+  useWatch,
+} from 'react-hook-form';
 
-import { diseaseOptions } from '@duri/assets/data/pet';
+import { DISEASE_OPTION_LIST } from '@duri/constants/pet';
 import { FormData } from '@duri/pages/My/MyPetModify';
 import { Button, Flex, HeightFitFlex, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 export const PetDiseaseModify = ({
   control,
-  getStringArrayValues,
   setValue,
 }: {
   control: Control<FormData>;
   setValue: UseFormSetValue<FormData>;
-  getStringArrayValues: (name: keyof FormData) => string[];
 }) => {
-  const [diseasesList, setDiseasesList] = useState<string[]>(
-    getStringArrayValues('diseases'),
-  );
+  const diseaseList = useWatch({
+    control,
+    name: 'diseases', // 'character' 필드를 감시
+    defaultValue: [], // 기본값 설정
+  });
 
   const handleDiseaseToggle = (key: string) => {
-    if (diseasesList.includes(key)) {
-      setDiseasesList(
-        diseasesList.filter((disease: string) => disease !== key),
-      );
-    } else {
-      setDiseasesList([...diseasesList, key]);
-    }
-    setValue('diseases', diseasesList);
+    const updatedList = diseaseList.includes(key)
+      ? diseaseList.filter((item: string) => item !== key)
+      : [...diseaseList, key];
+
+    setValue('diseases', updatedList); // 폼 상태 업데이트
   };
 
   return (
@@ -40,26 +41,26 @@ export const PetDiseaseModify = ({
           validate: (value: string[]) =>
             value.length > 0 || '성격에 대해 알려주세요.',
         }}
-        render={() => (
+        render={({ field }) => (
           <FitFlex justify="flex-start" gap={8} margin="19px 0 0 0">
-            {diseaseOptions.map(({ key, label }) => (
+            {DISEASE_OPTION_LIST.map(({ key, label }) => (
               <Button
                 key={key}
                 typo="Body3"
                 width="fit-content"
                 height="43px"
                 bg={
-                  diseasesList.includes(key)
+                  field.value?.includes(key)
                     ? theme.palette.Black
                     : theme.palette.White
                 }
                 fontColor={
-                  diseasesList.includes(key)
+                  field.value?.includes(key)
                     ? theme.palette.White
                     : theme.palette.Black
                 }
                 border={
-                  diseasesList.includes(key)
+                  field.value?.includes(key)
                     ? `1px solid ${theme.palette.Black}`
                     : `1px solid ${theme.palette.Gray100}`
                 }

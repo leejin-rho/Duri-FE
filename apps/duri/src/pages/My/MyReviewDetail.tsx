@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { PetInfoType } from '@duri/assets/types';
 import { ReviewDetailType } from '@duri/assets/types/my';
 import { ReviewUserInfo } from '@duri/components/my/review/ReviewUserInfo';
 import {
@@ -68,18 +67,15 @@ const MyReviewDetailPage = () => {
   const [reviewList, ] = useState<ReviewDetailType[]>(
     dummy.reviewList,
   );
-  const [petInfo, setPetInfo] = useState<PetInfoType>();
-  const petData = useGetPetInfo();
+
+  const {data: petInfo} = useGetPetInfo();
   const navigate = useNavigate();
   const handleClickShopButton = (shopId: number) => navigate(`/shop/${shopId}`);
   const handleNavigate = () => navigate(-1);
-  useEffect(() => {
-    if (petData) setPetInfo(petData);
-  });
 
   return (
     <MobileLayout>
-      <Header backIcon={true} title="내가 쓴 후기" titleAlign="start" onClickBack={handleNavigate}/>
+      <Header backIcon title="내가 쓴 후기" titleAlign="start" onClickBack={handleNavigate}/>
       <Flex direction="column" justify="flex-start" gap={10} padding="0 10px" margin='0 0 104px 0'>
         {reviewList.map((review, index) => (
           <Card
@@ -135,7 +131,7 @@ const MyReviewDetailPage = () => {
                 age={petInfo.age}
                 breed={petInfo.breed}
                 gender={petInfo.gender}
-                image={petInfo.image}
+                image={petInfo.imageURL}
                 name={petInfo.name}
                 weight={petInfo.weight}
                 neutering={petInfo.neutering}

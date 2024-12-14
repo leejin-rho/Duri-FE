@@ -27,10 +27,14 @@ export const Dropdown = ({
   onSelect,
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string | number>(
-    defaultValue,
-  );
+  const [selectedOption, setSelectedOption] = useState<string | number>(defaultValue);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // 펫 수정 페이지 -> defaultValue가 변경될 때 selectedOption도 업데이트되도록 useEffect 추가함!!
+  useEffect(() => {
+    setSelectedOption(defaultValue);
+  }, [defaultValue]);
+
   const handleSelectOption = (option: string | number) => {
     const newOption =
       suffix === '살' && option === 0 ? '0살 이하' : `${option}${suffix}`;
@@ -38,6 +42,7 @@ export const Dropdown = ({
     setSelectedOption(newOption);
     onSelect(option);
   };
+
   const toggleDropdown = (e: React.MouseEvent) => {
     e.stopPropagation(); // 클릭 이벤트 전파 방지
     setIsOpen((prev) => !prev);

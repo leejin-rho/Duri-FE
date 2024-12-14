@@ -12,14 +12,14 @@ export interface QuotationProps {
 }
 
 export interface RequestItemType {
-  quotationId: number;
-  createdAt: string;
-  expiredAt: string;
+  quotationReqId: number;
+  createdAt: Date;
+  expiredAt: Date;
   shops: {
     shopId: number;
     shopName: string;
   }[];
-  expired: boolean;
+  isExpired: boolean;
 }
 
 export interface ResponseQuotationType {

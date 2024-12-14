@@ -22,7 +22,6 @@ interface PetInfoCardProps {
 }
 
 export const PetInfoCard = ({
-  petId,
   name,
   imageURL,
   age,
@@ -32,7 +31,11 @@ export const PetInfoCard = ({
   neutering,
 }: PetInfoCardProps) => {
   const navigate = useNavigate();
-  const handleNavigate = () => navigate('/my/pet', { state: petId });
+
+  const handleClickNavigateButton = () => {
+    navigate('/my/pet');
+  };
+
   return (
     <FlexButton
       direction="column"
@@ -41,7 +44,7 @@ export const PetInfoCard = ({
       backgroundColor={theme.palette.White}
       align="flex-start"
       gap={20}
-      onClick={handleNavigate}
+      onClick={handleClickNavigateButton}
     >
       <Text typo="Body2">마이펫</Text>
       <Flex align="flex-start" padding="0 9px">
@@ -53,9 +56,9 @@ export const PetInfoCard = ({
           weight={weight}
           neutering={neutering}
           image={imageURL}
-          themeVariant='compact'
+          themeVariant="compact"
         />
-        <WidthFitFlex align='flex-start' margin="5px 0 0 0">
+        <WidthFitFlex align="flex-start" margin="5px 0 0 0">
           <NextArrow width={29} height={31} />
         </WidthFitFlex>
       </Flex>
@@ -65,4 +68,4 @@ export const PetInfoCard = ({
 
 const FlexButton = styled(Flex)`
   cursor: pointer;
-`
+`;

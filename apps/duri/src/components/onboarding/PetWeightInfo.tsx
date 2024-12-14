@@ -10,10 +10,11 @@ interface PetWeightInfoProps {
   name: string;
 }
 
-const PetWeightInfo = ({ control, name }: PetWeightInfoProps) => {
-  const integerList = Array.from({ length: 41 }, (_, i) => i.toString()); // 정수 리스트
-  const decimalList = Array.from({ length: 10 }, (_, i) => i.toString()); // 소수 리스트
+const integerList = Array.from({ length: 41 }, (_, i) => i.toString()); // 정수 리스트
 
+const decimalList = Array.from({ length: 10 }, (_, i) => i.toString()); // 소수 리스트
+
+const PetWeightInfo = ({ control, name }: PetWeightInfoProps) => {
   return (
     <Flex direction="column" align="flex-start" gap={28}>
       <Text typo="Heading" justify="flex-start">

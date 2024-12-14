@@ -1,11 +1,13 @@
-export const defaultRequestInfo = {
+import { format } from "date-fns";
+
+export const DEFAULT_REQUEST_INFO = {
   petId: undefined,
   menu: [],
   addMenu: [],
   specialMenu: [],
   design: [],
   etc: '',
-  day: new Date(),
+  day: format(new Date(),'yyyy-MM-dd'),
   time9: false,
   time10: false,
   time11: false,
