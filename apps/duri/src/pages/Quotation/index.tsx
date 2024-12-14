@@ -21,7 +21,6 @@ const QuotationPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
       <Header title="요청서 및 견적서" />
@@ -44,16 +43,26 @@ const QuotationPage = () => {
 
         {requestList && requestList.length > 0 ? (
           <Flex direction="column" padding="0 22px" align="flex-start" gap={12}>
-            {requestList.map(({requestId,createdAt,expiredAt,isExpired,shops}: RequestItemType) => (
-              <RequestItem
-                key={requestId}
-                requestId={requestId}
-                createdAt={createdAt}
-                expiredAt={expiredAt}
-                isExpired={isExpired}
-                shops={shops}
-              />
-            ))}
+            {requestList.map(
+              ({
+                quotationReqId,
+                requestId,
+                createdAt,
+                expiredAt,
+                isExpired,
+                shops,
+              }: RequestItemType) => (
+                <RequestItem
+                  key={requestId}
+                  quotationReqId={quotationReqId}
+                  requestId={requestId}
+                  createdAt={createdAt}
+                  expiredAt={expiredAt}
+                  isExpired={isExpired}
+                  shops={shops}
+                />
+              ),
+            )}
           </Flex>
         ) : (
           <Flex margin="92px 0 0">

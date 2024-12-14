@@ -162,19 +162,23 @@ export interface ShopDetailType {
   groomerName: string;
 }
 
-export interface RequestItemsType {
-  quotationId: number;
-  createdAt: Date;
-  expiredAt: Date;
-  shops: [
-    {
-      shopId: number;
-      shopName: string;
-    },
-  ];
-  isExpired: boolean;
+export interface ShopType {
+  shopName: string;
+  shopImage: string;
 }
 
-export interface RequestItemsResponse extends BaseResponse {
-  response: RequestItemsType[];
+export interface QuotationListResponse extends BaseResponse {
+  response: {
+    createdAt: Date;
+    expiredAt: Date;
+    bestDistanceShop: ShopType | null;
+    bestPriceShop: ShopType | null;
+    bestRatingShop: ShopType | null;
+    bestShop: ShopType | null;
+    quotations: {
+      requestId: number;
+      shopName: string;
+      totalPrice: number | null;
+    }[];
+  };
 }

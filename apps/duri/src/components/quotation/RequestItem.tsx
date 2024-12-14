@@ -1,31 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 
+import { RequestItemType } from '@duri/assets/types';
 import { Button, Card, Flex, Seperator, Text, theme } from '@duri-fe/ui';
 
 import { RequestInfo } from './RequestInfo';
 
-interface RequestItemProps {
-  requestId: number;
-  createdAt: Date;
-  expiredAt: Date;
-  shops: {
-    shopId: number;
-    shopName: string;
-  }[];
-  isExpired: boolean;
-}
 
 export const RequestItem = ({
+  quotationReqId,
   requestId,
   createdAt,
   expiredAt,
   isExpired,
   shops,
-}: RequestItemProps) => {
+}: RequestItemType) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
-    const quotationId = requestId;
-    navigate(`/quotation/${quotationId}`);
+    navigate(`/quotation/${quotationReqId}`, {state: requestId});
   };
 
   return (
