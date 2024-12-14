@@ -5,6 +5,7 @@ import { Button, Flex, Modal, Text, TextField, theme } from '@duri-fe/ui';
 import { ShopOnboardingInfoType, useModal } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 import { Coordinates } from '@salon/types';
+import { formatPhoneNumber } from '@salon/utils';
 
 import AddressSearchModal from './AddressSearchModal';
 import {
@@ -125,6 +126,7 @@ const InputSalon = ({
                   type="text"
                   label="매장 전화번호"
                   placeholder="전화번호 입력"
+                  maxLength={13}
                   isEssential
                   width={244}
                   isNoBorder
@@ -135,6 +137,11 @@ const InputSalon = ({
                       : []
                   }
                   isError={!!errors.phone}
+                  onChange={(e) => {
+                    // 입력값을 포매팅한 후 react-hook-form에 업데이트
+                    const formattedValue = formatPhoneNumber(e.target.value);
+                    field.onChange(formattedValue);
+                  }}
                 />
               )}
             />
