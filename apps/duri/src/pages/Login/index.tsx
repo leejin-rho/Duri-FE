@@ -2,7 +2,7 @@ import {
   Flex,
   MobileLayout,
   NaverLogo,
-  SpeechBallonContainer,
+  SpeechBalloonContainer,
   Text,
   theme,
 } from '@duri-fe/ui';
@@ -33,7 +33,7 @@ const LoginPage = () => {
 
         {/** 로그인 버튼 */}
         <Flex direction="column" margin="120px 0 0 0">
-          <SpeechBallonContainer
+          <SpeechBalloonContainer
             label="3초만에 시작하기 🚀"
             textColor={theme.palette.Gray400}
           />

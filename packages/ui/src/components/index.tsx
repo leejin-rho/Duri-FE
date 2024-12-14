@@ -6,7 +6,7 @@ export * from './MobileLayout';
 export * from './Navbar';
 export * from './StatusBar';
 export * from './Dropdown';
-export * from './SpeechBallonContainer';
+export * from './SpeechBalloonContainer';
 export * from './Image';
 
 export * from './Hr';
