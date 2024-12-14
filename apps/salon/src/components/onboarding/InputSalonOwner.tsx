@@ -48,7 +48,7 @@ const InputSalonOwner = ({
   onNext,
 }: InputSalonOwnerProps) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string>('');
-  const [historyYear, setHistoryYear] = useState<number | null>(null);
+  const [historyYear, setHistoryYear] = useState<number | null>(0);
   const [historyMonths, setHistoryMonths] = useState<number | null>(null);
   const [license, setLicense] = useState<string[]>([]);
 
@@ -146,18 +146,19 @@ const InputSalonOwner = ({
                     alt="선택된 파일 미리보기"
                   />
                 ) : (
-                  <Flex
+                  <ProfileWrapper
                     width={70}
                     height={70}
                     backgroundColor={theme.palette.Gray20}
                     borderRadius={35}
+                    isError={!imagePreviewUrl && isSubmitted}
                   >
                     <Profile
                       width={52}
                       height={52}
                       color={theme.palette.Gray200}
                     />
-                  </Flex>
+                  </ProfileWrapper>
                 )}
                 <FileInput
                   id="profile"
@@ -184,11 +185,6 @@ const InputSalonOwner = ({
                     isEssential
                     isNoBorder
                     shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-                    helperText={
-                      errors.name
-                        ? [{ type: 'error', text: `${errors.name.message}` }]
-                        : []
-                    }
                     isError={!!fieldState.error}
                   />
                 )}
@@ -279,6 +275,7 @@ const InputSalonOwner = ({
                 type="number"
                 label="경력"
                 isEssential
+                min={0}
                 max={99}
                 onChange={(e) => setHistoryYear(Number(e.target.value))}
                 placeholder="경력 입력"
@@ -295,6 +292,7 @@ const InputSalonOwner = ({
 
               <TextField
                 type="number"
+                min={0}
                 max={12}
                 onChange={(e) => setHistoryMonths(Number(e.target.value))}
                 placeholder="경력 입력"
@@ -396,6 +394,11 @@ const ImagePreview = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 35px;
+`;
+
+const ProfileWrapper = styled(Flex)<{ isError: boolean }>`
+  border: 1px solid
+    ${({ isError }) => (isError ? theme.palette.Alert : theme.palette.Gray100)};
 `;
 
 const FileInput = styled.input`
