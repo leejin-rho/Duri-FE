@@ -34,7 +34,11 @@ export const useBottomSheet = ({
     ref,
     css: StyledBottomCss(isMap),
     maxHeight,
-    snapPoints: ({ maxHeight }: { maxHeight: number }) => [maxHeight],
+    snapPoints: ({ maxHeight }: { maxHeight: number }) =>
+      isMap ? [300, maxHeight] : [maxHeight],
+    defaultSnap: ({ maxHeight }: { maxHeight: number }) =>
+      isMap ? 300 : maxHeight,
+
     onDismiss: handleDismiss,
   };
 

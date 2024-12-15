@@ -26,7 +26,13 @@ import { DesignerInfo } from './DesignerInfo';
 import { SendRequestQBox } from './SendRequesQBox';
 import { ShopPhotos } from './ShopPhotos';
 
-export const ShopInfo = () => {
+interface ShopInfoProps {
+  shopId: number;
+  shopLat: number;
+  shopLon: number;
+}
+
+export const ShopInfo = ({ shopId, shopLat, shopLon }: ShopInfoProps) => {
   const navigate = useNavigate();
   const { openSheet, closeSheet, bottomSheetProps } = useBottomSheet({
     maxHeight: 556,

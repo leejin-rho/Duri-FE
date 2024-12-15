@@ -1,4 +1,4 @@
-import { forwardRef, Suspense, useEffect, useState } from 'react';
+import { forwardRef, Suspense, useEffect, useRef, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import { LatLngType } from '@duri/assets/types/map';
@@ -10,6 +10,7 @@ import { ShopInfoType, useBottomSheet } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 import { SendRequestQBox } from './SendRequesQBox';
+import { ShopInfo } from './ShopInfo';
 import { ShopLine } from './ShopLine';
 
 interface MapProps {
@@ -17,15 +18,21 @@ interface MapProps {
   location: { loaded: boolean; coordinates: LatLngType };
   mapInstance: naver.maps.Map | undefined;
   isSearchMode: boolean;
-  changeSearchMode: () => void;
+  stopSearchMode: () => void;
 }
 
 export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
-  ({ shops, location, mapInstance, isSearchMode, changeSearchMode }, ref) => {
+  ({ shops, location, mapInstance, isSearchMode, stopSearchMode }, ref) => {
     const { loaded, coordinates } = location;
     const { naver } = window;
 
     const [selectedShop, setSelectedShop] = useState<ShopInfoType | null>(null);
+
+    const [sheetMode, setSheetMode] = useState<'default' | 'expanded'>(
+      'default',
+    );
+
+    const sheetModeRef = useRef<'default' | 'expanded'>('default');
 
     // 가게 정보 바텀시트
     const {
@@ -33,11 +40,12 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
       closeSheet: closeShopInfoSheet,
       bottomSheetProps: shopInfoSheetProps,
     } = useBottomSheet({
-      maxHeight: 300,
+      maxHeight: window.innerHeight,
       isMap: true,
       onDismiss: () => {
-        changeSearchMode();
+        stopSearchMode();
         setSelectedShop(null);
+        setSheetMode('default');
         closeShopInfoSheet();
       },
     });
@@ -111,36 +119,62 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
               </Button>
             </LocationBtn>
             {selectedShop && (
-              <BottomSheet {...shopInfoSheetProps}>
-                <Flex direction="column" padding="4px 24px" gap={14}>
-                  <ShopLine
-                    key={selectedShop.shopId}
-                    id={selectedShop.shopId}
-                    title={selectedShop.shopName}
-                    score={selectedShop.shopRating}
-                    reviewNum={selectedShop.reviewCnt}
-                    distance={selectedShop.distance}
-                    address={selectedShop.shopAddress}
-                    phone={selectedShop.shopPhone}
-                    tags={selectedShop.tags}
-                    hasBtn={false}
-                    shopImg={selectedShop.shopImage}
+              <BottomSheet
+                {...shopInfoSheetProps}
+                expandOnContentDrag={true}
+                onSpringEnd={(event) => {
+                  if (event.type === 'SNAP' && event.source === 'dragging') {
+                    const currentHeight =
+                      shopInfoSheetProps.ref?.current?.height ?? 0;
+                    const targetHeight = shopInfoSheetProps.maxHeight;
+                    const isExpanded = currentHeight >= targetHeight * 0.95;
+                    sheetModeRef.current = isExpanded ? 'expanded' : 'default';
+                    setSheetMode(sheetModeRef.current);
+                  }
+                }}
+              >
+                {sheetMode === 'default' && (
+                  <Flex direction="column" padding="4px 24px" gap={14}>
+                    <ShopLine
+                      key={selectedShop.shopId}
+                      id={selectedShop.shopId}
+                      title={selectedShop.shopName}
+                      score={selectedShop.shopRating}
+                      reviewNum={selectedShop.reviewCnt}
+                      distance={selectedShop.distance}
+                      address={selectedShop.shopAddress}
+                      phone={selectedShop.shopPhone}
+                      tags={selectedShop.tags}
+                      hasBtn={false}
+                      shopImg={selectedShop.shopImage}
+                    />
+                    <Button
+                      height="36px"
+                      borderRadius="8px"
+                      bg={theme.palette.Black}
+                      fontColor={theme.palette.White}
+                      padding="12px"
+                      onClick={() => {
+                        openRequestSheet();
+                        closeShopInfoSheet();
+                      }}
+                    >
+                      <Send
+                        width={18}
+                        height={17}
+                        color={theme.palette.White}
+                      />
+                      <Text margin="0 0 0 10px">입찰 넣기</Text>
+                    </Button>
+                  </Flex>
+                )}
+                {sheetMode === 'expanded' && (
+                  <ShopInfo
+                    shopId={selectedShop.shopId}
+                    shopLat={selectedShop.shopLat}
+                    shopLon={selectedShop.shopLon}
                   />
-                  <Button
-                    height="36px"
-                    borderRadius="8px"
-                    bg={theme.palette.Black}
-                    fontColor={theme.palette.White}
-                    padding="12px"
-                    onClick={() => {
-                      openRequestSheet();
-                      closeShopInfoSheet();
-                    }}
-                  >
-                    <Send width={18} height={17} color={theme.palette.White} />
-                    <Text margin="0 0 0 10px">입찰 넣기</Text>
-                  </Button>
-                </Flex>
+                )}
               </BottomSheet>
             )}
             <BottomSheet {...requestSheetProps}>
