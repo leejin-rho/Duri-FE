@@ -22,8 +22,12 @@ export const useBottomSheet = ({
     if (onDismiss) onDismiss();
   };
 
-  const openSheet = () => setIsOpenSheet(true);
-  const closeSheet = () => setIsOpenSheet(false);
+  const openSheet = () => {
+    setIsOpenSheet(true);
+  };
+  const closeSheet = () => {
+    setIsOpenSheet(false);
+  };
 
   const bottomSheetProps = {
     open: isOpenSheet,

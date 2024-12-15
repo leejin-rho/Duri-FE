@@ -5,6 +5,7 @@ import { MapInfo } from '@duri/components/shop';
 import { ShopList } from '@duri/components/shop/ShopList';
 import { useDebounce } from '@duri/hooks/useDebounce';
 import { useMapCenter } from '@duri/hooks/useMapCenter';
+import { useMapState } from '@duri/hooks/useMapState';
 import { useNaverMap } from '@duri/hooks/useNaverMap';
 import {
   Button,
@@ -35,6 +36,8 @@ const Shop = () => {
 
   const [isMap, setIsMap] = useState<boolean>(true);
 
+  const [isSearchMode, setIsSearchMode] = useState(false);
+
   const location = useGeolocation(); // 현재 위치 정보 가져오기
 
   const [nearbyShops, setNearbyShops] = useState<ShopInfoType[]>([]);
@@ -62,6 +65,8 @@ const Shop = () => {
     },
     mapInstance,
   );
+
+  const { savedState } = useMapState();
 
   // API가 너무 자주 호출되지 않도록 조정
   const debouncedCenter = useDebounce(mapCenter, 300);
@@ -99,7 +104,7 @@ const Shop = () => {
   const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const searchValue = getValues('search').trim();
-    console.log('검색값:', searchValue);
+    // console.log('검색값:', searchValue);
 
     if (!searchValue) {
       setSearchShops([]);
@@ -122,6 +127,10 @@ const Shop = () => {
     setIsMap(!isMap);
   };
 
+  const changeSearchMode = () => {
+    setIsSearchMode(!isSearchMode);
+  };
+
   useEffect(() => {
     if (isMap) {
       refreshMap();
@@ -134,30 +143,17 @@ const Shop = () => {
 
       if (mapInstance && mapContainer) {
         // 맵 컨테이너 존재 확인 후 중심 좌표 설정
-        mapInstance.setCenter(
-          new naver.maps.LatLng(mapCenter.lat, mapCenter.lng),
-        );
-        console.log('지도 중심 복구 완료:', mapCenter);
+        if (savedState) {
+          mapInstance.setCenter(
+            new naver.maps.LatLng(savedState.center.lat, savedState.center.lng),
+          );
+          mapInstance.setZoom(savedState.zoom);
+        }
       } else {
         console.warn('맵 인스턴스 또는 컨테이너가 초기화되지 않았습니다.');
       }
     }
-  }, [isMap, mapCenter]);
-
-  // 지도 상태 저장
-  // useEffect(() => {
-  //   if (isMap && mapInstance) {
-  //     const mapContainer = mapRef.current;
-
-  //     if (mapContainer) {
-  //       mapInstance.setCenter(
-  //         new naver.maps.LatLng(mapCenter.lat, mapCenter.lng),
-  //       );
-  //     } else {
-  //       console.error('맵 컨테이너를 찾을 수 없습니다.');
-  //     }
-  //   }
-  // }, [isMap, mapInstance, mapCenter]);
+  }, [isMap, savedState]);
 
   useEffect(() => {
     refetch();
@@ -178,11 +174,13 @@ const Shop = () => {
   useEffect(() => {
     // 검색 결과가 있으면 검색 결과를 표시, 없으면 주변 가게 표시
     if (searchShops.length > 0) {
+      setIsSearchMode(true);
       setShops(searchShops);
-      console.log('검색결과:', searchShops);
+      // console.log('검색결과:', searchShops);
     } else {
+      setIsSearchMode(false);
       setShops(nearbyShops);
-      console.log('내주변:', nearbyShops);
+      // console.log('내주변:', nearbyShops);
     }
   }, [searchShops, nearbyShops]);
 
@@ -234,6 +232,8 @@ const Shop = () => {
               location={location}
               mapInstance={mapInstance}
               ref={mapRef}
+              isSearchMode={isSearchMode}
+              changeSearchMode={changeSearchMode}
             />
           </>
         ) : (

@@ -16,10 +16,12 @@ interface MapProps {
   shops: ShopInfoType[];
   location: { loaded: boolean; coordinates: LatLngType };
   mapInstance: naver.maps.Map | undefined;
+  isSearchMode: boolean;
+  changeSearchMode: () => void;
 }
 
 export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
-  ({ shops, location, mapInstance }, ref) => {
+  ({ shops, location, mapInstance, isSearchMode, changeSearchMode }, ref) => {
     const { loaded, coordinates } = location;
     const { naver } = window;
 
@@ -33,6 +35,11 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
     } = useBottomSheet({
       maxHeight: 300,
       isMap: true,
+      onDismiss: () => {
+        changeSearchMode();
+        setSelectedShop(null); // 선택된 가게 초기화
+        closeShopInfoSheet(); // 바텀시트 닫기
+      },
     });
 
     // 요청서 전송용
@@ -50,7 +57,6 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
         mapInstance.panTo(
           new naver.maps.LatLng(coordinates.lat, coordinates.lng),
         );
-        console.log('중심:', coordinates);
         mapInstance.setZoom(16);
       }
     };
@@ -61,15 +67,22 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
     // 샵 마커 관리
     useMakeShopMarkers(mapInstance, shops, setSelectedShop, openShopInfoSheet);
 
-    // 검색 -> 첫번째 가게 바텀시트
+    // 검색 -> 첫 번째 가게 바텀시트 열고 지도 중심 이동
     useEffect(() => {
-      if (shops.length > 0) {
+      if (isSearchMode && shops.length > 0) {
         const firstShop = shops[0];
         setSelectedShop(firstShop);
 
+        // 지도 중심을 첫 번째 가게 좌표로 이동
+        if (mapInstance) {
+          mapInstance.panTo(
+            new naver.maps.LatLng(firstShop.shopLat, firstShop.shopLon),
+          );
+        }
+
         openShopInfoSheet();
       }
-    }, [shops, openShopInfoSheet]);
+    }, [shops, mapInstance, openShopInfoSheet]);
 
     return (
       <RelativeMobile>
