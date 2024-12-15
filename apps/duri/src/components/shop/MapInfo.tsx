@@ -37,8 +37,8 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
       isMap: true,
       onDismiss: () => {
         changeSearchMode();
-        setSelectedShop(null); // 선택된 가게 초기화
-        closeShopInfoSheet(); // 바텀시트 닫기
+        setSelectedShop(null);
+        closeShopInfoSheet();
       },
     });
 
