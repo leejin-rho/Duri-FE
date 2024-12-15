@@ -1,5 +1,11 @@
 import { publicInstance } from '../axiosConfig';
-import { CenterInfoType, SearchParamType, ShopInfoResponse } from '../types';
+import {
+  CenterInfoType,
+  SearchParamType,
+  ShopDetailParamType,
+  ShopDetailResponse,
+  ShopInfoResponse,
+} from '../types';
 
 export const getNearByShopInfo = async (
   { lat, lon, radius }: CenterInfoType,
@@ -18,6 +24,18 @@ export const getSearchShopResult = async ({
 }: SearchParamType): Promise<ShopInfoResponse['response']> => {
   const { data } = await publicInstance.get(`/shop/search`, {
     params: { search, lat, lon },
+  });
+
+  return data.response;
+};
+
+export const getShopDetailInfo = async ({
+  shopId,
+  lat,
+  lon,
+}: ShopDetailParamType): Promise<ShopDetailResponse['response']> => {
+  const { data } = await publicInstance.get(`/shop/detail`, {
+    params: { shopId, lat, lon },
   });
 
   return data.response;

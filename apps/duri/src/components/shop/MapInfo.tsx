@@ -170,9 +170,9 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
                 )}
                 {sheetMode === 'expanded' && (
                   <ShopInfo
-                    shopId={selectedShop.shopId}
-                    shopLat={selectedShop.shopLat}
-                    shopLon={selectedShop.shopLon}
+                    shopIdx={selectedShop.shopId}
+                    lat={location.coordinates.lat}
+                    lng={location.coordinates.lng}
                   />
                 )}
               </BottomSheet>

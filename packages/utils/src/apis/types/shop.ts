@@ -31,3 +31,42 @@ export type SearchParamType = {
   lat: number;
   lon: number;
 };
+
+export type ShopDetailParamType = {
+  shopId: number;
+  lat: number;
+  lon: number;
+};
+
+export interface ShopDetailType {
+  shopDetail: {
+    shopId: number;
+    shopImage: string;
+    shopName: string;
+    shopAddress: string;
+    shopLat: number;
+    shopLon: number;
+    shopPhone: string;
+    shopOpenTime: { hour: number; minute: number };
+    shopCloseTime: { hour: number; minute: number };
+    shopRating: number;
+    reviewCnt: number;
+    distance: number;
+    tags: string[];
+  };
+  groomerProfileDetail: {
+    id: number;
+    name: string;
+    gender: string;
+    age: number;
+    history: number;
+    image: string;
+    info: string;
+    license: string[];
+  };
+  shopImages: string[];
+}
+
+export interface ShopDetailResponse extends BaseResponse {
+  response: ShopDetailType;
+}

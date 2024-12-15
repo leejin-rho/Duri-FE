@@ -127,8 +127,8 @@ const Shop = () => {
     setIsMap(!isMap);
   };
 
-  const changeSearchMode = () => {
-    setIsSearchMode(!isSearchMode);
+  const stopSearchMode = () => {
+    setIsSearchMode(false);
   };
 
   useEffect(() => {
@@ -233,7 +233,7 @@ const Shop = () => {
               mapInstance={mapInstance}
               ref={mapRef}
               isSearchMode={isSearchMode}
-              changeSearchMode={changeSearchMode}
+              stopSearchMode={stopSearchMode}
             />
           </>
         ) : (

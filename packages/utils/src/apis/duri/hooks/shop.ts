@@ -4,10 +4,16 @@ import {
   BaseError,
   CenterInfoType,
   SearchParamType,
+  ShopDetailParamType,
+  ShopDetailResponse,
   ShopInfoResponse,
 } from '../../types';
 import { UseQueryProps } from '../../types/tanstack';
-import { getNearByShopInfo, getSearchShopResult } from '../shop';
+import {
+  getNearByShopInfo,
+  getSearchShopResult,
+  getShopDetailInfo,
+} from '../shop';
 
 type UseGetNearByShopProps = UseQueryProps<
   ShopInfoResponse['response'],
@@ -51,6 +57,29 @@ export const useGetSearchShopResult = ({
     queryKey: ['getSearchShopResult', searchInfo, ...(queryKey || [])],
     queryFn: () => getSearchShopResult(searchInfo),
     enabled: !!searchInfo.search.trim(),
+    ...options,
+  });
+};
+
+type UseGetShopDetailProps = UseQueryProps<
+  ShopDetailResponse['response'],
+  BaseError
+> & {
+  shopBaseInfo: ShopDetailParamType;
+};
+
+export const useGetShopDetailInfo = ({
+  queryKey,
+  options,
+  shopBaseInfo,
+}: UseGetShopDetailProps): UseQueryResult<
+  ShopDetailResponse['response'],
+  BaseError
+> => {
+  return useQuery<ShopDetailResponse['response'], BaseError>({
+    queryKey: ['getSearchShopResult', shopBaseInfo, ...(queryKey || [])],
+    queryFn: () => getShopDetailInfo(shopBaseInfo),
+    enabled: !!shopBaseInfo,
     ...options,
   });
 };
