@@ -132,7 +132,7 @@ const QuotationDetailPage = () => {
           </Flex>
         </>
 
-        <Flex direction="column" align="flex-start" margin="31px 0 17px">
+        {<Flex direction="column" align="flex-start" margin="31px 0 17px">
           <Text typo="Title2">들어온 견적</Text>
           <Flex direction="column" margin="17px 0 0 0" gap={8}>
             {quotationList?.map(
@@ -146,7 +146,7 @@ const QuotationDetailPage = () => {
               ),
             )}
           </Flex>
-        </Flex>
+        </Flex>}
       </Flex>
       <DuriNavbar />
     </MobileLayout>

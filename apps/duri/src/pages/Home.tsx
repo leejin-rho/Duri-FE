@@ -33,8 +33,11 @@ const Home = () => {
   const { data: petData, isError: getPetInfoError } = useGetPetInfo();
   const { data: regularListData } = useGetRegularShopList();
   const { data: reservationData } = useGetUpcomingReservation();
-  const { data: recommendedListData, isLoading: recommendedListLoading } =
-    useGetRecommendedShopList(lat, lon);
+  const {
+    data: recommendedListData,
+    isLoading: recommendedListLoading,
+    isPending: recommendedListPending,
+  } = useGetRecommendedShopList(lat, lon);
 
   const navigate = useNavigate();
   const handleNavigate = () => {
@@ -84,7 +87,7 @@ const Home = () => {
             }
             lastReservation={
               // petData?.lastGrooming === undefined ? '' : petData.lastGrooming
-              "2024-12-11 06:00"
+              '2024-12-11 06:00'
             }
           />
         </HeightFitFlex>
@@ -139,21 +142,16 @@ const Home = () => {
         </Flex>
         <Flex direction="column">
           {/* 추천 샵 */}
-          {recommendedListLoading && (
-            <Flex margin="31px 0 6px 0">
-              <Text typo="Caption1" colorCode={theme.palette.Gray300}>
-                Loading...
-              </Text>
-            </Flex>
-          )}
-          {recommendedListData ? (
+          {recommendedListLoading ||
+            (recommendedListPending && (
+              <Flex margin="31px 0 6px 0">
+                <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+                  Loading...
+                </Text>
+              </Flex>
+            ))}
+          {recommendedListData && (
             <RecommendedShop shopList={recommendedListData} />
-          ) : (
-            <Flex margin="31px 0 6px 0">
-              <Text typo="Caption1" colorCode={theme.palette.Gray300}>
-                Loading...
-              </Text>
-            </Flex>
           )}
         </Flex>
         <DuriNavbar />

@@ -27,15 +27,25 @@ export const DetailResponseQuotation = ({
             닫기
           </Button>
           <Button
-            bg={theme.palette.Black}
-            fontColor={theme.palette.White}
+            bg={
+              quotationData.status === '결제 전'
+                ? theme.palette.Black
+                : theme.palette.Gray20
+            }
+            fontColor={
+              quotationData.status === '결제 전'
+                ? theme.palette.White
+                : theme.palette.Black
+            }
             borderRadius="8px"
             typo="Body3"
             width="173px"
             height="47px"
             onClick={handleNavigate}
           >
-            수락 및 결제진행
+            {quotationData.status === '결제 전'
+              ? '수락 및 결제진행'
+              : quotationData.status}
           </Button>
         </ResponseQuotation>
       )}

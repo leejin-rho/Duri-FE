@@ -116,7 +116,7 @@ const MyReviewDetailPage = () => {
                 age={petInfo.age}
                 breed={petInfo.breed}
                 gender={petInfo.gender}
-                image={petInfo.image}
+                image={petInfo.imageURL}
                 name={petInfo.name}
                 weight={petInfo.weight}
                 neutering={petInfo.neutering}

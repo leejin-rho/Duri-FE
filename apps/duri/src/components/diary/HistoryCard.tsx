@@ -10,6 +10,7 @@ import {
   SalonTag,
   Text,
   theme,
+  WidthFitFlex,
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
@@ -59,10 +60,27 @@ export const HistoryCard = ({
       <HeightFitFlex gap={19} align="stretch">
         <GrayVerticalLine />
         <Card direction="row" borderRadius={12} padding="16px 20px">
-          <Flex>
+          <Flex width={250}>
             <Flex direction="column" align="flex-start">
-              <SalonTag content={tagContent} borderRadius={99} />
-              <HeightFitFlex justify="start" margin="16px 0 0 0" gap={12}>
+              <Flex justify='space-between' height={30} margin='0 0 13px'>
+                <SalonTag content={tagContent} borderRadius={99} />
+                <WidthFitFlex justify="end" align="start">
+                  {toggleModal && (
+                    <Button
+                      bg={theme.palette.Black}
+                      fontColor={theme.palette.White}
+                      typo="Label3"
+                      padding="10px"
+                      width="85px"
+                      height="30px"
+                      onClick={handleToggleModal}
+                    >
+                      견적서 보기
+                    </Button>
+                  )}
+                </WidthFitFlex>
+              </Flex>
+              <HeightFitFlex justify="start" gap={12}>
                 <ProfileImage
                   width={20}
                   height={20}
@@ -94,21 +112,6 @@ export const HistoryCard = ({
                 </Text>
               </HeightFitFlex>
             </Flex>
-          </Flex>
-          <Flex justify="end" align="start">
-            {toggleModal && (
-              <Button
-                bg={theme.palette.Black}
-                fontColor={theme.palette.White}
-                typo="Label3"
-                padding="10px"
-                width="85px"
-                height="30px"
-                onClick={handleToggleModal}
-              >
-                견적서 보기
-              </Button>
-            )}
           </Flex>
         </Card>
       </HeightFitFlex>

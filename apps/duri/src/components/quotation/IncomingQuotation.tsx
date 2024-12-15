@@ -50,7 +50,7 @@ export const IncomingQuotation = ({
       <Modal isOpen={isOpenModal} toggleModal={toggleModal} title="견적서">
         {
           <DetailResponseQuotation
-            quotationId={22}
+            quotationId={quotationId}
             handleCloseButton={toggleModal}
             handleNavigate={() => handleClickNavigateButton(quotationId)}
           />

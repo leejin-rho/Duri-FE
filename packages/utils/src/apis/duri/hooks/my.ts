@@ -7,6 +7,7 @@ import {
   getRequestHistory,
   getReviewDetail,
   getUserInfo,
+  getVisitHistory,
   putPetInfo,
   putUserInfo,
 } from '../my';
@@ -86,4 +87,12 @@ export const useGetReviewDetail = (reviewId: number) => {
     queryFn: () => getReviewDetail(reviewId),
     staleTime: 1000 * 60 * 10,
   });
-}
+};
+
+export const useGetVisitHistory = () => {
+  return useQuery({
+    queryKey: ['getVisitHistory'],
+    queryFn: () => getVisitHistory(),
+    staleTime: 1000 * 60 * 10,
+  });
+};

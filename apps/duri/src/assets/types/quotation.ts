@@ -53,5 +53,6 @@ export interface ResponseQuotationType {
       customPrice?: number;
       totalPrice: number;
     };
+    status?: string;
   };
 }

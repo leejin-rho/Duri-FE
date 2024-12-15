@@ -6,6 +6,7 @@ import {
   RequestQuotationType,
   ReviewDetailResponse,
   UserInfo,
+  VisitHistoryResponse,
 } from '../types/my';
 
 export const getMyReviews = async (): Promise<
@@ -77,3 +78,8 @@ export const getReviewDetail = async (
 
   return transformedData;
 };
+
+export const getVisitHistory = async():Promise<VisitHistoryResponse['response']> => {
+  const response = await duriInstance.get('/user/history');
+  return response.data.response;
+}

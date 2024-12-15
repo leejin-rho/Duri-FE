@@ -15,8 +15,8 @@ export const getQuotationList = async (
   lat: number,
   lon: number,
 ): Promise<QuotationListResponse['response']> => {
-  const response = await duriInstance.get(
-    `/quotation/request/detail?quotationReqId=${quotationReqId}&lat=${lat}&lon=${lon}`,
-  );
+  const response = await duriInstance.get(`/quotation/request/detail`, {
+    params: { quotationReqId, lat, lon },
+  });
   return response.data.response;
 };

@@ -81,3 +81,22 @@ export interface ReviewDetailResponse {
     petInfo: PetInfoType;
   };
 }
+
+export interface HistoryType {
+  quotationId: number;
+  complete: boolean;
+  groomerImageURL: string;
+  groomerName: string;
+  shopId: number;
+  shopName: string;
+  petName: string;
+  day: string;
+  startDate: string;
+}
+
+export interface VisitHistoryResponse {
+  response: {
+    month: string;
+    historyList: HistoryType[];
+  }[];
+}
