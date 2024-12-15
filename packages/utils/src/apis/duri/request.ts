@@ -1,4 +1,4 @@
-import { duriInstance } from '../axiosConfig';
+import { duriInstance } from '../config/instances';
 import { BaseResponse, RequestProps } from '../types';
 
 interface RequestResponse extends BaseResponse {

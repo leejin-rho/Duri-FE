@@ -1,4 +1,4 @@
-import { duriInstance } from '../axiosConfig';
+import { duriInstance } from '../config/instances';
 import {
   MyReviewResponseType,
   PetInfo,

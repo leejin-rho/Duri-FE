@@ -1,4 +1,5 @@
-import { publicInstance } from '../axiosConfig';
+import { publicInstance } from '@duri-fe/utils';
+
 import {
   CenterInfoType,
   SearchParamType,
