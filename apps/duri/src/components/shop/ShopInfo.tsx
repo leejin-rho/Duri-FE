@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useNavigate } from 'react-router-dom';
 
