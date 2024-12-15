@@ -77,7 +77,7 @@ duriInstance.interceptors.response.use(
   (error) => {
     if (error.response) {
       const { status } = error.response.data.error || {};
-      if (status === 401) {
+      if (status === 500) {
         window.location.href = '/login';
       }
     } else {
@@ -102,7 +102,7 @@ salonInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
-      const { status } = error.response.data.error || {};
+      const { status } = error.response || {};
       if (status === 401) {
         window.location.href = '/login';
       }

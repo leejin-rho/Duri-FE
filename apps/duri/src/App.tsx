@@ -25,59 +25,61 @@ import QuotationPage from '@pages/Quotation';
 import QuotationDetailPage from '@pages/Quotation/QuotationDetail';
 import RequestPage from '@pages/Request';
 import ReviewWritePage from '@pages/Review';
+import ReviewModifyPage from '@pages/Review/ReviewModify';
 import Shop from '@pages/Shop';
 import Portfolio from '@pages/Shop/Portfolio';
 import PortfolioDetail from '@pages/Shop/PortfolioDetail';
 
-import 'react-spring-bottom-sheet/dist/style.css';
+import PrivateRoute from '@components/PrivateRoute';
 
-import ReviewModifyPage from './pages/Review/ReviewModify';
+import 'react-spring-bottom-sheet/dist/style.css';
 
 function App() {
   return (
     <BrowserRouter>
       <Global styles={globalStyle} />
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth" element={<AuthPage />} />
 
-        <Route path="/onboarding" element={<StartPage />} />
-        <Route path="/onboarding/detail" element={<Onboarding />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/onboarding" element={<StartPage />} />
+          <Route path="/onboarding/detail" element={<Onboarding />} />
 
-        <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/payment/success" element={<SuccessPage />} />
-        <Route path="/payment/fail" element={<FailPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/payment/success" element={<SuccessPage />} />
+          <Route path="/payment/fail" element={<FailPage />} />
 
-        <Route path="/shop/request" element={<RequestPage />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="shop/:shopId " />
+          <Route path="/shop/request" element={<RequestPage />} />
+          <Route path="/shop" element={<Shop />} />
 
-        <Route path="/portfolio/:designerId" element={<Portfolio />} />
-        <Route
-          path="/portfolio/:designerId/:portfolioId"
-          element={<PortfolioDetail />}
-        />
+          <Route path="/portfolio/:designerId" element={<Portfolio />} />
+          <Route
+            path="/portfolio/:designerId/:portfolioId"
+            element={<PortfolioDetail />}
+          />
 
-        <Route path="/quotation" element={<QuotationPage />} />
-        <Route
-          path="/quotation/:quotationId"
-          element={<QuotationDetailPage />}
-        />
+          <Route path="/quotation" element={<QuotationPage />} />
+          <Route
+            path="/quotation/:quotationId"
+            element={<QuotationDetailPage />}
+          />
 
-        <Route path="/diary" element={<PetDiary />} />
-        <Route path="/diary/:diaryId" element={<PetDiaryDetail />} />
+          <Route path="/diary" element={<PetDiary />} />
+          <Route path="/diary/:diaryId" element={<PetDiaryDetail />} />
 
-        <Route path="/my" element={<MyPage />} />
-        <Route path="/my/pet" element={<MyPetPage />} />
-        <Route path="/my/pet/modify" element={<MyPetModifyPage />} />
-        <Route path="/my/info" element={<MyInfoModifyPage />} />
-        <Route path="/my/shop" element={<MyShopPage />} />
-        <Route path="/my/history" element={<MyHistoryPage />} />
-        <Route path="/my/review" element={<MyReviewPage />} />
-        <Route path="/my/review/:reviewId" element={<MyReviewDetailPage />} />
-        <Route path="/my/review/write" element={<ReviewWritePage />} />
-        <Route path="/my/review/modify" element={<ReviewModifyPage />} />
+          <Route path="/my" element={<MyPage />} />
+          <Route path="/my/pet" element={<MyPetPage />} />
+          <Route path="/my/pet/modify" element={<MyPetModifyPage />} />
+          <Route path="/my/info" element={<MyInfoModifyPage />} />
+          <Route path="/my/shop" element={<MyShopPage />} />
+          <Route path="/my/history" element={<MyHistoryPage />} />
+          <Route path="/my/review" element={<MyReviewPage />} />
+          <Route path="/my/review/:reviewId" element={<MyReviewDetailPage />} />
+          <Route path="/my/review/write" element={<ReviewWritePage />} />
+          <Route path="/my/review/modify" element={<ReviewModifyPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
