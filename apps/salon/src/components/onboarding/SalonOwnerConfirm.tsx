@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { SalonOwnerFormData } from '@assets/types/onboarding';
 import {
   AlertStar,
   Button,
@@ -9,6 +8,7 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
+import { GroomerOnboardingInfoType } from '@duri-fe/utils';
 
 import {
   ButtonWrapper,
@@ -17,7 +17,7 @@ import {
 } from './onboarding.styles';
 
 interface SalonOwnerConfirmProps {
-  salonOwnerFormData: SalonOwnerFormData;
+  salonOwnerFormData: GroomerOnboardingInfoType;
   onNext: () => void;
 }
 
@@ -57,7 +57,9 @@ const SalonOwnerConfirm = ({
               성별
               <AlertStar isUpper />
             </Text>
-            <Text typo="Body4">{salonOwnerFormData.gender}</Text>
+            <Text typo="Body4">
+              {salonOwnerFormData.gender === 'F' ? '여성' : '남성'}
+            </Text>
           </Flex>
 
           <Flex justify="flex-start" gap={36}>
@@ -74,8 +76,9 @@ const SalonOwnerConfirm = ({
               <AlertStar isUpper />
             </Text>
             <Text typo="Body4">
-              {salonOwnerFormData.experienceYears}년{' '}
-              {salonOwnerFormData.experienceMonths}개월
+              {Math.floor(salonOwnerFormData.history / 12)}년{' '}
+              {salonOwnerFormData.history % 12}
+              개월
             </Text>
           </Flex>
 
@@ -101,12 +104,11 @@ const SalonOwnerConfirm = ({
         </Flex>
       </Flex>
 
-      {/* 문의하기 눌렀을 때에 대한 처리 필요 */}
       <ContactContainer gap={4}>
         <Text typo="Label2" colorCode={theme.palette.Gray300}>
           문제가 발생한다면
         </Text>
-        <UnderlinedText typo="Label2" colorCode={theme.palette.Gray300}>
+        <UnderlinedText href="mailto:fodo9898@inha.edu">
           문의하기
         </UnderlinedText>
         <Text typo="Label2" colorCode={theme.palette.Gray300}>
@@ -114,7 +116,7 @@ const SalonOwnerConfirm = ({
         </Text>
       </ContactContainer>
 
-      <ButtonWrapper padding="0 20px">
+      <ButtonWrapper>
         <Button
           bg={theme.palette.Black}
           fontColor={theme.palette.White}

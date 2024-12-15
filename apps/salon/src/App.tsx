@@ -8,6 +8,7 @@ import AuthPage from '@pages/Auth';
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import OnboardingPage from '@pages/Onboarding';
+import OnboardingPendingPage from '@pages/Onboarding/Pending';
 import StartPage from '@pages/Onboarding/StartPage';
 import QuotationPage from '@pages/Quotation';
 import ReplyPage from '@pages/Quotation/ReplyPage';
@@ -25,6 +26,7 @@ function App() {
 
         <Route path="/onboarding" element={<StartPage />} />
         <Route path="/onboarding/detail" element={<OnboardingPage />} />
+        <Route path="/onboarding/pending" element={<OnboardingPendingPage />} />
 
         <Route path="/quotation" element={<QuotationPage />} />
         <Route path="/quotation/reservation" element={<ReservationPage />} />

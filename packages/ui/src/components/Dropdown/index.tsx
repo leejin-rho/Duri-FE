@@ -16,6 +16,7 @@ interface DropdownProps {
   defaultValue: string | number;
   onSelect: (value: string | number) => void; // 선택된 값을 부모로 전달
   suffix?: string; //접미사 (ex. 살 등등)
+  isError?: boolean;
 }
 
 export const Dropdown = ({
@@ -25,6 +26,7 @@ export const Dropdown = ({
   defaultValue,
   suffix = '',
   onSelect,
+  isError = false,
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | number>(defaultValue);
@@ -72,6 +74,7 @@ export const Dropdown = ({
         width={width}
         onClick={toggleDropdown}
         ref={dropdownRef}
+        isError={isError}
       >
         {selectedOption === defaultValue ? (
           <Text

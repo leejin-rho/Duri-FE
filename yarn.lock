@@ -536,6 +536,7 @@ __metadata:
     "@emotion/styled": "npm:^11.13.5"
     "@tanstack/react-query": "npm:^5.62.1"
     "@tanstack/react-query-devtools": "npm:^5.62.2"
+    "@types/navermaps": "npm:^3.7.8"
     "@types/node": "npm:^22.10.1"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
@@ -550,6 +551,7 @@ __metadata:
     eslint-plugin-simple-import-sort: "npm:^12.1.1"
     msw: "npm:^2.6.6"
     react: "npm:^18.3.1"
+    react-daum-postcode: "npm:^3.1.3"
     react-dom: "npm:^18.3.1"
     react-hook-form: "npm:^7.54.0"
     react-router-dom: "npm:^7.0.1"
@@ -8898,7 +8900,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-daum-postcode@npm:3.1.3":
+"react-daum-postcode@npm:3.1.3, react-daum-postcode@npm:^3.1.3":
   version: 3.1.3
   resolution: "react-daum-postcode@npm:3.1.3"
   peerDependencies:

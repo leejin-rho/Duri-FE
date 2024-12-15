@@ -4,17 +4,13 @@ import { Flex, Text } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 interface WelcomeProps {
-  userName: string;
   show: boolean;
 }
 
-const Welcome = ({ userName, show }: WelcomeProps) => {
+const Welcome = ({ show }: WelcomeProps) => {
   return (
     <Container show={show} direction="column">
       <Wrapper direction="column">
-        <Text typo="Heading" align="center">
-          {userName}님 안녕하세요!
-        </Text>
         <Text typo="Heading" align="center">
           두리묭실에 오신 것을 환영합니다 👋🏻
         </Text>
