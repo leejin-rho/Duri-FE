@@ -488,6 +488,7 @@ __metadata:
     "@tanstack/react-query": "npm:^5.62.0"
     "@tanstack/react-query-devtools": "npm:^5.62.2"
     "@tosspayments/tosspayments-sdk": "npm:^2.3.2"
+    "@types/lodash": "npm:^4.17.13"
     "@types/navermaps": "npm:^3.7.8"
     "@types/node": "npm:^22.10.1"
     "@types/react": "npm:^18"
@@ -501,6 +502,7 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-react: "npm:^7.37.2"
     eslint-plugin-simple-import-sort: "npm:^12.1.1"
+    lodash: "npm:^4.17.21"
     msw: "npm:^2.6.6"
     react: "npm:^18.3.1"
     react-calendar: "npm:^5.1.0"
@@ -600,6 +602,7 @@ __metadata:
     "@emotion/react": "npm:^11.13.5"
     "@emotion/styled": "npm:^11.13.5"
     "@tanstack/react-query": "npm:^5.62.0"
+    "@types/lodash": "npm:^4.17.13"
     "@types/react": "npm:^18"
     "@typescript-eslint/eslint-plugin": "npm:^8.15.0"
     "@typescript-eslint/parser": "npm:^8.15.0"
@@ -608,6 +611,7 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-react: "npm:^7.37.2"
     eslint-plugin-simple-import-sort: "npm:^12.1.1"
+    lodash: "npm:^4.17.21"
     msw: "npm:^2.6.6"
     react: "npm:^18.3.1"
     react-spring-bottom-sheet: "npm:^3.4.1"
@@ -2608,6 +2612,13 @@ __metadata:
   version: 2.0.4
   resolution: "@types/http-errors@npm:2.0.4"
   checksum: 10c0/494670a57ad4062fee6c575047ad5782506dd35a6b9ed3894cea65830a94367bd84ba302eb3dde331871f6d70ca287bfedb1b2cf658e6132cd2cbd427ab56836
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:^4.17.13":
+  version: 4.17.13
+  resolution: "@types/lodash@npm:4.17.13"
+  checksum: 10c0/c3d0b7efe7933ac0369b99f2f7bff9240d960680fdb74b41ed4bd1b3ca60cca1e31fe4046d9abbde778f941a41bc2a75eb629abf8659fa6c27b66efbbb0802a9
   languageName: node
   linkType: hard
 

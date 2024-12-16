@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 interface locationType {
   loaded: boolean;
-  coordinates?: { lat: number; lng: number };
+  coordinates: { lat: number; lng: number };
   error?: { code: number; message: string };
 }
 
@@ -30,6 +30,7 @@ export const useGeolocation = () => {
     console.error(`ERROR(${error.code}): ${error.message}`);
     setLocation({
       loaded: true,
+      coordinates: { lat: 0, lng: 0 },
       error,
     });
   };

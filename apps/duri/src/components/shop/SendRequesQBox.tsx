@@ -12,9 +12,14 @@ import {
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-export const SendRequestQBox = () => {
+export const SendRequestQBox = ({
+  closeBottomSheet,
+}: {
+  closeBottomSheet?: () => void;
+}) => {
   const navigate = useNavigate();
   const moveToShopRequest = () => {
+    if (closeBottomSheet) closeBottomSheet();
     navigate('/shop/request');
   };
   return (
@@ -54,7 +59,11 @@ export const SendRequestQBox = () => {
         </HeightFitFlex>
       </HeightFitFlex>
       <AbsoluteBtnWrapper gap={8} padding="0 20px">
-        <FlexBtn flex="136" bg={theme.palette.Gray20}>
+        <FlexBtn
+          flex="136"
+          bg={theme.palette.Gray20}
+          onClick={closeBottomSheet}
+        >
           <Text typo="Body3">취소</Text>
         </FlexBtn>
         <FlexBtn flex="191" bg={theme.palette.Gray200}>

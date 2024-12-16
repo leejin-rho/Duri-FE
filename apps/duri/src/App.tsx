@@ -28,7 +28,6 @@ import ReviewWritePage from '@pages/Review';
 import Shop from '@pages/Shop';
 import Portfolio from '@pages/Shop/Portfolio';
 import PortfolioDetail from '@pages/Shop/PortfolioDetail';
-import ShopDetail from '@pages/Shop/ShopDetail';
 
 import 'react-spring-bottom-sheet/dist/style.css';
 
@@ -52,7 +51,6 @@ function App() {
 
         <Route path="/shop/request" element={<RequestPage />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/shop/:shopId" element={<ShopDetail />} />
 
         <Route path="/portfolio/:designerId" element={<Portfolio />} />
         <Route
