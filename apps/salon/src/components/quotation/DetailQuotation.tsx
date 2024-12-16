@@ -26,9 +26,14 @@ export const DetailQuotation = ({
 
   const { data: quotation } = useGetDetailQuotation(requestId);
 
+  // TODO : quotationId로 보내야 함!! 근데 이게 없슈
+  const quotationId = 1;
+
   const handleNavigate = () => {
     closeModal();
-    navigate(`/feedback`);
+    navigate(`/feedback`, {
+      state: { quotationId: quotationId },
+    });
   };
 
   if (!quotation) {

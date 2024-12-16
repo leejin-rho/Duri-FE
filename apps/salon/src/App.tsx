@@ -5,7 +5,7 @@ import { globalStyle } from '@duri-fe/ui';
 import { Global } from '@emotion/react';
 
 import AuthPage from '@pages/Auth';
-import { FeedBackPage } from '@pages/Feedback';
+import FeedBackPage from '@pages/Feedback';
 import Home from '@pages/Home';
 import IncomePage from '@pages/Income/Income';
 import LoginPage from '@pages/Login';
