@@ -10,6 +10,6 @@
       "@mocks/*": ["./apps/salon/src/mocks/*"],
     }
   },
-  "include": ["src/**/*", "../../**/*.d.ts"],
+  "include": ["src/**/*", "../../**/*.d.ts", "setupProxy.js"],
   "exclude": ["node_modules", "dist"]
 }

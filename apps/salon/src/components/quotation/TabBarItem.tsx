@@ -6,6 +6,7 @@ interface TabBarItemProps {
   selected: boolean;
   typo?: KeyOfTypo;
   fitContent?: boolean;
+  onClick?: () => void;
 }
 
 export const TabBarItem = ({
@@ -13,9 +14,10 @@ export const TabBarItem = ({
   selected,
   typo = 'Body1',
   fitContent = false,
+  onClick,
 }: TabBarItemProps) => {
   return (
-    <Wrapper selected={selected} fitContent={fitContent}>
+    <Wrapper selected={selected} fitContent={fitContent} onClick={onClick}>
       <Text typo={typo} colorCode={selected ? theme.palette.Black : theme.palette.Gray300}>{label}</Text>
     </Wrapper>
   )

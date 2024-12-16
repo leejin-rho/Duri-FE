@@ -29,7 +29,7 @@ const Container = styled(Flex)`
   min-height: 100vh;
   box-sizing: border-box;
 
-  @media (min-width: 420px) {
+  @media (min-width: 480px) {
     max-width: 375px;
   }
 `;

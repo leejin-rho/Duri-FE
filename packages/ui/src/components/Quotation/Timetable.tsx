@@ -27,38 +27,32 @@ export const TimeTable = ({
           const key = `time${9 + index}` as keyof TimeType;
           const isSelected = selectedTimeList[key];
           return (
-            <>
-              {onSelect ? (
-                <Button
-                  key={time}
-                  width="72px"
-                  height="41px"
-                  bg={isSelected ? theme.palette.Black : theme.palette.Gray20}
-                  fontColor={
-                    isSelected ? theme.palette.White : theme.palette.Black
-                  }
-                  typo="Label2"
-                  borderRadius="4px"
-                  onClick={() => handleSelect(index, isSelected)}
-                >
-                  {time}
-                </Button>
-              ) : (
-                <DefaultCursorButton
-                  key={time}
-                  width="72px"
-                  height="41px"
-                  bg={isSelected ? theme.palette.Black : theme.palette.Gray20}
-                  fontColor={
-                    isSelected ? theme.palette.White : theme.palette.Black
-                  }
-                  typo="Label2"
-                  borderRadius="4px"
-                >
-                  {time}
-                </DefaultCursorButton>
-              )}
-            </>
+            onSelect ? (
+              <Button
+                key={time}
+                width="72px"
+                height="41px"
+                bg={isSelected ? theme.palette.Black : theme.palette.Gray_White}
+                fontColor={isSelected ? theme.palette.White : theme.palette.Gray300}
+                typo={isSelected ? 'Label2' : 'Caption1'}
+                borderRadius="4px"
+                onClick={() => handleSelect(index, isSelected)}
+              >
+                {time}
+              </Button>
+            ) : (
+              <DefaultCursorButton
+                key={time}
+                width="72px"
+                height="41px"
+                bg={isSelected ? theme.palette.Black : theme.palette.Gray_White}
+                fontColor={isSelected ? theme.palette.White : theme.palette.Gray300}
+                typo={isSelected ? 'Label2' : 'Caption1'}
+                borderRadius="4px"
+              >
+                {time}
+              </DefaultCursorButton>
+            )
           );
         })}
       </TimeWrapper>

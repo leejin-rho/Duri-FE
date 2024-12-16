@@ -1,20 +1,16 @@
 import { Control, Controller, UseFormSetValue } from 'react-hook-form';
 
-import { breeds } from '@duri/assets/data';
+import {
+  BREEDS,
+  GENDER_OPTION_LIST,
+  NEUTERED_OPTION_LIST,
+} from '@duri/constants';
 import { FormData } from '@duri/pages/My/MyPetModify';
 import { Button, Dropdown, Flex, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 
 import { PetDiseaseModify } from './PetDiseaseModify';
 import { PetPersonalityModify } from './PetPersonalityModify';
 
-const genderMapping = [
-  { label: '왕자님', value: 'M' },
-  { label: '공주님', value: 'F' },
-];
-const neuterMapping = [
-  { label: '완료', value: true },
-  { label: '미완료', value: false },
-];
 const integerList = Array.from({ length: 41 }, (_, i) => i.toString()); // 정수 리스트
 const decimalList = Array.from({ length: 10 }, (_, i) => i.toString()); // 소수 리스트
 const ageList = Array.from({ length: 26 }, (_, i) => i);
@@ -28,11 +24,6 @@ export const PetModifyForm = ({
   setValue: UseFormSetValue<FormData>;
   getValues: (name: keyof FormData) => string | number | string[] | boolean;
 }) => {
-  const getStringArrayValues = (name: keyof FormData) => {
-    const value = getValues(name);
-    return Array.isArray(value) ? value : [];
-  };
-
   // 드롭다운에서 선택된 값 업데이트!!!
   const handleBreedSelect = (value: string | number) => {
     if (typeof value === 'string') setValue('breed', value);
@@ -48,15 +39,25 @@ export const PetModifyForm = ({
     <Flex direction="column" gap={17} margin="23px 0 92px 0">
       <Flex justify="flex-start" gap={65}>
         <Text typo="Title3">이름</Text>
-        <Text typo="Body3">{getValues('name')}</Text>
+        <Controller
+          name="name"
+          control={control}
+          render={({ field }) => <Text typo="Body3">{field.value}</Text>}
+        />
       </Flex>
       <Flex justify="flex-start" gap={65}>
         <Text typo="Title3">견종</Text>
-        <Dropdown
-          options={breeds}
-          defaultValue={(getValues('breed') as string | number) ?? '견종 입력'}
-          width={114}
-          onSelect={handleBreedSelect}
+        <Controller
+          name="breed"
+          control={control}
+          render={({ field }) => (
+            <Dropdown
+              options={BREEDS}
+              defaultValue={field.value}
+              width={114}
+              onSelect={handleBreedSelect}
+            />
+          )}
         />
       </Flex>
       <Flex justify="flex-start" gap={65}>
@@ -66,29 +67,29 @@ export const PetModifyForm = ({
           control={control}
           render={() => (
             <WidthFitFlex gap={4}>
-              {genderMapping.map(({ label, value }) => (
+              {GENDER_OPTION_LIST.map(({ key, label }) => (
                 <Button
-                  key={value}
+                  key={label}
                   width="fit-content"
                   height="43px"
                   padding="16px 20px"
                   bg={
-                    getValues('gender') === value
+                    getValues('gender') === key
                       ? theme.palette.Black
                       : theme.palette.White
                   }
                   fontColor={
-                    getValues('gender') === value
+                    getValues('gender') === key
                       ? theme.palette.White
                       : theme.palette.Black
                   }
                   typo="Label3"
                   border={
-                    getValues('gender') === value
+                    getValues('gender') === key
                       ? `1px solid ${theme.palette.Black}`
                       : `1px solid ${theme.palette.Gray100}`
                   }
-                  onClick={() => handleGenderSelect(value)}
+                  onClick={() => handleGenderSelect(key)}
                 >
                   {label}
                 </Button>
@@ -104,29 +105,29 @@ export const PetModifyForm = ({
           control={control}
           render={() => (
             <WidthFitFlex gap={4}>
-              {neuterMapping.map(({ label, value }) => (
+              {NEUTERED_OPTION_LIST.map(({ key, label }) => (
                 <Button
-                  key={value ? 'yes' : 'no'}
+                  key={label}
                   width="fit-content"
                   height="43px"
                   padding="16px 20px"
                   bg={
-                    getValues('neutering') === value
+                    getValues('neutering') === key
                       ? theme.palette.Black
                       : theme.palette.White
                   }
                   fontColor={
-                    getValues('neutering') === value
+                    getValues('neutering') === key
                       ? theme.palette.White
                       : theme.palette.Black
                   }
                   typo="Label3"
                   border={
-                    getValues('neutering') === value
+                    getValues('neutering') === key
                       ? `1px solid ${theme.palette.Black}`
                       : `1px solid ${theme.palette.Gray100}`
                   }
-                  onClick={() => handleNeuterSelect(value)}
+                  onClick={() => handleNeuterSelect(key)}
                 >
                   {label}
                 </Button>
@@ -138,12 +139,18 @@ export const PetModifyForm = ({
 
       <Flex justify="flex-start" gap={65}>
         <Text typo="Title3">나이</Text>
-        <Dropdown
-          options={ageList}
-          defaultValue={`${getValues('age')}살`}
-          width={114}
-          onSelect={handleBreedSelect}
-          suffix="살"
+        <Controller
+          name="age"
+          control={control}
+          render={({ field }) => (
+            <Dropdown
+              options={ageList}
+              defaultValue={`${field.value}살`}
+              width={114}
+              onSelect={handleBreedSelect}
+              suffix="살"
+            />
+          )}
         />
       </Flex>
 
@@ -162,15 +169,16 @@ export const PetModifyForm = ({
           }}
           render={({ field }) => (
             <>
-              {/* style={{ display: 'flex', alignItems: 'center', gap: '4px' } */}
               <WidthFitFlex gap={12} justify="flex-start" align="flex-end">
                 {/* 정수 Dropdown */}
                 <Dropdown
                   width={45}
                   options={integerList}
-                  defaultValue={field.value.toString().split('.')[0] || '0'} // 정수 부분 초기값
+                  defaultValue={
+                    field.value ? field.value?.toString().split('.')[0] : 0
+                  } // 정수 부분 초기값
                   onSelect={(value) => {
-                    const decimal = field.value.toString().split('.')[1] || 0; // 소수 추출
+                    const decimal = field.value?.toString().split('.')[1] || 0; // 소수 추출
                     field.onChange(parseFloat(`${value}.${decimal}`)); // 정수와 소수 조합
                   }}
                 />
@@ -181,9 +189,9 @@ export const PetModifyForm = ({
                 <Dropdown
                   width={45}
                   options={decimalList}
-                  defaultValue={field.value.toString().split('.')[1] || '0'} // 소수 부분 초기값
+                  defaultValue={field.value?.toString().split('.')[1] ?? 0} // 소수 부분 초기값
                   onSelect={(value) => {
-                    const integer = field.value.toString().split('.')[0] || 0; // 정수 추출
+                    const integer = field.value?.toString().split('.')[0] || 0; // 정수 추출
                     field.onChange(parseFloat(`${integer}.${value}`)); // 정수와 소수 조합
                   }}
                 />
@@ -195,16 +203,8 @@ export const PetModifyForm = ({
           )}
         />
       </Flex>
-      <PetPersonalityModify
-        control={control}
-        getStringArrayValues={getStringArrayValues}
-        setValue={setValue}
-      />
-      <PetDiseaseModify
-        control={control}
-        getStringArrayValues={getStringArrayValues}
-        setValue={setValue}
-      />
+      <PetPersonalityModify control={control} setValue={setValue} />
+      <PetDiseaseModify control={control} setValue={setValue} />
     </Flex>
   );
 };

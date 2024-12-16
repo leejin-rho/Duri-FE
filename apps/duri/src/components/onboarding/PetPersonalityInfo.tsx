@@ -1,6 +1,6 @@
 import { Control, Controller } from 'react-hook-form';
 
-import { personalityOptions } from '@duri/assets/data/pet';
+import { PERSONALITY_OPTION_LIST } from '@duri/constants/pet';
 import { Button, Flex, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
@@ -54,7 +54,7 @@ const PetPersonalityInfo = ({
         }}
         render={() => (
           <FitFlex justify="flex-start" gap={8} margin="47px 0">
-            {personalityOptions.map(({ key, label }) => (
+            {PERSONALITY_OPTION_LIST.map(({ key, label }) => (
               <Button
                 key={key}
                 typo="Body3"

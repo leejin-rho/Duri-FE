@@ -17,7 +17,7 @@ interface ButtonProps {
   shadow?: string;
 }
 
-export const Button = styled.div<ButtonProps>`
+export const Button = styled.button<ButtonProps>`
   display: flex;
   padding: ${({ padding }) => padding ?? '16px 20px'};
   justify-content: center;
@@ -49,5 +49,9 @@ export const FrontBtn = styled(Button)`
   position: fixed;
   bottom: 92px;
   z-index: 3;
-  max-width: 375px;
+  max-width: 480px;
+
+  @media (min-width: 480px) {
+    width: 375px;
+  }
 `;

@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { defaultPetInfo } from '@duri/assets/data/pet';
-import { PetInfoType } from '@duri/assets/types';
-import { UpcomingReservationProps } from '@duri/assets/types/reservation';
-import { RecommendeShopType, RegularShopType } from '@duri/assets/types/shop';
+import {
+  PetInfoType,
+  RecommendedShopType,
+  RegularShopType,
+} from '@duri/assets/types';
+import { UpcomingReservationType } from '@duri/assets/types/reservation';
 import CarouselHome from '@duri/components/home/Home';
 import RecommendedShop from '@duri/components/home/RecommendedShop';
 import SpeedQuotation from '@duri/components/home/SpeedQuotation';
+import { DEFAULT_PET_INFO } from '@duri/constants/pet';
 import {
   AiStyleBanner,
   Button,
@@ -28,32 +31,33 @@ import {
 import styled from '@emotion/styled';
 
 const Home = () => {
-  const petData = useGetPetInfo();
-  const [petInfo, setPetInfo] = useState<PetInfoType>(defaultPetInfo);
-  const [regularShopList, setRegularShopList] = useState<RegularShopType[]>(
-    [],
-  );
+  const { data: petData, isError: getPetInfoError } = useGetPetInfo();
+  const [petInfo, setPetInfo] = useState<PetInfoType>(DEFAULT_PET_INFO);
+  const [regularShopList, setRegularShopList] = useState<RegularShopType[]>([]);
+  // 사용자 lat, lon 정보가 필요함!!!!
   const [recommendedShopList, setRecommendedShopList] = useState<
-    RecommendeShopType[]
+    RecommendedShopType[]
   >([]);
   const [upcomingReservation, setUpcomingReservation] =
-    useState<UpcomingReservationProps>();
-  const recommendedListData = useGetRecommendedShopList();
-  const regularListData = useGetRegularShopList();
-  const reservationData = useGetUpcomingReservation();
-  // const lastReservationData = useGetLastReservation();
+    useState<UpcomingReservationType>();
+  const { data: recommendedListData } = useGetRecommendedShopList();
+  const { data: regularListData } = useGetRegularShopList();
+  const { data: reservationData } = useGetUpcomingReservation();
+
   const navigate = useNavigate();
   const handleNavigate = () => navigate('/shop');
 
   useEffect(() => {
-    if (recommendedListData) setRecommendedShopList(recommendedListData.homeShopList);
+    // if (recommendedListData) console.log(recommendedListData)
     if (regularListData) setRegularShopList(regularListData.homeShopList);
+    if (recommendedListData) setRecommendedShopList(recommendedListData);
     if (reservationData) setUpcomingReservation(reservationData);
-  }, [recommendedListData, regularListData, reservationData]);
+  }, [reservationData, regularListData, recommendedListData]);
 
   useEffect(() => {
     if (petData) setPetInfo(petData);
-  }, [petData]);
+    if (getPetInfoError) navigate('/login');
+  }, [petData, getPetInfoError]);
 
   return (
     <MobileLayout>
@@ -70,7 +74,12 @@ const Home = () => {
             onClickSearch={handleNavigate}
           />
           <CarouselHome
-            upcomingReservation={upcomingReservation}
+            upcomingReservation={
+              upcomingReservation?.reserveDday === -1 ||
+              upcomingReservation?.lastSinceDay === -1
+                ? undefined
+                : upcomingReservation
+            }
             lastReservation={petData?.lastGrooming}
           />
         </HeightFitFlex>
@@ -122,9 +131,10 @@ const Home = () => {
           >
             <AiStyleBanner height={70} />
           </StyleBannerWrapper>
-
+        </Flex>
+        <Flex direction="column">
           {/* 추천 샵 */}
-          {recommendedShopList.length > 0 && (
+          {recommendedShopList && (
             <RecommendedShop shopList={recommendedShopList} />
           )}
         </Flex>

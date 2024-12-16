@@ -19,6 +19,7 @@ export { default as DownArrow } from './DownArrow';
 export { default as Help } from './Help';
 export { default as Information } from './Information';
 export { default as Magnifier } from './Magnifier';
+export { default as EmptyStar } from './EmptyStar';
 export { default as Menu } from './Menu';
 export { default as Notification } from './Notification';
 export { default as SafetyHelp } from './SafetyHelp';
@@ -60,6 +61,7 @@ export { default as AlertStar } from './AlertStar';
 export { default as NaverLogo } from './NaverLogo';
 export { default as SpeechBallon } from './SpeechBallon';
 export { default as ListIcon } from './List';
+export { default as EmptyImage } from './EmptyImage';
 export { default as LocationShop } from './LocationShop';
 export { default as RadioSelect } from './RadioSelect';
 export { default as RadioUnselect } from './RadioUnselect';
@@ -73,6 +75,7 @@ export { default as Time } from './Time';
 export { default as Scissors } from './Scissors';
 export { default as Store } from './Store';
 export { default as Trash } from './Trash';
+export { default as CheckCircle } from './CheckCircle';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -89,11 +92,14 @@ import Call from './Call';
 import CallCenter from './CallCenter';
 import Chat from './Chat';
 import Chatting from './Chatting';
+import CheckCircle from './CheckCircle';
 import Close from './Close';
 import CloseCircle from './CloseCircle';
 import CurLocation from './CurLocation';
 import Dot from './Dot';
 import DownArrow from './DownArrow';
+import EmptyImage from './EmptyImage';
+import EmptyStar from './EmptyStar';
 import FilledHeart from './FilledHeart';
 import FilledLocation from './FilledLocation';
 import FilledNotification from './FilledNotification';
@@ -159,6 +165,8 @@ export const icons = {
   DownArrow,
   Help,
   Information,
+  EmptyImage,
+  EmptyStar,
   SafetyHelp,
   SecurityWarning,
   Shield,
@@ -198,6 +206,7 @@ export const icons = {
   Time,
   Dot,
   Tape,
+  CheckCircle,
 };
 
 export default icons;

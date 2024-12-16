@@ -1,8 +1,13 @@
 import { duriInstance } from '../axiosConfig';
-import { RequestProps } from '../types';
+import { BaseResponse, RequestProps } from '../types';
 
-export const postRequestQuotation = async (request: RequestProps) => {
-  // ): Promise<RequestResponse> => {
+interface RequestResponse extends BaseResponse {
+  response: number;
+}
+
+export const postRequestQuotation = async (
+  request: RequestProps,
+): Promise<RequestResponse> => {
   const response = await duriInstance.post(`quotation/request`, request);
   return response.data;
 };

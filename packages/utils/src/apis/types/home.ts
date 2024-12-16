@@ -73,7 +73,7 @@ export interface UpcomingReservationResponse extends BaseResponse {
     quotationId: number;
     reserveDday: number;
     reservationDate: string;
-    price: number;
+    price: string;
   };
 }
 
@@ -95,14 +95,14 @@ export interface RegularShopResponse extends BaseResponse {
 export interface RecommendShopResponse extends BaseResponse {
   response: {
     petId: number;
-    feature: string[];
-    homeShopList: {
-      shopId: number;
-      imageURL: string;
-      shopName: string;
-      address: string;
-      phone: string;
-      shopTags: string[];
-    }[];
-  };
+    recommendFeature: string;
+    shopId: number;
+    imageURL: string;
+    shopName: string;
+    address: string;
+    phone: string;
+    shopTag1: string;
+    shopTag2: string;
+    score: number;
+  }[];
 }

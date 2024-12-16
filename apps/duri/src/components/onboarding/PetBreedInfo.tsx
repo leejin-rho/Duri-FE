@@ -1,7 +1,7 @@
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 
-import { breeds } from '@duri/assets/data';
+import { BREEDS } from '@duri/constants';
 import { Dropdown, Flex, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
@@ -30,7 +30,7 @@ const PetBreedInfo = ({ control }: PetBreedInfoProps) => {
         render={({ field }) => (
           <Flex margin="26px 0" justify="flex-start">
             <Dropdown
-              options={breeds}
+              options={BREEDS}
               defaultValue="품종 선택"
               width={114}
               onSelect={field.onChange}

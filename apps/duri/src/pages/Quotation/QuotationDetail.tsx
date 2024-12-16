@@ -1,19 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { DetailResponseQuotation } from '@duri/components/my/history/DetailResponseQuotation';
 import { IncomingQuotation } from '@duri/components/quotation/IncomingQuotation';
 import { RequestInfo } from '@duri/components/quotation/RequestInfo';
 import { SalonCard } from '@duri/components/quotation/SalonCard';
 import {
-  Button,
   Card,
-  defaultResponseData,
   DuriNavbar,
   Flex,
   Header,
   MobileLayout,
   Modal,
-  ResponseQuotation,
   Text,
   theme,
 } from '@duri-fe/ui';
@@ -22,12 +20,19 @@ import { useModal } from '@duri-fe/utils';
 const QuotationDetailPage = () => {
   const { quotationId } = useParams();
   const { isOpenModal, toggleModal } = useModal();
-  const [selectedQuotationId, setSelectedQuotationId] = useState<number>();
+  const [selectedQuotationId, setSelectedQuotationId] = useState<number>(-1);
   //   const [responseInfo, setResponseInfo] =
   //     useState<ResponseQuotationType | null>(null);
   const navigate = useNavigate();
-  const handleNavigate = () =>
+  const handleBackButtonClick = () => {
+    navigate(-1);
+  };
+
+  const handleNavigate = () => {
+    toggleModal();
+
     navigate('/payment', { state: { selectedQuotationId } });
+  };
   const onSelect = (value: number) => {
     setSelectedQuotationId(value);
     toggleModal();
@@ -40,13 +45,13 @@ const QuotationDetailPage = () => {
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
-      <Header title="요청서 및 견적서" />
+      <Header title="요청서 및 견적서" backIcon onClickBack={handleBackButtonClick}/>
       <Flex direction="column" padding="0 20px" margin="0 0 100px 0">
         <Card borderRadius={16} padding="26px 28px">
           <RequestInfo
             requestId={Number(quotationId)}
-            createdAt="2024-12-22 23:00"
-            expiredAt="2024-12-22 23:00"
+            createdAt={new Date()}
+            expiredAt={new Date()}
           />
         </Card>
 
@@ -122,29 +127,11 @@ const QuotationDetailPage = () => {
       </Flex>
       <Modal isOpen={isOpenModal} toggleModal={toggleModal} title="견적서">
         {
-          <ResponseQuotation responseList={defaultResponseData}>
-            <Button
-              bg={theme.palette.Gray20}
-              borderRadius="8px"
-              typo="Body3"
-              width="123px"
-              height="47px"
-              onClick={toggleModal}
-            >
-              닫기
-            </Button>
-            <Button
-              bg={theme.palette.Black}
-              fontColor={theme.palette.White}
-              borderRadius="8px"
-              typo="Body3"
-              width="173px"
-              height="47px"
-              onClick={handleNavigate}
-            >
-              수락 및 결제진행
-            </Button>
-          </ResponseQuotation>
+          <DetailResponseQuotation
+            quotationId={selectedQuotationId}
+            handleCloseButton={toggleModal}
+            handleNavigate={handleNavigate}
+          />
         }
       </Modal>
       <DuriNavbar />

@@ -5,14 +5,44 @@ import { Button, Flex, Modal, PetInfo, Text, theme, Trash } from '@duri-fe/ui';
 import { useModal } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
-const character = ['character1'];
-const diseases = ['disease1', 'disease2'];
+interface PetListInfo {
+  id: number;
+  name: string;
+  image: string | null;
+  breed: string;
+  age: number;
+  weight: number;
+  neutering: boolean;
+  gender: string;
+  character: string[];
+  diseases: string[];
+}
 
-export const ModifyPetInfoCard = ({ petId }: { petId: number }) => {
+export const SwipeCard = ({
+  age,
+  breed,
+  character,
+  diseases,
+  gender,
+  id,
+  image,
+  name,
+  neutering,
+  weight,
+}: PetListInfo) => {
   const navigate = useNavigate();
   const { isOpenModal, toggleModal } = useModal();
   const [isSwiped, setIsSwiped] = useState<boolean>(false);
   const [swipePosition, setSwipePosition] = useState<number>(0); // 화면에 반영될 스와이프 위치
+  const handleDelete = () => {
+    toggleModal();
+    //삭제 api 호출
+  };
+  const handleNotDelete = () => {
+    toggleModal();
+    setSwipePosition(0);
+    setIsSwiped(false);
+  };
   const startX = useRef<number>(0); // 터치 시작 시점 저장
   const isDragging = useRef<boolean>(false); // 마우스 드래그 여부
 
@@ -76,21 +106,11 @@ export const ModifyPetInfoCard = ({ petId }: { petId: number }) => {
   };
 
   const handleClickModifyButton = () =>
-    navigate('/my/pet/modify', { state: petId });
-
-  const handleDelete = () => {
-    toggleModal();
-    setSwipePosition(0);
-  };
-  const handleNotDelete = () => {
-    toggleModal();
-    setSwipePosition(0);
-    setIsSwiped(false);
-  };
+    navigate('/my/pet/modify', { state: id });
 
   return (
     <>
-      <SwipeContainer direction="column" isSwipe={isSwiped}>
+      <SwipeContainer direction="column" isSwipe={isSwiped} gap={10}>
         <SwipeWrapper>
           <SwipeFlex
             backgroundColor={theme.palette.White}
@@ -106,41 +126,42 @@ export const ModifyPetInfoCard = ({ petId }: { petId: number }) => {
             isSwiped={isSwiped}
           >
             <PetInfo
-              modify={true}
-              age={4}
-              breed="시츄"
-              gender="F"
-              neutering={true}
-              name="뭉뭉이"
-              weight={4.1}
+              modify
+              age={age}
+              breed={breed}
+              gender={gender}
+              neutering={neutering}
+              name={name}
+              weight={weight}
               character={character}
               diseases={diseases}
-              image="https://s3-alpha-sig.figma.com/img/2b3d/3445/169b817c088e24ca9f6999b9f7c18e5a?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=UNX-HCHQvf6OGFxdmOjpEf~gbzgcXfr7L~ZILgiSxtXRAt2cDJemS7sJOHFn177dH4-rXFgC0mu0iSo4mT02cqw0ybPZ7D-2GK5ch4XLi20GbfJjcy3yPJSXbtOonwpHQFjJDgbjRDu0VK~iz3DJSvLzAjmn5GvFaikpRDWTtJX51eL-YTGIBt7Q1vYxt66nU2dyREh1wb7u5chrtXImto2iEdFviMwJgZKP~f3K1457j~KdS~gM5gtOtm7ozWPTjdraKskNXGJhWWe9wfE74HFPFG~Tj~lY89I2fPd5TNnQI0CCghKbFOLIUyGtrJ0KceIW-gsIic-A3GWQ9IFCyg__"
+              image={image === null ? undefined : image}
               onClick={handleClickModifyButton}
+              themeVariant="spacious"
             />
           </SwipeFlex>
           <DeleteButton
             backgroundColor={theme.palette.Alert}
             swipePosition={swipePosition}
-            borderRadius={8}
             onClick={handleDelete}
           >
             <Trash width={23} height={23} />
           </DeleteButton>
         </SwipeWrapper>
       </SwipeContainer>
+
       <Modal isOpen={isOpenModal} toggleModal={toggleModal}>
         <Flex direction="column" gap={5}>
           <Flex direction="column">
             <Text typo="Body2">반려견 정보 삭제 시</Text>
-            <Text typo="Body2">새롭게 서비스를 시작해야 해요.</Text>
+            <Text typo="Body2">복구가 불가능해요.</Text>
           </Flex>
           <Flex direction="column">
             <Text typo="Caption3" colorCode={theme.palette.Gray400}>
-              온보딩으로 돌아가게 됩니다.
+              정보 삭제 시 복구가 불가능합니다.
             </Text>
             <Text typo="Caption3" colorCode={theme.palette.Gray400}>
-              삭제하시겠습니까?
+              신중히 선택해주세요.
             </Text>
           </Flex>
           <Flex gap={6} margin="28px 0 0 0">
@@ -152,7 +173,7 @@ export const ModifyPetInfoCard = ({ petId }: { petId: number }) => {
               borderRadius="8px"
               onClick={handleNotDelete}
             >
-              아니요
+              취소
             </Button>
             <Button
               typo="Body3"
@@ -162,7 +183,7 @@ export const ModifyPetInfoCard = ({ petId }: { petId: number }) => {
               height="47px"
               borderRadius="8px"
             >
-              네
+              삭제할게요
             </Button>
           </Flex>
         </Flex>
@@ -190,6 +211,7 @@ const DeleteButton = styled(Flex)<{ swipePosition: number }>`
   position: absolute;
   top: 0;
   right: 0;
+  border-radius: 0 16px 16px 0;
   width: ${({ swipePosition }) => `${swipePosition}px`};
   transition: width 0.4s ease;
 `;

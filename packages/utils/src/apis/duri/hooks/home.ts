@@ -8,39 +8,38 @@ import {
   getUpcomingReservation,
 } from '../home';
 
+
 export const useGetPetInfo = () => {
-  const { data } = useQuery({
+ return useQuery({
     queryKey: ['getPetInfo'],
     queryFn: () => getPetInfo(),
     staleTime: 1000 * 60 * 10,
   });
-  return data;
 };
 
 export const useGetRegularShopList = () => {
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['getRegularShopList'],
     queryFn: () => getRegularShopInfo(),
     staleTime: 1000 * 60 * 30,
   });
-
-  return data;
+  return { data, isError };
 };
 
 export const useGetRecommendedShopList = () => {
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['getRecommendedShopList'],
     queryFn: () => getRecommendedShopInfo(),
     staleTime: 1000 * 60 * 30,
   });
-  return data;
+  return { data, isError };
 };
 
 export const useGetUpcomingReservation = () => {
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['getUpcomingReservation'],
     queryFn: () => getUpcomingReservation(),
     staleTime: 1000 * 60 * 10,
   });
-  return data;
+  return { data, isError };
 };

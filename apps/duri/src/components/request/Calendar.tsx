@@ -5,9 +5,10 @@ import { Value } from 'react-calendar/dist/cjs/shared/types';
 
 import { Flex, theme } from '@duri-fe/ui';
 import { css } from '@emotion/react';
+import { format } from 'date-fns';
 
 interface CalendarProps {
-  onSelect: (key: string, value: Date) => void;
+  onSelect: (key: string, value: string) => void;
 }
 const MonthlyCalendar = ({ onSelect }: CalendarProps) => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -22,7 +23,8 @@ const MonthlyCalendar = ({ onSelect }: CalendarProps) => {
   const handleClickCalendar = (value: Value) => {
     if (value instanceof Date) {
       setSelectedDate(value);
-      onSelect('day', value);
+      const stringDate = format(value, 'yyyy-MM-dd')
+      onSelect('day', stringDate);
     }
     console.log(value);
   };

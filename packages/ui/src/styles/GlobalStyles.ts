@@ -20,6 +20,10 @@ export const globalStyle = css`
     scrollbar-width: none;
   }
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   button {
     background: inherit;
     border: none;

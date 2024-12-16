@@ -4,14 +4,18 @@ export interface RegularShopType {
   shopName: string;
   rating: number;
   reviewCnt: number;
-  visitCnt: number;
+  visitCnt?: number;
 }
 
-export interface RecommendeShopType {
+export interface RecommendedShopType {
+  petId: number;
+  recommendFeature: string;
   shopId: number;
   imageURL: string;
   shopName: string;
   address: string;
   phone: string;
-  shopTags: string[];
+  shopTag1: string;
+  shopTag2: string;
+  score: number;
 }

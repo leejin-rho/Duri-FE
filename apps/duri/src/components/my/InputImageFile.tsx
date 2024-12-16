@@ -1,15 +1,21 @@
-import { useState } from 'react';
-
 import { Pencil, ProfileImage, theme, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-export const InputImageFile = ({ imageURL }: { imageURL?: string }) => {
-  const [imageFile, setImageFile] = useState<string | undefined>(imageURL);
+export const InputImageFile = ({
+  imageURL,
+  onChange,
+  setImageURL,
+}: {
+  imageURL: string | undefined;
+  setImageURL: (url: string) => void;
+  onChange: (file: File) => void;
+}) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const fileUrl = URL.createObjectURL(file);
-      setImageFile(fileUrl);
+      const fileURL = URL.createObjectURL(file);
+      setImageURL(fileURL);
+      onChange(file);
     }
   };
 
@@ -20,7 +26,7 @@ export const InputImageFile = ({ imageURL }: { imageURL?: string }) => {
           width={100}
           height={100}
           borderRadius={40}
-          src={imageFile}
+          src={imageURL}
         />
         <PencilWrapper
           backgroundColor={theme.palette.Black}
