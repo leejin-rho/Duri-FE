@@ -5,8 +5,15 @@ import {
   getHomeQuotationRequest,
   getHomeShopInfo,
   HomeShopInfoResponse,
+  putGroomingComplete,
+  PutGroomingCompleteResponse,
+  putGroomingNoshow,
 } from '@duri-fe/utils';
-import { useQuery } from '@tanstack/react-query';
+import {
+  useMutation,
+  UseMutationResult,
+  useQuery,
+} from '@tanstack/react-query';
 
 import { UseQueryProps } from '../../types/tanstack';
 
@@ -30,6 +37,7 @@ export const useGetDailySchedule = () => {
   });
 };
 
+/** 요청서 확인 */
 export const useGetHomeQuotationRequest = () => {
   return useQuery({
     queryKey: ['getHomeQuotationRequest'],
@@ -44,6 +52,7 @@ type UseGetHomeShopInfoProps = UseQueryProps<
   BaseError
 >;
 
+/** 홈 상점 정보 */
 export const useGetHomeShopInfo = ({
   queryKey,
   options,
@@ -52,5 +61,25 @@ export const useGetHomeShopInfo = ({
     queryKey: ['getHomeShopInfo', ...(queryKey || [])],
     queryFn: () => getHomeShopInfo(),
     ...options,
+  });
+};
+
+export const usePutGroomingComplete = (): UseMutationResult<
+  PutGroomingCompleteResponse['response'],
+  BaseError,
+  number
+> => {
+  return useMutation({
+    mutationFn: (quotationId: number) => putGroomingComplete(quotationId),
+  });
+};
+
+export const usePutGroomingNoshow = (): UseMutationResult<
+  PutGroomingCompleteResponse['response'],
+  BaseError,
+  number
+> => {
+  return useMutation({
+    mutationFn: (quotationId: number) => putGroomingNoshow(quotationId),
   });
 };

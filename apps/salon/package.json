@@ -32,7 +32,8 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.0",
     "react-router-dom": "^7.0.1",
-    "react-spring-bottom-sheet": "^3.4.1"
+    "react-spring-bottom-sheet": "^3.4.1",
+    "react-toastify": "^10.0.6"
   },
   "devDependencies": {
     "@types/navermaps": "^3.7.8",

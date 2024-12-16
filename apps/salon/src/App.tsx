@@ -14,7 +14,7 @@ import QuotationPage from '@pages/Quotation';
 import ReplyPage from '@pages/Quotation/ReplyPage';
 import ReservationPage from '@pages/Quotation/ReservationPage';
 
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from '@components/PrivateRoute';
 
 function App() {
   return (

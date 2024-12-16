@@ -15,6 +15,7 @@ import {
   SkeletonCard,
   Text,
   theme,
+  Toast,
   WidthFitFlex,
 } from '@duri-fe/ui';
 import {
@@ -23,6 +24,8 @@ import {
   useGetDailySchedule,
   useGetHomeQuotationRequest,
   useGetHomeShopInfo,
+  usePutGroomingComplete,
+  usePutGroomingNoshow,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 import { RadioButton } from '@salon/components/home/RadioButton';
@@ -44,7 +47,7 @@ const Home = () => {
     maxHeight: 300,
   });
 
-  const [completeToggle, setCompleteToggle] = useState<number>();
+  const [completeToggle, setCompleteToggle] = useState<number | null>(null);
 
   const { data: shopInfoData } = useGetHomeShopInfo({});
   const { data: closetGroomingData, isPending: closetGroomingPending } =
@@ -53,12 +56,20 @@ const Home = () => {
     useGetDailySchedule();
   const { data: quotationRequestData, isPending: quotationRequestPending } =
     useGetHomeQuotationRequest();
+  const { mutateAsync: putGroomingComplete } = usePutGroomingComplete();
+  const { mutateAsync: putGroomingNoshow } = usePutGroomingNoshow();
 
   const handleCompleteGrooming = () => {
-    if (completeToggle === 1) naviagte('/feedback');
-    // TODO : quotationId 함께 전달
-    else return;
-    // TODO : 노쇼 시에는 어떻게 하지??
+    if (completeToggle === 1 && closetGroomingData) {
+      putGroomingComplete(closetGroomingData.quotationId);
+      naviagte('/feedback', {
+        state: { quotationId: closetGroomingData.quotationId },
+      });
+    } else if (completeToggle === 0 && closetGroomingData) {
+      putGroomingNoshow(closetGroomingData.quotationId);
+    } else {
+      return;
+    }
   };
 
   return (
@@ -295,23 +306,25 @@ const Home = () => {
             </Button>
             <CompleteButton
               height="47px"
-              bg={completeToggle ? theme.palette.Black : theme.palette.Gray20}
-              fontColor={
-                completeToggle ? theme.palette.White : theme.palette.Black
+              bg={
+                completeToggle === null
+                  ? theme.palette.Gray100
+                  : theme.palette.Black
               }
-              disabled={!completeToggle}
+              fontColor={theme.palette.White}
               borderRadius="8px"
               onClick={
-                completeToggle
-                  ? handleCompleteGrooming
-                  : bottomSheetProps.onDismiss
+                completeToggle === null
+                  ? bottomSheetProps.onDismiss
+                  : handleCompleteGrooming
               }
             >
-              일지 쓰기
+              {completeToggle ? '일지 쓰기' : '닫기'}
             </CompleteButton>
           </HeightFitFlex>
         </Flex>
       </BottomSheet>
+      <Toast />
     </MobileLayout>
   );
 };

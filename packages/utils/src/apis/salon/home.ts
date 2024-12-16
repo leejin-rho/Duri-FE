@@ -30,9 +30,32 @@ export const getHomeQuotationRequest = async (): Promise<
   return response.data.response;
 };
 
+/** 홈 상점 정보 */
 export const getHomeShopInfo = async (): Promise<
   HomeShopInfoResponse['response']
 > => {
   const response = await salonInstance.get('/shop');
+  return response.data.response;
+};
+
+/** 미용 완료 */
+export const putGroomingComplete = async (quotationId: number) => {
+  const response = await salonInstance.put(
+    `/shop/home/complete/${quotationId}`,
+    {
+      complete: true,
+    },
+  );
+  return response.data.response;
+};
+
+/** 노쇼 */
+export const putGroomingNoshow = async (quotationId: number) => {
+  const response = await salonInstance.put(
+    `/shop/home/no-show/${quotationId}`,
+    {
+      noshow: true,
+    },
+  );
   return response.data.response;
 };
