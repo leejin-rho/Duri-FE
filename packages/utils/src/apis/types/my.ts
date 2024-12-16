@@ -1,3 +1,15 @@
+interface PetInfoType {
+  petId: number;
+  imageURL?: string;
+  name: string;
+  breed: string;
+  age: number;
+  weight: number;
+  gender: string;
+  neutering?: boolean;
+  lastGrooming?: string;
+}
+
 export interface MyReviewResponseType {
   response: {
     reviewCnt: number;
@@ -54,6 +66,7 @@ export interface UserInfo {
 export interface RequestQuotationType {
   response: {
     quotationReqId: number;
+    requestId: number;
     createdAt: Date;
     expiredAt: Date;
     shops: {
@@ -61,5 +74,40 @@ export interface RequestQuotationType {
       shopName: string;
     }[];
     isExpired: boolean;
+  }[];
+}
+
+export interface ReviewDetailResponse {
+  response: {
+    userId: number;
+    userImageURL: string;
+    userName: string;
+    reviewId: number;
+    rating: number;
+    createdAt: string;
+    shopId: number;
+    shopName: string;
+    comment: string;
+    imgUrl: string;
+    petInfo: PetInfoType;
+  };
+}
+
+export interface HistoryType {
+  quotationId: number;
+  complete: boolean;
+  groomerImageURL: string;
+  groomerName: string;
+  shopId: number;
+  shopName: string;
+  petName: string;
+  day: string;
+  startDate: string;
+}
+
+export interface VisitHistoryResponse {
+  response: {
+    month: string;
+    historyList: HistoryType[];
   }[];
 }

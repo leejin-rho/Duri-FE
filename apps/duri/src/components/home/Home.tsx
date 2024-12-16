@@ -18,14 +18,15 @@ const CarouselHome = ({
   lastReservation,
 }: {
   upcomingReservation?: UpcomingReservationType;
-  lastReservation?: string
+  lastReservation: string;
 }) => {
   const [swiperIndex, setSwiperIndex] = useState<number>(0); // 슬라이드 인덱스 상태
   const currentDate = new Date();
-  
-  let daysDifference;
-  if (lastReservation)
+
+  let daysDifference = null;
+  if(lastReservation !== '')
     daysDifference = differenceInDays(currentDate, new Date(lastReservation)); // 일수 차이 계산
+
   const slides = [
     upcomingReservation ? (
       <UpcomingReservation
@@ -51,7 +52,7 @@ const CarouselHome = ({
         </Text>
       </Wrapper>
     ), //다가오는 예약이 없는 경우
-    lastReservation ? (
+    daysDifference ? (
       <LastReservation daysDifference={daysDifference} />
     ) : (
       <Wrapper
@@ -65,7 +66,6 @@ const CarouselHome = ({
       </Wrapper>
     ),
   ];
-
 
   return (
     <HeightFitFlex direction="column" align="flex-start">

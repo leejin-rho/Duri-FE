@@ -32,6 +32,8 @@ import ShopDetail from '@pages/Shop/ShopDetail';
 
 import 'react-spring-bottom-sheet/dist/style.css';
 
+import ReviewModifyPage from './pages/Review/ReviewModify';
+
 function App() {
   return (
     <BrowserRouter>
@@ -81,6 +83,7 @@ function App() {
         <Route path="/my/review" element={<MyReviewPage />} />
         <Route path="/my/review/:reviewId" element={<MyReviewDetailPage />} />
         <Route path="/my/review/write" element={<ReviewWritePage />} />
+        <Route path="/my/review/modify" element={<ReviewModifyPage />} />
       </Routes>
     </BrowserRouter>
   );

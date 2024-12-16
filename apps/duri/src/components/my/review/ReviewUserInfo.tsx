@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Flex,
@@ -26,10 +27,21 @@ export const ReviewUserInfo = ({
   userImageURL,
   userName,
 }: ReviewUserInfoProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const handleClickMenu = () => setIsOpen(!isOpen);
+  const navigate = useNavigate();
 
-  console.log(reviewId);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleClickMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleClickModifyButton = () => {
+    navigate('/my/review/modify', { state: reviewId });
+  };
+
+  const handleClickDeleteButton = () => {
+    //삭제 모달 띄우기
+  }
 
   return (
     <Wrapper justify="space-between">
@@ -41,13 +53,14 @@ export const ReviewUserInfo = ({
           borderRadius={34}
           src={userImageURL}
         />
-        <WidthFitFlex direction="column" gap={2}>
+        <WidthFitFlex direction="column" gap={2} align="start">
           <Text typo="Body3">{userName}</Text>
           <Flex>
             <RatingStars size={12} score={rating} />
           </Flex>
         </WidthFitFlex>
       </WidthFitFlex>
+
       {/* 오른쪽 버튼, 작성일자 */}
       <WidthFitFlex gap={8}>
         <SingleLineText typo="Caption5" colorCode={theme.palette.Gray300}>
@@ -61,12 +74,16 @@ export const ReviewUserInfo = ({
         <MenuCard
           direction="column"
           borderRadius={8}
-          height="67px"
-          padding="15px 32.5px"
+          width={114}
+          height={67}
           gap={8}
         >
-          <Text typo="Label3">수정하기</Text>
-          <Text typo="Label3">삭제하기</Text>
+          <MenuItem onClick={handleClickModifyButton}>
+            <Text typo="Label3">수정하기</Text>
+          </MenuItem>
+          <MenuItem onClick={handleClickDeleteButton}>
+            <Text typo="Label3">삭제하기</Text>
+          </MenuItem>
         </MenuCard>
       )}
     </Wrapper>
@@ -76,7 +93,7 @@ export const ReviewUserInfo = ({
 const Wrapper = styled(Flex)`
   position: relative;
 `;
-const MenuCard = styled(WidthFitFlex)`
+const MenuCard = styled(Flex)`
   position: absolute;
   top: 37.4px;
   right: 9px;
@@ -85,4 +102,16 @@ const MenuCard = styled(WidthFitFlex)`
 `;
 const SingleLineText = styled(Text)`
   word-break: no-wrap;
+`;
+
+const MenuItem = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 10px; // 좌우 여백을 추가하여 텍스트가 너무 붙지 않도록 조정
+  &:hover {
+    background-color: ${theme.palette.Gray_White};
+  }
 `;

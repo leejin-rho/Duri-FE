@@ -35,6 +35,7 @@ const MonthlyCalendar = ({ onSelect }: CalendarProps) => {
         onChange={handleClickCalendar}
         formatDay={formatCalendarDay}
         value={selectedDate}
+        locale="ko-KR"
       />
     </Flex>
   );

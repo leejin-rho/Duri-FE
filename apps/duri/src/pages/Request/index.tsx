@@ -74,7 +74,6 @@ const RequestPage = () => {
       return;
     }
 
-
     setRequestInfo((prev) => ({
       ...prev,
       [key]: value,
@@ -83,12 +82,13 @@ const RequestPage = () => {
 
   const handleSaveButtonClick = () => {
     console.log(requestInfo);
+
     request(requestInfo);
   };
 
   const handleBackButtonClick = () => {
     navigate(-1);
-  }
+  };
 
   // const handle
 
@@ -119,7 +119,12 @@ const RequestPage = () => {
 
   return (
     <MobileLayout>
-      <Header backIcon title='입찰 요청서 작성' titleAlign='start' onClickBack={handleBackButtonClick}/>
+      <Header
+        backIcon
+        title="입찰 요청서 작성"
+        titleAlign="start"
+        onClickBack={handleBackButtonClick}
+      />
       <HeightFitFlex direction="column" margin="0 0 91.6px">
         <HeightFitFlex
           direction="column"

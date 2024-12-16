@@ -15,7 +15,7 @@ export const DetailGrooming = ({
 }: GroomingMenuProps) => {
   return (
     <>
-      {groomingMenu.length > 0 && (
+      {groomingMenu?.length > 0 && (
         <Flex
         justify="space-between"
         align="flex-start"
@@ -31,7 +31,7 @@ export const DetailGrooming = ({
           </WidthFitFlex>
         </Flex>
       )}
-      {additionalGrooming.length> 0 && (
+      {additionalGrooming?.length> 0 && (
         <Flex
         justify="space-between"
         align="flex-start"
@@ -47,7 +47,7 @@ export const DetailGrooming = ({
           </WidthFitFlex>
         </Flex>
       )}
-      {specialCare.length > 0 && (
+      {specialCare?.length > 0 && (
         <Flex
         justify="space-between"
         align="flex-start"
@@ -63,7 +63,7 @@ export const DetailGrooming = ({
           </WidthFitFlex>
         </Flex>
       )}
-      {designCut.length > 0 && (
+      {designCut?.length > 0 && (
         <Flex
         justify="space-between"
         align="flex-start"

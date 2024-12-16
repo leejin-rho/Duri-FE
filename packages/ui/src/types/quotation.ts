@@ -32,6 +32,7 @@ export interface ResponseQuotationType {
       totalPrice: number;
     };
   };
+  status: string;
 }
 
 export interface QuotationDetailsType {

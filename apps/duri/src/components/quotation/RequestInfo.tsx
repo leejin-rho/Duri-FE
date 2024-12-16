@@ -2,12 +2,13 @@ import {
   Flex,
   Modal,
   NextArrow,
-  RequestQuotation,
   Text,
   theme,
 } from '@duri-fe/ui';
 import { useModal } from '@duri-fe/utils';
 import { format } from 'date-fns';
+
+import { RequestDetailQuotation } from './RequestDetailQuotation';
 
 interface RequestInfoProps {
   requestId: number;
@@ -61,7 +62,7 @@ export const RequestInfo = ({
         </Flex>
       </Flex>
       <Modal isOpen={isOpenModal} toggleModal={toggleModal} title="요청서">
-        <RequestQuotation />
+        <RequestDetailQuotation requestId={requestId} />
       </Modal>
     </Flex>
   );

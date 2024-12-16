@@ -1,16 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  PetInfoType,
-  RecommendedShopType,
-  RegularShopType,
-} from '@duri/assets/types';
-import { UpcomingReservationType } from '@duri/assets/types/reservation';
 import CarouselHome from '@duri/components/home/Home';
 import RecommendedShop from '@duri/components/home/RecommendedShop';
 import SpeedQuotation from '@duri/components/home/SpeedQuotation';
-import { DEFAULT_PET_INFO } from '@duri/constants/pet';
 import {
   AiStyleBanner,
   Button,
@@ -23,6 +16,7 @@ import {
   theme,
 } from '@duri-fe/ui';
 import {
+  useGeolocation,
   useGetPetInfo,
   useGetRecommendedShopList,
   useGetRegularShopList,
@@ -31,33 +25,44 @@ import {
 import styled from '@emotion/styled';
 
 const Home = () => {
+  const { coordinates } = useGeolocation();
+
+  const [lat, setLat] = useState<number | null>(null);
+  const [lon, setLon] = useState<number | null>(null);
+
   const { data: petData, isError: getPetInfoError } = useGetPetInfo();
-  const [petInfo, setPetInfo] = useState<PetInfoType>(DEFAULT_PET_INFO);
-  const [regularShopList, setRegularShopList] = useState<RegularShopType[]>([]);
-  // 사용자 lat, lon 정보가 필요함!!!!
-  const [recommendedShopList, setRecommendedShopList] = useState<
-    RecommendedShopType[]
-  >([]);
-  const [upcomingReservation, setUpcomingReservation] =
-    useState<UpcomingReservationType>();
-  const { data: recommendedListData } = useGetRecommendedShopList();
   const { data: regularListData } = useGetRegularShopList();
   const { data: reservationData } = useGetUpcomingReservation();
+  const {
+    data: recommendedListData,
+    isLoading: recommendedListLoading,
+    isPending: recommendedListPending,
+  } = useGetRecommendedShopList(lat, lon);
 
   const navigate = useNavigate();
-  const handleNavigate = () => navigate('/shop');
+  const handleNavigate = () => {
+    navigate('/shop');
+  };
 
   useEffect(() => {
-    // if (recommendedListData) console.log(recommendedListData)
-    if (regularListData) setRegularShopList(regularListData.homeShopList);
-    if (recommendedListData) setRecommendedShopList(recommendedListData);
-    if (reservationData) setUpcomingReservation(reservationData);
-  }, [reservationData, regularListData, recommendedListData]);
-
-  useEffect(() => {
-    if (petData) setPetInfo(petData);
     if (getPetInfoError) navigate('/login');
   }, [petData, getPetInfoError]);
+
+  useEffect(() => {
+    if (reservationData) console.log(reservationData);
+    if (petData) console.log(petData);
+  }, [reservationData, petData]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    if (coordinates) {
+      setLat(coordinates.lat);
+      setLon(coordinates.lng);
+    }
+  }, [coordinates]);
 
   return (
     <MobileLayout>
@@ -75,12 +80,15 @@ const Home = () => {
           />
           <CarouselHome
             upcomingReservation={
-              upcomingReservation?.reserveDday === -1 ||
-              upcomingReservation?.lastSinceDay === -1
+              reservationData?.reserveDday === -1 ||
+              reservationData?.lastSinceDay === -1
                 ? undefined
-                : upcomingReservation
+                : reservationData
             }
-            lastReservation={petData?.lastGrooming}
+            lastReservation={
+              // petData?.lastGrooming === undefined ? '' : petData.lastGrooming
+              '2024-12-11 06:00'
+            }
           />
         </HeightFitFlex>
         {/* 단골 빠른입찰 */}
@@ -92,12 +100,12 @@ const Home = () => {
                 colorCode={theme.palette.Gray400}
                 margin="0 0 6px 0"
               >
-                {petInfo.name}가 3회 이상 방문한 샵들이에요.
+                {petData.name}가 3회 이상 방문한 샵들이에요.
               </Text>
             )}
             <Text typo="Title1">단골 샵 빠른 입찰</Text>
-            {regularShopList.length > 0 ? (
-              <SpeedQuotation shopList={regularShopList} />
+            {regularListData && regularListData.homeShopList.length > 0 ? (
+              <SpeedQuotation shopList={regularListData.homeShopList} />
             ) : (
               <Flex direction="column" padding="62px 99px" gap={12}>
                 <Flex direction="column">
@@ -134,8 +142,16 @@ const Home = () => {
         </Flex>
         <Flex direction="column">
           {/* 추천 샵 */}
-          {recommendedShopList && (
-            <RecommendedShop shopList={recommendedShopList} />
+          {recommendedListLoading ||
+            (recommendedListPending && (
+              <Flex margin="31px 0 6px 0">
+                <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+                  Loading...
+                </Text>
+              </Flex>
+            ))}
+          {recommendedListData && (
+            <RecommendedShop shopList={recommendedListData} />
           )}
         </Flex>
         <DuriNavbar />
