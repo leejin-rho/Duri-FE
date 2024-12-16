@@ -1,7 +1,7 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import {
-  BaseErrorType as BaseError,
+  BaseError,
   CenterInfoType,
   SearchParamType,
   ShopDetailParamType,

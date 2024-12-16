@@ -1,9 +1,9 @@
 export interface BaseResponse {
   success: boolean;
-  error: BaseErrorType | null;
+  error: BaseError | null;
 }
 
-export interface BaseErrorType {
+export interface BaseError {
   message: string;
   status: number;
 }

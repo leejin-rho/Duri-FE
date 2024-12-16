@@ -2,6 +2,7 @@ import {
   ClosetGroomingResponse,
   DailyScheduleResponse,
   HomeQuotationRequestResponse,
+  HomeShopInfoResponse,
   salonInstance,
 } from '@duri-fe/utils';
 
@@ -26,5 +27,12 @@ export const getHomeQuotationRequest = async (): Promise<
   HomeQuotationRequestResponse['response'][]
 > => {
   const response = await salonInstance.get('/shop/home/request');
+  return response.data.response;
+};
+
+export const getHomeShopInfo = async (): Promise<
+  HomeShopInfoResponse['response']
+> => {
+  const response = await salonInstance.get('/shop');
   return response.data.response;
 };
