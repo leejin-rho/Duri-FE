@@ -1,4 +1,4 @@
-import { Text, theme, TypeOfTypo } from '@duri-fe/ui';
+import { HardText, theme, TypeOfTypo } from '@duri-fe/ui';
 
 import { WidthFitFlex } from '../FlexBox';
 
@@ -30,7 +30,7 @@ export const SalonTag = ({
   height,
   colorCode = theme.palette.Gray500,
   typo = 'Caption5',
-  padding
+  padding,
 }: TagProps) => {
   return (
     <WidthFitFlex
@@ -40,9 +40,9 @@ export const SalonTag = ({
       height={height ?? 20}
       width={width ?? 20}
     >
-      <Text typo={typo} colorCode={colorCode}>
+      <HardText typo={typo} colorCode={colorCode}>
         {content}
-      </Text>
+      </HardText>
     </WidthFitFlex>
   );
 };

@@ -18,10 +18,6 @@ export const GroomerPortfolio = ({ groomerId }: { groomerId: number }) => {
     groomerId: groomerId,
   });
 
-  if (data) {
-    console.log(data);
-  }
-
   return (
     <>
       <HeaderBox>
