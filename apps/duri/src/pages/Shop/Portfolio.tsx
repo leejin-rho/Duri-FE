@@ -13,44 +13,22 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
+import { UseGetGroomerInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 const Portfolio = () => {
   const [isMarked, setIsMarked] = useState<boolean>(false);
 
-  // image dummy
   const { designerId } = useParams<{ designerId: string }>();
+  const groomerId = designerId ? Number(designerId) : 0;
 
-  const images = [
-    {
-      id: 1,
-      src: 'https://s3-alpha-sig.figma.com/img/7a9d/1693/e6a098242d4a2c8446d1acc0d8bf51ab?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oWIr3Sr2va~UzNKEF4BG2jr3NWDieuXmdrJOaLxpHdcMJKypZi9sN3TyZQCj60ZIlgmzE8Ntj-6~sQBDL1N719Z5AI7J6~WtCi9mWR6jRRNoIxUALcUvZ1lmTuHeywMpKYDzPRbebB~KbJSCv3JphfMpuGEUeS~E3MuLPwsaexSdVtpfcUQg3uYmS3-qPMxnwym0oUbYBPK0xJD28yK3ZjfiMm~FtHSnXUmXegJ4Bp74sYndmHEF1MQKtVfy7h5N-ugtkTT9LuuLerthz26tNe8h4kYfEE9edM7puOyXCIH5Xgh4lNzt4WGD0ObsbUS8XkYpXrTiobSniqq~vnYUHg__',
-    },
-    {
-      id: 2,
-      src: 'https://s3-alpha-sig.figma.com/img/7a9d/1693/e6a098242d4a2c8446d1acc0d8bf51ab?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oWIr3Sr2va~UzNKEF4BG2jr3NWDieuXmdrJOaLxpHdcMJKypZi9sN3TyZQCj60ZIlgmzE8Ntj-6~sQBDL1N719Z5AI7J6~WtCi9mWR6jRRNoIxUALcUvZ1lmTuHeywMpKYDzPRbebB~KbJSCv3JphfMpuGEUeS~E3MuLPwsaexSdVtpfcUQg3uYmS3-qPMxnwym0oUbYBPK0xJD28yK3ZjfiMm~FtHSnXUmXegJ4Bp74sYndmHEF1MQKtVfy7h5N-ugtkTT9LuuLerthz26tNe8h4kYfEE9edM7puOyXCIH5Xgh4lNzt4WGD0ObsbUS8XkYpXrTiobSniqq~vnYUHg__',
-    },
-    {
-      id: 3,
-      src: 'https://s3-alpha-sig.figma.com/img/7a9d/1693/e6a098242d4a2c8446d1acc0d8bf51ab?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oWIr3Sr2va~UzNKEF4BG2jr3NWDieuXmdrJOaLxpHdcMJKypZi9sN3TyZQCj60ZIlgmzE8Ntj-6~sQBDL1N719Z5AI7J6~WtCi9mWR6jRRNoIxUALcUvZ1lmTuHeywMpKYDzPRbebB~KbJSCv3JphfMpuGEUeS~E3MuLPwsaexSdVtpfcUQg3uYmS3-qPMxnwym0oUbYBPK0xJD28yK3ZjfiMm~FtHSnXUmXegJ4Bp74sYndmHEF1MQKtVfy7h5N-ugtkTT9LuuLerthz26tNe8h4kYfEE9edM7puOyXCIH5Xgh4lNzt4WGD0ObsbUS8XkYpXrTiobSniqq~vnYUHg__',
-    },
-    {
-      id: 4,
-      src: 'https://s3-alpha-sig.figma.com/img/7a9d/1693/e6a098242d4a2c8446d1acc0d8bf51ab?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oWIr3Sr2va~UzNKEF4BG2jr3NWDieuXmdrJOaLxpHdcMJKypZi9sN3TyZQCj60ZIlgmzE8Ntj-6~sQBDL1N719Z5AI7J6~WtCi9mWR6jRRNoIxUALcUvZ1lmTuHeywMpKYDzPRbebB~KbJSCv3JphfMpuGEUeS~E3MuLPwsaexSdVtpfcUQg3uYmS3-qPMxnwym0oUbYBPK0xJD28yK3ZjfiMm~FtHSnXUmXegJ4Bp74sYndmHEF1MQKtVfy7h5N-ugtkTT9LuuLerthz26tNe8h4kYfEE9edM7puOyXCIH5Xgh4lNzt4WGD0ObsbUS8XkYpXrTiobSniqq~vnYUHg__',
-    },
-    {
-      id: 6,
-      src: 'https://s3-alpha-sig.figma.com/img/7a9d/1693/e6a098242d4a2c8446d1acc0d8bf51ab?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oWIr3Sr2va~UzNKEF4BG2jr3NWDieuXmdrJOaLxpHdcMJKypZi9sN3TyZQCj60ZIlgmzE8Ntj-6~sQBDL1N719Z5AI7J6~WtCi9mWR6jRRNoIxUALcUvZ1lmTuHeywMpKYDzPRbebB~KbJSCv3JphfMpuGEUeS~E3MuLPwsaexSdVtpfcUQg3uYmS3-qPMxnwym0oUbYBPK0xJD28yK3ZjfiMm~FtHSnXUmXegJ4Bp74sYndmHEF1MQKtVfy7h5N-ugtkTT9LuuLerthz26tNe8h4kYfEE9edM7puOyXCIH5Xgh4lNzt4WGD0ObsbUS8XkYpXrTiobSniqq~vnYUHg__',
-    },
-    {
-      id: 7,
-      src: 'https://s3-alpha-sig.figma.com/img/7a9d/1693/e6a098242d4a2c8446d1acc0d8bf51ab?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oWIr3Sr2va~UzNKEF4BG2jr3NWDieuXmdrJOaLxpHdcMJKypZi9sN3TyZQCj60ZIlgmzE8Ntj-6~sQBDL1N719Z5AI7J6~WtCi9mWR6jRRNoIxUALcUvZ1lmTuHeywMpKYDzPRbebB~KbJSCv3JphfMpuGEUeS~E3MuLPwsaexSdVtpfcUQg3uYmS3-qPMxnwym0oUbYBPK0xJD28yK3ZjfiMm~FtHSnXUmXegJ4Bp74sYndmHEF1MQKtVfy7h5N-ugtkTT9LuuLerthz26tNe8h4kYfEE9edM7puOyXCIH5Xgh4lNzt4WGD0ObsbUS8XkYpXrTiobSniqq~vnYUHg__',
-    },
-    {
-      id: 8,
-      src: 'https://s3-alpha-sig.figma.com/img/7a9d/1693/e6a098242d4a2c8446d1acc0d8bf51ab?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oWIr3Sr2va~UzNKEF4BG2jr3NWDieuXmdrJOaLxpHdcMJKypZi9sN3TyZQCj60ZIlgmzE8Ntj-6~sQBDL1N719Z5AI7J6~WtCi9mWR6jRRNoIxUALcUvZ1lmTuHeywMpKYDzPRbebB~KbJSCv3JphfMpuGEUeS~E3MuLPwsaexSdVtpfcUQg3uYmS3-qPMxnwym0oUbYBPK0xJD28yK3ZjfiMm~FtHSnXUmXegJ4Bp74sYndmHEF1MQKtVfy7h5N-ugtkTT9LuuLerthz26tNe8h4kYfEE9edM7puOyXCIH5Xgh4lNzt4WGD0ObsbUS8XkYpXrTiobSniqq~vnYUHg__',
-    },
-  ];
+  const { data } = UseGetGroomerInfo({
+    groomerId: groomerId,
+  });
+
+  if (data) {
+    console.log(data);
+  }
 
   return (
     <MobileLayout>
@@ -83,21 +61,21 @@ const Portfolio = () => {
         </TextBox>
       </HeaderBox>
       <Flex direction="column" padding="12px 5px 96px 5px" gap={12}>
-        <DesignerInfo
-          padding="0 6px"
-          version="horizontal"
-          designerId={2}
-          name="박댕댕"
-          age={28}
-          gender="남성"
-          experience={3}
-          roles={['반려동물 훈련사', '애견미용 전문가']}
-          imageUrl="https://s3-alpha-sig.figma.com/img/7288/e8cb/765917075a0ff1a9f4ef89045ec486ce?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Oq4Y0Uqsxbln0WqYdkcYB25-3jI94a-y4BgE1iR6LiJHuy4Fij17MRJuc4~5TrOtq4EErqmiLIaAzjbAr7DcIzOgUPonCTK6SSdtCvPvRzmHzwre6RsCF5eLy19WEHwDzvRnobu0HT6tWMJK4LNEfi7UjAt93eeXaXAI89y0gYZ790waTMt-9j4Uax-XKrI6CSxwEf-rms9RdhQGUqelUoNLRnNq3btRGrE-fYNlLL4a9B2mvHVhISB-e7PvygT0wDoaxQAdAHDSD-ctiqOzl~WLCyYJ1GNcrYYaOA5ihmYMDWkHaoCPLClnIL-LSuTyipWyRFvNqc07vuNAPbjfiA__"
-        />
-
-        {designerId && (
-          <PortfolioPhotos designerId={designerId} portfolios={images} />
+        {data && (
+          <DesignerInfo
+            padding="0 6px"
+            version="horizontal"
+            designerId={data.id}
+            name={data.name}
+            age={data.age}
+            gender={data.gender === 'F' ? '여성' : '남성'}
+            experience={data.history}
+            roles={data.license}
+            imageUrl={data.image}
+          />
         )}
+
+        {designerId && <PortfolioPhotos groomerId={groomerId} />}
       </Flex>
       <DuriNavbar />
     </MobileLayout>

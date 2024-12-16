@@ -1,3 +1,5 @@
+import { BaseResponse } from './base';
+
 interface PetInfoType {
   petId: number;
   imageURL?: string;
@@ -110,4 +112,22 @@ export interface VisitHistoryResponse {
     month: string;
     historyList: HistoryType[];
   }[];
+}
+
+/** 그루머 아이디로 그루머 인포 조회 시 사용 */
+export interface GroomerInfoType {
+  id: number;
+  email: string;
+  phone: string;
+  name: string;
+  gender: string;
+  age: number;
+  history: number;
+  image: string;
+  info: string;
+  license: string[];
+}
+
+export interface GroomerInfoResponse extends BaseResponse {
+  response: GroomerInfoType;
 }
