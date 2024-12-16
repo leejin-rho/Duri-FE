@@ -12,6 +12,7 @@ import {
   NextArrow,
   Pencil,
   SalonNavbar,
+  SkeletonCard,
   Text,
   theme,
   WidthFitFlex,
@@ -46,9 +47,12 @@ const Home = () => {
   const [completeToggle, setCompleteToggle] = useState<number>();
 
   const { data: shopInfoData } = useGetHomeShopInfo({});
-  const { data: closetGroomingData } = useGetClosetGrooming();
-  const { data: dailyScheduleData } = useGetDailySchedule();
-  const { data: quotationRequestData } = useGetHomeQuotationRequest();
+  const { data: closetGroomingData, isPending: closetGroomingPending } =
+    useGetClosetGrooming();
+  const { data: dailyScheduleData, isPending: dailySchedulePending } =
+    useGetDailySchedule();
+  const { data: quotationRequestData, isPending: quotationRequestPending } =
+    useGetHomeQuotationRequest();
 
   const handleCompleteGrooming = () => {
     if (completeToggle === 1) naviagte('/feedback');
@@ -122,20 +126,32 @@ const Home = () => {
       {/** 진행중인 시술 */}
       <Flex padding="0 20px" margin="45px 0 0 0">
         <Card height="195" borderRadius={16} shadow="large">
-          {closetGroomingData && (
-            <ClosetGrooming
-              petName={closetGroomingData.petName}
-              breed={closetGroomingData.breed}
-              gender={closetGroomingData.gender}
-              age={closetGroomingData.age}
-              weight={closetGroomingData.weight}
-              memo={closetGroomingData.memo}
-              userPhone={closetGroomingData.userPhone}
-              quotationId={closetGroomingData.quotationId}
-              startTime={closetGroomingData.startTime}
-              isNow={closetGroomingData.isNow}
-              handleOpenCompleteSheet={openSheet}
-            />
+          {closetGroomingData ? (
+            closetGroomingData.isNow === null ? (
+              <TitleText colorCode={theme.palette.Normal800}>
+                예정된 시술이 없어요.
+              </TitleText>
+            ) : (
+              <ClosetGrooming
+                petName={closetGroomingData.petName}
+                breed={closetGroomingData.breed}
+                gender={closetGroomingData.gender}
+                age={closetGroomingData.age}
+                weight={closetGroomingData.weight}
+                memo={closetGroomingData.memo}
+                userPhone={closetGroomingData.userPhone}
+                quotationId={closetGroomingData.quotationId}
+                startTime={closetGroomingData.startTime}
+                isNow={closetGroomingData.isNow}
+                handleOpenCompleteSheet={openSheet}
+              />
+            )
+          ) : closetGroomingPending ? (
+            <SkeletonCard borderRadius={16} />
+          ) : (
+            <TitleText colorCode={theme.palette.Normal800}>
+              예정된 시술이 없어요.
+            </TitleText>
           )}
         </Card>
       </Flex>
@@ -183,6 +199,8 @@ const Home = () => {
                 ))}
               </ScheduleContainer>
             </ScheduleWrapper>
+          ) : dailySchedulePending ? (
+            <SkeletonCard borderRadius={8} height={55} />
           ) : (
             <Flex padding="20px 0">
               <TitleText colorCode={theme.palette.Normal800}>
@@ -227,16 +245,17 @@ const Home = () => {
               />
             ))}
           </NewRequestItemWrapper>
+        ) : quotationRequestPending ? (
+          <Flex padding="0 20px" height={281}>
+            <SkeletonCard borderRadius={8} height={281} />
+          </Flex>
         ) : (
-          <Flex padding="20px" height={281}>
-            <BackgroundContainer
-              backgroundColor={theme.palette.Normal50}
-              borderRadius={8}
-            >
+          <Flex padding="0 20px" height={281}>
+            <Flex backgroundColor={theme.palette.Gray20} borderRadius={8}>
               <TitleText colorCode={theme.palette.Normal800}>
                 도착한 요청서가 없어요.
               </TitleText>
-            </BackgroundContainer>
+            </Flex>
           </Flex>
         )}
       </NewRequestWrapper>
@@ -372,10 +391,6 @@ const NewRequestWrapper = styled(Flex)`
 
 const NewRequestItemWrapper = styled(Flex)`
   overflow-x: scroll;
-`;
-
-const BackgroundContainer = styled(Flex)`
-  border: 1px solid ${theme.palette.Normal600};
 `;
 
 const CompleteButton = styled(Button)`

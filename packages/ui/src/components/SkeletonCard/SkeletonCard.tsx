@@ -4,9 +4,9 @@ import styled from '@emotion/styled';
 import { Flex } from '../FlexBox';
 
 interface SkeletonCardProps {
-  width: number;
-  height: number;
-  borderRadius: number;
+  width?: number;
+  height?: number;
+  borderRadius?: number;
 }
 
 export const SkeletonCard = ({
