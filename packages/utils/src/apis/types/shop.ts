@@ -70,3 +70,32 @@ export interface ShopInfoDetailType {
 export interface ShopDetailResponse extends BaseResponse {
   response: ShopInfoDetailType;
 }
+
+export interface PetDetail {
+  petId: number;
+  imageURL: string;
+  name: string;
+  age: number;
+  gender: string;
+  breed: string;
+  weight: number;
+  neutering: boolean;
+  lastGrooming: string;
+}
+
+export interface ShopReviewType {
+  userId: number;
+  userName: string;
+  userImageURL: string;
+  reviewId: number;
+  rating: number;
+  reviewImageURL: string;
+  comment: string;
+  createdAt: string | null;
+  imgUrl: string;
+  petInfo: PetDetail;
+}
+
+export interface ShopReviewListResponse extends BaseResponse {
+  response: ShopReviewType[];
+}
