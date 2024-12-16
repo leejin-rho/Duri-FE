@@ -36,7 +36,7 @@ const OnboardingPage = () => {
       license: [],
     });
 
-  const { mutateAsync, isSuccess, error } = usePostShopInfo();
+  const { mutateAsync } = usePostShopInfo();
 
   // TODO: 프로필 이미지
   const [profileImage, setProfileImage] = useState<File | null>(null);
@@ -65,11 +65,12 @@ const OnboardingPage = () => {
 
     await mutateAsync(formData);
 
-    if (isSuccess) {
-      navigate('/onboarding/pending');
-    } else {
-      alert(error?.message);
-    }
+    // TODO : 성공 여부에 따라 분기처리
+    // if (isSuccess) {
+    navigate('/onboarding/pending');
+    // } else {
+    //   alert(error?.message);
+    // }
   };
 
   return (
