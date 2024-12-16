@@ -103,7 +103,7 @@ export const ShopInfo = ({ shopIdx, lat, lng }: ShopInfoProps) => {
             <Flex gap={6} justify="flex-start">
               <FilledLocation width={21} />
               <TextLine typo="Caption3" colorCode={theme.palette.Gray400}>
-                <MarkText>{distance} | </MarkText>
+                <MarkText>{distance}m | </MarkText>
                 {shopAddress}
               </TextLine>
             </Flex>

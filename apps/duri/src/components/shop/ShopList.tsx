@@ -37,7 +37,7 @@ export const ShopList = ({
       maxHeight: 260,
     });
 
-  // 요청서 전송용
+  // 요청서 전송용 바텀시트
   const {
     openSheet: openRequestSheet,
     closeSheet: closeRequestSheet,
@@ -128,6 +128,8 @@ export const ShopList = ({
             <ShopLine
               key={shop.shopId}
               id={shop.shopId}
+              lat={shop.shopLat}
+              lon={shop.shopLon}
               title={shop.shopName}
               score={shop.shopRating}
               reviewNum={shop.reviewCnt}
