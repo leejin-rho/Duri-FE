@@ -39,12 +39,16 @@ const MyPetModifyPage = () => {
   // const { data: getPetDetailData, isError: getPetDetailError } =
   const { data: getPetDetailData } = useGetPetDetailInfo(petId);
 
-  const { mutateAsync: modify } = usePutPetInfo(
-    () => (window.location.href = `/my/pet?state=${petId}`),
-  );
+  const { mutateAsync: modify, isSuccess: modifySuccess } = usePutPetInfo();
 
   const { control, handleSubmit, setValue, getValues } = useForm<FormData>({
     mode: 'onChange',
+  });
+
+  useEffect(() => {
+    if (modifySuccess) {
+      navigate('/my/pet', { state: petId });
+    }
   });
 
   useEffect(() => {

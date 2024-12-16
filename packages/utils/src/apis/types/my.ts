@@ -1,4 +1,15 @@
-import { PetInfoType } from './../../../../../apps/duri/src/assets/types/pet';
+interface PetInfoType {
+  petId: number;
+  imageURL?: string;
+  name: string;
+  breed: string;
+  age: number;
+  weight: number;
+  gender: string;
+  neutering?: boolean;
+  lastGrooming?: string;
+}
+
 export interface MyReviewResponseType {
   response: {
     reviewCnt: number;

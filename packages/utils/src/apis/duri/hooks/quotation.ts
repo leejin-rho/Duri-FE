@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getQuotationList, gettDetailRequestQuotaion } from '../quotation';
+import { getDetailRequestQuotaion, getQuotationList } from '../quotation';
 
 export const useGetDetailRequestQuotation = (requestId: number) => {
   return useQuery({
     queryKey: ['getRequestDetailInfo'],
-    queryFn: () => gettDetailRequestQuotaion(requestId),
+    queryFn: () => getDetailRequestQuotaion(requestId),
     staleTime: 1000 * 60 * 10,
   });
 };

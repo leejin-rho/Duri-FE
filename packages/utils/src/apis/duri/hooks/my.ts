@@ -43,15 +43,14 @@ export const useGetPetDetailInfo = (petId: number) => {
   return { data, isError };
 };
 
-export const usePutPetInfo = (handleNavigate: () => void) => {
-  const { mutateAsync } = useMutation({
+export const usePutPetInfo = () => {
+  return useMutation({
     mutationKey: ['putPetInfo'],
     mutationFn: ({ petId, formData }: { petId: number; formData: FormData }) =>
       putPetInfo(petId, formData),
-    onSuccess: () => handleNavigate(),
+    // onSuccess: () => handleNavigate(),
     onError: (error) => console.log(error),
   });
-  return { mutateAsync };
 };
 
 export const useGetUserInfo = () => {

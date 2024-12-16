@@ -2,7 +2,7 @@ import { duriInstance } from '../axiosConfig';
 import { QuotationListResponse, RequestDetailResponse } from '../types';
 
 //고객 -> 미용사 (request)견적서 상세조회
-export const gettDetailRequestQuotaion = async (
+export const getDetailRequestQuotaion = async (
   requestId: number,
 ): Promise<RequestDetailResponse['response']> => {
   const response = await duriInstance.get(`/quotation/request/${requestId}`);
