@@ -7,12 +7,14 @@ interface UseBottomSheetProps {
   maxHeight: number;
   onDismiss?: () => void;
   isMap?: boolean;
+  isShopInfo?: boolean;
 }
 
 export const useBottomSheet = ({
   maxHeight,
   onDismiss,
   isMap = false,
+  isShopInfo = false,
 }: UseBottomSheetProps) => {
   const [isOpenSheet, setIsOpenSheet] = useState<boolean>(false);
   const ref = useRef<BottomSheetRef>(null);
@@ -32,7 +34,7 @@ export const useBottomSheet = ({
   const bottomSheetProps = {
     open: isOpenSheet,
     ref,
-    css: StyledBottomCss(isMap),
+    css: StyledBottomCss(isMap, isShopInfo),
     maxHeight,
     snapPoints: ({ maxHeight }: { maxHeight: number }) =>
       isMap ? [300, maxHeight] : [maxHeight],
@@ -45,13 +47,13 @@ export const useBottomSheet = ({
   return { isOpenSheet, openSheet, closeSheet, bottomSheetProps };
 };
 
-const StyledBottomCss = (isMap: boolean) => css`
+const StyledBottomCss = (isMap: boolean, isShopInfo: boolean) => css`
   position: relative;
 
   [data-rsbs-overlay],
   [data-rsbs-root]::after {
     border-radius: 16px 16px 0px 0px;
-    z-index: ${isMap ? '2' : '20'};
+    z-index: ${isMap || isShopInfo ? '2' : '20'};
     --max-width: 375px;
 
     @media (max-width: 420px) {
@@ -63,6 +65,7 @@ const StyledBottomCss = (isMap: boolean) => css`
   }
 
   [data-rsbs-backdrop] {
+    display: ${isShopInfo ? 'none' : 'block'};
     z-index: ${isMap ? 0 : 10};
     background-color: ${isMap ? 'transparent' : 'rgba(49, 48, 54, 0.5)'};
   }

@@ -14,7 +14,7 @@ export const PortfolioPhotos = ({
 }: PortfolioPhotosProps) => {
   const navigate = useNavigate();
 
-  const moveToProfolioDetail = (id: number) => {
+  const moveToPortfolioDetail = (id: number) => {
     navigate(`/portfolio/${designerId}/${id}`);
   };
   return (
@@ -25,7 +25,7 @@ export const PortfolioPhotos = ({
             key={item.id}
             src={item.src}
             alt={`Porfolio ${index + 1}`}
-            onClick={() => moveToProfolioDetail(item.id)}
+            onClick={() => moveToPortfolioDetail(item.id)}
           />
         ))}
       </PhotoGrid>

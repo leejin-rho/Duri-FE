@@ -58,6 +58,7 @@ export const ShopLine = ({
   const { openSheet: openShopInfoSheet, bottomSheetProps: shopInfoSheetProps } =
     useBottomSheet({
       maxHeight: window.innerHeight,
+      isShopInfo: true,
     });
 
   const handleSendClick = (event: React.MouseEvent) => {

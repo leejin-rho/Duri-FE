@@ -1,17 +1,14 @@
 import { BottomSheet } from 'react-spring-bottom-sheet';
-import { useNavigate } from 'react-router-dom';
 
 import {
   Call,
   DownArrow,
   FilledLocation,
   Flex,
-  FrontBtn,
   HardText,
   HeightFitFlex,
   Image,
   RatingStars,
-  Send,
   Star,
   Text,
   theme,
@@ -33,8 +30,7 @@ interface ShopInfoProps {
 }
 
 export const ShopInfo = ({ shopIdx, lat, lng }: ShopInfoProps) => {
-  const navigate = useNavigate();
-  const { openSheet, closeSheet, bottomSheetProps } = useBottomSheet({
+  const { closeSheet, bottomSheetProps } = useBottomSheet({
     maxHeight: 556,
   });
 
@@ -83,7 +79,7 @@ export const ShopInfo = ({ shopIdx, lat, lng }: ShopInfoProps) => {
           padding="0 20px 160px 20px"
           key={shopId}
         >
-          <HeightFitFlex justify="flex-start" onClick={() => navigate(-1)}>
+          <HeightFitFlex justify="flex-start">
             <DownArrow width={42} />
           </HeightFitFlex>
 
@@ -149,7 +145,7 @@ export const ShopInfo = ({ shopIdx, lat, lng }: ShopInfoProps) => {
               designerId={groomerId}
               name={groomerName}
               age={groomerAge}
-              gender={groomerGender}
+              gender={groomerGender === 'F' ? '여성' : '남성'}
               experience={groomerHistory}
               roles={groomerLicense}
               imageUrl={groomerImage}
@@ -232,7 +228,7 @@ export const ShopInfo = ({ shopIdx, lat, lng }: ShopInfoProps) => {
             </ShadowFlex>
           </HeightFitFlex>
         </ShopInfoContainer>
-        <FrontBtn
+        {/* <FrontBtn
           height="53px"
           borderRadius="0"
           bg={theme.palette.Black}
@@ -243,7 +239,7 @@ export const ShopInfo = ({ shopIdx, lat, lng }: ShopInfoProps) => {
           <Text typo="Body2" margin="0 0 0 12px">
             요청서 보내기
           </Text>
-        </FrontBtn>
+        </FrontBtn> */}
         <BottomSheet {...bottomSheetProps}>
           <SendRequestQBox closeBottomSheet={closeSheet} />
         </BottomSheet>

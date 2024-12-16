@@ -138,6 +138,8 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
                     <ShopLine
                       key={selectedShop.shopId}
                       id={selectedShop.shopId}
+                      lat={selectedShop.shopLat}
+                      lon={selectedShop.shopLon}
                       title={selectedShop.shopName}
                       score={selectedShop.shopRating}
                       reviewNum={selectedShop.reviewCnt}

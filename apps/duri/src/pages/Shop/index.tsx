@@ -267,7 +267,7 @@ const Shop = () => {
           </Button>
         </ListWrapper>
       </OuterWrapper>
-      <DuriNavbar />
+      <FrontNavbar />
     </RelativeMobile>
   );
 };
@@ -303,4 +303,8 @@ const FormWrapper = styled.form`
   padding: 0;
   border: none;
   display: contents;
+`;
+
+const FrontNavbar = styled(DuriNavbar)`
+  z-index: 1000;
 `;
