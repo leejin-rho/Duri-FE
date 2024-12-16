@@ -42,8 +42,10 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth" element={<AuthPage />} />
 
+        <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home />} />
           <Route path="/onboarding" element={<StartPage />} />
           <Route path="/onboarding/detail" element={<Onboarding />} />
 
@@ -52,7 +54,6 @@ function App() {
           <Route path="/payment/fail" element={<FailPage />} />
 
           <Route path="/shop/request" element={<RequestPage />} />
-          <Route path="/shop" element={<Shop />} />
 
           <Route path="/portfolio/:designerId" element={<Portfolio />} />
           <Route

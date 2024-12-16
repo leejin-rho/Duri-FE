@@ -5,6 +5,7 @@ import {
   RegularShopResponse,
   UpcomingReservationResponse,
 } from '../types';
+
 interface PetInfoResponse extends BaseResponse {
   response: {
     petId: number;

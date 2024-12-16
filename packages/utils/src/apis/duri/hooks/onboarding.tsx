@@ -6,7 +6,6 @@ import { Flex } from '../../../../../ui';
 import { postPetInfo } from '../onboarding';
 
 export const usePostPetInfo = (handleNavigate: () => void) => {
-
   const notify = () => {
     toast(
       <Flex justify="space-between">

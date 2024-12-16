@@ -1,6 +1,4 @@
-import { PostShopInfoResponse } from '@duri-fe/utils';
-
-import { salonInstance } from '../config/instances';
+import { PostShopInfoResponse, salonInstance } from '@duri-fe/utils';
 
 export const postShopInfo = async (
   formData: FormData,

@@ -2,9 +2,8 @@ import {
   ClosetGroomingResponse,
   DailyScheduleResponse,
   HomeQuotationRequestResponse,
+  salonInstance,
 } from '@duri-fe/utils';
-
-import { salonInstance } from '../config/instances';
 
 /** 진행중인 시술 */
 export const getClosetGrooming = async (): Promise<
