@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import {
@@ -12,51 +12,75 @@ import {
   Text,
   theme,
 } from '@duri-fe/ui';
+import { usePostAmountVerity, usePostPayment } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 const SuccessPage = () => {
   const navigate = useNavigate();
+
+  const [orderId, setOrderId] = useState<string>();
+  const [amount, setAmount] = useState<number>();
+  const [paymentKey, setPaymentKey] = useState<string>();
+  const [quotationId, setQuotationId] = useState<number>();
+
   const [searchParams] = useSearchParams();
 
+  const { mutateAsync: postAmountVerify, isSuccess: verifySuccess } =
+    usePostAmountVerity(); //결제 정보 검증
+
+  const {
+    mutateAsync: postPaymentConfirm,
+    isError: confirmError,
+    isSuccess: confirmSuccess,
+  } = usePostPayment();
+
   useEffect(() => {
-    // 쿼리 파라미터 값이 결제 요청할 때 보낸 데이터와 동일한지 반드시 확인하세요.
-    // 클라이언트에서 결제 금액을 조작하는 행위를 방지할 수 있습니다.
     const requestData = {
       orderId: searchParams.get('orderId'),
-      amount: searchParams.get('amount'),
+      amount: Number(searchParams.get('amount')),
       paymentKey: searchParams.get('paymentKey'),
+      quotationId: Number(searchParams.get('quotationId')),
     };
 
-    async function confirm() {
-      //결제 완료 상태로 바꾸기
-      const response = await fetch('/confirm', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-      });
+    if (requestData.amount) setAmount(requestData.amount);
+    if (requestData.orderId) setOrderId(requestData.orderId);
+    if (requestData.paymentKey) setPaymentKey(requestData.paymentKey);
+    if (requestData.quotationId) setQuotationId(requestData.quotationId);
 
-      const json = await response.json();
+    if (requestData.amount && requestData.orderId && requestData.paymentKey) {
+      const responseData = {
+        orderId: requestData.orderId,
+        amount: requestData.amount,
+      };
 
-      if (!response.ok) {
-        // 결제 실패 비즈니스 로직을 구현하세요.
-        navigate(`/fail?message=${json.message}&code=${json.code}`);
-        return;
-      }
-
-      // 결제 성공 비즈니스 로직을 구현하세요.
-      // 결제 성공 시 마이 견적으로 이동 -> 견적 요청 목록에서 안뜨도록 변경되어야 함 -> 예약 탭에서 뜨게
-      // 쿠폰 사용한 경우 쿠폰 개수 줄이는 동작도 필요
+      //결제 금액 확인
+      postAmountVerify(responseData);
     }
-    confirm();
-
-    // useEffect(() => {
-    //   setTimeout(() => {
-    //     window.location.href = '/';
-    //   }, 3000);
-    // },[]);
   }, []);
+
+  // 검증 성공 시 결제 완료로 확정
+  useEffect(() => {
+    if (verifySuccess) {
+      const paymentInfo = {
+        orderId: orderId,
+        amount: amount,
+        paymentKey: paymentKey,
+        quotationId: quotationId,
+      };
+
+      postPaymentConfirm(paymentInfo);
+    }
+  }, [verifySuccess]);
+
+  useEffect(() => {
+    if (confirmError) {
+      navigate(
+        '/payment/fail?code=FAIL_CONFIRM&message=결제가 중단되었습니다.',
+      );
+    } else if (confirmSuccess) {
+      navigate('/');
+    }
+  }, [confirmError, confirmSuccess]);
 
   return (
     <MobileLayout>
@@ -73,11 +97,6 @@ const SuccessPage = () => {
           <Text typo="Body1" colorCode={theme.palette.Normal700}>
             결제가 완료되었습니다!
           </Text>
-          {/* <p>{`주문번호: ${searchParams.get('orderId')}`}</p>
-        <p>{`결제 금액: ${Number(
-          searchParams.get('amount'),
-        ).toLocaleString()}원`}</p>
-        <p>{`paymentKey: ${searchParams.get('paymentKey')}`}</p> */}
 
           <Seperator height="1px" />
           <HeightFitFlex

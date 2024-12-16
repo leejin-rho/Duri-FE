@@ -76,10 +76,7 @@ const Home = () => {
           />
           <CarouselHome
             upcomingReservation={
-              reservationData?.reserveDday === -1 ||
-              reservationData?.lastSinceDay === -1
-                ? undefined
-                : reservationData
+              reservationData?.reserveDday === -1 ? undefined : reservationData
             }
             lastReservation={
               petData?.lastGrooming === undefined ? '' : petData.lastGrooming

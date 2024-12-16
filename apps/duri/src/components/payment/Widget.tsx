@@ -4,26 +4,24 @@ import { Button, Flex, Seperator, theme } from '@duri-fe/ui';
 import {
   handlePayment,
   useGetUuid,
+  usePostAmount,
   useTossPaymentWidget,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
-import { format } from 'date-fns';
 
 import PaymentInfo from './Info';
 
 interface PaymentWidget {
   groomingPrice: number;
   groomingList: string[];
-  shopName: string;
+  quotationId: number
 }
 
 const PaymentWidget = ({
   groomingList,
   groomingPrice,
-  shopName,
+  quotationId
 }: PaymentWidget) => {
-  console.log(groomingPrice);
-
   // 결제 금액 정보
   const vat = groomingPrice * 0.1;
   const totalPrice = groomingPrice + vat;
@@ -31,6 +29,7 @@ const PaymentWidget = ({
   const amount = { currency: 'KRW', value: totalPrice }; //결제 금액 정보 저장
 
   const { data: uuidData } = useGetUuid(); // 생성된 customerKey, orderId 저장
+  const { mutateAsync: postAmount } = usePostAmount();
 
   const { widgets, ready } = useTossPaymentWidget(
     uuidData?.customerKey,
@@ -47,18 +46,16 @@ const PaymentWidget = ({
       return;
     } else {
       const orderId = uuidData.orderId;
-      const createdAt = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
 
       //세션 임시저장 api 호출
-      
+      postAmount({ amount: groomingPrice, orderId: orderId });
 
       //토스 결제
       handlePayment({
         widgets,
         groomingList,
-        shopName,
         orderId,
-        createdAt,
+        quotationId
       });
     }
   };

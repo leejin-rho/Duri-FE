@@ -1,10 +1,19 @@
-import { Button, Flex, Image, Text, theme, WidthFitFlex } from '@duri-fe/ui';
+import { useNavigate } from 'react-router-dom';
+
+import {
+  Button,
+  Flex,
+  Image,
+  Store,
+  Text,
+  theme,
+  WidthFitFlex,
+} from '@duri-fe/ui';
 import styled from '@emotion/styled';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
 interface UpcomingReservationProps {
-  lastSinceDay: number;
   shopId: number;
   imageURL: string;
   name: string;
@@ -19,20 +28,29 @@ interface UpcomingReservationProps {
 const UpcomingReservation = ({
   imageURL,
   address,
-  // kakaoURL,
+  kakaoURL,
   name,
   phone,
   price,
   reservationDate,
   reserveDday,
-  // shopId,
+  shopId,
 }: UpcomingReservationProps) => {
+  const navigate = useNavigate();
+
   const handleClickTelButton = () => {
     window.location.href = `tel:${phone}`; //모바일에서 전화걸기 창 뜨는 그거... 하고시픈뎃!!
   };
+
   const handleClickChatButton = () => {
     //오픈채팅방 주소 알려주는 모달 뜨게?하면 될 듯
+    console.log(kakaoURL);
   };
+
+  const handleClickShopButton = () => {
+    navigate(`/shop/${shopId}`);
+  };
+
   return (
     <Wrapper
       direction="column"
@@ -41,20 +59,33 @@ const UpcomingReservation = ({
       backgroundColor={theme.palette.White}
     >
       <Flex gap={14} padding="0 20px">
-        <Image src={imageURL} width={67} height={67} borderRadius={13} />
-        <Flex direction="column" align="flex-start" gap={12}>
+        {imageURL ? (
+          <ImageWrapper
+            src={imageURL}
+            width={67}
+            height={67}
+            borderRadius={13}
+            onClick={handleClickShopButton}
+          />
+        ) : (
+          <ImageBox borderRadius={13}>
+            <Store width={67} height={67} />
+          </ImageBox>
+        )}
+
+        <ShopWrapper
+          direction="column"
+          align="flex-start"
+          gap={12}
+          onClick={handleClickShopButton}
+        >
           <Text>{name}</Text>
           <Text typo="Caption4" colorCode={theme.palette.Gray400}>
             {address}
           </Text>
-        </Flex>
+        </ShopWrapper>
         <WidthFitFlex align="flex-start">
-          <Button
-            width="45px"
-            height="25px"
-            typo="Label2"
-            fontColor={theme.palette.Normal800}
-          >
+          <Button width="45px" height="25px" typo="Label2" padding="8px 10px">
             D-{reserveDday}
           </Button>
         </WidthFitFlex>
@@ -118,3 +149,16 @@ const BottomWrapper = styled(Flex)`
 `;
 
 export default UpcomingReservation;
+
+const ImageWrapper = styled(Image)`
+  cursor: pointer;
+`;
+
+const ImageBox = styled(WidthFitFlex)`
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+`;
+
+const ShopWrapper = styled(Flex)`
+  cursor: pointer;
+`;

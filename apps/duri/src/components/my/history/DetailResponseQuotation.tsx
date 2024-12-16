@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { Button, ResponseQuotation, theme } from '@duri-fe/ui';
 import { useGetDetailQuotation } from '@duri-fe/utils';
 
@@ -11,6 +13,9 @@ export const DetailResponseQuotation = ({
   handleNavigate: (e: React.MouseEvent) => void;
 }) => {
   const { data: quotationData } = useGetDetailQuotation(quotationId);
+  useEffect(() => {
+    if (quotationData) console.log(quotationData);
+  });
 
   return (
     <>

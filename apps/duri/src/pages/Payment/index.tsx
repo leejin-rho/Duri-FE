@@ -11,7 +11,6 @@ const PaymentPage = () => {
 
   //매장 및 시술 정보
   if (selectedQuotationId === undefined) return;
-  else console.log(selectedQuotationId);
   const { data: quotationData } = useGetDetailQuotation(selectedQuotationId);
   const [groomingList, setGroomingList] = useState<string[]>([]);
 
@@ -36,7 +35,7 @@ const PaymentPage = () => {
           <PaymentWidget
             groomingPrice={quotationData.quotation.priceDetail.totalPrice}
             groomingList={groomingList}
-            shopName={quotationData.shopDetail.shopName}
+            quotationId={Number(selectedQuotationId)}
           />
         </Flex>
       ) : (
