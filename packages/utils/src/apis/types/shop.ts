@@ -38,7 +38,7 @@ export type ShopDetailParamType = {
   lon: number;
 };
 
-export interface ShopDetailType {
+export interface ShopInfoDetailType {
   shopDetail: {
     shopId: number;
     shopImage: string;
@@ -68,5 +68,5 @@ export interface ShopDetailType {
 }
 
 export interface ShopDetailResponse extends BaseResponse {
-  response: ShopDetailType;
+  response: ShopInfoDetailType;
 }
