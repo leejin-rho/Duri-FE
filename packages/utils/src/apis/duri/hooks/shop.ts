@@ -29,13 +29,12 @@ export const useGetNearByShopInfo = ({
   centerInfo,
   sortby,
 }: UseGetNearByShopProps) => {
-  const { data, refetch, isPending } = useQuery({
+  return useQuery({
     queryKey: ['getNearByShopInfo', centerInfo, ...(queryKey || [])],
     queryFn: () => getNearByShopInfo(centerInfo, sortby),
     enabled: !!centerInfo,
     ...options,
   });
-  return { data, refetch, isPending };
 };
 
 type UseGetSearchShopResultProps = UseQueryProps<

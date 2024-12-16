@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 interface DesignerInfoProps {
   version?: 'vertical' | 'horizontal';
-  designerId: number | string;
+  designerId: number;
   name: string;
   age: number;
   gender: string;

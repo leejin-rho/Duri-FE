@@ -1,34 +1,40 @@
 import { useNavigate } from 'react-router-dom';
 
 import { Flex } from '@duri-fe/ui';
+import { UseGetGroomerPorfolio } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 interface PortfolioPhotosProps {
-  portfolios: { id: number; src: string }[];
-  designerId: string | number;
+  groomerId: number;
 }
 
-export const PortfolioPhotos = ({
-  portfolios,
-  designerId,
-}: PortfolioPhotosProps) => {
+export const PortfolioPhotos = ({ groomerId }: PortfolioPhotosProps) => {
   const navigate = useNavigate();
 
   const moveToPortfolioDetail = (id: number) => {
-    navigate(`/portfolio/${designerId}/${id}`);
+    navigate(`/portfolio/${groomerId}/${id}`);
   };
+
+  const { data } = UseGetGroomerPorfolio({
+    groomerId: groomerId,
+  });
+
   return (
     <Flex>
-      <PhotoGrid>
-        {portfolios.map((item, index) => (
-          <PortfolioInsideImg
-            key={item.id}
-            src={item.src}
-            alt={`Porfolio ${index + 1}`}
-            onClick={() => moveToPortfolioDetail(item.id)}
-          />
-        ))}
-      </PhotoGrid>
+      {data && data.length > 0 ? (
+        <PhotoGrid>
+          {data.map((item, index) => (
+            <PortfolioInsideImg
+              key={item.feedbackId}
+              src={item.imageUrl}
+              alt={`Porfolio ${index + 1}`}
+              onClick={() => moveToPortfolioDetail(item.feedbackId)}
+            />
+          ))}
+        </PhotoGrid>
+      ) : (
+        <Flex> 등록된 포트폴리오가 없어요</Flex>
+      )}
     </Flex>
   );
 };
