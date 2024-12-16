@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { RequestQuotation } from '@duri-fe/ui';
+import { RequestQuotation, Text, theme } from '@duri-fe/ui';
 import { TimeType, useGetDetailRequest } from '@duri-fe/utils';
 
 interface RequestDetailQuotationProps {
@@ -34,7 +34,9 @@ export const RequestDetailQuotation = ({
           selectedTimeList={timeList}
         />
       ) : (
-        <div>Quotation details not available</div>
+        <Text typo="Caption3" colorCode={theme.palette.Gray300}>
+          견적서 로딩에 실패했습니다.
+        </Text>
       )}
     </>
   );

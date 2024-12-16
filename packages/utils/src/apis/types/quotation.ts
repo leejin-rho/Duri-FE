@@ -186,3 +186,19 @@ export interface QuotationListResponse extends BaseResponse {
 export interface PutGroomingCompleteResponse extends BaseResponse {
   response: string;
 }
+export interface RequestItemsType {
+  quotationId: number;
+  createdAt: Date;
+  expiredAt: Date;
+  shops: [
+    {
+      shopId: number;
+      shopName: string;
+    },
+  ];
+  isExpired: boolean;
+}
+
+export interface RequestItemsResponse extends BaseResponse {
+  response: RequestItemsType[];
+}

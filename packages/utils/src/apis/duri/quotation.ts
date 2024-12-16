@@ -29,3 +29,10 @@ export const getQuotationList = async (
   });
   return response.data.response;
 };
+
+export const getRequestItems = async (): Promise<
+  RequestItemsResponse['response']
+> => {
+  const response = await duriInstance.get(`quotation/request`);
+  return response.data.response;
+};

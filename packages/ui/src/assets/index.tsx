@@ -76,6 +76,7 @@ export { default as Scissors } from './Scissors';
 export { default as Store } from './Store';
 export { default as Trash } from './Trash';
 export { default as CheckCircle } from './CheckCircle';
+export { default as PaymentSuccess } from './PaymentSuccess';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -117,6 +118,7 @@ import Magnifier from './Magnifier';
 import Menu from './Menu';
 import MyLocation from './MyLocation';
 import Notification from './Notification';
+import PaymentSuccess from './PaymentSuccess';
 import PortfolioIcon from './PortfolioIcon';
 import RadioSelect from './RadioSelect';
 import RadioUnselect from './RadioUnselect';
@@ -200,6 +202,7 @@ export const icons = {
   Store,
   SelectBox,
   SelectBoxUn,
+  PaymentSuccess,
   PortfolioIcon,
   TimetableIcon,
   Write,

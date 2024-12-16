@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-// import PaymentWidget from '@duri/components/payment/Widget';
-import { DuriNavbar, Flex, MobileLayout } from '@duri-fe/ui';
+import PaymentWidget from '@duri/components/payment/Widget';
+import { DuriNavbar, Flex, MobileLayout, Text } from '@duri-fe/ui';
 import { useGetDetailQuotation } from '@duri-fe/utils';
 
 const PaymentPage = () => {
@@ -12,7 +13,19 @@ const PaymentPage = () => {
   if (selectedQuotationId === undefined) return;
   else console.log(selectedQuotationId);
   const { data: quotationData } = useGetDetailQuotation(selectedQuotationId);
+  const [groomingList, setGroomingList] = useState<string[]>([]);
 
+  useEffect(() => {
+    if (quotationData) {
+      const groomingList = [
+        ...quotationData.menuDetail.groomingMenu,
+        ...quotationData.menuDetail.additionalGrooming,
+        ...quotationData.menuDetail.specialCare,
+        ...quotationData.menuDetail.designCut,
+      ];
+      setGroomingList(groomingList);
+    }
+  }, [quotationData]);
   //쿠폰 정보 - 후순위!!!!!!
 
   return (
@@ -20,10 +33,16 @@ const PaymentPage = () => {
       {quotationData ? (
         <Flex direction="column">
           {/* 결제 방법 - 쿠폰 개발된다면 쿠폰 정보도 같이 넘겨야 함 */}
-          {/* <PaymentWidget quotationInfo={quotationData} /> */}
+          <PaymentWidget
+            groomingPrice={quotationData.quotation.priceDetail.totalPrice}
+            groomingList={groomingList}
+            shopName={quotationData.shopDetail.shopName}
+          />
         </Flex>
       ) : (
-        <>돌아가기</>
+        <Flex>
+          <Text>Loading...</Text>
+        </Flex>
       )}
       <DuriNavbar />
     </MobileLayout>
