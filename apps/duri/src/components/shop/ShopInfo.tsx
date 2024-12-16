@@ -3,13 +3,17 @@ import { useNavigate } from 'react-router-dom';
 
 import {
   BeforeArrow,
+  Button,
   Call,
+  Chat,
   DesignerInfo,
   DownArrow,
   FilledLocation,
   Flex,
   HeightFitFlex,
   RatingStars,
+  SalonTag,
+  Send,
   Star,
   Text,
   theme,
@@ -41,9 +45,7 @@ export const ShopInfo = ({
 }: ShopInfoProps & { isForBottomSheet?: boolean }) => {
   const navigate = useNavigate();
 
-  console.log(shopIdx);
-
-  const { closeSheet, bottomSheetProps } = useBottomSheet({
+  const { closeSheet, openSheet, bottomSheetProps } = useBottomSheet({
     maxHeight: 556,
   });
 
@@ -73,6 +75,7 @@ export const ShopInfo = ({
       shopRating,
       reviewCnt,
       distance,
+      tags,
     },
     groomerProfileDetail: {
       id: groomerId,
@@ -134,20 +137,44 @@ export const ShopInfo = ({
               </TextLine>
             </Flex>
 
-            <Flex gap={10} justify="flex-start" margin="0 0 0 4px">
-              <Call width={16} />
-              <Text typo="Caption3" colorCode={theme.palette.Link}>
-                {shopPhone}
-              </Text>
-            </Flex>
+            <HeightFitFlex justify="flex-start" align="flex-end">
+              <WidthFitFlex direction="column" gap={8}>
+                <Flex gap={10} justify="flex-start" margin="0 0 0 4px">
+                  <Call width={16} />
+                  <Text typo="Caption3" colorCode={theme.palette.Link}>
+                    {shopPhone}
+                  </Text>
+                </Flex>
 
-            <Flex gap={10} justify="flex-start" margin="0 0 0 4px">
-              <Time width={16} />
-              <Text typo="Caption3">
-                {shopOpenTime.hour}:{shopOpenTime.minute} ~ {shopCloseTime.hour}
-                :{shopCloseTime.minute}
-              </Text>
-            </Flex>
+                <Flex gap={10} justify="flex-start" margin="0 0 0 4px">
+                  <Time width={16} />
+                  <Text typo="Caption3">
+                    {shopOpenTime.hour}:{shopOpenTime.minute} ~{' '}
+                    {shopCloseTime.hour}:{shopCloseTime.minute}
+                  </Text>
+                </Flex>
+
+                <TagList gap={10} justify="flex-start" margin="0 0 0 4px">
+                  {tags &&
+                    tags.map((tag, index) => (
+                      <SalonTag
+                        key={index}
+                        content={tag}
+                        bg={theme.palette.Gray50}
+                        borderRadius={2}
+                      />
+                    ))}
+                </TagList>
+              </WidthFitFlex>
+              <WidthFitFlex gap={8}>
+                <IconCircle>
+                  <Chat width={21} color={theme.palette.Normal700} />
+                </IconCircle>
+                <IconCircle onClick={openSheet}>
+                  <Send width={21} color={theme.palette.Normal700} />
+                </IconCircle>
+              </WidthFitFlex>
+            </HeightFitFlex>
           </HeightFitFlex>
 
           <HeightFitFlex
@@ -219,18 +246,6 @@ export const ShopInfo = ({
             )}
           </HeightFitFlex>
         </ShopInfoContainer>
-        {/* <FrontBtn
-          height="53px"
-          borderRadius="0"
-          bg={theme.palette.Black}
-          fontColor={theme.palette.White}
-          onClick={openSheet}
-        >
-          <Send width={18} height={17} color={theme.palette.White} />
-          <Text typo="Body2" margin="0 0 0 12px">
-            요청서 보내기
-          </Text>
-        </FrontBtn> */}
         <BottomSheet {...bottomSheetProps}>
           <SendRequestQBox closeBottomSheet={closeSheet} />
         </BottomSheet>
@@ -259,4 +274,16 @@ const MainImg = styled.img`
   aspect-ratio: 330 / 180;
   border-radius: 12px;
   object-fit: cover;
+`;
+
+const IconCircle = styled(Button)`
+  width: 42px;
+  height: 42px;
+  border-radius: 40px;
+  background-color: ${theme.palette.Normal100};
+  padding: 0;
+`;
+
+const TagList = styled(WidthFitFlex)`
+  flex-wrap: wrap;
 `;

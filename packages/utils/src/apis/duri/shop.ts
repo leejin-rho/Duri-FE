@@ -51,7 +51,5 @@ export const getShopReviewList = async ({
     headers: { ShopId: shopId },
   });
 
-  console.log(data.response);
-
   return data.response;
 };
