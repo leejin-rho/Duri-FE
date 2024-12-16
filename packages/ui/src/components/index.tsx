@@ -20,3 +20,4 @@ export * from './Quotation';
 export * from './RatingStars';
 export * from './PetInfo';
 export * from './Portfolio';
+export * from './SkeletonCard';
