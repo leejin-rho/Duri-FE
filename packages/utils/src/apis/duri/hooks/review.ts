@@ -1,14 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 
 import {
-  PostPutReviewResponse,
+  PostPutDeleteReviewResponse,
   PostReviewProps,
   PutReviewProps,
 } from '../../types/review';
 import { deleteReview, postReview, putReview } from '../review';
 
 export const usePostReview = () => {
-  return useMutation<PostPutReviewResponse, Error, PostReviewProps>({
+  return useMutation<PostPutDeleteReviewResponse, Error, PostReviewProps>({
     mutationKey: ['postReview'],
     mutationFn: ({ quotationId, formData }: PostReviewProps) =>
       postReview(quotationId, formData),
@@ -22,7 +22,7 @@ export const usePostReview = () => {
 };
 
 export const usePutReview = (handleNavigate: () => void) => {
-  return useMutation<PostPutReviewResponse, Error, PutReviewProps>({
+  return useMutation<PostPutDeleteReviewResponse, Error, PutReviewProps>({
     mutationKey: ['putReview'],
     mutationFn: ({ reviewId, formData }: PutReviewProps) =>
       putReview(reviewId, formData),
