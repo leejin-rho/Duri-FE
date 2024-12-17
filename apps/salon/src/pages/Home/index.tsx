@@ -107,11 +107,11 @@ const Home = () => {
             {/** 매장 정보 */}
             <TextContainer
               direction="column"
-              align="start"
+              align="flex-start"
               padding="36px 20px"
               gap={4}
             >
-              <Flex gap={12}>
+              <Flex justify="flex-start" gap={12}>
                 <Text typo="Title4" colorCode={theme.palette.White}>
                   {shopInfoData.name}
                 </Text>

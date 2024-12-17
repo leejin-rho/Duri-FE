@@ -14,7 +14,6 @@ import {
 } from '@duri-fe/ui';
 import { parsePetInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
-import { format } from 'date-fns';
 
 interface GroomerInfoType {
   groomerName: string;
@@ -142,8 +141,8 @@ export const PetInfo = ({
                   {groomer.date}
                 </Text>
                 <Text typo="Label3" colorCode={theme.palette.Gray400}>
-                  {format(groomer.startTime, 'hh:mm')} ~{' '}
-                  {format(groomer.endTime, 'hh:mm')}
+                  {groomer.startTime.slice(0, 5)} ~{' '}
+                  {groomer.endTime.slice(0, 5)}
                 </Text>
               </Flex>
             </Flex>

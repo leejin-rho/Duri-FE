@@ -15,7 +15,7 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
-import { useGetPetInfoByQuotationId } from '@duri-fe/utils';
+import { useGetPetInfoByQuotationId, usePostFeedback } from '@duri-fe/utils';
 import { css } from '@emotion/react';
 import MainInputContainer from '@salon/components/feedback/MainInputContainer';
 import PetBehaviorContainer from '@salon/components/feedback/PetBehaviorContainer';
@@ -39,6 +39,8 @@ const FeedBackPage = () => {
   const { data: petAndUserInfo } = useGetPetInfoByQuotationId({
     quotationId: quotationId,
   });
+
+  const { mutateAsync: postFeedback } = usePostFeedback();
 
   const {
     petProfileResponse = {
@@ -116,8 +118,11 @@ const FeedBackPage = () => {
     });
 
     // TODO: 피드백 POST
-    console.log(formData);
-    // navigate(-1);
+    await postFeedback({
+      quotationId: quotationId,
+      formData: formData,
+    });
+    navigate(-1);
   };
 
   return (
