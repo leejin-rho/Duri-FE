@@ -2,14 +2,17 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
+  Button,
   Flex,
   Menu,
+  Modal,
   ProfileImage,
   RatingStars,
   Text,
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
+import { useDeleteReview, useModal } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 interface ReviewUserInfoProps {
@@ -29,7 +32,13 @@ export const ReviewUserInfo = ({
 }: ReviewUserInfoProps) => {
   const navigate = useNavigate();
 
+  const { isOpenModal, toggleModal } = useModal();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const { mutateAsync: deleteReview } = useDeleteReview(() => {
+    navigate('/my/review', { replace: true });
+  });
 
   const handleClickMenu = () => {
     setIsOpen(!isOpen);
@@ -41,7 +50,12 @@ export const ReviewUserInfo = ({
 
   const handleClickDeleteButton = () => {
     //삭제 모달 띄우기
-  }
+    toggleModal();
+  };
+
+  const handleClickDeleteConfirmButton = () => {
+    deleteReview(reviewId);
+  };
 
   return (
     <Wrapper justify="space-between">
@@ -85,6 +99,47 @@ export const ReviewUserInfo = ({
             <Text typo="Label3">삭제하기</Text>
           </MenuItem>
         </MenuCard>
+      )}
+      {isOpenModal && (
+        <Modal
+          isOpen={isOpenModal}
+          toggleModal={toggleModal}
+          title="후기를 삭제하시겠습니까?"
+          closeIcon={false}
+        >
+          <Flex direction="column" gap={24}>
+            <Flex direction="column">
+              <Text typo="Caption2" colorCode={theme.palette.Gray400}>
+                후기 삭제 후
+              </Text>
+              <Text typo="Caption2" colorCode={theme.palette.Gray400}>
+                복구할 수 없습니다.
+              </Text>
+            </Flex>
+            <Flex>
+              <Button
+                width="104px"
+                height="47px"
+                padding="10px"
+                bg={theme.palette.Gray20}
+                typo="Body3"
+                onClick={toggleModal}
+              >
+                아니오
+              </Button>
+              <Button
+                width="145px"
+                height="47px"
+                padding="10px"
+                bg={theme.palette.Alert}
+                typo="Body3"
+                onClick={handleClickDeleteConfirmButton}
+              >
+                네
+              </Button>
+            </Flex>
+          </Flex>
+        </Modal>
       )}
     </Wrapper>
   );

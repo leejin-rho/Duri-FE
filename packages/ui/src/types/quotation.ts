@@ -18,6 +18,7 @@ export interface ResponseQuotationType {
     designCut: string[];
     otherRequests: string;
   };
+  quotationId: number;
   quotation: {
     requestId: number;
     memo: string;

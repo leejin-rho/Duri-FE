@@ -7,6 +7,7 @@ import { Global } from '@emotion/react';
 import AuthPage from '@pages/Auth';
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
+import MyPage from '@pages/My';
 import OnboardingPage from '@pages/Onboarding';
 import OnboardingPendingPage from '@pages/Onboarding/Pending';
 import StartPage from '@pages/Onboarding/StartPage';
@@ -36,6 +37,8 @@ function App() {
           <Route path="/quotation" element={<QuotationPage />} />
           <Route path="/quotation/reservation" element={<ReservationPage />} />
           <Route path="/quotation/reply/:requestId" element={<ReplyPage />} />
+
+          <Route path="/my" element={<MyPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

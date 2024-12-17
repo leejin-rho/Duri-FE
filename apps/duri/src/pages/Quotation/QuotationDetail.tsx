@@ -25,8 +25,8 @@ const QuotationDetailPage = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  const requestId = location.state; //요청서 id
-  const { quotationId } = useParams(); //견적서 id
+  const requestId = location.state; //요청 id
+  const { quotationReqId } = useParams<{ quotationReqId: string }>(); //견적서 id
   const { coordinates } = useGeolocation();
 
   const [lat, setLat] = useState<number | null>(null);
@@ -41,12 +41,12 @@ const QuotationDetailPage = () => {
   );
 
   const { data: quotationListData } = useGetQuotationList(
-    Number(quotationId),
+    Number(quotationReqId),
     lat,
     lon,
   );
 
-  const handleBackButtonClick = () => {
+  const handleClickBackButton = () => {
     navigate(-1);
   };
 
@@ -80,14 +80,22 @@ const QuotationDetailPage = () => {
       <Header
         title="요청서 및 견적서"
         backIcon
-        onClickBack={handleBackButtonClick}
+        onClickBack={handleClickBackButton}
       />
       <Flex direction="column" padding="0 20px" margin="0 0 100px 0">
         <Card borderRadius={16} padding="26px 28px">
           <RequestInfo
             requestId={Number(requestId)}
-            createdAt={new Date()}
-            expiredAt={new Date()}
+            createdAt={
+              quotationListData?.createdAt === undefined
+                ? null
+                : new Date(quotationListData?.createdAt)
+            }
+            expiredAt={
+              quotationListData?.expiredAt === undefined
+                ? null
+                : new Date(quotationListData?.expiredAt)
+            }
           />
         </Card>
         <>
@@ -132,21 +140,23 @@ const QuotationDetailPage = () => {
           </Flex>
         </>
 
-        {<Flex direction="column" align="flex-start" margin="31px 0 17px">
-          <Text typo="Title2">들어온 견적</Text>
-          <Flex direction="column" margin="17px 0 0 0" gap={8}>
-            {quotationList?.map(
-              ({ requestId, shopName, totalPrice }) => (
-                <IncomingQuotation
-                  key={requestId}
-                  quotationId={requestId}
-                  salonName={shopName}
-                  price={totalPrice}
-                />
-              ),
-            )}
+        {
+          <Flex direction="column" align="flex-start" margin="31px 0 17px">
+            <Text typo="Title2">들어온 견적</Text>
+            <Flex direction="column" margin="17px 0 0 0" gap={8}>
+              {quotationList?.map(
+                ({ requestId, shopName, totalPrice }) => (
+                  <IncomingQuotation
+                    key={requestId}
+                    requestId={Number(requestId)}
+                    salonName={shopName}
+                    price={totalPrice}
+                  />
+                ),
+              )}
+            </Flex>
           </Flex>
-        </Flex>}
+        }
       </Flex>
       <DuriNavbar />
     </MobileLayout>

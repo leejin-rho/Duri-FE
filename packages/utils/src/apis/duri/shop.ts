@@ -8,6 +8,7 @@ import {
   ShopInfoResponse,
   ShopReviewListResponse,
 } from '../types';
+import { ReviewShopAndPetResponse } from '../types/review';
 
 export const getNearByShopInfo = async (
   { lat, lon, radius }: CenterInfoType,
@@ -50,6 +51,15 @@ export const getShopReviewList = async ({
 }): Promise<ShopReviewListResponse['response']> => {
   const { data } = await publicInstance.get(`/shop/review`, {
     headers: { ShopId: shopId },
+  });
+  return data.response;
+};
+
+export const getReviewShopAndPetInfo = async (
+  quotationId: number,
+): Promise<ReviewShopAndPetResponse['response']> => {
+  const { data } = await publicInstance.get(`/review-new`, {
+    params: { quotationId },
   });
 
   return data.response;

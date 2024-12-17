@@ -63,7 +63,7 @@ function App() {
 
           <Route path="/quotation" element={<QuotationPage />} />
           <Route
-            path="/quotation/:quotationId"
+            path="/quotation/:quotationReqId"
             element={<QuotationDetailPage />}
           />
 

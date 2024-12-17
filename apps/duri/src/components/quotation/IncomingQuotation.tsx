@@ -1,30 +1,21 @@
-import { useNavigate } from 'react-router-dom';
-
 import { Button, Flex, Modal, NextArrow, Text, theme } from '@duri-fe/ui';
 import { useModal } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
-import { DetailResponseQuotation } from '../my/history/DetailResponseQuotation';
+import { DetailResponseQuotation } from './DetailResponseQuotation';
 
 interface IncomingQuotationProps {
-  quotationId: number;
-  // onSelect: (value: number) => void;
+  requestId: number;
   salonName: string;
   price: number | null;
 }
 
 export const IncomingQuotation = ({
-  quotationId,
+  requestId,
   salonName,
   price = null,
 }: IncomingQuotationProps) => {
-  const navigate = useNavigate();
   const { isOpenModal, toggleModal } = useModal();
-  const handleClickNavigateButton = (selectedQuotationId: number) => {
-    toggleModal();
-
-    navigate('/payment', { state: { selectedQuotationId } });
-  };
 
   return (
     <>
@@ -50,9 +41,8 @@ export const IncomingQuotation = ({
       <Modal isOpen={isOpenModal} toggleModal={toggleModal} title="견적서">
         {
           <DetailResponseQuotation
-            quotationId={quotationId}
+            requestId={requestId} //결제 시 메뉴 조회를 위한 requestId 전달
             handleCloseButton={toggleModal}
-            handleNavigate={() => handleClickNavigateButton(quotationId)}
           />
         }
       </Modal>

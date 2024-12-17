@@ -11,11 +11,13 @@ import {
   Header,
   HeightFitFlex,
   MobileLayout,
+  PetInfo,
+  ShopInfo,
   Text,
   TextField,
   theme,
 } from '@duri-fe/ui';
-import { usePostReview } from '@duri-fe/utils';
+import { useGetReviewShopAndPetInfo, usePostReview } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 export interface ReviewFormData {
@@ -27,8 +29,21 @@ export interface ReviewFormData {
 
 const ReviewWritePage = () => {
   const location = useLocation();
+  const quotationId = Number(location.state);
+  const { data: shopAndPetDetailInfo } = useGetReviewShopAndPetInfo({
+    quotationId: quotationId,
+  });
 
   const navigate = useNavigate();
+  const handleClickShopButton = () => {
+    if (shopAndPetDetailInfo?.shopInfo.shopId) {
+      const shopId = shopAndPetDetailInfo.shopInfo.shopId;
+      navigate(`/shop/${shopId}`);
+    }
+  };
+  const handleClickBackButton = () => {
+    navigate(-1);
+  };
 
   const [imageURL, setImageURL] = useState<string | undefined>();
 
@@ -66,7 +81,6 @@ const ReviewWritePage = () => {
     }
 
     // API 연결
-    console.log(formData);
     postReview({ quotationId: Number(7), formData });
   };
 
@@ -75,11 +89,26 @@ const ReviewWritePage = () => {
       <Header
         title="후기 작성"
         backIcon
-        onClickBack={() => navigate(-1)}
+        onClickBack={handleClickBackButton}
         titleAlign="start"
       />
+
       <FlexGrow direction="column" justify="flex-start">
         <Flex direction="column" gap={4} margin="42px 0 12px 0">
+          {/* 가게 정보 */}
+          {shopAndPetDetailInfo?.shopInfo && (
+            <ShopInfo
+              onClick={handleClickShopButton}
+              themeVariant="duri"
+              image={shopAndPetDetailInfo.shopInfo.imageURL}
+              shopName={shopAndPetDetailInfo.shopInfo.shopName}
+              address={shopAndPetDetailInfo.shopInfo.address}
+              shopTag1={shopAndPetDetailInfo.shopInfo.shopTag1}
+              shopTag2={shopAndPetDetailInfo.shopInfo.shopTag2}
+              shopTag3={shopAndPetDetailInfo.shopInfo.shopTag3}
+            />
+          )}
+
           <Text typo="Body2">미용이 만족스러우셨나요?</Text>
           <Text typo="Caption5" colorCode={theme.palette.Gray400}>
             미용에 대한 후기를 남겨주세요👀
@@ -136,6 +165,19 @@ const ReviewWritePage = () => {
             )}
           />
         </Flex>
+        {shopAndPetDetailInfo?.petInfo && (
+          <Flex>
+            <PetInfo
+              age={shopAndPetDetailInfo.petInfo.age}
+              weight={shopAndPetDetailInfo.petInfo.weight}
+              name={shopAndPetDetailInfo.petInfo.name}
+              breed={shopAndPetDetailInfo.petInfo.breed}
+              gender={shopAndPetDetailInfo.petInfo.gender}
+              image={shopAndPetDetailInfo.petInfo.imageURL}
+              neutering={shopAndPetDetailInfo.petInfo.neutering}
+            />
+          </Flex>
+        )}
       </FlexGrow>
       {isPostError && (
         <Flex>
