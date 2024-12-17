@@ -172,3 +172,8 @@ interface ShopDetailType {
   kakaoTalk: string;
   tags: string[];
 }
+
+/** [PUT] /shop/profile/image 미용사 마이샵 사진 수정 */
+export interface PutShopImageResponse extends BaseResponse {
+  response: ShopDetailType;
+}

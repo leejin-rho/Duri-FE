@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { Flex, Pencil, Text, theme } from '@duri-fe/ui';
+import { Flex, FrontBtn, Pencil, Text, theme } from '@duri-fe/ui';
+import { UsePutShopImage } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 interface ShopImageAreaProps {
@@ -10,6 +11,9 @@ interface ShopImageAreaProps {
 }
 
 const ShopImageArea = ({ imageURL, onEdit, setOnEdit }: ShopImageAreaProps) => {
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+  const { mutateAsync } = UsePutShopImage();
   const shopImageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,9 +31,34 @@ const ShopImageArea = ({ imageURL, onEdit, setOnEdit }: ShopImageAreaProps) => {
     };
   }, [shopImageRef]);
 
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setImagePreviewUrl(URL.createObjectURL(e.target.files[0]));
+      setImageFile(e.target.files[0]);
+    }
+  };
+
+  const handleImageUpload = async () => {
+    const formData = new FormData();
+    if (!imageFile) {
+      setOnEdit(false);
+      return;
+    }
+    formData.append('image', imageFile);
+
+    try {
+      await mutateAsync(formData);
+      setOnEdit(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <ShopImageWrapper ref={shopImageRef} onClick={() => setOnEdit(true)}>
-      {imageURL ? (
+      {imagePreviewUrl ? (
+        <MainImg src={imagePreviewUrl} />
+      ) : imageURL ? (
         <MainImg src={imageURL} />
       ) : (
         <Flex
@@ -43,12 +72,40 @@ const ShopImageArea = ({ imageURL, onEdit, setOnEdit }: ShopImageAreaProps) => {
         </Flex>
       )}
       {onEdit && (
-        <ShopEditArea backgroundColor={theme.palette.Black} borderRadius={12}>
-          <Pencil width={16} />
-          <Text typo="Label3" colorCode={theme.palette.White}>
-            수정하기
-          </Text>
-        </ShopEditArea>
+        <>
+          <ShopEditWrapper>
+            <ShopEditArea
+              backgroundColor={theme.palette.Black}
+              borderRadius={12}
+            >
+              <Pencil width={16} />
+              <Text typo="Label3" colorCode={theme.palette.White}>
+                수정하기
+              </Text>
+            </ShopEditArea>
+            <ShopEditInput
+              id="profile"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+          </ShopEditWrapper>
+
+          <FrontBtn
+            bg={theme.palette.Black}
+            padding="10px 0"
+            height="53px"
+            borderRadius="0"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleImageUpload();
+            }}
+          >
+            <Text typo="Body2" colorCode={theme.palette.White}>
+              수정하기
+            </Text>
+          </FrontBtn>
+        </>
       )}
     </ShopImageWrapper>
   );
@@ -66,11 +123,28 @@ const MainImg = styled.img`
   object-fit: cover;
 `;
 
+const ShopEditWrapper = styled(Flex)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+
 const ShopEditArea = styled(Flex)`
   position: absolute;
   top: 0;
   left: 0;
   background-color: rgba(17, 17, 17, 0.5);
+`;
+
+const ShopEditInput = styled.input`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
 `;
 
 export default ShopImageArea;

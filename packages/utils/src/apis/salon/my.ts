@@ -1,7 +1,10 @@
 import { publicInstance, salonInstance } from '@duri-fe/utils';
 
-import { GroomerAndShopProfileResponse } from '../types/my';
-import { GetMyShopInfoResponse } from '../types/my';
+import {
+  GetMyShopInfoResponse,
+  GroomerAndShopProfileResponse,
+  PutShopImageResponse,
+} from '../types/my';
 
 export const getGroomerInfo = async ({
   groomerId,
@@ -14,9 +17,22 @@ export const getGroomerInfo = async ({
   return data.response;
 };
 
+/** [GET] /groomer/profile 미용사 마이샵 */
 export const getMyShopInfo = async (): Promise<
   GetMyShopInfoResponse['response']
 > => {
   const response = await salonInstance.get('groomer/profile');
+  return response.data.response;
+};
+
+/** [PUT] /shop/profile/image 미용사 마이샵 사진 수정 */
+export const putShopImage = async (
+  formData: FormData,
+): Promise<PutShopImageResponse['response']> => {
+  const response = await salonInstance.put('shop/profile/image', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return response.data.response;
 };

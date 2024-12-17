@@ -1,10 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { BaseError } from '../../types';
-import { GroomerAndShopProfileResponse } from '../../types/my';
-import { GetMyShopInfoResponse } from '../../types/my';
+import {
+  GetMyShopInfoResponse,
+  GroomerAndShopProfileResponse,
+  PutShopImageResponse,
+} from '../../types/my';
 import { UseQueryProps } from '../../types/tanstack';
 import { getGroomerInfo, getMyShopInfo } from '../my';
+
+import { putShopImage } from './../my';
 
 type UseGetGroomerInfo = UseQueryProps<
   GroomerAndShopProfileResponse['response'],
@@ -37,5 +42,15 @@ export const UseGetMyShopInfo = ({ queryKey, options }: UseGetMyShopInfo) => {
     queryKey: ['getMyShopInfo', ...(queryKey || [])],
     queryFn: () => getMyShopInfo(),
     ...options,
+  });
+};
+
+export const UsePutShopImage = () => {
+  return useMutation<PutShopImageResponse['response'], Error, FormData>({
+    mutationFn: (formData: FormData) => putShopImage(formData),
+    onError: (error) => {
+      console.error(error);
+      alert('샵 사진 등록에 실패했습니다.');
+    },
   });
 };
