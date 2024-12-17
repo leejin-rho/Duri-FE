@@ -77,6 +77,8 @@ export { default as Store } from './Store';
 export { default as Trash } from './Trash';
 export { default as CheckCircle } from './CheckCircle';
 export { default as FilledHome } from './FilledHome';
+export { default as UploadIcon } from './UploadIcon';
+export { default as Save } from './Save';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -125,6 +127,7 @@ import RadioSelect from './RadioSelect';
 import RadioUnselect from './RadioUnselect';
 import Report from './Report';
 import SafetyHelp from './SafetyHelp';
+import Save from './Save';
 import Scissors from './Scissors';
 import SecurityWarning from './SecurityWarning';
 import SelectBox from './SelectBox';
@@ -143,6 +146,7 @@ import UnionDown from './UnionDown';
 import UnionUp from './UnionUp';
 import Unlock from './Unlock';
 import UpArrow from './UpArrow';
+import UploadIcon from './UploadIcon';
 import Write from './Write';
 
 export const icons = {
@@ -212,6 +216,8 @@ export const icons = {
   CheckCircle,
   HomeIcon,
   FilledHome,
+  UploadIcon,
+  Save,
 };
 
 export default icons;

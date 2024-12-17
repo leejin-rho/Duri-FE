@@ -8,3 +8,4 @@ export * from './onboarding';
 export * from './my';
 export * from './review';
 export * from './portfolio';
+export * from './ai';

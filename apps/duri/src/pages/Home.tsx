@@ -131,7 +131,7 @@ const Home = () => {
             )}
           </Flex>
 
-          <a href="/ai/home">
+          <a href="/ai">
             {/* AI 스타일링 배너 */}
             <StyleBannerWrapper
               borderRadius={12}

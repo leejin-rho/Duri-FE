@@ -82,7 +82,7 @@ function App() {
         <Route path="/my/review/write" element={<ReviewWritePage />} />
         <Route path="/my/review/modify" element={<ReviewModifyPage />} />
 
-        <Route path="/ai/home" element={<DooriAI />} />
+        <Route path="/ai" element={<DooriAI />} />
         <Route path="/ai/styling" element={<AIStyling />} />
         <Route path="/ai/result" element={<DooriAIResult />} />
       </Routes>
