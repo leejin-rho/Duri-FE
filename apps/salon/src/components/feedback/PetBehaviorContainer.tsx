@@ -1,15 +1,6 @@
 import { Button, Flex, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-/**
-   "friendly": "string",
-  "reaction": "string",
-  "behavior": "string",
-  "noticeContent": "string",
-  "portfolioContent": "string",
-  "expose": true
- */
-
 const FRIENDLY = ['베스트 프렌드', '라뽀가 많이 형성됐어요', '어색한 반응'];
 const REACTION = [
   '다소 공격적이에요',
