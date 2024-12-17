@@ -112,7 +112,7 @@ const InputSalonOwner = ({
   };
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmitSalonOwnerData)}>
+    <StyledForm>
       <Flex direction="column" align="flex-start" padding="48px 0 96px 0">
         <Flex
           direction="column"
@@ -242,7 +242,6 @@ const InputSalonOwner = ({
                     control={control}
                     render={({ field }) => (
                       <Button
-                        type="button"
                         onClick={() => field.onChange(gender)}
                         bg={
                           field.value === gender
@@ -361,10 +360,10 @@ const InputSalonOwner = ({
 
       <ButtonWrapper padding="0 20px">
         <Button
-          type="submit"
           bg={theme.palette.Black}
           fontColor={theme.palette.White}
           onClick={() => console.log(historyYear, historyMonths, license)}
+          onSubmit={handleSubmit(onSubmitSalonOwnerData)}
         >
           다음 단계
         </Button>

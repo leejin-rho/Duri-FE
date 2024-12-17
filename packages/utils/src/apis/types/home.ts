@@ -106,3 +106,13 @@ export interface RecommendShopResponse extends BaseResponse {
     score: number;
   }[];
 }
+
+export interface HomeShopInfoResponse extends BaseResponse {
+  response: {
+    id: number;
+    name: string;
+    address: string;
+    imageURL: string;
+    phone: string;
+  };
+}

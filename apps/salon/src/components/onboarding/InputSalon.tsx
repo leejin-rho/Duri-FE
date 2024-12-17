@@ -70,7 +70,7 @@ const InputSalon = ({
 
   return (
     <>
-      <StyledForm onSubmit={handleSubmit(onSubmitSalonData)}>
+      <StyledForm>
         <Flex direction="column" align="flex-start" padding="48px 0 96px 0">
           <Flex
             direction="column"
@@ -258,9 +258,9 @@ const InputSalon = ({
 
         <ButtonWrapper>
           <Button
-            type="submit"
             bg={theme.palette.Black}
             fontColor={theme.palette.White}
+            onSubmit={handleSubmit(onSubmitSalonData)}
           >
             다음 단계
           </Button>

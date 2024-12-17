@@ -9,9 +9,11 @@ import {
   ShopInfoResponse,
   ShopReviewListResponse,
 } from '../../types';
+import { ReviewShopAndPetResponse } from '../../types/review';
 import { UseQueryProps } from '../../types/tanstack';
 import {
   getNearByShopInfo,
+  getReviewShopAndPetInfo,
   getSearchShopResult,
   getShopDetailInfo,
   getShopReviewList,
@@ -101,6 +103,30 @@ export const UseGetShopReviewList = ({
     queryKey: ['getPortfolioDetail', shopId, ...(queryKey || [])],
     queryFn: () => getShopReviewList({ shopId }),
     enabled: !!shopId,
+    ...options,
+  });
+};
+
+// 리뷰 작성 시 상단에 들어가는 샵 정보, 하단에 들어가는 펫 정보
+type UseGetReviewShopDetailProps = UseQueryProps<
+  ReviewShopAndPetResponse['response'],
+  BaseError
+> & {
+  quotationId: number;
+};
+
+export const useGetReviewShopAndPetInfo = ({
+  queryKey,
+  options,
+  quotationId,
+}: UseGetReviewShopDetailProps): UseQueryResult<
+  ReviewShopAndPetResponse['response'],
+  BaseError
+> => {
+  return useQuery<ReviewShopAndPetResponse['response'], BaseError>({
+    queryKey: ['getSearchShopResult', quotationId, ...(queryKey || [])],
+    queryFn: () => getReviewShopAndPetInfo(quotationId),
+    enabled: !!quotationId,
     ...options,
   });
 };

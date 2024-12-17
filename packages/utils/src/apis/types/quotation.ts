@@ -144,6 +144,8 @@ export interface CompletedQuotationListResponse extends BaseResponse {
   };
 }
 
+
+//응답 견적서 상세조회
 export interface QuotationDetailResponse extends BaseResponse {
   response: {
     shopDetail: ShopDetailType;
@@ -151,6 +153,7 @@ export interface QuotationDetailResponse extends BaseResponse {
     petDetail: RequestDetailPetType;
     menuDetail: QuotationDetailsType;
     quotation: PostQuotationRequest;
+    quotationId: number;
     status: string;
   };
 }
@@ -181,4 +184,24 @@ export interface QuotationListResponse extends BaseResponse {
       totalPrice: number | null;
     }[];
   };
+}
+
+export interface PutGroomingCompleteResponse extends BaseResponse {
+  response: string;
+}
+export interface RequestItemsType {
+  quotationId: number;
+  createdAt: Date;
+  expiredAt: Date;
+  shops: [
+    {
+      shopId: number;
+      shopName: string;
+    },
+  ];
+  isExpired: boolean;
+}
+
+export interface RequestItemsResponse extends BaseResponse {
+  response: RequestItemsType[];
 }

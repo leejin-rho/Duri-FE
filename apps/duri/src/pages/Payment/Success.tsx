@@ -1,114 +1,161 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import {
   DuriNavbar,
   Flex,
+  Header,
   HeightFitFlex,
   MobileLayout,
+  PaymentSuccess,
   Seperator,
   Text,
   theme,
 } from '@duri-fe/ui';
+import { usePostAmountVerity, usePostPayment } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 const SuccessPage = () => {
   const navigate = useNavigate();
+
+  const [orderId, setOrderId] = useState<string>();
+  const [amount, setAmount] = useState<number>();
+  const [paymentKey, setPaymentKey] = useState<string>();
+  const [quotationId, setQuotationId] = useState<number>();
+
   const [searchParams] = useSearchParams();
 
+  const { mutateAsync: postAmountVerify, isSuccess: verifySuccess } =
+    usePostAmountVerity(); //결제 정보 검증
+
+  const {
+    mutateAsync: postPaymentConfirm,
+    isError: confirmError,
+    isSuccess: confirmSuccess,
+  } = usePostPayment();
+
   useEffect(() => {
-    // 쿼리 파라미터 값이 결제 요청할 때 보낸 데이터와 동일한지 반드시 확인하세요.
-    // 클라이언트에서 결제 금액을 조작하는 행위를 방지할 수 있습니다.
     const requestData = {
       orderId: searchParams.get('orderId'),
-      amount: searchParams.get('amount'),
+      amount: Number(searchParams.get('amount')),
       paymentKey: searchParams.get('paymentKey'),
+      quotationId: Number(searchParams.get('quotationId')),
     };
 
-    async function confirm() {
-      //PATCH 요청으로 결제 완료 상태로 바꾸기
-      const response = await fetch('/confirm', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestData),
-      });
+    if (requestData.amount) setAmount(requestData.amount);
+    if (requestData.orderId) setOrderId(requestData.orderId);
+    if (requestData.paymentKey) setPaymentKey(requestData.paymentKey);
+    if (requestData.quotationId) setQuotationId(requestData.quotationId);
 
-      const json = await response.json();
+    if (requestData.amount && requestData.orderId && requestData.paymentKey) {
+      const responseData = {
+        orderId: requestData.orderId,
+        amount: requestData.amount,
+      };
 
-      if (!response.ok) {
-        // 결제 실패 비즈니스 로직을 구현하세요.
-        navigate(`/fail?message=${json.message}&code=${json.code}`);
-        return;
-      }
-
-      // 결제 성공 비즈니스 로직을 구현하세요.
-      // 결제 성공 시 마이 견적으로 이동 -> 견적 요청 목록에서 안뜨도록 변경되어야 함 -> 예약 탭에서 뜨게
-      // 쿠폰 사용한 경우 쿠폰 개수 줄이는 동작도 필요
+      //결제 금액 확인
+      postAmountVerify(responseData);
     }
-    confirm();
   }, []);
+
+  // 검증 성공 시 결제 완료로 확정
+  useEffect(() => {
+    if (verifySuccess) {
+      const paymentInfo = {
+        orderId: orderId,
+        amount: amount,
+        paymentKey: paymentKey,
+        quotationId: quotationId,
+      };
+
+      // console.log(paymentInfo)
+
+      postPaymentConfirm(paymentInfo);
+    }
+  }, [verifySuccess]);
+
+  useEffect(() => {
+    if (confirmError) {
+      navigate(
+        '/payment/fail?code=FAIL_CONFIRM&message=결제가 중단되었습니다.',
+      );
+    } else if (confirmSuccess) {
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
+    }
+  }, [confirmError, confirmSuccess]);
 
   return (
     <MobileLayout>
-      <Container direction='column'>
-      <Flex direction="column" padding="0 24px 46px 24px" gap={29} margin='90px 0 35px 0'>
-        {/* <RadioSelect width={126} height={126} stroke={theme.palette.Normal700} fill={theme.palette.White} /> */}
+      <Container direction="column">
+        <Header />
+        <Flex
+          direction="column"
+          padding="0 24px 46px 24px"
+          gap={29}
+          margin="0 0 35px 0"
+        >
+          <PaymentSuccess width={126} height={126} />
 
-        <Text typo="Body1" colorCode={theme.palette.Normal700}>
-          결제가 완료되었습니다!
-        </Text>
-        {/* <p>{`주문번호: ${searchParams.get('orderId')}`}</p>
-        <p>{`결제 금액: ${Number(
-          searchParams.get('amount'),
-        ).toLocaleString()}원`}</p>
-        <p>{`paymentKey: ${searchParams.get('paymentKey')}`}</p> */}
+          <Text typo="Body1" colorCode={theme.palette.Normal700}>
+            결제가 완료되었습니다!
+          </Text>
 
-        <Seperator height="1px" />
-        <HeightFitFlex direction="column" padding="0 10px" gap={12} justify='flex-start'>
-          <HeightFitFlex justify="space-between">
-            <Text typo="Caption1" colorCode={theme.palette.Gray300}>
-              가맹점
-            </Text>
-            <Text typo="Label2">댕댕샵</Text>
+          <Seperator height="1px" />
+          <HeightFitFlex
+            direction="column"
+            padding="0 10px"
+            gap={12}
+            justify="flex-start"
+          >
+            <HeightFitFlex justify="space-between">
+              <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+                가맹점
+              </Text>
+              <Text typo="Label2">댕댕샵</Text>
+            </HeightFitFlex>
+            <HeightFitFlex justify="space-between">
+              <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+                결제금액
+              </Text>
+              <Text typo="Body1" colorCode={theme.palette.Normal700}>
+                {Number(searchParams.get('amount')).toLocaleString()} 원
+              </Text>
+            </HeightFitFlex>
           </HeightFitFlex>
-          <HeightFitFlex justify="space-between">
-            <Text typo="Caption1" colorCode={theme.palette.Gray300}>
-              결제금액
-            </Text>
-            <Text typo="Body1" colorCode={theme.palette.Normal700}>
-            {Number(
-          searchParams.get('amount'),
-        ).toLocaleString()} 원
-            </Text>
-          </HeightFitFlex>
-        </HeightFitFlex>
-        <Seperator height="1px" />
-        <Flex direction="column" padding="0 10px" gap={12} justify='flex-start'>
-          <HeightFitFlex justify="space-between">
-            <Text typo="Caption1" colorCode={theme.palette.Gray300}>
-              결제일시
-            </Text>
-            <Text typo="Label2">2024-11-21 10:52:16</Text>
-          </HeightFitFlex>
-          <HeightFitFlex justify="space-between">
-            <Text typo="Caption1" colorCode={theme.palette.Gray300}>
-              결제카드
-            </Text>
-            <Text typo="Label2">현대카드</Text>
-          </HeightFitFlex>
+          <Seperator height="1px" />
+          <Flex
+            direction="column"
+            padding="0 10px"
+            gap={12}
+            justify="flex-start"
+          >
+            <HeightFitFlex justify="space-between">
+              <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+                결제일시
+              </Text>
+              <Text typo="Label2">2024-11-21 10:52:16</Text>
+            </HeightFitFlex>
+            <HeightFitFlex justify="space-between">
+              <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+                결제카드
+              </Text>
+              <Text typo="Label2">현대카드</Text>
+            </HeightFitFlex>
+          </Flex>
         </Flex>
-        </Flex>
 
-        <BottomWrapper padding='0 44px' widthPer={100}>
+        <BottomWrapper padding="0 44px" widthPer={100}>
           <ul>
             <Li>결제금액은 해당 금액만큼 충전 후 즉시 결제됩니다.</Li>
             <Li>
               포인트 적립 정책은 예고없이 변경될 수 있으며, 결제 취소 시적립된
               포인트는 회수됩니다.
             </Li>
-            <Li colorCode={theme.palette.Black}>결제 취소를 원할 경우 매장에 문의해주세요.</Li>
+            <Li colorCode={theme.palette.Black}>
+              결제 취소를 원할 경우 매장에 문의해주세요.
+            </Li>
           </ul>
         </BottomWrapper>
       </Container>
@@ -128,9 +175,9 @@ const Li = styled.li<{ colorCode?: string }>`
 const Container = styled(Flex)`
   position: relative;
   height: 100vh;
-`
+`;
 
 const BottomWrapper = styled(HeightFitFlex)`
   position: absolute;
   bottom: 117px;
-`
+`;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-const SvgSpeechBallon = (props: React.SVGProps<SVGSVGElement>) => (
+const SvgSpeechBalloon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -10,4 +10,4 @@ const SvgSpeechBallon = (props: React.SVGProps<SVGSVGElement>) => (
     <path fill="#fff" d="m82.5 46-5.63-9.75h11.26z" />
   </svg>
 );
-export default SvgSpeechBallon;
+export default SvgSpeechBalloon;

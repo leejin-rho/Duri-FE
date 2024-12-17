@@ -1,11 +1,10 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
-export const BASE_URL = import.meta.env.VITE_SERVER_API + '/api/v1';
-export const BASE_URL_AUTH = import.meta.env.VITE_SERVER_API + '/oauth2';
+import { BASE_URL, errorConfig, TIME_OUT } from './config';
 
 export const duriInstance = axios.create({
   baseURL: BASE_URL,
-  timeout: 10000,
+  timeout: TIME_OUT,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -15,7 +14,7 @@ export const duriInstance = axios.create({
 
 export const salonInstance = axios.create({
   baseURL: BASE_URL,
-  timeout: 10000,
+  timeout: TIME_OUT,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -25,17 +24,7 @@ export const salonInstance = axios.create({
 
 export const adminInstance = axios.create({
   baseURL: BASE_URL,
-  timeout: 10000,
-  withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-  },
-});
-
-export const authInstance = axios.create({
-  baseURL: BASE_URL_AUTH,
-  timeout: 10000,
+  timeout: TIME_OUT,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -45,7 +34,7 @@ export const authInstance = axios.create({
 
 export const publicInstance = axios.create({
   baseURL: BASE_URL,
-  timeout: 10000,
+  timeout: TIME_OUT,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -74,3 +63,13 @@ salonInstance.interceptors.request.use((config) => {
   config.headers['authorization_shop'] = token ? `Bearer ${token}` : '';
   return config;
 });
+
+duriInstance.interceptors.response.use(
+  (response) => response,
+  (error: AxiosError) => errorConfig(error),
+);
+
+salonInstance.interceptors.response.use(
+  (response) => response,
+  (error: AxiosError) => errorConfig(error),
+);

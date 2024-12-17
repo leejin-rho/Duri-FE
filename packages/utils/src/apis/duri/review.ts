@@ -1,10 +1,11 @@
-import { duriInstance } from '../axiosConfig';
-import { PostPutReviewResponse } from '../types/review';
+import { duriInstance } from '@duri-fe/utils';
+
+import { PostPutDeleteReviewResponse } from '../types/review';
 
 export const postReview = async (
   quotationId: number,
   formData: FormData,
-): Promise<PostPutReviewResponse> => {
+): Promise<PostPutDeleteReviewResponse> => {
   const config = {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -22,7 +23,7 @@ export const postReview = async (
 export const putReview = async (
   reviewId: number,
   formData: FormData,
-): Promise<PostPutReviewResponse> => {
+): Promise<PostPutDeleteReviewResponse> => {
   const config = {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -36,3 +37,8 @@ export const putReview = async (
 
   return response.data;
 };
+
+export const deleteReview = async(reviewId: number) => {
+  const response = await duriInstance.delete(`/review/${reviewId}`);
+  return response.data;
+}

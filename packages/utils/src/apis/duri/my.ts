@@ -1,4 +1,5 @@
-import { duriInstance } from '../axiosConfig';
+import { duriInstance } from '@duri-fe/utils';
+
 import {
   MyReviewResponseType,
   PetInfo,
@@ -79,7 +80,9 @@ export const getReviewDetail = async (
   return transformedData;
 };
 
-export const getVisitHistory = async():Promise<VisitHistoryResponse['response']> => {
+export const getVisitHistory = async (): Promise<
+  VisitHistoryResponse['response']
+> => {
   const response = await duriInstance.get('/user/history');
   return response.data.response;
-}
+};

@@ -49,10 +49,14 @@ const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
                   width="fit-content"
                   height="43px"
                   bg={
-                    field.value === key ? theme.palette.Black : theme.palette.White
+                    field.value === key
+                      ? theme.palette.Black
+                      : theme.palette.White
                   }
                   fontColor={
-                    field.value === key ? theme.palette.White : theme.palette.Black
+                    field.value === key
+                      ? theme.palette.White
+                      : theme.palette.Black
                   }
                   typo="Body3"
                   border={

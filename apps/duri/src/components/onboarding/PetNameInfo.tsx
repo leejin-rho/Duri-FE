@@ -57,7 +57,7 @@ const PetNameInfo = ({ register, trigger, setStep }: PetNameInfoProps) => {
         ex. 신참 &gt; 신참이 <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 초코 &gt;
         초코
       </Text>
-      <Flex justify="center" gap={8} margin="66px 0 0 0">
+      <Flex justify="center" align="flex-end" gap={8} margin="66px 0 0 0">
         <TextField
           placeholder="반려견 이름"
           placeholderTypo={theme.typo.Caption1}

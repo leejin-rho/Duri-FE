@@ -8,6 +8,9 @@ import { Global } from '@emotion/react';
 
 import PetDiary from '@pages/Diary';
 import PetDiaryDetail from '@pages/Diary/DiaryDetail';
+import DooriAI from '@pages/DooriAI';
+import DooriAIResult from '@pages/DooriAI/AIResult';
+import AIStyling from '@pages/DooriAI/AIStyling';
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import MyPage from '@pages/My';
@@ -25,66 +28,68 @@ import QuotationPage from '@pages/Quotation';
 import QuotationDetailPage from '@pages/Quotation/QuotationDetail';
 import RequestPage from '@pages/Request';
 import ReviewWritePage from '@pages/Review';
+import ReviewModifyPage from '@pages/Review/ReviewModify';
 import Shop from '@pages/Shop';
 import Portfolio from '@pages/Shop/Portfolio';
 import PortfolioDetail from '@pages/Shop/PortfolioDetail';
 
-import 'react-spring-bottom-sheet/dist/style.css';
+import PrivateRoute from '@components/PrivateRoute';
 
-import DooriAI from './pages/DooriAI';
-import DooriAIResult from './pages/DooriAI/AIResult';
-import AIStyling from './pages/DooriAI/AIStyling';
-import ReviewModifyPage from './pages/Review/ReviewModify';
+import 'react-spring-bottom-sheet/dist/style.css';
 
 function App() {
   return (
     <BrowserRouter>
       <Global styles={globalStyle} />
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth" element={<AuthPage />} />
 
-        <Route path="/onboarding" element={<StartPage />} />
-        <Route path="/onboarding/detail" element={<Onboarding />} />
-
-        <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/payment/success" element={<SuccessPage />} />
-        <Route path="/payment/fail" element={<FailPage />} />
-
-        <Route path="/shop/request" element={<RequestPage />} />
+        <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="shop/:shopId " />
 
-        <Route path="/portfolio/:designerId" element={<Portfolio />} />
-        <Route
-          path="/portfolio/:designerId/:portfolioId"
-          element={<PortfolioDetail />}
-        />
+        <Route element={<PrivateRoute />}>
+          <Route path="/onboarding" element={<StartPage />} />
+          <Route path="/onboarding/detail" element={<Onboarding />} />
 
-        <Route path="/quotation" element={<QuotationPage />} />
-        <Route
-          path="/quotation/:quotationId"
-          element={<QuotationDetailPage />}
-        />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/payment/success" element={<SuccessPage />} />
+          <Route path="/payment/fail" element={<FailPage />} />
 
-        <Route path="/diary" element={<PetDiary />} />
-        <Route path="/diary/:diaryId" element={<PetDiaryDetail />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="shop/:shopId " />
+          <Route path="/shop/request" element={<RequestPage />} />
 
-        <Route path="/my" element={<MyPage />} />
-        <Route path="/my/pet" element={<MyPetPage />} />
-        <Route path="/my/pet/modify" element={<MyPetModifyPage />} />
-        <Route path="/my/info" element={<MyInfoModifyPage />} />
-        <Route path="/my/shop" element={<MyShopPage />} />
-        <Route path="/my/history" element={<MyHistoryPage />} />
-        <Route path="/my/review" element={<MyReviewPage />} />
-        <Route path="/my/review/:reviewId" element={<MyReviewDetailPage />} />
-        <Route path="/my/review/write" element={<ReviewWritePage />} />
-        <Route path="/my/review/modify" element={<ReviewModifyPage />} />
+          <Route path="/my" element={<MyPage />} />
+          <Route path="/my/pet" element={<MyPetPage />} />
+          <Route path="/my/pet/modify" element={<MyPetModifyPage />} />
+          <Route path="/my/info" element={<MyInfoModifyPage />} />
+          <Route path="/my/shop" element={<MyShopPage />} />
+          <Route path="/my/history" element={<MyHistoryPage />} />
+          <Route path="/my/review" element={<MyReviewPage />} />
+          <Route path="/my/review/:reviewId" element={<MyReviewDetailPage />} />
+          <Route path="/my/review/write" element={<ReviewWritePage />} />
+          <Route path="/my/review/modify" element={<ReviewModifyPage />} />
 
-        <Route path="/ai" element={<DooriAI />} />
-        <Route path="/ai/styling" element={<AIStyling />} />
-        <Route path="/ai/result" element={<DooriAIResult />} />
+          <Route path="/ai" element={<DooriAI />} />
+          <Route path="/ai/styling" element={<AIStyling />} />
+          <Route path="/ai/result" element={<DooriAIResult />} />
+
+          <Route path="/portfolio/:designerId" element={<Portfolio />} />
+          <Route
+            path="/portfolio/:designerId/:portfolioId"
+            element={<PortfolioDetail />}
+          />
+
+          <Route path="/quotation" element={<QuotationPage />} />
+          <Route
+            path="/quotation/:quotationReqId"
+            element={<QuotationDetailPage />}
+          />
+
+          <Route path="/diary" element={<PetDiary />} />
+          <Route path="/diary/:diaryId" element={<PetDiaryDetail />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

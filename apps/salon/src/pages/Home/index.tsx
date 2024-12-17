@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useNavigate } from 'react-router-dom';
 
-import { ShopInfoType } from '@assets/types/home';
 import {
   Button,
   Card,
@@ -13,8 +12,10 @@ import {
   NextArrow,
   Pencil,
   SalonNavbar,
+  SkeletonCard,
   Text,
   theme,
+  Toast,
   WidthFitFlex,
 } from '@duri-fe/ui';
 import {
@@ -22,6 +23,9 @@ import {
   useGetClosetGrooming,
   useGetDailySchedule,
   useGetHomeQuotationRequest,
+  useGetHomeShopInfo,
+  usePutGroomingComplete,
+  usePutGroomingNoshow,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 import { RadioButton } from '@salon/components/home/RadioButton';
@@ -31,15 +35,6 @@ import DailyScheduleItem from '@components/home/DailyScheduleItem';
 import NewRequestItem from '@components/home/NewRequestItem';
 
 import 'react-spring-bottom-sheet/dist/style.css';
-
-const shopInfoData: ShopInfoType = {
-  id: 1,
-  name: '강남 미용샵',
-  address: '서울시 강남구',
-  imageURL:
-    'https://s3-alpha-sig.figma.com/img/6ae5/2907/1605954d65e7c8d959c7fcaecd4e0e98?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=czjs3XT0-ZqRY6iOmf0ZCXPiCFu8QM9WDWrmxH~4YvCrLWFBZZnIdiKFk~xDmyvVrrUNzP2IvsX~EXXwS5JEMnyV8lH~afmVJGMhWvaQNp4A0m8ZNjVX-xo~Kd-rMlImbq6VFP6boXFloqm8jJ5SgDhDvJ~8B71nSILBIfOYkjUvEaI1ZqFMRdJi9o10jiLF1csY7C9ezeQRMwN~qryG02dSqpCODQ5fyf0~mOGlxywjPhcTn8ZhV9CY1l~5iayN2EWcBb1~SFmVulqH~3T~6ARB3XpAK6I3Wo5lB2iPyfh8axChEFqnIfpUQk0kVEsFi1B58rgoUM9j-tLBdXHWfw__',
-  phone: '02-123-4567',
-};
 
 const completeToggleData = ['노쇼했어요.', '네, 완료했어요!'];
 
@@ -52,17 +47,29 @@ const Home = () => {
     maxHeight: 300,
   });
 
-  const [completeToggle, setCompleteToggle] = useState<number>();
+  const [completeToggle, setCompleteToggle] = useState<number | null>(null);
 
-  const { data: closetGroomingData } = useGetClosetGrooming();
-  const { data: dailyScheduleData } = useGetDailySchedule();
-  const { data: quotationRequestData } = useGetHomeQuotationRequest();
+  const { data: shopInfoData } = useGetHomeShopInfo({});
+  const { data: closetGroomingData, isPending: closetGroomingPending } =
+    useGetClosetGrooming();
+  const { data: dailyScheduleData, isPending: dailySchedulePending } =
+    useGetDailySchedule();
+  const { data: quotationRequestData, isPending: quotationRequestPending } =
+    useGetHomeQuotationRequest();
+  const { mutateAsync: putGroomingComplete } = usePutGroomingComplete();
+  const { mutateAsync: putGroomingNoshow } = usePutGroomingNoshow();
 
   const handleCompleteGrooming = () => {
-    if (completeToggle === 1) naviagte('/feedback');
-    // TODO : quotationId 함께 전달
-    else return;
-    // TODO : 노쇼 시에는 어떻게 하지??
+    if (completeToggle === 1 && closetGroomingData) {
+      putGroomingComplete(closetGroomingData.quotationId);
+      naviagte('/feedback', {
+        state: { quotationId: closetGroomingData.quotationId },
+      });
+    } else if (completeToggle === 0 && closetGroomingData) {
+      putGroomingNoshow(closetGroomingData.quotationId);
+    } else {
+      return;
+    }
   };
 
   return (
@@ -73,63 +80,89 @@ const Home = () => {
         align="start"
         justify="space-between"
       >
-        <HomeImageWrapper>
-          {shopInfoData.imageURL && (
-            <img width="100%" src={shopInfoData.imageURL} />
-          )}
-        </HomeImageWrapper>
-        <MainHeader
-          logoColor={theme.palette.Black}
-          iconColor={theme.palette.Normal800}
-          badge
-        />
+        {shopInfoData ? (
+          <>
+            <HomeImageWrapper>
+              {shopInfoData.imageURL ? (
+                <img width="100%" src={shopInfoData.imageURL} />
+              ) : (
+                <img width="100%" src={shopInfoData.imageURL} />
+              )}
+            </HomeImageWrapper>
+            <MainHeader
+              logoColor={theme.palette.Black}
+              iconColor={theme.palette.Normal800}
+              badge
+            />
 
-        {/** 매장 정보 */}
-        <TextContainer
-          direction="column"
-          align="start"
-          padding="36px 20px"
-          gap={4}
-        >
-          <Flex gap={12}>
-            <Text typo="Title4" colorCode={theme.palette.White}>
-              {shopInfoData.name}
-            </Text>
-            <Pencil width={20} />
-          </Flex>
-          <Text typo="Body3" colorCode={theme.palette.White}>
-            {shopInfoData.address}
-          </Text>
-        </TextContainer>
+            {/** 매장 정보 */}
+            <TextContainer
+              direction="column"
+              align="start"
+              padding="36px 20px"
+              gap={4}
+            >
+              <Flex gap={12}>
+                <Text typo="Title4" colorCode={theme.palette.White}>
+                  {shopInfoData.name}
+                </Text>
+                <ShopInfoEditButton onClick={() => naviagte('my')}>
+                  <Pencil width={20} />
+                </ShopInfoEditButton>
+              </Flex>
+              <Text typo="Body3" colorCode={theme.palette.White}>
+                {shopInfoData.address}
+              </Text>
+            </TextContainer>
 
-        <ShopNotice
-          justify="start"
-          padding="16px"
-          backgroundColor={theme.palette.Normal200}
-        >
-          <ShopNoticeText colorCode={theme.palette.Normal900} align="start">
-            댕댕샵 점주님 안녕하세용용용용용용용용
-          </ShopNoticeText>
-        </ShopNotice>
+            <ShopNotice
+              justify="start"
+              padding="16px"
+              backgroundColor={theme.palette.Normal200}
+            >
+              <ShopNoticeText colorCode={theme.palette.Normal900} align="start">
+                {shopInfoData.name} 점주님, 오늘도 좋은 하루 되세요!
+              </ShopNoticeText>
+            </ShopNotice>
+          </>
+        ) : (
+          <MainHeader
+            logoColor={theme.palette.Black}
+            iconColor={theme.palette.Normal800}
+            badge
+          />
+        )}
       </HomeHeaderContainer>
 
       {/** 진행중인 시술 */}
       <Flex padding="0 20px" margin="45px 0 0 0">
         <Card height="195" borderRadius={16} shadow="large">
-          {closetGroomingData && (
-            <ClosetGrooming
-              petName={closetGroomingData.petName}
-              breed={closetGroomingData.breed}
-              gender={closetGroomingData.gender}
-              age={closetGroomingData.age}
-              weight={closetGroomingData.weight}
-              memo={closetGroomingData.memo}
-              userPhone={closetGroomingData.userPhone}
-              quotationId={closetGroomingData.quotationId}
-              startTime={closetGroomingData.startTime}
-              isNow={closetGroomingData.isNow}
-              handleOpenCompleteSheet={openSheet}
-            />
+          {closetGroomingData ? (
+            closetGroomingData.isNow === null ? (
+              <TitleText colorCode={theme.palette.Normal800}>
+                예정된 시술이 없어요.
+              </TitleText>
+            ) : (
+              <ClosetGrooming
+                petName={closetGroomingData.petName}
+                breed={closetGroomingData.breed}
+                gender={closetGroomingData.gender}
+                age={closetGroomingData.age}
+                weight={closetGroomingData.weight}
+                memo={closetGroomingData.memo}
+                userPhone={closetGroomingData.userPhone}
+                quotationId={closetGroomingData.quotationId}
+                startTime={closetGroomingData.startTime}
+                isNow={closetGroomingData.isNow}
+                handleOpenCompleteSheet={openSheet}
+              />
+            )
+          ) : closetGroomingPending ? (
+            <SkeletonCard borderRadius={16} />
+          ) : (
+            <TitleText colorCode={theme.palette.Normal800}>
+              예정된 시술이 없어요.
+            </TitleText>
           )}
         </Card>
       </Flex>
@@ -147,24 +180,24 @@ const Home = () => {
           <Text typo="Title1">오늘 일정 빠르게 보기</Text>
         </Flex>
         <Card maxHeight="240px" borderRadius={8} shadow="large">
-          <ScheduleWrapper
-            direction="column"
-            align="flex-start"
-            justify="flex-start"
-            padding="20px 14px"
-          >
-            <ScheduleContainer
+          {dailyScheduleData && dailyScheduleData.length > 0 ? (
+            <ScheduleWrapper
               direction="column"
               align="flex-start"
               justify="flex-start"
+              padding="20px 14px"
             >
-              <SideBar
-                margin="0 10px 0 3px"
-                width={1}
-                backgroundColor={theme.palette.Gray200}
-              />
-              {dailyScheduleData &&
-                dailyScheduleData.map((schedule, index) => (
+              <ScheduleContainer
+                direction="column"
+                align="flex-start"
+                justify="flex-start"
+              >
+                <SideBar
+                  margin="0 10px 0 3px"
+                  width={1}
+                  backgroundColor={theme.palette.Gray200}
+                />
+                {dailyScheduleData.map((schedule, index) => (
                   <DailyScheduleItem
                     key={index}
                     startTime={schedule.startTime}
@@ -175,8 +208,17 @@ const Home = () => {
                     groomerName={schedule.groomerName}
                   />
                 ))}
-            </ScheduleContainer>
-          </ScheduleWrapper>
+              </ScheduleContainer>
+            </ScheduleWrapper>
+          ) : dailySchedulePending ? (
+            <SkeletonCard borderRadius={8} height={55} />
+          ) : (
+            <Flex padding="20px 0">
+              <TitleText colorCode={theme.palette.Normal800}>
+                오늘 스케줄이 없어요.
+              </TitleText>
+            </Flex>
+          )}
         </Card>
       </Flex>
 
@@ -195,9 +237,9 @@ const Home = () => {
             <NextArrow width={20} color={theme.palette.Gray300} />
           </WidthFitFlex>
         </Flex>
-        <NewRequestItemWrapper justify="flex-start" padding="0 20px" gap={8}>
-          {quotationRequestData &&
-            quotationRequestData.map((request, index) => (
+        {quotationRequestData && quotationRequestData.length > 0 ? (
+          <NewRequestItemWrapper justify="flex-start" padding="0 20px" gap={8}>
+            {quotationRequestData.map((request, index) => (
               <NewRequestItem
                 key={index}
                 requestId={request.requestId}
@@ -213,7 +255,20 @@ const Home = () => {
                 memo={request.memo}
               />
             ))}
-        </NewRequestItemWrapper>
+          </NewRequestItemWrapper>
+        ) : quotationRequestPending ? (
+          <Flex padding="0 20px" height={281}>
+            <SkeletonCard borderRadius={8} height={281} />
+          </Flex>
+        ) : (
+          <Flex padding="0 20px" height={281}>
+            <Flex backgroundColor={theme.palette.Gray20} borderRadius={8}>
+              <TitleText colorCode={theme.palette.Normal800}>
+                도착한 요청서가 없어요.
+              </TitleText>
+            </Flex>
+          </Flex>
+        )}
       </NewRequestWrapper>
 
       <SalonNavbar />
@@ -251,23 +306,25 @@ const Home = () => {
             </Button>
             <CompleteButton
               height="47px"
-              bg={completeToggle ? theme.palette.Black : theme.palette.Gray20}
-              fontColor={
-                completeToggle ? theme.palette.White : theme.palette.Black
+              bg={
+                completeToggle === null
+                  ? theme.palette.Gray100
+                  : theme.palette.Black
               }
-              disabled={!completeToggle}
+              fontColor={theme.palette.White}
               borderRadius="8px"
               onClick={
-                completeToggle
-                  ? handleCompleteGrooming
-                  : bottomSheetProps.onDismiss
+                completeToggle === null
+                  ? bottomSheetProps.onDismiss
+                  : handleCompleteGrooming
               }
             >
-              일지 쓰기
+              {completeToggle ? '일지 쓰기' : '닫기'}
             </CompleteButton>
           </HeightFitFlex>
         </Flex>
       </BottomSheet>
+      <Toast />
     </MobileLayout>
   );
 };
@@ -302,6 +359,10 @@ const TextContainer = styled(Flex)`
   z-index: 2;
 `;
 
+const ShopInfoEditButton = styled.button`
+  height: 20px;
+`;
+
 const ShopNotice = styled(HeightFitFlex)`
   width: calc(100% - 40px);
   border-radius: 0 12px 12px 12px;
@@ -317,6 +378,11 @@ const ShopNoticeText = styled(Text)`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+
+const TitleText = styled(Text)`
+  font-weight: 500;
+  font-size: 15px;
 `;
 
 const ScheduleWrapper = styled(Flex)`
