@@ -10,8 +10,10 @@ import {
   MobileLayout,
   Modal,
   Text,
+  theme,
 } from '@duri-fe/ui';
 import { useGetVisitHistory, useModal } from '@duri-fe/utils';
+import styled from '@emotion/styled';
 
 const MyHistoryPage = () => {
   //   미용일지 조회 데이터 상태관리 필요!

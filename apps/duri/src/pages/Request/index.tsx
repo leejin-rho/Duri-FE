@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { RequestType } from '@duri/assets/types';
 import MonthlyCalendar from '@duri/components/request/Calendar';
@@ -47,6 +47,10 @@ const validateRequestInfo = (requestInfo: RequestType): boolean => {
 
 const RequestPage = () => {
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const { shopIdList } = location.state;
+
   const { data: petInfo } = useGetPetInfo();
   const {
     mutateAsync: request,
@@ -81,7 +85,10 @@ const RequestPage = () => {
   };
 
   const handleSaveButtonClick = () => {
-    console.log(requestInfo);
+    setRequestInfo((prev) => ({
+      ...prev,
+      shopIds: shopIdList,
+    }));
 
     request(requestInfo);
   };
@@ -106,7 +113,6 @@ const RequestPage = () => {
   useEffect(() => {
     const isValid = validateRequestInfo(requestInfo);
     setIsButton(isValid);
-
   }, [requestInfo]);
 
   // 오류 처리

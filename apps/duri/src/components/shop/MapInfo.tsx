@@ -180,9 +180,14 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
                 )}
               </BottomSheet>
             )}
-            <BottomSheet {...requestSheetProps}>
-              <SendRequestQBox closeBottomSheet={closeRequestSheet} />
-            </BottomSheet>
+            {selectedShop && (
+              <BottomSheet {...requestSheetProps}>
+                <SendRequestQBox
+                  closeBottomSheet={closeRequestSheet}
+                  shopIdList={[selectedShop.shopId]}
+                />
+              </BottomSheet>
+            )}
           </>
         )}
       </RelativeMobile>
