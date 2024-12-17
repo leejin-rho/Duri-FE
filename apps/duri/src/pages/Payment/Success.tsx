@@ -68,6 +68,8 @@ const SuccessPage = () => {
         quotationId: quotationId,
       };
 
+      // console.log(paymentInfo)
+
       postPaymentConfirm(paymentInfo);
     }
   }, [verifySuccess]);
@@ -78,7 +80,9 @@ const SuccessPage = () => {
         '/payment/fail?code=FAIL_CONFIRM&message=결제가 중단되었습니다.',
       );
     } else if (confirmSuccess) {
-      navigate('/');
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
     }
   }, [confirmError, confirmSuccess]);
 

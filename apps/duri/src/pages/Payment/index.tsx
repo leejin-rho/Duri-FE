@@ -7,11 +7,11 @@ import { useGetDetailQuotation } from '@duri-fe/utils';
 
 const PaymentPage = () => {
   const location = useLocation();
-  const { selectedQuotationId } = location.state; // state에서 quotationId 가져오기
+  const { quotationId, requestId } = location.state; // state에서 quotationId 가져오기
 
   //매장 및 시술 정보
-  if (selectedQuotationId === undefined) return;
-  const { data: quotationData } = useGetDetailQuotation(selectedQuotationId);
+  if (requestId === undefined) return;
+  const { data: quotationData } = useGetDetailQuotation(requestId);
   const [groomingList, setGroomingList] = useState<string[]>([]);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const PaymentPage = () => {
           <PaymentWidget
             groomingPrice={quotationData.quotation.priceDetail.totalPrice}
             groomingList={groomingList}
-            quotationId={Number(selectedQuotationId)}
+            quotationId={Number(quotationId)}
           />
         </Flex>
       ) : (

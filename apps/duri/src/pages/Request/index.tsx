@@ -106,6 +106,7 @@ const RequestPage = () => {
   useEffect(() => {
     const isValid = validateRequestInfo(requestInfo);
     setIsButton(isValid);
+
   }, [requestInfo]);
 
   // 오류 처리

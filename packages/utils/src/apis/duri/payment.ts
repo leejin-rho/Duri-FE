@@ -49,12 +49,13 @@ export const postAmountVerity = async (
     '/payments/amount-verify',
     verifyData,
   );
-  return response.data.response;
+  return response.data;
 };
 
 export const postPaymentConfirm = async (
   paymentData: PostPaymentProps,
 ): Promise<PostPaymentResponse> => {
   const response = await duriInstance.post('/payments/confirm', paymentData);
-  return response.data.response;
+  console.log("결제 axios: ",response.data);
+  return response.data;
 };

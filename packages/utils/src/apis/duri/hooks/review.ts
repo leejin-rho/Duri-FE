@@ -5,7 +5,7 @@ import {
   PostReviewProps,
   PutReviewProps,
 } from '../../types/review';
-import { postReview, putReview } from '../review';
+import { deleteReview, postReview, putReview } from '../review';
 
 export const usePostReview = () => {
   return useMutation<PostPutReviewResponse, Error, PostReviewProps>({
@@ -26,6 +26,19 @@ export const usePutReview = (handleNavigate: () => void) => {
     mutationKey: ['putReview'],
     mutationFn: ({ reviewId, formData }: PutReviewProps) =>
       putReview(reviewId, formData),
+    onSuccess: () => {
+      handleNavigate();
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
+};
+
+export const useDeleteReview = (handleNavigate: () => void) => {
+  return useMutation({
+    mutationKey: ['deleteReview'],
+    mutationFn: (reviewId: number) => deleteReview(reviewId),
     onSuccess: () => {
       handleNavigate();
     },

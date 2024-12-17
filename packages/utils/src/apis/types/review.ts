@@ -10,6 +10,6 @@ export interface PutReviewProps {
   formData: FormData;
 }
 
-export interface PostPutReviewResponse extends BaseResponse {
+export interface PostPutDeleteReviewResponse extends BaseResponse {
   response: string;
 }

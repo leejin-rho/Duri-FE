@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import { Button, Flex, Modal, NextArrow, Text, theme } from '@duri-fe/ui';
 import { useModal } from '@duri-fe/utils';
 import styled from '@emotion/styled';
@@ -8,7 +6,7 @@ import { DetailResponseQuotation } from '../my/history/DetailResponseQuotation';
 
 interface IncomingQuotationProps {
   quotationId: number;
-  // onSelect: (value: number) => void;
+  onSelect: () => void;
   salonName: string;
   price: number | null;
 }
@@ -17,13 +15,12 @@ export const IncomingQuotation = ({
   quotationId,
   salonName,
   price = null,
+  onSelect,
 }: IncomingQuotationProps) => {
-  const navigate = useNavigate();
   const { isOpenModal, toggleModal } = useModal();
-  const handleClickNavigateButton = (selectedQuotationId: number) => {
+  const handleClickNavigateButton = () => {
     toggleModal();
-
-    navigate('/payment', { state: { selectedQuotationId } });
+    onSelect();
   };
 
   return (
@@ -52,7 +49,7 @@ export const IncomingQuotation = ({
           <DetailResponseQuotation
             quotationId={quotationId}
             handleCloseButton={toggleModal}
-            handleNavigate={() => handleClickNavigateButton(quotationId)}
+            handleNavigate={handleClickNavigateButton}
           />
         }
       </Modal>

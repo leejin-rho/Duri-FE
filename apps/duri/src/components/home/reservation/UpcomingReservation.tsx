@@ -10,8 +10,6 @@ import {
   WidthFitFlex,
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
-import { format } from 'date-fns';
-import { ko } from 'date-fns/locale';
 
 interface UpcomingReservationProps {
   shopId: number;
@@ -49,6 +47,23 @@ const UpcomingReservation = ({
 
   const handleClickShopButton = () => {
     navigate(`/shop/${shopId}`);
+  };
+
+  const formatReservationDate = (reservationDate: string): string => {
+    if (!reservationDate) return '예약 정보 없음';
+
+    // 날짜와 시간 분리
+    const [datePart, hourPart] = reservationDate.split(' ');
+
+    // 시간 포맷 결정 (오전/오후)
+    const hour = parseInt(hourPart, 10);
+    const period = hour < 12 ? '오전' : '오후';
+    const formattedHour = hour <= 12 ? hour : hour - 12;
+
+    // 날짜 변환 (YYYY-MM-DD → YYYY.MM.DD)
+    const formattedDate = datePart.replace(/-/g, '.');
+
+    return `${formattedDate} ${period} ${formattedHour}시`;
   };
 
   return (
@@ -125,12 +140,10 @@ const UpcomingReservation = ({
         padding="12px 27px"
       >
         <Text typo="Label2" colorCode={theme.palette.Normal800}>
-          {format(reservationDate, 'yyyy.MM.dd a h시', {
-            locale: ko,
-          })}
+        {formatReservationDate(reservationDate)}
         </Text>
         <Text typo="Label2" colorCode={theme.palette.Normal800}>
-          {price.toLocaleString()} 원
+        {price ? `${price.toLocaleString()} 원` : '가격 정보 없음'}
         </Text>
       </BottomWrapper>
     </Wrapper>

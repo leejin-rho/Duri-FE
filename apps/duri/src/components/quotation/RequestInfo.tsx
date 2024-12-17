@@ -1,10 +1,4 @@
-import {
-  Flex,
-  Modal,
-  NextArrow,
-  Text,
-  theme,
-} from '@duri-fe/ui';
+import { Flex, Modal, NextArrow, Text, theme } from '@duri-fe/ui';
 import { useModal } from '@duri-fe/utils';
 import { format } from 'date-fns';
 
@@ -12,8 +6,8 @@ import { RequestDetailQuotation } from './RequestDetailQuotation';
 
 interface RequestInfoProps {
   requestId: number;
-  createdAt: Date;
-  expiredAt: Date;
+  createdAt: Date | null;
+  expiredAt: Date | null;
   expired?: boolean;
   margin?: string;
 }
@@ -48,17 +42,29 @@ export const RequestInfo = ({
           <Text typo="Label4" colorCode={theme.palette.Gray300}>
             요청서 전송 일자
           </Text>
-          <Text typo="Caption2" colorCode={theme.palette.Gray300}>
-            {format(createdAt, 'yyyy-MM-dd HH:mm')}
-          </Text>
+          {createdAt ? (
+            <Text typo="Caption2" colorCode={theme.palette.Gray300}>
+              {format(createdAt, 'yyyy-MM-dd HH:mm')}
+            </Text>
+          ) : (
+            <Text typo="Caption2" colorCode={theme.palette.Gray300}>
+              정보 없음
+            </Text>
+          )}
         </Flex>
         <Flex justify="space-between">
           <Text typo="Label4" colorCode={theme.palette.Alert}>
             요청서 마감 시간
           </Text>
-          <Text typo="Caption2" colorCode={theme.palette.Gray300}>
-            {format(expiredAt, 'yyyy-MM-dd HH:mm')}
-          </Text>
+          {expiredAt ? (
+            <Text typo="Caption2" colorCode={theme.palette.Gray300}>
+              {format(expiredAt, 'yyyy-MM-dd HH:mm')}
+            </Text>
+          ) : (
+            <Text typo="Caption2" colorCode={theme.palette.Gray300}>
+              정보 없음
+            </Text>
+          )}
         </Flex>
       </Flex>
       <Modal isOpen={isOpenModal} toggleModal={toggleModal} title="요청서">

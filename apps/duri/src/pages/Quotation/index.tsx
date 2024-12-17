@@ -21,6 +21,10 @@ const QuotationPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(()=>{
+console.log(requestList);
+  },[requestList])
+
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
       <Header title="요청서 및 견적서" />
