@@ -42,6 +42,7 @@ export const ShopInfo = ({
   address,
   shopTag1,
   shopTag2,
+  shopTag3,
   onClick,
   themeVariant,
 }: ShopInfoProps) => {
@@ -81,6 +82,7 @@ export const ShopInfo = ({
           <Flex justify="flex-start" gap={4} align='center'>
             <SalonTag content={shopTag1} />
             <SalonTag content={shopTag2} />
+            <SalonTag content={shopTag3} />
           </Flex>
         </Flex>
       </Flex>
