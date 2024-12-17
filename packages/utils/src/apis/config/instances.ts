@@ -42,6 +42,16 @@ export const publicInstance = axios.create({
   },
 });
 
+export const AIInstance = axios.create({
+  baseURL: BASE_URL,
+  timeout: 300000,
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  },
+});
+
 duriInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem('authorization_user');
   config.headers['authorization_user'] = token ? `Bearer ${token}` : '';

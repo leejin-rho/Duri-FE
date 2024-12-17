@@ -123,14 +123,16 @@ const Home = () => {
             )}
           </Flex>
 
-          {/* AI 스타일링 배너 */}
-          <StyleBannerWrapper
-            borderRadius={12}
-            widthPer={100}
-            margin="26px 0 0 0"
-          >
-            <AiStyleBanner height={70} />
-          </StyleBannerWrapper>
+          <a href="/ai">
+            {/* AI 스타일링 배너 */}
+            <StyleBannerWrapper
+              borderRadius={12}
+              widthPer={100}
+              margin="26px 0 0 0"
+            >
+              <AiStyleBanner height={70} />
+            </StyleBannerWrapper>
+          </a>
         </Flex>
         <Flex direction="column">
           {/* 추천 샵 */}

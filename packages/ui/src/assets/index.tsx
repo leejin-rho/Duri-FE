@@ -77,6 +77,9 @@ export { default as Store } from './Store';
 export { default as Trash } from './Trash';
 export { default as CheckCircle } from './CheckCircle';
 export { default as PaymentSuccess } from './PaymentSuccess';
+export { default as FilledHome } from './FilledHome';
+export { default as UploadIcon } from './UploadIcon';
+export { default as Save } from './Save';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -102,6 +105,7 @@ import DownArrow from './DownArrow';
 import EmptyImage from './EmptyImage';
 import EmptyStar from './EmptyStar';
 import FilledHeart from './FilledHeart';
+import FilledHome from './FilledHome';
 import FilledLocation from './FilledLocation';
 import FilledNotification from './FilledNotification';
 import FilledReport from './FilledReport';
@@ -109,6 +113,7 @@ import Filter from './Filter';
 import Heart from './Heart';
 import Help from './Help';
 import Hold from './Hold';
+import HomeIcon from './HomeIcon';
 import Information from './Information';
 import List from './List';
 import Location from './Location';
@@ -124,6 +129,7 @@ import RadioSelect from './RadioSelect';
 import RadioUnselect from './RadioUnselect';
 import Report from './Report';
 import SafetyHelp from './SafetyHelp';
+import Save from './Save';
 import Scissors from './Scissors';
 import SecurityWarning from './SecurityWarning';
 import SelectBox from './SelectBox';
@@ -142,6 +148,7 @@ import UnionDown from './UnionDown';
 import UnionUp from './UnionUp';
 import Unlock from './Unlock';
 import UpArrow from './UpArrow';
+import UploadIcon from './UploadIcon';
 import Write from './Write';
 
 export const icons = {
@@ -210,6 +217,10 @@ export const icons = {
   Dot,
   Tape,
   CheckCircle,
+  HomeIcon,
+  FilledHome,
+  UploadIcon,
+  Save,
 };
 
 export default icons;
