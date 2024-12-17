@@ -28,7 +28,9 @@ const ShopInfoItem = ({
   return (
     <Flex
       direction="column"
+      align="flex-start"
       padding="27px 16px"
+      gap={8}
       backgroundColor={theme.palette.Gray_White}
       borderRadius={12}
     >

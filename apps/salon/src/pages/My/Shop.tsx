@@ -74,6 +74,7 @@ const MyShopPage = () => {
               closeTime={shopDetail.closeTime}
               tags={shopDetail.tags}
               info={shopDetail.info}
+              kakaoTalk={shopDetail.kakaoTalk}
               onEdit={onShopInfoEdit}
               setOnEdit={setOnShopInfoEdit}
             />

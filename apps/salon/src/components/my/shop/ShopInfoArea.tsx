@@ -27,6 +27,7 @@ interface ShopInfoAreaProps {
   closeTime: string;
   tags: string[];
   info: string;
+  kakaoTalk: string;
   onEdit: boolean;
   setOnEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -39,6 +40,7 @@ const ShopInfoArea = ({
   closeTime,
   tags,
   info,
+  kakaoTalk,
   onEdit,
   setOnEdit,
 }: ShopInfoAreaProps) => {
@@ -156,7 +158,15 @@ const ShopInfoArea = ({
       </HeightFitFlex>
 
       <BottomSheet {...bottomSheetProps}>
-        <ShopInfoBottomSheet closeSheet={closeSheet} />
+        <ShopInfoBottomSheet
+          phone={phone}
+          openTime={openTime}
+          closeTime={closeTime}
+          tags={tags}
+          info={info}
+          kakaoTalk={kakaoTalk}
+          closeSheet={closeSheet}
+        />
       </BottomSheet>
     </>
   );
