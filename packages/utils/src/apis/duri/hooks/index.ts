@@ -7,3 +7,4 @@ export * from './onboarding';
 // export * from './payment';
 export * from './my';
 export * from './review';
+export * from './portfolio';

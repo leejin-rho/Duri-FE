@@ -2,6 +2,7 @@ import { forwardRef, Suspense, useEffect, useRef, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import { LatLngType } from '@duri/assets/types/map';
+import { ShopInfo } from '@duri/components/shop/ShopInfo';
 import useMakeCurrentLocationMarker from '@duri/hooks/useMakeCurrentMarker';
 import useMakeShopMarkers from '@duri/hooks/useMakeShopMarkers';
 import { RelativeMobile } from '@duri/pages/Shop';
@@ -10,7 +11,6 @@ import { ShopInfoType, useBottomSheet } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 import { SendRequestQBox } from './SendRequesQBox';
-import { ShopInfo } from './ShopInfo';
 import { ShopLine } from './ShopLine';
 
 interface MapProps {
@@ -172,6 +172,7 @@ export const MapInfo = forwardRef<HTMLDivElement, MapProps>(
                 )}
                 {sheetMode === 'expanded' && (
                   <ShopInfo
+                    isForBottomSheet={true}
                     shopIdx={selectedShop.shopId}
                     lat={location.coordinates.lat}
                     lng={location.coordinates.lng}

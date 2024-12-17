@@ -104,7 +104,6 @@ const Shop = () => {
   const handleSearchSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const searchValue = getValues('search').trim();
-    // console.log('검색값:', searchValue);
 
     if (!searchValue) {
       setSearchShops([]);

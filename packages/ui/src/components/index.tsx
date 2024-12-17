@@ -19,3 +19,4 @@ export * from './ProfileImage';
 export * from './Quotation';
 export * from './RatingStars';
 export * from './PetInfo';
+export * from './Portfolio';

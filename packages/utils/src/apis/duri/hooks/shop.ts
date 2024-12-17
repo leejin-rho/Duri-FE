@@ -7,12 +7,14 @@ import {
   ShopDetailParamType,
   ShopDetailResponse,
   ShopInfoResponse,
+  ShopReviewListResponse,
 } from '../../types';
 import { UseQueryProps } from '../../types/tanstack';
 import {
   getNearByShopInfo,
   getSearchShopResult,
   getShopDetailInfo,
+  getShopReviewList,
 } from '../shop';
 
 type UseGetNearByShopProps = UseQueryProps<
@@ -29,13 +31,12 @@ export const useGetNearByShopInfo = ({
   centerInfo,
   sortby,
 }: UseGetNearByShopProps) => {
-  const { data, refetch, isPending } = useQuery({
+  return useQuery({
     queryKey: ['getNearByShopInfo', centerInfo, ...(queryKey || [])],
     queryFn: () => getNearByShopInfo(centerInfo, sortby),
     enabled: !!centerInfo,
     ...options,
   });
-  return { data, refetch, isPending };
 };
 
 type UseGetSearchShopResultProps = UseQueryProps<
@@ -80,6 +81,26 @@ export const useGetShopDetailInfo = ({
     queryKey: ['getSearchShopResult', shopBaseInfo, ...(queryKey || [])],
     queryFn: () => getShopDetailInfo(shopBaseInfo),
     enabled: !!shopBaseInfo,
+    ...options,
+  });
+};
+
+type UseGetShopReviewList = UseQueryProps<
+  ShopReviewListResponse['response'],
+  BaseError
+> & {
+  shopId: number;
+};
+
+export const UseGetShopReviewList = ({
+  queryKey,
+  options,
+  shopId,
+}: UseGetShopReviewList) => {
+  return useQuery({
+    queryKey: ['getPortfolioDetail', shopId, ...(queryKey || [])],
+    queryFn: () => getShopReviewList({ shopId }),
+    enabled: !!shopId,
     ...options,
   });
 };

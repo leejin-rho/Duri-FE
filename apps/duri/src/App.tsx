@@ -51,6 +51,7 @@ function App() {
 
         <Route path="/shop/request" element={<RequestPage />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="shop/:shopId " />
 
         <Route path="/portfolio/:designerId" element={<Portfolio />} />
         <Route
@@ -59,11 +60,6 @@ function App() {
         />
 
         <Route path="/quotation" element={<QuotationPage />} />
-        <Route
-          path="/quotation/:quotationId"
-          element={<QuotationDetailPage />}
-        />
-
         <Route
           path="/quotation/:quotationId"
           element={<QuotationDetailPage />}

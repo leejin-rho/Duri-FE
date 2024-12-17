@@ -5,6 +5,7 @@ import {
   ShopDetailParamType,
   ShopDetailResponse,
   ShopInfoResponse,
+  ShopReviewListResponse,
 } from '../types';
 
 export const getNearByShopInfo = async (
@@ -36,6 +37,18 @@ export const getShopDetailInfo = async ({
 }: ShopDetailParamType): Promise<ShopDetailResponse['response']> => {
   const { data } = await publicInstance.get(`/shop/detail`, {
     params: { shopId, lat, lon },
+  });
+
+  return data.response;
+};
+
+export const getShopReviewList = async ({
+  shopId,
+}: {
+  shopId: number;
+}): Promise<ShopReviewListResponse['response']> => {
+  const { data } = await publicInstance.get(`/shop/review`, {
+    headers: { ShopId: shopId },
   });
 
   return data.response;
