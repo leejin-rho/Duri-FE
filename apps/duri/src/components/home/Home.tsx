@@ -12,7 +12,7 @@ import {
 import LastReservation from './reservation/LastReservation';
 import UpcomingReservation from './reservation/UpcomingReservation';
 
-interface UpcommingReservationProps {
+interface UpcomingReservationProps {
   petId: number;
   shopId: number;
   imageURL: string;
@@ -30,7 +30,7 @@ const CarouselHome = ({
   upcomingReservation,
   lastReservation,
 }: {
-  upcomingReservation?: UpcommingReservationProps;
+  upcomingReservation?: UpcomingReservationProps;
   lastReservation: string;
 }) => {
   const [swiperIndex, setSwiperIndex] = useState<number>(0); // 슬라이드 인덱스 상태
