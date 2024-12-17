@@ -173,7 +173,17 @@ interface ShopDetailType {
   tags: string[];
 }
 
-/** [PUT] /shop/profile/image 미용사 마이샵 사진 수정 */
-export interface PutShopImageResponse extends BaseResponse {
+/** [PUT] /shop/profile, /shop/profile/image 미용사 마이샵 수정 */
+export interface PutShopInfoResponse extends BaseResponse {
   response: ShopDetailType;
+}
+
+/** [PUT] /shop/profile 미용사 마이샵 정보 수정 */
+export interface PutShopInfoRequest {
+  phone: string;
+  openTime: string;
+  closeTime: string;
+  info: string;
+  kakaoTalk: string;
+  tags: string[];
 }

@@ -4,10 +4,11 @@ import { BaseError } from '../../types';
 import {
   GetMyShopInfoResponse,
   GroomerAndShopProfileResponse,
-  PutShopImageResponse,
+  PutShopInfoRequest,
+  PutShopInfoResponse,
 } from '../../types/my';
 import { UseQueryProps } from '../../types/tanstack';
-import { getGroomerInfo, getMyShopInfo } from '../my';
+import { getGroomerInfo, getMyShopInfo, putShopInfo } from '../my';
 
 import { putShopImage } from './../my';
 
@@ -45,12 +46,28 @@ export const UseGetMyShopInfo = ({ queryKey, options }: UseGetMyShopInfo) => {
   });
 };
 
+/** [PUT] /shop/profile/image 미용사 마이샵 사진 수정 */
 export const UsePutShopImage = () => {
-  return useMutation<PutShopImageResponse['response'], Error, FormData>({
+  return useMutation<PutShopInfoResponse['response'], Error, FormData>({
     mutationFn: (formData: FormData) => putShopImage(formData),
     onError: (error) => {
       console.error(error);
       alert('샵 사진 등록에 실패했습니다.');
+    },
+  });
+};
+
+/** [PUT] /shop/profile 미용사 마이샵 정보 수정 */
+export const UsePutShopInfo = () => {
+  return useMutation<
+    PutShopInfoResponse['response'],
+    Error,
+    PutShopInfoRequest
+  >({
+    mutationFn: (request: PutShopInfoRequest) => putShopInfo(request),
+    onError: (error) => {
+      console.error(error);
+      alert('샵 정보 수정에 실패했습니다.');
     },
   });
 };

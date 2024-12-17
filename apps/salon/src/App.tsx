@@ -8,6 +8,7 @@ import AuthPage from '@pages/Auth';
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import MyPage from '@pages/My';
+import MyShopPage from '@pages/My/Shop';
 import OnboardingPage from '@pages/Onboarding';
 import OnboardingPendingPage from '@pages/Onboarding/Pending';
 import StartPage from '@pages/Onboarding/StartPage';
@@ -19,7 +20,7 @@ import ReservationPage from '@pages/Quotation/ReservationPage';
 
 import PrivateRoute from '@components/PrivateRoute';
 
-import MyShopPage from './pages/My/Shop';
+import 'react-spring-bottom-sheet/dist/style.css';
 
 function App() {
   return (

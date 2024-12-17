@@ -3,7 +3,8 @@ import { publicInstance, salonInstance } from '@duri-fe/utils';
 import {
   GetMyShopInfoResponse,
   GroomerAndShopProfileResponse,
-  PutShopImageResponse,
+  PutShopInfoRequest,
+  PutShopInfoResponse,
 } from '../types/my';
 
 export const getGroomerInfo = async ({
@@ -28,11 +29,19 @@ export const getMyShopInfo = async (): Promise<
 /** [PUT] /shop/profile/image 미용사 마이샵 사진 수정 */
 export const putShopImage = async (
   formData: FormData,
-): Promise<PutShopImageResponse['response']> => {
+): Promise<PutShopInfoResponse['response']> => {
   const response = await salonInstance.put('shop/profile/image', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   });
+  return response.data.response;
+};
+
+/** [PUT] /shop/profile 미용사 마이샵 정보 수정 */
+export const putShopInfo = async (
+  request: PutShopInfoRequest,
+): Promise<PutShopInfoResponse['response']> => {
+  const response = await salonInstance.put('shop/profile', request);
   return response.data.response;
 };
