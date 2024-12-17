@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import {
   Call,
@@ -13,7 +14,10 @@ import {
   Time,
   WidthFitFlex,
 } from '@duri-fe/ui';
+import { useBottomSheet } from '@duri-fe/utils';
 import styled from '@emotion/styled';
+
+import ShopInfoBottomSheet from './ShopInfoBottomSheet';
 
 interface ShopInfoAreaProps {
   name: string;
@@ -38,6 +42,10 @@ const ShopInfoArea = ({
   onEdit,
   setOnEdit,
 }: ShopInfoAreaProps) => {
+  const { openSheet, closeSheet, bottomSheetProps } = useBottomSheet({
+    maxHeight: 636,
+  });
+
   const shopInfoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -56,91 +64,101 @@ const ShopInfoArea = ({
   }, [shopInfoRef]);
 
   return (
-    <HeightFitFlex direction="column" gap={8} margin="24px 0 0 0">
-      <Flex gap={17} justify="flex-start" margin="0 0 9px 0">
-        <Text typo="Body2">{name}</Text>
-        <WidthFitFlex gap={7}>
-          <Star width={14} />
-        </WidthFitFlex>
-      </Flex>
-
-      {/** 주소 */}
-      <Flex gap={6} justify="flex-start" height={16}>
-        <FilledLocation width={21} />
-        <TextLine typo="Caption3" colorCode={theme.palette.Gray400}>
-          {address}
-        </TextLine>
-      </Flex>
-
-      <ShopInfoContainer
-        direction="column"
-        gap={8}
-        ref={shopInfoRef}
-        onClick={() => setOnEdit(true)}
-      >
-        {/** 전화번호 */}
-        <Flex gap={10} justify="flex-start" margin="0 0 0 4px">
-          <Call width={16} />
-          <Text typo="Caption3" colorCode={theme.palette.Link}>
-            {phone}
-          </Text>
+    <>
+      <HeightFitFlex direction="column" gap={8} margin="24px 0 0 0">
+        <Flex gap={17} justify="flex-start" margin="0 0 9px 0">
+          <Text typo="Body2">{name}</Text>
+          <WidthFitFlex gap={7}>
+            <Star width={14} />
+          </WidthFitFlex>
         </Flex>
 
-        {/** 영업시간 */}
-        <Flex gap={10} justify="flex-start" margin="0 0 0 4px">
-          <Time width={16} />
-          <Text typo="Caption3">
-            {openTime} ~{closeTime}
-          </Text>
+        {/** 주소 */}
+        <Flex gap={6} justify="flex-start" height={16}>
+          <FilledLocation width={21} />
+          <TextLine typo="Caption3" colorCode={theme.palette.Gray400}>
+            {address}
+          </TextLine>
         </Flex>
 
-        {/** 태그 */}
-        {tags.length > 0 ? (
-          <TagList gap={10} justify="flex-start" margin="0 0 0 4px">
-            {tags.map((tag, index) => (
-              <SalonTag
-                key={index}
-                content={tag}
-                bg={theme.palette.Gray50}
-                borderRadius={2}
-              />
-            ))}
-          </TagList>
-        ) : (
+        <ShopInfoContainer
+          direction="column"
+          gap={8}
+          ref={shopInfoRef}
+          onClick={() => setOnEdit(true)}
+        >
+          {/** 전화번호 */}
+          <Flex gap={10} justify="flex-start" margin="0 0 0 4px">
+            <Call width={16} />
+            <Text typo="Caption3" colorCode={theme.palette.Link}>
+              {phone}
+            </Text>
+          </Flex>
+
+          {/** 영업시간 */}
+          <Flex gap={10} justify="flex-start" margin="0 0 0 4px">
+            <Time width={16} />
+            <Text typo="Caption3">
+              {openTime} ~{closeTime}
+            </Text>
+          </Flex>
+
+          {/** 태그 */}
+          {tags.length > 0 ? (
+            <TagList gap={10} justify="flex-start" margin="0 0 0 4px">
+              {tags.map((tag, index) => (
+                <SalonTag
+                  key={index}
+                  content={tag}
+                  bg={theme.palette.Gray50}
+                  borderRadius={2}
+                />
+              ))}
+            </TagList>
+          ) : (
+            <Flex
+              justify="flex-start"
+              backgroundColor={theme.palette.Gray_White}
+              borderRadius={8}
+              padding="4px 16px"
+            >
+              <Text typo="Caption3" colorCode={theme.palette.Gray500}>
+                매장 태그를 추가해주세요.
+              </Text>
+            </Flex>
+          )}
+
+          {/** 한줄소개 */}
           <Flex
             justify="flex-start"
             backgroundColor={theme.palette.Gray_White}
-            borderRadius={8}
-            padding="4px 16px"
+            padding="12px 16px"
+            borderRadius={12}
           >
-            <Text typo="Caption3" colorCode={theme.palette.Gray500}>
-              매장 태그를 추가해주세요.
-            </Text>
+            <TextHeight typo="Caption3" colorCode={theme.palette.Gray500}>
+              {info === null ? '매장 한줄소개를 작성해주세요.' : info}
+            </TextHeight>
           </Flex>
-        )}
 
-        {/** 한줄소개 */}
-        <Flex
-          justify="flex-start"
-          backgroundColor={theme.palette.Gray_White}
-          padding="12px 16px"
-          borderRadius={12}
-        >
-          <TextHeight typo="Caption3" colorCode={theme.palette.Gray500}>
-            {info === null ? '매장 한줄소개를 작성해주세요.' : info}
-          </TextHeight>
-        </Flex>
+          {onEdit && (
+            <ShopEditArea
+              backgroundColor={theme.palette.Black}
+              borderRadius={12}
+              onClick={openSheet}
+            >
+              <Pencil width={16} />
+              <Text typo="Label3" colorCode={theme.palette.White}>
+                수정하기
+              </Text>
+            </ShopEditArea>
+          )}
+        </ShopInfoContainer>
+      </HeightFitFlex>
 
-        {onEdit && (
-          <ShopEditArea backgroundColor={theme.palette.Black} borderRadius={12}>
-            <Pencil width={16} />
-            <Text typo="Label3" colorCode={theme.palette.White}>
-              수정하기
-            </Text>
-          </ShopEditArea>
-        )}
-      </ShopInfoContainer>
-    </HeightFitFlex>
+      <BottomSheet {...bottomSheetProps}>
+        <ShopInfoBottomSheet closeSheet={closeSheet} />
+      </BottomSheet>
+    </>
   );
 };
 
