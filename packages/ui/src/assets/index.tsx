@@ -82,6 +82,8 @@ export { default as FilledHome } from './FilledHome';
 export { default as UploadIcon } from './UploadIcon';
 export { default as Save } from './Save';
 export { default as LinkIcon } from './LinkIcon';
+export { default as ToggleDisable } from './ToggleDisable';
+export { default as ToggleEnable } from './ToggleEnable';
 
 import Add from './Add';
 import AddNew from './AddNew';

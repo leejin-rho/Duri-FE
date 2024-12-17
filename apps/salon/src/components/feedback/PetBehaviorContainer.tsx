@@ -1,5 +1,6 @@
 import { Button, Flex, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
+import { FeedBackRequestType } from '@salon/pages/Feedback';
 
 const FRIENDLY = ['베스트 프렌드', '라뽀가 많이 형성됐어요', '어색한 반응'];
 const REACTION = [
@@ -13,7 +14,29 @@ const BEHAVIOR = [
   '별다른 반응이 없어요',
 ];
 
-const PetBehaviorContainer = () => {
+interface PetBehaviorContainerProps {
+  newFeedbackRequest: FeedBackRequestType;
+  setNewFeedbackRequest: React.Dispatch<
+    React.SetStateAction<FeedBackRequestType>
+  >;
+}
+
+const PetBehaviorContainer = ({
+  newFeedbackRequest,
+  setNewFeedbackRequest,
+}: PetBehaviorContainerProps) => {
+  const { friendly, reaction, behavior } = newFeedbackRequest;
+
+  const handleBehaviorToggleSelect = (
+    key: keyof FeedBackRequestType,
+    value: string,
+  ) => {
+    setNewFeedbackRequest((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
   return (
     <>
       <Flex direction="column" padding="0 20px 24px" align="flex-start" gap={8}>
@@ -35,9 +58,14 @@ const PetBehaviorContainer = () => {
                 typo="Label3"
                 width="fit-content"
                 height="43px"
-                bg={theme.palette.White}
-                fontColor={theme.palette.Black}
-                border={`1px solid ${theme.palette.Gray100}`}
+                bg={
+                  friendly === item ? theme.palette.Black : theme.palette.White
+                }
+                fontColor={
+                  friendly === item ? theme.palette.White : theme.palette.Black
+                }
+                border={`1px solid ${friendly === item ? theme.palette.Black : theme.palette.Gray100}`}
+                onClick={() => handleBehaviorToggleSelect('friendly', item)}
               >
                 {item}
               </Button>
@@ -56,9 +84,14 @@ const PetBehaviorContainer = () => {
                 typo="Label3"
                 width="fit-content"
                 height="43px"
-                bg={theme.palette.White}
-                fontColor={theme.palette.Black}
-                border={`1px solid ${theme.palette.Gray100}`}
+                bg={
+                  reaction === item ? theme.palette.Black : theme.palette.White
+                }
+                fontColor={
+                  reaction === item ? theme.palette.White : theme.palette.Black
+                }
+                border={`1px solid ${reaction === item ? theme.palette.Black : theme.palette.Gray100}`}
+                onClick={() => handleBehaviorToggleSelect('reaction', item)}
               >
                 {item}
               </Button>
@@ -77,9 +110,14 @@ const PetBehaviorContainer = () => {
                 typo="Label3"
                 width="fit-content"
                 height="43px"
-                bg={theme.palette.White}
-                fontColor={theme.palette.Black}
-                border={`1px solid ${theme.palette.Gray100}`}
+                bg={
+                  behavior === item ? theme.palette.Black : theme.palette.White
+                }
+                fontColor={
+                  behavior === item ? theme.palette.White : theme.palette.Black
+                }
+                border={`1px solid ${behavior === item ? theme.palette.Black : theme.palette.Gray100}`}
+                onClick={() => handleBehaviorToggleSelect('behavior', item)}
               >
                 {item}
               </Button>

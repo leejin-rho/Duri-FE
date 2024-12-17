@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -53,14 +53,7 @@ const FeedBackPage = () => {
   // const { state } = useLocation();
   // const { quotationId } = state;
   // TODO: quotationId로 요청해서 펫, 보호자 데이터 받아오기
-  /**
-   "friendly": "string",
-  "reaction": "string",
-  "behavior": "string",
-  "noticeContent": "string",
-  "portfolioContent": "string",
-  "expose": true
- */
+
   const [newFeedbackRequest, setNewFeedbackRequest] =
     useState<FeedBackRequestType>({
       friendly: '',
@@ -70,8 +63,38 @@ const FeedBackPage = () => {
       portfolioContent: '',
       expose: true,
     });
+  const {
+    friendly,
+    reaction,
+    behavior,
+    noticeContent,
+    portfolioContent,
+    expose,
+  } = newFeedbackRequest;
 
   const [feedbackImageList, setFeedbackImageList] = useState<File[]>([]);
+
+  const [isValid, setIsValid] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (expose) {
+      setIsValid(
+        feedbackImageList.length > 0 &&
+          noticeContent !== '' &&
+          friendly !== '' &&
+          reaction !== '' &&
+          behavior !== '' &&
+          portfolioContent !== '',
+      );
+    } else {
+      setIsValid(
+        noticeContent !== '' &&
+          friendly !== '' &&
+          reaction !== '' &&
+          behavior !== '',
+      );
+    }
+  }, [newFeedbackRequest, feedbackImageList]);
 
   const handleSubmitFeedback = async () => {
     console.log(newFeedbackRequest);
@@ -90,6 +113,7 @@ const FeedBackPage = () => {
 
     // TODO: 피드백 POST
     console.log(formData);
+    // navigate(-1);
   };
 
   return (
@@ -153,28 +177,36 @@ const FeedBackPage = () => {
           </Flex>
 
           <Flex padding="16px 0" direction="column" align="flex-start">
-            <PetBehaviorContainer />
+            <PetBehaviorContainer
+              newFeedbackRequest={newFeedbackRequest}
+              setNewFeedbackRequest={setNewFeedbackRequest}
+            />
           </Flex>
 
           <Flex padding="16px 20px" direction="column" align="flex-start">
-            <Text typo="Title2">포트폴리오 노출 설정</Text>
-          </Flex>
-
-          <Flex padding="16px 20px" direction="column" align="flex-start">
-            <PortfolioInputContainer />
+            <PortfolioInputContainer
+              newFeedbackRequest={newFeedbackRequest}
+              setNewFeedbackRequest={setNewFeedbackRequest}
+            />
           </Flex>
         </Flex>
 
-        <FrontBtn
-          height="53px"
-          bg={theme.palette.Black}
-          borderRadius="0"
+        <button
+          type="button"
           onClick={handleSubmitFeedback}
+          disabled={!isValid}
         >
-          <Text typo="Body2" colorCode={theme.palette.White}>
-            완료
-          </Text>
-        </FrontBtn>
+          <FrontBtn
+            height="53px"
+            bg={isValid ? theme.palette.Black : theme.palette.Gray200}
+            disabled={!isValid}
+            borderRadius="0"
+          >
+            <Text typo="Body2" colorCode={theme.palette.White}>
+              완료
+            </Text>
+          </FrontBtn>
+        </button>
       </form>
 
       <SalonNavbar />

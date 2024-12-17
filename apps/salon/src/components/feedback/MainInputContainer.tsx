@@ -25,6 +25,7 @@ const MainInputContainer = ({
   newFeedbackRequest,
   setNewFeedbackRequest,
 }: MainInputContainerProps) => {
+  const { noticeContent } = newFeedbackRequest;
   const [previewImageList, setPreviewImageList] = useState<
     ImageListContainer[]
   >([]);
@@ -67,9 +68,14 @@ const MainInputContainer = ({
     <>
       <Flex direction="column" align="flex-start" gap={8}>
         <Text typo="Title2">오늘 미용은 어땠나요?</Text>
-        <Text typo="Label3" colorCode={theme.palette.Gray400}>
-          미용을 진행하는 동안의 강아지의 컨디션을 작성해주세요.
-        </Text>
+        <Flex direction="column" align="flex-start">
+          <Text typo="Label3" colorCode={theme.palette.Gray400}>
+            미용을 진행하는 동안의 강아지의 컨디션을 작성해주세요.
+          </Text>
+          <Text typo="Label3" colorCode={theme.palette.Gray400}>
+            사진을 업로드해야 포트폴리오에 등록됩니다.
+          </Text>
+        </Flex>
       </Flex>
       <ImageListContainer justify="flex-start" padding="16px 0 0" gap={8}>
         {previewImageList.length > 0 ? (
@@ -110,12 +116,13 @@ const MainInputContainer = ({
       </ImageListContainer>
       <TextField
         multiline
+        widthPer="100%"
         height={108}
-        value={newFeedbackRequest.noticeContent}
+        value={noticeContent}
         onChange={handleNoticeInputChange}
         placeholder={`예약자가 참고할 점이 있다면 작성해주세요.\n작성 내용은 [일지]에서 사용자가 열람 가능해요!`}
         placeholderTypo={theme.typo.Label3Thin}
-      ></TextField>
+      />
     </>
   );
 };
