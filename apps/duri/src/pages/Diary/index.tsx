@@ -14,7 +14,6 @@ import styled from '@emotion/styled';
 
 const PetDiary = () => {
   const { data: diaryStats } = UseGetDiaryData({});
-
   const { data: historyData } = useGetVisitHistory();
 
   return (
@@ -35,7 +34,7 @@ const PetDiary = () => {
           padding="24px 33px"
           gap={21}
         >
-          <Text typo="Title2">신참이 미용 레포트</Text>
+          <Text typo="Title2">미용 레포트</Text>
           <HeightFitFlex direction="column" gap={8}>
             <Flex justify="space-between">
               <Text typo="Label2">🥰 미용사와의 친화력</Text>
