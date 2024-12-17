@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
-  DuriNavbar,
   Flex,
   Header,
   MobileLayout,
+  SalonNavbar,
   Store,
   Text,
   theme,
@@ -21,10 +21,12 @@ const MyPage = () => {
 
   const navigate = useNavigate();
   const handleNavigate = (path: string) => navigate(path);
+
   const logout = () => {
-    localStorage.removeItem('authorization_user');
+    localStorage.removeItem('authorization_shop');
     navigate('/login');
   };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -85,7 +87,7 @@ const MyPage = () => {
           로그아웃
         </Text>
       </FlexButton>
-      <DuriNavbar />
+      <SalonNavbar />
     </MobileLayout>
   );
 };

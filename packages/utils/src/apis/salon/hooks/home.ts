@@ -2,8 +2,10 @@ import {
   BaseError,
   getClosetGrooming,
   getDailySchedule,
+  getGroomersProfileList,
   getHomeQuotationRequest,
   getHomeShopInfo,
+  GroomersListProfileResponse,
   HomeShopInfoResponse,
   putGroomingComplete,
   PutGroomingCompleteResponse,
@@ -81,5 +83,22 @@ export const usePutGroomingNoshow = (): UseMutationResult<
 > => {
   return useMutation({
     mutationFn: (quotationId: number) => putGroomingNoshow(quotationId),
+  });
+};
+
+type UseGetGroomerProfile = UseQueryProps<
+  GroomersListProfileResponse['response'],
+  BaseError
+>;
+
+export const useGetGroomersList = ({
+  queryKey,
+  options,
+}: UseGetGroomerProfile) => {
+  return useQuery({
+    queryKey: ['getPortfolioDetail', ...(queryKey || [])],
+    queryFn: () => getGroomersProfileList(),
+    staleTime: 1000 * 60 * 5,
+    ...options,
   });
 };

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { FilledHeart, Heart } from '@duri-fe/ui';
 import { theme } from '@duri-fe/ui';
@@ -17,6 +17,12 @@ export const GroomerPortfolio = ({ groomerId }: { groomerId: number }) => {
   const { data } = UseGetGroomerInfo({
     groomerId: groomerId,
   });
+
+  useEffect(()=>{
+    if(data){
+      console.log(data)
+    }
+  })
 
   return (
     <>

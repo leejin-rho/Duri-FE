@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Approve, Flex, Text, theme } from '@duri-fe/ui';
+import { Approve, Flex, ProfileImage, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 interface DesignerInfoProps {
@@ -45,31 +45,37 @@ export const DesignerInfo = ({
       padding={padding}
     >
       <ImageWrapper version={version}>
-        <DesignerImg
-          version={version}
-          src={imageUrl}
-          alt={`${name}'s profile`}
-        />
+        {imageUrl === undefined ? (
+          <ProfileImage width={102} height={102} borderRadius={102} />
+        ) : (
+          <DesignerImg
+            version={version}
+            src={imageUrl}
+            alt={`${name}'s profile`}
+          />
+        )}
       </ImageWrapper>
 
       <Flex direction="column" align="flex-start" justify="flex-start" gap={8}>
-        <Text typo="Title3">{name}</Text>
+        <Text typo="Title3">{name ?? '정보없음'}</Text>
 
         <Text
           typo="Caption4"
           colorCode={theme.palette.Gray400}
-        >{`경력 ${experience}년, ${age}세, ${gender}`}</Text>
+        >{`경력 ${experience ?? '-'}년, ${age ?? '-'}세, ${gender}`}</Text>
 
-        <Flex direction="column" gap={8}>
-          {roles.map((item, idx) => (
-            <Role key={idx}>
-              <Text typo="Caption3" colorCode={theme.palette.Link}>
-                {item}
-              </Text>
-              <Approve width={11} height={10} />
-            </Role>
-          ))}
-        </Flex>
+        {roles?.length > 0 && (
+          <Flex direction="column" gap={8}>
+            {roles.map((item, idx) => (
+              <Role key={idx}>
+                <Text typo="Caption3" colorCode={theme.palette.Link}>
+                  {item}
+                </Text>
+                <Approve width={11} height={10} />
+              </Role>
+            ))}
+          </Flex>
+        )}
       </Flex>
     </Container>
   );

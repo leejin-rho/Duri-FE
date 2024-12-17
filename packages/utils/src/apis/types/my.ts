@@ -114,7 +114,7 @@ export interface VisitHistoryResponse {
   }[];
 }
 
-/** 그루머 아이디로 그루머 인포 조회 시 사용 */
+/** 그루머 아이디로 그루머 인포 조회 시 사용 & 포트폴리오 조회를 위해 id 얻으려고 사용 */
 export interface GroomerInfoType {
   id: number;
   email: string;
@@ -127,6 +127,7 @@ export interface GroomerInfoType {
   info: string;
   license: string[];
 }
+
 
 export interface GroomerInfoResponse extends BaseResponse {
   response: GroomerInfoType;

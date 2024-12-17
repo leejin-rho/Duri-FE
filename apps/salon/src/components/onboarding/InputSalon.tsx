@@ -260,7 +260,7 @@ const InputSalon = ({
           <Button
             bg={theme.palette.Black}
             fontColor={theme.palette.White}
-            onSubmit={handleSubmit(onSubmitSalonData)}
+            onClick={handleSubmit(onSubmitSalonData)}
           >
             다음 단계
           </Button>

@@ -1,5 +1,20 @@
 import { BaseResponse } from './base';
 
+export interface GroomerProfileInfo extends BaseResponse {
+  response: {
+    id: number;
+    email: string;
+    phone: string;
+    name: string;
+    gender: string;
+    age: number;
+    history: number;
+    image: string;
+    info: string;
+    license: string[];
+  }[];
+}
+
 export interface PortfolioType {
   feedbackId: number;
   imageUrl: string;
@@ -34,6 +49,7 @@ export interface PortfolioDetailType {
   feedbackImages: string[];
   petInfo: PortfolioPetInfo;
   groomerInfo: PortfolioGroomerInfo;
+  feedbackDate: string;
 }
 
 export interface PorfolioDetailResponse extends BaseResponse {
