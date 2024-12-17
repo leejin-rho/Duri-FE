@@ -31,6 +31,9 @@ import PortfolioDetail from '@pages/Shop/PortfolioDetail';
 
 import 'react-spring-bottom-sheet/dist/style.css';
 
+import DooriAI from './pages/DooriAI';
+import DooriAIResult from './pages/DooriAI/AIResult';
+import AIStyling from './pages/DooriAI/AIStyling';
 import ReviewModifyPage from './pages/Review/ReviewModify';
 
 function App() {
@@ -78,6 +81,10 @@ function App() {
         <Route path="/my/review/:reviewId" element={<MyReviewDetailPage />} />
         <Route path="/my/review/write" element={<ReviewWritePage />} />
         <Route path="/my/review/modify" element={<ReviewModifyPage />} />
+
+        <Route path="/ai/home" element={<DooriAI />} />
+        <Route path="/ai/styling" element={<AIStyling />} />
+        <Route path="/ai/result" element={<DooriAIResult />} />
       </Routes>
     </BrowserRouter>
   );

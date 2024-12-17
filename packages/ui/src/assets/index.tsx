@@ -76,6 +76,7 @@ export { default as Scissors } from './Scissors';
 export { default as Store } from './Store';
 export { default as Trash } from './Trash';
 export { default as CheckCircle } from './CheckCircle';
+export { default as FilledHome } from './FilledHome';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -101,6 +102,7 @@ import DownArrow from './DownArrow';
 import EmptyImage from './EmptyImage';
 import EmptyStar from './EmptyStar';
 import FilledHeart from './FilledHeart';
+import FilledHome from './FilledHome';
 import FilledLocation from './FilledLocation';
 import FilledNotification from './FilledNotification';
 import FilledReport from './FilledReport';
@@ -108,6 +110,7 @@ import Filter from './Filter';
 import Heart from './Heart';
 import Help from './Help';
 import Hold from './Hold';
+import HomeIcon from './HomeIcon';
 import Information from './Information';
 import List from './List';
 import Location from './Location';
@@ -207,6 +210,8 @@ export const icons = {
   Dot,
   Tape,
   CheckCircle,
+  HomeIcon,
+  FilledHome,
 };
 
 export default icons;
