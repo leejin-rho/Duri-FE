@@ -12,8 +12,9 @@ import {
   Write,
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
-import { OwnerInfo } from '@salon/components/my/OwnerInfo';
-import { Status } from '@salon/components/my/Status';
+import { OwnerInfo } from '@salon/components/my/info/OwnerInfo';
+import { ShopInfoCard } from '@salon/components/my/info/ShopInfoCard';
+import { Status } from '@salon/components/my/info/Status';
 
 const MyPage = () => {
   // const { data: petData, isError: getPetInfoError } = useGetPetInfo();
@@ -31,7 +32,12 @@ const MyPage = () => {
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
       <Header />
-      <FlexGrow direction="column" padding="0 18px" margin="0 0 100px 0" justify='flex-start'>
+      <FlexGrow
+        direction="column"
+        padding="0 18px"
+        margin="0 0 100px 0"
+        justify="flex-start"
+      >
         <OwnerInfo
           shopId={1}
           shopName="댕댕샵"
@@ -40,6 +46,15 @@ const MyPage = () => {
         <Flex direction="column" margin="40px 0 0">
           <Status reservationCnt={3} noShowCnt={1} />
           <Flex direction="column" margin="8px 0" gap={8}>
+            <ShopInfoCard
+              shopId={1}
+              shopName="댕댕샵"
+              address="서울특별시 강남구 188-16 101호"
+              image=""
+              shopTag1="노견전문"
+              shopTag2="소형견"
+              shopTag3="프리미엄"
+            />
             <Flex gap={10}>
               <FlexButton
                 padding="13px 35px"
@@ -63,14 +78,13 @@ const MyPage = () => {
               </FlexButton>
             </Flex>
           </Flex>
-
         </Flex>
       </FlexGrow>
       <FlexButton margin="0 0 100px" onClick={logout}>
-            <Text typo="Caption2" colorCode={theme.palette.Gray300}>
-              로그아웃
-            </Text>
-          </FlexButton>
+        <Text typo="Caption2" colorCode={theme.palette.Gray300}>
+          로그아웃
+        </Text>
+      </FlexButton>
       <DuriNavbar />
     </MobileLayout>
   );
@@ -83,5 +97,5 @@ const FlexButton = styled(Flex)`
 `;
 
 const FlexGrow = styled(Flex)`
-    flex: 1;
-`
+  flex: 1;
+`;

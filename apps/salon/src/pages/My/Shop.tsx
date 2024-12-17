@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 
 import {
   Call,
-  FilledLocation,
   Flex,
   Header,
   HeightFitFlex,
@@ -15,9 +14,9 @@ import {
   WidthFitFlex,
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
-import { ShopPhotos } from '@salon/components/my/ShopPhotos';
+import { ShopPhotos } from '@salon/components/my/info/ShopPhotos';
 
-import { DesignerInfo } from './DesignerInfo';
+import { DesignerInfo } from '../../components/my/info/DesignerInfo';
 
 const MyShopPage = () => {
   const navigate = useNavigate();
@@ -48,10 +47,8 @@ const MyShopPage = () => {
             </WidthFitFlex>
           </Flex>
 
-          <Flex gap={6} justify="flex-start">
-            <FilledLocation width={21} />
+          <Flex justify="flex-start">
             <TextLine typo="Caption3" colorCode={theme.palette.Gray400}>
-              <MarkText>{`354m | `}</MarkText>
               서울특별시 강남구 188-16 101호
             </TextLine>
           </Flex>
@@ -122,10 +119,6 @@ export default MyShopPage;
 
 const ShopInfoContainer = styled(Flex)`
   overflow-y: auto;
-`;
-
-const MarkText = styled.span`
-  font-weight: 600;
 `;
 
 const TextLine = styled(Text)`

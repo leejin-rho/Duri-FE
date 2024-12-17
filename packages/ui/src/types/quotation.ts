@@ -20,6 +20,7 @@ export interface ResponseQuotationType {
   };
   quotation: {
     requestId: number;
+    quotationId: number;
     memo: string;
     startDateTime: string;
     endDateTime: string;

@@ -13,6 +13,7 @@ const PaymentPage = () => {
   if (requestId === undefined) return;
   const { data: quotationData } = useGetDetailQuotation(requestId);
   const [groomingList, setGroomingList] = useState<string[]>([]);
+  console.log('quotationId, requestId : ', quotationData, requestId);
 
   useEffect(() => {
     if (quotationData) {
