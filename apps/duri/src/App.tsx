@@ -47,6 +47,17 @@ function App() {
 
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="shop/:shopId " />
+
+        <Route path="/ai" element={<DooriAI />} />
+        <Route path="/ai/styling" element={<AIStyling />} />
+        <Route path="/ai/result" element={<DooriAIResult />} />
+
+        <Route path="/portfolio/:designerId" element={<Portfolio />} />
+        <Route
+          path="/portfolio/:designerId/:portfolioId"
+          element={<PortfolioDetail />}
+        />
 
         <Route element={<PrivateRoute />}>
           <Route path="/onboarding" element={<StartPage />} />
@@ -56,8 +67,6 @@ function App() {
           <Route path="/payment/success" element={<SuccessPage />} />
           <Route path="/payment/fail" element={<FailPage />} />
 
-          <Route path="/shop" element={<Shop />} />
-          <Route path="shop/:shopId " />
           <Route path="/shop/request" element={<RequestPage />} />
 
           <Route path="/my" element={<MyPage />} />
@@ -70,16 +79,6 @@ function App() {
           <Route path="/my/review/:reviewId" element={<MyReviewDetailPage />} />
           <Route path="/my/review/write" element={<ReviewWritePage />} />
           <Route path="/my/review/modify" element={<ReviewModifyPage />} />
-
-          <Route path="/ai" element={<DooriAI />} />
-          <Route path="/ai/styling" element={<AIStyling />} />
-          <Route path="/ai/result" element={<DooriAIResult />} />
-
-          <Route path="/portfolio/:designerId" element={<Portfolio />} />
-          <Route
-            path="/portfolio/:designerId/:portfolioId"
-            element={<PortfolioDetail />}
-          />
 
           <Route path="/quotation" element={<QuotationPage />} />
           <Route
