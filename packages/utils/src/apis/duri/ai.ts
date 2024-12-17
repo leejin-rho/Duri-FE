@@ -1,4 +1,4 @@
-import { AIInstance } from '../axiosConfig';
+import { AIInstance } from '../config';
 import { AIParams, AIStylingResponse } from '../types/ai';
 
 export const postAIStyling = async ({
