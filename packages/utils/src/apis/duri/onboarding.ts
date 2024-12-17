@@ -1,4 +1,5 @@
-import { duriInstance } from '../config/instances';
+import { duriInstance } from '@duri-fe/utils';
+
 import { BaseResponse } from '../types';
 interface FormData {
   name: string;

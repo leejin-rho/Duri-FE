@@ -1,4 +1,5 @@
-import { salonInstance } from '../config/instances';
+import { salonInstance } from '@duri-fe/utils';
+
 import {
   ApprovedQuotationListResponse,
   CompletedQuotationListResponse,

@@ -1,4 +1,5 @@
-import { publicInstance } from '../axiosConfig';
+import { publicInstance } from '@duri-fe/utils';
+
 import { GroomerInfoResponse } from '../types/my';
 
 export const getGroomerInfo = async ({

@@ -1,4 +1,5 @@
-import { salonInstance } from '../config/instances';
+import { salonInstance } from '@duri-fe/utils';
+
 import { NewRequestListResponse, RequestDetailResponse } from '../types';
 
 /** 새로운 견적요청 리스트 */

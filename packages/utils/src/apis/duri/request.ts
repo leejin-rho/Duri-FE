@@ -1,4 +1,5 @@
-import { duriInstance } from '../config/instances';
+import { duriInstance } from '@duri-fe/utils';
+
 import { BaseResponse, RequestProps } from '../types';
 
 interface RequestResponse extends BaseResponse {
