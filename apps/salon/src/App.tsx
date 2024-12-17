@@ -19,6 +19,8 @@ import ReservationPage from '@pages/Quotation/ReservationPage';
 
 import PrivateRoute from '@components/PrivateRoute';
 
+import MyShopPage from './pages/My/Shop';
+
 function App() {
   return (
     <BrowserRouter>
@@ -47,6 +49,7 @@ function App() {
             path="/portfolio/:groomerId/:portfolioId"
             element={<PortfolioDetailPage />}
           />
+          <Route path="/my/shop" element={<MyShopPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

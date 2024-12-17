@@ -149,3 +149,26 @@ export interface GroomerAndShopProfileResponse extends BaseResponse {
     shopProfileDetail: ShopInfoType;
   };
 }
+
+/** [GET] /groomer/profile 미용사 마이샵 */
+export interface GetMyShopInfoResponse extends BaseResponse {
+  response: {
+    groomerProfileDetailResponse: GroomerInfoType;
+    reservationCount: number;
+    noShowCount: number;
+    shopProfileDetailResponse: ShopDetailType;
+  };
+}
+
+interface ShopDetailType {
+  id: number;
+  name: string;
+  address: string;
+  imageURL: string;
+  phone: string;
+  openTime: string;
+  closeTime: string;
+  info: string;
+  kakaoTalk: string;
+  tags: string[];
+}
