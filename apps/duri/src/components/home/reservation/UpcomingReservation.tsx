@@ -70,7 +70,7 @@ const UpcomingReservation = ({
     <Wrapper
       direction="column"
       borderRadius={12}
-      padding="27px 0"
+      padding="27px 0 36px"
       backgroundColor={theme.palette.White}
     >
       <Flex gap={14} padding="0 20px">

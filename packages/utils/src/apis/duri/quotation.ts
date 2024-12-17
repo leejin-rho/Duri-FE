@@ -1,6 +1,6 @@
 import { duriInstance } from '@duri-fe/utils';
 
-import { QuotationListResponse, RequestDetailResponse } from '../types';
+import { QuotationListResponse, RequestDetailResponse, RequestItemsResponse } from '../types';
 
 //고객 -> 미용사 (request)견적서 상세조회
 export const getDetailRequestQuotaion = async (
