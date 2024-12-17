@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { RequestType } from '@duri/assets/types';
 import MonthlyCalendar from '@duri/components/request/Calendar';
@@ -47,6 +47,8 @@ const validateRequestInfo = (requestInfo: RequestType): boolean => {
 
 const RequestPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const { data: petInfo } = useGetPetInfo();
   const {
     mutateAsync: request,
@@ -90,12 +92,16 @@ const RequestPage = () => {
     navigate(-1);
   };
 
-  // const handle
-
+  //스크롤 멘 위로 옮기고 shopIds리스트 받은 애 set
   useEffect(() => {
     window.scrollTo(0, 0);
+    setRequestInfo((prev) => ({
+      ...prev,
+      shopIds: location.state?.shopIds,
+    }));
   }, []);
 
+  
   useEffect(() => {
     if (petInfo) {
       setRequestInfo((prev) => ({ ...prev, petId: petInfo.petId }));
@@ -106,7 +112,6 @@ const RequestPage = () => {
   useEffect(() => {
     const isValid = validateRequestInfo(requestInfo);
     setIsButton(isValid);
-
   }, [requestInfo]);
 
   // 오류 처리
