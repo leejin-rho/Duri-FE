@@ -6,6 +6,7 @@ import {
   DuriNavbar,
   Flex,
   Header,
+  HeightFitFlex,
   MobileLayout,
   Modal,
   Text,
@@ -60,24 +61,35 @@ const MyHistoryPage = () => {
       >
         {historyData && historyData.length > 0 ? (
           historyData.map(({ month, historyList }) => (
-            <div key={month}>
-              {historyList.map((history) => (
-                <HistoryCard
-                  key={history.quotationId}
-                  visitMonth={`${month}월`}
-                  tagContent={history.complete ? '미용 완료' : '미완료'}
-                  designerName={history.groomerName}
-                  shopName={history.shopName}
-                  petName={history.petName}
-                  visitDate={history.startDate}
-                  dayOfWeek={history.day}
-                  toggleModal={() =>
-                    // handleToggleModal(history.quotationId, history.shopId)
-                    handleToggleModal(history.quotationId)
-                  }
-                />
-              ))}
-            </div>
+            <HeightFitFlex
+              key={month}
+              direction="column"
+              align="start"
+              gap={16}
+            >
+              <Text typo="Title1">{month}월 방문</Text>
+              <BorderLeftFlex
+                gap={24}
+                direction="column"
+                padding="8px 0 8px 19px"
+              >
+                {historyList.map((history) => (
+                  <HistoryCard
+                    key={history.quotationId}
+                    tagContent={history.complete ? '미용 완료' : '미완료'}
+                    designerName={history.groomerName}
+                    shopName={history.shopName}
+                    petName={history.petName}
+                    visitDate={history.startDate}
+                    dayOfWeek={history.day}
+                    toggleModal={() =>
+                      // handleToggleModal(history.quotationId, history.shopId)
+                      handleToggleModal(history.quotationId)
+                    }
+                  />
+                ))}
+              </BorderLeftFlex>
+            </HeightFitFlex>
           ))
         ) : (
           <Text>이용 기록이 없습니다.</Text>
@@ -101,3 +113,7 @@ const MyHistoryPage = () => {
 };
 
 export default MyHistoryPage;
+
+const BorderLeftFlex = styled(Flex)`
+  border-left: 3px solid ${theme.palette.Gray50};
+`;
