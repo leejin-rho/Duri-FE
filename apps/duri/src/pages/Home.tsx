@@ -30,7 +30,7 @@ const Home = () => {
   const [lat, setLat] = useState<number | null>(null);
   const [lon, setLon] = useState<number | null>(null);
 
-  const { data: petData, isError: getPetInfoError } = useGetPetInfo();
+  const { data: petData } = useGetPetInfo();
   const { data: regularListData } = useGetRegularShopList();
   const { data: reservationData } = useGetUpcomingReservation();
   const {
@@ -43,10 +43,6 @@ const Home = () => {
   const handleNavigate = () => {
     navigate('/shop');
   };
-
-  useEffect(() => {
-    if (getPetInfoError) navigate('/login');
-  }, [petData, getPetInfoError]);
 
   useEffect(() => {
     if (reservationData) console.log(reservationData);
@@ -86,8 +82,7 @@ const Home = () => {
                 : reservationData
             }
             lastReservation={
-              // petData?.lastGrooming === undefined ? '' : petData.lastGrooming
-              '2024-12-11 06:00'
+              petData?.lastGrooming === undefined ? '' : petData.lastGrooming
             }
           />
         </HeightFitFlex>

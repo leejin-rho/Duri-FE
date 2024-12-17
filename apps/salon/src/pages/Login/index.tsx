@@ -1,8 +1,9 @@
 import {
+  Doori,
   Flex,
   MobileLayout,
   NaverLogo,
-  SpeechBallonContainer,
+  SpeechBalloonContainer,
   Text,
   theme,
 } from '@duri-fe/ui';
@@ -18,8 +19,8 @@ const LoginPage = () => {
     <MobileLayout>
       <Container direction="column">
         {/** 로고 */}
-        <Logo src="/images/logo.png" />
-        <Flex direction="column" margin="24px 0 0 0">
+        <Doori height={40} />
+        <Flex direction="column" margin="48px 0 0 0">
           <Text typo="Heading">두리묭실로</Text>
           <Text typo="Heading">쉽고 빠르게 예약해요!</Text>
           <Text
@@ -33,7 +34,7 @@ const LoginPage = () => {
 
         {/** 로그인 버튼 */}
         <Flex direction="column" margin="120px 0 0 0">
-          <SpeechBallonContainer
+          <SpeechBalloonContainer
             label="3초만에 시작하기 🚀"
             textColor={theme.palette.Gray400}
           />
@@ -43,7 +44,7 @@ const LoginPage = () => {
         </Flex>
 
         {/** 문의하기 */}
-        <Contact>
+        <Contact href="mailto:fodo9898@inha.edu">
           <Text typo="Body3" colorCode={theme.palette.Gray300}>
             문의하기
           </Text>
@@ -58,18 +59,17 @@ const Container = styled(Flex)`
   position: relative;
 `;
 
-const Logo = styled.img``;
-
 const LoginButton = styled.button`
   width: 60px;
   height: 60px;
   margin-top: 20px;
 `;
 
-const Contact = styled(Flex)`
+const Contact = styled.a`
   position: absolute;
   bottom: 50px;
   height: fit-content;
+  text-decoration: none;
 `;
 
 export default LoginPage;

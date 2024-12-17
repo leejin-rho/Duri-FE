@@ -182,3 +182,7 @@ export interface QuotationListResponse extends BaseResponse {
     }[];
   };
 }
+
+export interface PutGroomingCompleteResponse extends BaseResponse {
+  response: string;
+}

@@ -1,10 +1,12 @@
-import { duriInstance } from '../axiosConfig';
+import { duriInstance } from '@duri-fe/utils';
+
 import {
   BaseResponse,
   RecommendShopResponse,
   RegularShopResponse,
   UpcomingReservationResponse,
 } from '../types';
+
 interface PetInfoResponse extends BaseResponse {
   response: {
     petId: number;

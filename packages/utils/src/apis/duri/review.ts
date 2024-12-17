@@ -1,4 +1,5 @@
-import { duriInstance } from '../axiosConfig';
+import { duriInstance } from '@duri-fe/utils';
+
 import { PostPutReviewResponse } from '../types/review';
 
 export const postReview = async (

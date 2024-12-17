@@ -1,4 +1,5 @@
-import { publicInstance } from '../axiosConfig';
+import { publicInstance } from '@duri-fe/utils';
+
 import { PorfolioDetailResponse, PorfolioResponse } from '../types/portfolio';
 
 export const getGroomerPorfolio = async ({
