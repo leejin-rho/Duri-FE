@@ -80,6 +80,7 @@ export { default as PaymentSuccess } from './PaymentSuccess';
 export { default as FilledHome } from './FilledHome';
 export { default as UploadIcon } from './UploadIcon';
 export { default as Save } from './Save';
+export { default as LinkIcon } from './LinkIcon';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -115,6 +116,7 @@ import Help from './Help';
 import Hold from './Hold';
 import HomeIcon from './HomeIcon';
 import Information from './Information';
+import LinkIcon from './LinkIcon';
 import List from './List';
 import Location from './Location';
 import LocationShop from './LocationShop';
@@ -221,6 +223,7 @@ export const icons = {
   FilledHome,
   UploadIcon,
   Save,
+  LinkIcon,
 };
 
 export default icons;
