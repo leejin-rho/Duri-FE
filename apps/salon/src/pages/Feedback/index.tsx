@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
   Card,
@@ -32,9 +32,8 @@ export interface FeedBackRequestType {
 
 const FeedBackPage = () => {
   const navigate = useNavigate();
-  // const { state } = useLocation();
-  // const { quotationId } = state;
-  const quotationId = 10;
+  const { state } = useLocation();
+  const { quotationId } = state;
 
   const { data: petAndUserInfo } = useGetPetInfoByQuotationId({
     quotationId: quotationId,
