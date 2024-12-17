@@ -18,9 +18,9 @@ export interface ResponseQuotationType {
     designCut: string[];
     otherRequests: string;
   };
+  quotationId: number;
   quotation: {
     requestId: number;
-    quotationId: number;
     memo: string;
     startDateTime: string;
     endDateTime: string;

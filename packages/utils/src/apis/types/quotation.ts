@@ -144,10 +144,6 @@ export interface CompletedQuotationListResponse extends BaseResponse {
   };
 }
 
-//매장 순위 api 수정때문에 응답 견적서 quotation 속성에 quotationId가 추가됐는데 일단 따로 타입 만들었어요
-export interface GetQuotationResponseListType extends PostQuotationRequest{
-  quotationId: number;
-}
 
 //응답 견적서 상세조회
 export interface QuotationDetailResponse extends BaseResponse {
@@ -156,7 +152,8 @@ export interface QuotationDetailResponse extends BaseResponse {
     quotationCreatedAt: string;
     petDetail: RequestDetailPetType;
     menuDetail: QuotationDetailsType;
-    quotation: GetQuotationResponseListType;
+    quotation: PostQuotationRequest;
+    quotationId: number;
     status: string;
   };
 }
@@ -182,7 +179,6 @@ export interface QuotationListResponse extends BaseResponse {
     bestRatingShop: ShopType | null;
     bestShop: ShopType | null;
     quotations: {
-      quotationId: number;
       requestId: number;
       shopName: string;
       totalPrice: number | null;

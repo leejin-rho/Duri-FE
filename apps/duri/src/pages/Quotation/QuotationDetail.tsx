@@ -17,7 +17,6 @@ import { ShopType, useGeolocation, useGetQuotationList } from '@duri-fe/utils';
 
 interface QuotationType {
   requestId: number;
-  quotationId: number;
   shopName: string;
   totalPrice: number | null;
 }
@@ -27,7 +26,7 @@ const QuotationDetailPage = () => {
 
   const location = useLocation();
   const requestId = location.state; //요청 id
-  const { quotationId } = useParams(); //견적서 id
+  const { quotationReqId } = useParams<{ quotationReqId: string }>(); //견적서 id
   const { coordinates } = useGeolocation();
 
   const [lat, setLat] = useState<number | null>(null);
@@ -42,21 +41,13 @@ const QuotationDetailPage = () => {
   );
 
   const { data: quotationListData } = useGetQuotationList(
-    Number(quotationId),
+    Number(quotationReqId),
     lat,
     lon,
   );
 
   const handleClickBackButton = () => {
     navigate(-1);
-  };
-
-  const handleClickPayment = (quotationId: number) => {
-    navigate('/payment', {
-      state: {
-        quotationId: quotationId,
-      },
-    });
   };
 
   useEffect(() => {
@@ -153,16 +144,16 @@ const QuotationDetailPage = () => {
           <Flex direction="column" align="flex-start" margin="31px 0 17px">
             <Text typo="Title2">들어온 견적</Text>
             <Flex direction="column" margin="17px 0 0 0" gap={8}>
-              {quotationList?.map(({ quotationId, requestId, shopName, totalPrice }) => (
-                <IncomingQuotation
-                  key={quotationId}
-                  quotationId={quotationId} //요청에 대한 응답견적서
-                  requestId={Number(requestId)} //사용자 요청 견적서
-                  salonName={shopName}
-                  price={totalPrice}
-                  onSelect={() => handleClickPayment(quotationId)}
-                />
-              ))}
+              {quotationList?.map(
+                ({ requestId, shopName, totalPrice }) => (
+                  <IncomingQuotation
+                    key={requestId}
+                    requestId={Number(requestId)}
+                    salonName={shopName}
+                    price={totalPrice}
+                  />
+                ),
+              )}
             </Flex>
           </Flex>
         }

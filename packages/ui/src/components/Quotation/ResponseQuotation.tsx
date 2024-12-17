@@ -93,9 +93,11 @@ export const ResponseQuotation = ({
           </Flex>
         </HeightFitFlex>
       </Flex>
-      <Flex gap={7} margin="6px 0" padding="16px 18.5px">
-        {children}
-      </Flex>
+      {children && (
+        <Flex gap={7} margin="6px 0" padding="16px 18.5px">
+          {children}
+        </Flex>
+      )}
     </MaxWidthFlex>
   );
 };

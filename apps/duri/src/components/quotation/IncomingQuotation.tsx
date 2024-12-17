@@ -5,25 +5,17 @@ import styled from '@emotion/styled';
 import { DetailResponseQuotation } from './DetailResponseQuotation';
 
 interface IncomingQuotationProps {
-  quotationId: number;
   requestId: number;
-  onSelect: () => void;
   salonName: string;
   price: number | null;
 }
 
 export const IncomingQuotation = ({
-  quotationId,
   requestId,
   salonName,
   price = null,
-  onSelect,
 }: IncomingQuotationProps) => {
   const { isOpenModal, toggleModal } = useModal();
-  const handleClickNavigateButton = () => {
-    toggleModal();
-    onSelect();
-  };
 
   return (
     <>
@@ -49,10 +41,8 @@ export const IncomingQuotation = ({
       <Modal isOpen={isOpenModal} toggleModal={toggleModal} title="견적서">
         {
           <DetailResponseQuotation
-            quotationId={quotationId} //결제를 위한 quotationId 전달
-            requestId={requestId} //견적서 조회를 위한 requestId 전달
+            requestId={requestId} //결제 시 메뉴 조회를 위한 requestId 전달
             handleCloseButton={toggleModal}
-            handleNavigate={handleClickNavigateButton}
           />
         }
       </Modal>

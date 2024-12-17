@@ -15,7 +15,8 @@ export const RequestItem = ({
 }: RequestItemType) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate(`/quotation/${quotationReqId}`); //URL에서는 요청 자체 id가 뜨게 하고, 실제 세부조회에서는 요청서의 id를 전달해서 조회할 수 있도록
+    navigate(`/quotation/${quotationReqId}`, {state: requestId}); 
+    //URL에서는 요청 자체 id가 뜨게 하고, 실제 세부조회에서는 요청서의 id를 전달해서 조회할 수 있도록
   };
 
   return (

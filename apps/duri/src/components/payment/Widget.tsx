@@ -80,7 +80,7 @@ const PaymentWidget = ({
           <Flex direction="column" id="payment-method" />
 
           {/* 이용약관 UI */}
-          <Flex id="agreement" padding="0" />
+          <Flex id="agreement" padding="0"></Flex>
           {/* 쿠폰 체크박스 */}
           {/* <div>
           <div>

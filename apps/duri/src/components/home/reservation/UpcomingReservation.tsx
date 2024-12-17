@@ -140,15 +140,18 @@ const UpcomingReservation = ({
         padding="12px 27px"
       >
         <Text typo="Label2" colorCode={theme.palette.Normal800}>
-        {formatReservationDate(reservationDate)}
+          {formatReservationDate(reservationDate)}
         </Text>
         <Text typo="Label2" colorCode={theme.palette.Normal800}>
-        {price ? `${price.toLocaleString()} 원` : '가격 정보 없음'}
+          {price ? `${price.toLocaleString()} 원` : '가격 정보 없음'}
         </Text>
       </BottomWrapper>
     </Wrapper>
   );
 };
+
+export default UpcomingReservation;
+
 
 const Wrapper = styled(Flex)`
   flex-shrink: 0;
@@ -160,8 +163,6 @@ const BottomWrapper = styled(Flex)`
   bottom: 0;
   border-radius: 0 0 12px 12px;
 `;
-
-export default UpcomingReservation;
 
 const ImageWrapper = styled(Image)`
   cursor: pointer;
