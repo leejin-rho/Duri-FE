@@ -1,11 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Call, Flex, LinkIcon, TextField, theme } from '@duri-fe/ui';
+import {
+  Button,
+  Call,
+  Flex,
+  LinkIcon,
+  Text,
+  TextField,
+  theme,
+  TimeTable,
+} from '@duri-fe/ui';
+import { TimeType, UsePutShopInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
-import { formatPhoneNumber } from '@salon/utils';
+import { checkContinuousTime, formatPhoneNumber } from '@salon/utils';
+import { getTimeRange, getTimeStr } from '@salon/utils/parseTimeRange';
 
 import ShopInfoItem from './ShopInfoItem';
+
+const timeList = Array(12)
+  .fill(0)
+  .map((_, i) => `${9 + i}:00`);
+
+const TAG_LIST = [
+  '소형견',
+  '중형견',
+  '대형견',
+  '예민한 반려견',
+  '예민한 피부',
+  '스트레스 케어',
+  '훈육미용',
+  '피어프리',
+];
 
 /** 각 항목 열고닫기 토글용 라벨 */
 export interface ToggleOpenState {
@@ -65,8 +91,60 @@ const ShopInfoBottomSheet = ({
     info: false,
   });
 
-  const handlePutShopInfo = (data: PutShopInfoRequest) => {
-    console.log(data);
+  const [selectedTimeList, setSelectedTimeList] = useState<TimeType>(
+    getTimeRange(openTime, closeTime),
+  );
+
+  const [selectedTagList, setSelectedTagList] = useState<string[]>(tags);
+
+  const handleTimeTableSelect = (key: string, value: boolean) => {
+    const updatedTimeList = { ...selectedTimeList, [key]: value };
+
+    // 연속적인 시간대인지 검증
+    const { isCountinuous } = checkContinuousTime(updatedTimeList, '');
+
+    if (isCountinuous) {
+      setSelectedTimeList(updatedTimeList);
+    } else {
+      alert('연속된 시간을 선택해주세요.');
+    }
+  };
+
+  const handleTagSelect = (selectedTag: string) => {
+    const set = new Set(selectedTagList);
+    if (typeof selectedTag === 'string') {
+      if (selectedTagList.includes(selectedTag)) {
+        set.delete(selectedTag);
+        console.log([...set]);
+        setSelectedTagList([...set]);
+      } else {
+        set.add(selectedTag);
+        if (set.size > 3) {
+          alert('태그는 최대 3개까지 선택 가능합니다.');
+          return;
+        }
+        console.log([...set]);
+        setSelectedTagList([...set]);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const { startTime, endTime } = getTimeStr(selectedTimeList);
+    setValue('openTime', startTime);
+    setValue('closeTime', endTime);
+  }, [selectedTimeList]);
+
+  useEffect(() => {
+    setValue('tags', selectedTagList);
+  }, [selectedTagList]);
+
+  const { mutateAsync } = UsePutShopInfo();
+
+  const handlePutShopInfo = async (data: PutShopInfoRequest) => {
+    // console.log(data);
+    await mutateAsync(data);
+    closeSheet();
   };
 
   return (
@@ -108,9 +186,11 @@ const ShopInfoBottomSheet = ({
           isOpen={isOpen.time}
           setIsOpen={setIsOpen}
         >
-          <Flex>
-            {openTime} ~ {closeTime}
-          </Flex>
+          <TimeTable
+            timeList={timeList}
+            selectedTimeList={selectedTimeList}
+            onSelect={handleTimeTableSelect}
+          />
         </ShopInfoItem>
 
         {/* 매장 태그 수정 */}
@@ -119,12 +199,35 @@ const ShopInfoBottomSheet = ({
           keyName="tags"
           isOpen={isOpen.tags}
           setIsOpen={setIsOpen}
+          gap={12}
         >
-          <Flex gap={8}>
-            {tags.map((tag) => (
-              <Flex key={tag}>{tag}</Flex>
+          <Text typo="Caption3" colorCode={theme.palette.Gray300}>
+            최대 3개 선택 가능
+          </Text>
+          <TagContainer gap={8} justify="flex-start">
+            {TAG_LIST.map((tag, index) => (
+              <TagButton
+                key={index}
+                onClick={() => handleTagSelect(tag)}
+                bg={
+                  selectedTagList.includes(tag)
+                    ? theme.palette.Black
+                    : theme.palette.Gray_White
+                }
+                fontColor={
+                  selectedTagList.includes(tag)
+                    ? theme.palette.White
+                    : theme.palette.Black
+                }
+                border={`1px solid ${theme.palette.Gray100}`}
+                height="43px"
+                typo="Body2"
+                width="fit-content"
+              >
+                <Text typo="Label3">{tag}</Text>
+              </TagButton>
             ))}
-          </Flex>
+          </TagContainer>
         </ShopInfoItem>
 
         {/* 카카오톡 오픈채팅 링크 수정 */}
@@ -153,7 +256,7 @@ const ShopInfoBottomSheet = ({
 
         {/* 매장 한줄 소개 수정 */}
         <ShopInfoItem
-          title="샵 한줄 소개 수정"
+          title="매장 소개글 수정"
           keyName="info"
           isOpen={isOpen.info}
           setIsOpen={setIsOpen}
@@ -162,14 +265,31 @@ const ShopInfoBottomSheet = ({
             {...register('info', { required: '샵 한줄 소개를 입력해주세요.' })}
             multiline
             placeholder="샵 한줄 소개를 입력해주세요."
-            maxLength={30}
+            maxLength={300}
             widthPer="100%"
             height={95}
           />
         </ShopInfoItem>
-        <button onSubmit={handleSubmit(handlePutShopInfo)}>
-          <Flex onClick={closeSheet}>ㅎㅎ</Flex>
-        </button>
+
+        <Flex gap={8}>
+          <CancleButton
+            width="136px"
+            bg={theme.palette.Gray20}
+            borderRadius="8px"
+            onClick={closeSheet}
+          >
+            <Text typo="Body4" colorCode={theme.palette.Black}>
+              취소
+            </Text>
+          </CancleButton>
+          <ConfirmButton onSubmit={handleSubmit(handlePutShopInfo)}>
+            <Button bg={theme.palette.Black} borderRadius="8px">
+              <Text typo="Body2" colorCode={theme.palette.White}>
+                수정하기
+              </Text>
+            </Button>
+          </ConfirmButton>
+        </Flex>
       </Flex>
     </FormWrapper>
   );
@@ -187,4 +307,21 @@ const InputWrapper = styled(Flex)`
 const InputField = styled.input`
   width: 100%;
 `;
+
+const TagContainer = styled(Flex)`
+  flex-wrap: wrap;
+`;
+
+const TagButton = styled(Button)`
+  flex-shrink: 0;
+`;
+
+const CancleButton = styled(Button)`
+  flex-shrink: 0;
+`;
+
+const ConfirmButton = styled.button`
+  flex-grow: 1;
+`;
+
 export default ShopInfoBottomSheet;

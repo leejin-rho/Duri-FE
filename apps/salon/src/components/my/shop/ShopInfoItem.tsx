@@ -8,6 +8,7 @@ interface ShopInfoItemProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<ToggleOpenState>>;
   children?: React.ReactNode;
+  gap?: number;
 }
 
 const ShopInfoItem = ({
@@ -16,6 +17,7 @@ const ShopInfoItem = ({
   isOpen,
   setIsOpen,
   children,
+  gap = 8,
 }: ShopInfoItemProps) => {
   /** item 열고 닫기 */
   const handleToggle = () => {
@@ -30,7 +32,7 @@ const ShopInfoItem = ({
       direction="column"
       align="flex-start"
       padding="27px 16px"
-      gap={8}
+      gap={gap}
       backgroundColor={theme.palette.Gray_White}
       borderRadius={12}
     >

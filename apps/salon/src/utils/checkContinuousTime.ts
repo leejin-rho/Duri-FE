@@ -1,10 +1,13 @@
-import { TimeType } from "@salon/assets/types/quotation";
+import { TimeType } from '@salon/assets/types/quotation';
 
 /** 연속된 시간인지 확인 */
-export const checkContinuousTime = (reservationTimeList: TimeType, requestDay: string) => {
+export const checkContinuousTime = (
+  reservationTimeList: TimeType,
+  requestDay: string,
+) => {
   const selectedTime = Object.keys(reservationTimeList).filter(
-    (key) => reservationTimeList[key as keyof TimeType]
-  )
+    (key) => reservationTimeList[key as keyof TimeType],
+  );
 
   if (selectedTime.length === 0) {
     return { isEmpty: true, startDateTime: '', endDateTime: '' };
@@ -30,4 +33,4 @@ export const checkContinuousTime = (reservationTimeList: TimeType, requestDay: s
   const endDateTime = `${requestDay}T${end.slice(4).padStart(2, '0')}:59:59Z`;
 
   return { isCountinuous, startDateTime, endDateTime };
-}
+};

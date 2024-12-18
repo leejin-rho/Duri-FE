@@ -40,6 +40,7 @@ const MyShopPage = () => {
       closeTime: '',
       info: '',
       kakaoTalk: '',
+      rating: 0,
       tags: [],
     },
   } = myShopInfo || {};
@@ -75,6 +76,8 @@ const MyShopPage = () => {
               tags={shopDetail.tags}
               info={shopDetail.info}
               kakaoTalk={shopDetail.kakaoTalk}
+              rating={shopDetail.rating}
+              reviewCnt={0}
               onEdit={onShopInfoEdit}
               setOnEdit={setOnShopInfoEdit}
             />

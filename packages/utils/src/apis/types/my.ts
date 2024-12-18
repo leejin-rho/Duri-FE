@@ -170,6 +170,7 @@ interface ShopDetailType {
   closeTime: string;
   info: string;
   kakaoTalk: string;
+  rating: number;
   tags: string[];
 }
 

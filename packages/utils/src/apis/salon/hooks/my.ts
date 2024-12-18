@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { BaseError } from '../../types';
 import {
@@ -48,8 +48,12 @@ export const UseGetMyShopInfo = ({ queryKey, options }: UseGetMyShopInfo) => {
 
 /** [PUT] /shop/profile/image 미용사 마이샵 사진 수정 */
 export const UsePutShopImage = () => {
+  const queryClient = useQueryClient();
   return useMutation<PutShopInfoResponse['response'], Error, FormData>({
     mutationFn: (formData: FormData) => putShopImage(formData),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getMyShopInfo'] });
+    },
     onError: (error) => {
       console.error(error);
       alert('샵 사진 등록에 실패했습니다.');
@@ -59,12 +63,16 @@ export const UsePutShopImage = () => {
 
 /** [PUT] /shop/profile 미용사 마이샵 정보 수정 */
 export const UsePutShopInfo = () => {
+  const queryClient = useQueryClient();
   return useMutation<
     PutShopInfoResponse['response'],
     Error,
     PutShopInfoRequest
   >({
     mutationFn: (request: PutShopInfoRequest) => putShopInfo(request),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getMyShopInfo'] });
+    },
     onError: (error) => {
       console.error(error);
       alert('샵 정보 수정에 실패했습니다.');

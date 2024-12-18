@@ -28,6 +28,8 @@ interface ShopInfoAreaProps {
   tags: string[];
   info: string;
   kakaoTalk: string;
+  rating: number;
+  reviewCnt: number;
   onEdit: boolean;
   setOnEdit: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -41,6 +43,8 @@ const ShopInfoArea = ({
   tags,
   info,
   kakaoTalk,
+  rating,
+  reviewCnt,
   onEdit,
   setOnEdit,
 }: ShopInfoAreaProps) => {
@@ -72,6 +76,9 @@ const ShopInfoArea = ({
           <Text typo="Body2">{name}</Text>
           <WidthFitFlex gap={7}>
             <Star width={14} />
+            <Text typo="Label3">
+              {rating} ({reviewCnt})
+            </Text>
           </WidthFitFlex>
         </Flex>
 
@@ -88,6 +95,7 @@ const ShopInfoArea = ({
           gap={8}
           ref={shopInfoRef}
           onClick={() => setOnEdit(true)}
+          align="flex-start"
         >
           {/** 전화번호 */}
           <Flex gap={10} justify="flex-start" margin="0 0 0 4px">
