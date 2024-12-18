@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
+  Button,
   Card,
   Flex,
   HardText,
@@ -8,6 +10,7 @@ import {
   HeightFitFlex,
   Image,
   Menu,
+  Modal,
   PetInfo,
   ProfileImage,
   RelativeFlex,
@@ -16,7 +19,7 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
-import { UseGetPorfolioDetail } from '@duri-fe/utils';
+import { UseGetPorfolioDetail, useModal } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 export const GroomerPortfolioDetail = ({
@@ -27,10 +30,25 @@ export const GroomerPortfolioDetail = ({
   groomer?: boolean;
 }) => {
   const navigate = useNavigate();
+  const { isOpenModal, toggleModal } = useModal();
 
   const { data } = UseGetPorfolioDetail({
     feedbackId: feedbackId,
   });
+
+  const [isOpen, setIsOpen] = useState<boolean>(false); //메뉴 버튼 클릭 시 토글
+
+  const handleClickMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleClickModifyButton = () => {
+    // navigate('/portfolio/modify', { state: feedbackId });
+  };
+
+  const handleClickDeleteConfirmButton = () => {
+    
+  };
 
   return (
     data && (
@@ -44,7 +62,7 @@ export const GroomerPortfolioDetail = ({
         </RelativeFlex>
 
         {/** 피드백 및 후기 */}
-        <Flex direction="column" gap={14}>
+        <RelativeFlex direction="column" gap={14}>
           <Flex justify="space-between" padding="0 24px">
             <WidthFitFlex gap={16}>
               <ProfileImage
@@ -58,14 +76,31 @@ export const GroomerPortfolioDetail = ({
 
             {/* 미용사 포폴용 - 수정삭제를 선택 할 수 있는 메뉴 노출 */}
             {groomer ? (
-              <WidthFitFlex gap={8}>
-                <HardText typo="Caption4" colorCode={theme.palette.Gray400}>
-                  {data.feedbackDate}
-                </HardText>
-                <MenuWrapper>
-                  <Menu width={23} height={23} />
-                </MenuWrapper>
-              </WidthFitFlex>
+              <>
+                <WidthFitFlex gap={8}>
+                  <HardText typo="Caption4" colorCode={theme.palette.Gray400}>
+                    {data.feedbackDate}
+                  </HardText>
+                  <MenuWrapper onClick={handleClickMenu}>
+                    <Menu width={23} height={23} />
+                  </MenuWrapper>
+                </WidthFitFlex>
+                {isOpen && (
+                  <MenuCard
+                    direction="column"
+                    borderRadius={8}
+                    width={114}
+                    height={67}
+                  >
+                    <MenuItem onClick={handleClickModifyButton}>
+                      <Text typo="Label3">수정하기</Text>
+                    </MenuItem>
+                    <MenuItem onClick={toggleModal}>
+                      <Text typo="Label3">삭제하기</Text>
+                    </MenuItem>
+                  </MenuCard>
+                )}
+              </>
             ) : (
               <HardText typo="Caption4" colorCode={theme.palette.Gray400}>
                 {data.feedbackDate}
@@ -132,7 +167,47 @@ export const GroomerPortfolioDetail = ({
               padding="12px"
             />
           </TagList>
-        </Flex>
+        </RelativeFlex>
+
+        <Modal isOpen={isOpenModal} toggleModal={toggleModal} closeIcon={false}>
+          <Flex direction="column" gap={4}>
+            <Text typo="Body2">포트폴리오 본문을</Text>
+            <Text typo="Body2">삭제하시겠습니까?</Text>
+          </Flex>
+          <Flex direction="column" margin="16px 0 40px">
+            <Text typo="Caption2" colorCode={theme.palette.Gray400}>
+              삭제 후엔 복구할 수 없습니다.
+            </Text>
+            <Text typo="Caption2" colorCode={theme.palette.Gray400}>
+              신중히 선택해주세요!
+            </Text>
+          </Flex>
+          <Flex gap={6}>
+            <Button
+              width="104px"
+              height="47px"
+              padding="10px"
+              bg={theme.palette.Gray20}
+              borderRadius='8px'
+              typo="Body3"
+              onClick={toggleModal}
+            >
+              아니오
+            </Button>
+            <Button
+              width="145px"
+              height="47px"
+              padding="10px"
+              bg={theme.palette.Alert}
+              borderRadius='8px'
+              typo="Body3"
+              fontColor={theme.palette.White}
+              onClick={handleClickDeleteConfirmButton}
+            >
+              네
+            </Button>
+          </Flex>
+        </Modal>
       </>
     )
   );
@@ -182,4 +257,25 @@ const PetInfoCard = styled(Card)`
 
 const MenuWrapper = styled(WidthFitFlex)`
   cursor: pointer;
+`;
+
+const MenuCard = styled(Flex)`
+  position: absolute;
+  top: 37.4px;
+  right: 9px;
+  background-color: ${theme.palette.White};
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+`;
+
+const MenuItem = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  /* padding: 0 10px; // 좌우 여백을 추가하여 텍스트가 너무 붙지 않도록 조정 */
+  &:hover {
+    background-color: ${theme.palette.Gray_White};
+  }
+  z-index: 10;
 `;

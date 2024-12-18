@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { FilledHeart, Heart } from '@duri-fe/ui';
+import { FilledHeart, Heart, SalonTag } from '@duri-fe/ui';
 import { theme } from '@duri-fe/ui';
 import { UseGetGroomerInfo } from '@duri-fe/utils';
 import {
@@ -29,20 +29,16 @@ export const GroomerPortfolio = ({ groomerId }: { groomerId: number }) => {
       setGroomerProfile(data.groomerProfileDetail);
       setShopProfile(data.shopProfileDetail);
     }
-  }, [groomerProfile]);
+  }, [data]);
 
   return (
     <>
       <HeaderBox>
-        <MainImg
-          alt="shop-image"
-          src={
-            shopProfile?.imageURL}
-        />
+        <MainImg alt="shop-image" src={shopProfile?.imageURL} />
         <TextBox direction="column" gap={14}>
           <HeightFitFlex gap={10} justify="flex-start">
             <Text typo="Title4" colorCode={theme.palette.White}>
-              {shopProfile?.name}
+              {shopProfile?.name ?? '정보 없음'}
             </Text>
             <WidthFitFlex
               height="fit-content"
@@ -56,8 +52,13 @@ export const GroomerPortfolio = ({ groomerId }: { groomerId: number }) => {
             </WidthFitFlex>
           </HeightFitFlex>
           <Text typo="Label3" colorCode={theme.palette.White}>
-            경기도 성남시 불정로 119
+            {shopProfile?.address ?? '정보 없음'}
           </Text>
+          <Flex justify='flex-start' gap={8}>
+        <SalonTag content='노견전문' bg={theme.palette.Gray20} colorCode={theme.palette.Gray500}/>
+        <SalonTag content='노견전문' bg={theme.palette.Gray20} colorCode={theme.palette.Gray500}/>
+        <SalonTag content='노견전문' bg={theme.palette.Gray20} colorCode={theme.palette.Gray500}/>
+        </Flex>
         </TextBox>
       </HeaderBox>
       <Flex direction="column" padding="12px 5px 96px 5px" gap={12}>

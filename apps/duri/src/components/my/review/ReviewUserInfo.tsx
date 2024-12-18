@@ -80,18 +80,12 @@ export const ReviewUserInfo = ({
         <SingleLineText typo="Caption5" colorCode={theme.palette.Gray300}>
           {createdAt}
         </SingleLineText>
-        <WidthFitFlex onClick={handleClickMenu}>
+        <MenuWrapper onClick={handleClickMenu}>
           <Menu width={23} height={23} />
-        </WidthFitFlex>
+        </MenuWrapper>
       </WidthFitFlex>
       {isOpen && (
-        <MenuCard
-          direction="column"
-          borderRadius={8}
-          width={114}
-          height={67}
-          gap={8}
-        >
+        <MenuCard direction="column" borderRadius={8} width={114} height={67}>
           <MenuItem onClick={handleClickModifyButton}>
             <Text typo="Label3">수정하기</Text>
           </MenuItem>
@@ -101,14 +95,10 @@ export const ReviewUserInfo = ({
         </MenuCard>
       )}
       {isOpenModal && (
-        <Modal
-          isOpen={isOpenModal}
-          toggleModal={toggleModal}
-          title="후기를 삭제하시겠습니까?"
-          closeIcon={false}
-        >
+        <Modal isOpen={isOpenModal} toggleModal={toggleModal} closeIcon={false}>
           <Flex direction="column" gap={24}>
-            <Flex direction="column">
+            <Text typo="Body2">후기를 삭제하시겠습니까?</Text>
+            <Flex direction="column" margin="16px 0 40px" gap={4}>
               <Text typo="Caption2" colorCode={theme.palette.Gray400}>
                 후기 삭제 후
               </Text>
@@ -116,12 +106,13 @@ export const ReviewUserInfo = ({
                 복구할 수 없습니다.
               </Text>
             </Flex>
-            <Flex>
+            <Flex gap={6}>
               <Button
                 width="104px"
                 height="47px"
                 padding="10px"
                 bg={theme.palette.Gray20}
+                borderRadius="8px"
                 typo="Body3"
                 onClick={toggleModal}
               >
@@ -132,7 +123,9 @@ export const ReviewUserInfo = ({
                 height="47px"
                 padding="10px"
                 bg={theme.palette.Alert}
+                borderRadius="8px"
                 typo="Body3"
+                fontColor={theme.palette.White}
                 onClick={handleClickDeleteConfirmButton}
               >
                 네
@@ -148,15 +141,21 @@ export const ReviewUserInfo = ({
 const Wrapper = styled(Flex)`
   position: relative;
 `;
+
+const SingleLineText = styled(Text)`
+  word-break: no-wrap;
+`;
+
+const MenuWrapper = styled(WidthFitFlex)`
+  cursor: pointer;
+`;
+
 const MenuCard = styled(Flex)`
   position: absolute;
   top: 37.4px;
   right: 9px;
   background-color: ${theme.palette.White};
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-`;
-const SingleLineText = styled(Text)`
-  word-break: no-wrap;
 `;
 
 const MenuItem = styled.div`
@@ -165,7 +164,6 @@ const MenuItem = styled.div`
   display: flex;
   justify-content: center;
   cursor: pointer;
-  padding: 0 10px; // 좌우 여백을 추가하여 텍스트가 너무 붙지 않도록 조정
   &:hover {
     background-color: ${theme.palette.Gray_White};
   }

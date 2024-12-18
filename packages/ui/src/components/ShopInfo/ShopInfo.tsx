@@ -46,7 +46,8 @@ export const ShopInfo = ({
   onClick,
   themeVariant,
 }: ShopInfoProps) => {
-  const { imageSize, typo, gap, padding, backgroundColor } = ShopInfoTheme[themeVariant];
+  const { imageSize, typo, gap, padding, backgroundColor } =
+    ShopInfoTheme[themeVariant];
   return (
     <FlexButton
       direction="column"
@@ -60,7 +61,7 @@ export const ShopInfo = ({
     >
       {title && <Text typo="Body2">{title}</Text>}
 
-      <Flex align="flex-start" padding="0 9px" gap={gap}>
+      <Flex padding="0 9px" gap={gap}>
         <ShadowImage
           width={imageSize.width}
           height={imageSize.height}
@@ -79,11 +80,13 @@ export const ShopInfo = ({
           <Text typo={typo.address} colorCode={theme.palette.Gray400}>
             {address}
           </Text>
-          <Flex justify="flex-start" gap={4} align='center'>
-            <SalonTag content={shopTag1} />
-            <SalonTag content={shopTag2} />
-            <SalonTag content={shopTag3} />
-          </Flex>
+          {(shopTag1 || shopTag2 || shopTag3) && (
+            <Flex justify="flex-start" gap={4} align="center">
+              {shopTag1 && <SalonTag content={shopTag1} />}
+              {shopTag2 && <SalonTag content={shopTag2} />}
+              {shopTag3 && <SalonTag content={shopTag3} />}
+            </Flex>
+          )}
         </Flex>
       </Flex>
     </FlexButton>
@@ -112,5 +115,5 @@ const FlexButton = styled(Flex)`
 `;
 
 const ShadowImage = styled(Image)`
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
-`
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+`;
