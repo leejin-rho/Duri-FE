@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// import LoadingGIF from '@assets/images/gifs/Final_renderfile.gif';
 import BabyCut from '@assets/images/pngs/BabyCut.png';
 import BearCut from '@assets/images/pngs/BearCut.png';
 import GuideDog1 from '@assets/images/pngs/GuideDog1.png';
