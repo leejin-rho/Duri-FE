@@ -85,7 +85,7 @@ export const GroomerPortfolio = ({ groomerId }: { groomerId: number }) => {
       <Flex direction="column" padding="12px 5px 96px 5px" gap={12}>
         {groomerProfile && (
           <DesignerInfo
-            padding="0 6px"
+            padding="16px"
             version="horizontal"
             designerId={groomerProfile.id}
             name={groomerProfile.name}

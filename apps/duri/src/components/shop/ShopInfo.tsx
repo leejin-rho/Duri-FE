@@ -29,7 +29,6 @@ import styled from '@emotion/styled';
 import { format, parse } from 'date-fns';
 
 import { SendRequestQBox } from './SendRequesQBox';
-import { ShopPhotos } from './ShopPhotos';
 import { ShopReviewBox } from './ShopReviewBox';
 
 interface ShopInfoProps {
@@ -88,13 +87,11 @@ export const ShopInfo = ({
       info: groomerInfo,
       license: groomerLicense,
     },
-    shopImages,
   } = shopData;
 
+  console.log(shopData);
   const openTime = parse(shopOpenTime, 'HH:mm:ss', new Date());
   const closeTime = parse(shopCloseTime, 'HH:mm:ss', new Date());
-
-  console.log(reviewData);
 
   return (
     shopData && (
@@ -113,7 +110,9 @@ export const ShopInfo = ({
           {isForBottomSheet ? (
             <DownArrow width={42} />
           ) : (
-            <BeforeArrow width={42} />
+            <HeightFitFlex padding="12px 4px 8px" justify="start">
+              <BeforeArrow width={42} />
+            </HeightFitFlex>
           )}
         </HeightFitFlex>
         <ShopInfoContainer
@@ -182,6 +181,7 @@ export const ShopInfo = ({
             </HeightFitFlex>
           </HeightFitFlex>
 
+          {/** 인삿말 */}
           <HeightFitFlex
             justify="flex-start"
             backgroundColor={theme.palette.Gray_White}
@@ -190,7 +190,7 @@ export const ShopInfo = ({
             margin="26px 0 0 0"
           >
             <TextHeight typo="Caption2" colorCode={theme.palette.Gray500}>
-              {groomerInfo}
+              {groomerInfo ?? '등록된 소개글이 없어요.'}
             </TextHeight>
           </HeightFitFlex>
 
@@ -215,7 +215,7 @@ export const ShopInfo = ({
           </HeightFitFlex>
 
           {/**샵 내부 */}
-          <HeightFitFlex
+          {/* <HeightFitFlex
             direction="column"
             gap={24}
             margin="36px 0 0 0"
@@ -223,7 +223,7 @@ export const ShopInfo = ({
           >
             <Text typo="Title3">샵 내부</Text>
             <ShopPhotos images={shopImages} />
-          </HeightFitFlex>
+          </HeightFitFlex> */}
 
           {/**리뷰 */}
           <HeightFitFlex
