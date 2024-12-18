@@ -42,7 +42,6 @@ const UpcomingReservation = ({
 
   const handleClickChatButton = () => {
     //오픈채팅방 주소 알려주는 모달 뜨게?하면 될 듯
-    console.log(kakaoURL);
   };
 
   const handleClickShopButton = () => {

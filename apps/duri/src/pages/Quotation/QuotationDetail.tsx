@@ -70,8 +70,6 @@ const QuotationDetailPage = () => {
       setBestRatingShop(bestRatingShop);
       setBestShop(bestShop);
       setQuotationList(quotationListData.quotations);
-
-      console.log(quotationListData);
     }
   }, [quotationListData]);
 

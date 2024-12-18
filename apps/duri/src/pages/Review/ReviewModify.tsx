@@ -47,7 +47,6 @@ const ReviewModifyPage = () => {
 
   useEffect(() => {
     if (reviewData) {
-      console.log(reviewData);
       setPetInfo(reviewData.petInfo);
       setImageURL(reviewData.imgUrl);
       setValue('rating', reviewData.rating);

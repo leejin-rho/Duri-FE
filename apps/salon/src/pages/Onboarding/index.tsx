@@ -38,11 +38,6 @@ const OnboardingPage = () => {
 
   const { mutateAsync, isSuccess, error } = usePostShopInfo();
 
-  useEffect(() => {
-    console.log(salonFormData);
-    console.log(salonOwnerFormData);
-  }, [salonFormData, salonOwnerFormData]);
-
   // TODO: 프로필 이미지
   const [profileImage, setProfileImage] = useState<File | null>(null);
 

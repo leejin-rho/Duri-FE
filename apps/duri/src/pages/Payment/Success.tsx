@@ -68,8 +68,6 @@ const SuccessPage = () => {
         quotationId: quotationId,
       };
 
-      // console.log(paymentInfo)
-
       postPaymentConfirm(paymentInfo);
     }
   }, [verifySuccess]);

@@ -90,5 +90,4 @@ const LoginLink = styled.a`
 
 const LoginButton = styled.div`
   cursor: pointer;
-  /* padding: 5px 10px; */
 `;
