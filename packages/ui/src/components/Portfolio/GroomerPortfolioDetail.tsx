@@ -13,7 +13,7 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
-import { UseGetPorfolioDetail } from '@duri-fe/utils';
+import { UseGetPortfolioDetail } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 export const GroomerPortfolioDetail = ({
@@ -23,7 +23,7 @@ export const GroomerPortfolioDetail = ({
 }) => {
   const navigate = useNavigate();
 
-  const { data } = UseGetPorfolioDetail({
+  const { data } = UseGetPortfolioDetail({
     feedbackId: feedbackId,
   });
 

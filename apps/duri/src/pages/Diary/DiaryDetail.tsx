@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   DuriNavbar,
@@ -16,14 +16,19 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
+import { UseGetDiaryDetail } from '@duri-fe/utils';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 const PetDiaryDetail = () => {
   const navigate = useNavigate();
+  const { diaryId } = useParams<{ diaryId: string }>();
+  const quotationId = Number(diaryId);
 
   const character = ['character1'];
   const diseases = ['disease1', 'disease2'];
+
+  const { data } = UseGetDiaryDetail({ quotationId });
 
   return (
     <MobileLayout>

@@ -9,3 +9,16 @@ export interface DiaryDataType {
 export interface DiaryDataResponse extends BaseResponse {
   response: DiaryDataType;
 }
+
+export interface DiaryDetailType {
+  feedbackId: number;
+  friendly: string;
+  reaction: string;
+  behavior: string;
+  noticeContent: string;
+  feedbackImages: string[];
+}
+
+export interface DiaryDetailResponse extends BaseResponse {
+  response: DiaryDetailType;
+}

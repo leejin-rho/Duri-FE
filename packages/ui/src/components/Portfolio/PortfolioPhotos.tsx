@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { Flex, Text } from '@duri-fe/ui';
-import { UseGetGroomerPorfolio } from '@duri-fe/utils';
+import { UseGetGroomerPortfolio } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 interface PortfolioPhotosProps {
@@ -15,7 +15,7 @@ export const PortfolioPhotos = ({ groomerId }: PortfolioPhotosProps) => {
     navigate(`/portfolio/${groomerId}/${id}`);
   };
 
-  const { data } = UseGetGroomerPorfolio({
+  const { data } = UseGetGroomerPortfolio({
     groomerId: groomerId,
   });
 
@@ -27,7 +27,7 @@ export const PortfolioPhotos = ({ groomerId }: PortfolioPhotosProps) => {
             <PortfolioInsideImg
               key={item.feedbackId}
               src={item.imageUrl}
-              alt={`Porfolio ${index + 1}`}
+              alt={`Portfolio ${index + 1}`}
               onClick={() => moveToPortfolioDetail(item.feedbackId)}
             />
           ))}

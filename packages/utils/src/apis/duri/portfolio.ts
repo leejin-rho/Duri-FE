@@ -1,12 +1,12 @@
 import { publicInstance } from '@duri-fe/utils';
 
-import { PorfolioDetailResponse, PorfolioResponse } from '../types/portfolio';
+import { PortfolioDetailResponse, PortfolioResponse } from '../types/portfolio';
 
-export const getGroomerPorfolio = async ({
+export const getGroomerPortfolio = async ({
   groomerId,
 }: {
   groomerId: number;
-}): Promise<PorfolioResponse['response']> => {
+}): Promise<PortfolioResponse['response']> => {
   const { data } = await publicInstance.get(`/feedback/${groomerId}`, {
     params: { groomerId },
   });
@@ -17,7 +17,7 @@ export const getPortfolioDetail = async ({
   feedbackId,
 }: {
   feedbackId: number;
-}): Promise<PorfolioDetailResponse['response']> => {
+}): Promise<PortfolioDetailResponse['response']> => {
   const { data } = await publicInstance.get(`/feedback/detail/${feedbackId}`, {
     params: { feedbackId },
   });

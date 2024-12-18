@@ -14,6 +14,7 @@ import {
 } from '@duri-fe/ui';
 
 interface HistoryCardProps {
+  quotationId: number;
   tagContent: string;
   profileImageUrl?: string;
   designerName: string;
@@ -25,6 +26,7 @@ interface HistoryCardProps {
 }
 
 export const HistoryCard = ({
+  quotationId,
   tagContent,
   profileImageUrl,
   designerName,
@@ -35,8 +37,8 @@ export const HistoryCard = ({
   toggleModal,
 }: HistoryCardProps) => {
   const navigate = useNavigate();
-  const handleDiaryCardClick = () => {
-    navigate('/diary/:diaryId');
+  const handleDiaryCardClick = (quotationId: number) => {
+    navigate(`/diary/${quotationId}`);
   };
 
   const handleToggleModal = (e: React.MouseEvent) => {
@@ -47,7 +49,7 @@ export const HistoryCard = ({
   };
 
   return (
-    <div onClick={handleDiaryCardClick}>
+    <div onClick={() => handleDiaryCardClick(quotationId)}>
       <Card direction="row" borderRadius={12} padding="16px 20px">
         <Flex width={250}>
           <Flex direction="column" align="flex-start">
