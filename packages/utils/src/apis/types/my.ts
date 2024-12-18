@@ -95,7 +95,9 @@ export interface ReviewDetailResponse {
   };
 }
 
+//이용기록 - 견적응답서 조회를 위한 requestId 컬럼 추가
 export interface HistoryType {
+  requestId: number;
   quotationId: number;
   complete: boolean;
   groomerImageURL: string;

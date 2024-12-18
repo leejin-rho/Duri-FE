@@ -27,6 +27,9 @@ import styled from '@emotion/styled';
 const Home = () => {
   const { coordinates } = useGeolocation();
 
+  //로그인 토큰이 있는지 확인하기 위해
+  const token = localStorage.getItem('authorization_user');
+
   const [lat, setLat] = useState<number | null>(null);
   const [lon, setLon] = useState<number | null>(null);
 
@@ -68,12 +71,21 @@ const Home = () => {
           backgroundColor={theme.palette.Normal500}
           padding="0 0 37px 0"
         >
-          <MainHeader
-            logoColor={theme.palette.Black}
-            iconColor={theme.palette.Normal800}
-            searchIcon={true}
-            onClickSearch={handleNavigate}
-          />
+          {token ? (
+            <MainHeader
+              logoColor={theme.palette.Black}
+              iconColor={theme.palette.Normal800}
+              searchIcon
+              onClickSearch={handleNavigate}
+            />
+          ) : (
+            <MainHeader
+              logoColor={theme.palette.Black}
+              iconColor={theme.palette.Normal800}
+              notificationIcon={false}
+              login
+            />
+          )}
           <CarouselHome
             upcomingReservation={
               reservationData?.reserveDday === -1 ? undefined : reservationData
