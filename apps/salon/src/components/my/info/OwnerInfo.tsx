@@ -1,4 +1,11 @@
-import { Button, Flex, ProfileImage, Text, theme, WidthFitFlex } from '@duri-fe/ui';
+import {
+  Flex,
+  ProfileImage,
+  Text,
+  theme,
+  WidthFitFlex,
+} from '@duri-fe/ui';
+import styled from '@emotion/styled';
 
 interface OwnerInfoProps {
   shopId: number;
@@ -15,16 +22,20 @@ export const OwnerInfo = ({ image, shopName }: OwnerInfoProps) => {
           <br />
           안녕하세요!
         </Text>
-        <Button
-          bg={theme.palette.White}
-          typo="Caption3"
-          fontColor={theme.palette.Gray300}
-          padding='10px'
-        >
-          내 포트폴리오 보기
-        </Button>
+        <MoveToPortfolio href='/portfolio'>내 포트폴리오 보기</MoveToPortfolio>
       </WidthFitFlex>
-        <ProfileImage width={100} height={100} borderRadius={40} src={image} />
+      <ProfileImage width={100} height={100} borderRadius={40} src={image} />
     </Flex>
   );
 };
+
+const MoveToPortfolio = styled.a`
+  background-color: ${theme.palette.White};
+  ${theme.typo.Caption3}
+  color: ${theme.palette.Gray300};
+  padding: 10px;
+  text-align: center;
+  border-radius: 99px;
+  cursor: pointer;
+  text-decoration: none;
+`;

@@ -54,11 +54,31 @@ export const GroomerPortfolio = ({ groomerId }: { groomerId: number }) => {
           <Text typo="Label3" colorCode={theme.palette.White}>
             {shopProfile?.address ?? '정보 없음'}
           </Text>
-          <Flex justify='flex-start' gap={8}>
-        <SalonTag content='노견전문' bg={theme.palette.Gray20} colorCode={theme.palette.Gray500}/>
-        <SalonTag content='노견전문' bg={theme.palette.Gray20} colorCode={theme.palette.Gray500}/>
-        <SalonTag content='노견전문' bg={theme.palette.Gray20} colorCode={theme.palette.Gray500}/>
-        </Flex>
+          {shopProfile?.tags && (
+            <Flex justify="flex-start" gap={8}>
+              {shopProfile.tags[0] && (
+                <SalonTag
+                  content={shopProfile.tags[0]}
+                  bg={theme.palette.Gray20}
+                  colorCode={theme.palette.Gray500}
+                />
+              )}
+              {shopProfile.tags[1] && (
+                <SalonTag
+                  content={shopProfile.tags[1]}
+                  bg={theme.palette.Gray20}
+                  colorCode={theme.palette.Gray500}
+                />
+              )}
+              {shopProfile.tags[2] && (
+                <SalonTag
+                  content="노견전문"
+                  bg={theme.palette.Gray20}
+                  colorCode={theme.palette.Gray500}
+                />
+              )}
+            </Flex>
+          )}
         </TextBox>
       </HeaderBox>
       <Flex direction="column" padding="12px 5px 96px 5px" gap={12}>
