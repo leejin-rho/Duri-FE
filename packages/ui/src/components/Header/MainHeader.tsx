@@ -58,7 +58,7 @@ export const MainHeader = ({
         )}
         {login && (
           <LoginButton>
-            <LoginLink href="/login">Login</LoginLink>
+            <LoginLink href="/login">로그인</LoginLink>
           </LoginButton>
         )}
       </IconContainer>
