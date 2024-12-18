@@ -26,7 +26,6 @@ interface UpcomingReservationProps {
 const UpcomingReservation = ({
   imageURL,
   address,
-  kakaoURL,
   name,
   phone,
   price,
