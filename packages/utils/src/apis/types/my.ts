@@ -149,3 +149,8 @@ export interface GroomerAndShopProfileResponse extends BaseResponse {
     shopProfileDetail: ShopInfoType;
   };
 }
+
+//펫정보 삭제 응답
+export interface DeletePetResponse extends BaseResponse {
+  response: string;
+}

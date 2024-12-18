@@ -14,7 +14,7 @@ const MyPetPage = () => {
         backIcon
         onClickBack={() => navigate('/my')}
       />
-      <ModifyPetInfoCard />
+      {<ModifyPetInfoCard />}
       <DuriNavbar />
     </MobileLayout>
   );
