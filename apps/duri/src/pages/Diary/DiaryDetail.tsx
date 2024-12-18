@@ -95,29 +95,41 @@ const PetDiaryDetail = () => {
             <Text typo="Caption1" colorCode={theme.palette.Gray400}>
               미용사님이 작성하신 미용 일지에요
             </Text>
-            <Flex gap={4} justify="flex-start" margin="4px 0 0 0">
-              <SalonTag
-                height={23}
-                content={diaryDetailData.friendly}
-                bg={theme.palette.Normal100}
-                colorCode={theme.palette.Normal700}
-                typo="Label2"
-              />
-              <SalonTag
-                height={23}
-                content={diaryDetailData.reaction}
-                bg={theme.palette.Normal100}
-                colorCode={theme.palette.Normal700}
-                typo="Label2"
-              />
-              <SalonTag
-                height={23}
-                content={diaryDetailData.behavior}
-                bg={theme.palette.Normal100}
-                colorCode={theme.palette.Normal700}
-                typo="Label2"
-              />
-            </Flex>
+            <TagListFlex gap={4} justify="flex-start" margin="4px 0 0 0">
+              <Flex justify="space-between">
+                <Text typo="Label2">🥰 미용사와의 친화력</Text>
+                <SalonTag
+                  height={23}
+                  content={diaryDetailData.friendly}
+                  bg={theme.palette.Normal100}
+                  colorCode={theme.palette.Normal700}
+                  typo="Label3"
+                  padding="10px"
+                />
+              </Flex>
+              <Flex justify="space-between">
+                <Text typo="Label2">✂️ 미용도구 반응</Text>
+                <SalonTag
+                  height={23}
+                  content={diaryDetailData.reaction}
+                  bg={theme.palette.Normal100}
+                  colorCode={theme.palette.Normal700}
+                  typo="Label3"
+                  padding="10px"
+                />
+              </Flex>
+              <Flex justify="space-between">
+                <Text typo="Label2">🐶 행동 밎 짖음</Text>
+                <SalonTag
+                  height={23}
+                  content={diaryDetailData.behavior}
+                  bg={theme.palette.Normal100}
+                  colorCode={theme.palette.Normal700}
+                  typo="Label3"
+                  padding="10px"
+                />
+              </Flex>
+            </TagListFlex>
           </Flex>
           <Seperator height="5px" />
           <RelativeFlex padding="25px 20px 117px 20px">
@@ -151,4 +163,8 @@ const TapeWrapper = styled.div`
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+`;
+
+const TagListFlex = styled(Flex)`
+  flex-wrap: wrap;
 `;
