@@ -53,6 +53,8 @@ export interface ShopInfoDetailType {
     reviewCnt: number;
     distance: number;
     tags: string[];
+    kakaoTalkUrl: string;
+    shopInfo: string;
   };
   groomerProfileDetail: {
     id: number;

@@ -63,6 +63,10 @@ export const ShopInfo = ({
 
   if (!shopData) return null;
 
+  const handleKaKaoButtonClick = (kakaoUrl: string) => {
+    window.location.href = kakaoUrl;
+  };
+
   const {
     shopDetail: {
       shopId,
@@ -76,6 +80,8 @@ export const ShopInfo = ({
       reviewCnt,
       distance,
       tags,
+      shopInfo,
+      kakaoTalkUrl,
     },
     groomerProfileDetail: {
       id: groomerId,
@@ -84,7 +90,6 @@ export const ShopInfo = ({
       age: groomerAge,
       history: groomerHistory,
       image: groomerImage,
-      info: groomerInfo,
       license: groomerLicense,
     },
   } = shopData;
@@ -170,7 +175,9 @@ export const ShopInfo = ({
                 </TagList>
               </WidthFitFlex>
               <WidthFitFlex gap={8} padding="0 4px 0">
-                <IconCircle>
+                <IconCircle
+                  onClick={() => handleKaKaoButtonClick(kakaoTalkUrl)}
+                >
                   <Chat width={21} color={theme.palette.Normal700} />
                 </IconCircle>
                 <IconCircle onClick={openSheet}>
@@ -189,7 +196,7 @@ export const ShopInfo = ({
             margin="26px 0 0 0"
           >
             <TextHeight typo="Caption2" colorCode={theme.palette.Gray500}>
-              {groomerInfo ?? '등록된 소개글이 없어요.'}
+              {shopInfo ?? '등록된 소개글이 없어요.'}
             </TextHeight>
           </HeightFitFlex>
 

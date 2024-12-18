@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { RecommendedShopType } from '@duri/assets/types/shop';
 import { Button, Flex, HeightFitFlex, Image, Text, theme } from '@duri-fe/ui';
+import { getShortenedAddress } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 export const ShopVertical = ({
@@ -50,7 +51,7 @@ export const ShopVertical = ({
                 colorCode={theme.palette.Gray500}
                 margin="0 0 12px 6px"
               >
-                {shop.address}
+                {getShortenedAddress(shop.address)}
               </Text>
               <HeightFitFlex
                 direction="column"
@@ -58,17 +59,19 @@ export const ShopVertical = ({
                 gap={3}
                 margin="0 0 0 6px"
               >
-                <Tag
-                  key="tag1"
-                  typo="Caption5"
-                  bg={theme.palette.Gray50}
-                  fontColor={theme.palette.Gray500}
-                  width="fit-content"
-                  height="19px"
-                  borderRadius="2px"
-                >
-                  {shop.shopTag1}
-                </Tag>
+                {
+                  <Tag
+                    key="tag1"
+                    typo="Caption5"
+                    bg={theme.palette.Gray50}
+                    fontColor={theme.palette.Gray500}
+                    width="fit-content"
+                    height="19px"
+                    borderRadius="2px"
+                  >
+                    {shop.shopTag1}
+                  </Tag>
+                }
                 <Tag
                   key="tag2"
                   typo="Caption5"
