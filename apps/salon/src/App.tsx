@@ -8,6 +8,7 @@ import AuthPage from '@pages/Auth';
 import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import MyPage from '@pages/My';
+import ReviewPage from '@pages/My/Review';
 import MyShopPage from '@pages/My/Shop';
 import OnboardingPage from '@pages/Onboarding';
 import OnboardingPendingPage from '@pages/Onboarding/Pending';
@@ -51,6 +52,7 @@ function App() {
             element={<PortfolioDetailPage />}
           />
           <Route path="/my/shop" element={<MyShopPage />} />
+          <Route path="/my/review" element={<ReviewPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

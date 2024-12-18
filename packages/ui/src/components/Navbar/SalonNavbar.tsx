@@ -5,8 +5,8 @@ import {
   MyIcon,
   PortfolioIcon,
   QuotationIcon,
+  Store,
   theme,
-  TimetableIcon,
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
@@ -41,12 +41,12 @@ export const SalonNavbar = () => {
             <HomeIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname.startsWith('/timetable')}
-            text="시간표"
-            onClick={() => handleNavigate('/timetable')}
-            iconType="timetable"
+            isActive={pathname.startsWith('/portfolio')}
+            text="포트폴리오"
+            onClick={() => handleNavigate('/portfolio')}
+            iconType="portfolio"
           >
-            <TimetableIcon height={24} />
+            <PortfolioIcon height={24} />
           </NavItem>
           <NavItem
             isActive={pathname.startsWith('/quotation')}
@@ -57,12 +57,12 @@ export const SalonNavbar = () => {
             <QuotationIcon height={24} />
           </NavItem>
           <NavItem
-            isActive={pathname.startsWith('/portfolio')}
-            text="포트폴리오"
-            onClick={() => handleNavigate('/portfolio')}
-            iconType="portfolio"
+            isActive={pathname.startsWith('/income')}
+            text="매출관리"
+            onClick={() => handleNavigate('/income')}
+            iconType="income"
           >
-            <PortfolioIcon height={24} />
+            <Store height={24} />
           </NavItem>
           <NavItem
             isActive={pathname.startsWith('/my')}
