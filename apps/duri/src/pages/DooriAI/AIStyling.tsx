@@ -300,7 +300,7 @@ const SubmitButton = styled(FrontBtn)`
   border-radius: 0;
 `;
 
-const LoadingGIFImg = styled.img`
-  width: 115px;
-  height: 66px;
-`;
+// const LoadingGIFImg = styled.img`
+//   width: 115px;
+//   height: 66px;
+// `;
