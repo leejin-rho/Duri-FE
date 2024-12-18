@@ -37,11 +37,14 @@ export const ShopList = ({
       maxHeight: 260,
     });
 
-  // 요청서 전송용
-  const { openSheet: openRequestSheet, bottomSheetProps: requestSheetProps } =
-    useBottomSheet({
-      maxHeight: 552,
-    });
+  // 요청서 전송용 바텀시트
+  const {
+    openSheet: openRequestSheet,
+    closeSheet: closeRequestSheet,
+    bottomSheetProps: requestSheetProps,
+  } = useBottomSheet({
+    maxHeight: 552,
+  });
 
   // 선택된 가게 취합용
   const [selectedShops, setSelectedShops] = useState<number[]>([]);
@@ -125,15 +128,18 @@ export const ShopList = ({
             <ShopLine
               key={shop.shopId}
               id={shop.shopId}
+              lat={shop.shopLat}
+              lon={shop.shopLon}
               title={shop.shopName}
               score={shop.shopRating}
-              reviewNum={120}
+              reviewNum={shop.reviewCnt}
               distance={shop.distance}
               address={shop.shopAddress}
               phone={shop.shopPhone}
               isClicked={selectedShops.includes(shop.shopId)}
               onClick={() => toggleShopSelection(shop.shopId)}
               tags={shop.tags}
+              shopImg={shop.shopImage}
             />
           ))}
         </ScrollFlex>
@@ -207,7 +213,10 @@ export const ShopList = ({
           </Flex>
         </BottomSheet>
         <BottomSheet {...requestSheetProps}>
-          <SendRequestQBox />
+          <SendRequestQBox
+            closeBottomSheet={closeRequestSheet}
+            shopIdList={selectedShops}
+          />
         </BottomSheet>
       </Flex>
     </>

@@ -6,7 +6,7 @@ export * from './MobileLayout';
 export * from './Navbar';
 export * from './StatusBar';
 export * from './Dropdown';
-export * from './SpeechBallonContainer';
+export * from './SpeechBalloonContainer';
 export * from './Image';
 
 export * from './Hr';
@@ -19,3 +19,6 @@ export * from './ProfileImage';
 export * from './Quotation';
 export * from './RatingStars';
 export * from './PetInfo';
+export * from './Portfolio';
+export * from './SkeletonCard';
+export * from './ShopInfo';

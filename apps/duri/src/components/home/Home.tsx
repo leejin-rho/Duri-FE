@@ -1,7 +1,6 @@
 import { SetStateAction, useState } from 'react';
 import React from 'react';
 
-import { UpcomingReservationType } from '@duri/assets/types';
 import { Button, Flex, HeightFitFlex, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 import { differenceInDays } from 'date-fns';
@@ -13,24 +12,38 @@ import {
 import LastReservation from './reservation/LastReservation';
 import UpcomingReservation from './reservation/UpcomingReservation';
 
+interface UpcomingReservationProps {
+  petId: number;
+  shopId: number;
+  imageURL: string;
+  name: string;
+  address: string;
+  phone: string;
+  kakaoURL: string;
+  quotationId: number;
+  reserveDday: number;
+  reservationDate: string;
+  price: string;
+}
+
 const CarouselHome = ({
   upcomingReservation,
   lastReservation,
 }: {
-  upcomingReservation?: UpcomingReservationType;
-  lastReservation?: string
+  upcomingReservation?: UpcomingReservationProps;
+  lastReservation: string;
 }) => {
   const [swiperIndex, setSwiperIndex] = useState<number>(0); // 슬라이드 인덱스 상태
   const currentDate = new Date();
-  
-  let daysDifference;
-  if (lastReservation)
+
+  let daysDifference = null;
+  if (lastReservation !== '')
     daysDifference = differenceInDays(currentDate, new Date(lastReservation)); // 일수 차이 계산
+
   const slides = [
     upcomingReservation ? (
       <UpcomingReservation
         reservationDate={upcomingReservation.reservationDate}
-        lastSinceDay={upcomingReservation.lastSinceDay}
         shopId={upcomingReservation.shopId}
         address={upcomingReservation.address}
         name={upcomingReservation.name}
@@ -51,7 +64,7 @@ const CarouselHome = ({
         </Text>
       </Wrapper>
     ), //다가오는 예약이 없는 경우
-    lastReservation ? (
+    daysDifference ? (
       <LastReservation daysDifference={daysDifference} />
     ) : (
       <Wrapper
@@ -65,7 +78,6 @@ const CarouselHome = ({
       </Wrapper>
     ),
   ];
-
 
   return (
     <HeightFitFlex direction="column" align="flex-start">

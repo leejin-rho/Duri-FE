@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { Control, Controller } from 'react-hook-form';
 
+import { GENDER_OPTION_LIST } from '@duri/constants';
 import { Button, Flex, Text, theme } from '@duri-fe/ui';
 
 import { FormData } from '.';
@@ -10,7 +10,7 @@ interface PetGenderInfoProps {
 }
 
 const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
-  const [gender, setGender] = useState<string>('');
+  // const [gender, setGender] = useState<string>('');
 
   const handleClickButton = (
     field: {
@@ -21,13 +21,7 @@ const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
     value: string,
   ) => {
     field.onChange(value);
-    setGender(value);
   };
-
-  const options = [
-    { label: '왕자님', value: 'M' },
-    { label: '공주님', value: 'F' },
-  ];
 
   return (
     <Flex direction="column" align="flex-start" gap={28}>
@@ -49,25 +43,29 @@ const PetGenderInfo = ({ control }: PetGenderInfoProps) => {
           rules={{ required: '성별을 선택해주세요.' }}
           render={({ field }) => (
             <Flex margin="47px 0" justify="flex-start" gap={8}>
-              {options.map(({ label, value }) => (
+              {GENDER_OPTION_LIST.map(({ key, label }) => (
                 <Button
-                  key={value}
+                  key={key}
                   width="fit-content"
                   height="43px"
                   bg={
-                    gender === value ? theme.palette.Black : theme.palette.White
+                    field.value === key
+                      ? theme.palette.Black
+                      : theme.palette.White
                   }
                   fontColor={
-                    gender === value ? theme.palette.White : theme.palette.Black
+                    field.value === key
+                      ? theme.palette.White
+                      : theme.palette.Black
                   }
                   typo="Body3"
                   border={
-                    gender === value
+                    field.value === key
                       ? `1px solid ${theme.palette.Black}`
                       : `1px solid ${theme.palette.Gray100}`
                   }
                   onClick={() =>
-                    handleClickButton(field, gender === value ? '' : value)
+                    handleClickButton(field, field.value === key ? '' : key)
                   }
                 >
                   {label}

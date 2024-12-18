@@ -1,6 +1,6 @@
 export interface PetInfoType {
   petId: number;
-  image?: string;
+  imageURL?: string;
   name: string;
   breed: string;
   age: number;

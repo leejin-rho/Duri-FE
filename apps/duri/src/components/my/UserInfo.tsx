@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 
 import {
   Call,
-  FilledLocation,
   Flex,
   Pencil,
   ProfileImage,
@@ -13,34 +12,29 @@ import {
 import styled from '@emotion/styled';
 
 interface UserInfoProps {
-  userId: number;
-  userName: string;
-  location?: string;
+  name: string;
   phone: string;
-  imageURL?: string;
+  profileImg: string | null;
 }
 
 function handleFormatPhone(target: string) {
-  target = target
+  return target
     .replace(/[^0-9]/g, '')
     .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, '$1.$2.$3');
-  return target;
 }
 
-export const UserInfo = ({
-  userId,
-  userName,
-  location,
-  phone,
-  imageURL,
-}: UserInfoProps) => {
+export const UserInfo = ({ name, phone, profileImg }: UserInfoProps) => {
   const navigate = useNavigate();
-  const handleNavigate = () => navigate('/my/info', { state: userId });
+
+  const handleNavigate = () => {
+    navigate('/my/info');
+  };
+
   return (
     <>
       <Flex justify="space-between" padding="0 6px">
         <Text typo="Heading">
-          {userName}님,
+          {name}님,
           <br />
           안녕하세요!
         </Text>
@@ -49,7 +43,7 @@ export const UserInfo = ({
             width={100}
             height={100}
             borderRadius={40}
-            src={imageURL}
+            src={profileImg === null ? undefined : profileImg}
           />
           <PencilWrapper
             backgroundColor={theme.palette.Black}
@@ -60,17 +54,11 @@ export const UserInfo = ({
           </PencilWrapper>
         </ProfileImageWrapper>
       </Flex>
-      <Flex justify="flex-start" gap={6} margin="30px 0 0 0">
-        <FilledLocation width={22} height={22} />
-        {location ? (
-          <Text typo="Label3">{location}</Text>
-        ) : (
-          <Text typo="Label3">위치를 찾을 수 없습니다.</Text>
-        )}
-      </Flex>
       <Flex justify="flex-start" gap={10} margin="8px 0 24px 6px">
         <Call width={16} height={16} />
-        <Text typo="Label3">{handleFormatPhone(phone)}</Text>
+        <Text typo="Label3">
+          {phone ? handleFormatPhone(phone) : '등록이 안된 전화번호입니다.'}
+        </Text>
       </Flex>
     </>
   );

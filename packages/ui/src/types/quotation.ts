@@ -18,6 +18,7 @@ export interface ResponseQuotationType {
     designCut: string[];
     otherRequests: string;
   };
+  quotationId: number;
   quotation: {
     requestId: number;
     memo: string;
@@ -32,6 +33,7 @@ export interface ResponseQuotationType {
       totalPrice: number;
     };
   };
+  status: string;
 }
 
 export interface QuotationDetailsType {

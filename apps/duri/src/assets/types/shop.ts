@@ -7,6 +7,7 @@ export interface RegularShopType {
   visitCnt?: number;
 }
 
+
 export interface RecommendedShopType {
   petId: number;
   recommendFeature: string;

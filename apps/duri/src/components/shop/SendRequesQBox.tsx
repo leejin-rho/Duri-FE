@@ -12,10 +12,17 @@ import {
 } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
-export const SendRequestQBox = () => {
+export const SendRequestQBox = ({
+  closeBottomSheet,
+  shopIdList,
+}: {
+  closeBottomSheet?: () => void;
+  shopIdList: number[];
+}) => {
   const navigate = useNavigate();
   const moveToShopRequest = () => {
-    navigate('/shop/request');
+    if (closeBottomSheet) closeBottomSheet();
+    navigate('/shop/request', { state: { shopIdList: shopIdList } });
   };
   return (
     <RelativeFlex
@@ -54,7 +61,11 @@ export const SendRequestQBox = () => {
         </HeightFitFlex>
       </HeightFitFlex>
       <AbsoluteBtnWrapper gap={8} padding="0 20px">
-        <FlexBtn flex="136" bg={theme.palette.Gray20}>
+        <FlexBtn
+          flex="136"
+          bg={theme.palette.Gray20}
+          onClick={closeBottomSheet}
+        >
           <Text typo="Body3">취소</Text>
         </FlexBtn>
         <FlexBtn flex="191" bg={theme.palette.Gray200}>

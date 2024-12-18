@@ -1,4 +1,4 @@
-import { Text, theme, TypeOfTypo } from '@duri-fe/ui';
+import { HardText, theme, TypeOfTypo } from '@duri-fe/ui';
 
 import { WidthFitFlex } from '../FlexBox';
 
@@ -15,7 +15,8 @@ interface TagProps {
   content: string;
   bg?: string;
   borderRadius?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
   typo?: keyof TypeOfTypo;
   colorCode?: string;
   padding?: string;
@@ -25,10 +26,11 @@ export const SalonTag = ({
   content,
   bg,
   borderRadius,
+  width,
   height,
   colorCode = theme.palette.Gray500,
   typo = 'Caption5',
-  padding
+  padding,
 }: TagProps) => {
   return (
     <WidthFitFlex
@@ -36,11 +38,11 @@ export const SalonTag = ({
       borderRadius={borderRadius ?? 2}
       padding={padding ?? '5.5px 4px'}
       height={height ?? 20}
-      width={height ?? 20}
+      width={width ?? 20}
     >
-      <Text typo={typo} colorCode={colorCode}>
+      <HardText typo={typo} colorCode={colorCode}>
         {content}
-      </Text>
+      </HardText>
     </WidthFitFlex>
   );
 };

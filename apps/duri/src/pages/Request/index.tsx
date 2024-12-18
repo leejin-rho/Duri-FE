@@ -1,57 +1,73 @@
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { addMenu, designMenu, menu, specialMenu } from '@duri/assets/data';
-import { defaultRequestInfo } from '@duri/assets/data/request';
 import { RequestType } from '@duri/assets/types';
 import MonthlyCalendar from '@duri/components/request/Calendar';
 import EtcRequest from '@duri/components/request/EtcRequest';
 import PetInfo from '@duri/components/request/PetInfo';
 import SelectGrooming from '@duri/components/request/SelectGrooming';
+import { ADD_MENU, DESIGN_MENU, MENU, SPECIAL_MENU } from '@duri/constants';
+import { DEFAULT_REQUEST_INFO } from '@duri/constants/request';
 import {
   Button,
   DuriNavbar,
+  Flex,
+  Header,
   HeightFitFlex,
   MobileLayout,
   Text,
   theme,
 } from '@duri-fe/ui';
 import { TimeTable } from '@duri-fe/ui';
-import { useGetPetInfo } from '@duri-fe/utils';
-
-interface PetInfoType {
-  petId: number;
-  name: string;
-  imageURL?: string;
-  breed: string;
-  age: number;
-  weight: number;
-  gender: string;
-  lastGrooming?: string;
-  neutering?: boolean;
-}
+import {
+  TimeType,
+  useGetPetInfo,
+  usePostRequestQuotation,
+} from '@duri-fe/utils';
 
 const timeList = Array(10)
   .fill(0)
   .map((_, i) => `${9 + i}:00`);
 
+const validateRequestInfo = (requestInfo: RequestType): boolean => {
+  // 시간 조건: time9~time18 중 하나라도 true여야 함
+  const hasValidTime = Object.keys(requestInfo).some(
+    (key) => key.startsWith('time') && requestInfo[key as keyof TimeType],
+  );
+
+  // 전체 유효성 검사값을 리턴
+  return (
+    !!requestInfo.petId &&
+    requestInfo.menu.length > 0 &&
+    !!requestInfo.shopIds &&
+    !!requestInfo.day &&
+    hasValidTime
+  );
+};
+
 const RequestPage = () => {
-  const petData = useGetPetInfo();
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const { shopIdList } = location.state;
+
+  const { data: petInfo } = useGetPetInfo();
+  const {
+    mutateAsync: request,
+    isError: requestError,
+    error,
+  } = usePostRequestQuotation();
+
   const [requestInfo, setRequestInfo] =
-    useState<RequestType>(defaultRequestInfo);
-  const [petInfo, setPetInfo] = useState<PetInfoType | null>({
-    petId: 1,
-    name: '멍뭉이',
-    breed: '시츄',
-    age: 4,
-    weight: 3.7,
-    gender: 'F',
-    lastGrooming: '2024-12-01',
-  });
+    useState<RequestType>(DEFAULT_REQUEST_INFO);
+
   const [isButton, setIsButton] = useState<boolean>(false);
+
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSelect = (
     key: string,
-    value: number | string | string[] | boolean | Date | undefined,
+    value: number | string | string[] | boolean | undefined,
   ) => {
     if (key === 'petId') {
       setRequestInfo((prev) => ({
@@ -68,40 +84,65 @@ const RequestPage = () => {
     }));
   };
 
+  const handleSaveButtonClick = () => {
+    setRequestInfo((prev) => ({
+      ...prev,
+      shopIds: shopIdList,
+    }));
+
+    request(requestInfo);
+  };
+
+  const handleBackButtonClick = () => {
+    navigate(-1);
+  };
+
+  //스크롤 멘 위로 옮기고 shopIds리스트 받은 애 set
   useEffect(() => {
     window.scrollTo(0, 0);
+    setRequestInfo((prev) => ({
+      ...prev,
+      shopIds: location.state?.shopIds,
+    }));
   }, []);
 
   useEffect(() => {
-    if (petData) {
-      setPetInfo(petData);
-      if (petData && petData.petId !== undefined) {
-        handleSelect('petId', petData.petId); // id가 null이 아닌 경우만 설정
-      }
+    if (petInfo) {
+      setRequestInfo((prev) => ({ ...prev, petId: petInfo.petId }));
     }
-  }, [petData]);
+  }, [petInfo]);
 
   // 버튼 활성화 조건 업데이트
   useEffect(() => {
-    const isValid =
-      !!requestInfo.petId && !!requestInfo.menu && requestInfo.menu.length > 0;
+    const isValid = validateRequestInfo(requestInfo);
     setIsButton(isValid);
   }, [requestInfo]);
 
-  const handleClickButton = () => {
-    console.log(requestInfo);
-  };
+  // 오류 처리
+  useEffect(() => {
+    if (requestError) {
+      setErrorMessage('오류가 발생했습니다. 다시 시도해주세요.');
+    } else {
+      setErrorMessage(null);
+    }
+  }, [requestError, error]);
 
   return (
     <MobileLayout>
-      <HeightFitFlex direction="column" margin="30px 0 91.6px 0">
+      <Header
+        backIcon
+        title="입찰 요청서 작성"
+        titleAlign="start"
+        onClickBack={handleBackButtonClick}
+      />
+      <HeightFitFlex direction="column" margin="0 0 91.6px">
         <HeightFitFlex
           direction="column"
-          align="flex-start"
+          // align="flex-start"
           padding="0 20px"
           gap={40}
         >
-          {petInfo && (
+          {petInfo ? (
             <PetInfo
               name={petInfo.name}
               image={petInfo.imageURL}
@@ -110,6 +151,18 @@ const RequestPage = () => {
               gender={petInfo.gender}
               weight={petInfo.weight}
             />
+          ) : (
+            <Flex
+              direction="column"
+              borderRadius={12}
+              padding="25px 22px 27px 13px"
+              height={75.5}
+              backgroundColor={theme.palette.Gray_White}
+            >
+              <Text typo="Caption4" colorCode={theme.palette.Gray300}>
+                등록된 반려견 정보가 없습니다.
+              </Text>
+            </Flex>
           )}
           <HeightFitFlex direction="column" align="flex-start" gap={8}>
             <Text typo="Title2">미용 선택</Text>
@@ -121,7 +174,7 @@ const RequestPage = () => {
               description={requestInfo.menu}
               menuKey="menu"
               onSelect={handleSelect}
-              options={menu}
+              options={MENU}
               selected={requestInfo.menu.length > 0}
             />
             <SelectGrooming
@@ -129,7 +182,7 @@ const RequestPage = () => {
               menuKey="addMenu"
               description={requestInfo.addMenu}
               onSelect={handleSelect}
-              options={addMenu}
+              options={ADD_MENU}
               selected={requestInfo.addMenu.length > 0}
             />
             <SelectGrooming
@@ -137,7 +190,7 @@ const RequestPage = () => {
               description={requestInfo.specialMenu}
               menuKey="specialMenu"
               onSelect={handleSelect}
-              options={specialMenu}
+              options={SPECIAL_MENU}
               selected={requestInfo.specialMenu.length > 0}
             />
             <SelectGrooming
@@ -145,7 +198,7 @@ const RequestPage = () => {
               description={requestInfo.design}
               menuKey="design"
               onSelect={handleSelect}
-              options={designMenu}
+              options={DESIGN_MENU}
               selected={requestInfo.design.length > 0}
             />
           </HeightFitFlex>
@@ -178,12 +231,17 @@ const RequestPage = () => {
             </HeightFitFlex>
           </HeightFitFlex>
         </HeightFitFlex>
+        {requestError && errorMessage && (
+          <Text typo="Caption3" colorCode={theme.palette.Alert}>
+            {errorMessage}
+          </Text>
+        )}
         {isButton ? (
           <Button
             bg={theme.palette.Black}
             fontColor={theme.palette.White}
             borderRadius="0"
-            onClick={handleClickButton}
+            onClick={handleSaveButtonClick}
             typo="Body2"
           >
             요청서 저장

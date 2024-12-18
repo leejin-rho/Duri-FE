@@ -16,6 +16,8 @@
     "@duri-fe/utils": "workspace:packages/utils",
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
+    "@tanstack/react-query": "^5.62.8",
+    "@tanstack/react-query-devtools": "^5.62.8",
     "@types/node": "^22.10.1",
     "@typescript-eslint/eslint-plugin": "^8.15.0",
     "@typescript-eslint/parser": "^8.15.0",
@@ -24,6 +26,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-hook-form": "^7.54.1",
     "react-router-dom": "^7.0.1",
     "workspace": "^0.0.1-preview.1",
     "yarn": "^1.22.22"

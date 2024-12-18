@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
-import { SalonOwnerFormData } from '@assets/types/onboarding';
 import {
   AlertStar,
   Button,
@@ -12,6 +12,7 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
+import { GroomerOnboardingInfoType } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 import {
@@ -21,10 +22,15 @@ import {
 } from './onboarding.styles';
 
 interface InputSalonOwnerProps {
-  onNext: (data: SalonOwnerFormData) => void;
+  salonOwnerFormData: GroomerOnboardingInfoType;
+  setSalonOwnerFormData: React.Dispatch<
+    React.SetStateAction<GroomerOnboardingInfoType>
+  >;
+  setProfileImage: React.Dispatch<React.SetStateAction<File | null>>;
+  onNext: () => void;
 }
 
-const certificateOptions: string[] = [
+const CERTIFICATE_OPTIONS: string[] = [
   '반려견 스타일리스트',
   '펫뷰티션',
   '펫테이너',
@@ -33,73 +39,80 @@ const certificateOptions: string[] = [
   '피어프리 인증',
 ];
 
-const genders: string[] = ['male', 'female'];
+const GENDER_OPTIONS: string[] = ['M', 'F'];
 
-const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
-  const [salonOwnerFormState, setSalonOwnerFormState] =
-    useState<SalonOwnerFormData>({
-      profile: '',
-      name: '',
-      age: '',
-      gender: '',
-      experienceYears: '',
-      experienceMonths: '',
-      license: [],
-    });
-  const [isEmpty, setIsEmpty] = useState<boolean>(true);
-  const [imgUrl, setImgUrl] = useState<string>('');
+const InputSalonOwner = ({
+  salonOwnerFormData,
+  setSalonOwnerFormData,
+  setProfileImage,
+  onNext,
+}: InputSalonOwnerProps) => {
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string>('');
+  const [historyYear, setHistoryYear] = useState<number | null>(0);
+  const [historyMonths, setHistoryMonths] = useState<number | null>(null);
+  const [license, setLicense] = useState<string[]>([]);
 
-  useEffect(() => {
-    const isFilled = Object.values(salonOwnerFormState).every(
-      (value) => value !== '',
-    );
-    setIsEmpty(!isFilled);
-  }, [salonOwnerFormState]);
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isSubmitted },
+  } = useForm<GroomerOnboardingInfoType>({
+    mode: 'onSubmit',
+    defaultValues: salonOwnerFormData,
+  });
 
-  /** 변경 함수 */
-  const handleChange = (
-    field: keyof SalonOwnerFormData,
-    value: string | string[],
-  ) => {
-    setSalonOwnerFormState({ ...salonOwnerFormState, [field]: value });
+  /** 이미지 File 객체 저장 */
+  const handleProfileImageChange = (file: File | null) => {
+    setProfileImage(file);
   };
 
+  /** 프리뷰 저장 + 이미지 File 객체 저장 함수 호출 */
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       const fileUrl = URL.createObjectURL(file);
-      setImgUrl(fileUrl);
-      handleChange('profile', fileUrl);
+      setImagePreviewUrl(fileUrl);
+      handleProfileImageChange(file);
     } else {
-      handleChange('profile', '');
+      handleProfileImageChange(null);
     }
   };
 
-  const handleToggleGender = (selectedGender: string) => {
-    handleChange('gender', selectedGender);
-  };
-
+  /** 자격증 선택 */
   const handleSelectLicense = (selectedLicense: string | number) => {
-    const set = new Set(salonOwnerFormState.license);
+    const set = new Set(license);
     if (typeof selectedLicense === 'string') {
       set.add(selectedLicense);
-      handleChange('license', [...set]);
+      setLicense([...set]);
     }
   };
 
+  /** 자격증 제거 */
   const handleRemoveLicense = (selectedLicense: string) => {
-    const set = new Set(salonOwnerFormState.license);
+    const set = new Set(license);
     set.delete(selectedLicense);
-    handleChange('license', [...set]);
+    setLicense([...set]);
   };
 
-  const handleSubmit = () => {
-    URL.revokeObjectURL(imgUrl);
-    onNext(salonOwnerFormState);
+  const onSubmitSalonOwnerData = (data: GroomerOnboardingInfoType) => {
+    // 폼에 안들어가는 데이터 유효성 검사
+    const isHistoryValid = historyYear !== null && historyMonths !== null;
+    if (!imagePreviewUrl || !isHistoryValid || license.length === 0) {
+      return;
+    }
+
+    setSalonOwnerFormData({
+      ...data,
+      history: isHistoryValid ? historyYear * 12 + historyMonths : 0,
+      license,
+    });
+    URL.revokeObjectURL(imagePreviewUrl);
+
+    onNext();
   };
 
   return (
-    <>
+    <StyledForm>
       <Flex direction="column" align="flex-start" padding="48px 0 96px 0">
         <Flex
           direction="column"
@@ -116,205 +129,228 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
           </Text>
         </Flex>
 
-        <FormWrapper onSubmit={handleSubmit}>
-          <Flex direction="column" align="flex-start" gap={20}>
-            {/* 사진, 성함 */}
-            <Flex justify="flex-start" align="flex-start">
-              <Flex justify="flex-start" align="flex-start" widthPer={50}>
-                <label htmlFor="profile">
-                  <Text typo="Label1">
-                    사진
-                    <AlertStar isUpper />
-                  </Text>
-                </label>
-                <ImageUploadContainer width={70} height={70}>
-                  {imgUrl && salonOwnerFormState.profile ? (
-                    <ImagePreview src={imgUrl} alt="선택된 파일 미리보기" />
-                  ) : (
-                    <Flex
-                      width={70}
-                      height={70}
-                      backgroundColor={theme.palette.Gray20}
-                      borderRadius={35}
-                    >
-                      <Profile
-                        width={52}
-                        height={52}
-                        color={theme.palette.Gray200}
-                      />
-                    </Flex>
-                  )}
-                  <FileInput
-                    id="profile"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
+        <Flex direction="column" align="flex-start" gap={20}>
+          {/* 사진, 성함 */}
+          <Flex justify="flex-start" align="flex-start">
+            <Flex justify="flex-start" align="flex-start" widthPer={50}>
+              <label htmlFor="profile">
+                <Text typo="Label1">
+                  사진
+                  <AlertStar isUpper />
+                </Text>
+              </label>
+              <ImageUploadContainer width={70} height={70}>
+                {imagePreviewUrl ? (
+                  <ImagePreview
+                    src={imagePreviewUrl}
+                    alt="선택된 파일 미리보기"
                   />
-                </ImageUploadContainer>
-              </Flex>
-
-              <FormInputWrapper widthPer={50}>
-                <TextField
-                  label="성함"
-                  placeholder="이름 입력"
-                  value={salonOwnerFormState.name}
-                  maxLength={10}
-                  onChange={(e) => handleChange('name', e.target.value)}
-                  width={130}
-                  height={40}
-                  isEssential
-                  isNoBorder
-                  shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+                ) : (
+                  <ProfileWrapper
+                    width={70}
+                    height={70}
+                    backgroundColor={theme.palette.Gray20}
+                    borderRadius={35}
+                    isError={!imagePreviewUrl && isSubmitted}
+                  >
+                    <Profile
+                      width={52}
+                      height={52}
+                      color={theme.palette.Gray200}
+                    />
+                  </ProfileWrapper>
+                )}
+                <FileInput
+                  id="profile"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
                 />
-              </FormInputWrapper>
+              </ImageUploadContainer>
             </Flex>
 
-            {/* 나이, 성별 */}
-            <Flex align="flex-start">
-              <FormInputWrapper widthPer={50}>
-                <label>
-                  <Text typo="Label1">
-                    나이
-                    <AlertStar isUpper />
-                  </Text>
-                </label>
-                <Flex justify="flex-start" gap={8}>
+            <FormInputWrapper widthPer={50}>
+              <Controller
+                name="name"
+                control={control}
+                rules={{ required: '필수' }}
+                render={({ field, fieldState }) => (
                   <TextField
-                    type="number"
-                    placeholder="나이 입력"
-                    value={salonOwnerFormState.age}
-                    maxLength={2}
-                    onChange={(e) => handleChange('age', e.target.value)}
-                    width={83}
+                    {...field}
+                    label="성함"
+                    placeholder="이름 입력"
+                    maxLength={10}
+                    width={130}
                     height={40}
+                    isEssential
                     isNoBorder
                     shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+                    isError={!!fieldState.error}
                   />
-                  <Text>세</Text>
-                </Flex>
-              </FormInputWrapper>
+                )}
+              />
+            </FormInputWrapper>
+          </Flex>
 
-              <FormInputWrapper widthPer={50}>
-                <label>
-                  <Text typo="Label1">
-                    성별
-                    <AlertStar isUpper />
-                  </Text>
-                </label>
-                <Flex justify="flex-start" gap={8}>
-                  {genders.map((gender) => (
-                    <Button
-                      key={gender}
-                      onClick={() => handleToggleGender(gender)}
-                      bg={
-                        salonOwnerFormState.gender === gender
-                          ? theme.palette.Black
-                          : theme.palette.White
+          {/* 나이, 성별 */}
+          <Flex align="flex-start">
+            <FormInputWrapper widthPer={50}>
+              <Flex justify="flex-start" align="flex-end" gap={8}>
+                <Controller
+                  name="age"
+                  control={control}
+                  rules={{ required: '필수', min: 15, max: 99 }}
+                  render={({ field, fieldState }) => (
+                    <TextField
+                      {...field}
+                      type="number"
+                      label="나이"
+                      isEssential
+                      placeholder="나이 입력"
+                      maxLength={2}
+                      width={83}
+                      height={40}
+                      isNoBorder
+                      shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+                      isError={!!fieldState.error}
+                      helperText={
+                        errors.age
+                          ? [{ type: 'error', text: `${errors.age.message}` }]
+                          : []
                       }
-                      fontColor={
-                        salonOwnerFormState.gender === gender
-                          ? theme.palette.White
-                          : theme.palette.Black
-                      }
-                      border={`1px solid ${theme.palette.Gray100}`}
-                      height="43px"
-                      typo="Body2"
-                      width="fit-content"
-                    >
-                      {gender === 'male' ? '남' : '여'}
-                    </Button>
-                  ))}
-                </Flex>
-              </FormInputWrapper>
-            </Flex>
+                    />
+                  )}
+                />
+                <WidthFitFlex height={40}>
+                  <Text typo="Body3">세</Text>
+                </WidthFitFlex>
+              </Flex>
+            </FormInputWrapper>
 
-            {/* 경력 */}
-            <FormInputWrapper>
+            <FormInputWrapper widthPer={50}>
               <label>
                 <Text typo="Label1">
-                  경력
+                  성별
                   <AlertStar isUpper />
                 </Text>
               </label>
               <Flex justify="flex-start" gap={8}>
-                <TextField
-                  type="number"
-                  max={99}
-                  placeholder="경력 입력"
-                  value={salonOwnerFormState.experienceYears}
-                  maxLength={2}
-                  onChange={(e) =>
-                    handleChange('experienceYears', e.target.value)
-                  }
-                  width={83}
-                  height={40}
-                  isNoBorder
-                  shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-                />
-                <Text>년</Text>
-                <TextField
-                  type="number"
-                  max={12}
-                  placeholder="경력 입력"
-                  value={salonOwnerFormState.experienceMonths}
-                  maxLength={2}
-                  onChange={(e) =>
-                    handleChange('experienceMonths', e.target.value)
-                  }
-                  width={83}
-                  height={40}
-                  isNoBorder
-                  shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
-                />
-                <Text>개월</Text>
+                {GENDER_OPTIONS.map((gender) => (
+                  <Controller
+                    key={gender}
+                    name="gender"
+                    control={control}
+                    render={({ field }) => (
+                      <Button
+                        onClick={() => field.onChange(gender)}
+                        bg={
+                          field.value === gender
+                            ? theme.palette.Black
+                            : theme.palette.White
+                        }
+                        fontColor={
+                          field.value === gender
+                            ? theme.palette.White
+                            : theme.palette.Black
+                        }
+                        border={`1px solid ${theme.palette.Gray100}`}
+                        height="43px"
+                        typo="Body2"
+                        width="fit-content"
+                      >
+                        {gender === 'M' ? '남' : '여'}
+                      </Button>
+                    )}
+                  />
+                ))}
               </Flex>
             </FormInputWrapper>
-
-            {/* 자격 */}
-            <FormInputWrapper>
-              <label htmlFor="license">
-                <Text typo="Label1">
-                  자격
-                  <AlertStar isUpper />
-                </Text>
-              </label>
-              <Dropdown
-                options={certificateOptions}
-                defaultValue="자격 선택"
-                onSelect={handleSelectLicense}
-                width={235}
-              />
-              <WidthFitFlex
-                padding="8px 0 0 16px"
-                direction="column"
-                justify="flex-start"
-                align="start"
-                gap={12}
-              >
-                {salonOwnerFormState.license &&
-                  salonOwnerFormState.license.map((item) => (
-                    <Text
-                      key={item}
-                      typo="Body4"
-                      onClick={() => handleRemoveLicense(item)}
-                    >
-                      {item}
-                    </Text>
-                  ))}
-              </WidthFitFlex>
-            </FormInputWrapper>
           </Flex>
-        </FormWrapper>
+
+          {/* 경력 */}
+          <FormInputWrapper>
+            <Flex justify="flex-start" align="flex-end" gap={8}>
+              <TextField
+                type="number"
+                label="경력"
+                isEssential
+                min={0}
+                max={99}
+                onChange={(e) => setHistoryYear(Number(e.target.value))}
+                placeholder="경력 입력"
+                maxLength={2}
+                width={83}
+                height={40}
+                isNoBorder
+                shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+                isError={historyYear === null && isSubmitted}
+              />
+              <WidthFitFlex height={40}>
+                <Text typo="Body3">년</Text>
+              </WidthFitFlex>
+
+              <TextField
+                type="number"
+                min={0}
+                max={12}
+                onChange={(e) => setHistoryMonths(Number(e.target.value))}
+                placeholder="경력 입력"
+                maxLength={2}
+                width={83}
+                height={40}
+                isNoBorder
+                shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
+                isError={historyMonths === null && isSubmitted}
+              />
+
+              <WidthFitFlex height={40}>
+                <Text typo="Body3">개월</Text>
+              </WidthFitFlex>
+            </Flex>
+          </FormInputWrapper>
+
+          {/* 자격 */}
+          <FormInputWrapper>
+            <label htmlFor="license">
+              <Text typo="Label1">
+                자격
+                <AlertStar isUpper />
+              </Text>
+            </label>
+            <Dropdown
+              options={CERTIFICATE_OPTIONS}
+              defaultValue="자격 선택"
+              onSelect={handleSelectLicense}
+              width={235}
+              isError={license.length === 0 && isSubmitted}
+            />
+            <WidthFitFlex
+              padding="8px 0 0 16px"
+              direction="column"
+              justify="flex-start"
+              align="start"
+              gap={12}
+            >
+              {license &&
+                license.map((item) => (
+                  <Text
+                    key={item}
+                    typo="Body4"
+                    onClick={() => handleRemoveLicense(item)}
+                  >
+                    {item}
+                  </Text>
+                ))}
+            </WidthFitFlex>
+          </FormInputWrapper>
+        </Flex>
       </Flex>
 
-      {/* 문의하기
-       * TODO : 문의하기 눌렀을 때에 대한 처리 필요
-       */}
       <ContactContainer gap={4}>
         <Text typo="Label2" colorCode={theme.palette.Gray300}>
           문제가 발생한다면
         </Text>
-        <UnderlinedText typo="Label2" colorCode={theme.palette.Gray300}>
+        <UnderlinedText href="mailto:fodo9898@inha.edu">
           문의하기
         </UnderlinedText>
         <Text typo="Label2" colorCode={theme.palette.Gray300}>
@@ -323,32 +359,27 @@ const InputSalonOwner = ({ onNext }: InputSalonOwnerProps) => {
       </ContactContainer>
 
       <ButtonWrapper padding="0 20px">
-        {isEmpty ? (
-          <Button bg={theme.palette.Gray50} disabled>
-            다음 단계
-          </Button>
-        ) : (
-          <Button
-            onClick={handleSubmit}
-            bg={theme.palette.Black}
-            fontColor={theme.palette.White}
-          >
-            다음 단계
-          </Button>
-        )}
+        <Button
+          bg={theme.palette.Black}
+          fontColor={theme.palette.White}
+          // onClick={() => console.log(historyYear, historyMonths, license)}
+          onClick={handleSubmit(onSubmitSalonOwnerData)}
+        >
+          다음 단계
+        </Button>
       </ButtonWrapper>
-    </>
+    </StyledForm>
   );
 };
 
-const FormWrapper = styled.form`
+const StyledForm = styled.form`
   width: 100%;
 `;
 
 const FormInputWrapper = styled(Flex)`
   align-items: flex-start;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 `;
 
 const ImageUploadContainer = styled(Flex)`
@@ -362,6 +393,11 @@ const ImagePreview = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 35px;
+`;
+
+const ProfileWrapper = styled(Flex)<{ isError: boolean }>`
+  border: 1px solid
+    ${({ isError }) => (isError ? theme.palette.Alert : theme.palette.Gray100)};
 `;
 
 const FileInput = styled.input`

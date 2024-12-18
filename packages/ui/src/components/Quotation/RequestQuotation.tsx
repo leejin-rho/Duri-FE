@@ -1,11 +1,10 @@
 import {
-  defaultRequestDetailData,
   Flex,
   HeightFitFlex,
   PetInfo,
   Seperator,
   Text,
-  theme,
+  TextField,
   WidthFitFlex,
 } from '@duri-fe/ui';
 import { TimeType } from '@duri-fe/utils';
@@ -13,8 +12,8 @@ import { format } from 'date-fns';
 
 import { RequestDetailProps } from '../../types';
 
-// import { DetailGrooming } from './DetailGrooming';
-import { DetailGroomingTemp } from './DetailGroomingTemp';
+import { DetailGrooming } from './DetailGrooming';
+// import { DetailGroomingTemp } from './DetailGroomingTemp';
 import { TimeTable } from './Timetable';
 
 const timeList = Array(10)
@@ -22,17 +21,29 @@ const timeList = Array(10)
   .map((_, i) => `${9 + i}:00`);
 
 interface RequestQuotationProps {
-  requestList?: RequestDetailProps;
+  requestList: RequestDetailProps;
   selectedTimeList?: TimeType;
   children?: React.ReactNode;
 }
 
 export const RequestQuotation = ({
-  requestList = defaultRequestDetailData,
+  requestList,
   selectedTimeList,
   children,
 }: RequestQuotationProps) => {
-  const { groomingMenu, additionalGrooming, specialCare, designCut } = requestList.quotationDetails;
+  const {
+    groomingMenu,
+    additionalGrooming,
+    specialCare,
+    designCut,
+    day,
+    otherRequests,
+  } = requestList.quotationDetails; //미용정보
+
+  const { age, breed, gender, image, neutering, name, weight } =
+    requestList.pet; //펫정보
+
+  console.log(requestList);
 
   return (
     <>
@@ -45,20 +56,20 @@ export const RequestQuotation = ({
       >
         {requestList.pet && (
           <PetInfo
-            gender={requestList.pet.gender}
-            name={requestList.pet.name}
-            age={requestList.pet.age}
-            breed={requestList.pet.breed}
-            image={requestList.pet.image}
-            weight={requestList.pet.weight}
-            themeVariant='spacious'
-            neutering={requestList.pet.neutering}
+            gender={gender}
+            name={name}
+            age={age}
+            breed={breed}
+            image={image}
+            weight={weight}
+            themeVariant="spacious"
+            neutering={neutering}
           />
         )}
       </Flex>
 
       <HeightFitFlex direction="column" gap={18}>
-        <Seperator width='90%' mode="dotted" height="2px" />
+        <Seperator mode="dotted" height="2px" />
 
         {/** 보호자 */}
         <Flex justify="space-between" padding="0 30.5px">
@@ -70,34 +81,35 @@ export const RequestQuotation = ({
         </Flex>
 
         {/** 희망 예약 날짜 */}
-        {requestList.quotationDetails.day && (
+        {day && (
           <>
-            <Seperator width='90%' mode="dotted" height="2px" />
+            <Seperator mode="dotted" height="2px" />
             <Flex justify="space-between" padding="0 30.5px">
               <Text typo="Body2">희망 예약 날짜</Text>
-              <Text typo="Body2">
-                {format(requestList.quotationDetails.day, 'yyyy.MM.dd')}
-              </Text>
+              <Text typo="Body2">{format(day, 'yyyy.MM.dd')}</Text>
             </Flex>
           </>
         )}
 
-        <Seperator width='90%' mode="dotted" height="2px" />
+        <Seperator mode="dotted" height="2px" />
 
         {/** 희망 예약 시간 */}
-        {selectedTimeList && (        
+        {selectedTimeList && (
           <Flex direction="column">
             <Text typo="Body2">희망 예약 시간</Text>
-            <TimeTable timeList={timeList} selectedTimeList={selectedTimeList} />
+            <TimeTable
+              timeList={timeList}
+              selectedTimeList={selectedTimeList}
+            />
           </Flex>
         )}
       </HeightFitFlex>
 
-      <Seperator width='90%' mode="dotted" height="2px" />
+      <Seperator mode="dotted" height="2px" />
 
       {/** 상세 미용 */}
-      <HeightFitFlex direction="column" padding='28px 0'>
-        <DetailGroomingTemp
+      <HeightFitFlex direction="column" padding="28px 0">
+        <DetailGrooming
           groomingMenu={groomingMenu}
           additionalGrooming={additionalGrooming}
           specialCare={specialCare}
@@ -105,18 +117,25 @@ export const RequestQuotation = ({
         />
       </HeightFitFlex>
 
-      <Seperator width='90%' mode="dotted" height="2px" />
+      <Seperator mode="dotted" height="2px" />
 
       {/** 요청사항 */}
-      <Flex direction="column" align="flex-start" padding="28px 30.5px" gap={12}>
+      <Flex
+        direction="column"
+        align="flex-start"
+        padding="28px 30.5px"
+        gap={12}
+      >
         <Text typo="Body2">요청사항</Text>
-        <Text typo="Label3" colorCode={theme.palette.Gray500}>{requestList.quotationDetails.otherRequests}</Text>
+        <TextField disabled value={otherRequests} widthPer='100%' multiline height={82}/>
       </Flex>
 
       {/** 하단 버튼 */}
-      <Flex gap={7} margin="6px 0" padding="16px 18.5px">
-        {children}
-      </Flex>
+      {children && (
+        <Flex gap={7} margin="6px 0" padding="16px 18.5px">
+          {children}
+        </Flex>
+      )}
     </>
   );
 };

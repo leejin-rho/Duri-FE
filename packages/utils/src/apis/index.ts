@@ -1,4 +1,6 @@
 export * from './duri';
 export * from './salon';
-export * from './axiosConfig';
+export * from './admin';
+
+export * from './config';
 export * from './types';

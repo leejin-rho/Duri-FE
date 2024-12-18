@@ -10,11 +10,11 @@ import {
   SalonTag,
   Text,
   theme,
+  WidthFitFlex,
 } from '@duri-fe/ui';
-import styled from '@emotion/styled';
 
 interface HistoryCardProps {
-  visitMonth: string;
+  quotationId: number;
   tagContent: string;
   profileImageUrl?: string;
   designerName: string;
@@ -26,7 +26,7 @@ interface HistoryCardProps {
 }
 
 export const HistoryCard = ({
-  visitMonth,
+  quotationId,
   tagContent,
   profileImageUrl,
   designerName,
@@ -37,8 +37,8 @@ export const HistoryCard = ({
   toggleModal,
 }: HistoryCardProps) => {
   const navigate = useNavigate();
-  const moveToDiaryDetail = () => {
-    navigate('/diary/1');
+  const handleDiaryCardClick = (quotationId: number) => {
+    navigate(`/diary/${quotationId}`);
   };
 
   const handleToggleModal = (e: React.MouseEvent) => {
@@ -49,76 +49,69 @@ export const HistoryCard = ({
   };
 
   return (
-    <HeightFitFlex
-      direction="column"
-      align="start"
-      gap={24}
-      onClick={moveToDiaryDetail}
-    >
-      <Text typo="Title1">{visitMonth} 방문</Text>
-      <HeightFitFlex gap={19} align="stretch">
-        <GrayVerticalLine />
-        <Card direction="row" borderRadius={12} padding="16px 20px">
-          <Flex>
-            <Flex direction="column" align="flex-start">
-              <SalonTag content={tagContent} borderRadius={99} />
-              <HeightFitFlex justify="start" margin="16px 0 0 0" gap={12}>
-                <ProfileImage
-                  width={20}
-                  height={20}
-                  borderRadius={99}
-                  src={profileImageUrl}
-                />
-                <Text typo="Label3" colorCode={theme.palette.Gray300}>
-                  {designerName}
-                </Text>
-              </HeightFitFlex>
-              <HeightFitFlex justify="flex-start" gap={8} margin="14px 0 0 0">
-                <Text
-                  typo="Title1"
-                  colorCode={theme.palette.Normal700}
-                  margin="0 4px 0 0"
-                >
-                  {shopName}
-                </Text>
-                <Dot width={3} />
-                <Text typo="Title1">{petName}</Text>
-              </HeightFitFlex>
-
-              <HeightFitFlex justify="flex-start" gap={8} margin="16px 0 0 0">
-                <Text typo="Label1" colorCode={theme.palette.Gray300}>
-                  {dayOfWeek}
-                </Text>
-                <Text typo="Label3" colorCode={theme.palette.Gray300}>
-                  {visitDate}
-                </Text>
-              </HeightFitFlex>
+    <div onClick={() => handleDiaryCardClick(quotationId)}>
+      <Card direction="row" borderRadius={12} padding="16px 20px">
+        <Flex width={250}>
+          <Flex direction="column" align="flex-start">
+            <Flex justify="space-between" height={30} margin="0 0 13px">
+              <SalonTag
+                height={24}
+                padding="8px 10px"
+                content={tagContent}
+                borderRadius={99}
+                colorCode={theme.palette.Gray300}
+                typo="Caption5"
+              />
+              <WidthFitFlex justify="end" align="start">
+                {toggleModal && (
+                  <Button
+                    bg={theme.palette.Black}
+                    fontColor={theme.palette.White}
+                    typo="Label3"
+                    padding="10px"
+                    width="85px"
+                    height="30px"
+                    onClick={handleToggleModal}
+                  >
+                    견적서 보기
+                  </Button>
+                )}
+              </WidthFitFlex>
             </Flex>
-          </Flex>
-          <Flex justify="end" align="start">
-            {toggleModal && (
-              <Button
-                bg={theme.palette.Black}
-                fontColor={theme.palette.White}
-                typo="Label3"
-                padding="10px"
-                width="85px"
-                height="30px"
-                onClick={handleToggleModal}
+            <HeightFitFlex justify="start" gap={12}>
+              <ProfileImage
+                width={20}
+                height={20}
+                borderRadius={99}
+                src={profileImageUrl}
+              />
+              <Text typo="Label3" colorCode={theme.palette.Gray300}>
+                {designerName}
+              </Text>
+            </HeightFitFlex>
+            <HeightFitFlex justify="flex-start" gap={8} margin="14px 0 0 0">
+              <Text
+                typo="Title1"
+                colorCode={theme.palette.Normal700}
+                margin="0 4px 0 0"
               >
-                견적서 보기
-              </Button>
-            )}
+                {shopName}
+              </Text>
+              <Dot width={3} />
+              <Text typo="Title1">{petName}</Text>
+            </HeightFitFlex>
+
+            <HeightFitFlex justify="flex-start" gap={8} margin="16px 0 0 0">
+              <Text typo="Label1" colorCode={theme.palette.Gray300}>
+                {dayOfWeek}
+              </Text>
+              <Text typo="Label3" colorCode={theme.palette.Gray300}>
+                {visitDate}
+              </Text>
+            </HeightFitFlex>
           </Flex>
-        </Card>
-      </HeightFitFlex>
-    </HeightFitFlex>
+        </Flex>
+      </Card>
+    </div>
   );
 };
-
-const GrayVerticalLine = styled.div`
-  width: 3px;
-  height: 100%;
-  flex-shrink: 0;
-  background-color: ${theme.palette.Gray50};
-`;

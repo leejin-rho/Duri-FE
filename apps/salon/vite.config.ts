@@ -11,9 +11,20 @@ export default defineConfig({
       { find: '@styles', replacement: '/src/styles' },
       { find: '@assets', replacement: '/src/assets' },
       { find: '@mocks', replacement: '/src/mocks' },
+      { find: '@utils', replacement: '/src/utils' },
+      { find: '@types', replacement: '/src/types' },
+      { find: '@hooks', replacement: '/src/hooks' },
+      { find: '@stores', replacement: '/src/stores' },
     ],
   },
   server: {
     port: 3001,
+    proxy: {
+      '/naver-api': {
+        target: 'https://naveropenapi.apigw.ntruss.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/naver-api/, ''),
+      },
+    },
   },
 });

@@ -1,3 +1,5 @@
+import { BaseResponse } from './base';
+
 export interface TimeType {
   time9: boolean;
   time10: boolean;
@@ -11,6 +13,7 @@ export interface TimeType {
   time18: boolean;
 }
 
+/** [POST] 견적 요청서 작성 request */
 export interface RequestProps extends TimeType {
   petId?: number;
   menu: string[];
@@ -18,10 +21,11 @@ export interface RequestProps extends TimeType {
   specialMenu: string[];
   design: string[];
   etc: string;
-  day: Date;
+  day: string;
   shopIds: number[];
 }
 
+/** [GET] 견적 요청서 리스트 response */
 export interface NewRequestListResponse {
   response: {
     requestId: number;
@@ -32,12 +36,15 @@ export interface NewRequestListResponse {
     petAge: number;
     petBreed: string;
     petNeutering: boolean;
+    petGender: string;
+    petWeight: number;
     petCharacter: string[];
     petDiseases: string[];
-    requestCreatedAt: Date | string | null
-  }
+    requestCreatedAt: Date | null;
+  };
 }
 
+/** [GET] 견적 요청서 세부 response */
 export interface RequestDetailResponse {
   response: {
     userName: string;
@@ -45,7 +52,7 @@ export interface RequestDetailResponse {
     pet: RequestDetailPetType;
     groomer: RequestDetailGroomerType;
     quotationDetails: QuotationDetailsType;
-  }
+  };
 }
 
 export interface RequestDetailPetType {
@@ -69,10 +76,132 @@ export interface RequestDetailGroomerType {
 }
 
 export interface QuotationDetailsType extends TimeType {
-  groomingMenu: string;
-  additionalGrooming: string;
-  specialCare: string;
-  designCut: string;
+  groomingMenu: string[];
+  additionalGrooming: string[];
+  specialCare: string[];
+  designCut: string[];
   otherRequests: string;
   day: string;
+}
+
+/** [POST] 견적서 작성 request */
+export interface PostQuotationRequest {
+  requestId: number;
+  priceDetail: {
+    groomingPrice: number;
+    additionalPrice: number;
+    specialCarePrice: number;
+    designPrice: number;
+    customPrice: number;
+    totalPrice: number;
+  };
+  memo: string;
+  startDateTime: string;
+  endDateTime: string;
+}
+
+export interface PostQuotationResponse extends BaseResponse {
+  response: {
+    data: string;
+  };
+}
+
+export interface ApprovedQuotationListResponse extends BaseResponse {
+  response: NewRequestListResponse['response'] & {
+    status: string;
+  };
+}
+
+export interface ReservedQuotationListResponse extends BaseResponse {
+  response: {
+    requestId: number;
+    userId: number;
+    petId: number;
+    petDetailResponse: RequestDetailPetType;
+    groomerName: string;
+    groomerImage: string;
+    totalPrice: number;
+    dday: number;
+    date: string;
+    startTime: string;
+    endTime: string;
+  };
+}
+
+export interface CompletedQuotationListResponse extends BaseResponse {
+  response: {
+    requestId: number;
+    userId: number;
+    petId: number;
+    petDetailResponse: RequestDetailPetType;
+    groomerName: string;
+    groomerImage: string;
+    totalPrice: number;
+    dday: number;
+    date: string;
+    startTime: string;
+    endTime: string;
+  };
+}
+
+
+//응답 견적서 상세조회
+export interface QuotationDetailResponse extends BaseResponse {
+  response: {
+    shopDetail: ShopDetailType;
+    quotationCreatedAt: string;
+    petDetail: RequestDetailPetType;
+    menuDetail: QuotationDetailsType;
+    quotation: PostQuotationRequest;
+    quotationId: number;
+    status: string;
+  };
+}
+
+export interface ShopDetailType {
+  shopName: string;
+  shopAddress: string;
+  shopPhone: string;
+  groomerName: string;
+}
+
+export interface ShopType {
+  shopName: string;
+  shopImage: string;
+}
+
+export interface QuotationListResponse extends BaseResponse {
+  response: {
+    createdAt: Date;
+    expiredAt: Date;
+    bestDistanceShop: ShopType | null;
+    bestPriceShop: ShopType | null;
+    bestRatingShop: ShopType | null;
+    bestShop: ShopType | null;
+    quotations: {
+      requestId: number;
+      shopName: string;
+      totalPrice: number | null;
+    }[];
+  };
+}
+
+export interface PutGroomingCompleteResponse extends BaseResponse {
+  response: string;
+}
+export interface RequestItemsType {
+  quotationId: number;
+  createdAt: Date;
+  expiredAt: Date;
+  shops: [
+    {
+      shopId: number;
+      shopName: string;
+    },
+  ];
+  isExpired: boolean;
+}
+
+export interface RequestItemsResponse extends BaseResponse {
+  response: RequestItemsType[];
 }

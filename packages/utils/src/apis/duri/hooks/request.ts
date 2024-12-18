@@ -1,14 +1,18 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { BaseResponse } from '../../types';
 import { RequestProps } from '../../types/quotation';
 import { postRequestQuotation } from '../request';
+interface RequestResponse extends BaseResponse {
+  response: number;
+}
 
-// import { BaseResponse } from './../../types/base';
-
-
-export const useRequestQuotation = () => {
-  return useMutation<void, Error, RequestProps>({
+export const usePostRequestQuotation = () => {
+  return useMutation<RequestResponse, Error, RequestProps>({
     mutationFn: (request: RequestProps) => postRequestQuotation(request),
+    onSuccess: () => {
+      window.location.href = '/quotation';
+    },
     onError: (error) => {
       console.error(error);
       alert('견적서 요청을 실패했습니다.');

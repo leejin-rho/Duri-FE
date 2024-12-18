@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,10 +28,18 @@ export const ShopHorizontal = ({
   home: boolean;
 }) => {
   const navigate = useNavigate();
-  const handleClickShop = (shopIdx: number) => navigate(`/shop/${shopIdx}`);
+  const handleClickShop = (shopIdx: number) => {
+    navigate(`/shop/${shopIdx}`);
+  };
   const { openSheet, bottomSheetProps } = useBottomSheet({
     maxHeight: 556,
   });
+  const [clickedShopId, setClickedShopId] = useState<number>(0);
+  const handleSendBtnClick = (shopIdx: number) => {
+    setClickedShopId(shopIdx);
+    openSheet();
+  };
+
   return (
     <Flex direction="column" gap={20} margin="28px 0 0 0">
       {shopList &&
@@ -52,7 +61,11 @@ export const ShopHorizontal = ({
             >
               <Flex justify="space-between">
                 <Wrapper direction="column" align="flex-start">
-                  <Flex justify="flex-start" gap={2} onClick={() => handleClickShop(shop.shopId)}>
+                  <Flex
+                    justify="flex-start"
+                    gap={2}
+                    onClick={() => handleClickShop(shop.shopId)}
+                  >
                     <Text typo="Title3">{shop.shopName}</Text>
                     <NextArrow width={20} height={20} />
                   </Flex>
@@ -81,7 +94,7 @@ export const ShopHorizontal = ({
                 fontColor={theme.palette.White}
                 borderRadius="8px"
                 typo="Label2"
-                onClick={openSheet}
+                onClick={() => handleSendBtnClick(shop.shopId)}
               >
                 <Send width={18} height={17} /> &nbsp; 입찰 넣기
               </Button>
@@ -89,7 +102,7 @@ export const ShopHorizontal = ({
           </HeightFitFlex>
         ))}
       <BottomSheet {...bottomSheetProps}>
-        <SendRequestQBox />
+        <SendRequestQBox shopIdList={[clickedShopId]} />
       </BottomSheet>
     </Flex>
   );

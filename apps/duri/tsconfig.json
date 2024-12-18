@@ -12,6 +12,14 @@
       "@mocks/*": ["./apps/duri/src/mocks/*"]
     }
   },
-  "include": ["src/**/*", "../../**/*.d.ts", "public/svg/MyLocation.tsx", "../../packages/utils/src/stores"],
+  "include": [
+    "src/**/*",
+    "../../**/*.d.ts",
+    "public/svg/MyLocation.tsx",
+    "../../packages/utils/src/stores",
+    "../../packages/ui/src/components/Portfolio/PortfolioPhotos.tsx",
+    "../../packages/ui/src/components/Portfolio/DesignerInfo.tsx",
+    "src/components/shop/ShopInfo.tsx"
+  ],
   "exclude": ["node_modules", "dist"]
 }

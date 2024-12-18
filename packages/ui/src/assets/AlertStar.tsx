@@ -30,5 +30,5 @@ const SvgAlertStar: React.FC<SvgAlertStarProps> = ({
 export default SvgAlertStar;
 
 const Wrapper = styled(Flex)<{ isUpper?: boolean }>`
-  margin-top: ${({ isUpper }) => (isUpper ? '-8px' : '0px')};
+  margin-top: ${({ isUpper }) => (isUpper ? '-10px' : '0px')};
 `;

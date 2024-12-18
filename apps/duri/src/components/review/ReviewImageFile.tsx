@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Flex, Image, Text, theme, Trash, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
@@ -6,37 +6,43 @@ import styled from '@emotion/styled';
 export const ReviewImageFile = ({
   imageURL,
   onChange,
+  setImageURL,
 }: {
   imageURL?: string;
-  onChange: (file: string) => void;
+  onChange: (file: File | null) => void;
+  setImageURL: (url: string) => void;
 }) => {
-  const [imageFile, setImageFile] = useState<string | undefined>(imageURL);
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     const file = e.target.files?.[0];
     if (file) {
       const fileUrl = URL.createObjectURL(file);
-      setImageFile(fileUrl);
-      onChange(fileUrl);
+      setImageURL(fileUrl);
+      onChange(file);
+
+      // 파일 입력 초기화
+      setTimeout(() => {
+        e.target.value = '';
+      }, 0);
     }
   };
-  const handleFileDelete = () => {
-    setImageFile(undefined);
-    onChange('');
 
+  const handleFileDelete = () => {
+    setImageURL('');
+    onChange(null);
   };
 
   useEffect(() => {
     if (imageURL) {
-      setImageFile(imageURL);
+      setImageURL(imageURL);
+      
     }
   }, [imageURL]); //url 변경 시 렌더링되도록
 
   return (
     <ImageUploadContainer borderRadius={8}>
       <ReviewImageWrapper borderRadius={8}>
-        {imageFile ? (
-          <Image width={100} height={100} borderRadius={8} src={imageFile} />
+        {imageURL ? (
+          <Image width={100} height={100} borderRadius={8} src={imageURL} />
         ) : (
           <ShadowFlex
             backgroundColor={theme.palette.Gray_White}
@@ -45,12 +51,7 @@ export const ReviewImageFile = ({
             borderRadius={8}
           ></ShadowFlex>
         )}
-        {!imageFile ? (
-          <AddImageWrapper borderRadius={8} height={29} direction="column">
-            <Text typo="Label4">+</Text>
-            <Text typo="Label4">사진추가하기</Text>
-          </AddImageWrapper>
-        ) : (
+        {imageURL ? (
           <TrashWrapper
             padding="6.5px 9.1px"
             backgroundColor={theme.palette.Alert}
@@ -61,6 +62,11 @@ export const ReviewImageFile = ({
           >
             <Trash width={8} height={8} />
           </TrashWrapper>
+        ) : (
+          <AddImageWrapper borderRadius={8} height={29} direction="column">
+            <Text typo="Label4">+</Text>
+            <Text typo="Label4">사진추가하기</Text>
+          </AddImageWrapper>
         )}
       </ReviewImageWrapper>
       <FileInput type="file" accept="image/*" onChange={handleFileChange} />

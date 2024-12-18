@@ -8,8 +8,11 @@
       "@styles/*": ["./apps/salon/src/styles/*"],
       "@assets/*": ["./apps/salon/src/assets/*"],
       "@mocks/*": ["./apps/salon/src/mocks/*"],
+      "@utils/*": ["./apps/salon/src/utils/*"],
+      "@hooks/*": ["./apps/salon/src/hooks/*"],
+      "@types/*": ["./apps/salon/src/types/*"],
     }
   },
-  "include": ["src/**/*", "../../**/*.d.ts"],
+  "include": ["src/**/*", "../../**/*.d.ts", "setupProxy.js"],
   "exclude": ["node_modules", "dist"]
 }

@@ -16,7 +16,7 @@ const Instruction = ({ onNext, show }: InstructionProps) => {
           두리묭실 서비스에 등록하기 위해
         </Text>
         <Text typo="Heading" align="center">
-          매장 정보의 등록이 필요해요
+          매장 정보의 등록이 필요해요!
         </Text>
       </Wrapper>
 

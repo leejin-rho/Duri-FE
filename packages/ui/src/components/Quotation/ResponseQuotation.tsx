@@ -17,9 +17,11 @@ import { DetailGrooming } from './DetailGrooming';
 
 export const ResponseQuotation = ({
   responseList,
+  isSalon = false,
   children,
 }: {
   responseList: ResponseQuotationType;
+  isSalon?: boolean;
   children: React.ReactNode;
 }) => {
   const { groomingMenu, additionalGrooming, specialCare, designCut } =
@@ -73,7 +75,13 @@ export const ResponseQuotation = ({
         <Seperator mode="dotted" height="2px" />
         <Flex direction="column" align="flex-start" padding="0 35.5px" gap={24}>
           <Text typo="Body2">요청사항</Text>
-          <TextField value={memo} width={266} multiline={true} height={108} />
+          {isSalon ? (
+            <MemoText typo="Label3" colorCode={theme.palette.Gray500}>
+              {memo}
+            </MemoText>
+          ) : (
+            <TextField value={memo} width={266} multiline={true} height={108} />
+          )}
         </Flex>
         <Seperator mode="dotted" height="2px" />
         <HeightFitFlex direction="column" gap={18}>
@@ -85,9 +93,11 @@ export const ResponseQuotation = ({
           </Flex>
         </HeightFitFlex>
       </Flex>
-      <Flex gap={7} margin="6px 0" padding="16px 18.5px">
-        {children}
-      </Flex>
+      {children && (
+        <Flex gap={7} margin="6px 0" padding="16px 18.5px">
+          {children}
+        </Flex>
+      )}
     </MaxWidthFlex>
   );
 };
@@ -104,4 +114,8 @@ const SingleLineText = styled(Text)`
 
 const MaxWidthFlex = styled(Flex)`
   max-width: 337px;
+`;
+
+const MemoText = styled(Text)`
+  text-align: start;
 `;

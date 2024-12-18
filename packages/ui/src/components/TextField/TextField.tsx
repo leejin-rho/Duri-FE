@@ -79,26 +79,33 @@ export const TextField = forwardRef<
     },
     ref,
   ) => {
-    function maxLengthCheck(event: React.ChangeEvent<HTMLInputElement>){
-      if (event.target.maxLength > 0 && event.target.value.length > event.target.maxLength){
+    function maxLengthCheck(event: React.ChangeEvent<HTMLInputElement>) {
+      if (
+        event.target.maxLength > 0 &&
+        event.target.value.length > event.target.maxLength
+      ) {
         //object.maxLength : 매게변수 오브젝트의 maxlength 속성 값입니다.
-        event.target.value = event.target.value.slice(0, event.target.maxLength);
-      }    
+        event.target.value = event.target.value.slice(
+          0,
+          event.target.maxLength,
+        );
+      }
     }
 
     return (
       <Container per={widthPer} width={isSubTextField ? width + 37 : width}>
         <HeightFitFlex
           direction="row"
-          gap={19}
+          gap={4}
           justify="flex-start"
-          align="flex-end"
+          align="center"
+          margin="0 0 8px 0"
         >
           <Flex width="fit-content" gap={1}>
             {label && <StyledLabel>{label}</StyledLabel>}
             {isEssential && (
               <Flex width={8} align="flex-start">
-                <AlertStar width={8} isUpper={true} />
+                <AlertStar width={8} isUpper />
               </Flex>
             )}
           </Flex>
@@ -163,7 +170,7 @@ const Container = styled(Flex)<{
   align-items: flex-start;
 `;
 const StyledHelperTextBox = styled.div`
-  margin-top: 8px;
+  /* margin-top: 8px; */
 `;
 const InputContainer = styled.div<{
   fontColor: string;
@@ -205,10 +212,10 @@ const StyledInput = styled.input<{
     isNoBorder ? '12px' : isRound ? '99px' : '8px'};
 
   border: ${({ isNoBorder, isError }) =>
-    isNoBorder
-      ? 'none'
-      : isError
-        ? `1px solid ${theme.palette.Alert}`
+    isError
+      ? `1px solid ${theme.palette.Alert}`
+      : isNoBorder
+        ? `1px solid ${theme.palette.White}`
         : `1px solid ${theme.palette.Gray300}`};
 
   ${({ isNoBorder, isRound }) =>
@@ -231,7 +238,9 @@ const StyledInput = styled.input<{
       color: ${theme.palette.Gray500};
     }
     border: ${({ isNoBorder }) =>
-      isNoBorder ? 'none' : `1px solid ${theme.palette.Gray500}`};
+      isNoBorder
+        ? `1px solid ${theme.palette.White}`
+        : `1px solid ${theme.palette.Gray500}`};
 
     color: ${theme.palette.Black};
   }
@@ -298,14 +307,12 @@ const StyledIcon = styled.div`
 `;
 
 const StyledLabel = styled.p`
-  margin-bottom: 12px;
-
   ${theme.typo.Label1};
   color: ${theme.palette.Black};
 `;
 
 const StyledHelperText = styled.p<{ isError: boolean }>`
-  ${theme.typo.Body3};
+  ${theme.typo.Label3};
   color: ${({ isError }) =>
     isError ? theme.palette.Alert : theme.palette.Gray300};
 `;

@@ -1,5 +1,12 @@
 {
   "extends": "../../tsconfig.base.json",
-  "include": ["."],
+  "include": [
+    ".",
+    "../../apps/duri/src/components/shop/ShopInfo.tsx",
+    "../../apps/duri/src/assets/images/svgs/BabyCut.tsx",
+    "../../apps/duri/src/assets/images/svgs/BearCut.tsx",
+    "../../apps/duri/src/assets/images/svgs/LionDog.tsx",
+    "../../apps/duri/src/assets/images/svgs/LionCut.tsx"
+  ],
   "exclude": ["node_modules"]
 }

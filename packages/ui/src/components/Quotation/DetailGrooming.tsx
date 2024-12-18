@@ -1,4 +1,4 @@
-import { Flex, Text, WidthFitFlex } from '@duri-fe/ui';
+import { Flex, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 
 interface GroomingMenuProps {
     groomingMenu:string[],
@@ -15,7 +15,7 @@ export const DetailGrooming = ({
 }: GroomingMenuProps) => {
   return (
     <>
-      {groomingMenu.length > 0 && (
+      {groomingMenu?.length > 0 && (
         <Flex
         justify="space-between"
         align="flex-start"
@@ -24,14 +24,14 @@ export const DetailGrooming = ({
           <Text typo="Body2">기본 미용</Text>
           <WidthFitFlex direction="column" gap={12} align='end'>
             {groomingMenu.map((item, index) => (
-              <Text typo="Label3" key={index}>
+              <Text typo="Label3" colorCode={theme.palette.Gray500} key={index}>
                 {item}
               </Text>
             ))}
           </WidthFitFlex>
         </Flex>
       )}
-      {additionalGrooming.length> 0 && (
+      {additionalGrooming?.length> 0 && (
         <Flex
         justify="space-between"
         align="flex-start"
@@ -40,14 +40,14 @@ export const DetailGrooming = ({
           <Text typo="Body2">추가 미용</Text>
           <WidthFitFlex direction="column" gap={12} align='end'>
             {additionalGrooming.map((item, index) => (
-              <Text typo="Label3" key={index}>
+              <Text typo="Label3" colorCode={theme.palette.Gray500} key={index}>
                 {item}
               </Text>
             ))}
           </WidthFitFlex>
         </Flex>
       )}
-      {specialCare.length > 0 && (
+      {specialCare?.length > 0 && (
         <Flex
         justify="space-between"
         align="flex-start"
@@ -56,14 +56,14 @@ export const DetailGrooming = ({
           <Text typo="Body2">스페셜 케어</Text>
           <WidthFitFlex direction="column" gap={12} align='end'>
             {specialCare.map((item, index) => (
-              <Text typo="Label3" key={index}>
+              <Text typo="Label3" colorCode={theme.palette.Gray500} key={index}>
                 {item}
               </Text>
             ))}
           </WidthFitFlex>
         </Flex>
       )}
-      {designCut.length > 0 && (
+      {designCut?.length > 0 && (
         <Flex
         justify="space-between"
         align="flex-start"
@@ -72,7 +72,7 @@ export const DetailGrooming = ({
           <Text typo="Body2">디자인 컷</Text>
           <WidthFitFlex direction="column" gap={12} align='end'>
             {designCut.map((item, index) => (
-              <Text typo="Label3" key={index}>
+              <Text typo="Label3" colorCode={theme.palette.Gray500} key={index}>
                 {item}
               </Text>
             ))}

@@ -3,7 +3,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { breedMapping } from '@duri/assets/data';
+import { BREEDS_MAPPING } from '@duri/constants';
 import { Button, Flex, StatusBar, theme, Toast } from '@duri-fe/ui';
 import { usePostPetInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
@@ -104,14 +104,13 @@ const MultiStepForm = () => {
   };
 
   const onSubmit = (data: FormData) => {
-    setValue('breed', breedMapping[data.breed]);
-
+    setValue('breed', BREEDS_MAPPING[data.breed]);
     //API 호출 필요
     postPetInfo(data);
   };
 
   return (
-    <Flex direction='column'>
+    <Flex direction="column">
       <Wrapper direction="column" padding="107px 20px 0 20px">
         <Wrapper
           direction="column"
@@ -179,6 +178,7 @@ const MultiStepForm = () => {
             {stepList[step] === '질환' ? '완료' : '다음 단계'}
           </Button>
         )}
+
         {stepList[step] === '성격' &&
           (characterList.length > 0 ? (
             <Button
@@ -198,6 +198,7 @@ const MultiStepForm = () => {
               다음 단계
             </Button>
           ))}
+
         {stepList[step] === '질환' &&
           (diseasesList.length > 0 ? (
             <Button

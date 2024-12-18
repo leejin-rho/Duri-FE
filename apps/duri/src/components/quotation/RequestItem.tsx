@@ -6,19 +6,22 @@ import { Button, Card, Flex, Seperator, Text, theme } from '@duri-fe/ui';
 import { RequestInfo } from './RequestInfo';
 
 export const RequestItem = ({
-  requestItem,
-}: {
-  requestItem: RequestItemType;
-}) => {
+  quotationReqId,
+  requestId,
+  createdAt,
+  expiredAt,
+  isExpired,
+  shops,
+}: RequestItemType) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
-    const quotationId = requestItem.quotationId;
-    navigate(`/quotation/${quotationId}`);
+    navigate(`/quotation/${quotationReqId}`, {state: requestId}); 
+    //URL에서는 요청 자체 id가 뜨게 하고, 실제 세부조회에서는 요청서의 id를 전달해서 조회할 수 있도록
   };
 
   return (
     <>
-      {requestItem.expired ? (
+      {isExpired ? (
         <Card
           borderRadius={16}
           shadow="small"
@@ -26,17 +29,17 @@ export const RequestItem = ({
           bg={theme.palette.Gray20}
         >
           <RequestInfo
-            requestId={requestItem.quotationId}
-            createdAt={requestItem.createdAt}
-            expiredAt={requestItem.expiredAt}
+            requestId={requestId}
+            createdAt={createdAt}
+            expiredAt={expiredAt}
             margin="0 0 20px 0"
           />
           <Seperator height="2px" colorCode={theme.palette.Gray50} />
           <Flex justify="flex-start" padding="0 11px" margin="20px 0">
             <Text typo="Caption3" colorCode={theme.palette.Gray300}>
-              {requestItem.shops.length > 1
-                ? `${requestItem.shops[0].shopName} 외 ${requestItem.shops.length - 1}`
-                : `${requestItem.shops[0].shopName}`}
+              {shops && shops.length > 1
+                ? `${shops[0]?.shopName} 외 ${shops.length - 1}`
+                : `${shops[0]?.shopName}`}
             </Text>
           </Flex>
           <Button
@@ -52,17 +55,19 @@ export const RequestItem = ({
       ) : (
         <Card borderRadius={16} shadow="small" padding="20px 14px">
           <RequestInfo
-            requestId={requestItem.quotationId}
-            createdAt={requestItem.createdAt}
-            expiredAt={requestItem.expiredAt}
+            requestId={requestId}
+            createdAt={createdAt}
+            expiredAt={expiredAt}
             margin="0 0 20px 0"
           />
           <Seperator height="2px" />
           <Flex justify="flex-start" padding="0 11px" margin="20px 0">
             <Text typo="Caption3" colorCode={theme.palette.Gray300}>
-              {requestItem.shops.length > 1
-                ? `${requestItem.shops[0].shopName} 외 ${requestItem.shops.length - 1}`
-                : `${requestItem.shops[0].shopName}`}
+              {shops && shops.length > 1
+                ? `${shops[0]?.shopName} 외 ${shops.length - 1}`
+                : shops[0]?.shopName === undefined
+                  ? '정보 없음'
+                  : `${shops[0]?.shopName}`}
             </Text>
           </Flex>
           <Button

@@ -156,6 +156,13 @@ export const typo = {
     font-weight: 300;
     line-height: normal;
   `,
+  Body2Light: css`
+    /* 스케줄러 이름 텍스트 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(16)};
+    font-weight: 400;
+    line-height: normal;
+  `,
   Letter: css`
     /* 피드백 텍스트 */
     font-family: 'OwnglyphRyryu';

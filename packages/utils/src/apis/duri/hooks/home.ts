@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
 import {
-  // getLastReservation,
   getPetInfo,
   getRecommendedShopInfo,
   getRegularShopInfo,
@@ -9,37 +8,38 @@ import {
 } from '../home';
 
 export const useGetPetInfo = () => {
-  const { data } = useQuery({
+  return useQuery({
     queryKey: ['getPetInfo'],
     queryFn: () => getPetInfo(),
     staleTime: 1000 * 60 * 10,
   });
-  if(data) return data;
 };
 
 export const useGetRegularShopList = () => {
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['getRegularShopList'],
     queryFn: () => getRegularShopInfo(),
     staleTime: 1000 * 60 * 30,
   });
-  return data;
+  return { data, isError };
 };
 
-export const useGetRecommendedShopList = () => {
-  const { data } = useQuery({
-    queryKey: ['getRecommendedShopList'],
-    queryFn: () => getRecommendedShopInfo(),
+export const useGetRecommendedShopList = (
+  lat: number | null,
+  lon: number | null,
+) => {
+  return useQuery({
+    queryKey: ['getRecommendedShopList', lat, lon],
+    queryFn: () => getRecommendedShopInfo(lat!, lon!), // null이 아닌 경우에만 호출
     staleTime: 1000 * 60 * 30,
+    enabled: lat !== null && lon !== null, // lat과 lon이 null이 아닐 때만 활성화
   });
-  return data;
 };
 
 export const useGetUpcomingReservation = () => {
-  const { data } = useQuery({
+  return useQuery({
     queryKey: ['getUpcomingReservation'],
     queryFn: () => getUpcomingReservation(),
     staleTime: 1000 * 60 * 10,
   });
-  return data;
 };
