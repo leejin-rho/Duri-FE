@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Flex, MobileLayout, StatusBar } from '@duri-fe/ui';
@@ -37,11 +37,6 @@ const OnboardingPage = () => {
     });
 
   const { mutateAsync, isSuccess, error } = usePostShopInfo();
-
-  useEffect(() => {
-    console.log(salonFormData);
-    console.log(salonOwnerFormData);
-  }, [salonFormData, salonOwnerFormData]);
 
   // TODO: 프로필 이미지
   const [profileImage, setProfileImage] = useState<File | null>(null);

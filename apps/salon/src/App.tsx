@@ -19,6 +19,8 @@ import ReservationPage from '@pages/Quotation/ReservationPage';
 
 import PrivateRoute from '@components/PrivateRoute';
 
+import IncomePage from './pages/Income/Income';
+
 function App() {
   return (
     <BrowserRouter>
@@ -47,6 +49,8 @@ function App() {
             path="/portfolio/:groomerId/:portfolioId"
             element={<PortfolioDetailPage />}
           />
+
+          <Route path="/income" element={<IncomePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

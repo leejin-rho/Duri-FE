@@ -50,9 +50,11 @@ export const usePutPetInfo = () => {
     mutationFn: ({ petId, formData }: { petId: number; formData: FormData }) =>
       putPetInfo(petId, formData),
     onSuccess: () => {
-        alert('펫 정보가 수정되었습니다.');
+      alert('펫 정보가 수정되었습니다.');
     },
-    onError: (error) => console.log(error),
+    onError: () => {
+      alert('펫 정보 수정에 실패했습니다.');
+    },
   });
 };
 
@@ -69,8 +71,13 @@ export const usePutUserInfo = (handleNavigate: () => void) => {
   const { mutateAsync } = useMutation({
     mutationKey: ['putUserInfo'],
     mutationFn: (formData: FormData) => putUserInfo(formData),
-    onSuccess: () => handleNavigate(),
-    onError: (error) => console.log(error),
+    onSuccess: () => {
+      alert('회원 정보가 수정되었습니다.');
+      handleNavigate();
+    },
+    onError: () => {
+      alert('회원 정보 수정에 실패했습니다.');
+    },
   });
   return { mutateAsync };
 };
@@ -107,8 +114,10 @@ export const useDeletePetInfo = () => {
       setTimeout(() => {
         alert('펫 정보가 삭제되었습니다.');
         window.location.reload();
-      }, 2000)
+      }, 2000);
     },
-    onError: (error) => console.log(error),
+    onError: () => {
+      alert('펫 정보 삭제에 실패했습니다.');
+    },
   });
 };

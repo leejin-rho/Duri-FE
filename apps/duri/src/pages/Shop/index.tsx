@@ -175,11 +175,9 @@ const Shop = () => {
     if (searchShops.length > 0) {
       setIsSearchMode(true);
       setShops(searchShops);
-      // console.log('검색결과:', searchShops);
     } else {
       setIsSearchMode(false);
       setShops(nearbyShops);
-      // console.log('내주변:', nearbyShops);
     }
   }, [searchShops, nearbyShops]);
 

@@ -68,10 +68,6 @@ const PaymentWidget = ({
     widgets.setAmount(amount);
   }, [widgets, amount]);
 
-  useEffect(() => {
-    console.log(uuidData);
-  }, [uuidData]);
-
   return (
     <Container direction="column">
       <Flex direction="column" className="wrapper">
