@@ -6,6 +6,7 @@ import { Global } from '@emotion/react';
 
 import AuthPage from '@pages/Auth';
 import Home from '@pages/Home';
+import IncomePage from '@pages/Income/Income';
 import LoginPage from '@pages/Login';
 import MyPage from '@pages/My';
 import ReviewPage from '@pages/My/Review';
@@ -53,6 +54,8 @@ function App() {
           />
           <Route path="/my/shop" element={<MyShopPage />} />
           <Route path="/my/review" element={<ReviewPage />} />
+
+          <Route path="/income" element={<IncomePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

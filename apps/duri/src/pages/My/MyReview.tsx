@@ -24,7 +24,6 @@ const MyReviewPage = () => {
 
   useEffect(() => {
     if (reviewListData) {
-      console.log(reviewListData);
       setReviewCount(reviewListData.reviewCnt);
       setReviewList(reviewListData.reviewList);
     }

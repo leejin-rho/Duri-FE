@@ -1,4 +1,4 @@
-import { Doori, Flex, Magnifier, Notification, theme } from '@duri-fe/ui';
+import { Doori, Flex, Magnifier, Notification, Text, theme } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 import { HeightFitFlex } from '../FlexBox/Flex';
@@ -58,7 +58,9 @@ export const MainHeader = ({
         )}
         {login && (
           <LoginButton>
-            <LoginLink href="/login">Login</LoginLink>
+            <LoginLink href="/login">
+              <Text typo='Caption5'>로그인/회원가입</Text>
+            </LoginLink>
           </LoginButton>
         )}
       </IconContainer>
@@ -88,5 +90,4 @@ const LoginLink = styled.a`
 
 const LoginButton = styled.div`
   cursor: pointer;
-  padding: 5px 10px;
 `;
