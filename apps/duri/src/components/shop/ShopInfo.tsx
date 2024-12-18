@@ -246,7 +246,9 @@ export const ShopInfo = ({
               ))
             ) : (
               <Flex height={48}>
-                <Text>아직 등록된 리뷰가 없습니다.</Text>
+                <Text colorCode={theme.palette.Gray700}>
+                  등록된 리뷰가 없습니다.
+                </Text>
               </Flex>
             )}
           </HeightFitFlex>
