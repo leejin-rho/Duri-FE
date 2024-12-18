@@ -1,4 +1,4 @@
-import { ShopInfoBox, ShopInfoBoxType } from '@admin/components/home/ShopBox';
+import { ShopInfoBox } from '@admin/components/home/ShopBox';
 import {
   Button,
   Doori,
@@ -8,86 +8,45 @@ import {
   Text,
   theme,
 } from '@duri-fe/ui';
+import {
+  UseGetApprovedShopList,
+  UseGetRequestShopList,
+  UsePostApproveRequest,
+  UsePostRejectRequest,
+} from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 const Home = () => {
-  const dummyShopInfo: ShopInfoBoxType[] = [
-    {
-      shopName: '퍼피스타일',
-      shopAddress: '서울특별시 강남구 강남대로 123',
-      businessRegistration: '123-45-67890',
-      groomerLicense: 'G-00123',
-      designerName: '김도그',
-      history: 5,
-      license: ['소형견 미용 자격증', '중형견 미용 자격증'],
+  const { data: requestShopListData } = UseGetRequestShopList({});
+  const { data: approvedShopListData } = UseGetApprovedShopList({});
+  const { mutate: mutateApproveShop } = UsePostApproveRequest({
+    options: {
+      onSuccess: () => {
+        console.log('Shop Approved successfully!');
+      },
+      onError: (err) => {
+        console.error('Error creating user:', err);
+      },
     },
-    {
-      shopName: '강아지 왕국',
-      shopAddress: '서울특별시 서초구 서초대로 456',
-      businessRegistration: '987-65-43210',
-      groomerLicense: 'G-00567',
-      designerName: '박퍼피',
-      history: 3,
-      license: ['반려견 스타일링 자격증'],
+  });
+  const { mutate: mutateRejectShop } = UsePostRejectRequest({
+    options: {
+      onSuccess: () => {
+        console.log('Shop Rejected successfully!');
+      },
+      onError: (err) => {
+        console.error('Error creating user:', err);
+      },
     },
-    {
-      shopName: '러블리 펫샵',
-      shopAddress: '서울특별시 마포구 홍익로 78',
-      businessRegistration: '234-56-78901',
-      groomerLicense: 'G-00321',
-      designerName: '이멍멍',
-      history: 8,
-      license: ['대형견 미용 자격증', '애견 미용 강사 자격증'],
-    },
-  ];
+  });
 
-  const dummyShopInfo2: ShopInfoBoxType[] = [
-    {
-      shopName: '퍼피스타일',
-      shopAddress: '서울특별시 강남구 강남대로 123',
-      businessRegistration: '123-45-67890',
-      groomerLicense: 'G-00123',
-      designerName: '김도그',
-      history: 5,
-      license: ['소형견 미용 자격증', '중형견 미용 자격증'],
-    },
-    {
-      shopName: '강아지 왕국',
-      shopAddress: '서울특별시 서초구 서초대로 456',
-      businessRegistration: '987-65-43210',
-      groomerLicense: 'G-00567',
-      designerName: '박퍼피',
-      history: 3,
-      license: ['반려견 스타일링 자격증'],
-    },
-    {
-      shopName: '러블리 펫샵',
-      shopAddress: '서울특별시 마포구 홍익로 78',
-      businessRegistration: '234-56-78901',
-      groomerLicense: 'G-00321',
-      designerName: '이멍멍',
-      history: 8,
-      license: ['대형견 미용 자격증', '애견 미용 강사 자격증'],
-    },
-    {
-      shopName: '개미소',
-      shopAddress: '서울특별시 성동구 성수이로 12',
-      businessRegistration: '345-67-89012',
-      groomerLicense: 'G-00456',
-      designerName: '정바크',
-      history: 2,
-      license: ['반려동물 피부관리 자격증'],
-    },
-    {
-      shopName: '헬로펫',
-      shopAddress: '서울특별시 동작구 상도로 98',
-      businessRegistration: '456-78-90123',
-      groomerLicense: 'G-00678',
-      designerName: '최댕댕',
-      history: 10,
-      license: ['소형견 미용 자격증', '반려견 스타일링 자격증'],
-    },
-  ];
+  const handleApproveButtonClick = async (shopId: number) => {
+    mutateApproveShop({ shopId: shopId });
+  };
+
+  const handleRejectButtonClick = async (shopId: number) => {
+    mutateRejectShop({ shopId: shopId });
+  };
 
   return (
     <MobileLayout>
@@ -105,41 +64,39 @@ const Home = () => {
         </HeightFitFlex>
 
         <HeightFitFlex direction="column" gap={8} padding="0 6px">
-          {dummyShopInfo.map((shop) => {
-            const {
-              shopName,
-              shopAddress,
-              businessRegistration,
-              groomerLicense,
-              designerName,
-              history,
-              license,
-            } = shop;
-            return (
+          {requestShopListData &&
+            requestShopListData.map((shop) => (
               <>
                 <ShopInfoBox
-                  key={shopName}
-                  shopName={shopName}
-                  shopAddress={shopAddress}
-                  businessRegistration={businessRegistration}
-                  groomerLicense={groomerLicense}
-                  designerName={designerName}
-                  history={history}
-                  license={license}
+                  key={shop.shop.shopId}
+                  shopName={shop.shop.shopName}
+                  shopAddress={shop.shop.shopAddress}
+                  businessRegistration={shop.shop.businessRegistrationNumber}
+                  groomerLicense={shop.shop.groomerLicenseNumber}
+                  designerName={shop.groomer.groomerName}
+                  history={shop.groomer.groomerAge}
+                  license={shop.groomer.license}
                 />
                 <HeightFitFlex gap={8} padding="0 14px">
-                  <FlexBtn flex="123" bg={theme.palette.Gray20}>
+                  <FlexBtn
+                    flex="123"
+                    bg={theme.palette.Gray20}
+                    onClick={() => handleRejectButtonClick(shop.shop.shopId)}
+                  >
                     <Text typo="Body3">입점 거절</Text>
                   </FlexBtn>
-                  <FlexBtn flex="173" bg={theme.palette.Black}>
+                  <FlexBtn
+                    flex="173"
+                    bg={theme.palette.Black}
+                    onClick={() => handleApproveButtonClick(shop.shop.shopId)}
+                  >
                     <Text typo="Body3" colorCode={theme.palette.White}>
                       입점 수락
                     </Text>
                   </FlexBtn>
                 </HeightFitFlex>
               </>
-            );
-          })}
+            ))}
         </HeightFitFlex>
 
         <HeightFitFlex direction="column" align="start" margin="28px 0">
@@ -148,29 +105,21 @@ const Home = () => {
         </HeightFitFlex>
 
         <HeightFitFlex direction="column" gap={8}>
-          {dummyShopInfo2.map((shop) => {
-            const {
-              shopName,
-              shopAddress,
-              businessRegistration,
-              groomerLicense,
-              designerName,
-              history,
-              license,
-            } = shop;
-            return (
-              <ShopInfoBox
-                key={shopName}
-                shopName={shopName}
-                shopAddress={shopAddress}
-                businessRegistration={businessRegistration}
-                groomerLicense={groomerLicense}
-                designerName={designerName}
-                history={history}
-                license={license}
-              />
-            );
-          })}
+          {approvedShopListData &&
+            approvedShopListData.map((shop) => {
+              return (
+                <ShopInfoBox
+                  key={shop.shop.shopId}
+                  shopName={shop.shop.shopName}
+                  shopAddress={shop.shop.shopAddress}
+                  businessRegistration={shop.shop.businessRegistrationNumber}
+                  groomerLicense={shop.shop.groomerLicenseNumber}
+                  designerName={shop.groomer.groomerName}
+                  history={shop.groomer.groomerAge}
+                  license={shop.groomer.license}
+                />
+              );
+            })}
         </HeightFitFlex>
       </Flex>
     </MobileLayout>

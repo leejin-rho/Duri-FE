@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import {
-  Button,
   Doori,
   Flex,
   HeightFitFlex,
@@ -91,13 +90,12 @@ const Login = () => {
                   {...register('pw', { required: 'PW를 입력해주세요.' })}
                   width={175}
                   placeholder="PW 입력"
+                  type="password"
                 />
               </Flex>
             </Flex>
 
-            <Button width="208px" height="54px">
-              로그인
-            </Button>
+            <Button type="submit">로그인</Button>
           </form>
         </HeightFitFlex>
       </Wrapper>
@@ -109,4 +107,16 @@ export default Login;
 
 const Wrapper = styled(Flex)`
   height: 100vh;
+`;
+
+const Button = styled.button`
+  width: 208px;
+  height: 54px;
+  background-color: ${theme.palette.Normal500};
+  border-radius: 99px;
+  border: none;
+  font-family: 'Pretendard';
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: normal;
 `;
