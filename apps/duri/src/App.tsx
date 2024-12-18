@@ -37,6 +37,8 @@ import PrivateRoute from '@components/PrivateRoute';
 
 import 'react-spring-bottom-sheet/dist/style.css';
 
+import ShopDetail from './pages/Shop/ShopDetail';
+
 function App() {
   return (
     <BrowserRouter>
@@ -47,7 +49,7 @@ function App() {
 
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="shop/:shopId " />
+        <Route path="shop/:shopId " element={<ShopDetail />} />
 
         <Route path="/ai" element={<DooriAI />} />
         <Route path="/ai/styling" element={<AIStyling />} />
