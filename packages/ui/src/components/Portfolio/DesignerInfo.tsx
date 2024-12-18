@@ -95,7 +95,7 @@ export const DesignerInfo = ({
                 <Text typo="Caption3" colorCode={theme.palette.Link}>
                   {item}
                 </Text>
-                <Approve width={11} height={10} />
+                <Approve width={11} height={10} color={theme.palette.Link} />
               </Role>
             ))}
           </Flex>
