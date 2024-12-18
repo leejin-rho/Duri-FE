@@ -78,6 +78,7 @@ const MyHistoryPage = () => {
                 {historyList.map((history) => (
                   <HistoryCard
                     key={history.quotationId}
+                    quotationId={history.quotationId}
                     tagContent={history.complete ? '미용 완료' : '미완료'}
                     designerName={history.groomerName}
                     shopName={history.shopName}
