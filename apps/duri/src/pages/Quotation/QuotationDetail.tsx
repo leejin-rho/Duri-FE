@@ -84,19 +84,26 @@ const QuotationDetailPage = () => {
       />
       <Flex direction="column" padding="0 20px" margin="0 0 100px 0">
         <Card borderRadius={16} padding="26px 28px">
-          <RequestInfo
-            requestId={Number(requestId)}
-            createdAt={
-              quotationListData?.createdAt === undefined
-                ? null
-                : new Date(quotationListData?.createdAt)
-            }
-            expiredAt={
-              quotationListData?.expiredAt === undefined
-                ? null
-                : new Date(quotationListData?.expiredAt)
-            }
-          />
+          {quotationListData && (
+            <RequestInfo
+              shopName={
+                quotationListData.quotations?.length > 1
+                  ? `${quotationListData.quotations[0].shopName} 외 ${quotationListData.quotations?.length - 1}`
+                  : `${quotationListData.quotations[0].shopName}`
+              }
+              requestId={Number(requestId)}
+              createdAt={
+                quotationListData.createdAt === undefined
+                  ? null
+                  : new Date(quotationListData.createdAt)
+              }
+              expiredAt={
+                quotationListData.expiredAt === undefined
+                  ? null
+                  : new Date(quotationListData.expiredAt)
+              }
+            />
+          )}
         </Card>
         <>
           <Flex

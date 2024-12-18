@@ -85,11 +85,6 @@ const RequestPage = () => {
   };
 
   const handleSaveButtonClick = () => {
-    setRequestInfo((prev) => ({
-      ...prev,
-      shopIds: shopIdList,
-    }));
-
     request(requestInfo);
   };
 
@@ -102,7 +97,7 @@ const RequestPage = () => {
     window.scrollTo(0, 0);
     setRequestInfo((prev) => ({
       ...prev,
-      shopIds: location.state?.shopIds,
+      shopIds: shopIdList,
     }));
   }, []);
 
