@@ -2,7 +2,6 @@ import {
   diseaseMapping,
   Flex,
   HeightFitFlex,
-  Image,
   KeyOfTypo,
   Pencil,
   personalityMapping,
@@ -89,7 +88,7 @@ export const PetInfo = ({
           />
         )}
         <Flex direction="column" gap={gap.horizontal} align="flex-start">
-          <Flex justify="flex-start" gap={8}>
+          <HeightFitFlex justify="flex-start" gap={8}>
             <Text typo={typo.name}>{name}</Text>
             {(dday === 0 || dday) && (
               <SalonTag
@@ -113,7 +112,7 @@ export const PetInfo = ({
                 borderRadius={99}
               />
             )}
-          </Flex>
+          </HeightFitFlex>
           <Text typo={typo.description} colorCode={theme.palette.Gray400}>
             {parsePetInfo({ age, breed, weight, gender })}
           </Text>
@@ -126,7 +125,7 @@ export const PetInfo = ({
               align="flex-start"
             >
               <Flex justify="flex-start" gap={8}>
-                <Image
+                <ProfileImage
                   src={groomer.groomerImage}
                   width={24}
                   height={24}
