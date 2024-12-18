@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import {
+  deletePetInfo,
   getMyReviews,
   getPetDetailInfo,
   getPetListInfo,
@@ -48,7 +49,9 @@ export const usePutPetInfo = () => {
     mutationKey: ['putPetInfo'],
     mutationFn: ({ petId, formData }: { petId: number; formData: FormData }) =>
       putPetInfo(petId, formData),
-    // onSuccess: () => handleNavigate(),
+    onSuccess: () => {
+        alert('펫 정보가 수정되었습니다.');
+    },
     onError: (error) => console.log(error),
   });
 };
@@ -93,5 +96,19 @@ export const useGetVisitHistory = () => {
     queryKey: ['getVisitHistory'],
     queryFn: () => getVisitHistory(),
     staleTime: 1000 * 60 * 10,
+  });
+};
+
+export const useDeletePetInfo = () => {
+  return useMutation({
+    mutationKey: ['deletePetInfo'],
+    mutationFn: (petId: number) => deletePetInfo(petId),
+    onSuccess: () => {
+      setTimeout(() => {
+        alert('펫 정보가 삭제되었습니다.');
+        window.location.reload();
+      }, 2000)
+    },
+    onError: (error) => console.log(error),
   });
 };

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { BREEDS_MAPPING } from '@duri/constants';
-import { Button, Flex, StatusBar, theme, Toast } from '@duri-fe/ui';
+import { Button, Flex, StatusBar, theme } from '@duri-fe/ui';
 import { usePostPetInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
@@ -219,7 +219,6 @@ const MultiStepForm = () => {
             </Button>
           ))}
       </Flex>
-      <Toast />
     </Flex>
   );
 };
