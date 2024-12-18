@@ -17,7 +17,7 @@ export const PERSONALITY_OPTION_LIST = [
   },
   {
     key: 'character2',
-    label: '낯가려요.',
+    label: '낯가려요',
   },
   {
     key: 'character3',

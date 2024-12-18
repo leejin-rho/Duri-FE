@@ -1,12 +1,12 @@
 import { publicInstance } from '@duri-fe/utils';
 
-import { GroomerInfoResponse } from '../types/my';
+import { GroomerAndShopProfileResponse } from '../types/my';
 
 export const getGroomerInfo = async ({
   groomerId,
 }: {
   groomerId: number;
-}): Promise<GroomerInfoResponse['response']> => {
+}): Promise<GroomerAndShopProfileResponse['response']> => {
   const { data } = await publicInstance.get(`/groomer/profile/${groomerId}`, {
     params: { groomerId },
   });

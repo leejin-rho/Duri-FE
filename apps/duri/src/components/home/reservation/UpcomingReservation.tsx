@@ -100,9 +100,14 @@ const UpcomingReservation = ({
           </Text>
         </ShopWrapper>
         <WidthFitFlex align="flex-start">
-          <Button width="45px" height="25px" typo="Label2" padding="8px 10px">
-            D-{reserveDday}
-          </Button>
+          <Flex
+            backgroundColor={theme.palette.Normal500}
+            borderRadius={99}
+            height="25px"
+            padding="8px 10px"
+          >
+            <DdayText typo="Label2">D-{reserveDday}</DdayText>
+          </Flex>
         </WidthFitFlex>
       </Flex>
       <Flex gap={8} justify="flex-end" padding="0 13px">
@@ -152,6 +157,9 @@ const UpcomingReservation = ({
 
 export default UpcomingReservation;
 
+const DdayText = styled(Text)`
+  white-space: nowrap;
+`;
 
 const Wrapper = styled(Flex)`
   flex-shrink: 0;

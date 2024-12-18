@@ -5,7 +5,7 @@ import { Value } from 'react-calendar/dist/cjs/shared/types';
 
 import { Flex, theme } from '@duri-fe/ui';
 import { css } from '@emotion/react';
-import { format } from 'date-fns';
+import { addHours, format } from 'date-fns';
 
 interface CalendarProps {
   onSelect: (key: string, value: string) => void;
@@ -22,8 +22,11 @@ const MonthlyCalendar = ({ onSelect }: CalendarProps) => {
 
   const handleClickCalendar = (value: Value) => {
     if (value instanceof Date) {
-      setSelectedDate(value);
-      const stringDate = format(value, 'yyyy-MM-dd')
+      // 한국 시간으로 변환
+      const koreaDate = addHours(value, 9);
+      setSelectedDate(koreaDate);
+
+      const stringDate = format(value, 'yyyy-MM-dd');
       onSelect('day', stringDate);
     }
     console.log(value);

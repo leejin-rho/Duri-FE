@@ -11,6 +11,8 @@ import MyPage from '@pages/My';
 import OnboardingPage from '@pages/Onboarding';
 import OnboardingPendingPage from '@pages/Onboarding/Pending';
 import StartPage from '@pages/Onboarding/StartPage';
+import PortfolioPage from '@pages/Portfolio';
+import PortfolioDetailPage from '@pages/Portfolio/PortfolioDetail';
 import QuotationPage from '@pages/Quotation';
 import ReplyPage from '@pages/Quotation/ReplyPage';
 import ReservationPage from '@pages/Quotation/ReservationPage';
@@ -39,6 +41,12 @@ function App() {
           <Route path="/quotation/reply/:requestId" element={<ReplyPage />} />
 
           <Route path="/my" element={<MyPage />} />
+
+          <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route
+            path="/portfolio/:groomerId/:portfolioId"
+            element={<PortfolioDetailPage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

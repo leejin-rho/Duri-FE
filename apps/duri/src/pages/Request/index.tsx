@@ -97,10 +97,13 @@ const RequestPage = () => {
     navigate(-1);
   };
 
-  // const handle
-
+  //스크롤 멘 위로 옮기고 shopIds리스트 받은 애 set
   useEffect(() => {
     window.scrollTo(0, 0);
+    setRequestInfo((prev) => ({
+      ...prev,
+      shopIds: location.state?.shopIds,
+    }));
   }, []);
 
   useEffect(() => {

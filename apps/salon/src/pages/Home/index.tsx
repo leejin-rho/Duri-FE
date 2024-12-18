@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,6 +22,7 @@ import {
   useBottomSheet,
   useGetClosetGrooming,
   useGetDailySchedule,
+  useGetGroomersList,
   useGetHomeQuotationRequest,
   useGetHomeShopInfo,
   usePutGroomingComplete,
@@ -29,6 +30,7 @@ import {
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 import { RadioButton } from '@salon/components/home/RadioButton';
+import useGroomerStore from '@salon/stores/groomerStore';
 
 import ClosetGrooming from '@components/home/ClosetGrooming';
 import DailyScheduleItem from '@components/home/DailyScheduleItem';
@@ -48,6 +50,10 @@ const Home = () => {
   });
 
   const [completeToggle, setCompleteToggle] = useState<number | null>(null);
+
+  //홈 진입 시 groomerId 전역변수로 저장
+  const { data: groomersListInfo } = useGetGroomersList({});
+  const { setGroomerId } = useGroomerStore();
 
   const { data: shopInfoData } = useGetHomeShopInfo({});
   const { data: closetGroomingData, isPending: closetGroomingPending } =
@@ -71,6 +77,11 @@ const Home = () => {
       return;
     }
   };
+
+  //로그인 후 미용사 id를 전역변수로 저장 for 포트폴리오
+  useEffect(() => {
+    if (groomersListInfo) setGroomerId(groomersListInfo[0].id);
+  }, [groomersListInfo]);
 
   return (
     <MobileLayout>

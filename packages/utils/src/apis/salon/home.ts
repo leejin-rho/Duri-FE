@@ -1,6 +1,7 @@
 import {
   ClosetGroomingResponse,
   DailyScheduleResponse,
+  GroomersListProfileResponse,
   HomeQuotationRequestResponse,
   HomeShopInfoResponse,
   salonInstance,
@@ -58,4 +59,12 @@ export const putGroomingNoshow = async (quotationId: number) => {
     },
   );
   return response.data.response;
+};
+
+//미용사 id 조회
+export const getGroomersProfileList = async (): Promise<
+GroomersListProfileResponse['response']
+> => {
+  const { data } = await salonInstance.get('/shop/groomers');
+  return data.response;
 };

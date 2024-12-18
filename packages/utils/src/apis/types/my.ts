@@ -95,7 +95,9 @@ export interface ReviewDetailResponse {
   };
 }
 
+//이용기록 - 견적응답서 조회를 위한 requestId 컬럼 추가
 export interface HistoryType {
+  requestId: number;
   quotationId: number;
   complete: boolean;
   groomerImageURL: string;
@@ -114,7 +116,7 @@ export interface VisitHistoryResponse {
   }[];
 }
 
-/** 그루머 아이디로 그루머 인포 조회 시 사용 */
+/** 그루머 아이디로 그루머 인포 조회 시 사용 & 포트폴리오 조회를 위해 id 얻으려고 사용 */
 export interface GroomerInfoType {
   id: number;
   email: string;
@@ -128,6 +130,22 @@ export interface GroomerInfoType {
   license: string[];
 }
 
-export interface GroomerInfoResponse extends BaseResponse {
-  response: GroomerInfoType;
+export interface ShopInfoType {
+  id: 0;
+  name: string;
+  address: string;
+  imageURL: string;
+  phone: string;
+  openTime: string;
+  closeTime: string;
+  info: string;
+  kakaoTalk: string;
+  tags: string[];
+}
+
+export interface GroomerAndShopProfileResponse extends BaseResponse {
+  response: {
+    groomerProfileDetail: GroomerInfoType;
+    shopProfileDetail: ShopInfoType;
+  };
 }

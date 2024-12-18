@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { BaseError } from '../../types';
-import { GroomerInfoResponse } from '../../types/my';
+import { GroomerAndShopProfileResponse } from '../../types/my';
 import { UseQueryProps } from '../../types/tanstack';
 import { getGroomerInfo } from '../my';
 
 type UseGetGroomerInfo = UseQueryProps<
-  GroomerInfoResponse['response'],
+GroomerAndShopProfileResponse['response'],
   BaseError
 > & {
   groomerId: number;

@@ -21,5 +21,6 @@ export const getPortfolioDetail = async ({
   const { data } = await publicInstance.get(`/feedback/detail/${feedbackId}`, {
     params: { feedbackId },
   });
+  console.log(data);
   return data.response;
 };
