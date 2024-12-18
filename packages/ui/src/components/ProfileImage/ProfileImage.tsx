@@ -16,7 +16,7 @@ export const ProfileImage = ({
   src,
   iconSize = 52,
 }: ProfileImageProps) => {
-  return src ? (
+  return src && src !== '' ? (
     <ProfileContainer
       width={width}
       height={height}
