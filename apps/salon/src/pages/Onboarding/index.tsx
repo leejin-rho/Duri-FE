@@ -58,7 +58,7 @@ const OnboardingPage = () => {
     };
 
     formData.append(
-      'data',
+      'shopOnboardingRequest',
       new Blob([JSON.stringify(onboardingFormData)], {
         type: 'application/json',
       }),

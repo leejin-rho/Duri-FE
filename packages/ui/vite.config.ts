@@ -3,4 +3,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: [{ find: '@assets', replacement: '/src/assets' }],
+  },
 });

@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import AuthPage from '@duri/pages/Auth';
+import Home from '@duri/pages/Home';
 import MyPetPage from '@duri/pages/My/MyPet';
 import Onboarding from '@duri/pages/Onboarding';
 import { globalStyle } from '@duri-fe/ui';
@@ -11,7 +12,6 @@ import PetDiaryDetail from '@pages/Diary/DiaryDetail';
 import DooriAI from '@pages/DooriAI';
 import DooriAIResult from '@pages/DooriAI/AIResult';
 import AIStyling from '@pages/DooriAI/AIStyling';
-import Home from '@pages/Home';
 import LoginPage from '@pages/Login';
 import MyPage from '@pages/My';
 import MyHistoryPage from '@pages/My/MyHistory';

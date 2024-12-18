@@ -1,4 +1,5 @@
 import { BaseResponse } from './base';
+import { GroomerInfoType } from './my';
 
 export interface ClosetGroomingResponse extends BaseResponse {
   response: {
@@ -115,4 +116,9 @@ export interface HomeShopInfoResponse extends BaseResponse {
     imageURL: string;
     phone: string;
   };
+}
+
+//미용사 GroomersList 프로필 조회 응답
+export interface GroomersListProfileResponse extends BaseResponse {
+  response: GroomerInfoType[];
 }

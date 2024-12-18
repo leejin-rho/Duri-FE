@@ -225,6 +225,7 @@ const InputSalon = ({
                   placeholder="미용사 면허번호 입력"
                   isEssential
                   width={175}
+                  maxLength={10}
                   isNoBorder
                   shadow="0px 0px 4px 0px rgba(0, 0, 0, 0.10)"
                   helperText={
@@ -260,7 +261,7 @@ const InputSalon = ({
           <Button
             bg={theme.palette.Black}
             fontColor={theme.palette.White}
-            onSubmit={handleSubmit(onSubmitSalonData)}
+            onClick={handleSubmit(onSubmitSalonData)}
           >
             다음 단계
           </Button>
