@@ -36,8 +36,6 @@ import ClosetGrooming from '@components/home/ClosetGrooming';
 import DailyScheduleItem from '@components/home/DailyScheduleItem';
 import NewRequestItem from '@components/home/NewRequestItem';
 
-import 'react-spring-bottom-sheet/dist/style.css';
-
 const completeToggleData = ['노쇼했어요.', '네, 완료했어요!'];
 
 const Home = () => {

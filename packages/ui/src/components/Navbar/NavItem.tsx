@@ -15,7 +15,8 @@ interface NavItemProps {
     | 'diary'
     | 'my'
     | 'portfolio'
-    | 'timetable';
+    | 'timetable'
+    | 'income';
   children: ReactNode;
 }
 

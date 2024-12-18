@@ -99,3 +99,19 @@ export interface ShopReviewType {
 export interface ShopReviewListResponse extends BaseResponse {
   response: ShopReviewType[];
 }
+
+export interface MyShopReviewType {
+  userId: number;
+  userName: string;
+  userImageURL: string;
+  reviewId: number;
+  rating: number;
+  comment: string;
+  createdAt: string;
+  imgUrl: string;
+  petInfo: PetDetail;
+}
+
+export interface MyShopReviewListResponse extends BaseResponse {
+  response: MyShopReviewType[];
+}
