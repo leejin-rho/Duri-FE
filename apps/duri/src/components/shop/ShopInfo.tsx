@@ -137,7 +137,7 @@ export const ShopInfo = ({
               </TextLine>
             </Flex>
 
-            <HeightFitFlex justify="flex-start" align="flex-end">
+            <HeightFitFlex justify="space-between" align="flex-end">
               <WidthFitFlex direction="column" gap={8}>
                 <Flex gap={10} justify="flex-start" margin="0 0 0 4px">
                   <Call width={16} />
@@ -166,7 +166,7 @@ export const ShopInfo = ({
                     ))}
                 </TagList>
               </WidthFitFlex>
-              <WidthFitFlex gap={8}>
+              <WidthFitFlex gap={8} padding="0 4px 0">
                 <IconCircle>
                   <Chat width={21} color={theme.palette.Normal700} />
                 </IconCircle>
@@ -247,7 +247,10 @@ export const ShopInfo = ({
           </HeightFitFlex>
         </ShopInfoContainer>
         <BottomSheet {...bottomSheetProps}>
-          <SendRequestQBox closeBottomSheet={closeSheet} />
+          <SendRequestQBox
+            closeBottomSheet={closeSheet}
+            shopIdList={[shopId]}
+          />
         </BottomSheet>
       </>
     )

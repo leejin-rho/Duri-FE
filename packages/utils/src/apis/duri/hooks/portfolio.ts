@@ -2,44 +2,44 @@ import { useQuery } from '@tanstack/react-query';
 
 import { BaseError } from '../../types';
 import {
-  PorfolioDetailResponse,
-  PorfolioResponse,
+  PortfolioDetailResponse,
+  PortfolioResponse,
 } from '../../types/portfolio';
 import { UseQueryProps } from '../../types/tanstack';
-import { getGroomerPorfolio, getPortfolioDetail } from '../portfolio';
+import { getGroomerPortfolio, getPortfolioDetail } from '../portfolio';
 
-type UseGetGroomerPorfolio = UseQueryProps<
-  PorfolioResponse['response'],
+type UseGetGroomerPortfolio = UseQueryProps<
+  PortfolioResponse['response'],
   BaseError
 > & {
   groomerId: number;
 };
 
-export const UseGetGroomerPorfolio = ({
+export const UseGetGroomerPortfolio = ({
   queryKey,
   options,
   groomerId,
-}: UseGetGroomerPorfolio) => {
+}: UseGetGroomerPortfolio) => {
   return useQuery({
-    queryKey: ['getGroomerPorfolio', groomerId, ...(queryKey || [])],
-    queryFn: () => getGroomerPorfolio({ groomerId }),
+    queryKey: ['getGroomerPortfolio', groomerId, ...(queryKey || [])],
+    queryFn: () => getGroomerPortfolio({ groomerId }),
     enabled: !!groomerId,
     ...options,
   });
 };
 
-type UseGetPorfolioDetail = UseQueryProps<
-  PorfolioDetailResponse['response'],
+type UseGetPortfolioDetail = UseQueryProps<
+  PortfolioDetailResponse['response'],
   BaseError
 > & {
   feedbackId: number;
 };
 
-export const UseGetPorfolioDetail = ({
+export const UseGetPortfolioDetail = ({
   queryKey,
   options,
   feedbackId,
-}: UseGetPorfolioDetail) => {
+}: UseGetPortfolioDetail) => {
   return useQuery({
     queryKey: ['getPortfolioDetail', feedbackId, ...(queryKey || [])],
     queryFn: () => getPortfolioDetail({ feedbackId }),

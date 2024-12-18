@@ -48,11 +48,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (reservationData) console.log(reservationData);
-    if (petData) console.log(petData);
-  }, [reservationData, petData]);
-
-  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
@@ -135,16 +130,16 @@ const Home = () => {
             )}
           </Flex>
 
-          <a href="/ai">
-            {/* AI 스타일링 배너 */}
-            <StyleBannerWrapper
-              borderRadius={12}
-              widthPer={100}
-              margin="26px 0 0 0"
-            >
+          {/* AI 스타일링 배너 */}
+          <StyleBannerWrapper
+            borderRadius={12}
+            widthPer={100}
+            margin="26px 0 0 0"
+          >
+            <a href="/ai">
               <AiStyleBanner height={70} />
-            </StyleBannerWrapper>
-          </a>
+            </a>
+          </StyleBannerWrapper>
         </Flex>
         <Flex direction="column">
           {/* 추천 샵 */}

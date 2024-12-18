@@ -213,7 +213,10 @@ export const ShopList = ({
           </Flex>
         </BottomSheet>
         <BottomSheet {...requestSheetProps}>
-          <SendRequestQBox closeBottomSheet={closeRequestSheet} />
+          <SendRequestQBox
+            closeBottomSheet={closeRequestSheet}
+            shopIdList={selectedShops}
+          />
         </BottomSheet>
       </Flex>
     </>

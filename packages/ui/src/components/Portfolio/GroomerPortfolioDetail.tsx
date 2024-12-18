@@ -21,7 +21,7 @@ import {
 } from '@duri-fe/ui';
 import {
   useDeletePortfolio,
-  UseGetPorfolioDetail,
+  UseGetPortfolioDetail,
   useModal,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
@@ -36,7 +36,7 @@ export const GroomerPortfolioDetail = ({
   const navigate = useNavigate();
   const { isOpenModal, toggleModal } = useModal();
 
-  const { data } = UseGetPorfolioDetail({
+  const { data } = UseGetPortfolioDetail({
     feedbackId: feedbackId,
   });
 
@@ -70,7 +70,10 @@ export const GroomerPortfolioDetail = ({
 
         {/** 피드백 및 후기 */}
         <RelativeFlex direction="column" gap={14}>
-          <Flex justify="space-between" padding={groomer ? "0 16px 0 24px" : "0 24px"}>
+          <Flex
+            justify="space-between"
+            padding={groomer ? '0 16px 0 24px' : '0 24px'}
+          >
             <WidthFitFlex gap={16}>
               <ProfileImage
                 width={34}

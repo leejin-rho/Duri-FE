@@ -14,13 +14,15 @@ import styled from '@emotion/styled';
 
 export const SendRequestQBox = ({
   closeBottomSheet,
+  shopIdList,
 }: {
   closeBottomSheet?: () => void;
+  shopIdList: number[];
 }) => {
   const navigate = useNavigate();
   const moveToShopRequest = () => {
     if (closeBottomSheet) closeBottomSheet();
-    navigate('/shop/request');
+    navigate('/shop/request', { state: { shopIdList: shopIdList } });
   };
   return (
     <RelativeFlex

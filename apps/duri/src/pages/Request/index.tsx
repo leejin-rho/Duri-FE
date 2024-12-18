@@ -47,7 +47,9 @@ const validateRequestInfo = (requestInfo: RequestType): boolean => {
 
 const RequestPage = () => {
   const navigate = useNavigate();
+
   const location = useLocation();
+  const { shopIdList } = location.state;
 
   const { data: petInfo } = useGetPetInfo();
   const {
@@ -83,7 +85,10 @@ const RequestPage = () => {
   };
 
   const handleSaveButtonClick = () => {
-    console.log(requestInfo);
+    setRequestInfo((prev) => ({
+      ...prev,
+      shopIds: shopIdList,
+    }));
 
     request(requestInfo);
   };
@@ -101,7 +106,6 @@ const RequestPage = () => {
     }));
   }, []);
 
-  
   useEffect(() => {
     if (petInfo) {
       setRequestInfo((prev) => ({ ...prev, petId: petInfo.petId }));

@@ -20,7 +20,7 @@ export interface PortfolioType {
   imageUrl: string;
 }
 
-export interface PorfolioResponse extends BaseResponse {
+export interface PortfolioResponse extends BaseResponse {
   response: PortfolioType[];
 }
 
@@ -52,7 +52,7 @@ export interface PortfolioDetailType {
   feedbackDate: string;
 }
 
-export interface PorfolioDetailResponse extends BaseResponse {
+export interface PortfolioDetailResponse extends BaseResponse {
   response: PortfolioDetailType;
 }
 
