@@ -53,3 +53,7 @@ yarn-error.log*
 
 # Vite Cache
 .vite-cache
+
+
+.gifs
+Final_renderfile.gif
