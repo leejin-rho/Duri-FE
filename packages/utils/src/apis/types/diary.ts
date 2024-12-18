@@ -22,3 +22,27 @@ export interface DiaryDetailType {
 export interface DiaryDetailResponse extends BaseResponse {
   response: DiaryDetailType;
 }
+
+export interface PetProfileType {
+  id: number;
+  image: string;
+  name: string;
+  age: number;
+  gender: 'M' | 'F';
+  breed: string;
+  weight: number;
+  neutering: boolean;
+  character: string[];
+  diseases: string[];
+  lastGrooming: string;
+}
+
+export interface DiaryPetInfoType {
+  petProfileResponse: PetProfileType;
+  customerName: string;
+  customerPhone: string;
+}
+
+export interface DiaryPetInfoResponse extends BaseResponse {
+  response: DiaryPetInfoType;
+}

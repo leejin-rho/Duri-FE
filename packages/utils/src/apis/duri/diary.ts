@@ -1,5 +1,9 @@
 import { duriInstance } from '../config';
-import { DiaryDataResponse, DiaryDetailResponse } from '../types/diary';
+import {
+  DiaryDataResponse,
+  DiaryDetailResponse,
+  DiaryPetInfoResponse,
+} from '../types/diary';
 
 export const getDiaryData = async (): Promise<
   DiaryDataResponse['response']
@@ -15,9 +19,15 @@ export const getDiaryDetail = async ({
 }): Promise<DiaryDetailResponse['response']> => {
   const { data } = await duriInstance.get(
     `/feedback/diary/detail/${quotationId}`,
-    {
-      params: { quotationId },
-    },
   );
+  return data.response;
+};
+
+export const getDiaryPetInfo = async ({
+  quotationId,
+}: {
+  quotationId: number;
+}): Promise<DiaryPetInfoResponse['response']> => {
+  const { data } = await duriInstance.get(`/user/pet/info/${quotationId}`);
   return data.response;
 };
