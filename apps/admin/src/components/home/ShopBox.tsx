@@ -45,7 +45,7 @@ export const ShopInfoBox = ({
         <Flex justify="space-between">
           <Text typo="Body2">{shopName}</Text>
           <button onClick={handleToggleButtonClick}>
-            {isBoxOpen ? <DownArrow width={23} /> : <UpArrow width={23} />}
+            {isBoxOpen ? <UpArrow width={23} /> : <DownArrow width={23} />}
           </button>
         </Flex>
         <Text typo="Caption4" colorCode={theme.palette.Gray400}>

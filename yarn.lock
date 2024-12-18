@@ -452,6 +452,8 @@ __metadata:
     "@duri-fe/utils": "workspace:packages/utils"
     "@emotion/react": "npm:^11.13.5"
     "@emotion/styled": "npm:^11.13.5"
+    "@tanstack/react-query": "npm:^5.62.8"
+    "@tanstack/react-query-devtools": "npm:^5.62.8"
     "@types/add": "npm:^2"
     "@types/node": "npm:^22.10.1"
     "@types/react": "npm:^18"
@@ -2385,6 +2387,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.62.8":
+  version: 5.62.8
+  resolution: "@tanstack/query-core@npm:5.62.8"
+  checksum: 10c0/190fd932ab0ee928172b4c8a20063a31d58a0165d53bc1f44c129fa0faa8d56d85e67963c4aa33e43009b3c65a49356a23ac342a0b7818829b12c6f2e3a9a228
+  languageName: node
+  linkType: hard
+
 "@tanstack/query-devtools@npm:5.61.4":
   version: 5.61.4
   resolution: "@tanstack/query-devtools@npm:5.61.4"
@@ -2404,6 +2413,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/react-query-devtools@npm:^5.62.8":
+  version: 5.62.8
+  resolution: "@tanstack/react-query-devtools@npm:5.62.8"
+  dependencies:
+    "@tanstack/query-devtools": "npm:5.61.4"
+  peerDependencies:
+    "@tanstack/react-query": ^5.62.8
+    react: ^18 || ^19
+  checksum: 10c0/2d930a84334941a9db8cc4400e0040bddde854c87cf3c16fa32eff742179cf57225d28030ddab47a79b5657b96ab1e4cadc6c7e64589c835aca86dff8a6af322
+  languageName: node
+  linkType: hard
+
 "@tanstack/react-query@npm:^5.62.0, @tanstack/react-query@npm:^5.62.1":
   version: 5.62.7
   resolution: "@tanstack/react-query@npm:5.62.7"
@@ -2412,6 +2433,17 @@ __metadata:
   peerDependencies:
     react: ^18 || ^19
   checksum: 10c0/4a99bf3f3cdce6a24b6356377697e4b8cc31b0b160942a32d0619b928aec44c42dad61070d9d127512e6139bc4e62e7fe0722054f8152e21a1b8743a1dbd39e0
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.62.8":
+  version: 5.62.8
+  resolution: "@tanstack/react-query@npm:5.62.8"
+  dependencies:
+    "@tanstack/query-core": "npm:5.62.8"
+  peerDependencies:
+    react: ^18 || ^19
+  checksum: 10c0/11828daef1ae8fad97a09fe609c7398f1f304dc77b0bc5292619f3e10c3e9db88911dd65e8585cabb20447da91cd224249f7a27b5a2255937754ce0fc70c2642
   languageName: node
   linkType: hard
 
