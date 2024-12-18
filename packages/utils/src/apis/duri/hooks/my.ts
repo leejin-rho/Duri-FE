@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import {
   deletePetInfo,
@@ -25,6 +25,7 @@ export const useGetPetListInfo = () => {
   return useQuery({
     queryKey: ['getPetListInfo'],
     queryFn: () => getPetListInfo(),
+    refetchOnWindowFocus: true,
     staleTime: 1000 * 60 * 30,
     select: (data) =>
       data.petProfileList.map((pet) => ({
@@ -36,20 +37,23 @@ export const useGetPetListInfo = () => {
   });
 };
 export const useGetPetDetailInfo = (petId: number) => {
-  const { data, isError } = useQuery({
+  return useQuery({
     queryKey: ['getPetDetailInfo'],
     queryFn: () => getPetDetailInfo(petId),
     staleTime: 1000 * 60 * 30,
   });
-  return { data, isError };
 };
 
 export const usePutPetInfo = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ['putPetInfo'],
     mutationFn: ({ petId, formData }: { petId: number; formData: FormData }) =>
       putPetInfo(petId, formData),
     onSuccess: () => {
+      // 데이터가 성공적으로 변경되었을 때 refetch
+      queryClient.invalidateQueries('getPetListInfo');
       alert('펫 정보가 수정되었습니다.');
     },
     onError: () => {
