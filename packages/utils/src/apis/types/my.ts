@@ -156,11 +156,11 @@ export interface GetMyShopInfoResponse extends BaseResponse {
     groomerProfileDetailResponse: GroomerInfoType;
     reservationCount: number;
     noShowCount: number;
-    shopProfileDetailResponse: ShopDetailType;
+    shopProfileDetailResponse: ShopProfileDetailType;
   };
 }
 
-interface ShopDetailType {
+export interface ShopProfileDetailType {
   id: number;
   name: string;
   address: string;
@@ -176,7 +176,7 @@ interface ShopDetailType {
 
 /** [PUT] /shop/profile, /shop/profile/image 미용사 마이샵 수정 */
 export interface PutShopInfoResponse extends BaseResponse {
-  response: ShopDetailType;
+  response: ShopProfileDetailType;
 }
 
 /** [PUT] /shop/profile 미용사 마이샵 정보 수정 */

@@ -5,14 +5,14 @@ import {
   Text,
   WidthFitFlex,
 } from '@duri-fe/ui';
-import { ShopReviewType } from '@duri-fe/utils';
+import { MyShopReviewType } from '@duri-fe/utils';
 
 import { ShopReviewBox } from './ShopReviewBox';
 
 interface ReviewPreviewProps {
   shopRating: number;
   reviewCnt: number;
-  reviewData: ShopReviewType[];
+  reviewData: MyShopReviewType[];
 }
 
 const ReviewPreview = ({

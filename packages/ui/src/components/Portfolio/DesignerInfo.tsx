@@ -78,30 +78,25 @@ export const DesignerInfo = ({
         )}
       </ImageWrapper>
 
-      <WidthFitFlex
-        direction="column"
-        align="flex-start"
-        justify="flex-start"
-        gap={8}
-      >
-        <Text typo="Title3">{name}</Text>
-
+      <Flex direction="column" align="flex-start" justify="flex-start" gap={8}>
+        <Text typo="Title3">{name ?? '정보없음'}</Text>
         <Text
           typo="Caption4"
           colorCode={theme.palette.Gray400}
         >{`경력 ${historyStr(experience)}, ${age}세, ${gender}`}</Text>
-
-        <Flex direction="column" gap={8}>
-          {roles.map((item, idx) => (
-            <Role key={idx}>
-              <Text typo="Caption3" colorCode={theme.palette.Link}>
-                {item}
-              </Text>
-              <Approve width={11} height={10} />
-            </Role>
-          ))}
-        </Flex>
-      </WidthFitFlex>
+        {roles.length > 0 && (
+          <Flex direction="column" gap={8}>
+            {roles.map((item, idx) => (
+              <Role key={idx}>
+                <Text typo="Caption3" colorCode={theme.palette.Link}>
+                  {item}
+                </Text>
+                <Approve width={11} height={10} />
+              </Role>
+            ))}
+          </Flex>
+        )}
+      </Flex>
     </Container>
   );
 };

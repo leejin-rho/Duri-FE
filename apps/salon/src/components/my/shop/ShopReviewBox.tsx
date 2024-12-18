@@ -9,11 +9,11 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
-import { ShopReviewType } from '@duri-fe/utils';
+import { MyShopReviewType } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 export interface ShopReviewBoxProps {
-  review: ShopReviewType;
+  review: MyShopReviewType;
 }
 
 export const ShopReviewBox = (props: ShopReviewBoxProps) => {
