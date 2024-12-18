@@ -1,6 +1,7 @@
 import { duriInstance } from '@duri-fe/utils';
 
 import {
+  DeletePetResponse,
   MyReviewResponseType,
   PetInfo,
   PetListInfo,
@@ -85,4 +86,11 @@ export const getVisitHistory = async (): Promise<
 > => {
   const response = await duriInstance.get('/user/history');
   return response.data.response;
+};
+
+export const deletePetInfo = async (
+  petId: number,
+): Promise<DeletePetResponse> => {
+  const { data } = await duriInstance.put(`/user/pet/delete/${petId}`);
+  return data;
 };

@@ -6,16 +6,24 @@ import {
   NEUTERED_FORM_OPTION_LIST,
 } from '@duri/constants';
 import { FormData } from '@duri/pages/My/MyPetModify';
-import { Button, Dropdown, Flex, Text, theme, WidthFitFlex } from '@duri-fe/ui';
+import {
+  Button,
+  Dropdown,
+  Flex,
+  Text,
+  TextField,
+  theme,
+  WidthFitFlex,
+} from '@duri-fe/ui';
 
-import { PetDiseaseModify } from './PetDiseaseModify';
-import { PetPersonalityModify } from './PetPersonalityModify';
+import { PetDiseaseModify } from '../modify/PetDiseaseModify';
+import { PetPersonalityModify } from '../modify/PetPersonalityModify';
 
 const integerList = Array.from({ length: 41 }, (_, i) => i.toString()); // 정수 리스트
 const decimalList = Array.from({ length: 10 }, (_, i) => i.toString()); // 소수 리스트
 const ageList = Array.from({ length: 26 }, (_, i) => i);
 
-export const PetModifyForm = ({
+export const PetRegisterForm = ({
   control,
   setValue,
   getValues,
@@ -28,12 +36,15 @@ export const PetModifyForm = ({
   const handleAgeSelect = (value: string | number) => {
     if (typeof value === 'number') setValue('age', value);
   };
+
   const handleBreedSelect = (value: string | number) => {
     if (typeof value === 'string') setValue('breed', value);
   };
+
   const handleGenderSelect = (value: string | number) => {
     if (typeof value === 'string') setValue('gender', value);
   };
+
   const handleNeuterSelect = (value: string | number | boolean) => {
     if (typeof value === 'boolean') setValue('neutering', value);
   };
@@ -45,7 +56,15 @@ export const PetModifyForm = ({
         <Controller
           name="name"
           control={control}
-          render={({ field }) => <Text typo="Body3">{field.value}</Text>}
+          render={({ field }) => (
+            <TextField
+              isNoBorder
+              {...field}
+              width={114}
+              placeholder="이름 입력"
+              placeholderTypo={theme.typo.Caption3}
+            />
+          )}
         />
       </Flex>
       <Flex justify="flex-start" gap={65}>
@@ -53,10 +72,10 @@ export const PetModifyForm = ({
         <Controller
           name="breed"
           control={control}
-          render={({ field }) => (
+          render={() => (
             <Dropdown
               options={BREEDS}
-              defaultValue={field.value}
+              defaultValue="견종 입력"
               width={114}
               onSelect={handleBreedSelect}
             />
@@ -145,10 +164,10 @@ export const PetModifyForm = ({
         <Controller
           name="age"
           control={control}
-          render={({ field }) => (
+          render={() => (
             <Dropdown
               options={ageList}
-              defaultValue={`${field.value}살`}
+              defaultValue={0}
               width={114}
               onSelect={handleAgeSelect}
               suffix="살"

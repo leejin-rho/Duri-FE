@@ -57,6 +57,5 @@ export const postPaymentConfirm = async (
   paymentData: PostPaymentProps,
 ): Promise<PostPaymentResponse> => {
   const response = await duriInstance.post('/payments/confirm', paymentData);
-  console.log("결제 axios: ",response.data);
   return response.data;
 };

@@ -13,6 +13,7 @@ export const usePostReview = () => {
     mutationFn: ({ quotationId, formData }: PostReviewProps) =>
       postReview(quotationId, formData),
     onSuccess: () => {
+      alert('리뷰가 등록되었습니다.');
       window.location.href = '/my/review';
     },
     onError: (error) => {
@@ -27,6 +28,7 @@ export const usePutReview = (handleNavigate: () => void) => {
     mutationFn: ({ reviewId, formData }: PutReviewProps) =>
       putReview(reviewId, formData),
     onSuccess: () => {
+      alert('리뷰가 수정되었습니다.');
       handleNavigate();
     },
     onError: (error) => {
@@ -40,6 +42,7 @@ export const useDeleteReview = (handleNavigate: () => void) => {
     mutationKey: ['deleteReview'],
     mutationFn: (reviewId: number) => deleteReview(reviewId),
     onSuccess: () => {
+      alert('리뷰가 삭제되었습니다.');
       handleNavigate();
     },
     onError: (error) => {
