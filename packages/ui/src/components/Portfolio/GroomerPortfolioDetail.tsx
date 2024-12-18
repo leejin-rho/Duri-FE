@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -19,7 +19,11 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
-import { UseGetPorfolioDetail, useModal } from '@duri-fe/utils';
+import {
+  useDeletePortfolio,
+  UseGetPorfolioDetail,
+  useModal,
+} from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 export const GroomerPortfolioDetail = ({
@@ -36,10 +40,13 @@ export const GroomerPortfolioDetail = ({
     feedbackId: feedbackId,
   });
 
-  const [isOpen, setIsOpen] = useState<boolean>(false); //메뉴 버튼 클릭 시 토글
+  const { mutateAsync: deletePortfolio } = useDeletePortfolio();
+
+  const [menuOpen, setMenuOpen] = useState<boolean>(false); // MenuWrapper 상태
+  const menuRef = useRef<HTMLDivElement | null>(null); // MenuWrapper의 ref
 
   const handleClickMenu = () => {
-    setIsOpen(!isOpen);
+    setMenuOpen(!menuOpen);
   };
 
   const handleClickModifyButton = () => {
@@ -47,7 +54,7 @@ export const GroomerPortfolioDetail = ({
   };
 
   const handleClickDeleteConfirmButton = () => {
-    
+    deletePortfolio(feedbackId);
   };
 
   return (
@@ -63,7 +70,7 @@ export const GroomerPortfolioDetail = ({
 
         {/** 피드백 및 후기 */}
         <RelativeFlex direction="column" gap={14}>
-          <Flex justify="space-between" padding="0 24px">
+          <Flex justify="space-between" padding={groomer ? "0 16px 0 24px" : "0 24px"}>
             <WidthFitFlex gap={16}>
               <ProfileImage
                 width={34}
@@ -85,8 +92,9 @@ export const GroomerPortfolioDetail = ({
                     <Menu width={23} height={23} />
                   </MenuWrapper>
                 </WidthFitFlex>
-                {isOpen && (
+                {menuOpen && (
                   <MenuCard
+                    ref={menuRef}
                     direction="column"
                     borderRadius={8}
                     width={114}
@@ -188,7 +196,7 @@ export const GroomerPortfolioDetail = ({
               height="47px"
               padding="10px"
               bg={theme.palette.Gray20}
-              borderRadius='8px'
+              borderRadius="8px"
               typo="Body3"
               onClick={toggleModal}
             >
@@ -199,7 +207,7 @@ export const GroomerPortfolioDetail = ({
               height="47px"
               padding="10px"
               bg={theme.palette.Alert}
-              borderRadius='8px'
+              borderRadius="8px"
               typo="Body3"
               fontColor={theme.palette.White}
               onClick={handleClickDeleteConfirmButton}
@@ -265,6 +273,7 @@ const MenuCard = styled(Flex)`
   right: 9px;
   background-color: ${theme.palette.White};
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 `;
 
 const MenuItem = styled.div`
@@ -276,6 +285,7 @@ const MenuItem = styled.div`
   /* padding: 0 10px; // 좌우 여백을 추가하여 텍스트가 너무 붙지 않도록 조정 */
   &:hover {
     background-color: ${theme.palette.Gray_White};
+    border-radius: 8px;
   }
   z-index: 10;
 `;

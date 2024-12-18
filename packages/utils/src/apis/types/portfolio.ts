@@ -55,3 +55,8 @@ export interface PortfolioDetailType {
 export interface PorfolioDetailResponse extends BaseResponse {
   response: PortfolioDetailType;
 }
+
+//삭제 수정용 response
+export interface PutDeletePortfolioResponse extends BaseResponse {
+  response: string;
+}

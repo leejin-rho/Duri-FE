@@ -35,12 +35,12 @@ export const usePutReview = (handleNavigate: () => void) => {
   });
 };
 
-export const useDeleteReview = (handleNavigate: () => void) => {
+export const useDeleteReview = () => {
   return useMutation({
     mutationKey: ['deleteReview'],
     mutationFn: (reviewId: number) => deleteReview(reviewId),
     onSuccess: () => {
-      handleNavigate();
+      window.location.href = '/portfolio';
     },
     onError: (error) => {
       console.error(error);

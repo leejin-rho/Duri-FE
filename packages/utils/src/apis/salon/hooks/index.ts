@@ -4,4 +4,4 @@ export * from './request';
 export * from './quotation';
 export * from './onboarding';
 export * from './my';
-// export * from './portfolio';
+export * from './portfolio';
