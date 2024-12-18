@@ -72,10 +72,7 @@ const MyHistoryPage = () => {
                     petName={history.petName}
                     visitDate={history.startDate}
                     dayOfWeek={history.day}
-                    toggleModal={() =>
-                      // handleToggleModal(history.quotationId, history.shopId)
-                      handleToggleModal(history.quotationId)
-                    }
+                    toggleModal={() => handleToggleModal(history.quotationId)}
                   />
                 ))}
               </BorderLeftFlex>
