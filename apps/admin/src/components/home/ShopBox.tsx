@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   DownArrow,
@@ -30,6 +30,15 @@ export const ShopInfoBox = ({
   license,
 }: ShopInfoBoxType) => {
   const [isBoxOpen, setIsBoxOpen] = useState<boolean>(false);
+  const [careerYear, setCareerYear] = useState<number>(0);
+  const [careerMonth, setCareerMonth] = useState<number>(0);
+
+  useEffect(() => {
+    if (history !== 0) {
+      setCareerYear(Math.floor(history / 12));
+      setCareerMonth(history % 12);
+    }
+  }, [history]);
 
   const handleToggleButtonClick = () => {
     setIsBoxOpen(!isBoxOpen);
@@ -81,7 +90,7 @@ export const ShopInfoBox = ({
 
           <ShopInfoLine>
             <Text typo="Label2">경력</Text>
-            <Text typo="Caption4">{history} 년</Text>
+            <Text typo="Caption4">{`${careerYear ? `${careerYear}년` : ''} ${careerMonth ? `${careerMonth}개월` : ''}`}</Text>
           </ShopInfoLine>
 
           <ShopInfoLine align="start">

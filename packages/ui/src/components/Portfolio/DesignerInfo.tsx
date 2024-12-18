@@ -73,7 +73,7 @@ export const DesignerInfo = ({
         <Text
           typo="Caption4"
           colorCode={theme.palette.Gray400}
-        >{`경력 ${careerYear ?? '-'}년 ${careerMonth ?? '-'}개월, ${age ?? '-'}세, ${gender}`}</Text>
+        >{`경력 ${careerYear ? `${careerYear}년` : ''} ${careerMonth ? `${careerMonth}개월` : ''}, ${age ?? '-'}세, ${gender}`}</Text>
 
         {roles?.length > 0 && (
           <Flex direction="column" gap={8}>
