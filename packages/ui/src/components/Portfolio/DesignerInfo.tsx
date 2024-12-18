@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Approve, Flex, ProfileImage, Text, theme } from '@duri-fe/ui';
@@ -28,11 +29,21 @@ export const DesignerInfo = ({
 }: DesignerInfoProps) => {
   const navigate = useNavigate();
 
+  const [careerYear, setCareerYear] = useState<number>(0);
+  const [careerMonth, setCareerMonth] = useState<number>(0);
+
   const moveToPortfolio = () => {
     if (version === 'vertical') {
       navigate(`/portfolio/${designerId}`);
     }
   };
+
+  useEffect(() => {
+    if (experience !== 0) {
+      setCareerYear(Math.floor(experience / 12));
+      setCareerMonth(experience % 12);
+    }
+  }, [experience]);
 
   return (
     <Container
@@ -62,7 +73,7 @@ export const DesignerInfo = ({
         <Text
           typo="Caption4"
           colorCode={theme.palette.Gray400}
-        >{`경력 ${experience ?? '-'}년, ${age ?? '-'}세, ${gender}`}</Text>
+        >{`경력 ${careerYear ?? '-'}년 ${careerMonth ?? '-'}개월, ${age ?? '-'}세, ${gender}`}</Text>
 
         {roles?.length > 0 && (
           <Flex direction="column" gap={8}>
