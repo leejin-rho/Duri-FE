@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import LoadingGIF from '@assets/images/gifs/Final_renderfile.gif';
+// import LoadingGIF from '@assets/images/gifs/Final_renderfile.gif';
 import BabyCut from '@assets/images/pngs/BabyCut.png';
 import BearCut from '@assets/images/pngs/BearCut.png';
 import GuideDog1 from '@assets/images/pngs/GuideDog1.png';
@@ -87,7 +87,7 @@ const AIStyling = () => {
             padding="0 0 123px"
           >
             <Flex height={55}>
-              <LoadingGIFImg src={LoadingGIF} alt="loading indicator" />
+              {/* <LoadingGIFImg src={LoadingGIF} alt="loading indicator" /> */}
             </Flex>
             <Text typo="Title2" colorCode={theme.palette.White}>
               새로운 스타일로 변화 중...
