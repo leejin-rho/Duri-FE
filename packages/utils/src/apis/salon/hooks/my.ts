@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { BaseError, ShopReviewListResponse } from '../../types';
+import { BaseError, MyShopReviewListResponse } from '../../types';
 import {
   GetMyShopInfoResponse,
   GroomerAndShopProfileResponse,
@@ -52,7 +52,7 @@ export const useGetMyShopInfo = ({ queryKey, options }: UseGetMyShopInfo) => {
 };
 
 type UseGetMyShopReviewList = UseQueryProps<
-  ShopReviewListResponse['response'],
+  MyShopReviewListResponse['response'],
   BaseError
 >;
 
