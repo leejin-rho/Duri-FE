@@ -36,7 +36,7 @@ export const ModifyPetInfoCard = () => {
   }, [petListData]);
 
   return (
-    <Flex direction="column" gap={20} padding="0 20px">
+    <Flex direction="column" gap={20}>
       {petListInfo &&
         petListInfo.map(
           ({
