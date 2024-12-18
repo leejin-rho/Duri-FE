@@ -89,7 +89,6 @@ export const ShopInfo = ({
     },
   } = shopData;
 
-  console.log(shopData);
   const openTime = parse(shopOpenTime, 'HH:mm:ss', new Date());
   const closeTime = parse(shopCloseTime, 'HH:mm:ss', new Date());
 

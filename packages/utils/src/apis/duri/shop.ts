@@ -40,6 +40,7 @@ export const getShopDetailInfo = async ({
   const { data } = await publicInstance.get(`/shop/detail`, {
     params: { shopId, lat, lon },
   });
+  console.log('샵', data.response);
 
   return data.response;
 };
