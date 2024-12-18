@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { BaseError } from '../../types';
+import { BaseError, ShopReviewListResponse } from '../../types';
 import {
   GetMyShopInfoResponse,
   GroomerAndShopProfileResponse,
@@ -8,7 +8,12 @@ import {
   PutShopInfoResponse,
 } from '../../types/my';
 import { UseQueryProps } from '../../types/tanstack';
-import { getGroomerInfo, getMyShopInfo, putShopInfo } from '../my';
+import {
+  getGroomerInfo,
+  getMyShopInfo,
+  getMyShopReviewList,
+  putShopInfo,
+} from '../my';
 
 import { putShopImage } from './../my';
 
@@ -38,10 +43,27 @@ type UseGetMyShopInfo = UseQueryProps<
 >;
 
 /** [GET] /groomer/profile 미용사 마이샵 */
-export const UseGetMyShopInfo = ({ queryKey, options }: UseGetMyShopInfo) => {
+export const useGetMyShopInfo = ({ queryKey, options }: UseGetMyShopInfo) => {
   return useQuery({
     queryKey: ['getMyShopInfo', ...(queryKey || [])],
     queryFn: () => getMyShopInfo(),
+    ...options,
+  });
+};
+
+type UseGetMyShopReviewList = UseQueryProps<
+  ShopReviewListResponse['response'],
+  BaseError
+>;
+
+/** [GET] /shop/review 마이샵 리뷰 조회 */
+export const UseGetMyShopReviewList = ({
+  queryKey,
+  options,
+}: UseGetMyShopReviewList) => {
+  return useQuery({
+    queryKey: ['getMyShopReviewList', ...(queryKey || [])],
+    queryFn: () => getMyShopReviewList(),
     ...options,
   });
 };

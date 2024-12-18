@@ -1,4 +1,8 @@
-import { publicInstance, salonInstance } from '@duri-fe/utils';
+import {
+  publicInstance,
+  salonInstance,
+  ShopReviewListResponse,
+} from '@duri-fe/utils';
 
 import {
   GetMyShopInfoResponse,
@@ -43,5 +47,13 @@ export const putShopInfo = async (
   request: PutShopInfoRequest,
 ): Promise<PutShopInfoResponse['response']> => {
   const response = await salonInstance.put('shop/profile', request);
+  return response.data.response;
+};
+
+/** [GET] /shop/review 마이샵 리뷰 조회 */
+export const getMyShopReviewList = async (): Promise<
+  ShopReviewListResponse['response']
+> => {
+  const response = await salonInstance.get('shop/review');
   return response.data.response;
 };
