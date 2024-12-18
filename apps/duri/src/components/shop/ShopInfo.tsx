@@ -26,6 +26,7 @@ import {
   UseGetShopReviewList,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
+import { format, parse } from 'date-fns';
 
 import { SendRequestQBox } from './SendRequesQBox';
 import { ShopPhotos } from './ShopPhotos';
@@ -90,6 +91,11 @@ export const ShopInfo = ({
     shopImages,
   } = shopData;
 
+  const openTime = parse(shopOpenTime, 'HH:mm:ss', new Date());
+  const closeTime = parse(shopCloseTime, 'HH:mm:ss', new Date());
+
+  console.log(reviewData);
+
   return (
     shopData && (
       <>
@@ -149,8 +155,7 @@ export const ShopInfo = ({
                 <Flex gap={10} justify="flex-start" margin="0 0 0 4px">
                   <Time width={16} />
                   <Text typo="Caption3">
-                    {shopOpenTime.hour}:{shopOpenTime.minute} ~{' '}
-                    {shopCloseTime.hour}:{shopCloseTime.minute}
+                    {format(openTime, 'HH:mm')}~ {format(closeTime, 'HH:mm')}
                   </Text>
                 </Flex>
 

@@ -47,8 +47,8 @@ export interface ShopInfoDetailType {
     shopLat: number;
     shopLon: number;
     shopPhone: string;
-    shopOpenTime: { hour: number; minute: number };
-    shopCloseTime: { hour: number; minute: number };
+    shopOpenTime: string;
+    shopCloseTime: string;
     shopRating: number;
     reviewCnt: number;
     distance: number;
@@ -72,15 +72,16 @@ export interface ShopDetailResponse extends BaseResponse {
 }
 
 export interface PetDetail {
-  petId: number;
-  imageURL: string;
+  image: string;
   name: string;
   age: number;
   gender: string;
   breed: string;
   weight: number;
   neutering: boolean;
-  lastGrooming: string;
+  character: string[];
+  diseases: string[];
+  lastGrooming: string | null;
 }
 
 export interface ShopReviewType {
@@ -92,8 +93,7 @@ export interface ShopReviewType {
   reviewImageURL: string;
   comment: string;
   createdAt: string | null;
-  imgUrl: string;
-  petInfo: PetDetail;
+  petDetail: PetDetail;
 }
 
 export interface ShopReviewListResponse extends BaseResponse {
