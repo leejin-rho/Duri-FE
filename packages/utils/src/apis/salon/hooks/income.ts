@@ -41,7 +41,7 @@ type UseGetSelectedMonthIncomeType = UseQueryProps<
   GetSelectedMonthIncomeResponse['response'],
   BaseError
 > & {
-  month: number;
+  month: string;
 };
 
 export const useGetSelectedMonthIncome = ({
