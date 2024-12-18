@@ -100,6 +100,20 @@ export interface ShopReviewListResponse extends BaseResponse {
   response: ShopReviewType[];
 }
 
+export interface MyPetDetail {
+  petId: number;
+  imageURL: string;
+  name: string;
+  age: number;
+  gender: string;
+  breed: string;
+  weight: number;
+  neutering: boolean;
+  character: string[];
+  diseases: string[];
+  lastGrooming: string | null;
+}
+
 export interface MyShopReviewType {
   userId: number;
   userName: string;
@@ -109,7 +123,7 @@ export interface MyShopReviewType {
   comment: string;
   createdAt: string;
   imgUrl: string;
-  petInfo: PetDetail;
+  petInfo: MyPetDetail;
 }
 
 export interface MyShopReviewListResponse extends BaseResponse {

@@ -137,8 +137,10 @@ const MyPage = () => {
                 gap={5}
                 onClick={() => handleNavigate('/my/shop')}
               >
-                <Store width={28} height={28} />
-                <Text typo="Label1">단골가게</Text>
+                <Store width={19} />
+                <Text typo="Label1" margin="0 0 0 2px">
+                  단골가게
+                </Text>
               </FlexButton>
               <FlexButton
                 padding="15px 35px"

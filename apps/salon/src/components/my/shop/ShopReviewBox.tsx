@@ -26,7 +26,8 @@ export const ShopReviewBox = (props: ShopReviewBoxProps) => {
       createdAt,
       imgUrl,
       petInfo: {
-        image: petImage,
+        petId: petId,
+        imageURL: petImage,
         name: petName,
         age: petAge,
         breed: petBreed,
@@ -80,7 +81,7 @@ export const ShopReviewBox = (props: ShopReviewBoxProps) => {
       >
         <PetInfo
           themeVariant="compact"
-          key={petName}
+          key={petId}
           name={petName}
           image={petImage}
           age={petAge}
