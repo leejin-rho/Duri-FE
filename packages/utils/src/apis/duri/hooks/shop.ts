@@ -80,7 +80,7 @@ export const useGetShopDetailInfo = ({
   BaseError
 > => {
   return useQuery<ShopDetailResponse['response'], BaseError>({
-    queryKey: ['getSearchShopResult', shopBaseInfo, ...(queryKey || [])],
+    queryKey: ['getShopDetailInfo', shopBaseInfo, ...(queryKey || [])],
     queryFn: () => getShopDetailInfo(shopBaseInfo),
     enabled: !!shopBaseInfo,
     ...options,

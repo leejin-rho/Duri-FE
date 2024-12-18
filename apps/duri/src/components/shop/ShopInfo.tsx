@@ -26,9 +26,9 @@ import {
   UseGetShopReviewList,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
+import { format, parse } from 'date-fns';
 
 import { SendRequestQBox } from './SendRequesQBox';
-import { ShopPhotos } from './ShopPhotos';
 import { ShopReviewBox } from './ShopReviewBox';
 
 interface ShopInfoProps {
@@ -63,6 +63,10 @@ export const ShopInfo = ({
 
   if (!shopData) return null;
 
+  const handleKaKaoButtonClick = (kakaoUrl: string) => {
+    window.location.href = kakaoUrl;
+  };
+
   const {
     shopDetail: {
       shopId,
@@ -76,6 +80,8 @@ export const ShopInfo = ({
       reviewCnt,
       distance,
       tags,
+      shopInfo,
+      kakaoTalkUrl,
     },
     groomerProfileDetail: {
       id: groomerId,
@@ -84,11 +90,12 @@ export const ShopInfo = ({
       age: groomerAge,
       history: groomerHistory,
       image: groomerImage,
-      info: groomerInfo,
       license: groomerLicense,
     },
-    shopImages,
   } = shopData;
+
+  const openTime = parse(shopOpenTime, 'HH:mm:ss', new Date());
+  const closeTime = parse(shopCloseTime, 'HH:mm:ss', new Date());
 
   return (
     shopData && (
@@ -107,7 +114,9 @@ export const ShopInfo = ({
           {isForBottomSheet ? (
             <DownArrow width={42} />
           ) : (
-            <BeforeArrow width={42} />
+            <HeightFitFlex padding="12px 4px 8px" justify="start">
+              <BeforeArrow width={42} />
+            </HeightFitFlex>
           )}
         </HeightFitFlex>
         <ShopInfoContainer
@@ -149,8 +158,7 @@ export const ShopInfo = ({
                 <Flex gap={10} justify="flex-start" margin="0 0 0 4px">
                   <Time width={16} />
                   <Text typo="Caption3">
-                    {shopOpenTime.hour}:{shopOpenTime.minute} ~{' '}
-                    {shopCloseTime.hour}:{shopCloseTime.minute}
+                    {format(openTime, 'HH:mm')}~ {format(closeTime, 'HH:mm')}
                   </Text>
                 </Flex>
 
@@ -167,7 +175,9 @@ export const ShopInfo = ({
                 </TagList>
               </WidthFitFlex>
               <WidthFitFlex gap={8} padding="0 4px 0">
-                <IconCircle>
+                <IconCircle
+                  onClick={() => handleKaKaoButtonClick(kakaoTalkUrl)}
+                >
                   <Chat width={21} color={theme.palette.Normal700} />
                 </IconCircle>
                 <IconCircle onClick={openSheet}>
@@ -177,6 +187,7 @@ export const ShopInfo = ({
             </HeightFitFlex>
           </HeightFitFlex>
 
+          {/** 인삿말 */}
           <HeightFitFlex
             justify="flex-start"
             backgroundColor={theme.palette.Gray_White}
@@ -185,7 +196,7 @@ export const ShopInfo = ({
             margin="26px 0 0 0"
           >
             <TextHeight typo="Caption2" colorCode={theme.palette.Gray500}>
-              {groomerInfo}
+              {shopInfo ?? '등록된 소개글이 없어요.'}
             </TextHeight>
           </HeightFitFlex>
 
@@ -210,7 +221,7 @@ export const ShopInfo = ({
           </HeightFitFlex>
 
           {/**샵 내부 */}
-          <HeightFitFlex
+          {/* <HeightFitFlex
             direction="column"
             gap={24}
             margin="36px 0 0 0"
@@ -218,7 +229,7 @@ export const ShopInfo = ({
           >
             <Text typo="Title3">샵 내부</Text>
             <ShopPhotos images={shopImages} />
-          </HeightFitFlex>
+          </HeightFitFlex> */}
 
           {/**리뷰 */}
           <HeightFitFlex
@@ -241,7 +252,9 @@ export const ShopInfo = ({
               ))
             ) : (
               <Flex height={48}>
-                <Text>아직 등록된 리뷰가 없습니다.</Text>
+                <Text colorCode={theme.palette.Gray700}>
+                  등록된 리뷰가 없습니다.
+                </Text>
               </Flex>
             )}
           </HeightFitFlex>

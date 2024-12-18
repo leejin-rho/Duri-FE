@@ -86,7 +86,7 @@ export const GroomerPortfolio = ({ groomerId }: { groomerId: number }) => {
         <Flex justify="flex-start">
           {groomerProfile && (
             <DesignerInfo
-              padding="0 6px"
+              padding="16px"
               version="horizontal"
               designerId={groomerProfile.id}
               name={groomerProfile.name}

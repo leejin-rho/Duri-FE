@@ -26,7 +26,7 @@ export const ShopReviewBox = (props: ShopReviewBoxProps) => {
       createdAt,
       imgUrl,
       petInfo: {
-        petId,
+        petId: petId,
         imageURL: petImage,
         name: petName,
         age: petAge,

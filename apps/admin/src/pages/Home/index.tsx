@@ -19,34 +19,46 @@ import styled from '@emotion/styled';
 const Home = () => {
   const { data: requestShopListData } = UseGetRequestShopList({});
   const { data: approvedShopListData } = UseGetApprovedShopList({});
-  const { mutate: mutateApproveShop } = UsePostApproveRequest({
-    options: {
-      onSuccess: () => {
-        console.log('Shop Approved successfully!');
+  const { mutate: mutateApproveShop, isSuccess: approvedSuccess } =
+    UsePostApproveRequest({
+      options: {
+        onSuccess: () => {
+          console.log('Shop Approved successfully!');
+        },
+        onError: (err) => {
+          console.error('Error creating user:', err);
+        },
       },
-      onError: (err) => {
-        console.error('Error creating user:', err);
+    });
+  const { mutate: mutateRejectShop, isSuccess: rejectedSuccess } =
+    UsePostRejectRequest({
+      options: {
+        onSuccess: () => {
+          console.log('Shop Rejected successfully!');
+        },
+        onError: (err) => {
+          console.error('Error creating user:', err);
+        },
       },
-    },
-  });
-  const { mutate: mutateRejectShop } = UsePostRejectRequest({
-    options: {
-      onSuccess: () => {
-        console.log('Shop Rejected successfully!');
-      },
-      onError: (err) => {
-        console.error('Error creating user:', err);
-      },
-    },
-  });
+    });
 
   const handleApproveButtonClick = async (shopId: number) => {
     mutateApproveShop({ shopId: shopId });
   };
 
+  if (approvedSuccess) {
+    window.alert('성공적으로 수락하였습니다.');
+    window.location.reload();
+  }
+
   const handleRejectButtonClick = async (shopId: number) => {
     mutateRejectShop({ shopId: shopId });
   };
+
+  if (rejectedSuccess) {
+    window.alert('성공적으로 거절하였습니다.');
+    window.location.reload();
+  }
 
   return (
     <MobileLayout>
@@ -68,7 +80,7 @@ const Home = () => {
             requestShopListData.map((shop) => (
               <>
                 <ShopInfoBox
-                  key={shop.shop.shopId}
+                  key={shop.shop.shopName}
                   shopName={shop.shop.shopName}
                   shopAddress={shop.shop.shopAddress}
                   businessRegistration={shop.shop.businessRegistrationNumber}
@@ -109,7 +121,7 @@ const Home = () => {
             approvedShopListData.map((shop) => {
               return (
                 <ShopInfoBox
-                  key={shop.shop.shopId}
+                  key={shop.shop.shopName}
                   shopName={shop.shop.shopName}
                   shopAddress={shop.shop.shopAddress}
                   businessRegistration={shop.shop.businessRegistrationNumber}

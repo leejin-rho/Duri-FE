@@ -5,7 +5,10 @@ import { DuriNavbar, MobileLayout } from '@duri-fe/ui';
 
 const ShopDetail = () => {
   const { shopId } = useParams<{ shopId: string }>();
+  console.log(shopId);
+
   const shopIndex = shopId ? Number(shopId) : 0;
+  console.log(shopIndex);
 
   return (
     <MobileLayout>

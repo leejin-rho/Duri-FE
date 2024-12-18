@@ -13,7 +13,7 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
-import { useBottomSheet } from '@duri-fe/utils';
+import { getShortenedAddress, useBottomSheet } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 import { ShopInfo } from './ShopInfo';
@@ -82,7 +82,7 @@ export const ShopLine = ({
 
         <TextLine typo="Caption3" colorCode={theme.palette.Gray400}>
           <MarkText>{`${distance}m | `}</MarkText>
-          {address}
+          {getShortenedAddress(address)}
         </TextLine>
         <Flex>
           <Flex direction="column" gap={8}>

@@ -13,49 +13,52 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-export const Modal = forwardRef<HTMLDivElement, ModalProps>(({
-  width = '337',
-  closeIcon = true,
-  ...props
-}, ref) => {
-  const handleClickInnerModal = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-  };
+export const Modal = forwardRef<HTMLDivElement, ModalProps>(
+  ({ width = '337', closeIcon = true, ...props }, ref) => {
+    const handleClickInnerModal = (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+    };
 
-  if (!props.isOpen) return null;
+    if (!props.isOpen) return null;
 
-  return (
-    <Backdrop
-      onClick={props.toggleModal}
-      className={props.isOpen ? 'open' : ''}
-    >
-      <ModalBox ref={ref} onClick={handleClickInnerModal} width={width} margin={props.margin} direction="column" justify='flex-start'>
-        <Flex justify="flex-end" padding='0 0 17px 0'>
-          {props.title && (
-            <Text
-              typo="Body3"
-              margin="0 0 0 26px"
-              colorCode={theme.palette.Gray400}
-            >
-              {props.title}
-            </Text>
-          )}
-          {closeIcon && (
-            <Close
-              isOpen={props.isOpen}
-              toggleModal={props.toggleModal}
-              margin="0 26px auto auto"
-              width={17}
-              height={17}
-              currentColor={theme.palette.Gray400}
-            />
-          )}
-        </Flex>
-        <ModalContent>{props.children}</ModalContent>
-      </ModalBox>
-    </Backdrop>
-  );
-});
+    return (
+      <Backdrop
+        onClick={props.toggleModal}
+        className={props.isOpen ? 'open' : ''}
+      >
+        <ModalBox
+          ref={ref}
+          onClick={handleClickInnerModal}
+          width={width}
+          margin={props.margin}
+          direction="column"
+          justify="flex-start"
+        >
+          <Flex justify="flex-end" padding="0 0 17px 0">
+            {props.title && (
+              <Text
+                typo="Body3"
+                margin="0 0 0 26px"
+                colorCode={theme.palette.Gray400}
+              >
+                {props.title}
+              </Text>
+            )}
+            {closeIcon && (
+              <Close
+                isOpen={props.isOpen}
+                toggleModal={props.toggleModal}
+                margin="0 26px auto auto"
+                currentColor={theme.palette.Black}
+              />
+            )}
+          </Flex>
+          <ModalContent>{props.children}</ModalContent>
+        </ModalBox>
+      </Backdrop>
+    );
+  },
+);
 
 Modal.displayName = 'Modal';
 
@@ -72,7 +75,7 @@ const Backdrop = styled.div`
   z-index: 10000;
 `;
 
-const ModalBox = styled(Flex)<{margin?: string}>`
+const ModalBox = styled(Flex)<{ margin?: string }>`
   height: fit-content;
   padding: 18.5px 0;
   position: relative;

@@ -67,8 +67,12 @@ export const DesignerInfo = ({
       padding={padding}
     >
       <ImageWrapper version={version}>
-        {imageUrl === undefined ? (
-          <ProfileImage width={102} height={102} borderRadius={102} />
+        {imageUrl === undefined || imageUrl === null ? (
+          <ProfileImage
+            width={version === 'horizontal' ? 102 : 160}
+            height={version === 'horizontal' ? 102 : 160}
+            borderRadius={version === 'horizontal' ? 99 : 8}
+          />
         ) : (
           <DesignerImg
             version={version}
@@ -91,7 +95,7 @@ export const DesignerInfo = ({
                 <Text typo="Caption3" colorCode={theme.palette.Link}>
                   {item}
                 </Text>
-                <Approve width={11} height={10} />
+                <Approve width={11} height={10} color={theme.palette.Link} />
               </Role>
             ))}
           </Flex>
