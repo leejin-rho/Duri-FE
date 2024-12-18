@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import {
   Card,
   Flex,
+  HardText,
   Header,
   HeightFitFlex,
   Image,
+  Menu,
   PetInfo,
+  ProfileImage,
   RelativeFlex,
   SalonTag,
   Text,
@@ -18,8 +21,10 @@ import styled from '@emotion/styled';
 
 export const GroomerPortfolioDetail = ({
   feedbackId,
+  groomer = false,
 }: {
   feedbackId: number;
+  groomer?: boolean;
 }) => {
   const navigate = useNavigate();
 
@@ -42,7 +47,7 @@ export const GroomerPortfolioDetail = ({
         <Flex direction="column" gap={14}>
           <Flex justify="space-between" padding="0 24px">
             <WidthFitFlex gap={16}>
-              <Image
+              <ProfileImage
                 width={34}
                 height={34}
                 borderRadius={99}
@@ -51,9 +56,21 @@ export const GroomerPortfolioDetail = ({
               <Text typo="Title1">{data.groomerInfo.name}</Text>
             </WidthFitFlex>
 
-            {/* <HardText typo="Caption4" colorCode={theme.palette.Gray400}>
-              2024-12-25
-            </HardText> */}
+            {/* 미용사 포폴용 - 수정삭제를 선택 할 수 있는 메뉴 노출 */}
+            {groomer ? (
+              <WidthFitFlex gap={8}>
+                <HardText typo="Caption4" colorCode={theme.palette.Gray400}>
+                  {data.feedbackDate}
+                </HardText>
+                <MenuWrapper>
+                  <Menu width={23} height={23} />
+                </MenuWrapper>
+              </WidthFitFlex>
+            ) : (
+              <HardText typo="Caption4" colorCode={theme.palette.Gray400}>
+                {data.feedbackDate}
+              </HardText>
+            )}
           </Flex>
 
           <ImageWrapper>
@@ -161,4 +178,8 @@ const PetInfoCard = styled(Card)`
   padding: 16px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: ${theme.palette.Gray_White};
+`;
+
+const MenuWrapper = styled(WidthFitFlex)`
+  cursor: pointer;
 `;

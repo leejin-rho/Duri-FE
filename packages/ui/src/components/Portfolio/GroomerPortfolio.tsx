@@ -3,6 +3,10 @@ import { useEffect, useState } from 'react';
 import { FilledHeart, Heart } from '@duri-fe/ui';
 import { theme } from '@duri-fe/ui';
 import { UseGetGroomerInfo } from '@duri-fe/utils';
+import {
+  GroomerInfoType,
+  ShopInfoType,
+} from '@duri-fe/utils/src/apis/types/my';
 import styled from '@emotion/styled';
 
 import { Flex, HeightFitFlex, WidthFitFlex } from '../FlexBox';
@@ -13,16 +17,19 @@ import { PortfolioPhotos } from './PortfolioPhotos';
 
 export const GroomerPortfolio = ({ groomerId }: { groomerId: number }) => {
   const [isMarked, setIsMarked] = useState<boolean>(false);
+  const [shopProfile, setShopProfile] = useState<ShopInfoType>();
+  const [groomerProfile, setGroomerProfile] = useState<GroomerInfoType>();
 
   const { data } = UseGetGroomerInfo({
     groomerId: groomerId,
   });
 
-  useEffect(()=>{
-    if(data){
-      console.log(data)
+  useEffect(() => {
+    if (data) {
+      setGroomerProfile(data.groomerProfileDetail);
+      setShopProfile(data.shopProfileDetail);
     }
-  })
+  }, [groomerProfile]);
 
   return (
     <>
@@ -30,13 +37,12 @@ export const GroomerPortfolio = ({ groomerId }: { groomerId: number }) => {
         <MainImg
           alt="shop-image"
           src={
-            'https://s3-alpha-sig.figma.com/img/b451/cdeb/1b126206922d93851b0f7d50c8e39562?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZI~FkT7vXniXT8Kwm-tEkVdtP0PUf8YfdcOEtpO0P1PQAJlG6dJz-VvaTRl8k-IiXvleuMayGOw8k53CfVHh7Qnw9Q0U9QRyhDZ71dxK7NWKSghjD6O4LcTalyZ0-RNYovDwZEfc90WDYmHid49LMyhX0qlxFyhNQtqKt-dvtu92SGG1LiTbKkH3xoeLg3QsJBTezqIvQA7UE16KuPQx-73RML9nR3gPs9~69sI-Aw3lcZC8s0xEo9lIqZ-WhjbyRWdFoXYpl8TDM8x160IDZG51zx-R3n-OFoaLHYntEj2jZchfuKNsX8GJvN6ia8XCouQ5bdvPU2lBWNDAdx9EcA__'
-          }
+            shopProfile?.imageURL}
         />
         <TextBox direction="column" gap={14}>
           <HeightFitFlex gap={10} justify="flex-start">
             <Text typo="Title4" colorCode={theme.palette.White}>
-              댕댕샵
+              {shopProfile?.name}
             </Text>
             <WidthFitFlex
               height="fit-content"
@@ -55,17 +61,17 @@ export const GroomerPortfolio = ({ groomerId }: { groomerId: number }) => {
         </TextBox>
       </HeaderBox>
       <Flex direction="column" padding="12px 5px 96px 5px" gap={12}>
-        {data && (
+        {groomerProfile && (
           <DesignerInfo
             padding="0 6px"
             version="horizontal"
-            designerId={data.id}
-            name={data.name}
-            age={data.age}
-            gender={data.gender === 'F' ? '여성' : '남성'}
-            experience={data.history}
-            roles={data.license}
-            imageUrl={data.image}
+            designerId={groomerProfile.id}
+            name={groomerProfile.name}
+            age={groomerProfile.age}
+            gender={groomerProfile.gender === 'F' ? '여성' : '남성'}
+            experience={groomerProfile.history}
+            roles={groomerProfile.license}
+            imageUrl={groomerProfile.image}
           />
         )}
 

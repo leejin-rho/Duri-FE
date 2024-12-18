@@ -128,7 +128,22 @@ export interface GroomerInfoType {
   license: string[];
 }
 
+export interface ShopInfoType {
+  id: 0;
+  name: string;
+  address: string;
+  imageURL: string;
+  phone: string;
+  openTime: string;
+  closeTime: string;
+  info: string;
+  kakaoTalk: string;
+  tags: string[];
+}
 
-export interface GroomerInfoResponse extends BaseResponse {
-  response: GroomerInfoType;
+export interface GroomerAndShopProfileResponse extends BaseResponse {
+  response: {
+    groomerProfileDetail: GroomerInfoType;
+    shopProfileDetail: ShopInfoType;
+  };
 }

@@ -8,7 +8,7 @@ const PortfolioDetailPage = () => {
 
   return (
     <MobileLayout>
-      <GroomerPortfolioDetail feedbackId={feedbackId} />
+      <GroomerPortfolioDetail feedbackId={feedbackId} groomer />
       <SalonNavbar />
     </MobileLayout>
   );
