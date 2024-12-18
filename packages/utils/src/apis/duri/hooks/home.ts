@@ -16,12 +16,11 @@ export const useGetPetInfo = () => {
 };
 
 export const useGetRegularShopList = () => {
-  const { data, isError } = useQuery({
+  return useQuery({
     queryKey: ['getRegularShopList'],
     queryFn: () => getRegularShopInfo(),
     staleTime: 1000 * 60 * 30,
   });
-  return { data, isError };
 };
 
 export const useGetRecommendedShopList = (

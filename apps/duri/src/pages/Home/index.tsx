@@ -12,6 +12,7 @@ import {
   HeightFitFlex,
   MainHeader,
   MobileLayout,
+  SkeletonCard,
   Text,
   theme,
 } from '@duri-fe/ui';
@@ -34,13 +35,11 @@ const Home = () => {
   const [lon, setLon] = useState<number | null>(null);
 
   const { data: petData } = useGetPetInfo();
-  const { data: regularListData } = useGetRegularShopList();
+  const { data: regularListData, isPending: isPendingRegularData } =
+    useGetRegularShopList();
   const { data: reservationData } = useGetUpcomingReservation();
-  const {
-    data: recommendedListData,
-    isLoading: recommendedListLoading,
-    isPending: recommendedListPending,
-  } = useGetRecommendedShopList(lat, lon);
+  const { data: recommendedListData, isPending: isPendingRecommendData } =
+    useGetRecommendedShopList(lat, lon);
 
   const navigate = useNavigate();
   const handleNavigate = () => {
@@ -103,30 +102,45 @@ const Home = () => {
               </Text>
             )}
             <Text typo="Title1">단골 샵 빠른 입찰</Text>
-            {regularListData && regularListData.homeShopList.length > 0 ? (
-              <SpeedQuotation shopList={regularListData.homeShopList} />
-            ) : (
-              <Flex direction="column" padding="62px 99px" gap={12}>
-                <Flex direction="column">
-                  <Text typo="Caption4" colorCode={theme.palette.Gray400}>
-                    아직 단골샵이 없어요!
-                  </Text>
-                  <Text typo="Caption4" colorCode={theme.palette.Gray400}>
-                    단골샵을 찾으러 가볼까요?
-                  </Text>
-                </Flex>
-                <Button
-                  width="135px"
-                  height="37px"
-                  typo="Label4"
-                  borderRadius="8px"
-                  bg={theme.palette.Black}
-                  fontColor={theme.palette.White}
-                  onClick={handleNavigate}
-                >
-                  샵 둘러보기
-                </Button>
+            {isPendingRegularData ? (
+              <Flex
+                direction="column"
+                gap={9}
+                justify="flex-start"
+                margin="28px 0 0"
+              >
+                <SkeletonCard width={336} height={100} borderRadius={8} />
+                <SkeletonCard width={336} height={100} borderRadius={8} />
               </Flex>
+            ) : (
+              <>
+                {/* 단골샵이 없는 경우 */}
+                {regularListData && regularListData.homeShopList.length > 0 ? (
+                  <SpeedQuotation shopList={regularListData.homeShopList} />
+                ) : (
+                  <Flex direction="column" padding="62px 99px" gap={12}>
+                    <Flex direction="column">
+                      <Text typo="Caption4" colorCode={theme.palette.Gray400}>
+                        아직 단골샵이 없어요!
+                      </Text>
+                      <Text typo="Caption4" colorCode={theme.palette.Gray400}>
+                        단골샵을 찾으러 가볼까요?
+                      </Text>
+                    </Flex>
+                    <Button
+                      width="135px"
+                      height="37px"
+                      typo="Label4"
+                      borderRadius="8px"
+                      bg={theme.palette.Black}
+                      fontColor={theme.palette.White}
+                      onClick={handleNavigate}
+                    >
+                      샵 둘러보기
+                    </Button>
+                  </Flex>
+                )}
+              </>
             )}
           </Flex>
 
@@ -143,16 +157,13 @@ const Home = () => {
         </Flex>
         <Flex direction="column">
           {/* 추천 샵 */}
-          {recommendedListLoading ||
-            (recommendedListPending && (
-              <Flex margin="31px 0 6px 0">
-                <Text typo="Caption1" colorCode={theme.palette.Gray300}>
-                  Loading...
-                </Text>
-              </Flex>
-            ))}
-          {recommendedListData && (
-            <RecommendedShop shopList={recommendedListData} />
+          {isPendingRecommendData ? (
+            <Flex gap={6} justify="flex-start" padding="0 20px">
+              <SkeletonCard width={152} height={198} borderRadius={12} />
+              <SkeletonCard width={152} height={198} borderRadius={12} />
+            </Flex>
+          ) : (
+            <RecommendedShop shopList={recommendedListData ?? []} />
           )}
         </Flex>
         <DuriNavbar />
