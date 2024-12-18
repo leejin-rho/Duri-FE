@@ -32,10 +32,14 @@ export const SalonCard = ({
           {imageURL ? (
             <Image width={34} height={34} src={imageURL} borderRadius={34} />
           ) : (
-            <WidthFitFlex><Store width={34} height={34}/></WidthFitFlex>
+            <WidthFitFlex width={34} height={34}>
+              <Store width={28} height={28} />
+            </WidthFitFlex>
           )}
           <Flex height={34}>
-          <Text typo={salonName.length > 5 ? "Caption3" :"Body4"}>{salonName}</Text>
+            <Text typo={salonName.length > 5 ? 'Caption3' : 'Body4'}>
+              {salonName}
+            </Text>
           </Flex>
         </WidthFitFlex>
       </Flex>

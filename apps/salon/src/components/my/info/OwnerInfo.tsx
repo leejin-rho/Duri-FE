@@ -1,10 +1,4 @@
-import {
-  Flex,
-  ProfileImage,
-  Text,
-  theme,
-  WidthFitFlex,
-} from '@duri-fe/ui';
+import { Flex, ProfileImage, Text, theme, WidthFitFlex } from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 interface OwnerInfoProps {
@@ -22,7 +16,11 @@ export const OwnerInfo = ({ image, shopName }: OwnerInfoProps) => {
           <br />
           안녕하세요!
         </Text>
-        <MoveToPortfolio href='/portfolio'>내 포트폴리오 보기</MoveToPortfolio>
+        <Flex justify="flex-start">
+          <MoveToPortfolio href="/portfolio">
+            내 포트폴리오 보기
+          </MoveToPortfolio>
+        </Flex>
       </WidthFitFlex>
       <ProfileImage width={100} height={100} borderRadius={40} src={image} />
     </Flex>

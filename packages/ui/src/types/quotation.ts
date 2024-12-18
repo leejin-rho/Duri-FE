@@ -9,6 +9,7 @@ export interface ResponseQuotationType {
     shopAddress: string;
     shopPhone: string;
     groomerName: string;
+    shopImage: string;
   };
   quotationCreatedAt: string;
   menuDetail: {

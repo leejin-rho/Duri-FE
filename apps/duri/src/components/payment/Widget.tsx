@@ -32,8 +32,8 @@ const PaymentWidget = ({
   const { mutateAsync: postAmount } = usePostAmount();
 
   const { widgets, ready } = useTossPaymentWidget(
-    uuidData?.customerKey,
     amount,
+    uuidData?.customerKey,
   );
 
   const handleClickPaymentButton = () => {
@@ -67,6 +67,14 @@ const PaymentWidget = ({
 
     widgets.setAmount(amount);
   }, [widgets, amount]);
+
+  useEffect(() => {
+    if (ready) {
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 0); // 0ms 대기 후 스크롤 적용
+    }
+  }, [ready]);
 
   return (
     <Container direction="column">

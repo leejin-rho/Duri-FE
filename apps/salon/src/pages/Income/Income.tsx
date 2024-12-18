@@ -19,7 +19,7 @@ const IncomePage = () => {
   };
 
   const { data: monthIncomeData } = useGetThisMonthIncome({});
-  const { data: selectedIncomeData } = useGetSelectedMonthIncome({ month: 12 });
+  const { data: selectedIncomeData } = useGetSelectedMonthIncome({ month: "2024-12" });
   const { data: agePetStatistic } = useGetAgeStatistic({});
   const { data: diseasePetStatistic } = useGetDiseaseStatistic({});
   const { data: characterPetStatistic } = useGetCharacterStatistic({});

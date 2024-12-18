@@ -10,6 +10,7 @@ import {
   Flex,
   Header,
   MobileLayout,
+  SkeletonCard,
   Text,
   theme,
 } from '@duri-fe/ui';
@@ -40,11 +41,8 @@ const QuotationDetailPage = () => {
     null,
   );
 
-  const { data: quotationListData } = useGetQuotationList(
-    Number(quotationReqId),
-    lat,
-    lon,
-  );
+  const { data: quotationListData, isPending: isPendingQuotationList } =
+    useGetQuotationList(Number(quotationReqId), lat, lon);
 
   const handleClickBackButton = () => {
     navigate(-1);
@@ -149,14 +147,24 @@ const QuotationDetailPage = () => {
           <Flex direction="column" align="flex-start" margin="31px 0 17px">
             <Text typo="Title2">들어온 견적</Text>
             <Flex direction="column" margin="17px 0 0 0" gap={8}>
-              {quotationList?.map(({ requestId, shopName, totalPrice }) => (
-                <IncomingQuotation
-                  key={requestId}
-                  requestId={Number(requestId)}
-                  salonName={shopName}
-                  price={totalPrice}
-                />
-              ))}
+              {isPendingQuotationList ? (
+                <Flex direction="column" gap={8}>
+                  <SkeletonCard width={336} height={79} borderRadius={16} />
+                  <SkeletonCard width={336} height={79} borderRadius={16} />
+                  <SkeletonCard width={336} height={79} borderRadius={16} />
+                </Flex>
+              ) : (
+                <>
+                  {quotationList?.map(({ requestId, shopName, totalPrice }) => (
+                    <IncomingQuotation
+                      key={requestId}
+                      requestId={Number(requestId)}
+                      salonName={shopName}
+                      price={totalPrice}
+                    />
+                  ))}
+                </>
+              )}
             </Flex>
           </Flex>
         }

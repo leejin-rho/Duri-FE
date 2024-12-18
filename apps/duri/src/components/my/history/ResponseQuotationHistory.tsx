@@ -13,7 +13,7 @@ export const ResponseQuotationHistory = ({
   const navigate = useNavigate();
   const { data: quotationData } = useGetDetailQuotation(requestId);
   const handleClickReviewButton = (quotationId: number) => {
-    navigate('/review/write', {
+    navigate('/my/review/write', {
       state: {
         quotationId: quotationId,
       },

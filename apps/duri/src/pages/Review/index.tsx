@@ -52,7 +52,7 @@ const ReviewWritePage = () => {
   const { control, handleSubmit, setValue } = useForm<ReviewFormData>({
     mode: 'onChange',
     defaultValues: {
-      quotationId: location.state || 0,
+      quotationId: quotationId || 0,
       rating: 5,
       comment: '',
       image: null,
