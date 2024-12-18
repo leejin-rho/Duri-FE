@@ -9,8 +9,8 @@ interface Amount {
 }
 
 export const useTossPaymentWidget = (
-  customerKey: string | undefined,
   amount: Amount,
+  customerKey?: string,
 ) => {
   const [ready, setReady] = useState<boolean>(false);
   const [widgets, setWidgets] = useState<TossPaymentsWidgets | null>(null);
@@ -26,7 +26,20 @@ export const useTossPaymentWidget = (
           import.meta.env.VITE_CLIENT_KEY, // Client Key
         );
 
+        // 기존 위젯을 렌더링할 HTML 요소 제거
+        const paymentMethodElement = document.querySelector('#payment-method');
+        const agreementElement = document.querySelector('#agreement');
+
+        if (paymentMethodElement) {
+          paymentMethodElement.innerHTML = ''; // 기존 내용 제거
+        }
+
+        if (agreementElement) {
+          agreementElement.innerHTML = ''; // 기존 내용 제거
+        }
+
         const widgetsInstance = tossPayments.widgets({ customerKey });
+
         await widgetsInstance.setAmount(amount);
 
         await Promise.all([

@@ -13,6 +13,7 @@ export { default as Backup } from './Backup';
 export { default as BeforeArrow } from './BeforeArrow';
 export { default as Chat } from './Chat';
 export { default as Chatting } from './Chatting';
+export { default as DuriDog } from './DuriDog';
 export { default as Close } from './Close';
 export { default as CloseCircle } from './CloseCircle';
 export { default as DownArrow } from './DownArrow';
