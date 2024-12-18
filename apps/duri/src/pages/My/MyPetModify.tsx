@@ -45,11 +45,17 @@ const MyPetModifyPage = () => {
     mode: 'onChange',
   });
 
+  useEffect(()=>{
+    if(!location.state) {
+      navigate('/my/pet/register')
+    }
+  })
+
   useEffect(() => {
     if (modifySuccess) {
       navigate('/my/pet', { state: petId });
     }
-  });
+  },[modifySuccess]);
 
   useEffect(() => {
     if (getPetDetailData) {

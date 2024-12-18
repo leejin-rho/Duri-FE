@@ -1,5 +1,6 @@
 import { Flex, Modal, NextArrow, Text, theme } from '@duri-fe/ui';
 import { useModal } from '@duri-fe/utils';
+import styled from '@emotion/styled';
 import { format } from 'date-fns';
 
 import { RequestDetailQuotation } from './RequestDetailQuotation';
@@ -10,9 +11,11 @@ interface RequestInfoProps {
   expiredAt: Date | null;
   expired?: boolean;
   margin?: string;
+  shopName: string;
 }
 
 export const RequestInfo = ({
+  shopName,
   requestId,
   createdAt,
   expiredAt,
@@ -28,15 +31,15 @@ export const RequestInfo = ({
       margin={margin ?? `${margin}`}
       onClick={toggleModal}
     >
-      <Flex gap={8} justify="flex-start">
+      <FlexButton gap={8} justify="flex-start">
         <Text
           typo="Title3"
           colorCode={expired ? theme.palette.Gray300 : theme.palette.Normal700}
         >
-          요청서{requestId}
+          {shopName}
         </Text>
         <NextArrow width={22} height={23} />
-      </Flex>
+      </FlexButton>
       <Flex direction="column" gap={12}>
         <Flex justify="space-between">
           <Text typo="Label4" colorCode={theme.palette.Gray300}>
@@ -73,3 +76,7 @@ export const RequestInfo = ({
     </Flex>
   );
 };
+
+const FlexButton = styled(Flex)`
+  cursor: pointer;
+`;

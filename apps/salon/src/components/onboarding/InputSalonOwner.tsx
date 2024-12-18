@@ -362,7 +362,6 @@ const InputSalonOwner = ({
         <Button
           bg={theme.palette.Black}
           fontColor={theme.palette.White}
-          // onClick={() => console.log(historyYear, historyMonths, license)}
           onClick={handleSubmit(onSubmitSalonOwnerData)}
         >
           다음 단계

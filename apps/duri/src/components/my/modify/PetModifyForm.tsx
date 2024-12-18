@@ -3,7 +3,7 @@ import { Control, Controller, UseFormSetValue } from 'react-hook-form';
 import {
   BREEDS,
   GENDER_OPTION_LIST,
-  NEUTERED_OPTION_LIST,
+  NEUTERED_FORM_OPTION_LIST,
 } from '@duri/constants';
 import { FormData } from '@duri/pages/My/MyPetModify';
 import { Button, Dropdown, Flex, Text, theme, WidthFitFlex } from '@duri-fe/ui';
@@ -25,6 +25,9 @@ export const PetModifyForm = ({
   getValues: (name: keyof FormData) => string | number | string[] | boolean;
 }) => {
   // 드롭다운에서 선택된 값 업데이트!!!
+  const handleAgeSelect = (value: string | number) => {
+    if (typeof value === 'number') setValue('age', value);
+  };
   const handleBreedSelect = (value: string | number) => {
     if (typeof value === 'string') setValue('breed', value);
   };
@@ -105,7 +108,7 @@ export const PetModifyForm = ({
           control={control}
           render={() => (
             <WidthFitFlex gap={4}>
-              {NEUTERED_OPTION_LIST.map(({ key, label }) => (
+              {NEUTERED_FORM_OPTION_LIST.map(({ key, label }) => (
                 <Button
                   key={label}
                   width="fit-content"
@@ -147,7 +150,7 @@ export const PetModifyForm = ({
               options={ageList}
               defaultValue={`${field.value}살`}
               width={114}
-              onSelect={handleBreedSelect}
+              onSelect={handleAgeSelect}
               suffix="살"
             />
           )}

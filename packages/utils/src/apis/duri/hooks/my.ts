@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import {
+  deletePetInfo,
   getMyReviews,
   getPetDetailInfo,
   getPetListInfo,
@@ -48,8 +49,12 @@ export const usePutPetInfo = () => {
     mutationKey: ['putPetInfo'],
     mutationFn: ({ petId, formData }: { petId: number; formData: FormData }) =>
       putPetInfo(petId, formData),
-    // onSuccess: () => handleNavigate(),
-    onError: (error) => console.log(error),
+    onSuccess: () => {
+      alert('펫 정보가 수정되었습니다.');
+    },
+    onError: () => {
+      alert('펫 정보 수정에 실패했습니다.');
+    },
   });
 };
 
@@ -66,8 +71,13 @@ export const usePutUserInfo = (handleNavigate: () => void) => {
   const { mutateAsync } = useMutation({
     mutationKey: ['putUserInfo'],
     mutationFn: (formData: FormData) => putUserInfo(formData),
-    onSuccess: () => handleNavigate(),
-    onError: (error) => console.log(error),
+    onSuccess: () => {
+      alert('회원 정보가 수정되었습니다.');
+      handleNavigate();
+    },
+    onError: () => {
+      alert('회원 정보 수정에 실패했습니다.');
+    },
   });
   return { mutateAsync };
 };
@@ -93,5 +103,21 @@ export const useGetVisitHistory = () => {
     queryKey: ['getVisitHistory'],
     queryFn: () => getVisitHistory(),
     staleTime: 1000 * 60 * 10,
+  });
+};
+
+export const useDeletePetInfo = () => {
+  return useMutation({
+    mutationKey: ['deletePetInfo'],
+    mutationFn: (petId: number) => deletePetInfo(petId),
+    onSuccess: () => {
+      setTimeout(() => {
+        alert('펫 정보가 삭제되었습니다.');
+        window.location.reload();
+      }, 2000);
+    },
+    onError: () => {
+      alert('펫 정보 삭제에 실패했습니다.');
+    },
   });
 };

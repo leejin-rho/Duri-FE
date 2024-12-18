@@ -43,8 +43,6 @@ export const RequestQuotation = ({
   const { age, breed, gender, image, neutering, name, weight } =
     requestList.pet; //펫정보
 
-  console.log(requestList);
-
   return (
     <>
       {/** 펫 정보 */}

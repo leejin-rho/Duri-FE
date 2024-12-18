@@ -6,8 +6,11 @@ import { Global } from '@emotion/react';
 
 import AuthPage from '@pages/Auth';
 import Home from '@pages/Home';
+import IncomePage from '@pages/Income/Income';
 import LoginPage from '@pages/Login';
 import MyPage from '@pages/My';
+import ReviewPage from '@pages/My/Review';
+import MyShopPage from '@pages/My/Shop';
 import OnboardingPage from '@pages/Onboarding';
 import OnboardingPendingPage from '@pages/Onboarding/Pending';
 import StartPage from '@pages/Onboarding/StartPage';
@@ -18,6 +21,8 @@ import ReplyPage from '@pages/Quotation/ReplyPage';
 import ReservationPage from '@pages/Quotation/ReservationPage';
 
 import PrivateRoute from '@components/PrivateRoute';
+
+import 'react-spring-bottom-sheet/dist/style.css';
 
 function App() {
   return (
@@ -47,6 +52,10 @@ function App() {
             path="/portfolio/:groomerId/:portfolioId"
             element={<PortfolioDetailPage />}
           />
+          <Route path="/my/shop" element={<MyShopPage />} />
+          <Route path="/my/review" element={<ReviewPage />} />
+
+          <Route path="/income" element={<IncomePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

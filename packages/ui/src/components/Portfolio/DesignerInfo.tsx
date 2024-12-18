@@ -1,7 +1,13 @@
-import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Approve, Flex, ProfileImage, Text, theme } from '@duri-fe/ui';
+import {
+  Approve,
+  Flex,
+  ProfileImage,
+  Text,
+  theme,
+  WidthFitFlex,
+} from '@duri-fe/ui';
 import styled from '@emotion/styled';
 
 interface DesignerInfoProps {
@@ -14,6 +20,7 @@ interface DesignerInfoProps {
   roles: string[];
   imageUrl: string;
   padding?: string;
+  isNavigate?: boolean;
 }
 
 export const DesignerInfo = ({
@@ -26,24 +33,28 @@ export const DesignerInfo = ({
   roles,
   imageUrl,
   padding,
+  isNavigate = true,
 }: DesignerInfoProps) => {
   const navigate = useNavigate();
 
-  const [careerYear, setCareerYear] = useState<number>(0);
-  const [careerMonth, setCareerMonth] = useState<number>(0);
-
   const moveToPortfolio = () => {
-    if (version === 'vertical') {
+    if (version === 'vertical' && isNavigate) {
       navigate(`/portfolio/${designerId}`);
     }
   };
 
-  useEffect(() => {
-    if (experience !== 0) {
-      setCareerYear(Math.floor(experience / 12));
-      setCareerMonth(experience % 12);
+  const historyStr = (experience: number) => {
+    if (experience % 12 === 0) {
+      return `${experience / 12}년`;
+    } else {
+      const month = experience % 12;
+      const year = (experience - month) / 12;
+      if (year === 0) {
+        return `${month}개월`;
+      }
+      return `${year}년 ${month}개월`;
     }
-  }, [experience]);
+  };
 
   return (
     <Container
@@ -73,13 +84,11 @@ export const DesignerInfo = ({
 
       <Flex direction="column" align="flex-start" justify="flex-start" gap={8}>
         <Text typo="Title3">{name ?? '정보없음'}</Text>
-
         <Text
           typo="Caption4"
           colorCode={theme.palette.Gray400}
-        >{`경력 ${careerYear ? `${careerYear}년` : ''} ${careerMonth ? `${careerMonth}개월` : ''}, ${age ?? '-'}세, ${gender}`}</Text>
-
-        {roles?.length > 0 && (
+        >{`경력 ${historyStr(experience)}, ${age}세, ${gender}`}</Text>
+        {roles.length > 0 && (
           <Flex direction="column" gap={8}>
             {roles.map((item, idx) => (
               <Role key={idx}>
@@ -96,7 +105,7 @@ export const DesignerInfo = ({
   );
 };
 
-const Container = styled(Flex)<{
+const Container = styled(WidthFitFlex)<{
   version: 'vertical' | 'horizontal';
   clickable: boolean;
 }>`

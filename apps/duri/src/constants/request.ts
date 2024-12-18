@@ -18,5 +18,5 @@ export const DEFAULT_REQUEST_INFO = {
   time16: false,
   time17: false,
   time18: false,
-  shopIds: [5],
+  shopIds: [],
 };
