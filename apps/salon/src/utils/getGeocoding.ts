@@ -1,23 +1,29 @@
 import { Coordinates } from '@salon/types';
 import axios from 'axios';
 
-const NAVER_MAP_CLIENT_ID = import.meta.env.VITE_NAVER_MAP_CLIENT_ID;
-const NAVER_MAP_CLIENT_KEY = import.meta.env.VITE_NAVER_MAP_CLIENT_KEY;
+const GOOGLE_MAP_API_KEY = import.meta.env.VITE_GOOGLE_MAP_API_KEY;
 
 /** 도로명주소 -> 위도/경도 */
 export const getGeocoding = async (query: string): Promise<Coordinates> => {
-  const response = await axios.get('/naver-api/map-geocode/v2/geocode', {
-    params: {
-      query: query,
-    },
-    headers: {
-      'x-ncp-apigw-api-key-id': NAVER_MAP_CLIENT_ID,
-      'x-ncp-apigw-api-key': NAVER_MAP_CLIENT_KEY,
-      Accept: 'application/json',
-    },
-  });
-  const { y, x } = response.data.addresses[0];
-  const lat = parseFloat(y);
-  const lon = parseFloat(x);
-  return { lat, lon };
+  try {
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json`,
+      {
+        params: {
+          address: query,
+          key: GOOGLE_MAP_API_KEY,
+        },
+      },
+    );
+
+    if (response.data.status !== 'OK') {
+      throw new Error('지오코딩 실패');
+    }
+
+    const { lat, lng } = response.data.results[0].geometry.location;
+    return { lat, lon: lng };
+  } catch (error) {
+    console.error('지오코딩 에러:', error);
+    throw new Error('주소를 검색할 수 없습니다.');
+  }
 };
