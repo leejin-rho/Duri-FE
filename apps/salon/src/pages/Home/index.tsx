@@ -281,7 +281,6 @@ const Home = () => {
                 age={request.age}
                 weight={request.weight}
                 neutering={request.neutering}
-                // quotationReqId={request.quotationReqId}
                 memo={request.memo}
                 handleClickRequest={handleClickRequest}
               />

@@ -206,5 +206,5 @@ const LocationBtn = styled(Flex)`
   height: fit-content;
   max-width: 375px;
   bottom: 120px;
-  z-index: 2;
+  z-index: 1;
 `;
