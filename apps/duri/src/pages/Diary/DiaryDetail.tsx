@@ -69,7 +69,7 @@ const PetDiaryDetail = () => {
             <Flex padding="16px 22px" justify="space-between">
               <Text typo="Title3">시술날짜</Text>
               <Text typo="Body2" css={LightBody2}>
-                2024-12-26
+                {diaryDetailData.groomingDate}
               </Text>
             </Flex>
             <Seperator />
@@ -77,9 +77,14 @@ const PetDiaryDetail = () => {
             <Flex padding="16px 22px" justify="space-between">
               <Text typo="Title3">담당자</Text>
               <WidthFitFlex gap={12}>
-                <ProfileImage width={20} height={20} borderRadius={99} />
+                <ProfileImage
+                  width={20}
+                  height={20}
+                  borderRadius={99}
+                  src={diaryDetailData.groomerInfo.profileImageUrl}
+                />
                 <Text typo="Body2" css={LightBody2}>
-                  미나쌤
+                  {diaryDetailData.groomerInfo.name}
                 </Text>
               </WidthFitFlex>
             </Flex>

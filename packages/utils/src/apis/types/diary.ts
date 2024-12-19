@@ -11,6 +11,12 @@ export interface DiaryDataResponse extends BaseResponse {
 }
 
 export interface DiaryDetailType {
+  groomerInfo: {
+    id: number;
+    name: string;
+    profileImageUrl: string | undefined;
+  };
+  groomingDate: string;
   feedbackId: number;
   friendly: string;
   reaction: string;
