@@ -40,11 +40,7 @@ const AuthPage = () => {
         <Flex direction="column" margin="24px 0 0 0">
           <Text typo="Heading">두리묭실로</Text>
           <Text typo="Heading">쉽고 빠르게 예약해요!</Text>
-          <Text
-            typo="Body3"
-            colorCode={theme.palette.Gray300}
-            margin="8px 0 0 0"
-          >
+          <Text typo="Body3" colorCode={theme.palette.Gray300}>
             최저가 예약부터 근처 미용샵까지
           </Text>
         </Flex>
