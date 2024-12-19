@@ -2,14 +2,13 @@ import { useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useNavigate } from 'react-router-dom';
 
-import ShopDefaultImage from '@assets/images/pngs/ShopDefaultImage.png';
 import { RegularShopType } from '@duri/assets/types/shop';
 import {
   Button,
   Flex,
   HeightFitFlex,
-  Image,
   NextArrow,
+  ProfileImage,
   Send,
   Star,
   Text,
@@ -47,11 +46,11 @@ export const ShopHorizontal = ({
         shopList.map((shop: RegularShopType) => (
           <HeightFitFlex key={shop.shopId} justify="flex-start" gap={15}>
             <ImageBox onClick={() => handleClickShop(shop.shopId)}>
-              <Image
+              <ProfileImage
                 width={100}
                 height={100}
                 borderRadius={8}
-                src={shop.imageURL ?? ShopDefaultImage}
+                src={shop.imageURL}
               />
             </ImageBox>
             <Flex

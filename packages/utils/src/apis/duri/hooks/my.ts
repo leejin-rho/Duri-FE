@@ -67,11 +67,12 @@ export const usePutPetInfo = () => {
 };
 
 export const useGetUserInfo = () => {
-  return useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['getUserInfo'],
     queryFn: () => getUserInfo(),
     staleTime: 1000 * 60 * 30,
   });
+  return { data, isError };
 };
 
 export const usePutUserInfo = (handleNavigate: () => void) => {

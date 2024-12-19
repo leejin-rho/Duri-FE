@@ -36,7 +36,6 @@ const Home = () => {
   const { data: petData } = useGetPetInfo();
   const { data: regularListData, isPending: isPendingRegularData } =
     useGetRegularShopList();
-
   const { data: reservationData } = useGetUpcomingReservation();
   const { data: recommendedListData, isPending: isPendingRecommendData } =
     useGetRecommendedShopList(lat, lon);
@@ -46,17 +45,16 @@ const Home = () => {
     navigate('/shop');
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
-    if (coordinates.lat && coordinates.lng) {
+    if (coordinates) {
       setLat(coordinates.lat);
       setLon(coordinates.lng);
     }
   }, [coordinates]);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <MobileLayout>
@@ -147,7 +145,7 @@ const Home = () => {
           </Flex>
 
           {/* AI 스타일링 배너 */}
-          <Flex margin="24px 0 0">
+          <Flex margin='24px 0 0'>
             <a href="/ai">
               <AiBanner height={100} />
             </a>
