@@ -96,7 +96,7 @@ const ReservationPage = () => {
                 startTime,
                 endTime,
               }) => (
-                <Flex
+                <CardButton
                   key={requestId}
                   onClick={() => handleRequestClick(requestId)}
                 >
@@ -119,7 +119,7 @@ const ReservationPage = () => {
                       }}
                     />
                   </Card>
-                </Flex>
+                </CardButton>
               ),
             )}
           </Flex>
@@ -141,7 +141,7 @@ const ReservationPage = () => {
               startTime,
               endTime,
             }) => (
-              <Flex
+              <CardButton
                 key={requestId}
                 onClick={() => handleRequestClick(requestId)}
               >
@@ -164,7 +164,7 @@ const ReservationPage = () => {
                     }}
                   />
                 </Card>
-              </Flex>
+              </CardButton>
             ),
           )}
         </Flex>
@@ -211,6 +211,10 @@ const ReservationPage = () => {
 
 const FlexGrow = styled(Flex)`
   flex-grow: 1;
+`;
+
+const CardButton = styled.button`
+  width: 100%;
 `;
 
 export default ReservationPage;

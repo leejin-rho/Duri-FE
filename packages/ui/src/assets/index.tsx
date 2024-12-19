@@ -13,6 +13,7 @@ export { default as Backup } from './Backup';
 export { default as BeforeArrow } from './BeforeArrow';
 export { default as Chat } from './Chat';
 export { default as Chatting } from './Chatting';
+export { default as DuriDog } from './DuriDog';
 export { default as Close } from './Close';
 export { default as CloseCircle } from './CloseCircle';
 export { default as DownArrow } from './DownArrow';
@@ -81,6 +82,8 @@ export { default as FilledHome } from './FilledHome';
 export { default as UploadIcon } from './UploadIcon';
 export { default as Save } from './Save';
 export { default as LinkIcon } from './LinkIcon';
+export { default as ToggleDisable } from './ToggleDisable';
+export { default as ToggleEnable } from './ToggleEnable';
 export { default as Max } from './Max';
 export { default as Min } from './Min';
 

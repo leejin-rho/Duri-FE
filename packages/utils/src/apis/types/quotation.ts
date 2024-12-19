@@ -144,7 +144,6 @@ export interface CompletedQuotationListResponse extends BaseResponse {
   };
 }
 
-
 //응답 견적서 상세조회
 export interface QuotationDetailResponse extends BaseResponse {
   response: {
@@ -163,6 +162,7 @@ export interface ShopDetailType {
   shopAddress: string;
   shopPhone: string;
   groomerName: string;
+  shopImage: string;
 }
 
 export interface ShopType {

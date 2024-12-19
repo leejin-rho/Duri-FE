@@ -29,7 +29,8 @@ export interface ReviewFormData {
 
 const ReviewWritePage = () => {
   const location = useLocation();
-  const quotationId = Number(location.state);
+  const state = location.state;
+  const quotationId = parseInt(state.quotationId) || 0;
   const { data: shopAndPetDetailInfo } = useGetReviewShopAndPetInfo({
     quotationId: quotationId,
   });
@@ -52,7 +53,7 @@ const ReviewWritePage = () => {
   const { control, handleSubmit, setValue } = useForm<ReviewFormData>({
     mode: 'onChange',
     defaultValues: {
-      quotationId: location.state || 0,
+      quotationId: quotationId,
       rating: 5,
       comment: '',
       image: null,
@@ -81,7 +82,7 @@ const ReviewWritePage = () => {
     }
 
     // API 연결
-    postReview({ quotationId: Number(7), formData });
+    postReview({ quotationId: quotationId, formData });
   };
 
   return (

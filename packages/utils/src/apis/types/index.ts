@@ -6,3 +6,5 @@ export * from './home';
 export * from './onboarding';
 export * from './ai';
 export * from './payment';
+export * from './feedback';
+export * from './tanstack';

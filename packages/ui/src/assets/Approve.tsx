@@ -2,7 +2,7 @@ import * as React from 'react';
 const SvgApprove = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="none"
+    fill="currentColor"
     viewBox="0 0 55 54"
     {...props}
   >

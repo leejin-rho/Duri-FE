@@ -52,12 +52,12 @@ export const SendRequestQBox = ({
         <Text typo="Title3">요청서 선택</Text>
         <HeightFitFlex justify="space-between">
           <Text typo="Title3">작성한 요청서가 없습니다.</Text>
-          <WidthFitFlex onClick={moveToShopRequest}>
+          <CursorButton onClick={moveToShopRequest}>
             <Text typo="Label3" colorCode={theme.palette.Gray300}>
               작성하러가기
             </Text>
             <NextArrow width={23} color={theme.palette.Gray300} />
-          </WidthFitFlex>
+          </CursorButton>
         </HeightFitFlex>
       </HeightFitFlex>
       <AbsoluteBtnWrapper gap={8} padding="0 20px">
@@ -85,4 +85,8 @@ const AbsoluteBtnWrapper = styled(HeightFitFlex)`
 const FlexBtn = styled(Button)<{ flex: string }>`
   border-radius: 8px;
   flex: ${({ flex }) => flex};
+`;
+
+const CursorButton = styled(WidthFitFlex)`
+  cursor: pointer;
 `;

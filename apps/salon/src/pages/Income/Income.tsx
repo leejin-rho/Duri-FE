@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Header, MobileLayout, SalonNavbar } from '@duri-fe/ui';
+import { Flex, Header, MobileLayout, SalonNavbar } from '@duri-fe/ui';
 import {
   useGetAgeStatistic,
   useGetCharacterStatistic,
@@ -19,7 +19,9 @@ const IncomePage = () => {
   };
 
   const { data: monthIncomeData } = useGetThisMonthIncome({});
-  const { data: selectedIncomeData } = useGetSelectedMonthIncome({ month: 12 });
+  const { data: selectedIncomeData } = useGetSelectedMonthIncome({
+    month: '2024-12',
+  });
   const { data: agePetStatistic } = useGetAgeStatistic({});
   const { data: diseasePetStatistic } = useGetDiseaseStatistic({});
   const { data: characterPetStatistic } = useGetCharacterStatistic({});
@@ -32,25 +34,27 @@ const IncomePage = () => {
         backIcon
         onClickBack={handleClickBack}
       />
-      {monthIncomeData && (
-        <MonthIncomeStatistic
-          beforeRatio={monthIncomeData.beforeRatio}
-          incomeMonthList={monthIncomeData.incomeMonthList}
-        />
-      )}
+      <Flex direction="column">
+        {monthIncomeData && (
+          <MonthIncomeStatistic
+            beforeRatio={monthIncomeData.beforeRatio}
+            incomeMonthList={monthIncomeData.incomeMonthList}
+          />
+        )}
 
-      {selectedIncomeData && (
-        <RecentIncomeStatistic
-          incomeMonthList={selectedIncomeData.incomeMonthList}
-          beforeRatio={selectedIncomeData.beforeRatio}
-          nowRatio={selectedIncomeData.nowRatio}
+        {selectedIncomeData && (
+          <RecentIncomeStatistic
+            incomeMonthList={selectedIncomeData.incomeMonthList}
+            beforeRatio={selectedIncomeData.beforeRatio}
+            nowRatio={selectedIncomeData.nowRatio}
+          />
+        )}
+        <PetStatistic
+          agePetStatistic={agePetStatistic?.ageList}
+          diseasePetStatistic={diseasePetStatistic?.diseaseList}
+          characterPetStatistic={characterPetStatistic?.characterList}
         />
-      )}
-      {<PetStatistic
-        agePetStatistic={agePetStatistic?.ageList}
-        diseasePetStatistic={diseasePetStatistic?.diseaseList}
-        characterPetStatistic={characterPetStatistic?.characterList}
-      />}
+      </Flex>
       <SalonNavbar />
     </MobileLayout>
   );
