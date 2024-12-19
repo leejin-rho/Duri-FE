@@ -27,7 +27,7 @@ export const getSelectedMonthIncome = async (
 export const getRecentDaysIncome = async (): Promise<
   GetRecentDaysResponse['response']
 > => {
-  const { data } = await salonInstance.get('statistics/age');
+  const { data } = await salonInstance.get('statistics/income/week');
   return data.response;
 };
 
