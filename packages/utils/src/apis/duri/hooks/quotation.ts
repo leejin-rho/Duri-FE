@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { BaseError, RequestDetailResponse } from '../../types';
 import { UseQueryProps } from '../../types/tanstack';
-import { getDetailRequestQuotaion, getQuotationList } from '../quotation';
+import { getDetailRequestQuotaion, getDetailResponseQuotaion, getQuotationList } from '../quotation';
 
 import { getRequestItems } from './../quotation';
 
@@ -47,4 +47,15 @@ export const useGetQuotationList = (
     staleTime: 1000 * 60 * 10,
     enabled: lat !== null && lon !== null,
   });
+};
+
+export const useGetDetailQuotationDuri = (requestId: number) => {
+  const { data } = useQuery({
+    queryKey: ['detailQuotation', requestId],
+    queryFn: () => getDetailResponseQuotaion(requestId),
+    enabled: true,
+    staleTime: 10 * 60 * 1000,
+  });
+
+  return { data };
 };

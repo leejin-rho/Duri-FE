@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { Button, ResponseQuotation, theme } from '@duri-fe/ui';
-import { useGetDetailQuotation } from '@duri-fe/utils';
+import { useGetDetailQuotationDuri } from '@duri-fe/utils';
 
 export const DetailResponseQuotation = ({
   requestId,
@@ -11,7 +11,7 @@ export const DetailResponseQuotation = ({
   handleCloseButton: () => void;
 }) => {
   const navigate = useNavigate();
-  const { data: quotationData } = useGetDetailQuotation(requestId);
+  const { data: quotationData } = useGetDetailQuotationDuri(requestId);
   const handleClickPayment = (quotationId: number) => {
     navigate('/payment', {
       state: {
