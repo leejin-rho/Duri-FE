@@ -5,6 +5,7 @@ import { PetRegisterForm } from '@duri/components/my/register/PetRegisterForm';
 import { BREEDS_MAPPING } from '@duri/constants';
 import {
   Button,
+  Doori,
   DuriNavbar,
   Flex,
   Header,
@@ -63,13 +64,14 @@ const MyPetRegisterPage = () => {
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
       <Header
-        title="마이펫 정보 등록"
+        title="마이펫 추가"
         titleAlign="start"
         backIcon
         onClickBack={() => navigate('/my/pet')}
       />
-      <Flex direction="column" margin="0 0 100px">
-        <Flex direction="column" padding="0 20px" margin="0 0 30px 0">
+      <Flex direction="column" margin="24px 0 100px">
+        <Doori width={170} height={53}/>
+        <Flex direction="column" padding="0 20px" margin="16px 0 30px 0">
           <PetRegisterForm
             control={control}
             getValues={getValues}

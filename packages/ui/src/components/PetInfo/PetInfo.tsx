@@ -76,7 +76,7 @@ export const PetInfo = ({
               height={29}
               imageSize={imageSize.width}
             >
-              <Pencil width={17} height={17} />
+              <Pencil width={17} height={17} color={theme.palette.White} />
             </PencilWrapper>
           </ProfileImageWrapper>
         ) : (

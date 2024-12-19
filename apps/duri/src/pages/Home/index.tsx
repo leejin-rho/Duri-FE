@@ -5,7 +5,7 @@ import CarouselHome from '@duri/components/home/Home';
 import RecommendedShop from '@duri/components/home/RecommendedShop';
 import SpeedQuotation from '@duri/components/home/SpeedQuotation';
 import {
-  AiStyleBanner,
+  AiBanner,
   Button,
   DuriNavbar,
   Flex,
@@ -23,7 +23,6 @@ import {
   useGetRegularShopList,
   useGetUpcomingReservation,
 } from '@duri-fe/utils';
-import styled from '@emotion/styled';
 
 const Home = () => {
   const { coordinates } = useGeolocation();
@@ -145,15 +144,10 @@ const Home = () => {
           </Flex>
 
           {/* AI 스타일링 배너 */}
-          <StyleBannerWrapper
-            borderRadius={12}
-            widthPer={100}
-            margin="26px 0 0 0"
-          >
-            <a href="/ai">
-              <AiStyleBanner height={70} />
-            </a>
-          </StyleBannerWrapper>
+          <a href="/ai">
+            <AiBanner height={100} />
+          </a>
+          {/* </StyleBannerWrapper> */}
         </Flex>
         <Flex direction="column">
           {/* 추천 샵 */}
@@ -173,9 +167,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const StyleBannerWrapper = styled(HeightFitFlex)`
-  opacity: 0.9;
-  box-shadow: 0px 0px 16px 0px rgba(195, 195, 195, 0.15);
-  cursor: pointer;
-`;

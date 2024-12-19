@@ -57,7 +57,7 @@ export { default as Send } from './Send';
 export { default as Shopping } from './Shopping';
 export { default as Star } from './Star';
 export { default as Write } from './Write';
-export { default as AiStyleBanner } from './AiStyleBanner';
+export { default as AiBanner } from './AiBanner';
 export { default as AlertStar } from './AlertStar';
 export { default as NaverLogo } from './NaverLogo';
 export { default as SpeechBalloon } from './SpeechBalloon';

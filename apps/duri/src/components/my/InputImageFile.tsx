@@ -33,7 +33,7 @@ export const InputImageFile = ({
           borderRadius={99}
           height={29}
         >
-          <Pencil width={17} height={17} />
+          <Pencil width={17} height={17} color={theme.palette.White} />
         </PencilWrapper>
       </ProfileImageWrapper>
       <FileInput type="file" accept="image/*" onChange={handleFileChange} />
