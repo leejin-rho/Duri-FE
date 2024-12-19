@@ -27,11 +27,15 @@ export const useGetRecommendedShopList = (
   lat: number | null,
   lon: number | null,
 ) => {
+  console.log(lat, lon);
+  const isCoordinatesValid =
+    lat !== null && lon !== null && lat !== 0 && lon !== 0;
+
   return useQuery({
     queryKey: ['getRecommendedShopList', lat, lon],
-    queryFn: () => getRecommendedShopInfo(lat!, lon!), // null이 아닌 경우에만 호출
-    staleTime: 1000 * 60 * 30,
-    enabled: lat !== null && lon !== null, // lat과 lon이 null이 아닐 때만 활성화
+    queryFn: () => getRecommendedShopInfo(lat!, lon!),
+    staleTime: 1000 * 60 * 10,
+    enabled: isCoordinatesValid, // 유효한 경우에만 실행
   });
 };
 
