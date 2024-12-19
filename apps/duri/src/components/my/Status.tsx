@@ -16,11 +16,13 @@ export const Status = ({ reservationCnt, noShowCnt }: StatusProps) => {
     >
       <Flex direction="column" gap={15}>
         <Text typo="Caption2">누적예약</Text>
-        <Text typo="Body2">{reservationCnt}건</Text>
+        <Text typo="Body2">
+          {reservationCnt === -1 ? ' - ' : reservationCnt}건
+        </Text>
       </Flex>
       <BorderFlex direction="column" gap={15}>
         <Text typo="Caption2">노쇼</Text>
-        <Text typo="Body2">{noShowCnt}건</Text>
+        <Text typo="Body2">{noShowCnt === -1 ? ' - ' : noShowCnt}건</Text>
       </BorderFlex>
       <FlexButton direction="column" gap={9}>
         <Text typo="Caption2">고객센터</Text>
@@ -32,9 +34,9 @@ export const Status = ({ reservationCnt, noShowCnt }: StatusProps) => {
 
 const FlexButton = styled(Flex)`
   cursor: pointer;
-`
+`;
 
 const BorderFlex = styled(Flex)`
-    border-left: solid 1.5px ${theme.palette.Normal600};
-    border-right: solid 1.5px ${theme.palette.Normal600};
-`
+  border-left: solid 1.5px ${theme.palette.Normal600};
+  border-right: solid 1.5px ${theme.palette.Normal600};
+`;

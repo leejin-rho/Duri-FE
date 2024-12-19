@@ -9,6 +9,7 @@ import {
   HeightFitFlex,
   MainHeader,
   MobileLayout,
+  Modal,
   NextArrow,
   Pencil,
   SalonNavbar,
@@ -25,18 +26,18 @@ import {
   useGetGroomersList,
   useGetHomeQuotationRequest,
   useGetHomeShopInfo,
+  useModal,
   usePutGroomingComplete,
   usePutGroomingNoshow,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 import { RadioButton } from '@salon/components/home/RadioButton';
+import { DetailRequest } from '@salon/components/quotation/DetailRequest';
 import useGroomerStore from '@salon/stores/groomerStore';
 
 import ClosetGrooming from '@components/home/ClosetGrooming';
 import DailyScheduleItem from '@components/home/DailyScheduleItem';
 import NewRequestItem from '@components/home/NewRequestItem';
-
-import 'react-spring-bottom-sheet/dist/style.css';
 
 const completeToggleData = ['노쇼했어요.', '네, 완료했어요!'];
 
@@ -48,8 +49,12 @@ const Home = () => {
   const { openSheet, bottomSheetProps } = useBottomSheet({
     maxHeight: 300,
   });
+  const { isOpenModal, openModal, closeModal } = useModal();
 
   const [completeToggle, setCompleteToggle] = useState<number | null>(null);
+  const [selectedRequestId, setSelectedRequestId] = useState<number | null>(
+    null,
+  );
 
   //홈 진입 시 groomerId 전역변수로 저장
   const { data: groomersListInfo } = useGetGroomersList({});
@@ -76,6 +81,11 @@ const Home = () => {
     } else {
       return;
     }
+  };
+
+  const handleClickRequest = (requestId: number) => {
+    setSelectedRequestId(requestId);
+    openModal();
   };
 
   //로그인 후 미용사 id를 전역변수로 저장 for 포트폴리오
@@ -109,16 +119,16 @@ const Home = () => {
             {/** 매장 정보 */}
             <TextContainer
               direction="column"
-              align="start"
+              align="flex-start"
               padding="36px 20px"
               gap={4}
             >
-              <Flex gap={12}>
+              <Flex justify="flex-start" gap={12}>
                 <Text typo="Title4" colorCode={theme.palette.White}>
                   {shopInfoData.name}
                 </Text>
                 <ShopInfoEditButton onClick={() => naviagte('my')}>
-                  <Pencil width={20} />
+                  <Pencil width={20} color={theme.palette.White} />
                 </ShopInfoEditButton>
               </Flex>
               <Text typo="Body3" colorCode={theme.palette.White}>
@@ -190,47 +200,49 @@ const Home = () => {
           <Text typo="Caption1">{dateStr}</Text>
           <Text typo="Title1">오늘 일정 빠르게 보기</Text>
         </Flex>
-        <Card maxHeight="240px" borderRadius={8} shadow="large">
-          {dailyScheduleData && dailyScheduleData.length > 0 ? (
-            <ScheduleWrapper
-              direction="column"
-              align="flex-start"
-              justify="flex-start"
-              padding="20px 14px"
-            >
-              <ScheduleContainer
+        <ScheduleCardButton onClick={() => naviagte('/quotation/reservation')}>
+          <Card maxHeight="240px" borderRadius={8} shadow="large">
+            {dailyScheduleData && dailyScheduleData.length > 0 ? (
+              <ScheduleWrapper
                 direction="column"
                 align="flex-start"
                 justify="flex-start"
+                padding="20px 14px"
               >
-                <SideBar
-                  margin="0 10px 0 3px"
-                  width={1}
-                  backgroundColor={theme.palette.Gray200}
-                />
-                {dailyScheduleData.map((schedule, index) => (
-                  <DailyScheduleItem
-                    key={index}
-                    startTime={schedule.startTime}
-                    petName={schedule.petName}
-                    breed={schedule.breed}
-                    gender={schedule.gender}
-                    weight={schedule.weight}
-                    groomerName={schedule.groomerName}
+                <ScheduleContainer
+                  direction="column"
+                  align="flex-start"
+                  justify="flex-start"
+                >
+                  <SideBar
+                    margin="0 10px 0 3px"
+                    width={1}
+                    backgroundColor={theme.palette.Gray200}
                   />
-                ))}
-              </ScheduleContainer>
-            </ScheduleWrapper>
-          ) : dailySchedulePending ? (
-            <SkeletonCard borderRadius={8} height={55} />
-          ) : (
-            <Flex padding="20px 0">
-              <TitleText colorCode={theme.palette.Normal800}>
-                오늘 스케줄이 없어요.
-              </TitleText>
-            </Flex>
-          )}
-        </Card>
+                  {dailyScheduleData.map((schedule, index) => (
+                    <DailyScheduleItem
+                      key={index}
+                      startTime={schedule.startTime}
+                      petName={schedule.petName}
+                      breed={schedule.breed}
+                      gender={schedule.gender}
+                      weight={schedule.weight}
+                      groomerName={schedule.groomerName}
+                    />
+                  ))}
+                </ScheduleContainer>
+              </ScheduleWrapper>
+            ) : dailySchedulePending ? (
+              <SkeletonCard borderRadius={8} height={55} />
+            ) : (
+              <Flex padding="20px 0">
+                <TitleText colorCode={theme.palette.Normal800}>
+                  오늘 스케줄이 없어요.
+                </TitleText>
+              </Flex>
+            )}
+          </Card>
+        </ScheduleCardButton>
       </Flex>
 
       {/** 요청서 확인 */}
@@ -241,15 +253,21 @@ const Home = () => {
       >
         <Flex justify="flex-start" gap={16} margin="0 20px 16px 20px">
           <Text typo="Title1">요청서 확인하기</Text>
-          <WidthFitFlex>
-            <Text typo="Caption1" colorCode={theme.palette.Gray300}>
-              더보기
-            </Text>
-            <NextArrow width={20} color={theme.palette.Gray300} />
-          </WidthFitFlex>
+          <button onClick={() => naviagte('/quotation')}>
+            <WidthFitFlex>
+              <Text typo="Caption1" colorCode={theme.palette.Gray300}>
+                더보기
+              </Text>
+              <NextArrow width={20} color={theme.palette.Gray300} />
+            </WidthFitFlex>
+          </button>
         </Flex>
         {quotationRequestData && quotationRequestData.length > 0 ? (
-          <NewRequestItemWrapper justify="flex-start" padding="0 20px" gap={8}>
+          <NewRequestItemWrapper
+            justify="flex-start"
+            padding="4px 20px"
+            gap={8}
+          >
             {quotationRequestData.map((request, index) => (
               <NewRequestItem
                 key={index}
@@ -262,8 +280,9 @@ const Home = () => {
                 age={request.age}
                 weight={request.weight}
                 neutering={request.neutering}
-                quotationReqId={request.quotationReqId}
+                // quotationReqId={request.quotationReqId}
                 memo={request.memo}
+                handleClickRequest={handleClickRequest}
               />
             ))}
           </NewRequestItemWrapper>
@@ -335,6 +354,20 @@ const Home = () => {
           </HeightFitFlex>
         </Flex>
       </BottomSheet>
+      {selectedRequestId && (
+        <Modal
+          title="요청서"
+          margin="20px"
+          isOpen={isOpenModal}
+          toggleModal={closeModal}
+        >
+          <DetailRequest
+            requestId={selectedRequestId}
+            closeModal={closeModal}
+          />
+        </Modal>
+      )}
+
       <Toast />
     </MobileLayout>
   );
@@ -396,6 +429,10 @@ const TitleText = styled(Text)`
   font-size: 15px;
 `;
 
+const ScheduleCardButton = styled.button`
+  width: 100%;
+`;
+
 const ScheduleWrapper = styled(Flex)`
   overflow-y: hidden;
 `;
@@ -415,6 +452,7 @@ const NewRequestWrapper = styled(Flex)`
 
 const NewRequestItemWrapper = styled(Flex)`
   overflow-x: scroll;
+  /* padding: 4px 0; */
 `;
 
 const CompleteButton = styled(Button)`

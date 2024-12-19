@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Flex, Modal, PetInfo, Text, theme, Trash } from '@duri-fe/ui';
-import { useModal } from '@duri-fe/utils';
+import { useDeletePetInfo, useModal } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 interface PetListInfo {
@@ -32,11 +32,16 @@ export const SwipeCard = ({
 }: PetListInfo) => {
   const navigate = useNavigate();
   const { isOpenModal, toggleModal } = useModal();
+  const { mutateAsync: deletePetInfo } = useDeletePetInfo();
+
   const [isSwiped, setIsSwiped] = useState<boolean>(false);
   const [swipePosition, setSwipePosition] = useState<number>(0); // 화면에 반영될 스와이프 위치
+
   const handleDelete = () => {
     toggleModal();
+
     //삭제 api 호출
+    deletePetInfo(id);
   };
   const handleNotDelete = () => {
     toggleModal();
@@ -150,7 +155,7 @@ export const SwipeCard = ({
         </SwipeWrapper>
       </SwipeContainer>
 
-      <Modal isOpen={isOpenModal} toggleModal={toggleModal}>
+      <Modal isOpen={isOpenModal} toggleModal={toggleModal} closeIcon={false}>
         <Flex direction="column" gap={5}>
           <Flex direction="column">
             <Text typo="Body2">반려견 정보 삭제 시</Text>
@@ -177,11 +182,12 @@ export const SwipeCard = ({
             </Button>
             <Button
               typo="Body3"
-              bg={theme.palette.Black}
+              bg={theme.palette.Alert}
               fontColor={theme.palette.White}
               width="145px"
               height="47px"
               borderRadius="8px"
+              onClick={handleDelete}
             >
               삭제할게요
             </Button>

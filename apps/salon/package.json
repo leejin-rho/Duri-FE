@@ -16,6 +16,7 @@
     "@duri-fe/utils": "workspace:packages/utils",
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
+    "@nivo/pie": "^0.88.0",
     "@tanstack/react-query": "^5.62.1",
     "@tanstack/react-query-devtools": "^5.62.2",
     "@types/node": "^22.10.1",

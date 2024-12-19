@@ -14,6 +14,8 @@ import {
 } from '@duri-fe/ui';
 import { usePostAmountVerity, usePostPayment } from '@duri-fe/utils';
 import styled from '@emotion/styled';
+import { format } from 'date-fns';
+
 
 const SuccessPage = () => {
   const navigate = useNavigate();
@@ -67,8 +69,6 @@ const SuccessPage = () => {
         paymentKey: paymentKey,
         quotationId: quotationId,
       };
-
-      // console.log(paymentInfo)
 
       postPaymentConfirm(paymentInfo);
     }
@@ -135,13 +135,13 @@ const SuccessPage = () => {
               <Text typo="Caption1" colorCode={theme.palette.Gray300}>
                 결제일시
               </Text>
-              <Text typo="Label2">2024-11-21 10:52:16</Text>
+              <Text typo="Label2">{format(new Date(), "yyyy-MM-dd HH:mm:ss")}</Text>
             </HeightFitFlex>
             <HeightFitFlex justify="space-between">
               <Text typo="Caption1" colorCode={theme.palette.Gray300}>
-                결제카드
+                결제수단
               </Text>
-              <Text typo="Label2">현대카드</Text>
+              <Text typo="Label2">간편결제</Text>
             </HeightFitFlex>
           </Flex>
         </Flex>

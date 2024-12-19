@@ -83,3 +83,14 @@ export const NEUTERED_OPTION_LIST = [
     label: '아니요, 아직 안했어요.',
   },
 ];
+
+export const NEUTERED_FORM_OPTION_LIST = [
+  {
+    key: true,
+    label: '완료',
+  },
+  {
+    key: false,
+    label: '미완료',
+  },
+];

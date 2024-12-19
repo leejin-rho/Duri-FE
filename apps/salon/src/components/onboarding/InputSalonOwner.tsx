@@ -205,9 +205,10 @@ const InputSalonOwner = ({
                       {...field}
                       type="number"
                       label="나이"
+                      onChange={(event) => field.onChange(+event.target.value)}
                       isEssential
                       placeholder="나이 입력"
-                      maxLength={2}
+                      maxLength={3}
                       width={83}
                       height={40}
                       isNoBorder
@@ -362,7 +363,6 @@ const InputSalonOwner = ({
         <Button
           bg={theme.palette.Black}
           fontColor={theme.palette.White}
-          // onClick={() => console.log(historyYear, historyMonths, license)}
           onClick={handleSubmit(onSubmitSalonOwnerData)}
         >
           다음 단계

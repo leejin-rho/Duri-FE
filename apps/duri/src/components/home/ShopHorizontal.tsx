@@ -41,7 +41,7 @@ export const ShopHorizontal = ({
   };
 
   return (
-    <Flex direction="column" gap={20} margin="28px 0 0 0">
+    <Flex direction="column" gap={20} margin="28px 0 0">
       {shopList &&
         shopList.map((shop: RegularShopType) => (
           <HeightFitFlex key={shop.shopId} justify="flex-start" gap={15}>

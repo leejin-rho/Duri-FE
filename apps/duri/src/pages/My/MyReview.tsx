@@ -16,7 +16,7 @@ import styled from '@emotion/styled';
 
 const MyReviewPage = () => {
   const navigate = useNavigate();
-  const handleNavigate = () => navigate(-1);
+  const handleNavigate = () => navigate('/my');
   const { data: reviewListData } = useGetMyReviews();
   const [reviewCount, setReviewCount] = useState<number>(0);
   const [reviewList, setReviewList] =
@@ -24,7 +24,6 @@ const MyReviewPage = () => {
 
   useEffect(() => {
     if (reviewListData) {
-      console.log(reviewListData);
       setReviewCount(reviewListData.reviewCnt);
       setReviewList(reviewListData.reviewList);
     }

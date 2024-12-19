@@ -2,7 +2,6 @@ import {
   diseaseMapping,
   Flex,
   HeightFitFlex,
-  Image,
   KeyOfTypo,
   Pencil,
   personalityMapping,
@@ -14,7 +13,6 @@ import {
 } from '@duri-fe/ui';
 import { parsePetInfo } from '@duri-fe/utils';
 import styled from '@emotion/styled';
-import { format } from 'date-fns';
 
 interface GroomerInfoType {
   groomerName: string;
@@ -78,7 +76,7 @@ export const PetInfo = ({
               height={29}
               imageSize={imageSize.width}
             >
-              <Pencil width={17} height={17} />
+              <Pencil width={17} height={17} color={theme.palette.White} />
             </PencilWrapper>
           </ProfileImageWrapper>
         ) : (
@@ -90,7 +88,7 @@ export const PetInfo = ({
           />
         )}
         <Flex direction="column" gap={gap.horizontal} align="flex-start">
-          <Flex justify="flex-start" gap={8}>
+          <HeightFitFlex justify="flex-start" gap={8}>
             <Text typo={typo.name}>{name}</Text>
             {(dday === 0 || dday) && (
               <SalonTag
@@ -114,7 +112,7 @@ export const PetInfo = ({
                 borderRadius={99}
               />
             )}
-          </Flex>
+          </HeightFitFlex>
           <Text typo={typo.description} colorCode={theme.palette.Gray400}>
             {parsePetInfo({ age, breed, weight, gender })}
           </Text>
@@ -127,7 +125,7 @@ export const PetInfo = ({
               align="flex-start"
             >
               <Flex justify="flex-start" gap={8}>
-                <Image
+                <ProfileImage
                   src={groomer.groomerImage}
                   width={24}
                   height={24}
@@ -142,8 +140,8 @@ export const PetInfo = ({
                   {groomer.date}
                 </Text>
                 <Text typo="Label3" colorCode={theme.palette.Gray400}>
-                  {format(groomer.startTime, 'hh:mm')} ~{' '}
-                  {format(groomer.endTime, 'hh:mm')}
+                  {groomer.startTime.slice(0, 5)} ~{' '}
+                  {groomer.endTime.slice(0, 5)}
                 </Text>
               </Flex>
             </Flex>

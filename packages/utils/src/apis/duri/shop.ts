@@ -40,6 +40,7 @@ export const getShopDetailInfo = async ({
   const { data } = await publicInstance.get(`/shop/detail`, {
     params: { shopId, lat, lon },
   });
+  console.log('샵', data.response);
 
   return data.response;
 };
@@ -49,8 +50,8 @@ export const getShopReviewList = async ({
 }: {
   shopId: number;
 }): Promise<ShopReviewListResponse['response']> => {
-  const { data } = await publicInstance.get(`/shop/review`, {
-    headers: { ShopId: shopId },
+  const { data } = await publicInstance.get(`/review/shop`, {
+    params: { shopId: shopId },
   });
   return data.response;
 };

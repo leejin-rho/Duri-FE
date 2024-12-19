@@ -4,6 +4,7 @@ import {
   HeightFitFlex,
   Image,
   PetInfo,
+  ProfileImage,
   RatingStars,
   Text,
   theme,
@@ -11,6 +12,7 @@ import {
 } from '@duri-fe/ui';
 import { ShopReviewType } from '@duri-fe/utils';
 import styled from '@emotion/styled';
+import { format } from 'date-fns';
 
 export interface ShopReviewBoxProps {
   review: ShopReviewType;
@@ -24,10 +26,9 @@ export const ShopReviewBox = (props: ShopReviewBoxProps) => {
       rating,
       comment,
       createdAt,
-      imgUrl,
-      petInfo: {
-        petId,
-        imageURL: petImage,
+      reviewImageURL: imgUrl,
+      petDetail: {
+        image: petImage,
         name: petName,
         age: petAge,
         breed: petBreed,
@@ -49,7 +50,7 @@ export const ShopReviewBox = (props: ShopReviewBoxProps) => {
       <Flex justify="flex-start">
         <HeightFitFlex justify="space-between">
           <WidthFitFlex gap={16}>
-            <Image
+            <ProfileImage
               width={34}
               height={34}
               borderRadius={99}
@@ -62,7 +63,7 @@ export const ShopReviewBox = (props: ShopReviewBoxProps) => {
           </WidthFitFlex>
         </HeightFitFlex>
         <HardText typo="Caption5" colorCode={theme.palette.Gray300}>
-          {createdAt}
+          {createdAt ? format(new Date(createdAt), 'yyyy-MM-dd') : ''}
         </HardText>
       </Flex>
       {imgUrl && (
@@ -81,7 +82,7 @@ export const ShopReviewBox = (props: ShopReviewBoxProps) => {
       >
         <PetInfo
           themeVariant="compact"
-          key={petId}
+          key={petName}
           name={petName}
           image={petImage}
           age={petAge}

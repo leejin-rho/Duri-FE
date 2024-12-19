@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { RecommendedShopType } from '@duri/assets/types/shop';
 import { Button, Flex, HeightFitFlex, Image, Text, theme } from '@duri-fe/ui';
+import { getShortenedAddress } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 export const ShopVertical = ({
@@ -13,17 +14,16 @@ export const ShopVertical = ({
   const handleClickShop = (shopIdx: number) => navigate(`/shop/${shopIdx}`);
 
   return (
-    <FitFlex justify="flex-start" gap={6} padding="0 20px">
+    <FitFlex justify="flex-start" gap={6} padding="5px 20px">
       {shopList &&
         shopList.map((shop: RecommendedShopType) => (
           <Wrapper
             key={shop.shopId}
             direction="column"
+            justify="flex-start"
             align="flex-start"
-            gap={6}
             width={152}
-            height={184}
-            padding="3px 3px 13px 3px"
+            padding="3px"
             onClick={() => handleClickShop(shop.shopId)}
           >
             {shop.imageURL ? (
@@ -50,7 +50,7 @@ export const ShopVertical = ({
                 colorCode={theme.palette.Gray500}
                 margin="0 0 12px 6px"
               >
-                {shop.address}
+                {getShortenedAddress(shop.address)}
               </Text>
               <HeightFitFlex
                 direction="column"
@@ -58,17 +58,19 @@ export const ShopVertical = ({
                 gap={3}
                 margin="0 0 0 6px"
               >
-                <Tag
-                  key="tag1"
-                  typo="Caption5"
-                  bg={theme.palette.Gray50}
-                  fontColor={theme.palette.Gray500}
-                  width="fit-content"
-                  height="19px"
-                  borderRadius="2px"
-                >
-                  {shop.shopTag1}
-                </Tag>
+                {
+                  <Tag
+                    key="tag1"
+                    typo="Caption5"
+                    bg={theme.palette.Gray50}
+                    fontColor={theme.palette.Gray500}
+                    width="fit-content"
+                    height="19px"
+                    borderRadius="2px"
+                  >
+                    {shop.shopTag1}
+                  </Tag>
+                }
                 <Tag
                   key="tag2"
                   typo="Caption5"
@@ -81,6 +83,38 @@ export const ShopVertical = ({
                   {shop.shopTag2}
                 </Tag>
               </HeightFitFlex>
+                <Text typo="Caption4" colorCode={theme.palette.Gray500}>
+                  {shop.address}
+                </Text>
+
+              <TagWrapper direction="column" align="flex-start" gap={3}>
+                {shop.shopTag1 && (
+                  <Tag
+                    key="tag1"
+                    typo="Caption5"
+                    bg={theme.palette.Gray50}
+                    fontColor={theme.palette.Gray500}
+                    width="fit-content"
+                    height="19px"
+                    borderRadius="2px"
+                  >
+                    {shop.shopTag1}
+                  </Tag>
+                )}
+                {shop.shopTag2 && (
+                  <Tag
+                    key="tag2"
+                    typo="Caption5"
+                    bg={theme.palette.Gray50}
+                    fontColor={theme.palette.Gray500}
+                    width="fit-content"
+                    height="19px"
+                    borderRadius="2px"
+                  >
+                    {shop.shopTag2}
+                  </Tag>
+                )}
+              </TagWrapper>
             </HeightFitFlex>
           </Wrapper>
         ))}
@@ -91,7 +125,7 @@ export const ShopVertical = ({
 const Tag = styled(Button)`
   padding: 10px;
 `;
-const Wrapper = styled(HeightFitFlex)`
+const Wrapper = styled(Flex)`
   border-radius: 12px;
   background: var(--bw-white, #fff);
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
@@ -100,4 +134,8 @@ const Wrapper = styled(HeightFitFlex)`
 
 const FitFlex = styled(HeightFitFlex)`
   width: fit-content;
+`;
+
+const TagWrapper = styled(HeightFitFlex)`
+  min-height: 45px;
 `;

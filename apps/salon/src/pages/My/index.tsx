@@ -11,34 +11,29 @@ import {
   theme,
   Write,
 } from '@duri-fe/ui';
-import { UseGetGroomerInfo } from '@duri-fe/utils';
+import { useGetMyShopInfo } from '@duri-fe/utils';
 import {
   GroomerInfoType,
-  ShopInfoType,
+  ShopProfileDetailType,
 } from '@duri-fe/utils/src/apis/types/my';
 import styled from '@emotion/styled';
 import { OwnerInfo } from '@salon/components/my/info/OwnerInfo';
 import { ShopInfoCard } from '@salon/components/my/info/ShopInfoCard';
 import { Status } from '@salon/components/my/info/Status';
-import useGroomerStore from '@salon/stores/groomerStore';
 
 const MyPage = () => {
   const navigate = useNavigate();
   const handleNavigate = (path: string) => navigate(path);
 
-  const groomerId = useGroomerStore((state) => state.groomerId);
-
-  const [shopProfile, setShopProfile] = useState<ShopInfoType>();
+  const [shopProfile, setShopProfile] = useState<ShopProfileDetailType>();
   const [groomerProfile, setGroomerProfile] = useState<GroomerInfoType>();
 
-  const { data } = UseGetGroomerInfo({
-    groomerId: groomerId,
-  });
+  const { data } = useGetMyShopInfo({});
 
   useEffect(() => {
     if (data) {
-      setGroomerProfile(data.groomerProfileDetail);
-      setShopProfile(data.shopProfileDetail);
+      setShopProfile(data.shopProfileDetailResponse);
+      setGroomerProfile(data.groomerProfileDetailResponse);
     }
   }, [data]);
 
@@ -60,15 +55,19 @@ const MyPage = () => {
         margin="0 0 100px 0"
         justify="flex-start"
       >
-        {shopProfile && groomerProfile ? (
+        {data && shopProfile && groomerProfile ? (
           <>
             <OwnerInfo
               shopId={shopProfile.id}
               shopName={shopProfile.name}
               image={groomerProfile.image}
+              shopEmail={groomerProfile.email}
             />
             <Flex direction="column" margin="40px 0 0">
-              <Status reservationCnt={3} noShowCnt={1} />
+              <Status
+                reservationCnt={data.reservationCount}
+                noShowCnt={data.noShowCount}
+              />
               <Flex direction="column" margin="8px 0" gap={8}>
                 <ShopInfoCard
                   shopId={1}
@@ -87,7 +86,7 @@ const MyPage = () => {
                     gap={5}
                     onClick={() => handleNavigate('/my/income')}
                   >
-                    <Store width={28} height={28} />
+                    <Store width={16} height={16} />
                     <Text typo="Label1">매출관리</Text>
                   </FlexButton>
                   <FlexButton
@@ -97,7 +96,7 @@ const MyPage = () => {
                     gap={5}
                     onClick={() => handleNavigate('/my/review')}
                   >
-                    <Write width={24} height={24} />
+                    <Write width={16} height={16} />
                     <Text typo="Label1">후기관리</Text>
                   </FlexButton>
                 </Flex>

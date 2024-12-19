@@ -3,7 +3,4 @@ export async function enableMocking() {
     const { worker } = await import('./browser');
     return await worker.start();
   }
-  else {
-    console.log('MSW is disabled');
-  }
 }

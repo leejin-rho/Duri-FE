@@ -47,12 +47,14 @@ export interface ShopInfoDetailType {
     shopLat: number;
     shopLon: number;
     shopPhone: string;
-    shopOpenTime: { hour: number; minute: number };
-    shopCloseTime: { hour: number; minute: number };
+    shopOpenTime: string;
+    shopCloseTime: string;
     shopRating: number;
     reviewCnt: number;
     distance: number;
     tags: string[];
+    kakaoTalkUrl: string;
+    shopInfo: string;
   };
   groomerProfileDetail: {
     id: number;
@@ -72,15 +74,16 @@ export interface ShopDetailResponse extends BaseResponse {
 }
 
 export interface PetDetail {
-  petId: number;
-  imageURL: string;
+  image: string;
   name: string;
   age: number;
   gender: string;
   breed: string;
   weight: number;
   neutering: boolean;
-  lastGrooming: string;
+  character: string[];
+  diseases: string[];
+  lastGrooming: string | null;
 }
 
 export interface ShopReviewType {
@@ -92,10 +95,39 @@ export interface ShopReviewType {
   reviewImageURL: string;
   comment: string;
   createdAt: string | null;
-  imgUrl: string;
-  petInfo: PetDetail;
+  petDetail: PetDetail;
 }
 
 export interface ShopReviewListResponse extends BaseResponse {
   response: ShopReviewType[];
+}
+
+export interface MyPetDetail {
+  petId: number;
+  imageURL: string;
+  name: string;
+  age: number;
+  gender: string;
+  breed: string;
+  weight: number;
+  neutering: boolean;
+  character: string[];
+  diseases: string[];
+  lastGrooming: string | null;
+}
+
+export interface MyShopReviewType {
+  userId: number;
+  userName: string;
+  userImageURL: string;
+  reviewId: number;
+  rating: number;
+  comment: string;
+  createdAt: string;
+  imgUrl: string;
+  petInfo: MyPetDetail;
+}
+
+export interface MyShopReviewListResponse extends BaseResponse {
+  response: MyShopReviewType[];
 }

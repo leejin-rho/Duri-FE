@@ -11,6 +11,7 @@ export const usePostRequestQuotation = () => {
   return useMutation<RequestResponse, Error, RequestProps>({
     mutationFn: (request: RequestProps) => postRequestQuotation(request),
     onSuccess: () => {
+      alert('견적서 요청을 성공했습니다.');
       window.location.href = '/quotation';
     },
     onError: (error) => {

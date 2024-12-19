@@ -5,6 +5,7 @@ import {
   Seperator,
   Text,
   TextField,
+  theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
 import { TimeType } from '@duri-fe/utils';
@@ -43,8 +44,6 @@ export const RequestQuotation = ({
   const { age, breed, gender, image, neutering, name, weight } =
     requestList.pet; //펫정보
 
-  console.log(requestList);
-
   return (
     <>
       {/** 펫 정보 */}
@@ -75,8 +74,8 @@ export const RequestQuotation = ({
         <Flex justify="space-between" padding="0 30.5px">
           <Text typo="Body2">보호자</Text>
           <WidthFitFlex gap={16}>
-            <Text typo="Caption5">{requestList.userName}</Text>
-            <Text typo="Caption5">{requestList.userPhone}</Text>
+            <Text typo="Label3">{requestList.userName}</Text>
+            <Text typo="Label3" colorCode={theme.palette.Gray500}>{requestList.userPhone}</Text>
           </WidthFitFlex>
         </Flex>
 
@@ -127,7 +126,7 @@ export const RequestQuotation = ({
         gap={12}
       >
         <Text typo="Body2">요청사항</Text>
-        <TextField disabled value={otherRequests} widthPer='100%' multiline height={82}/>
+        <TextField value={otherRequests} widthPer='100%' multiline height={82} disabled />
       </Flex>
 
       {/** 하단 버튼 */}

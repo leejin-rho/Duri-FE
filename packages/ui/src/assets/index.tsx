@@ -13,6 +13,7 @@ export { default as Backup } from './Backup';
 export { default as BeforeArrow } from './BeforeArrow';
 export { default as Chat } from './Chat';
 export { default as Chatting } from './Chatting';
+export { default as DuriDog } from './DuriDog';
 export { default as Close } from './Close';
 export { default as CloseCircle } from './CloseCircle';
 export { default as DownArrow } from './DownArrow';
@@ -56,7 +57,7 @@ export { default as Send } from './Send';
 export { default as Shopping } from './Shopping';
 export { default as Star } from './Star';
 export { default as Write } from './Write';
-export { default as AiStyleBanner } from './AiStyleBanner';
+export { default as AiBanner } from './AiBanner';
 export { default as AlertStar } from './AlertStar';
 export { default as NaverLogo } from './NaverLogo';
 export { default as SpeechBalloon } from './SpeechBalloon';
@@ -80,6 +81,11 @@ export { default as PaymentSuccess } from './PaymentSuccess';
 export { default as FilledHome } from './FilledHome';
 export { default as UploadIcon } from './UploadIcon';
 export { default as Save } from './Save';
+export { default as LinkIcon } from './LinkIcon';
+export { default as ToggleDisable } from './ToggleDisable';
+export { default as ToggleEnable } from './ToggleEnable';
+export { default as Max } from './Max';
+export { default as Min } from './Min';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -115,12 +121,15 @@ import Help from './Help';
 import Hold from './Hold';
 import HomeIcon from './HomeIcon';
 import Information from './Information';
+import LinkIcon from './LinkIcon';
 import List from './List';
 import Location from './Location';
 import LocationShop from './LocationShop';
 import Lock from './Lock';
 import Magnifier from './Magnifier';
+import Max from './Max';
 import Menu from './Menu';
+import Min from './Min';
 import MyLocation from './MyLocation';
 import Notification from './Notification';
 import PaymentSuccess from './PaymentSuccess';
@@ -221,6 +230,9 @@ export const icons = {
   FilledHome,
   UploadIcon,
   Save,
+  LinkIcon,
+  Max,
+  Min,
 };
 
 export default icons;

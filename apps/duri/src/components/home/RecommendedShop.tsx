@@ -24,7 +24,7 @@ const RecommendedShop = ({ shopList }: { shopList: RecommendedShopType[] }) => {
         )}
         <Text typo="Title1">여기 샵은 어때요?</Text>
       </Flex>
-      <ShopWrapper justify="flex-start" margin="23px 0 0 0" height={220}>
+      <ShopWrapper justify="flex-start" margin='14px 0 0'>
         <ShopVertical shopList={shopList} />
       </ShopWrapper>
     </>

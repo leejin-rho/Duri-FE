@@ -34,11 +34,11 @@ const DailyScheduleItem = ({
 
       </WidthFitFlex>
 
-      <Flex justify="space-between">
+      <NameWrapper justify="space-between">
         <Text typo="Body2">{petName}</Text>
         <Text typo="Body4" colorCode={theme.palette.Gray500}>{petInfoStr}</Text>
         <Text typo="Body4">{groomerName}쌤</Text>
-      </Flex>
+      </NameWrapper>
     </ItemWrapper>
   )
 }
@@ -53,6 +53,10 @@ const Dot = styled(Flex)`
 
 const ItemWrapper = styled(Flex)`
   flex-shrink: 0;
+`
+
+const NameWrapper = styled(Flex)`
+  flex-wrap: wrap;
 `
 
 export default DailyScheduleItem;

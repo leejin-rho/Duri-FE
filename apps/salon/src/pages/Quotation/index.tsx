@@ -123,7 +123,7 @@ const QuotationPage = () => {
                 petGender,
                 petWeight,
               }) => (
-                <Flex
+                <CardButton
                   key={requestId}
                   onClick={() => handleRequestClick(requestId)}
                 >
@@ -139,7 +139,7 @@ const QuotationPage = () => {
                       weight={petWeight}
                     />
                   </Card>
-                </Flex>
+                </CardButton>
               ),
             )}
           </Flex>
@@ -164,7 +164,7 @@ const QuotationPage = () => {
               status,
               requestCreatedAt,
             }) => (
-              <Flex
+              <CardButton
                 key={requestId}
                 onClick={() => handleRequestClick(requestId)}
               >
@@ -217,7 +217,7 @@ const QuotationPage = () => {
                     {requestCreatedAt && calculateTimeAgo(requestCreatedAt)}
                   </TimeAgoText>
                 </PetInfoCard>
-              </Flex>
+              </CardButton>
             ),
           )}
         </Flex>
@@ -267,6 +267,10 @@ const FlexGrow = styled(Flex)`
 
 const TagWrapper = styled(WidthFitFlex)`
   flex-shrink: 0;
+`;
+
+const CardButton = styled.button`
+  width: 100%;
 `;
 
 const PetInfoCard = styled(Card)`

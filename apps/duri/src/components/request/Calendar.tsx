@@ -29,7 +29,6 @@ const MonthlyCalendar = ({ onSelect }: CalendarProps) => {
       const stringDate = format(value, 'yyyy-MM-dd');
       onSelect('day', stringDate);
     }
-    console.log(value);
   };
   return (
     <Flex margin="7px 0 0 0" padding="0 20px">

@@ -83,20 +83,21 @@ export const GroomerPortfolio = ({ groomerId }: { groomerId: number }) => {
         </TextBox>
       </HeaderBox>
       <Flex direction="column" padding="12px 5px 96px 5px" gap={12}>
-        {groomerProfile && (
-          <DesignerInfo
-            padding="0 6px"
-            version="horizontal"
-            designerId={groomerProfile.id}
-            name={groomerProfile.name}
-            age={groomerProfile.age}
-            gender={groomerProfile.gender === 'F' ? '여성' : '남성'}
-            experience={groomerProfile.history}
-            roles={groomerProfile.license}
-            imageUrl={groomerProfile.image}
-          />
-        )}
-
+        <Flex justify="flex-start">
+          {groomerProfile && (
+            <DesignerInfo
+              padding="16px"
+              version="horizontal"
+              designerId={groomerProfile.id}
+              name={groomerProfile.name}
+              age={groomerProfile.age}
+              gender={groomerProfile.gender === 'F' ? '여성' : '남성'}
+              experience={groomerProfile.history}
+              roles={groomerProfile.license}
+              imageUrl={groomerProfile.image}
+            />
+          )}
+        </Flex>
         {groomerId && <PortfolioPhotos groomerId={groomerId} />}
       </Flex>
     </>

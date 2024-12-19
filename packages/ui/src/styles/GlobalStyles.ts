@@ -58,4 +58,7 @@ export const globalStyle = css`
     border: none !important;
     width: 100%;
   }
+  .css-1f7sphi {
+    z-index: -1 !important;
+  }
 `;

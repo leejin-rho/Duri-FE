@@ -1,5 +1,5 @@
 import {
-  Doori,
+  DuriDog,
   Flex,
   MobileLayout,
   NaverLogo,
@@ -19,8 +19,8 @@ const LoginPage = () => {
     <MobileLayout>
       <Container direction="column">
         {/** 로고 */}
-        <Doori height={40} />
-        <Flex direction="column" margin="48px 0 0 0">
+        <DuriDog width={169} height={143} />
+        <Flex direction="column">
           <Text typo="Heading">두리묭실로</Text>
           <Text typo="Heading">쉽고 빠르게 예약해요!</Text>
           <Text

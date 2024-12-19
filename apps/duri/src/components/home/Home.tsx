@@ -2,6 +2,7 @@ import { SetStateAction, useState } from 'react';
 import React from 'react';
 
 import { Button, Flex, HeightFitFlex, Text, theme } from '@duri-fe/ui';
+import { getShortenedAddress } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 import { differenceInDays } from 'date-fns';
 import {
@@ -45,7 +46,7 @@ const CarouselHome = ({
       <UpcomingReservation
         reservationDate={upcomingReservation.reservationDate}
         shopId={upcomingReservation.shopId}
-        address={upcomingReservation.address}
+        address={getShortenedAddress(upcomingReservation.address)}
         name={upcomingReservation.name}
         imageURL={upcomingReservation.imageURL}
         price={upcomingReservation.price}

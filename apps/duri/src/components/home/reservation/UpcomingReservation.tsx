@@ -26,7 +26,6 @@ interface UpcomingReservationProps {
 const UpcomingReservation = ({
   imageURL,
   address,
-  kakaoURL,
   name,
   phone,
   price,
@@ -42,14 +41,13 @@ const UpcomingReservation = ({
 
   const handleClickChatButton = () => {
     //오픈채팅방 주소 알려주는 모달 뜨게?하면 될 듯
-    console.log(kakaoURL);
   };
 
   const handleClickShopButton = () => {
     navigate(`/shop/${shopId}`);
   };
 
-  const formatReservationDate = (reservationDate: string): string => {
+  const formatReservationDate = (reservationDate: string) => {
     if (!reservationDate) return '예약 정보 없음';
 
     // 날짜와 시간 분리
@@ -63,7 +61,14 @@ const UpcomingReservation = ({
     // 날짜 변환 (YYYY-MM-DD → YYYY.MM.DD)
     const formattedDate = datePart.replace(/-/g, '.');
 
-    return `${formattedDate} ${period} ${formattedHour}시`;
+    return (
+      <ReservationText typo="Label2" colorCode={theme.palette.Normal800}>
+        <span>{formattedDate}</span>{' '}
+        <span>
+          {period} {formattedHour}시
+        </span>
+      </ReservationText>
+    );
   };
 
   return (
@@ -118,7 +123,7 @@ const UpcomingReservation = ({
           padding="6px 26px"
           bg={theme.palette.Gray20}
           fontColor={theme.palette.Gray500}
-          typo="Caption2"
+          typo="Caption3"
           onClick={handleClickTelButton}
         >
           전화하기
@@ -130,7 +135,7 @@ const UpcomingReservation = ({
           padding="6px 26px"
           bg={theme.palette.Gray20}
           fontColor={theme.palette.Gray500}
-          typo="Caption2"
+          typo="Caption3"
           onClick={handleClickChatButton}
         >
           문의하기
@@ -144,9 +149,7 @@ const UpcomingReservation = ({
         margin="12px 0 0 0"
         padding="12px 27px"
       >
-        <Text typo="Label2" colorCode={theme.palette.Normal800}>
-          {formatReservationDate(reservationDate)}
-        </Text>
+        {formatReservationDate(reservationDate)}
         <Text typo="Label2" colorCode={theme.palette.Normal800}>
           {price ? `${price.toLocaleString()} 원` : '가격 정보 없음'}
         </Text>
@@ -183,4 +186,8 @@ const ImageBox = styled(WidthFitFlex)`
 
 const ShopWrapper = styled(Flex)`
   cursor: pointer;
+`;
+
+const ReservationText = styled(Text)`
+  gap: 10px;
 `;
