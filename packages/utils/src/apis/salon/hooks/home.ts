@@ -25,7 +25,7 @@ export const useGetClosetGrooming = () => {
     queryKey: ['getClosetGrooming'],
     queryFn: () => getClosetGrooming(),
     enabled: true,
-    staleTime: 10 * 60 * 1000,
+    staleTime: 0,
   });
 };
 
@@ -35,7 +35,7 @@ export const useGetDailySchedule = () => {
     queryKey: ['getDailySchedule'],
     queryFn: () => getDailySchedule(),
     enabled: true,
-    staleTime: 10 * 60 * 1000,
+    staleTime: 0,
   });
 };
 
@@ -45,7 +45,7 @@ export const useGetHomeQuotationRequest = () => {
     queryKey: ['getHomeQuotationRequest'],
     queryFn: () => getHomeQuotationRequest(),
     enabled: true,
-    staleTime: 10 * 60 * 1000,
+    staleTime: 0,
   });
 };
 

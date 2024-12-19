@@ -7,3 +7,4 @@ export * from './onboarding';
 export * from './my';
 export * from './portfolio';
 export * from './income';
+export * from './feedback';

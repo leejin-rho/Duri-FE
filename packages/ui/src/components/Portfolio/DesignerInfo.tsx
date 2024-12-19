@@ -8,6 +8,7 @@ import {
   theme,
   WidthFitFlex,
 } from '@duri-fe/ui';
+import { historyStr } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
 interface DesignerInfoProps {
@@ -40,19 +41,6 @@ export const DesignerInfo = ({
   const moveToPortfolio = () => {
     if (version === 'vertical' && isNavigate) {
       navigate(`/portfolio/${designerId}`);
-    }
-  };
-
-  const historyStr = (experience: number) => {
-    if (experience % 12 === 0) {
-      return `${experience / 12}년`;
-    } else {
-      const month = experience % 12;
-      const year = (experience - month) / 12;
-      if (year === 0) {
-        return `${month}개월`;
-      }
-      return `${year}년 ${month}개월`;
     }
   };
 

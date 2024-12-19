@@ -121,6 +121,13 @@ export const typo = {
     font-weight: 600;
     line-height: 14px;
   `,
+  Label3Thin: css`
+    /* 후기 갯수 */
+    font-family: 'Pretendard';
+    font-size: ${calcRem(14)};
+    font-weight: 300;
+    line-height: normal;
+  `,
   Body1: css`
     /* 정렬 본문 텍스트 */
     font-family: 'Pretendard';

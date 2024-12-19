@@ -128,7 +128,7 @@ export const GroomerPortfolioDetail = ({
                 gap={10}
                 padding="4px 10px 4px 5px"
               >
-                <Image
+                <ProfileImage
                   width={34}
                   height={34}
                   borderRadius={99}

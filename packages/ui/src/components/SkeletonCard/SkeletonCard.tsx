@@ -27,7 +27,6 @@ export const SkeletonCard = ({
 const SkeletonWrapper = styled(Flex)`
   position: relative;
   overflow: hidden;
-  border-radius: 4px;
   @keyframes skeleton-gradient {
     0% {
       background-color: rgba(165, 165, 165, 0.1);

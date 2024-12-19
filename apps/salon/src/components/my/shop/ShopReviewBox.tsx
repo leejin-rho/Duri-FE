@@ -4,6 +4,7 @@ import {
   HeightFitFlex,
   Image,
   PetInfo,
+  ProfileImage,
   RatingStars,
   Text,
   theme,
@@ -49,7 +50,7 @@ export const ShopReviewBox = (props: ShopReviewBoxProps) => {
       <Flex justify="flex-start">
         <HeightFitFlex justify="space-between">
           <WidthFitFlex gap={16}>
-            <Image
+            <ProfileImage
               width={34}
               height={34}
               borderRadius={99}
