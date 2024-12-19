@@ -18,10 +18,9 @@ const PetDiary = () => {
 
   return (
     <RelativeMobile backgroundColor={theme.palette.Gray_White}>
-      <AbsoluteHeader title="일지" iconColor={theme.palette.White} />
-      <Flex
+      <AbsoluteHeader title="미용 일기" iconColor={theme.palette.White} />
+      <HalfBorderRadius
         backgroundColor={theme.palette.Normal500}
-        borderRadius={12}
         margin="-70px 0 0 0"
         padding="70px 28px 26px 28px"
       >
@@ -31,7 +30,7 @@ const PetDiary = () => {
           backgroundColor={theme.palette.Normal300}
           direction="column"
           align="start"
-          padding="24px 33px"
+          padding="24px 26px"
           gap={21}
         >
           <Text typo="Title2">미용 레포트</Text>
@@ -68,7 +67,7 @@ const PetDiary = () => {
             </Flex>
           </HeightFitFlex>
         </Flex>
-      </Flex>
+      </HalfBorderRadius>
 
       <Flex padding="32px 20px 124px 20px" direction="column" gap={32}>
         {historyData && historyData.length > 0 ? (
@@ -126,4 +125,8 @@ const AbsoluteHeader = styled(Header)`
 
 const BorderLeftFlex = styled(Flex)`
   border-left: 3px solid ${theme.palette.Gray50};
+`;
+
+const HalfBorderRadius = styled(Flex)`
+  border-radius: 0 0 12px 12px;
 `;

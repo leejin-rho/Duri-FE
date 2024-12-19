@@ -84,6 +84,8 @@ export { default as Save } from './Save';
 export { default as LinkIcon } from './LinkIcon';
 export { default as ToggleDisable } from './ToggleDisable';
 export { default as ToggleEnable } from './ToggleEnable';
+export { default as Max } from './Max';
+export { default as Min } from './Min';
 
 import Add from './Add';
 import AddNew from './AddNew';
@@ -125,7 +127,9 @@ import Location from './Location';
 import LocationShop from './LocationShop';
 import Lock from './Lock';
 import Magnifier from './Magnifier';
+import Max from './Max';
 import Menu from './Menu';
+import Min from './Min';
 import MyLocation from './MyLocation';
 import Notification from './Notification';
 import PaymentSuccess from './PaymentSuccess';
@@ -227,6 +231,8 @@ export const icons = {
   UploadIcon,
   Save,
   LinkIcon,
+  Max,
+  Min,
 };
 
 export default icons;
