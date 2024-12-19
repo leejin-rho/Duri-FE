@@ -84,7 +84,7 @@ const MyPage = () => {
                     backgroundColor={theme.palette.White}
                     borderRadius={8}
                     gap={5}
-                    onClick={() => handleNavigate('/my/income')}
+                    onClick={() => handleNavigate('/income')}
                   >
                     <Store width={16} height={16} />
                     <Text typo="Label1">매출관리</Text>
