@@ -113,6 +113,7 @@ const Home = () => {
             <MainHeader
               logoColor={theme.palette.Black}
               iconColor={theme.palette.Normal800}
+              notificationIcon={false}
               badge
             />
 
