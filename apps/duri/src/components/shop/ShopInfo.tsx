@@ -1,6 +1,7 @@
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import { useNavigate } from 'react-router-dom';
 
+import ShopDefaultImage from '@assets/images/pngs/ShopDefaultImage.png';
 import {
   BeforeArrow,
   Button,
@@ -125,7 +126,7 @@ export const ShopInfo = ({
           padding="0 20px 160px 20px"
           key={shopId}
         >
-          <MainImg src={shopImage} />
+          <MainImg src={shopImage ?? ShopDefaultImage} />
           {/**헤더 */}
           <HeightFitFlex direction="column" gap={8} margin="24px 0 0 0">
             <Flex gap={17} justify="flex-start" margin="0 0 9px 0">

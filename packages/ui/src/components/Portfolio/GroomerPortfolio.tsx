@@ -10,6 +10,7 @@ import {
 } from '@duri-fe/utils/src/apis/types/my';
 import styled from '@emotion/styled';
 
+import ShopDefaultImage from '../../assets/images/ShopDefaultImage.png';
 import { Flex, HeightFitFlex, WidthFitFlex } from '../FlexBox';
 import { Text } from '../Typo';
 
@@ -35,7 +36,10 @@ export const GroomerPortfolio = ({ groomerId }: { groomerId: number }) => {
   return (
     <>
       <HeaderBox>
-        <MainImg alt="shop-image" src={shopProfile?.imageURL} />
+        <MainImg
+          alt="shop-image"
+          src={shopProfile?.imageURL ?? ShopDefaultImage}
+        />
         <TextBox direction="column" gap={14}>
           <HeightFitFlex gap={10} justify="flex-start">
             <Text typo="Title4" colorCode={theme.palette.White}>

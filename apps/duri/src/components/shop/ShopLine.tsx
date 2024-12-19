@@ -1,11 +1,12 @@
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
+import ShopDefaultImage from '@assets/images/pngs/ShopDefaultImage.png';
 import {
   Button,
   Flex,
   HardText,
   HeightFitFlex,
-  ProfileImage,
+  Image,
   SalonTag,
   Send,
   Star,
@@ -68,7 +69,12 @@ export const ShopLine = ({
 
   return (
     <HeightFitFlex gap={20} key={id} onClick={openShopInfoSheet}>
-      <ProfileImage height={92} width={92} src={shopImg} borderRadius={8} />
+      <Image
+        height={92}
+        width={92}
+        src={shopImg ?? ShopDefaultImage}
+        borderRadius={8}
+      />
       <Flex direction="column" align="flex-start" gap={8}>
         <Flex gap={17} justify="flex-start">
           <Text typo="Body2">{title}</Text>

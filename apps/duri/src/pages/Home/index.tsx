@@ -69,6 +69,7 @@ const Home = () => {
               logoColor={theme.palette.Black}
               iconColor={theme.palette.Normal800}
               searchIcon
+              notificationIcon={false}
               onClickSearch={handleNavigate}
             />
           ) : (
