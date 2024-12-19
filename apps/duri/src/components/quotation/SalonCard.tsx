@@ -32,9 +32,9 @@ export const SalonCard = ({
           {imageURL ? (
             <Image width={34} height={34} src={imageURL} borderRadius={34} />
           ) : (
-            <WidthFitFlex width={34} height={34}>
-              <Store width={28} height={28} />
-            </WidthFitFlex>
+            <Flex width={34} height={34}>
+              <Store width={34} height={24} />
+            </Flex>
           )}
           <Flex height={34}>
             <Text typo={salonName.length > 5 ? 'Caption3' : 'Body4'}>
