@@ -15,9 +15,9 @@ export const getThisMonthIncome = async (): Promise<
   return data.response;
 };
 
-export const getSelectedMonthIncome = async (month: string): Promise<
-  GetSelectedMonthIncomeResponse['response']
-> => {
+export const getSelectedMonthIncome = async (
+  month: string,
+): Promise<GetSelectedMonthIncomeResponse['response']> => {
   const { data } = await salonInstance.get('statistics/income/month', {
     params: { month: month },
   });
@@ -27,7 +27,7 @@ export const getSelectedMonthIncome = async (month: string): Promise<
 export const getRecentDaysIncome = async (): Promise<
   GetRecentDaysResponse['response']
 > => {
-  const { data } = await salonInstance.get('statistics/age');
+  const { data } = await salonInstance.get('statistics/income/week');
   return data.response;
 };
 

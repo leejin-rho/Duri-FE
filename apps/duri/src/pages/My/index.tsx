@@ -36,7 +36,7 @@ interface PetInfoType {
 
 const MyPage = () => {
   // const { data: petData, isError: getPetInfoError } = useGetPetInfo();
-  const { data: userInfo } = useGetUserInfo();
+  const { data: userInfo, isSuccess: getUserInfo } = useGetUserInfo();
   const { data: petListData } = useGetPetListInfo();
   const [petInfo, setPetInfo] = useState<PetInfoType>();
   const navigate = useNavigate();
@@ -46,11 +46,6 @@ const MyPage = () => {
     navigate('/login');
   };
 
-  useEffect(() => {
-    if (!userInfo) {
-      navigate('/login');
-    }
-  }, [userInfo]);
 
   const handleClickRegisterButton = () => {
     navigate('/my/pet/register');
@@ -69,7 +64,7 @@ const MyPage = () => {
       <Header />
       <Flex direction="column" padding="0 18px" margin="0 0 100px 0">
         <>
-          {userInfo ? (
+          {getUserInfo && userInfo ? (
             <>
               <UserInfo
                 name={userInfo.name}
@@ -121,7 +116,7 @@ const MyPage = () => {
               <Text typo="Label3" colorCode={theme.palette.Gray300}>
                 등록된 반려견이 없습니다.
               </Text>
-              {userInfo && (
+              {getUserInfo && (
                 <Button
                   typo="Label4"
                   fontColor={theme.palette.White}
@@ -157,7 +152,7 @@ const MyPage = () => {
                 borderRadius={8}
                 gap={5}
                 onClick={() =>
-                  userInfo ? handleNavigate('/my/history') : null
+                  getUserInfo && handleNavigate('/my/history')
                 }
               >
                 <Scissors width={24} height={24} />
@@ -169,7 +164,7 @@ const MyPage = () => {
               backgroundColor={theme.palette.White}
               borderRadius={8}
               gap={10}
-              onClick={() => (userInfo ? handleNavigate('/my/review') : null)}
+              onClick={() => (getUserInfo && handleNavigate('/my/review'))}
             >
               <Write width={18} height={18} />
               <Text typo="Label1">내가 쓴 후기</Text>
