@@ -106,7 +106,7 @@ const Home = () => {
             {regularListData && regularListData.homeShopList.length > 0 ? (
               <SpeedQuotation shopList={regularListData.homeShopList} />
             ) : (
-              <Flex direction="column" padding="62px 99px" gap={12}>
+              <Flex direction="column" padding="62px 70px" gap={12}>
                 <Flex direction="column">
                   <Text typo="Caption4" colorCode={theme.palette.Gray400}>
                     아직 단골샵이 없어요!
