@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 
-import ShopDefaultImage from '@assets/images/pngs/ShopDefaultImage.png';
 import { RecommendedShopType } from '@duri/assets/types/shop';
 import { Button, Flex, HeightFitFlex, Image, Text, theme } from '@duri-fe/ui';
 import { getShortenedAddress } from '@duri-fe/utils';
@@ -24,42 +23,42 @@ export const ShopVertical = ({
             justify="flex-start"
             align="flex-start"
             width={152}
-            height={200}
             padding="3px"
             onClick={() => handleClickShop(shop.shopId)}
           >
-            <Image
-              width={146}
-              height={81}
-              borderRadius={8}
-              src={shop.imageURL === '' ? ShopDefaultImage : shop.imageURL}
-            />
-
-            <Flex
-              direction="column"
-              align="flex-start"
-              padding="0 0 8px 0"
-              margin="13px 0 8px 6px"
-              gap={8}
-            >
-              <Text typo="Title3">{shop.shopName}</Text>
+            {shop.imageURL ? (
+              <Image
+                width={146}
+                height={81}
+                borderRadius={8}
+                src={shop.imageURL}
+              />
+            ) : (
+              <Flex
+                backgroundColor={theme.palette.Gray_White}
+                width={146}
+                height={81}
+                borderRadius={8}
+              ></Flex>
+            )}
+            <HeightFitFlex direction="column" align="flex-start">
+              <Text typo="Title3" margin="13px 0 11px 6px">
+                {shop.shopName}
+              </Text>
               <Text
                 typo="Caption4"
                 colorCode={theme.palette.Gray500}
+                margin="0 0 12px 6px"
               >
                 {getShortenedAddress(shop.address)}
               </Text>
-              <Flex
+              <HeightFitFlex
                 direction="column"
                 align="flex-start"
                 gap={3}
+                margin="0 0 0 6px"
               >
-                <TagWrapper
-                  direction="column"
-                  justify="flex-start"
-                  align="flex-start"
-                  gap={3}
-                >
+                <TagWrapper direction="column" align="flex-start" gap={3}>
                   {shop.shopTag1 && (
                     <Tag
                       key="tag1"
@@ -87,8 +86,8 @@ export const ShopVertical = ({
                     </Tag>
                   )}
                 </TagWrapper>
-              </Flex>
-            </Flex>
+              </HeightFitFlex>
+            </HeightFitFlex>
           </Wrapper>
         ))}
     </FitFlex>
@@ -109,6 +108,6 @@ const FitFlex = styled(HeightFitFlex)`
   width: fit-content;
 `;
 
-const TagWrapper = styled(Flex)`
+const TagWrapper = styled(HeightFitFlex)`
   min-height: 45px;
 `;

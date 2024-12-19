@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import {
-  DuriDog,
   Flex,
   MobileLayout,
   NaverLogo,
@@ -37,7 +36,7 @@ const AuthPage = () => {
     <MobileLayout>
       <Container direction="column">
         {/** 로고 */}
-        <DuriDog width={169} height={143} />
+        <Logo src="/images/logo.png" />
         <Flex direction="column" margin="24px 0 0 0">
           <Text typo="Heading">두리묭실로</Text>
           <Text typo="Heading">쉽고 빠르게 예약해요!</Text>
@@ -76,6 +75,8 @@ const Container = styled(Flex)`
   flex-grow: 1;
   position: relative;
 `;
+
+const Logo = styled.img``;
 
 const LoginButton = styled.button`
   width: 60px;
