@@ -12,6 +12,7 @@ import {
   getGroomerInfo,
   getMyShopInfo,
   getMyShopReviewList,
+  putGroomerInfo,
   putShopInfo,
 } from '../my';
 
@@ -95,6 +96,22 @@ export const UsePutShopInfo = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['getMyShopInfo'] });
     },
+    onError: (error) => {
+      console.error(error);
+      alert('샵 정보 수정에 실패했습니다.');
+    },
+  });
+};
+
+/** [PUT] /groomer/profile/{groomerId} 마이샵 미용사 수정 */
+export const UsePutGroomerInfo = () => {
+  return useMutation<
+    PutShopInfoResponse['response'],
+    Error,
+    { groomerId: number; formData: FormData }
+  >({
+    mutationFn: ({ groomerId, formData }) =>
+      putGroomerInfo(groomerId, formData),
     onError: (error) => {
       console.error(error);
       alert('샵 정보 수정에 실패했습니다.');

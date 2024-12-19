@@ -57,3 +57,17 @@ export const getMyShopReviewList = async (): Promise<
   const response = await salonInstance.get('shop/review');
   return response.data.response;
 };
+
+/** [PUT] /groomer/profile/{groomerId} 마이샵 미용사 수정 */
+export const putGroomerInfo = async (groomerId: number, formData: FormData) => {
+  const response = await salonInstance.put(
+    `/groomer/profile/${groomerId}`,
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    },
+  );
+  return response.data.response;
+};

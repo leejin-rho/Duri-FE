@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
   DesignerInfo,
@@ -34,6 +35,7 @@ const DesignerInfoArea = ({
   onEdit,
   setOnEdit,
 }: DesignerInfoAreaProps) => {
+  const navigate = useNavigate();
   const designerInfoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -76,12 +78,17 @@ const DesignerInfoArea = ({
           isNavigate={false}
         />
         {onEdit && (
-          <ShopEditArea backgroundColor={theme.palette.Black} borderRadius={12}>
-            <Pencil width={16} />
-            <Text typo="Label3" colorCode={theme.palette.White}>
-              수정하기
-            </Text>
-          </ShopEditArea>
+          <AreaButton onClick={() => navigate('/my/groomer/edit')}>
+            <ShopEditArea
+              backgroundColor={theme.palette.Black}
+              borderRadius={12}
+            >
+              <Pencil width={16} />
+              <Text typo="Label3" colorCode={theme.palette.White}>
+                수정하기
+              </Text>
+            </ShopEditArea>
+          </AreaButton>
         )}
       </DesignerInfoWrapper>
     </HeightFitFlex>
@@ -92,12 +99,15 @@ const DesignerInfoWrapper = styled(WidthFitFlex)`
   position: relative;
 `;
 
-const ShopEditArea = styled(Flex)`
+const AreaButton = styled.button`
   position: absolute;
   top: -4px;
   left: -4px;
   width: calc(100% + 8px);
   height: calc(100% + 8px);
+`;
+
+const ShopEditArea = styled(Flex)`
   background-color: rgba(17, 17, 17, 0.5);
 `;
 
