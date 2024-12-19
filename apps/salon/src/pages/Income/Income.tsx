@@ -5,7 +5,8 @@ import {
   useGetAgeStatistic,
   useGetCharacterStatistic,
   useGetDiseaseStatistic,
-  useGetSelectedMonthIncome,
+  useGetRecentDaysIncome,
+  // useGetSelectedMonthIncome,
   useGetThisMonthIncome,
 } from '@duri-fe/utils';
 import { MonthIncomeStatistic } from '@salon/components/income/MonthIncomeStatistic';
@@ -19,9 +20,10 @@ const IncomePage = () => {
   };
 
   const { data: monthIncomeData } = useGetThisMonthIncome({});
-  const { data: selectedIncomeData } = useGetSelectedMonthIncome({
-    month: '2024-12',
-  });
+  // const { data: selectedIncomeData } = useGetSelectedMonthIncome({
+  //   month: '2024-12',
+  // });
+  const { data: recentDaysIncomeData } = useGetRecentDaysIncome({});
   const { data: agePetStatistic } = useGetAgeStatistic({});
   const { data: diseasePetStatistic } = useGetDiseaseStatistic({});
   const { data: characterPetStatistic } = useGetCharacterStatistic({});
@@ -34,7 +36,7 @@ const IncomePage = () => {
         backIcon
         onClickBack={handleClickBack}
       />
-      <Flex direction="column">
+      <Flex direction="column" padding="0 0 128px 0">
         {monthIncomeData && (
           <MonthIncomeStatistic
             beforeRatio={monthIncomeData.beforeRatio}
@@ -42,18 +44,19 @@ const IncomePage = () => {
           />
         )}
 
-        {selectedIncomeData && (
+        {recentDaysIncomeData && (
           <RecentIncomeStatistic
-            incomeMonthList={selectedIncomeData.incomeMonthList}
-            beforeRatio={selectedIncomeData.beforeRatio}
-            nowRatio={selectedIncomeData.nowRatio}
+            incomeMonthList={recentDaysIncomeData.incomeMonthList}
           />
         )}
-        <PetStatistic
-          agePetStatistic={agePetStatistic?.ageList}
-          diseasePetStatistic={diseasePetStatistic?.diseaseList}
-          characterPetStatistic={characterPetStatistic?.characterList}
-        />
+
+        {agePetStatistic && diseasePetStatistic && characterPetStatistic && (
+          <PetStatistic
+            agePetStatistic={agePetStatistic?.ageList}
+            diseasePetStatistic={diseasePetStatistic?.diseaseList}
+            characterPetStatistic={characterPetStatistic?.characterList}
+          />
+        )}
       </Flex>
       <SalonNavbar />
     </MobileLayout>
