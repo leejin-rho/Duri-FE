@@ -19,6 +19,7 @@ const QuotationPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
+
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
       <Header title="요청서 및 견적서" />
@@ -52,7 +53,7 @@ const QuotationPage = () => {
             )}
           </Flex>
         ) : (
-          <Flex margin="92px 0 0">
+          <Flex margin="24px 0 0">
             <Text typo="Body3" colorCode={theme.palette.Gray300}>
               요청서 및 견적서가 없습니다.
             </Text>

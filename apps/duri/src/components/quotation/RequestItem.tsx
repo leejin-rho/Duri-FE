@@ -19,9 +19,10 @@ export const RequestItem = ({
     //URL에서는 요청 자체 id가 뜨게 하고, 실제 세부조회에서는 요청서의 id를 전달해서 조회할 수 있도록
   };
 
+
   return (
     <>
-      {isExpired ? (
+      {isExpired && shops && shops.length > 0 ? (
         <Card
           borderRadius={16}
           shadow="small"
@@ -33,7 +34,7 @@ export const RequestItem = ({
             createdAt={createdAt}
             expiredAt={expiredAt}
             shopName={
-              shops.length > 1
+              shops?.length > 1
                 ? `${shops[0].shopName} 외 ${shops.length - 1}`
                 : `${shops[0].shopName}`
             }
@@ -42,7 +43,7 @@ export const RequestItem = ({
           <Seperator height="2px" colorCode={theme.palette.Gray50} />
           <Flex justify="flex-start" padding="0 11px" margin="20px 0">
             <Text typo="Caption3" colorCode={theme.palette.Gray300}>
-              {shops && shops.length > 1
+              {shops?.length > 1
                 ? `${shops[0]?.shopName} 외 ${shops.length - 1}`
                 : `${shops[0]?.shopName}`}
             </Text>
