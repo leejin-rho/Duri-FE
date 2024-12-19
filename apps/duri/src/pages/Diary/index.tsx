@@ -30,7 +30,7 @@ const PetDiary = () => {
           backgroundColor={theme.palette.Normal300}
           direction="column"
           align="start"
-          padding="24px 33px"
+          padding="24px 26px"
           gap={21}
         >
           <Text typo="Title2">미용 레포트</Text>
