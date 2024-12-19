@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  QueryKey,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 import {
   deletePetInfo,
@@ -53,7 +58,7 @@ export const usePutPetInfo = () => {
       putPetInfo(petId, formData),
     onSuccess: () => {
       // 데이터가 성공적으로 변경되었을 때 refetch
-      queryClient.invalidateQueries('getPetListInfo');
+      queryClient.invalidateQueries({ queryKey: ['getPetListInfo'] });
       alert('펫 정보가 수정되었습니다.');
     },
     onError: () => {
