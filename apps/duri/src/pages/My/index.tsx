@@ -46,6 +46,12 @@ const MyPage = () => {
     navigate('/login');
   };
 
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/login');
+    }
+  }, [userInfo]);
+
   const handleClickRegisterButton = () => {
     navigate('/my/pet/register');
   };
@@ -84,7 +90,7 @@ const MyPage = () => {
               backgroundColor={theme.palette.White}
               margin="0 0 10px"
             >
-              <Text typo="Caption4" colorCode={theme.palette.Gray300}>
+              <Text typo="Label3" colorCode={theme.palette.Gray300}>
                 등록된 유저 정보가 없습니다.
               </Text>
             </Flex>
@@ -113,21 +119,24 @@ const MyPage = () => {
               gap={16}
             >
               <Text typo="Label3" colorCode={theme.palette.Gray300}>
-                앗! 등록된 반려견이 없어요.
+                등록된 반려견이 없습니다.
               </Text>
-              <Button
-                typo="Label4"
-                fontColor={theme.palette.White}
-                onClick={handleClickRegisterButton}
-                bg={theme.palette.Black}
-                width="135px"
-                padding="10px"
-                borderRadius="8px"
-              >
-                마이펫 등록하러가기
-              </Button>
+              {userInfo && (
+                <Button
+                  typo="Label4"
+                  fontColor={theme.palette.White}
+                  onClick={handleClickRegisterButton}
+                  bg={theme.palette.Black}
+                  width="135px"
+                  padding="10px"
+                  borderRadius="8px"
+                >
+                  마이펫 등록하러가기
+                </Button>
+              )}
             </HeightFitFlex>
           )}
+
           <Flex direction="column" margin="8px 0" gap={8}>
             <Flex gap={10}>
               <FlexButton
@@ -135,7 +144,7 @@ const MyPage = () => {
                 backgroundColor={theme.palette.White}
                 borderRadius={8}
                 gap={5}
-                onClick={() => handleNavigate('/my/shop')}
+                onClick={() => (userInfo ? handleNavigate('/my/shop') : null)}
               >
                 <Store width={19} />
                 <Text typo="Label1" margin="0 0 0 2px">
@@ -147,7 +156,9 @@ const MyPage = () => {
                 backgroundColor={theme.palette.White}
                 borderRadius={8}
                 gap={5}
-                onClick={() => handleNavigate('/my/history')}
+                onClick={() =>
+                  userInfo ? handleNavigate('/my/history') : null
+                }
               >
                 <Scissors width={24} height={24} />
                 <Text typo="Label1">이용기록</Text>
@@ -158,17 +169,20 @@ const MyPage = () => {
               backgroundColor={theme.palette.White}
               borderRadius={8}
               gap={10}
-              onClick={() => handleNavigate('/my/review')}
+              onClick={() => (userInfo ? handleNavigate('/my/review') : null)}
             >
               <Write width={18} height={18} />
               <Text typo="Label1">내가 쓴 후기</Text>
             </FlexButton>
           </Flex>
-          <FlexButton margin="40px 0 0 0" onClick={logout}>
-            <Text typo="Caption2" colorCode={theme.palette.Gray300}>
-              로그아웃
-            </Text>
-          </FlexButton>
+
+          {userInfo && (
+            <FlexButton margin="40px 0 0 0" onClick={logout}>
+              <Text typo="Caption2" colorCode={theme.palette.Gray300}>
+                로그아웃
+              </Text>
+            </FlexButton>
+          )}
         </>
       </Flex>
       <DuriNavbar />

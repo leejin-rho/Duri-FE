@@ -58,63 +58,35 @@ export const ShopVertical = ({
                 gap={3}
                 margin="0 0 0 6px"
               >
-                {
-                  <Tag
-                    key="tag1"
-                    typo="Caption5"
-                    bg={theme.palette.Gray50}
-                    fontColor={theme.palette.Gray500}
-                    width="fit-content"
-                    height="19px"
-                    borderRadius="2px"
-                  >
-                    {shop.shopTag1}
-                  </Tag>
-                }
-                <Tag
-                  key="tag2"
-                  typo="Caption5"
-                  bg={theme.palette.Gray50}
-                  fontColor={theme.palette.Gray500}
-                  width="fit-content"
-                  height="19px"
-                  borderRadius="2px"
-                >
-                  {shop.shopTag2}
-                </Tag>
+                <TagWrapper direction="column" align="flex-start" gap={3}>
+                  {shop.shopTag1 && (
+                    <Tag
+                      key="tag1"
+                      typo="Caption5"
+                      bg={theme.palette.Gray50}
+                      fontColor={theme.palette.Gray500}
+                      width="fit-content"
+                      height="19px"
+                      borderRadius="2px"
+                    >
+                      {shop.shopTag1}
+                    </Tag>
+                  )}
+                  {shop.shopTag2 && (
+                    <Tag
+                      key="tag2"
+                      typo="Caption5"
+                      bg={theme.palette.Gray50}
+                      fontColor={theme.palette.Gray500}
+                      width="fit-content"
+                      height="19px"
+                      borderRadius="2px"
+                    >
+                      {shop.shopTag2}
+                    </Tag>
+                  )}
+                </TagWrapper>
               </HeightFitFlex>
-                <Text typo="Caption4" colorCode={theme.palette.Gray500}>
-                  {shop.address}
-                </Text>
-
-              <TagWrapper direction="column" align="flex-start" gap={3}>
-                {shop.shopTag1 && (
-                  <Tag
-                    key="tag1"
-                    typo="Caption5"
-                    bg={theme.palette.Gray50}
-                    fontColor={theme.palette.Gray500}
-                    width="fit-content"
-                    height="19px"
-                    borderRadius="2px"
-                  >
-                    {shop.shopTag1}
-                  </Tag>
-                )}
-                {shop.shopTag2 && (
-                  <Tag
-                    key="tag2"
-                    typo="Caption5"
-                    bg={theme.palette.Gray50}
-                    fontColor={theme.palette.Gray500}
-                    width="fit-content"
-                    height="19px"
-                    borderRadius="2px"
-                  >
-                    {shop.shopTag2}
-                  </Tag>
-                )}
-              </TagWrapper>
             </HeightFitFlex>
           </Wrapper>
         ))}

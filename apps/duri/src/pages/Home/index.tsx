@@ -145,17 +145,27 @@ const Home = () => {
           </Flex>
 
           {/* AI 스타일링 배너 */}
-          <a href="/ai">
-            <AiBanner height={100} />
-          </a>
-          {/* </StyleBannerWrapper> */}
+          <Flex margin='24px 0 0'>
+            <a href="/ai">
+              <AiBanner height={100} />
+            </a>
+          </Flex>
         </Flex>
+
+        {/* 추천 샵 */}
         <Flex direction="column">
-          {/* 추천 샵 */}
           {isPendingRecommendData ? (
-            <Flex gap={6} justify="flex-start" padding="0 20px">
-              <SkeletonCard width={152} height={198} borderRadius={12} />
-              <SkeletonCard width={152} height={198} borderRadius={12} />
+            <Flex
+              direction="column"
+              align="flex-start"
+              padding="0 20px"
+              margin="24px 0 0"
+            >
+              <Text typo="Title1">여기 샵은 어때요?</Text>
+              <Flex gap={6} justify="flex-start" margin="6px">
+                <SkeletonCard width={152} height={198} borderRadius={12} />
+                <SkeletonCard width={152} height={198} borderRadius={12} />
+              </Flex>
             </Flex>
           ) : (
             <RecommendedShop shopList={recommendedListData ?? []} />
