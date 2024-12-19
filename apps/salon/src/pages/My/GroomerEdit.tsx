@@ -23,7 +23,7 @@ import {
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 
-import GroomerEditItem from './GroomerEditItem';
+import GroomerEditItem from '../../components/my/info/GroomerEditItem';
 
 const LICENSES = [
   '반려견 스타일리스트',
@@ -163,7 +163,7 @@ const GroomerEditPage = () => {
             borderRadius={99}
             height={29}
           >
-            <Pencil width={17} height={17} />
+            <Pencil width={17} height={17} color={theme.palette.White} />
           </PencilWrapper>
           <FileInput type="file" accept="image/*" onChange={handleFileChange} />
         </ProfileImageWrapper>
@@ -172,12 +172,12 @@ const GroomerEditPage = () => {
       <Flex padding="48px 20px">
         <EditContainer>
           <Flex direction="column" align="flex-start" gap={4}>
-            <GroomerEditItem label="성함" value={groomerDetailRequest.name} />
-            <GroomerEditItem label="성별" value={groomerDetailRequest.gender} />
+            <GroomerEditItem label="성함" value={groomerDetail.name} />
             <GroomerEditItem
-              label="나이"
-              value={`${groomerDetailRequest.age}세`}
+              label="성별"
+              value={groomerDetail.gender === 'F' ? '여성' : '남성'}
             />
+            <GroomerEditItem label="나이" value={`${groomerDetail.age}세`} />
             <GroomerEditItem
               label="경력"
               value={historyStr(groomerDetail.history)}

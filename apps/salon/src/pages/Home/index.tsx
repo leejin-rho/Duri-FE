@@ -128,7 +128,7 @@ const Home = () => {
                   {shopInfoData.name}
                 </Text>
                 <ShopInfoEditButton onClick={() => naviagte('my')}>
-                  <Pencil width={20} />
+                  <Pencil width={20} color={theme.palette.White} />
                 </ShopInfoEditButton>
               </Flex>
               <Text typo="Body3" colorCode={theme.palette.White}>
