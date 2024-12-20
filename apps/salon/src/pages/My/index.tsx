@@ -61,7 +61,6 @@ const MyPage = () => {
               shopId={shopProfile.id}
               shopName={shopProfile.name}
               image={groomerProfile.image}
-              shopEmail={groomerProfile.email}
             />
             <Flex direction="column" margin="40px 0 0">
               <Status

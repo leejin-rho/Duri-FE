@@ -18,7 +18,7 @@ const QuotationPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+console.log(requestList)
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>

@@ -14,10 +14,10 @@ interface OwnerInfoProps {
   shopId: number;
   image: string;
   shopName: string;
-  shopEmail: string;
+  // shopEmail: string;
 }
 
-export const OwnerInfo = ({ image, shopName, shopEmail }: OwnerInfoProps) => {
+export const OwnerInfo = ({ image, shopName }: OwnerInfoProps) => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -32,7 +32,6 @@ export const OwnerInfo = ({ image, shopName, shopEmail }: OwnerInfoProps) => {
           <br />
           안녕하세요!
         </Text>
-        <Text>{shopEmail ? shopEmail : 'email'}</Text>
         <Flex justify="flex-start">
           <MoveToPortfolio href="/portfolio">
             내 포트폴리오 보기
