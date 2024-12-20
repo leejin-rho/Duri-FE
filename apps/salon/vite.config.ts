@@ -19,12 +19,5 @@ export default defineConfig({
   },
   server: {
     port: 3001,
-    proxy: {
-      '/naver-api': {
-        target: 'https://naveropenapi.apigw.ntruss.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/naver-api/, ''),
-      },
-    },
   },
 });
