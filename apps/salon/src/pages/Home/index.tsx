@@ -26,14 +26,12 @@ import {
   useGetGroomersList,
   useGetHomeQuotationRequest,
   useGetHomeShopInfo,
-  useGetRecentDaysIncome,
   useModal,
   usePutGroomingComplete,
   usePutGroomingNoshow,
 } from '@duri-fe/utils';
 import styled from '@emotion/styled';
 import { RadioButton } from '@salon/components/home/RadioButton';
-import { RecentIncomeStatistic } from '@salon/components/income/RecentIncomeStatistic';
 import { DetailRequest } from '@salon/components/quotation/DetailRequest';
 import useGroomerStore from '@salon/stores/groomerStore';
 
@@ -69,7 +67,6 @@ const Home = () => {
     useGetDailySchedule();
   const { data: quotationRequestData, isPending: quotationRequestPending } =
     useGetHomeQuotationRequest();
-  const { data: recentDaysIncomeData } = useGetRecentDaysIncome({});
   const { mutateAsync: putGroomingComplete } = usePutGroomingComplete();
   const { mutateAsync: putGroomingNoshow } = usePutGroomingNoshow();
 
@@ -303,12 +300,6 @@ const Home = () => {
           </Flex>
         )}
       </NewRequestWrapper>
-
-      {recentDaysIncomeData && (
-        <RecentIncomeStatistic
-          incomeMonthList={recentDaysIncomeData.incomeMonthList}
-        />
-      )}
 
       <SalonNavbar />
 

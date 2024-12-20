@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import {
+  Doori,
+  DuriDog,
   Flex,
   MobileLayout,
   NaverLogo,
@@ -33,14 +35,18 @@ const AuthPage = () => {
   }, [data, error]);
 
   return (
-    <MobileLayout>
+    <RelativeMobileLayout>
       <Container direction="column">
         {/** 로고 */}
-        <Logo src="/images/logo.png" />
-        <Flex direction="column" margin="24px 0 0 0">
+        <DuriDog width={169} height={143} />
+        <Flex direction="column">
           <Text typo="Heading">두리묭실로</Text>
           <Text typo="Heading">쉽고 빠르게 예약해요!</Text>
-          <Text typo="Body3" colorCode={theme.palette.Gray300}>
+          <Text
+            typo="Body3"
+            colorCode={theme.palette.Gray300}
+            margin="8px 0 0 0"
+          >
             최저가 예약부터 근처 미용샵까지
           </Text>
         </Flex>
@@ -63,27 +69,47 @@ const AuthPage = () => {
           </Text>
         </Contact>
       </Container>
-    </MobileLayout>
+      <AuthWrapper>
+        <Doori color={theme.palette.White} height={40} />
+        <Text typo="Body1" colorCode={theme.palette.White}>
+          두리묭실 입장 중...
+        </Text>
+      </AuthWrapper>
+    </RelativeMobileLayout>
   );
 };
+
+const RelativeMobileLayout = styled(MobileLayout)`
+  position: relative;
+`;
+
+const AuthWrapper = styled(Flex)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  flex-direction: column;
+  gap: 16px;
+`;
 
 const Container = styled(Flex)`
   flex-grow: 1;
   position: relative;
 `;
 
-const Logo = styled.img``;
-
-const LoginButton = styled.button`
+const LoginButton = styled.div`
   width: 60px;
   height: 60px;
   margin-top: 20px;
 `;
 
-const Contact = styled(Flex)`
+const Contact = styled.div`
   position: absolute;
   bottom: 50px;
   height: fit-content;
+  text-decoration: none;
 `;
 
 export default AuthPage;
