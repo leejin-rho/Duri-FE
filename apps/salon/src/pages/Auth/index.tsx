@@ -19,12 +19,12 @@ const AuthPage = () => {
   const [query] = useSearchParams();
   const providerId = query.get('providerId') || '';
 
-  const { data, error, isSuccess } = useSalonNaverLogin(providerId);
+  const { data, error } = useSalonNaverLogin(providerId);
 
   useEffect(() => {
     if (error) {
       window.alert('로그인에 실패했습니다.');
-    } else if (isSuccess && data) {
+    } else if (data) {
       localStorage.setItem(`${data.client}`, data.token);
       if (data.newUser) {
         navigate('/onboarding');

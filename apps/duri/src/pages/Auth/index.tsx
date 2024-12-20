@@ -19,12 +19,12 @@ const AuthPage = () => {
   const [query] = useSearchParams();
   const providerId = query.get('providerId') || '';
 
-  const { data, error, isSuccess } = useDuriNaverLogin(providerId);
+  const { data, error } = useDuriNaverLogin(providerId);
 
   useEffect(() => {
     if (error) {
       window.alert('로그인에 실패했습니다.');
-    } else if (isSuccess && data) {
+    } else if (data) {
       localStorage.setItem(`${data.client}`, data.token);
       if (data.newUser) {
         navigate('/onboarding');
