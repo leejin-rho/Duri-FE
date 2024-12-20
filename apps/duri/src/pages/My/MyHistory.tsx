@@ -29,9 +29,11 @@ const MyHistoryPage = () => {
 
   // 모달 토글 함수
   const handleToggleModal = (requestId: number) => {
+    console.log(requestId)
     setRequestId(requestId);
     toggleModal();
   };
+  console.log(historyData)
 
   return (
     <MobileLayout>
@@ -72,7 +74,7 @@ const MyHistoryPage = () => {
                     petName={history.petName}
                     visitDate={history.startDate}
                     dayOfWeek={history.day}
-                    toggleModal={() => handleToggleModal(history.quotationId)}
+                    toggleModal={() => handleToggleModal(history.requestId)}
                   />
                 ))}
               </BorderLeftFlex>

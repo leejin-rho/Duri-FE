@@ -12,7 +12,7 @@ export const getDetailRequestQuotaion = async (
 export const getDetailResponseQuotaion = async (
   requestId: number,
 ): Promise<QuotationDetailResponse['response']> => {
-  const response = await duriInstance.get(`/quotation/${requestId}`);
+  const response = await duriInstance.get(`/quotation/request/${requestId}`);
   return response.data.response;
 };
 
