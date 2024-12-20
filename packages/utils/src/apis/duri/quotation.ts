@@ -1,6 +1,11 @@
 import { duriInstance } from '@duri-fe/utils';
 
-import { QuotationDetailResponse, QuotationListResponse, RequestDetailResponse, RequestItemsResponse } from '../types';
+import {
+  QuotationDetailResponse,
+  QuotationListResponse,
+  RequestDetailResponse,
+  RequestItemsResponse,
+} from '../types';
 
 //고객 -> 미용사 (request)견적서 상세조회
 export const getDetailRequestQuotaion = async (
@@ -12,7 +17,7 @@ export const getDetailRequestQuotaion = async (
 export const getDetailResponseQuotaion = async (
   requestId: number,
 ): Promise<QuotationDetailResponse['response']> => {
-  const response = await duriInstance.get(`/quotation/request/${requestId}`);
+  const response = await duriInstance.get(`/quotation/${requestId}`);
   return response.data.response;
 };
 
