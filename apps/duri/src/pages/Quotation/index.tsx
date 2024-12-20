@@ -18,6 +18,7 @@ const QuotationPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+console.log(requestList)
 
   return (
     <MobileLayout backgroundColor={theme.palette.Gray_White}>
@@ -52,7 +53,7 @@ const QuotationPage = () => {
             )}
           </Flex>
         ) : (
-          <Flex margin="92px 0 0">
+          <Flex margin="24px 0 0">
             <Text typo="Body3" colorCode={theme.palette.Gray300}>
               요청서 및 견적서가 없습니다.
             </Text>
